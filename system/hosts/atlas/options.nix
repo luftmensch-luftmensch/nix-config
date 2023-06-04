@@ -71,6 +71,7 @@
       ricing.enable    = true;
       secrets.enable   = true;
       utilities.enable = true;
+      xorg-related.enable = true;
     };
 
     services = {

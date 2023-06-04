@@ -25,7 +25,7 @@ in {
         # KbdInteractiveAuthentication = false;
       };
 
-      allowSFTP = false;
+      allowSFTP = true;
 
       # extraConfig = ''
       #   AllowTcpForwarding no
