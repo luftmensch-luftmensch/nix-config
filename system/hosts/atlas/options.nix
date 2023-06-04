@@ -34,7 +34,7 @@
     editor = {
       emacs = {
         enable          = true;
-        default-package = pkgs.emacs-gtk;
+        package = pkgs.emacs-gtk;
         daemon.enable   = true;
         mails.enable    = true;
       };

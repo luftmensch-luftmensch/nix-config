@@ -7,7 +7,7 @@
 
   imports = [
     ./filesystem-configuration.nix
-    # ./options.nix
+    ./options.nix
     ../common.nix
   ];
 
