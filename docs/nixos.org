@@ -1,0 +1,123 @@
+#+title: Nix/Nixos Documentation
+#+description: A basic introductional guide in order to familiarize with Nix/Nixos ecosystem
+* Table of Content :toc:
+- [[#nix][Nix]]
+  - [[#introduction][Introduction]]
+  - [[#getting-started][Getting Started]]
+  - [[#shell][Shell]]
+  - [[#templates][Templates]]
+  - [[#using-nix-develop-w-flakes][Using ~nix develop w/ flakes~]]
+- [[#nixos][NixOS]]
+  - [[#introduction-1][Introduction]]
+  - [[#links][Links]]
+- [[#flakes][Flakes]]
+  - [[#getting-started-1][Getting started]]
+  - [[#installation][Installation]]
+- [[#resources][Resources]]
+
+* Nix
+** Introduction
+The Nix language is used to declare packages and configurations to be built by Nix.
+** Getting Started
+- [[https://nixos.org/download.html][Nix Website]]
+- [[https://nixos.org/manual/nix/stable][Manual]]
+*** Installing Nix
+This command will install the Nix Package Manager on your system. More information can be found [[https://nixos.org/manual/nix/stable/installation/installing-binary.html][here]].
+When prompted, allow the installer to use root priviliges and to set up Nix as a Multi User.
+#+begin_src sh
+sh <(curl -L https://nixos.org/nix/install)
+#+end_src
+** Shell
++ Create a shell where a package is available: ~nix-shell -p <packages>~
++ Install a package and run command. Only temporarly enter shell: ~nix-shell -p <package> --run <cmd>~  or ~--command~
++ Install package in the current active ~$SHELL (current terminal)~: ~nix shell nixpkgs#<package>~
+  + Since nixpkgs is used, you can also specify the branch: ~nix shell nixpkgs/<branch>#<package>~
+** Templates
+*** General ~shell.nix~
+#+begin_src nix
+with import <nixpkgs> {};
+mkShell {
+  name = "<shell-name>";
+  buildInputs = with pkgs; [
+    packages
+  ];
+
+  # Commands to run after everything is sourced.
+  shellHook = ''
+    echo "hello world"
+  '';
+}
+#+end_src
+** Using ~nix develop w/ flakes~
+#+begin_src nix
+{
+  description = "A development environment";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+  };
+  outputs = inputs:
+    let
+      pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+    in {
+      # default host
+      devShells.x86_64-linux.default = inputs.nixpkgs.legacyPackages.x86_64-linux.mkShell {
+        buildInputs = [ <packages> ];
+      };
+    };
+}
+#+end_src
+* NixOS
+** Introduction
+[[https://nixos.org/][Nixos]] is a Linux distribution based on Nix package manager.
+
+It supports declarative reproducible system configurations and aims to be ~ubreakable~.
+** Links
++ [[https://search.nixos.org/packages][Packages]]
++ [[https://search.nixos.org/options?][Options]]
++ ~man configuration.nix~
+* Flakes
+~Flakes~ are an /upcoming feature/ of the Nix package manager. Specify code dependencies declaratively (stored in ~flake.lock~)
+
+Rebuilding and updating whole system made easy. Very useful tool to build your own config.
+** Getting started
+You can find all the needed resources on the [[https://nixos.wiki/wiki/Flakes][wiki]]. 
+** Installation
+*** Generate
+*This command will generate a flake.nix and flake.lock file*
+- ~cd~ into a location to store in your system
+- ~$ nix flake init~
+
+#+begin_src nix
+{
+  description = "A very basic flake";
+
+  outputs = { self, nixpkgs}: {
+    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
+  };
+}
+#+end_src
+**** Inputs
+*attribute set of all the dependencies used in the flake*
+#+begin_src nix
+inputs = {
+  nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  home-manager = {
+    url = "github:nix-community/home-manager";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+  nixgl = {
+    url = "gihub:guibou/nixGL";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+};
+#+end_src
+**** Outputs
+*function of an argument that uses the inputs for reference*
+- Configure what you imported
+- Can be pretty much anything: ~Packages / configurations / modules / etc~...
+* Resources
++ [[https://nixos.org/][NixOS Website]]
++ [[https://nixos.org/learn.html/][NixOS Learn]]
++ [[https://nixos.org/manual/nix/stable/introduction.html][Nix Manual]]
++ [[https://nixos.wiki/wiki/][NixOS Wiki]]
++ [[https://nixos.org/guides/nix-pills/][Nix Pills]]

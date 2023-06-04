@@ -1,0 +1,93 @@
+#+TITLE: Custom ISO installer
+#+description: Create a custom prebuilt iso w/ btrfs support
+* Table of Content :toc:
+- [[#flakenix][flake.nix]]
+- [[#configurationnix][configuration.nix]]
+
+* flake.nix
+#+begin_src nix
+{
+  description = "Build a NixOS installer ISO file with nixos-stable and flake support pre-enabled.";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+  outputs = { self, nixpkgs }: {
+    nixosConfigurations = let
+      # Shared base configuration
+      base-system = {
+        system = "x86_64-linux";
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+        ];
+      };
+    in {
+      # Build it with nix build .#nixosConfigurations.nixos-flake-iso.config.system.build.isoImage
+      nixos-flake-iso = nixpkgs.lib.nixosSystem {
+        inherit (base-system) system;
+        modules = base-system.modules ++ [./configuration.nix];
+      };
+    };
+    # nix build default to nixos-flake-iso
+    defaultPackage.x86_64-linux = self.nixosConfigurations.nixos-flake-iso.config.system.build.isoImage;
+  };
+}
+#+end_src
+* configuration.nix
+#+begin_src nix
+{ pkgs, lib, ... }: {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Needed for https://github.com/NixOS/nixpkgs/issues/58959
+  boot.supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+
+  # Enable SSH in the boot process.
+  #systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
+  services.sshd.enable = true;
+  
+  users.users.root.password = "nixos";
+  services.openssh.permitRootLogin = lib.mkDefault "yes";
+  services.getty.autologinUser = lib.mkDefault "root";
+
+  #networking.firewall.allowedTCPPorts = [ 80 ];
+  # Set up automatically wifi
+  networking.wireless = {
+    enable = true;
+    userControlled.enable = true;
+    networks = {
+      CAP1750_039500_G = {
+        pskRaw = "2a343a0cfea2782acbcfd2302dcda36e3c0f22b819221b9cb83e5e033f607b5c";
+      };
+    };
+  };
+
+  # Name of the installer
+  isoImage = {
+    isoBaseName = "nixos-with-flakes-on-btrfs";
+    # isoName = pkgs.lib.mkForce "nixos-with-flakes-on-btrfs.iso";
+    # edition = "btrfs-iso";
+  };
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "it_IT.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    # font = "ter-v32n";
+    keyMap = "it";
+  };
+  environment.systemPackages = with pkgs;[
+    git
+    wget
+    tmux
+  ];
+  
+
+  #users.users.root.openssh.authorizedKeys.keys = [
+  #"ssh-ed25519 AaAeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee username@host" # Take from the id_rsa.pub file on ~/.ssh
+  #];
+
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+}
+#+end_src

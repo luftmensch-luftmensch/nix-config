@@ -1,0 +1,120 @@
+#+OPTIONS: date:nil title:nil toc:nil author:nil
+#+STARTUP: overview
+* My personal Nixos configuration with flakes
+#+BEGIN_HTML
+<div align="center">
+
+  <!-- License -->
+  <a href="https://github.com/luftmensch-luftmensch/Nixos/blob/main/LICENSE"
+          ><img
+              src="https://img.shields.io/badge/License-GPL_v3-blue.svg?style=for-the-badge&color=red"
+              alt="License"
+      /></a>
+
+  <!-- Nixos Version -->
+  <a href="https://nixos.org/"
+          ><img
+              src="https://img.shields.io/badge/NixOS-v22.05-blue.svg?style=for-the-badge&logo=NixOS&logoColor=white"
+              alt="Nixos Version"
+      />
+
+  <!-- Repository Size -->
+  <a href="https://github.com/luftmensch-luftmensch/Nixos/archive/refs/heads/main.zip"
+          ><img
+              src="https://img.shields.io/github/repo-size/luftmensch-luftmensch/Nixos?style=for-the-badge"
+              alt="GitHub repository size"
+      /></a>
+
+  <!-- Last commit -->
+  <a href="https://github.com/luftmensch-luftmensch/Nixos/commits/main"
+          ><img
+              src="https://img.shields.io/github/last-commit/luftmensch-luftmensch/Nixos?style=for-the-badge"
+              alt="Last commit"
+      /></a>
+ <!-- Work on my machine -->
+ <a href="https://img.shields.io/badge/WORKS%20ON-MY%20MACHINE-red?style=for-the-badge"
+           ><img
+             src="https://img.shields.io/badge/WORKS%20ON-MY%20MACHINE-red?style=for-the-badge"
+             alt="Work on my machine"
+      /></a>
+</div>
+#+END_HTML
+* About
+This is my configuration for NixOS, meant to harmonize my different systems.
+
+-----
+This is *not* necessarily an example of good practices. This is what I am (probably) currently using.
+
+#+begin_quote
+Be careful if you want to use this “template”, this is not a framework neither an easy-come-easy-go library.
+#+end_quote
+
+The purpose of making this repository public is for me to be able to easily share my current configuration files with others. It is not expected that anyone would use these files verbatim. I update files frequently, often multiple times per day, and at any given point, some files might be broken. I often push commits just so I can easily move files from one computer to another to continue working on them. I will make tags when I think my setup is stable enough for others to use.
+-----
+
+The entire system configuration is written in Nix. A top-level structure is written below:
+#+begin_src bash
+.
+├── flake.nix
+├── flake.lock                  
+├── shell.nix   # Shell declaration for this repo 
+├── docs        # Docs about different topics
+├── lib         # Utility functions 
+├── overlays    # Package overlays
+├── packages    # Custom personal packages
+└── system      # Top level system configuration
+    ├── hosts   # System host specific configuration
+    └── modules # Modules containing custom system configuration
+#+end_src
+
+A convenience [[file:nix-install.sh][script]] is provided to setup the system on the live ISO (currently btrfs).
+** Why flakes?
+[[https://github.com/jonringer][jonringer]] gave a [[https://discourse.nixos.org/t/what-are-nix-flakes-and-why-should-i-care/12910/3][brief explanation]] as to why one might want to use Nix flakes.
+* Quick start
+1. Download the latest build of [[https://nixos.org/download.html][Nixos]] or build your own (see [[file:iso/][here]])
+2. Boot into the installer.
+3. Clone the repository and start the installation script in order to get a working installation ([[file:btrfs-nix-install.sh][more info here]])
+4. Enable nix-flakes with ~nix-shell -p git nixFlakes~  (No need if you build the custom iso)
+6. Install NixOS: ~nixos-install --root //mnt --no-root-passwd --flake //mnt/etc/nixos#XYZ~, where /XYZ is [the host you want to install]/
+7. Reboot!
+8. Change your ~$USER~ password
+9. Enjoy!
+* Some useful guide
+** Written guide / blogs (Flakes)
+1. ~man nix-flake~ (22.05);
+2. [[https://nixos.wiki/wiki/Flakes][Flakes]];
+3. [[https://nixos.org/guides/nix-pills/][Nix pills]];
+4. [[https://www.tweag.io/blog/2020-05-25-flakes/][Nix Flakes - Part 1: Introduction and tutorial]];
+5. [[https://www.tweag.io/blog/2020-06-25-eval-cache/][Nix Flakes - Part 2: Evaluation caching]];
+6. [[https://www.tweag.io/blog/2020-07-31-nixos-flakes/][Nix Flakes - Part 3: Managing Nixos Systems]];
+7. [[https://xeiaso.net/blog/nix-flakes-1-2022-02-21][Xe on Flakes: Introduction]];
+8. [[https://xeiaso.net/blog/nix-flakes-2-2022-02-27][Xe on Flakes: Packages and How to use Them]];
+9. [[https://serokell.io/blog/practical-nix-flakes][Pratical Nix Flakes by Serokell]];
+10. [[https://www.yanboyang.com/nixflakes/][Nix flakes by Yanboyang]];
+11. [[https://ianthehenry.com/posts/how-to-learn-nix/][How to learn Nix]];
+12. [[https://garnix.io/blog/converting-to-flakes][Nix flakes, and how to convert to them]];
+** Video sources
+1. [[https://www.youtube.com/watch?v=90P-Ml1318U][Jon R tutorial]];
+2. [[https://www.youtube.com/playlist?list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-][Will T tutorials]];
+3. [[https://www.youtube.com/watch?v=AGVXJ-TIv3Y][Nixos Setup Guide]];
+4. [[https://www.youtube.com/watch?v=QXUlhnhuRX4][Jorg Thalheim: Nix flakes 101]];
+** Useful links
++ [[https://nixos.org/manual/nixpkgs/stable/#chap-functions][Nixpkgs Functions reference]];
++ [[https://nixos.org/manual/nix/stable/#ch-expression-language][Nix Expression Language]];
+** Useful nix dotfiles
++ [[https://github.com/hlissner/dotfiles][hlissner/dotfiles]];
++ [[https://github.com/NobbZ/nixos-config][NobbZ/nixos-config]];
++ [[https://github.com/ners/NixOS][ners/NixOS]];
++ [[https://github.com/balsoft/nixos-config][balsoft/nixos-config]];
++ [[https://github.com/Kranzes/nix-config][Kranzes/nix-config]];
++ [[https://github.com/jonringer/nixpkgs-config][jonringer/nixpkgs-config]];
++ [[https://github.com/sebastiant/dotfiles][sebastiant/dotfiles]];
++ [[https://github.com/archer-65/nix-dotfiles][archer-65/nix-dotfiles]];
+** Some extra places that you can get help
++ [[https://nixos.wiki/wiki/Packaging/Tutorial][How to Package]];
++ [[https://nixos.org/manual/nix/unstable/][Nix Lang Manual]];
+
+** Nix Flake templates for various languages
++ [[https://github.com/serokell/templates][Templates by serokell (haskell, infra, python, rust)]];
++ [[https://github.com/lukebfox/nix-flake-templates][Templates by lukebfox (rust, python, elixir)]];
++ [[https://github.com/rdk31/nix-flake-templates][Templates by rdk31 (python, rust)]];
