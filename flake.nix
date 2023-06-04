@@ -41,8 +41,7 @@
 
     ###              NIX COMMUNITY               ###
     emacs-overlay = {
-      # url = "github:nix-community/emacs-overlay?rev=";
-      url = "github:nix-community/emacs-overlay?rev=9bc16d788b9b09e986b2fba5a76fe44d35010d52";
+      url = "github:nix-community/emacs-overlay";
     };
 
     neovim-flake = {

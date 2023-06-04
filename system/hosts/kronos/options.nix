@@ -34,7 +34,7 @@
     editor = {
       emacs = {
         enable         = true;
-        package        = pkgs.emacs-pgtk;
+        package        = pkgs.emacs29-pgtk;
         daemon.enable  = true;
         mails.enable   = true;
         enableSpelling = true;
