@@ -78,7 +78,6 @@ in {
           grim                      # Grab images from a Wayland compositor
           slurp                     # Select a region in a Wayland compositor
           sway-contrib.grimshot     # A helper for screenshots within sway (grimshot --notify copy area)
-          swaynotificationcenter    # Simple notification daemon with a GUI built for Sway
           libinput-gestures         # Gesture support under wayland
 
           waybar                    # Highly customizable Wayland bar for Sway and Wlroots based compositors

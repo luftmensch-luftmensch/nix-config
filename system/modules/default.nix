@@ -38,6 +38,7 @@
   "packages/programming"        = import ./packages/programming.nix;
   "packages/ricing"             = import ./packages/ricing.nix;
   "packages/secrets"            = import ./packages/secrets.nix;
+  "packages/unstable"           = import ./packages/unstable.nix;
   "packages/utilities"          = import ./packages/utilities.nix;
   "packages/xorg-related"       = import ./packages/xorg-related.nix;
 
