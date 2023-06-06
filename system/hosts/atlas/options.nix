@@ -33,10 +33,11 @@
 
     editor = {
       emacs = {
-        enable          = true;
-        package = pkgs.emacs-gtk;
-        daemon.enable   = true;
-        mails.enable    = true;
+        enable         = true;
+        package        = pkgs.emacs29-gtk3;
+        daemon.enable  = true;
+        mails.enable   = true;
+        enableSpelling = true;
       };
       ide.enable    = true;
       neovim.enable = true;
