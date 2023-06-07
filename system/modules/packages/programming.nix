@@ -40,7 +40,7 @@ in {
       clang_16 clang-tools ccls
       bear                                # Tool that generates a compilation database for clang tooling
       gcc
-      gdb valgrind
+      gdb valgrind gef
       cmake gnumake
       unixtools.xxd                       # Make a hexdump or do the reverse (xxd -i <file>)
     ]) ++ (optionals cfg.go-packages [
