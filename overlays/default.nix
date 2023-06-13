@@ -14,14 +14,13 @@ inputs: {
     # });
 
     tdlib = prev.tdlib.overrideAttrs (oldAttrs: {
-      version = "1.8.12";
+      version = "1.8.14";
       src = final.fetchFromGitHub {
         owner  = "tdlib";
         repo   = "td";
-        rev    = "c95598e5e1493881d31211c1329bdbe4630f6136";
-        sha256 = "0h435zh4wylzvxd6chzjawa9zibmnnza8nf01zqbaywfg17vpcbp";
+        rev    = "66234ae2537a99ec0eaf7b0857245a6e5c2d2bc9";
+        sha256 = "0lv19vpgv8nqzxmsgnmbg32zjkarqngh8cjhxc3hy3jj74cwkil5";
       };
-
     });
   };
 }
