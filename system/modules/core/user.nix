@@ -57,31 +57,33 @@ in {
       root = {
         # disable root login here, and also when installing nix by running nixos-install --no-root-passwd
         # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235/3
-        hashedPassword = "!";  # disable root logins, nothing hashes to !
+        hashedPassword = "!"; # disable root logins, nothing hashes to !
       };
 
       ${cfg.username} = {
         description = cfg.description;
         isNormalUser = true;
         hashedPassword = cfg.hashedPassword;
-        extraGroups = [ "wheel" ] ++ cfg.extraGroups;
+        extraGroups = ["wheel"] ++ cfg.extraGroups;
         uid = cfg.uid;
 
-        openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXljN45Z1tPnPH0ow3i/w2hCKcc8Q2/KPTB+yl30X7R valentino@pine64" # Rock Pro 64
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII5bHKpkOWDHNEaG5eovp8pQzsNpJIm8+ziHwF5idLKf valentino@P30-Pro" # P30 - Pro
-        ] ++ cfg.extraAuthorizedKeys;
+        openssh.authorizedKeys.keys =
+          [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXljN45Z1tPnPH0ow3i/w2hCKcc8Q2/KPTB+yl30X7R valentino@pine64"  # Rock Pro 64
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII5bHKpkOWDHNEaG5eovp8pQzsNpJIm8+ziHwF5idLKf valentino@P30-Pro" # P30 - Pro
+          ]
+          ++ cfg.extraAuthorizedKeys;
       };
     };
 
     # Sessio variables
     environment = {
-      sessionVariables  = {
-        XDG_CACHE_HOME  = "$HOME/.cache";
+      sessionVariables = {
+        XDG_CACHE_HOME = "$HOME/.cache";
         XDG_CONFIG_HOME = "$HOME/.config";
-        XDG_DATA_HOME   = "$HOME/.local/share";
-        XDG_BIN_HOME    = "$HOME/.local/bin";
-        XDG_STATE_HOME  = "$HOME/.local/state";
+        XDG_DATA_HOME = "$HOME/.local/share";
+        XDG_BIN_HOME = "$HOME/.local/bin";
+        XDG_STATE_HOME = "$HOME/.local/state";
       };
     };
   };

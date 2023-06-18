@@ -7,7 +7,7 @@
   # sets hidepid=2 on /proc (make process info visible only to owning user)
   security = {
     protectKernelImage = true; # Prevent replacing the running kernel w/o reboot
-    
+
     #lockKernelModules = true; # Disable kernel module loading once the system is fully initialised
 
     # Make hardened profile more usable (This should be enabled alongside the hardened profile)
@@ -20,8 +20,8 @@
       execWheelOnly = true;
     };
     # Whether to enable the RealtimeKit system service, which hands out realtime scheduling priority to user processes on demand.
-    # For example, the PulseAudio server uses this to acquire realtime priority. 
-    rtkit = { 
+    # For example, the PulseAudio server uses this to acquire realtime priority.
+    rtkit = {
       enable = true; # Recommended for pipewire
     };
 
@@ -30,17 +30,15 @@
   };
 
   boot = {
-
     # tmpfs = /tmp is mounted in ram. Doing so makes temp file management speedy
     # on ssd systems, and volatile! Because it's wiped on reboot.
     tmp = {
-      useTmpfs =  true;
+      useTmpfs = true;
 
       # If not using tmpfs, which is naturally purged on reboot, we must clean it
       # /tmp ourselves. /tmp should be volatile storage!
       cleanOnBoot = lib.mkDefault (!config.boot.tmp.useTmpfs);
     };
-
 
     # https://github.com/NixOS/nixpkgs/blob/d6fe32c6b9059a054ca0cda9a2bb99753d1134df/nixos/modules/profiles/hardened.nix#L95
     kernel.sysctl = {
@@ -49,7 +47,7 @@
       # Disable it, since we don't need it, and is a potential security concern.
       "kernel.sysrq" = 0; # don't allow sysrqs (Magic SysRq is a key combination directly intercepted by the kernel and can be used, among other things, to perform an emergency shutdown)
       #"kernel.printk" = "3 4 3 3"; # don't let logging bleed into TTY
-      
+
       # SHMMAX is the maximum size of a shared memory segment on a Linux system whereas
       # SHMALL is the maximum allocation of shared memory pages on a system
       #"kernel.shmmax" = 4294967296;
@@ -80,14 +78,12 @@
       "net.ipv6.conf.all.accept_redirects" = 0;
       "net.ipv6.conf.default.accept_redirects" = 0;
 
-
       # Log packets with impossible addresses to kernel log.log_martians
       # for the interface will be enabled if at least one of
       # conf/{all,interface}/log_martians is set to TRUE, it will be disabled otherwise
       #"net.ipv4.conf.default.log_martians" = 1;
       #"net.ipv4.conf.all.log_martians" = 1;
 
-      
       #"net.ipv6.conf.all.use_tempaddr" = 2;
 
       # Protects against SYN flood attacks
@@ -104,9 +100,8 @@
       "net.ipv4.tcp_congestion_control" = "bbr"; # htcp
       "net.core.default_qdisc" = "cake"; # fq
 
-
       # DDoS Protection With IPtables - Source: https://javapipe.com/blog/iptables-ddos-protection/
-      
+
       #"net.core.netdev_max_backlog" = 262144; # Increase number of incoming connections backlog
       #"net.core.rmem_default" = 31457280; # Default Socket Receive Buffer
       #"net.core.rmem_max" = 67108864; # Maximum Socket Receive Buffer
@@ -116,7 +111,7 @@
       #"net.core.optmem_max" = 25165824; # Increase the maximum amount of option memory buffers
 
       #"vm.swappiness" = 0; # or 10
-      
+
       # Intel GPU Analysis
       #"dev.i915.perf_stream_paranoid" = 0;
     };

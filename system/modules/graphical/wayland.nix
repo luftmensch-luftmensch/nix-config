@@ -19,7 +19,7 @@ with lib; let
       dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
       systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
       systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-      '';
+    '';
   };
 
   configure-gtk = pkgs.writeTextFile {
@@ -30,23 +30,21 @@ with lib; let
       schema = pkgs.gsettings-desktop-schemas;
       datadir = "${schema}/share/gsettings-schemas/${schema.name}";
     in ''
-        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-        gnome_schema=org.gnome.desktop.interface
-        wm_schema=org.gnome.desktop.wm.preferences
-        gsettings set $gnome_schema gtk-theme 'Materia-dark'
-        gsettings set $gnome_schema document-font-name "Sarasa Mono Slab SC 13"
-        gsettings set $gnome_schema font-name "Sarasa Mono Slab SC 13"
-        gsettings set $gnome_schema monospace-font-name "Sarasa Mono Slab SC 13"
-        gsettings set $wm_schema titlebar-font "Sarasa Mono Slab SC 13"
-        '';
+      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      gnome_schema=org.gnome.desktop.interface
+      wm_schema=org.gnome.desktop.wm.preferences
+      gsettings set $gnome_schema gtk-theme 'Materia-dark'
+      gsettings set $gnome_schema document-font-name "Sarasa Mono Slab SC 13"
+      gsettings set $gnome_schema font-name "Sarasa Mono Slab SC 13"
+      gsettings set $gnome_schema monospace-font-name "Sarasa Mono Slab SC 13"
+      gsettings set $wm_schema titlebar-font "Sarasa Mono Slab SC 13"
+    '';
   };
-
 
   # chrome://flags/#enable-webrtc-pipewire-capturer (Enable it to share entire screen)
   chromium_on_wayland = with pkgs; (chromium.override {
     commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WebRTCPipeWireCapturer --enable-usermedia-screen-capturing";
   });
-
 in {
   options.system.modules.graphical.wayland = {
     enable = mkEnableOption "Wayland basic configuration and packages";
@@ -119,7 +117,7 @@ in {
       enable = true;
       description = "Lock the screen before suspend.";
       before = ["suspend.target"];
-      wantedBy = [ "suspend.target" ];
+      wantedBy = ["suspend.target"];
       serviceConfig = {
         Type = "simple";
         Environment = "DISPLAY=:1 WAYLAND_DISPLAY=wayland-1 XDG_RUNTIME_DIR=/run/user/1000";

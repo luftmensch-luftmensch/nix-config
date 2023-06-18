@@ -18,13 +18,12 @@ in {
         QT_QPA_PLATFORMTHEME = "qt5ct";
         #AMD_VULKAN_ICD = "RADV";
         EDITOR = "emacsclient -t";
-        BROWSER= "firefox";
-        PAGER="less --quit-at-eof";
-        GTK_THEME="Materia-dark";
+        BROWSER = "firefox";
+        PAGER = "less --quit-at-eof";
+        GTK_THEME = "Materia-dark";
         #GTK_USE_PORTAL="1";
       };
       etc = {
-
         "xdg/user-dirs.defaults".text = ''
           XDG_DOWNLOAD_DIR="$HOME/Scaricati"
           XDG_DOCUMENTS_DIR="$HOME/Documenti"

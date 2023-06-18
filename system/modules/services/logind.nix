@@ -31,6 +31,5 @@ in {
       #  IdleActionSec=1m
       #'';
     };
-
   };
 }

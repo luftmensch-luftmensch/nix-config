@@ -17,8 +17,8 @@ with builtins; let
     };
 
     baseSystem = {
-      nixpkgs = { inherit pkgs; };
-      system = { inherit stateVersion; };
+      nixpkgs = {inherit pkgs;};
+      system = {inherit stateVersion;};
       networking.hostName = lib.mkDefault hostname;
     };
   in

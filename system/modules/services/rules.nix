@@ -14,8 +14,8 @@ in {
     config = mkIf cfg.enable {
       services.udev = {
         extraRules = ''
-        ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN{program}+="${pkgs.systemd}/bin/systemd-mount --no-block --automount=yes --collect $devnode /media"       
-    '';
+          ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN{program}+="${pkgs.systemd}/bin/systemd-mount --no-block --automount=yes --collect $devnode /media"
+        '';
 
         #Autosuspend usb
         #ACTION=="add", SUBSYSTEM=="usb", ATTR{power/control}="auto"
@@ -39,10 +39,7 @@ in {
         #  ENV{ID_USB_INTERFACES}!="", ENV{ID_USB_INTERFACES}!=":03*", ENV{ID_USB_INTERFACES}!=":09*" \
         #  ATTR{bDeviceClass}=="00", \
         #  ATTR{power/control}="auto"
-
       };
-
-      
     };
   };
 }

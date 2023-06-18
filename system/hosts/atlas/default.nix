@@ -4,7 +4,6 @@
   lib,
   ...
 }: {
-
   imports = [
     ./filesystem-configuration.nix
     ./options.nix
@@ -14,8 +13,8 @@
   # Kernel related
   boot = {
     kernelPackages = pkgs.linuxPackages;
-    kernelModules = [ "kvm-intel" ];
-    supportedFilesystems = [ "btrfs" ];
+    kernelModules = ["kvm-intel"];
+    supportedFilesystems = ["btrfs"];
   };
 
   # Networking specific
@@ -39,6 +38,6 @@
 
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = ["nvidia"];
   };
 }

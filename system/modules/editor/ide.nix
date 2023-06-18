@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: with lib; let 
+}:
+with lib; let
   cfg = config.system.modules.editor.ide;
 in {
   options.system.modules.editor.ide = {

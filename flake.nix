@@ -3,11 +3,9 @@
 # Author:  luftmensch-luftmensch
 # URL:     https://github.com/luftmensch-luftmensch/Nixos/
 # License: GPL-3.0
-
 # You probably shouldn't be using my configuration as a guideline
 # Sure, it works (mostly), but the code is horrible
 # I have no idea what the hell I'm doing... It's true!
-#
 #
 # You can get started with flakes here: https://nixos.wiki/wiki/Flakes
 # Also, you may want to take a look on the flakes that I took inspiration:
@@ -21,9 +19,7 @@
 # Welcome to ground zero. Where the whole flake gets set up and all its modules
 # are loaded.
 {
-
   description = "A collection of crap, hacks and copy-paste to make my localhosts boot";
-
 
   # Attribute set of all the dependencies used in the flake - Dependency Management Part
   inputs = {
@@ -39,57 +35,56 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ###              NIX COMMUNITY               ###
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-    };
-
-    neovim-flake = {
-      url = "github:luftmensch-luftmensch/neovim-flake";
-    };
-
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    neovim-flake.url = "github:luftmensch-luftmensch/neovim-flake";
   };
 
   # Function of an argument that uses a the inputs for reference
   # - Configure what you imported
   # - Can be pretty much anything: Packages / configurations / modules / etc...
-  outputs = inputs @ { nixpkgs, nixpkgs-unstable, impermanence, sops-nix, emacs-overlay, neovim-flake, ... }:
-    let
-      lib = import ./lib {inherit inputs;};
-      inherit (lib) mkSystem forAllSystems;
-    in {
-      nixosModules = import ./system/modules;
-      overlays = import ./overlays inputs;
-      formatter = forAllSystems (
-        system:
+  outputs = inputs @ {
+    nixpkgs,
+    nixpkgs-unstable,
+    impermanence,
+    sops-nix,
+    emacs-overlay,
+    neovim-flake,
+    ...
+  }: let
+    lib = import ./lib {inherit inputs;};
+    inherit (lib) mkSystem forAllSystems;
+  in {
+    nixosModules = import ./system/modules;
+    overlays = import ./overlays inputs;
+    formatter = forAllSystems (
+      system:
         nixpkgs.legacyPackages.${system}.alejandra
-      );
+    );
 
-      packages = forAllSystems (
-        system:
+    packages = forAllSystems (
+      system:
         import ./packages {pkgs = nixpkgs.legacyPackages.${system};}
-      );
+    );
 
-      devShells = forAllSystems (
-        system:
+    devShells = forAllSystems (
+      system:
         import ./shell.nix {pkgs = nixpkgs.legacyPackages.${system};}
-      );
+    );
 
-      nixosConfigurations = {
-        # Thinkpad T14-S GEN2 - Laptop
-        kronos = mkSystem {
-          hostname     = "kronos";
-          system       = "x86_64-linux";
-          stateVersion = "22.05";
-        };
-
-        # Lenovo IdeaCentre K450 - Desktop PC
-        atlas = mkSystem {
-          hostname     = "atlas";
-          system       = "x86_64-linux";
-          stateVersion = "22.05";
-        };
+    nixosConfigurations = {
+      # Thinkpad T14-S GEN2 - Laptop
+      kronos = mkSystem {
+        hostname = "kronos";
+        system = "x86_64-linux";
+        stateVersion = "22.05";
       };
 
+      # Lenovo IdeaCentre K450 - Desktop PC
+      atlas = mkSystem {
+        hostname = "atlas";
+        system = "x86_64-linux";
+        stateVersion = "22.05";
+      };
     };
+  };
 }

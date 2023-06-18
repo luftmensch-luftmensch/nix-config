@@ -18,13 +18,12 @@ in {
       enable = true;
       settings = {
         # CHARGE THRESHOLD - BAT #
-        
+
         #"START_CHARGE_THRESH_BAT0" = 0;
         #"STOP_CHARGE_THRESH_BAT0" = 0;
 
         #"START_CHARGE_THRESH_BAT1" = 0;
         #"STOP_CHARGE_THRESH_BAT1" = 0;
-
 
         # AHCI OPTIONS #
         #AHCI_RUNTIME_PM_TIMEOUT=15;
@@ -35,8 +34,8 @@ in {
         #BAY_DEVICE="sr0";
 
         # CPU - AC #
-        CPU_SCALING_GOVERNOR_ON_AC="performance";
-        CPU_MAX_PERF_ON_AC=70;
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_MAX_PERF_ON_AC = 70;
         #CPU_MIN_PERF_ON_AC = 0;
         #CPU_BOOST_ON_AC = 1;
         #CPU_ENERGY_PERF_POLICY_ON_AC="performance";
@@ -44,14 +43,13 @@ in {
         #CPU_HWP_DYN_BOOST_ON_AC=1;
 
         # CPU - BAT #
-        CPU_SCALING_GOVERNOR_ON_BAT="schedutil";
-        CPU_MAX_PERF_ON_BAT=60;
+        CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
+        CPU_MAX_PERF_ON_BAT = 60;
         #CPU_MIN_PERF_ON_BAT = 0;
         #CPU_BOOST_ON_BAT = 1;
         #CPU_ENERGY_PERF_POLICY_ON_BAT="power";
         #CPU_HWP_ON_BAT = "performance";
         #CPU_HWP_DYN_BOOST_ON_BAT=0;
-
 
         # DISK OPTIONS #
 
@@ -94,13 +92,12 @@ in {
         # PLATFORM - PROFILE #
         #PLATFORM_PROFILE_ON_AC="performance";
         #PLATFORM_PROFILE_ON_BAT="low-power";
-        
+
         # PCIE  - AC #
         #PCIE_ASPM_ON_AC = default;
 
         # PCIE  - BAT #
         #PCIE_ASPM_ON_BAT = default;
-
 
         # RADEON OPTIONS #
         #RADEON_POWER_PROFILE_ON_AC=high;
@@ -109,7 +106,6 @@ in {
         #RADEON_DPM_STATE_ON_BAT=battery;
         #RADEON_DPM_PERF_LEVEL_ON_AC=auto;
         #RADEON_DPM_PERF_LEVEL_ON_BAT=auto;
-
 
         # RUNTIME PM - AC #
         #RUNTIME_PM_ON_AC = "on";
@@ -136,17 +132,14 @@ in {
         # SOUND - BAT #
         #SOUND_POWER_SAVE_ON_BAT = 1;
 
-
         # WAKE ON LAN #
         #"WOL_DISABLE" = "Y";
-        
+
         # WIFI - AC #
         #WIFI_PWR_ON_AC = "off";
 
         # WIFI - BAT #
         #WIFI_PWR_ON_BAT = "on";
-
-
       };
     };
   };

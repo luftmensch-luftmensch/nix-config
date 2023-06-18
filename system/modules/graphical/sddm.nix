@@ -22,8 +22,6 @@ in {
           rev = "d03373b1ddb56f295a587c9d7ffd4647bf739282";
           sha256 = "1n9pd00dmvfq87wcr2nflbpdzviy6nvzrg3kk7d09xsssfh2d1xr";
         })}";
-
-
       };
     };
 

@@ -2,9 +2,8 @@
   pkgs,
   lib,
   ...
-}:
-let 
-  default_file_system_options = [ "autodefrag" "space_cache=v2" "noatime" "compress=zstd:3" ];
+}: let
+  fs_options = ["autodefrag" "space_cache=v2" "noatime" "compress=zstd:3"];
 in {
   boot = {
     loader = {
@@ -21,7 +20,7 @@ in {
     };
 
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "ums_realtek" "usbhid" "usb_storage" "sd_mod" "xxhash" "nvme" "sd_mod" "rtsx_pci_sdmmc" ];
+      availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "ums_realtek" "usbhid" "usb_storage" "sd_mod" "xxhash" "nvme" "sd_mod" "rtsx_pci_sdmmc"];
 
       # Note `lib.mkBefore` is used instead of `lib.mkAfter` here.
       postDeviceCommands = pkgs.lib.mkBefore ''
@@ -43,7 +42,6 @@ in {
         umount /mnt
       '';
     };
-    
   };
 
   # An handy way to retrieve the corresponding label from UUID is using `blkid`
@@ -51,33 +49,32 @@ in {
     device = "/dev/disk/by-label/vault";
     fsType = "btrfs";
     # options = [ "subvol=@" "autodefrag" "space_cache=v2" "noatime" "compress=zstd:3" ];
-    options = [ "subvol=@" ] ++ default_file_system_options;
+    options = ["subvol=@"] ++ fs_options;
   };
-
 
   fileSystems."/home" = {
     device = "/dev/disk/by-label/vault";
     fsType = "btrfs";
-    options = [ "subvol=@home" "autodefrag" "space_cache=v2" "noatime" "compress=zstd:3" ];
+    options = ["subvol=@home"] ++ fs_options;
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-label/vault";
     fsType = "btrfs";
-    options = [ "subvol=@nix" "autodefrag" "space_cache=v2" "noatime" "compress=zstd:3" ];
+    options = ["subvol=@nix"] ++ fs_options;
   };
 
   fileSystems."/persist" = {
     device = "/dev/disk/by-label/vault";
     fsType = "btrfs";
-    options = [ "subvol=@persist" "autodefrag" "space_cache=v2" "noatime" "compress=zstd:3" ];
+    options = ["subvol=@persist"] ++ fs_options;
     neededForBoot = true;
   };
 
   fileSystems."/var/log" = {
     device = "/dev/disk/by-label/vault";
     fsType = "btrfs";
-    options = [ "subvol=@var_log" "autodefrag" "space_cache=v2" "noatime" "compress=zstd:3" ];
+    options = ["subvol=@var_log"] ++ fs_options;
   };
 
   fileSystems."/boot" = {
@@ -85,11 +82,10 @@ in {
     fsType = "vfat";
   };
 
-  swapDevices = [ { device = "/dev/disk/by-label/SWAP"; } ];
+  swapDevices = [{device = "/dev/disk/by-label/SWAP";}];
 
   services.btrfs.autoScrub = {
     enable = true;
     interval = "monthly";
   };
-
 }

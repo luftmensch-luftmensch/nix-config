@@ -17,7 +17,7 @@ in {
     (mkIf cfg.enableCups {
       services.printing = {
         enable = true;
-        drivers = [ pkgs.brlaser ];
+        drivers = [pkgs.brlaser];
       };
     })
 
@@ -25,7 +25,7 @@ in {
       hardware = {
         sane = {
           enable = true;
-          extraBackends = [ pkgs.epkowa ];
+          extraBackends = [pkgs.epkowa];
         };
       };
     })

@@ -12,19 +12,18 @@ in {
     security = {
       pam = {
         services = {
-          sddm.enableGnomeKeyring = true; 
+          sddm.enableGnomeKeyring = true;
         };
-      }; 
+      };
 
       polkit.enable = true;
     };
-
 
     programs.dconf.enable = true;
     services = {
       dbus = {
         enable = true;
-        packages = [ pkgs.dconf ];
+        packages = [pkgs.dconf];
       };
 
       gnome = {
@@ -32,7 +31,6 @@ in {
           enable = true;
         };
       };
-
     };
 
     # Trash and GTK apps features
@@ -52,7 +50,7 @@ in {
       font-awesome
       fira-code
       monoid # https://larsenwork.com/monoid/
-      (nerdfonts.override { fonts = [ "Iosevka" ];  })
+      (nerdfonts.override {fonts = ["Iosevka"];})
       source-code-pro
       sarasa-gothic # A CJK programming font based on Iosevka and Source Han Sans
       victor-mono
@@ -63,7 +61,7 @@ in {
       # twemoji-color-font
       # scientifica
       # google-fonts
-      # noto-fonts-emoji 
+      # noto-fonts-emoji
       # roboto
       # vegur
     ];

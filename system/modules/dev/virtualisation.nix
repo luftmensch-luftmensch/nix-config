@@ -25,7 +25,6 @@ in {
       };
     };
 
-    environment.systemPackages = with pkgs; [ virt-manager virt-viewer swtpm ];
-
+    environment.systemPackages = with pkgs; [virt-manager virt-viewer swtpm];
   };
 }

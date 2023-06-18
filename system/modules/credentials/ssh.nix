@@ -16,7 +16,7 @@ in {
       enable = true;
       startWhenNeeded = true;
       openFirewall = true;
-      ports = [ 6969 ];
+      ports = [6969];
 
       settings = {
         X11Forwarding = false;

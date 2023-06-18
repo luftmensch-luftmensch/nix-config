@@ -14,10 +14,11 @@ in {
 
   config = mkIf cfg.enable {
     networking.wg-quick.interfaces = {
-      wg0 = { # "wg0" is the network interface name. You can name the interface arbitrarily.
-        address = [ "10.8.0.3/24" ];
+      # "wg0" is the network interface name. You can name the interface arbitrarily.
+      wg0 = {
+        address = ["10.8.0.3/24"];
         listenPort = 51820;
-        dns = [ "1.1.1.1" ];
+        dns = ["1.1.1.1"];
 
         # Path to the private key file.
         #
@@ -25,7 +26,6 @@ in {
         # but this makes the private key world-readable; thus, using privateKeyFile is
         # recommended.
         privateKeyFile = "/home/valentino/.config/vpn/wireguard/thinkpad_privatekey";
-
 
         peers = [
           # For a client configuration, one peer entry for the server will be enough.
@@ -39,7 +39,7 @@ in {
             presharedKey = "Bq+DpD2XnPlXd815ysg9PBak9lWTGN6WuSSV5qx3Yt0=";
 
             # Forward all the traffic via VPN.
-            allowedIPs = [ "0.0.0.0/0" "::/0" ];
+            allowedIPs = ["0.0.0.0/0" "::/0"];
             # Or forward only particular subnets
             #allowedIPs = [ "10.100.0.1" "91.108.12.0/22" ];
 

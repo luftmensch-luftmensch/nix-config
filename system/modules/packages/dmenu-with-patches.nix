@@ -13,10 +13,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    
     environment.systemPackages = with pkgs; [
       (dmenu.overrideAttrs (oldAttrs: {
-        patches = [ ./dmenu-patches/case-insensitive ./dmenu-patches/borders ];
+        patches = [./dmenu-patches/case-insensitive ./dmenu-patches/borders];
       }))
     ];
   };

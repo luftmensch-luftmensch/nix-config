@@ -28,7 +28,7 @@ in {
 
         user = cfgUser;
         configDir = "/home/valentino/.config/syncthing";
-        openDefaultPorts = true; # TCP 22000 for transfer, UDP 21027 for discovery 
+        openDefaultPorts = true; # TCP 22000 for transfer, UDP 21027 for discovery
 
         overrideFolders = true; # Purge folders not declaratively configured!
         overrideDevices = true;
@@ -40,7 +40,7 @@ in {
           };
           nixos-device = {
             id = cfg.device-id;
-          };  
+          };
         };
 
         # extraOptions = {
@@ -53,23 +53,21 @@ in {
           "Music" = {
             path = "/home/valentino/Music";
             id = "n4gcw-3q7u5";
-            devices = [ "nixos-device" ];
+            devices = ["nixos-device"];
           };
 
           "Dropbox" = {
             path = "/home/valentino/Dropbox";
             id = "tcfun-ya2ir";
-            devices = [ "P30-PRO" "nixos-device" ]; # NAS
+            devices = ["P30-PRO" "nixos-device"]; # NAS
           };
 
           "Video" = {
             path = "/home/valentino/Video";
             id = "tzf49-nwpwz";
-            devices = [ "nixos-device" ]; # PC
+            devices = ["nixos-device"]; # PC
           };
-          
         };
-        
       };
     };
   };
