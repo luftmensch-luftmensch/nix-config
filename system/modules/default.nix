@@ -48,7 +48,9 @@
   "services/rules"              = import ./services/rules.nix;
   "services/syncthing"          = import ./services/syncthing.nix;
   "services/touchpad"           = import ./services/touchpad.nix;
-  "services/wireguard"          = import ./services/wireguard.nix;
+
+  "vpn/openvpn"                 = import ./vpn/openvpn.nix;
+  "vpn/wireguard"               = import ./vpn/wireguard.nix;
 
   "shell/bash"                  = import ./shell/bash.nix;
 }

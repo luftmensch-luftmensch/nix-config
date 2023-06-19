@@ -83,6 +83,10 @@
       };
     };
 
+    vpn = {
+      openvpn.enable = true;
+    };
+
     shell = {
       bash.enable = true;
     };

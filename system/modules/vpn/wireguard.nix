@@ -6,10 +6,10 @@
   ...
 }:
 with lib; let
-  cfg = config.system.modules.services.wireguard;
+  cfg = config.system.modules.vpn.wireguard;
 in {
-  options.system.modules.services.wireguard = {
-    enable = mkEnableOption "Enable touchpad capabilities";
+  options.system.modules.vpn.wireguard = {
+    enable = mkEnableOption "Enable wireguard capabilities";
   };
 
   config = mkIf cfg.enable {
@@ -25,7 +25,7 @@ in {
         # Note: The private key can also be included inline via the privateKey option,
         # but this makes the private key world-readable; thus, using privateKeyFile is
         # recommended.
-        privateKeyFile = "/home/valentino/.config/vpn/wireguard/thinkpad_privatekey";
+        privateKeyFile = "/home/valentino/Dropbox/vpn/wireguard/thinkpad_privatekey";
 
         peers = [
           # For a client configuration, one peer entry for the server will be enough.

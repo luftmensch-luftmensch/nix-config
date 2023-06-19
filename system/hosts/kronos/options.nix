@@ -82,8 +82,13 @@
         device-id = "LXTK5LZ-CT2L6QP-MTAGSYX-XIRR2N2-GQOB7XS-LQCRUTS-UDB36R5-O3OEXQ2";
       };
       touchpad.enable = true;
+    };
+
+    vpn = {
+      openvpn.enable = true;
       wireguard.enable = true;
     };
+
 
     shell = {
       bash.enable = true;
