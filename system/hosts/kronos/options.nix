@@ -11,7 +11,7 @@
         description = "Valentino Bocchetti";
         hashedPassword = "$6$4CvDCvwb2FE/EnAv$pP65k96pPwwOVu1aspgUbYSwq9HUgwzFCdvOvHq/rj6te1KdFNAWHbo65aql15awsUrKcianHFSTm5GzqA.MZ.";
         extraGroups = ["networkmanager" "docker" "scanner" "lp" "lpadmin" "adbusers" "input"];
-        extraAuthorizedKeys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDLhTJTjWwzsg+e3xwCJ4yweI064n1MYtgT4V8ksBYKn valentino@homelab"];
+        extraAuthorizedKeys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILKiPJdb2rsLRwFGczP8x7KVTjqqY4lPkdbwE6+GcKxP valentino@homelab"];
       };
     };
 
