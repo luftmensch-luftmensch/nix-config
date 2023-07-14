@@ -79,7 +79,7 @@
       udev-rules.enable = true;
       syncthing = {
         enable = true;
-        device-id = "LXTK5LZ-CT2L6QP-MTAGSYX-XIRR2N2-GQOB7XS-LQCRUTS-UDB36R5-O3OEXQ2";
+        device-id = "6LMWCO4-HGJ5WVU-W3CKJYV-GLBR2KF-IMB6E7A-NKLI7ZF-SZ7N4YX-YBE26AN";
       };
       touchpad.enable = true;
     };
