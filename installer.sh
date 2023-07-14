@@ -62,7 +62,7 @@ fail (){
   printf ''
   print_info 'Incorrect arguments, did you make a typo?\n'
   printf ''
-  print_info "Usage: $(basename "$0") [[-]s|[--]start] [[-]h|[--]help ] \n"
+  print_info "Usage: $(basename "$0") [[-]r|[--]run] [[-]h|[--]help ] \n"
   print_error "This script wipes all your data to  generate a full working\nNixos installation with encrypted BTRFS partition as root\n"
   print_error "\t\t\tTake care!\n"
   printf ''
