@@ -2,7 +2,7 @@
 set -e # exit immediately if a command return non-zero status
 
 # Global variables
-declare -a subvolumes_list=("@" "@home" "@nix" "@persist" "@var_log") # TODO: Add a subvol for docker/libvirt(?)
+declare -a subvolumes_list=("@" "@home" "@nix" "@persist" "@var_log")
 declare -a subvolumes_flags=("compress=zstd:3" "noatime" "autodefrag" "space_cache=v2" "discard=async")
 
 print_ok() {
@@ -78,10 +78,9 @@ install_nixos(){
 
     # Search device on which to install NixOS
     
-    # print_info "Available devices:\n$(find /dev/ -regex "/dev/\(sd[a-z]\|vd[a-z]\|nvme[0-9]n[0-9]\)")\n"
     print_info "Available devices:\n\t$(find /dev/ -regex "/dev/\(sd[a-z]\|vd[a-z]\|nvme[0-9]n[0-9]\)" | tr '\n' ' ')\n" # Print all the available devices on the same line
-    # loop as long as $device is a valid device
 
+    # loop as long as $device is a valid device
     while [ -z "$device" ] || [ ! -e "$device" ] || \
 	      ! expr "$device" : '^/dev/\(sd[a-z]\|vd[a-z]\|nvme[0-9]n[0-9]\)$' >/dev/null; do
 	print_info "Type the device name ('/dev/' required): "

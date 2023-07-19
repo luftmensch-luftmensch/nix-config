@@ -21,15 +21,15 @@ in {
     environment.systemPackages = with pkgs; [
       
     ] ++ (optionals cfg.python-packages [
-      python310
-      python310Packages.mutagen           # Used to add information to music
-      python310Packages.pip               # Python pm
-      python310Packages.psutil            # Process and system utilization information interface
-      python310Packages.setuptools        # Utilities to facilitate the installation of Python packages
-      python310Packages.flake8            # python tool that glues together pycodestyle, pyflakes, mccabe, and third-party plugins to check the style and quality of some python code. 
-      python310Packages.python-lsp-server # python language server
-      python310Packages.httpie            # Command line http client (API Testing)
-      python310Packages.pygments          # Used for minted (syntax highlighting)
+      python312
+      python312Packages.mutagen           # Used to add information to music
+      python312Packages.pip               # Python pm
+      python312Packages.psutil            # Process and system utilization information interface
+      python312Packages.setuptools        # Utilities to facilitate the installation of Python packages
+      python312Packages.flake8            # python tool that glues together pycodestyle, pyflakes, mccabe, and third-party plugins to check the style and quality of some python code. 
+      python312Packages.python-lsp-server # python language server
+      python312Packages.httpie            # Command line http client (API Testing)
+      python312Packages.pygments          # Used for minted (syntax highlighting)
     ]) ++ (optionals cfg.nix-packages [
       deadnix                             # Scan Nix files for dead code
       nix-index                           # Locate packages
