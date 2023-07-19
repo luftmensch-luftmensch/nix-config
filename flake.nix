@@ -35,7 +35,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    # emacs-overlay.url = "github:nix-community/emacs-overlay";
     neovim-flake.url = "github:luftmensch-luftmensch/neovim-flake";
   };
 
@@ -47,7 +47,7 @@
     nixpkgs-unstable,
     impermanence,
     sops-nix,
-    emacs-overlay,
+    # emacs-overlay,
     neovim-flake,
     ...
   }: let

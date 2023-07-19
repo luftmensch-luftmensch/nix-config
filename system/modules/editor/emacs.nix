@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  # inputs,
   ...
 }:
 with lib; let
@@ -23,7 +23,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      nixpkgs.overlays = [inputs.emacs-overlay.overlays.default];
+      # nixpkgs.overlays = [inputs.emacs-overlay.overlays.default];
 
       environment.systemPackages = with pkgs; [
         ((emacsPackagesFor cfg.package).emacsWithPackages (epkgs: [epkgs.melpaPackages.telega epkgs.vterm epkgs.pdf-tools]))
