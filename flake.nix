@@ -35,6 +35,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ###      Atomic secret provisioning for NixOS based on age      ###
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # emacs-overlay.url = "github:nix-community/emacs-overlay";
     neovim-flake.url = "github:luftmensch-luftmensch/neovim-flake";
   };
