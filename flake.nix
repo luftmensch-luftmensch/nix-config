@@ -30,16 +30,16 @@
     impermanence.url = "github:nix-community/impermanence";
 
     ###      Atomic secret provisioning for NixOS based on sops      ###
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # sops-nix = {
+    #   url = "github:Mic92/sops-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     ###      Atomic secret provisioning for NixOS based on age      ###
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # agenix = {
+    #   url = "github:ryantm/agenix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # emacs-overlay.url = "github:nix-community/emacs-overlay";
     neovim-flake.url = "github:luftmensch-luftmensch/neovim-flake";
@@ -52,7 +52,7 @@
     nixpkgs,
     nixpkgs-unstable,
     impermanence,
-    sops-nix,
+    # sops-nix,
     # emacs-overlay,
     neovim-flake,
     ...
