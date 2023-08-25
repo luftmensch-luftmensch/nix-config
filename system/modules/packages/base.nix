@@ -27,7 +27,9 @@ in {
       fzf                      # A command-line fuzzy finder
       gimp-with-plugins        # An image manipulation and paint program
       darktable                # Virtual lighttable and darkroom for photographers
-      mpv                      # Media player
+      (mpv.override {          # Media Player
+        scripts = [ mpvScripts.mpris ];
+      })
       obs-studio               # Free and open source software for video recording and live streaming
       rofi                     # A window  switcher, application launcher, ssh dialog, dmenu replacement and more
       cinnamon.nemo            # Cinnamon file manager
