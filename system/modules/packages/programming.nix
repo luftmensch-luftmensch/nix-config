@@ -34,6 +34,7 @@ in {
       deadnix                             # Scan Nix files for dead code
       nix-index                           # Locate packages
       nix-prefetch-git                    # Same logic of nix-prefetch-url
+      nix-output-monitor                  # Additional info while building (more info at https://github.com/maralorn/nix-output-monitor)
       # niv                               # Dependency management for Nix
       # patchelf                          # Patches binaries for Nix support
     ]) ++ (optionals cfg.c-packages [
