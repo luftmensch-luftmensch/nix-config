@@ -54,7 +54,6 @@ in {
       libtool
       nodejs yarn
       shellcheck
-      flutter
       mongodb-compass
     ]);
   }];
