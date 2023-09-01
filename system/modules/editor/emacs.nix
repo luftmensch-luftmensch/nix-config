@@ -38,7 +38,7 @@ in {
       fonts.fonts = with pkgs; [emacs-all-the-icons-fonts];
     }
     (mkIf cfg.mails.enable {
-      environment.systemPackages = with pkgs; [afew isync libsecret mu notmuch notmuch.emacs thunderbird];
+      environment.systemPackages = with pkgs; [afew isync libsecret mu notmuch notmuch.emacs thunderbirdPackages.thunderbird-115]; # thunderbird
       programs.msmtp = {
         enable = true;
       };
