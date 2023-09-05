@@ -30,14 +30,15 @@
       intel.updateMicrocode = true; # lib.mkDefault config.hardware.enableRedistributableFirmware;
     };
 
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.legacy_470; # beta
-      modesetting.enable = true;
-    };
+    # nvidia = {
+    #   package = config.boot.kernelPackages.nvidiaPackages.legacy_470; # beta
+    #   modesetting.enable = true;
+    # };
   };
 
   services.xserver = {
     enable = true;
-    videoDrivers = ["nvidia"];
+    # videoDrivers = ["nvidia"];
+    videoDrivers = ["intel"];
   };
 }
