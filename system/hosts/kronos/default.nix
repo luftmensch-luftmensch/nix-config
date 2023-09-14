@@ -12,7 +12,8 @@
 
   # Kernel related
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    # kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = ["kvm-amd" "amdgpu" "acpi_call"];
     kernelParams = ["acpi_backlight=native" "idle=nomwait" "iommu=pt"];
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
