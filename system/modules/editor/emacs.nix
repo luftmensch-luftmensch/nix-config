@@ -26,7 +26,12 @@ in {
       # nixpkgs.overlays = [inputs.emacs-overlay.overlays.default];
 
       environment.systemPackages = with pkgs; [
-        ((emacsPackagesFor cfg.package).emacsWithPackages (epkgs: [epkgs.melpaPackages.telega epkgs.vterm epkgs.pdf-tools]))
+        ((emacsPackagesFor cfg.package).emacsWithPackages (epkgs: [
+          epkgs.melpaPackages.telega
+          epkgs.vterm
+          epkgs.pdf-tools
+          epkgs.treesit-grammars.with-all-grammars
+        ]))
         exiftool
         mupdf
         (writeScriptBin "emacs-daemon" ''
