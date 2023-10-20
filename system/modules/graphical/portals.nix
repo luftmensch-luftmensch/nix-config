@@ -16,6 +16,7 @@ in {
 
     (mkIf cfgWayland.enable {
       xdg.portal = {
+        xdgOpenUsePortal = true;
         extraPortals = [pkgs.xdg-desktop-portal-wlr];
         wlr = {
           enable = true;

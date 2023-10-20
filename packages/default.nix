@@ -1,3 +1,4 @@
 {pkgs ? null}: {
-  # TODO: Add custom packages here
+	# Httpie Desktop - cross-platform API testing client for humans. Painlessly test REST, GraphQL, and HTTP APIs.
+	httpie-desktop = pkgs.callPackage ./httpie-desktop {};
 }

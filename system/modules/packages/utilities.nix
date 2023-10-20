@@ -56,6 +56,7 @@ in {
 
 
       git           # gitAndTools.gitFull
+      git-lfs       # gitAndTools.gitFull
       htop          # Why is my laptop so hot? Oh yeah I'm compiling 20 programs while running two games
       jq            # command-line JSON processor
       hugo          # Static website engine
