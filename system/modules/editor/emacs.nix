@@ -26,12 +26,22 @@ in {
       # nixpkgs.overlays = [inputs.emacs-overlay.overlays.default];
 
       environment.systemPackages = with pkgs; [
-        ((emacsPackagesFor cfg.package).emacsWithPackages (epkgs: [
-          epkgs.melpaPackages.telega
-          epkgs.vterm
-          epkgs.pdf-tools
-          epkgs.treesit-grammars.with-all-grammars
-        ]))
+        ((emacsPackagesFor cfg.package).emacsWithPackages (epkgs:
+          with epkgs; [
+            # melpaPackages.telega
+            (melpaPackages.telega.overrideAttrs (oldAttrs: {
+              version = "1.8.160";
+              src = pkgs.fetchFromGitHub {
+                owner = "zevlg";
+                repo = "telega.el";
+                rev = "17bfa50c8f2e70daeb8866f3bf195f15623ab520";
+                sha256 = "1057zr4g8llxmzy47l5klyi89x66q8qx5vrd50pmpsp4c6772jz9";
+              };
+            }))
+            vterm
+            pdf-tools
+            treesit-grammars.with-all-grammars
+          ]))
         exiftool
         mupdf
         (writeScriptBin "emacs-daemon" ''

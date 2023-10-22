@@ -30,5 +30,6 @@ inputs: {
         hash = "sha256-mbhxuJjrV3nC8Ja7N0WWF9ByHovJLmoLLuuzoU4khjU=";
       };
     });
+
   };
 }
