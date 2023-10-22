@@ -12,12 +12,6 @@
 		sha256 = "1qq8rfk5jm7k2ncp5q01zzbkhai3p9dxrmllc8nw8z3knmjzfw00";
   };
 
-	# appimageContents = pkgs.appimageTools.extractType2 {inherit name src;};
-
-	# install -m 444 -D ${appimageContents}/${pname}.desktop $out/share/applications/${pname}.desktop
-
-	# install -m 444 -D ${appimageContents}/${pname}.png $out/share/icons/hicolor/512x512/apps/${pname}.png
-	# substituteInPlace $out/share/applications/${pname}.desktop \ --replace 'Exec=AppRun --no-sandbox %U' 'Exec=${pname} %U'
 in
   pkgs.appimageTools.wrapType2 rec {
     inherit name src;

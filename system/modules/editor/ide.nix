@@ -20,6 +20,7 @@ in {
       vscodium
       postman
       httpie-desktop
+      insomnium
     ];
   };
 }
