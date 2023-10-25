@@ -38,6 +38,9 @@ in {
     services.tumbler.enable = true;
     services.udisks2.enable = true;
 
+    # Who the hell uses xterm these days?
+    services.xserver.excludePackages = [pkgs.xterm];
+
     environment.systemPackages = with pkgs; [
       gnome.seahorse
       libsecret

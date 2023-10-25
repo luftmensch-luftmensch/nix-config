@@ -18,10 +18,7 @@ in {
       libinput.enable = true;
       displayManager.defaultSession = "none+i3";
       windowManager = {
-        i3 = {
-          enable = true;
-          # package = pkgs.i3-gaps; (Merged in v4.22)
-        };
+        i3.enable = true;
       };
     };
   };
