@@ -5,7 +5,7 @@ inputs: {
   # Overlays for various pkgs (e.g. broken / too old)
   modifications = final: prev: {
     stable = import inputs.nixpkgs-stable {
-      system = final.system;
+      inherit (final) system;
       config.allowUnfree = true; # Forgive me Stallman
     };
 
