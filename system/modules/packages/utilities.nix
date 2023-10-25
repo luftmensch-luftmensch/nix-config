@@ -75,7 +75,8 @@ in {
       tmpmail       # Temporary email (https://github.com/sdushantha/tmpmail)
       traceroute    # Print the route packets trace to network host
 
-      unzip         # list, test  and extract compressed  files in  a ZIP archive
+      unrar         # Utility for RAR archives
+      unzip         # list, test and extract compressed files in a ZIP archive
       usbutils      # Tools for working with USB devices, such as lsusb
 
       wget          # The non-interactive network downloader
