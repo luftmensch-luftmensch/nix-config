@@ -158,10 +158,8 @@ install_nixos(){
     mount -t btrfs "$root" /mnt
 
     # We first create the subvolumes outlined above:
-    for sv in "${subvolumes_list[@]}";
-    do
+    for sv in "${subvolumes_list[@]}"; do
 	btrfs subvolume create "/mnt/$sv"
-    
     done
     # We then take an empty *readonly* snapshot of the root subvolume,
     # which we'll eventually rollback to on every boot.
