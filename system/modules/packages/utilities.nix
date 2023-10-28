@@ -86,17 +86,15 @@ in {
 
       # bc            # GNU software calculator
       # usbguard      # Protect against infected USB
-      # gping         # Modern replacement for ping
       # gh            # Github's CLI tool
 
-      # unrar
       # killall
 
       # mkpasswd      # Generates passwords and can apply them automatically to users
       # mpg123
       # telnet        # client-server protocol predating the TCP protocol.
       # foremost      # Data recovery tool
-      # appimage-run # Execute appimage programs
+      # appimage-run  # Execute appimage programs
     ];
   };
 }

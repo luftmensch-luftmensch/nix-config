@@ -23,8 +23,6 @@ in
     meta = {
       description = "Cross-platform API testing client for humans. Painlessly test REST, GraphQL, and HTTP APIs.";
       homepage = "https://github.com/httpie/desktop";
-      # license = licenses.gpl3;
       maintainers = [];
-      # platforms = ["x86_64-linux"];
     };
   }

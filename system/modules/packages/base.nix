@@ -27,7 +27,7 @@ in {
       fzf                      # A command-line fuzzy finder
       gimp-with-plugins        # An image manipulation and paint program
       darktable                # Virtual lighttable and darkroom for photographers
-      (mpv.override {          # Media Player
+      (mpv.override {          # Media Player with embedded mpris support
         scripts = [ mpvScripts.mpris ];
       })
       obs-studio               # Free and open source software for video recording and live streaming

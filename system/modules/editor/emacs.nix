@@ -28,7 +28,7 @@ in {
       environment.systemPackages = with pkgs; [
         ((emacsPackagesFor cfg.package).emacsWithPackages (epkgs:
           with epkgs; [
-            # melpaPackages.telega
+            # melpaPackages.telega is outdated. Pull a newer version directly from the repo
             (melpaPackages.telega.overrideAttrs (oldAttrs: {
               version = "1.8.160";
               src = pkgs.fetchFromGitHub {

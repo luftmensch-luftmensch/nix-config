@@ -24,8 +24,6 @@ in {
     services = {
       syncthing = {
         enable = true;
-        # user = "valentino";
-
         user = cfgUser;
         configDir = "/home/valentino/.config/syncthing";
         openDefaultPorts = true; # TCP 22000 for transfer, UDP 21027 for discovery

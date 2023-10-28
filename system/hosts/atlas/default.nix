@@ -38,7 +38,6 @@
 
   services.xserver = {
     enable = true;
-    # videoDrivers = ["nvidia"];
-    videoDrivers = ["intel"];
+    videoDrivers = ["intel"]; # "nvidia"
   };
 }

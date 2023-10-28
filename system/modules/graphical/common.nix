@@ -57,16 +57,13 @@ in {
       source-code-pro
       sarasa-gothic # A CJK programming font based on Iosevka and Source Han Sans
       victor-mono
+      cantarell_fonts
+      scientifica
 
-      # cantarell_fonts
-      # inconsolata
       # mononoki
-      # twemoji-color-font
-      # scientifica
       # google-fonts
       # noto-fonts-emoji
       # roboto
-      # vegur
     ];
   };
 }

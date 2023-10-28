@@ -26,6 +26,5 @@ in
       homepage = "https://github.com/ArchGPT/insomnium";
       license = licenses.mit;
       maintainers = [];
-      # platforms = ["x86_64-linux"];
     };
   }
