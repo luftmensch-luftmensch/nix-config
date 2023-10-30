@@ -43,6 +43,7 @@
   "packages/xorg-related"       = import ./packages/xorg-related.nix;
 
   "services/battery"            = import ./services/battery.nix;
+  "services/fprintd"            = import ./services/fprintd.nix;
   "services/logind"             = import ./services/logind.nix;
   "services/printing"           = import ./services/printing.nix;
   "services/rules"              = import ./services/rules.nix;

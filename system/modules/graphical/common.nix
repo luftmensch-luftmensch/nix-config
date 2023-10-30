@@ -57,7 +57,7 @@ in {
       source-code-pro
       sarasa-gothic # A CJK programming font based on Iosevka and Source Han Sans
       victor-mono
-      cantarell_fonts
+      cantarell-fonts
       scientifica
 
       # mononoki

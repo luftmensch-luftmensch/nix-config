@@ -66,12 +66,16 @@
 
       ricing.enable = true;
       secrets.enable = true;
-      unstable.enable = true;
+      unstable = {
+        enable = true;
+        onWayland = true;
+      };
       utilities.enable = true;
     };
 
     services = {
       battery.enable = true;
+      fingerprint.enable = true;
       logind.enable = true;
       printing = {
         enableCups = true;
