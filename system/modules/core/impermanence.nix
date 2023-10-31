@@ -21,6 +21,7 @@ in {
         # "/var/lib/cni"
         # "/var/lib/containers"
         "/var/lib/libvirt"
+        "/var/lib/fprint"
         "/var/lib/docker"
         "/root/.ssh"
         "/root/.gnupg"
