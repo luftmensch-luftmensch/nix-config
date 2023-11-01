@@ -60,7 +60,7 @@
         c-packages = true;
         nix-packages = true;
         java-packages = true;
-        go-packages = true;
+        # go-packages = true;
         python-packages = true;
         misc-packages = true;
       };
