@@ -18,8 +18,7 @@ in {
       alacritty                # A fast, cross-platform, OpenGL terminal emulator
       autotiling               # Manual to dynamic TWM (i3/sway)
 
-      # Wait for https://github.com/NixOS/nixpkgs/pull/262797 until get fixed
-      # bitwarden                # A secure and free password manager for all of your devices
+      bitwarden                # A secure and free password manager for all of your devices
       dunst                    # A customizable and lightweight notification-daemon
       imv                      # Image viewer for X11 & Wayland
       inkscape-with-extensions # Vector graphics editor

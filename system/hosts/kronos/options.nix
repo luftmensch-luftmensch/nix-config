@@ -66,10 +66,7 @@
 
       ricing.enable = true;
       secrets.enable = true;
-      unstable = {
-        enable = true;
-        onWayland = true;
-      };
+      unstable.enable = true;
       utilities.enable = true;
     };
 
