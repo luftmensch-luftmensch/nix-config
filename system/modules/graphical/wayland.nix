@@ -78,8 +78,6 @@ in {
           sway-contrib.grimshot     # A helper for screenshots within sway (grimshot --notify copy area)
           libinput-gestures         # Gesture support under wayland
 
-          waybar                    # Highly customizable Wayland bar for Sway and Wlroots based compositors
-
           swayidle                  # Idle management daemon for Wayland
           swaylock-effects          # A more customizable `swaylock`
           wob                       # A lightweight overlay volume/backlight/progress/anything bar for Wayland

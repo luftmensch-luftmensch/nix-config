@@ -15,6 +15,7 @@ in {
 
 	config = mkIf cfg.enable {
 		environment.systemPackages = with unstable-pkgs; [
+			waybar # Highly customizable Wayland bar for Sway and Wlroots based compositors
 			swaynotificationcenter # Simple notification daemon with a GUI built for Sway
 		];
 	};
