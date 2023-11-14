@@ -30,15 +30,15 @@ in {
           with epkgs; [
             # melpaPackages.telega is outdated. Pull a newer version directly from the repo
             (melpaPackages.telega.overrideAttrs (oldAttrs: {
-              # version = "1.8.160";
-              version = "1.8.200";
+              # version = "1.8.200";
+              version = "0.8.211";
               src = pkgs.fetchFromGitHub {
                 owner = "zevlg";
                 repo = "telega.el";
-                # rev = "17bfa50c8f2e70daeb8866f3bf195f15623ab520";
-                # sha256 = "1057zr4g8llxmzy47l5klyi89x66q8qx5vrd50pmpsp4c6772jz9";
-                rev = "93fedcefd6585dd98d649e2d8b8ca393e288f2fd";
-                sha256 = "0d88mc3as1q1lkzjxnbiq8an80nyd9xkz2d9gbcfdfpd3ggm03mz";
+								rev = "aaf5e05f60af786b6aedf469269a422b3a4c1095";
+								sha256 = "12jbg6l66f4k8hpv2knczl5v0zicgk125g9dx4jg8g8yi96in6if";
+                # rev = "93fedcefd6585dd98d649e2d8b8ca393e288f2fd";
+                # sha256 = "0d88mc3as1q1lkzjxnbiq8an80nyd9xkz2d9gbcfdfpd3ggm03mz";
               };
             }))
             vterm
