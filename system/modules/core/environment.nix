@@ -20,8 +20,7 @@ in {
         EDITOR = "emacsclient -t";
         BROWSER = "firefox";
         PAGER = "less --quit-at-eof";
-        GTK_THEME = "Materia-dark";
-        #GTK_USE_PORTAL="1";
+        GTK_THEME = "Adwaita:dark"; # "Materia-dark";
       };
       etc = {
         "xdg/user-dirs.defaults".text = ''
@@ -32,9 +31,9 @@ in {
         '';
 
         "xdg/gtk-2.0/gtkrc".text = ''
-          gtk-theme-name="Materia-dark"
-          gtk-icon-theme-name="breeze-dark"
-          gtk-font-name="Sans 10"
+          gtk-theme-name="Adwaita-dark"
+          gtk-icon-theme-name="Adwaita"
+          gtk-font-name="Sarasa Mono Slab SC 12"
           gtk-cursor-theme-name="capitaine-cursors"
           gtk-cursor-theme-size=0
           gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
@@ -49,24 +48,24 @@ in {
           gtk-xft-rgba="rgb"
         '';
 
-        "xdg/gtk-3.0/settings.ini".text = ''
-          [Settings]
-          gtk-theme-name=Materia-dark
-          gtk-icon-theme-name=breeze-dark
-          gtk-font-name=Sans 10
-          gtk-cursor-theme-size=0
-          gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
-          gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
-          gtk-button-images=0
-          gtk-menu-images=0
-          gtk-enable-event-sounds=1
-          gtk-enable-input-feedback-sounds=1
-          gtk-xft-antialias=1
-          gtk-xft-hinting=1
-          gtk-xft-hintstyle=hintslight
-          gtk-xft-rgba=rgb
-          gtk-cursor-theme-name=capitaine-cursors
-        '';
+        # "xdg/gtk-3.0/settings.ini".text = ''
+        #   [Settings]
+        #   gtk-theme-name=Materia-dark
+        #   gtk-icon-theme-name=breeze-dark
+        #   gtk-font-name=Sans 10
+        #   gtk-cursor-theme-size=0
+        #   gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
+        #   gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+        #   gtk-button-images=0
+        #   gtk-menu-images=0
+        #   gtk-enable-event-sounds=1
+        #   gtk-enable-input-feedback-sounds=1
+        #   gtk-xft-antialias=1
+        #   gtk-xft-hinting=1
+        #   gtk-xft-hintstyle=hintslight
+        #   gtk-xft-rgba=rgb
+        #   gtk-cursor-theme-name=capitaine-cursors
+        # '';
       };
     };
   };
