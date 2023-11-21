@@ -33,11 +33,12 @@ with lib; let
       export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
       gnome_schema=org.gnome.desktop.interface
       wm_schema=org.gnome.desktop.wm.preferences
-      gsettings set $gnome_schema gtk-theme 'Materia-dark'
+      gsettings set $gnome_schema gtk-theme 'Adwaita-dark'
       gsettings set $gnome_schema document-font-name "Sarasa Mono Slab SC 13"
       gsettings set $gnome_schema font-name "Sarasa Mono Slab SC 13"
       gsettings set $gnome_schema monospace-font-name "Sarasa Mono Slab SC 13"
       gsettings set $wm_schema titlebar-font "Sarasa Mono Slab SC 13"
+			gsettings set $gnome_schema color-scheme 'prefer-dark'
     '';
   };
 
@@ -105,7 +106,7 @@ in {
           export _JAVA_AWT_WM_NONREPARENTING=1
           export XDG_SESSION_TYPE=wayland
           export XDG_CURRENT_DESKTOP=sway
-          export GTK_THEME=Materia-dark
+          export GTK_THEME=Adwaita:dark
         '';
       };
     };
