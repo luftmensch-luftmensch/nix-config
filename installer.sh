@@ -5,6 +5,31 @@ set -e # exit immediately if a command return non-zero status
 declare -a subvolumes_list=("@" "@home" "@nix" "@persist" "@var_log")
 declare -a subvolumes_flags=("compress=zstd:3" "noatime" "autodefrag" "space_cache=v2" "discard=async")
 
+logger() {
+    tostdout () {
+        printf "%*s%b%s %s %s\033[0m%b" "$INDENT" '' "${COLOR}" "${HEADER}" "${SEPARATOR}" "${MESSAGE}" "${NEWLINE:-\n}";
+    }
+
+    # No message given
+    if [[ $# -eq 0 ]]; then
+        logmsg E "No parameters were given to the logmsg function!";
+        return 0
+    fi
+
+    FORMAT="${1}"; shift;
+    MESSAGE="${1}"; shift;
+    INDENT=${INDENT:-0}
+
+    shopt -s nocasematch
+    case "$FORMAT" in
+        'E')  HEADER="[ERR] "; COLOR="\033[1;31m"; SEPARATOR="»"; tostdout ;;
+        'W')  HEADER="[WARN]"; COLOR="\033[0;33m"; SEPARATOR="»"; tostdout ;;
+        'I')  HEADER="[INFO]"; COLOR="\033[0;97m"; SEPARATOR="»"; tostdout ;;
+        *) logmsg E "Internal $(basename "$PROGNAME") error: format ‹${FORMAT}› does not exist!";;
+    esac
+    shopt -u nocasematch
+}
+
 print_ok() {
     printf "\e[32m%b\e[0m" "$1"
 }
@@ -20,10 +45,10 @@ print_error() {
 
 usage() {
 
-  printf "Usage: %s [[-]f|[--]fix ] [[-]r|[--]run]  [[-]h|[--]help ]\n" "$(basename "$0")"
-  echo "  -h, --help    prints this message and exits"
-  echo "  -r, --run     run the installation"
-  echo "   *            print this menu"
+    printf "Usage: %s [[-]f|[--]fix ] [[-]r|[--]run]  [[-]h|[--]help ]\n" "$(basename "$0")"
+    echo "  -h, --help    prints this message and exits"
+    echo "  -r, --run     run the installation"
+    echo "   *            print this menu"
 }
 
 print_help() {
@@ -59,21 +84,21 @@ print_help() {
 }
 
 fail (){
-  printf ''
-  print_info 'Incorrect arguments, did you make a typo?\n'
-  printf ''
-  print_info "Usage: $(basename "$0") [[-]r|[--]run] [[-]h|[--]help ] \n"
-  print_error "This script wipes all your data to  generate a full working\nNixos installation with encrypted BTRFS partition as root\n"
-  print_error "\t\t\tTake care!\n"
-  printf ''
-  exit 1
+    printf ''
+    print_info 'Incorrect arguments, did you make a typo?\n'
+    printf ''
+    print_info "Usage: $(basename "$0") [[-]r|[--]run] [[-]h|[--]help ] \n"
+    print_error "This script wipes all your data to  generate a full working\nNixos installation with encrypted BTRFS partition as root\n"
+    print_error "\t\t\tTake care!\n"
+    printf ''
+    exit 1
 }
 
 install_nixos(){
     # Check if the user which run the script is root
     if [[ $EUID -ne 0 ]]; then
-	print_error "This scripts needs to be runned as root!"
-	exit 1
+	      print_error "This scripts needs to be runned as root!"
+	      exit 1
     fi
 
     # Search device on which to install NixOS
@@ -82,14 +107,14 @@ install_nixos(){
 
     # loop as long as $device is a valid device
     while [ -z "$device" ] || [ ! -e "$device" ] || \
-	      ! expr "$device" : '^/dev/\(sd[a-z]\|vd[a-z]\|nvme[0-9]n[0-9]\)$' >/dev/null; do
-	print_info "Type the device name ('/dev/' required): "
-	read -r device
-	[ ! -e "$device" ] && print_error "This device doesn't exist\n"
-	if ! expr "$device" : '^/dev/\(sd[a-z]\|vd[a-z]\|nvme[0-9]n[0-9]\)$' >/dev/null; then
-	    print_error "You should type a device name, not a partition name\n"
-	    device=""
-	fi
+	            ! expr "$device" : '^/dev/\(sd[a-z]\|vd[a-z]\|nvme[0-9]n[0-9]\)$' >/dev/null; do
+	      print_info "Type the device name ('/dev/' required): "
+	      read -r device
+	      [ ! -e "$device" ] && print_error "This device doesn't exist\n"
+	      if ! expr "$device" : '^/dev/\(sd[a-z]\|vd[a-z]\|nvme[0-9]n[0-9]\)$' >/dev/null; then
+	          print_error "You should type a device name, not a partition name\n"
+	          device=""
+	      fi
     done
 
     sgdisk -p "$device"
@@ -101,14 +126,14 @@ install_nixos(){
 
     # Define partition name based on the disk (nvme/sda...)
     if echo "$device" | grep -q "nvme"; then
-	print_info "Detected nvme...\n"
-	boot_device="${device}p1"
-	swap_device="${device}p2"
-	root_device="${device}p3"
+	      print_info "Detected nvme...\n"
+	      boot_device="${device}p1"
+	      swap_device="${device}p2"
+	      root_device="${device}p3"
     else
-	boot_device="${device}1"
-	swap_device="${device}2"
-	root_device="${device}3"
+	      boot_device="${device}1"
+	      swap_device="${device}2"
+	      root_device="${device}3"
     fi
 
     wipefs --all -f "${device}"
@@ -159,7 +184,7 @@ install_nixos(){
 
     # We first create the subvolumes outlined above:
     for sv in "${subvolumes_list[@]}"; do
-	btrfs subvolume create "/mnt/$sv"
+        btrfs subvolume create "/mnt/$sv"
     done
     # We then take an empty *readonly* snapshot of the root subvolume,
     # which we'll eventually rollback to on every boot.
@@ -188,8 +213,8 @@ install_nixos(){
 }
 
 case "$1" in
-	-h|--help) print_help ;;
+	  -h|--help) print_help ;;
 
-	-r|--run) install_nixos ;;
-	*) fail ;;
+	  -r|--run) install_nixos ;;
+	  *) fail ;;
 esac
