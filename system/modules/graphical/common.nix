@@ -49,7 +49,7 @@ in {
 
     # To get list of the font installed: (fc-list : family)
     # Valid font names https://github.com/NixOS/nixpkgs/blob/6ba3207643fd27ffa25a172911e3d6825814d155/pkgs/data/fonts/nerdfonts/shas.nix
-    fonts.fonts = with pkgs; [
+    fonts.packages = with pkgs; [
       font-awesome
       fira-code
       monoid # https://larsenwork.com/monoid/

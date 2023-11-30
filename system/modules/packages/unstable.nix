@@ -1,12 +1,12 @@
 {
   lib,
   config,
-  inputs,
+  # inputs,
   ...
 }:
 with lib; let
   cfg = config.system.modules.packages.unstable;
-  unstable-pkgs = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
+  # unstable-pkgs = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
 in {
   options.system.modules.packages.unstable = {
     enable = mkEnableOption "Enable packages pulled from unstable branch";
@@ -14,10 +14,8 @@ in {
   };
 
 	config = mkIf cfg.enable {
-		environment.systemPackages = with unstable-pkgs; [
-			waybar # Highly customizable Wayland bar for Sway and Wlroots based compositors
-			swaynotificationcenter # Simple notification daemon with a GUI built for Sway
-		];
+		# environment.systemPackages = with unstable-pkgs; [
+		# ];
 	};
 
   # config = mkIf cfg.enable (

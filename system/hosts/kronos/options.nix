@@ -66,7 +66,7 @@
 
       ricing.enable = true;
       secrets.enable = true;
-      unstable.enable = true;
+      # unstable.enable = true;
       utilities.enable = true;
     };
 

@@ -23,7 +23,7 @@
 
   # Attribute set of all the dependencies used in the flake - Dependency Management Part
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05"; # Released in 01.06.2023
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11"; # Released in 30.11.2023
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     ### Handle persistent state on systems with ephemeral root storage ###

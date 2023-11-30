@@ -11,7 +11,12 @@ in {
   # XDG Portals, useful for wayland screen sharing and flatpak).
   config = mkMerge [
     (mkIf (cfgXorg.enable || cfgWayland.enable) {
-      xdg.portal.enable = true;
+      xdg.portal = {
+        enable = true;
+        config = {
+          common.default = "*";
+        };
+      };
     })
 
     (mkIf cfgWayland.enable {

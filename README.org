@@ -56,10 +56,10 @@ The entire system configuration is written in Nix. A top-level structure is writ
 #+begin_src bash
 .
 ├── flake.nix
-├── flake.lock                  
-├── shell.nix   # Shell declaration for this repo 
+├── flake.lock
+├── shell.nix   # Shell declaration for this repo
 ├── docs        # Docs about different topics
-├── lib         # Utility functions 
+├── lib         # Utility functions
 ├── overlays    # Package overlays
 ├── packages    # Custom personal packages
 └── system      # Top level system configuration

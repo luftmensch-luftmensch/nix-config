@@ -23,7 +23,7 @@ in {
       gnome3.gnome-disk-utility # A udisks graphical front-end
       gnome-themes-extra        # Needed to fix `Unable to locate theme engine in module_path: "adwaita"` (https://github.com/NixOS/nixpkgs/issues/60918)
 
-      materia-theme             # Material Design theme for GNOME/GTK based desktop environments
+      # materia-theme             # Material Design theme for GNOME/GTK based desktop environments
       papirus-icon-theme        # Open source SVG icon theme for Linux
 
       # Qt5 Configuration Tool

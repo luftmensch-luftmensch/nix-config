@@ -49,7 +49,7 @@ in {
       bat           # After any updates of themes/syntaxes run `bat cache --build`
       bind          # Domain name server
       bluez         # Bluetooth support for Linux
-      exa           # A better alternative to boring ls
+      eza           # A better alternative to boring ls
       fd            # Alternative to find (much faster)
       ffmpeg-full   # ffmpeg video converter
       fs-diff       # Bash script to show a diff between the root subvolume and the root-blank subvolume

@@ -84,6 +84,8 @@ in {
           wob                       # A lightweight overlay volume/backlight/progress/anything bar for Wayland
           dbus-sway-environment     # Bash script to let dbus know about important env variables and propogate them to relevent services
           chromium_on_wayland
+					waybar # Highly customizable Wayland bar for Sway and Wlroots based compositors
+					swaynotificationcenter # Simple notification daemon with a GUI built for Sway
         ];
 
         #export SUDO_ASKPASS="${pkgs.ksshaskpass}/bin/ksshaskpass"

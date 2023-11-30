@@ -54,7 +54,7 @@ in {
       ];
 
       # Install emacs icons symbols if we have any kind of graphical emacs
-      fonts.fonts = with pkgs; [emacs-all-the-icons-fonts];
+      fonts.packages = with pkgs; [emacs-all-the-icons-fonts];
     }
     (mkIf cfg.mails.enable {
       environment.systemPackages = with pkgs; [afew isync libsecret mu notmuch notmuch.emacs thunderbird];

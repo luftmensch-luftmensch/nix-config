@@ -18,6 +18,7 @@ in {
       directories = [
         "/etc/NetworkManager/system-connections"
         "/var/lib/bluetooth"
+        # "/var/lib/syncthing"
         # "/var/lib/cni"
         # "/var/lib/containers"
         "/var/lib/libvirt"

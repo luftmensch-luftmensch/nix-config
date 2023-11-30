@@ -17,7 +17,7 @@ in {
       # (androidStudioPackages.dev.override {tiling_wm = true;})
       jetbrains.idea-community
       vscodium
-      postman
+      # postman
       httpie-desktop
       insomnium
     ];
