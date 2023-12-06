@@ -38,7 +38,7 @@ in {
       pavucontrol              # PulseAudio Volume Control
       qrcp                     # Transfer files over wifi by scanning a QR code from your terminal
 
-      # spotdl                   # Spotify playlists downloader ( Homepage: https://github.com/spotDL/spotify-downloader )
+      spotdl                   # Spotify playlists downloader ( Homepage: https://github.com/spotDL/spotify-downloader )
       spotify                  # Play music from the Spotify music service
       tdlib                    # Cross-platform library for building Telegram clients
 
