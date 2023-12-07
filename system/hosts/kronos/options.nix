@@ -93,6 +93,7 @@
 
     shell = {
       bash.enable = true;
+      fish.enable = true;
     };
   };
 }

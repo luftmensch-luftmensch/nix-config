@@ -54,4 +54,5 @@
   "vpn/wireguard"               = import ./vpn/wireguard.nix;
 
   "shell/bash"                  = import ./shell/bash.nix;
+  "shell/fish"                  = import ./shell/fish.nix;
 }

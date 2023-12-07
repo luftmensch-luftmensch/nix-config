@@ -15,7 +15,6 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       libreoffice                          # Variant of openoffice.org
-      fish                                 # The friendly interactive shell
       libnotify                            # A library that sends desktop notifications to a notification daemon (Gonna hel dunst!)
       openssl                              # Cryptography toolkit implementing TLS network protocol
       pandoc                               # General markup converter
