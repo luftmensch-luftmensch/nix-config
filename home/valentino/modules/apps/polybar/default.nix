@@ -95,8 +95,11 @@ in {
           type = "internal/tray";
           format-margin = "8px";
           tray-spacing = "8px";
-          tray-size = 80;
+          # tray-size = 80;
+          # tray-max-size = 80;
+					tray-maxsize = 28;
           tray-padding = 5;
+					tray-scale = 1.0;
         };
 				"module/bctl" = {
 					type = "custom/script";
