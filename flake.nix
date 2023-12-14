@@ -26,6 +26,16 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11"; # Released in 30.11.2023
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    home-manager = {
+      url = "github:nix-community/home-manager?ref=release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ### Handle persistent state on systems with ephemeral root storage ###
     impermanence.url = "github:nix-community/impermanence";
 
@@ -35,24 +45,31 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
     neovim-flake.url = "github:luftmensch-luftmensch/neovim-flake";
+
+    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   # Function of an argument that uses a the inputs for reference
   # - Configure what you imported
   # - Can be pretty much anything: Packages / configurations / modules / etc...
   outputs = inputs @ {
+    self,
     nixpkgs,
-    nixpkgs-unstable,
-    impermanence,
+    # nixpkgs-unstable,
+    # impermanence,
     # sops-nix,
-    neovim-flake,
+    # neovim-flake,
     ...
   }: let
+    inherit (self) outputs;
     lib = import ./lib {inherit inputs;};
-    inherit (lib) mkSystem forAllSystems;
+    inherit (lib) mkSystem mkHome forAllSystems;
   in {
     nixosModules = import ./system/modules;
+    homeModules = import ./home/valentino/modules;
+
     overlays = import ./overlays inputs;
+
     formatter = forAllSystems (
       system:
         nixpkgs.legacyPackages.${system}.alejandra
@@ -81,6 +98,22 @@
         hostname = "atlas";
         system = "x86_64-linux";
         stateVersion = "22.05";
+      };
+    };
+
+    homeConfigurations = {
+      "valentino@kronos" = mkHome {
+        username = "valentino";
+        hostname = "kronos";
+        system = "x86_64-linux";
+        stateVersion = "23.11";
+      };
+
+      "valentino@atlas" = mkHome {
+        username = "valentino";
+        hostname = "atlas";
+        system = "x86_64-linux";
+        stateVersion = "23.11";
       };
     };
   };

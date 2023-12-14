@@ -6,4 +6,7 @@
 	# Used plugins (install under ~/.config/Insomnium/plugins/ with npm):
 	# insomnia-plugin-dark-modern-theme
   insomnium = pkgs.callPackage ./insomnium {};
+
+  rofi-powermenu = pkgs.callPackage ./rofi-powermenu {};
+  theme-toggle = pkgs.callPackage ./theme-toggle {};
 }

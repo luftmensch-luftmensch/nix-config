@@ -14,7 +14,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      capitaine-cursors         # An x-cursor theme inspired by macOS and based on KDE Breeze
+      # capitaine-cursors         # An x-cursor theme inspired by macOS and based on KDE Breeze
 
       dconf                     # Low-level configuration system
 

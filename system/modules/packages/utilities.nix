@@ -45,22 +45,21 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      at            # The classical Unix `at' job scheduling command   
-      bat           # After any updates of themes/syntaxes run `bat cache --build`
+      # at            # The classical Unix `at' job scheduling command   
+      # bat           
       bind          # Domain name server
       bluez         # Bluetooth support for Linux
-      eza           # A better alternative to boring ls
-      fd            # Alternative to find (much faster)
-      ffmpeg-full   # ffmpeg video converter
+      # eza           
+      # fd            
+      # ffmpeg-full   # ffmpeg video converter
       fs-diff       # Bash script to show a diff between the root subvolume and the root-blank subvolume
 
 
-      git           # gitAndTools.gitFull
-      git-lfs       # gitAndTools.gitFull
-      htop          # Why is my laptop so hot? Oh yeah I'm compiling 20 programs while running two games
+      # git           # gitAndTools.gitFull
+      # git-lfs       # gitAndTools.gitFull
       jq            # command-line JSON processor
       hugo          # Static website engine
-      imagemagick   # File conversion & manipulation
+      # imagemagick   # File conversion & manipulation
 
       lm_sensors    # Tools for reading hardware sensors
       lshw          # Info on the HW configuration of the machine
@@ -69,8 +68,8 @@ in {
 
       procs         # Modern replacement for ps
       ps_mem        # Usage: sudo ps_mem -p $(pgrep -d, -u $USER) (Why is Emacs using so much RAM?)
-      ripgrep       # Blazing fast grep
-      speedtest-cli # Command line interface for testing internet bandwidth using speedtest.net
+      # ripgrep     
+      # speedtest-cli # Command line interface for testing internet bandwidth using speedtest.net
 
       tmpmail       # Temporary email (https://github.com/sdushantha/tmpmail)
       traceroute    # Print the route packets trace to network host
@@ -80,7 +79,7 @@ in {
       usbutils      # Tools for working with USB devices, such as lsusb
 
       wget          # The non-interactive network downloader
-      wavemon       # Ncurses-based monitoring application for wireless network devices
+      # wavemon       # Ncurses-based monitoring application for wireless network devices
 
       zip           # package and compress (archive) files
 
