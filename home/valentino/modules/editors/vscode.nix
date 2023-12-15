@@ -256,7 +256,7 @@ in {
             "bold" = false;
             "italic" = false;
           }
-          
+
           {
             "tag" = "*";
             "color" = "#98C379";

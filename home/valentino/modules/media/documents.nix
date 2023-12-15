@@ -75,6 +75,10 @@ in {
           "[fullscreen] f" = "toggle_fullscreen";
           "[fullscreen] d" = "toggle_page_mode 2";
           "[fullscreen] t" = "toggle_statusbar";
+          # Available at ~/.local/share/zathura/bookmarks
+          "bs" = "feedkeys \":bmark <Tab>\"";
+          "bd" = "feedkeys \":bdelete <Tab>\"";
+          "bl" = "feedkeys \":blist\"";
         };
       };
     })

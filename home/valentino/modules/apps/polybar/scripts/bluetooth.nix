@@ -1,16 +1,14 @@
-{ pkgs, ...}:
-
-let
-	bctl = "${pkgs.bluez}/bin/bluetoothctl";
-	sctl = "${pkgs.systemd}/bin/systemctl";
-	_grep = "${pkgs.gnugrep}/bin/grep";
-	_cut = "${pkgs.coreutils}/bin/cut";
+{pkgs, ...}: let
+  bctl = "${pkgs.bluez}/bin/bluetoothctl";
+  sctl = "${pkgs.systemd}/bin/systemctl";
+  _grep = "${pkgs.gnugrep}/bin/grep";
+  _cut = "${pkgs.coreutils}/bin/cut";
 in
   pkgs.writeShellScriptBin "bluetooth-ctl" ''
     bluetooth_print() {
       ${bctl} | while read -r; do
         if [ "$(${sctl} is-active "bluetooth.service")" = "active" ]; then
-					printf ' '
+    	printf ' '
 
           devices_paired=$(${bctl} devices Paired | ${_grep} Device | ${_cut} -d ' ' -f 2)
           counter=0

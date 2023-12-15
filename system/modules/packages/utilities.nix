@@ -78,7 +78,7 @@ in {
       unzip         # list, test and extract compressed files in a ZIP archive
       usbutils      # Tools for working with USB devices, such as lsusb
 
-      wget          # The non-interactive network downloader
+      # wget          # The non-interactive network downloader
       # wavemon       # Ncurses-based monitoring application for wireless network devices
 
       zip           # package and compress (archive) files

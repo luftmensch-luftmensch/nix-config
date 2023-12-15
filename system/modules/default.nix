@@ -19,7 +19,7 @@
   "dev/virtualisation"          = import ./dev/virtualisation.nix;
 
   "editor/emacs"                = import ./editor/emacs.nix;
-  "editor/ide"                  = import ./editor/ide.nix;
+  # "editor/ide"                  = import ./editor/ide.nix;
   "editor/neovim"               = import ./editor/neovim.nix;
 
   "graphical/common"            = import ./graphical/common.nix;

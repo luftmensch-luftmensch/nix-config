@@ -8,6 +8,7 @@
 with lib; let
   cfg = config.valentino.modules.browsers.chromium;
   cfgWayland = config.valentino.modules.wayland;
+  configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
 in {
   options.valentino.modules.browsers.firefox = {
     enable = mkEnableOption "firefox";
@@ -455,6 +456,11 @@ in {
           "browser.aboutConfig.showWarning" = false;
         };
       };
+    };
+
+    home.file.".config/startpage.html" = {
+      enable = true;
+      source = config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
     };
   };
 }

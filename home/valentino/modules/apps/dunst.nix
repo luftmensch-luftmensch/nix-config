@@ -51,7 +51,7 @@ in {
 
           # Appearance
           indicate_hidden = true;
-          transparency = 4;
+          transparency = 5;
 
           separator_height = 2;
 

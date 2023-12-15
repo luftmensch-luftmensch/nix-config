@@ -7,7 +7,8 @@
 with lib; let
   cfg = config.valentino.modules.shell.direnv;
   cfgBash = config.valentino.modules.shell.bash;
-  cfgZsh = config.valentino.modules.shell.bash;
+  cfgZsh = config.valentino.modules.shell.zsh;
+  cfgFish = config.valentino.modules.shell.fish;
 in {
   options.valentino.modules.shell.direnv = {
     enable = mkEnableOption "direnv and extensions";
@@ -24,6 +25,11 @@ in {
         if cfgZsh.enable
         then true
         else false;
+
+      # enableFishIntegration =
+      #   if cfgFish.enable
+      #   then true
+      #   else false;
       nix-direnv.enable = true; # better than lorri?
     };
 

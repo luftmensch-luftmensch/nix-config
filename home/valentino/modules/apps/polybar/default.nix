@@ -86,7 +86,7 @@ in {
 
           modules-left = "i3 title";
           # modules-right = "temp volume cpu memory bluetooth date notifications tray";
-					modules-right = "temp bctl volume cpu memory date notifications tray";
+          modules-right = "temp bctl volume cpu memory date notifications tray";
           # modules-right = "mail temp bluetooth volume cpu memory date notifications tray";
           pseudo-transparent = true;
         };
@@ -97,17 +97,17 @@ in {
           tray-spacing = "8px";
           # tray-size = 80;
           # tray-max-size = 80;
-					tray-maxsize = 28;
+          tray-maxsize = 28;
           tray-padding = 5;
-					tray-scale = 1.0;
+          tray-scale = 1.0;
         };
-				"module/bctl" = {
-					type = "custom/script";
-					exec = "${bluetoothScript}/bin/bluetooth-ctl";
-					tail = true;
-					# click-left = "${bluetoothScript}/bin/bluetooth-ctl --toggle &";
-					# label-maxlen = 55;
-				};
+        "module/bctl" = {
+          type = "custom/script";
+          exec = "${bluetoothScript}/bin/bluetooth-ctl";
+          tail = true;
+          # click-left = "${bluetoothScript}/bin/bluetooth-ctl --toggle &";
+          # label-maxlen = 55;
+        };
 
         "module/date" = {
           type = "internal/date";
@@ -133,10 +133,10 @@ in {
           label-volume = "%percentage%%";
           label-muted = "  Muted";
 
-					ramp = {
-						volume = [ "" "" "" "" "" "" "" "" "" "" ];
-						headphones = [ "" "" ];
-					};
+          ramp = {
+            volume = ["" "" "" "" "" "" "" "" "" ""];
+            headphones = ["" ""];
+          };
 
           ramp-volume-font = 2;
 
@@ -210,18 +210,17 @@ in {
           type = "custom/script";
           tail = true;
           format-padding = 0;
-          click-left  = "${pkgs.dunst}/bin/dunstctl set-paused toggle";
+          click-left = "${pkgs.dunst}/bin/dunstctl set-paused toggle";
           click-right = "${pkgs.dunst}/bin/dunstctl close-all";
-          exec =  "if [[ \$(${pkgs.dunst}/bin/dunstctl  is-paused) = false ]]; then echo ' '; else echo ' '; fi";
+          exec = "if [[ \$(${pkgs.dunst}/bin/dunstctl  is-paused) = false ]]; then echo ' '; else echo ' '; fi";
         };
-
       };
 
-        # for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-        #     MONITOR=$m polybar --reload main &
-        # done
+      # for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
+      #     MONITOR=$m polybar --reload main &
+      # done
       script = ''
-        polybar --reload main  2>/home/valentino/polybar.log &
+        polybar --reload main &
       '';
     };
   };

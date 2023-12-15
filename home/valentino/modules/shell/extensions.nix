@@ -52,9 +52,9 @@ in {
       # A better alternative to boring ls
       programs.eza = {
         enable = true;
-        enableAliases = true;
-        git = true;
-        icons = true;
+        # enableAliases = true;
+        # git = true;
+        # icons = true;
       };
     }
 

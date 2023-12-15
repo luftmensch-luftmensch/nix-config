@@ -35,7 +35,6 @@
         mails.enable = true;
         enableSpelling = true;
       };
-      ide.enable = true;
       neovim.enable = true;
     };
 

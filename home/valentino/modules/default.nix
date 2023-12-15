@@ -4,6 +4,7 @@
 
     "apps/polybar"           = import ./apps/polybar;
     "apps/rofi"              = import ./apps/rofi;
+    "apps/api_tools"         = import ./apps/api_tools.nix;
     "apps/dunst"             = import ./apps/dunst.nix;
     "apps/discord"           = import ./apps/discord.nix;
     "apps/teams"             = import ./apps/teams.nix;
@@ -33,6 +34,7 @@
 
     "media/documents"        = import ./media/documents.nix;
     "media/editing"          = import ./media/editing.nix;
+    "media/files"            = import ./media/files.nix;
     "media/images"           = import ./media/images.nix;
     "media/music"            = import ./media/music.nix;
     "media/videos"           = import ./media/videos.nix;
@@ -41,6 +43,7 @@
     "shell/zsh"              = import ./shell/zsh.nix;
     "shell/direnv"           = import ./shell/direnv.nix;
     "shell/extensions"       = import ./shell/extensions.nix;
+    "shell/fish"             = import ./shell/fish;
     "shell/git"              = import ./shell/git.nix;
     "shell/starship"         = import ./shell/starship.nix;
     "shell/tmux"             = import ./shell/tmux.nix;

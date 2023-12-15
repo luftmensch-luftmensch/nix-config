@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   valentino.modules = {
     apps = {
-      dunst.enable = true;
+      api_tools.enable = true;
       rofi.enable = true;
     };
 
@@ -31,11 +31,6 @@
     };
 
     editors = {
-      # emacs = {
-      #   enable = true;
-      #   package = pkgs.emacs29-gtk3;
-      #   daemon.enable = true;
-      # };
       intellij.enable = true;
       vscode.enable = true;
     };
@@ -45,6 +40,13 @@
         zathura.enable = true;
       };
       editing.enable = true;
+      files = {
+        filezilla.enable = true;
+        qrcp = {
+          enable = true;
+          interface = "enp2s0";
+        };
+      };
       images = {
         imv = {
           enable = true;
@@ -63,6 +65,7 @@
     shell = {
       bash.enable = true;
       extensions.enable = true;
+      fish.enable = true;
       tmux.enable = true;
       direnv.enable = true;
       git.enable = true;
