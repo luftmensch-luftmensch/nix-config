@@ -106,4 +106,11 @@ pkgs: {
   # Misc
   vim = "nvim";
   v = "vim";
+
+  getpass = "${pkgs.openssl}/bin/openssl rand -base64 20";
+  # gpg encryption
+  # verify signature for isos
+  gpg-check = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve --verify";
+  # receive the key of a developer
+  gpg-retrieve = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve --receive-keys";
 }

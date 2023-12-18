@@ -17,7 +17,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = [
-      pkgs.libnotify
+      pkgs.libnotify # A library that sends desktop notifications to a notification daemon (Gonna hel dunst!)
     ];
 
     services.dunst = {

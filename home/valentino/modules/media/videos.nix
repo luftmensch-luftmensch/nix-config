@@ -8,7 +8,7 @@
 with lib; let
   cfg = config.valentino.modules.media.videos;
   cfgTheme = config.valentino.modules.themes;
-  inherit (config.colorScheme) colors;
+  # inherit (config.colorScheme) colors;
 in {
   options.valentino.modules.media.videos = {
     enable = mkEnableOption "an option to watch videos";

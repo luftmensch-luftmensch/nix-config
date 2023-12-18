@@ -94,8 +94,22 @@ in {
 
       # To list all the defined function use: declare -f | grep -E '^[^ ]+ \(\) $'
       shellAliases = import ./aliases.nix pkgs;
+      sessionVariables = {
+        # i = case-insensitive searches, unless uppercase characters in search string
+        # F = exit immediately if output fits on one screen
+        # M = verbose prompt
+        # R = ANSI color support
+        # S = chop long lines (rather than wrap them onto next line)
+        # X = suppress alternate screen
+        LESS = "iFMRSX";
+        MANPAGER = "less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR";
+        TERM = "xterm-color";
+      };
     };
 
-    home.packages = [pkgs.beautysh];
+    home.packages = with pkgs; [
+      beautysh
+      shellcheck
+    ];
   };
 }

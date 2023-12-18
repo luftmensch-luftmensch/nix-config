@@ -15,7 +15,13 @@ in {
       initExtra = "xset b off";
       windowManager.i3 = {
         enable = true;
-        config = {
+        config = let
+          settings = import ./settings.nix {
+            default_mod = "${mod}";
+            alt_mod = "${mod1}";
+            packages = pkgs;
+          };
+        in {
           modifier = "${mod}";
           floating.modifier = "${mod}";
           bars = []; # use polybar instead
@@ -26,116 +32,7 @@ in {
             # smartBorders = "off";
           };
 
-          # keybindings = (import ./keybindings.nix "${default_modifier}" "${alt_modifier}") {
-          #   inherit pkgs;
-          # };
-
-          keybindings = {
-
-            "F1" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && echo $(pamixer --get-volume) > $xob_sock";
-            "F2" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && echo $(pamixer --get-volume) > $xob_sock";
-
-            "F3" = "exec --no-startup-id ~/.local/bin/audio -a";
-            "F4" = "exec --no-startup-id ~/.local/bin/audio -m";
-
-            "F7" = "exec ~/.local/bin/playerctl-handler -p"; # Prev
-            "F8" = "exec ~/.local/bin/playerctl-handler -x"; # Play/Pause
-            "F9" = "exec ~/.local/bin/playerctl-handler -n"; # Next
-
-            "${mod}+q" = "kill";
-            "--release ${mod}+Escape" = "exec xkill";
-            "${mod}+Shift+r" = "restart";
-
-            # Focus
-            "${mod}+Left" = "focus left";
-            "${mod}+Down" = "focus down";
-            "${mod}+Up" = "focus up";
-            "${mod}+Right" = "focus right";
-            "${mod}+h" = "focus left";
-            "${mod}+j" = "focus down";
-            "${mod}+k" = "focus up";
-            "${mod}+l" = "focus right";
-
-            # Move
-            "${mod}+Shift+Left" = "move left";
-            "${mod}+Shift+Down" = "move down";
-            "${mod}+Shift+Up" = "move up";
-            "${mod}+Shift+Right" = "move right";
-            "${mod}+Shift+h" = "move left";
-            "${mod}+Shift+j" = "move down";
-            "${mod}+Shift+k" = "move up";
-            "${mod}+Shift+l" = "move right";
-
-            # Splitting
-            "${mod}+z" = "split v; exec dunstify -h string:x-dunst-stack-tag:tile -t 600 -u low  'Tile horizontally'";
-            "${mod}+v" = "split h; exec dunstify -h string:x-dunst-stack-tag:tile -t 600 -u low  'Tile vertically'";
-
-            "${mod}+f" = "fullscreen toggle";
-
-            # toggle tiling / floating
-            "${mod}+Shift+space" = "floating toggle";
-            # change focus between tiling / floating windows
-            "${mod}+space" = "focus mode_toggle";
-
-            "${mod}+x" = "exec rofi-powermenu";
-
-            # $mod+x exec --no-startup-id "$menu"
-
-            # switch to workspace
-            "${mod}+1" = "workspace number 1";
-            "${mod}+2" = "workspace number 2";
-            "${mod}+3" = "workspace number 3";
-            "${mod}+4" = "workspace number 4";
-            "${mod}+5" = "workspace number 5";
-            "${mod}+6" = "workspace number 6";
-            "${mod}+7" = "workspace number 7";
-            "${mod}+8" = "workspace number 8";
-            "${mod}+9" = "workspace number 9";
-            "${mod}+0" = "workspace number 10";
-
-            # move focused container to workspace
-            "${mod}+Shift+1" = "move container to workspace number 1";
-            "${mod}+Shift+2" = "move container to workspace number 2";
-            "${mod}+Shift+3" = "move container to workspace number 3";
-            "${mod}+Shift+4" = "move container to workspace number 4";
-            "${mod}+Shift+5" = "move container to workspace number 5";
-            "${mod}+Shift+6" = "move container to workspace number 6";
-            "${mod}+Shift+7" = "move container to workspace number 7";
-            "${mod}+Shift+8" = "move container to workspace number 8";
-            "${mod}+Shift+9" = "move container to workspace number 9";
-            "${mod}+Shift+0" = "move container to workspace number 10";
-
-            "${mod1}+Ctrl+Right" = "workspace next";
-            "${mod1}+Ctrl+Left" = "workspace prev";
-
-            "${mod}+Tab" = "workspace back_and_forth";
-            "${mod}+Shift+Tab" = "workspace prev";
-
-            # Start mode
-            "${mod}+r" = "mode resize; exec dunstify -h string:x-dunst-stack-tag:volume -t 1000 -u low \"Resize\"";
-
-            "Print" = "exec --no-startup-id xfce4-screenshooter -r";
-            "${mod}+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t Alacritty -e fish";
-            "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t floating_term -e fish";
-
-            "${mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
-            "${mod}+d" = "exec --no-startup-id ${pkgs.dmenu}/bin/dmenu_run -nb '#0F0F0F' -nf '#c5c8c6' -sb '#3B4252' -sf '#c5c8c6' -fn 'Sarasa Mono Slab SC:size=10' -p 'Run: '";
-
-            "${mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
-
-            "${mod}+m" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -c";
-            "${mod}+o" = "exec --no-startup-id ${pkgs.obs-studio}/bin/obs";
-            "${mod}+p" = "exec --no-startup-id ${pkgs.pavucontrol}/bin/pavucontrol";
-
-            "${mod}+Shift+b" = "exec --no-startup-id ${pkgs.chromium}/bin/chromium";
-            "${mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
-            "${mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
-            "${mod}+Shift+p" = "exec --no-startup-id ~/.local/bin/screenshot";
-            "${mod}+Shift+v" = "exec --no-startup-id ~/.local/bin/copy-to-clipboard";
-            "${mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
-            
-          };
-          # keybindings = import ./keybindings.nix mod;
+          keybindings = settings.keybindings;
 
           assigns = {
             "2" = [{class = "^obs";}];
@@ -161,31 +58,12 @@ in {
             };
           };
 
-          startup = [
-            {
-              command = "autotiling";
-              always = true;
-            }
-
-            {
-              command = "parcellite";
-            }
-
-            {
-              command = "nm-applet";
-            }
-            {
-              command = "rm -f $xob_sock && mkfifo $xob_sock && tail -f $xob_sock | xob -t 700";
-            }
-						{ command = "systemctl --user restart polybar"; always = true; notification = false; }
-						# { command = "polybar --reload main &"; always = true; notification = false; }
-						{ command = "emacs --fg-daemon"; always = true; notification = false; }
-          ];
+          startup = settings.startup;
         };
 
         extraConfig = ''
           set $xob_sock $XDG_RUNTIME_DIR/wob.sock
-					# title_format "%title -- %class -- %instance" # (Enable it to select a correct for_window option)
+          # title_format "%title -- %class -- %instance" # (Enable it to select a correct for_window option)
           for_window [class=".*"] border pixel 1
           floating_minimum_size 75 x 50
           floating_maximum_size 1000 x 1000
@@ -237,12 +115,12 @@ in {
       pamixer
     ];
 
-		services = {
-			pasystray.enable = true;
-		};
+    services = {
+      pasystray.enable = true;
+    };
 
-		valentino.modules = {
-			apps = {
+    valentino.modules = {
+      apps = {
         dunst.enable = true;
         polybar = {
           enable = true;
@@ -250,6 +128,6 @@ in {
         };
       };
       xorg.xob.enable = true;
-		};
+    };
   };
 }

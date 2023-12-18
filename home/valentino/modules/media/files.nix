@@ -9,7 +9,8 @@ with lib; let
   cfg = config.valentino.modules.media.files;
 in {
   options.valentino.modules.media.files = {
-    filezilla.enable = mkEnableOption "enable qrcp";
+    filezilla.enable = mkEnableOption "enable filezilla";
+    libreoffice.enable = mkEnableOption "enable libreoffice";
     qrcp = {
       enable = mkEnableOption "enable qrcp";
       interface = mkOption {
@@ -47,6 +48,12 @@ in {
     (mkIf cfg.filezilla.enable {
       home.packages = with pkgs; [
         filezilla
+      ];
+    })
+
+    (mkIf cfg.libreoffice.enable {
+      home.packages = with pkgs; [
+        libreoffice
       ];
     })
   ];

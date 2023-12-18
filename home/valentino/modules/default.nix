@@ -13,6 +13,8 @@
     "browsers/chromium"      = import ./browsers/chromium.nix;
 
     "credentials/bitwarden"  = import ./credentials/bitwarden.nix;
+    "credentials/gpg"        = import ./credentials/gpg.nix;
+    "credentials/mail"       = import ./credentials/mail.nix;
 
     "dev/cc"                 = import ./dev/cc.nix;
     "dev/java"               = import ./dev/java.nix;
@@ -23,7 +25,6 @@
     "dev/tex"                = import ./dev/tex.nix;
 
     "editors/android-studio" = import ./editors/android-studio.nix;
-    "editors/emacs"          = import ./editors/emacs;
     "editors/intellij"       = import ./editors/intellij.nix;
     "editors/vscode"         = import ./editors/vscode.nix;
 

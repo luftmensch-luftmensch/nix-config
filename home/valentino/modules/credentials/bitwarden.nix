@@ -20,5 +20,9 @@ in {
         pinentry = "gnome3";
       };
     };
+
+    home.packages = with pkgs; [
+      bitwarden
+    ];
   };
 }

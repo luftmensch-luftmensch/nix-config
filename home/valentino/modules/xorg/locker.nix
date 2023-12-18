@@ -14,7 +14,7 @@ with lib; let
 
     [ -f "$TMPBG" ] && rm $TMPBG
 
-    ${pkgs.ffmpeg}/bin/ffmpeg -f x11grab -video_size "1920x1080" -i "$DISPLAY" -filter_complex "boxblur=8:8" -vframes 1 $TMPBG
+    ${pkgs.ffmpeg-full}/bin/ffmpeg -f x11grab -video_size "1920x1080" -i "$DISPLAY" -filter_complex "boxblur=8:8" -vframes 1 $TMPBG
 
     ${pkgs.i3lock}/bin/i3lock -i $TMPBG
 
@@ -34,7 +34,7 @@ in {
           # "-locker ${ff-locker}"
         ];
       };
-      lockCmd = "${ff-locker}";
+      lockCmd = "${ff-locker}/bin/ff-locker";
     };
   };
 }

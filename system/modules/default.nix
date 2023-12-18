@@ -19,7 +19,6 @@
   "dev/virtualisation"          = import ./dev/virtualisation.nix;
 
   "editor/emacs"                = import ./editor/emacs.nix;
-  # "editor/ide"                  = import ./editor/ide.nix;
   "editor/neovim"               = import ./editor/neovim.nix;
 
   "graphical/common"            = import ./graphical/common.nix;
@@ -32,9 +31,7 @@
   "hardware/bluetooth"          = import ./hardware/bluetooth.nix;
 
   "packages/base"               = import ./packages/base.nix;
-  "packages/dmenu-with-patches" = import ./packages/dmenu-with-patches.nix;
-  "packages/gaming"             = import ./packages/gaming.nix;
-  "packages/miscellaneous"      = import ./packages/miscellaneous.nix;
+  # "packages/miscellaneous"      = import ./packages/miscellaneous.nix;
   "packages/programming"        = import ./packages/programming.nix;
   "packages/ricing"             = import ./packages/ricing.nix;
   "packages/secrets"            = import ./packages/secrets.nix;
@@ -54,5 +51,4 @@
   "vpn/wireguard"               = import ./vpn/wireguard.nix;
 
   "shell/bash"                  = import ./shell/bash.nix;
-  "shell/fish"                  = import ./shell/fish.nix;
 }

@@ -59,20 +59,9 @@ with lib; let
     speedtest-cli
   ];
 
-  # files = let
-  #   thunarPlugins = with pkgs; [
-  #     xfce.thunar-volman
-  #     xfce.thunar-archive-plugin
-  #     xfce.thunar-media-tags-plugin
-  #   ];
-  # in
-  #   with pkgs; [
-
-  #   ];
-
   desktop = with pkgs; [
     transmission-gtk
-    cinnamon.nemo
+    cinnamon.nemo-with-extensions
   ];
 in {
   config = {
@@ -85,7 +74,6 @@ in {
 
     home.packages =
       desktop
-      # ++ files
       ++ fonts
       ++ monitoring
       ++ media

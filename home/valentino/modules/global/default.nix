@@ -2,7 +2,7 @@
   pkgs,
   config,
   lib,
-  outputs,
+  # outputs,
   ...
 }: {
   nix = {

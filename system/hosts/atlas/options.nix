@@ -17,7 +17,7 @@
 
     credentials = {
       ssh.enable = true;
-      gpg.enable = true;
+      # gpg.enable = true;
     };
 
     dev = {
@@ -53,8 +53,7 @@
 
     packages = {
       base.enable = true;
-      # dmenu-with-patches.enable = true;
-      miscellaneous.enable = true;
+      # miscellaneous.enable = true;
       # programming = {
       #   c-packages = true;
       #   nix-packages = true;
@@ -88,7 +87,7 @@
 
     shell = {
       bash.enable = true;
-      fish.enable = true;
+      # fish.enable = true;
     };
   };
 }

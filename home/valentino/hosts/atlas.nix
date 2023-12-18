@@ -16,8 +16,8 @@
     };
 
     credentials = {
-      # gpg.enable = true;
-      # mail-defaults.enable = false;
+      gpg.enable = true;
+      mail-defaults.enable = true;
       bitwarden.enable = true;
     };
 
@@ -65,7 +65,10 @@
     shell = {
       bash.enable = true;
       extensions.enable = true;
-      fish.enable = true;
+      fish = {
+        enable = true;
+        cpuTuning = true;
+      };
       tmux.enable = true;
       direnv.enable = true;
       git.enable = true;

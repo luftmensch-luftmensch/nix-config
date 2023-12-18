@@ -81,6 +81,11 @@ in {
           "bl" = "feedkeys \":blist\"";
         };
       };
+
+      home.packages = with pkgs; [
+        pandoc  # General markup converter
+        poppler # A PDF rendering library
+      ];
     })
 
     (mkIf cfg.okular.enable {home.packages = with pkgs; [okular];})

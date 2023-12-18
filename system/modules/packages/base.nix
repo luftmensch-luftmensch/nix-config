@@ -15,11 +15,6 @@ in {
   config = mkIf cfg.enable {
 
     environment.systemPackages = with pkgs; [
-      filezilla                # FTP client
-      rofi                     # A window  switcher, application launcher, ssh dialog, dmenu replacement and more
-      networkmanagerapplet     # NetworkManager control applet
-      qrcp                     # Transfer files over wifi by scanning a QR code from your terminal
-
       tdlib                    # Cross-platform library for building Telegram clients
     ];
   };

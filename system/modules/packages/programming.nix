@@ -29,7 +29,6 @@ in {
     ]) ++ (optionals cfg.misc-packages [
       direnv
       libtool
-      shellcheck
       mongodb-compass
     ]);
   }];

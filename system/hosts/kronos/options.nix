@@ -17,7 +17,7 @@
 
     credentials = {
       ssh.enable = true;
-      gpg.enable = true;
+      # gpg.enable = true;
     };
 
     dev = {
@@ -53,15 +53,15 @@
 
     packages = {
       base.enable = true;
-      miscellaneous.enable = true;
-      programming = {
-        c-packages = true;
-        nix-packages = true;
-        java-packages = true;
-        # go-packages = true;
-        python-packages = true;
-        misc-packages = true;
-      };
+      # miscellaneous.enable = true;
+      # programming = {
+      #   c-packages = true;
+      #   nix-packages = true;
+      #   java-packages = true;
+      #   # go-packages = true;
+      #   python-packages = true;
+      #   misc-packages = true;
+      # };
 
       ricing.enable = true;
       secrets.enable = true;
@@ -92,7 +92,6 @@
 
     shell = {
       bash.enable = true;
-      fish.enable = true;
     };
   };
 }
