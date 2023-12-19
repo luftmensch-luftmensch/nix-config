@@ -117,6 +117,13 @@ in {
 
     services = {
       pasystray.enable = true;
+      # Random background using feh
+      random-background = {
+        enable = true;
+        display = "scale";
+        imageDirectory = "%h/Dropbox/Immagini/Anime";
+        interval = "15min";
+      };
     };
 
     valentino.modules = {

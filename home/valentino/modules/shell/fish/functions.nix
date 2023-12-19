@@ -183,12 +183,12 @@ pkgs: {
   fcut = {
     body = ''
       if set -q "$argv"
-      	return 1
+        return 1
       end
       if test -z "$argv[1]"; or test -z "$argv[2]"; or test -z "$argv[3]"; or test -z "argv[4]"
-      	echo "Usage:"
-      	echo "fcut {input} {start} {end} {output}"
-      	return 1
+        echo "Usage:"
+        echo "fcut {input} {start} {end} {output}"
+        return 1
       end
       ${pkgs.ffmpeg}/bin/ffmpeg -i "$argv[1]" -ss "$argv[2]"  -t "$argv[3]" -c:v copy -c:a copy "$argv[4]"
     '';
@@ -208,6 +208,27 @@ pkgs: {
       echo file "$argv[1]" >> mylist.txt
       echo file "$argv[2]" >> mylist.txt
       ${pkgs.ffmpeg}/bin/ffmpeg -f concat -safe 0 -i mylist.txt -c copy "$argv[3]" && rm mylist.txt
+    '';
+  };
+
+  # Rebuild configuration / update flake.lock file (--commit-lock-file --recreate-lock-file)
+  # If git fails add : sudo git config --add safe.directory ~/Nixos
+  update = {
+    body = ''
+      set -l base_path $HOME/nix-config
+      switch $argv
+        case "--flake"
+            nix flake update $base_path
+        case "*"
+          sudo nixos-rebuild switch --flake "$base_path/.#$hostname" -v -L --use-remote-sudo # (In case of git error)
+      end
+    '';
+  };
+
+  home-switch = {
+    body = ''
+      set -l base_path $HOME/nix-config
+      home-manager switch --flake "$base_path/.#$USER@$hostname"
     '';
   };
 }

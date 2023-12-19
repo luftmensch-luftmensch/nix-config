@@ -34,7 +34,7 @@ in {
       swayidle
       swaylock-effects
       wob
-			# swaynotificationcenter
+      swaynotificationcenter
 
       wtype
       slurp
