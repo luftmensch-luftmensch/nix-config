@@ -5,7 +5,7 @@ keys:
       # - &kronos
 # Creation rules referencing the upon public keys
 creation_rules:
-  - path_regex: home/valentino/modules/credentials/ssh/config/*
+  - path_regex: home/valentino/modules/credentials/ssh/*
     key_groups:
     - age:
         - *atlas

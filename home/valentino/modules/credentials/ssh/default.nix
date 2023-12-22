@@ -18,7 +18,7 @@ in {
           sopsFile = ./personal/config;
           mode = "0400";
           format = "binary";
-          path = "${config.home.homeDirectory}/.ssh/config";
+          path = "${config.home.homeDirectory}/.ssh/personal/config";
         };
 
         "work/config" = {
@@ -34,6 +34,7 @@ in {
       ssh = {
         enable = true;
         includes = [
+          "personal/config"
           "work/config"
         ];
       };
