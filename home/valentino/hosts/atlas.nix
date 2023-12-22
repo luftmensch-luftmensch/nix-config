@@ -16,6 +16,7 @@
     };
 
     credentials = {
+      ssh.enable = true;
       gpg.enable = true;
       mail-defaults.enable = true;
       bitwarden.enable = true;
@@ -23,6 +24,7 @@
 
     dev = {
       cc.enable = true;
+      generics.enable = true;
       java.enable = true;
       js.enable = true;
       nix.enable = true;
@@ -42,6 +44,8 @@
       editing.enable = true;
       files = {
         filezilla.enable = true;
+        libreoffice.enable = true;
+        localsend.enable = true;
         qrcp = {
           enable = true;
           interface = "enp2s0";

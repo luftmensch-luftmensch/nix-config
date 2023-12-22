@@ -1,0 +1,226 @@
+{
+    "window.menuBarVisibility": "toggle",
+    "window.title": "VSCode ${separator} ${activeEditorShort}",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#cc241d"
+    },
+
+    "editor.cursorBlinking": "smooth",
+    "editor.renderWhitespace": "boundary",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.fontLigatures": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "editor.lineNumbers": "relative",
+    "editor.linkedEditing": true,
+    "editor.mouseWheelZoom": true,
+    "editor.smoothScrolling": true,
+    "editor.fontSize": <<initialization("22.18")>>,
+    "editor.fontFamily": "'Sarasa Mono Slab SC', 'monospace', monospace",
+    "workbench.startupEditor": "none",
+    "workbench.list.smoothScrolling": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.showTabs": "multiple",
+    "workbench.editor.labelFormat": "short",
+    "workbench.editor.enablePreview": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "update.mode": "none",
+    "editor.minimap.enabled": false,
+    "telemetry.telemetryLevel": "off",
+
+    // VIM
+    "vim.hlsearch": true,
+    "vim.ignorecase": true,
+    "vim.incsearch": true,
+    "vim.smartcase": true,
+    "vim.camelCaseMotion.enable": true,
+    "vim.useSystemClipboard": true,
+    "vim.leader": " ",
+    "vim.handleKeys": {
+        "<C-p>": false
+    },
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // Goto definition
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "d"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
+            ]
+        },
+        // Rename symbol
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "r"
+            ],
+            "commands": [
+                "editor.action.rename"
+            ]
+        },
+        // Rename symbol
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "R"
+            ],
+            "commands": [
+                "editor.action.goToReferences"
+            ]
+        },
+        // Toggle sidebar
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "commands": [
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+        // Split vertical
+        {
+            "before": [
+                "<leader>",
+                "v"
+            ],
+            "commands": [
+                "workbench.action.splitEditor"
+            ]
+        },
+        // Split horizontal
+        {
+            "before": [
+                "<leader>",
+                "h"
+            ],
+            "commands": [
+                "workbench.action.splitEditorDown"
+            ]
+        },
+        // Unsplit
+        {
+            "before": [
+                "<leader>",
+                "x"
+            ],
+            "commands": [
+                "workbench.action.editorLayoutSingle"
+            ]
+        },
+        // Goto Next problem (Error/Warning/Info)
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "n"
+            ],
+            "commands": [
+                "editor.action.marker.next"
+            ]
+        },
+        // Goto Previous problem (Error/Warning/Info)
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "p"
+            ],
+            "commands": [
+                "editor.action.marker.previous"
+            ]
+        }
+    ],
+    // Indenting in visual mode
+    "vim.visualModeKeyBindings": [
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        }
+    ],
+
+    // DART
+    "dart.checkForSdkUpdates": false,
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false,
+    },
+    "dart.showTodos": false,
+
+    "git.openRepositoryInParentFolders": "never",
+    // Extensions
+    "better-comments.tags": [
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "?",
+            "color": "#3498DB",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "//",
+            "color": "#474747",
+            "strikethrough": true,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "todo",
+            "color": "#FF8C00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "*",
+            "color": "#98C379",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        }
+    ]
+}

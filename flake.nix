@@ -40,10 +40,10 @@
     impermanence.url = "github:nix-community/impermanence";
 
     ###      Atomic secret provisioning for NixOS based on sops      ###
-    # sops-nix = {
-    #   url = "github:Mic92/sops-nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim-flake.url = "github:luftmensch-luftmensch/neovim-flake";
 
     nix-colors.url = "github:misterio77/nix-colors";

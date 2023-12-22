@@ -4,6 +4,35 @@
   ...
 }: let
   fs_options = ["autodefrag" "space_cache=v2" "noatime" "compress=zstd:3"];
+
+  fs-diff = pkgs.writeShellScriptBin "fs-diff" ''
+    #!/usr/bin/env bash
+    # fs-diff.sh
+    set -euo pipefail
+    sudo mkdir -p /mnt
+
+    sudo mount -o subvol=/ /dev/mapper/nix-enc /mnt
+    OLD_TRANSID=$(sudo btrfs subvolume find-new /mnt/root-blank 9999999)
+    OLD_TRANSID=$(echo $OLD_TRANSID | awk -F' ' '{print $4}')
+
+    sudo btrfs subvolume find-new "/mnt/@" "$OLD_TRANSID" |
+    sed '$d' |
+    cut -f17- -d' ' |
+    sort |
+    uniq |
+    while read path; do
+      path="/$path"
+        if [ -L "$path" ]; then
+      : # The path is a symbolic link, so is probably handled by NixOS already
+        elif [ -d "$path" ]; then
+            : # The path is a directory, ignore
+        else
+          echo "$path"
+        fi
+       done
+
+    sudo umount -R /mnt
+  '';
 in {
   boot = {
     loader = {
@@ -88,4 +117,6 @@ in {
     enable = true;
     interval = "monthly";
   };
+
+    environment.systemPackages = [ fs-diff ];
 }

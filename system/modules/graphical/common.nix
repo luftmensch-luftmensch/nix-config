@@ -34,9 +34,11 @@ in {
     };
 
     # Trash and GTK apps features
-    services.gvfs.enable = true;
-    services.tumbler.enable = true;
-    services.udisks2.enable = true;
+    services = {
+      gvfs.enable = true;
+      tumbler.enable = true;
+      udisks2.enable = true;
+    };
 
     # Who the hell uses xterm these days?
     services.xserver.excludePackages = [pkgs.xterm];

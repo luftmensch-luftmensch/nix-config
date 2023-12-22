@@ -11,6 +11,7 @@ in {
   options.valentino.modules.media.files = {
     filezilla.enable = mkEnableOption "enable filezilla";
     libreoffice.enable = mkEnableOption "enable libreoffice";
+    localsend.enable = mkEnableOption "localsend - An open source cross-platform alternative to AirDrop";
     qrcp = {
       enable = mkEnableOption "enable qrcp";
       interface = mkOption {
@@ -54,6 +55,12 @@ in {
     (mkIf cfg.libreoffice.enable {
       home.packages = with pkgs; [
         libreoffice
+      ];
+    })
+
+    (mkIf cfg.localsend.enable {
+      home.packages = with pkgs; [
+        localsend
       ];
     })
   ];

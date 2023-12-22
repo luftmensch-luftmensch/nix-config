@@ -52,21 +52,7 @@
     };
 
     packages = {
-      base.enable = true;
-      # miscellaneous.enable = true;
-      # programming = {
-      #   c-packages = true;
-      #   nix-packages = true;
-      #   java-packages = true;
-      #   # go-packages = true;
-      #   python-packages = true;
-      #   misc-packages = true;
-      # };
-
       ricing.enable = true;
-      secrets.enable = true;
-      utilities.enable = true;
-      xorg-related.enable = true;
     };
 
     services = {

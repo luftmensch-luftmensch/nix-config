@@ -12,11 +12,14 @@
     "browsers/firefox"       = import ./browsers/firefox.nix;
     "browsers/chromium"      = import ./browsers/chromium.nix;
 
+    "credentials/ssh"        = import ./credentials/ssh;
+    "credentials/sops"       = import ./credentials/sops.nix;
     "credentials/bitwarden"  = import ./credentials/bitwarden.nix;
     "credentials/gpg"        = import ./credentials/gpg.nix;
     "credentials/mail"       = import ./credentials/mail.nix;
 
     "dev/cc"                 = import ./dev/cc.nix;
+    "dev/generics"           = import ./dev/generics.nix;
     "dev/java"               = import ./dev/java.nix;
     "dev/js"                 = import ./dev/js.nix;
     "dev/nix"                = import ./dev/nix-lang.nix;
@@ -24,9 +27,10 @@
     "dev/rust"               = import ./dev/rust.nix;
     "dev/tex"                = import ./dev/tex.nix;
 
+
     "editors/android-studio" = import ./editors/android-studio.nix;
     "editors/intellij"       = import ./editors/intellij.nix;
-    "editors/vscode"         = import ./editors/vscode.nix;
+    "editors/vscode"         = import ./editors/vscode;
 
     "gaming/emulators"       = import ./gaming/emulators.nix;
     "gaming/steam"           = import ./gaming/steam.nix;

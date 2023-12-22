@@ -42,9 +42,9 @@ in {
               switch "$argv[1]"
                case "max"
                    echo "Setting to max"
-                   sudo cpupower frequency-set -f 3.0Ghz > /dev/null 2>&1
+                   sudo ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -f 3.0Ghz > /dev/null 2>&1
                case '*'
-                   sudo cpupower frequency-set -f 2.0Ghz > /dev/null 2>&1
+                   sudo ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -f 2.0Ghz > /dev/null 2>&1
               end
             '';
           };

@@ -2,6 +2,7 @@
   options,
   config,
   lib,
+	pkgs,
   ...
 }:
 with lib; let
@@ -13,5 +14,7 @@ in {
 
   config = mkIf cfg.enable {
     hardware.bluetooth.enable = true;
+
+    environment.systemPackages = [pkgs.bluez];
   };
 }

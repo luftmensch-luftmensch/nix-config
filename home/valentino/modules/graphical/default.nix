@@ -41,8 +41,6 @@ with lib; let
     ibm-plex
   ];
 
-  social = with pkgs; []; # tdesktop
-
   media = with pkgs; [
     pavucontrol
     brightnessctl
@@ -59,9 +57,25 @@ with lib; let
     speedtest-cli
   ];
 
+  utilities = with pkgs; [
+    bind       # Domain name server
+    lm_sensors # Tools for reading hardware sensors
+    lshw       # Info on the HW configuration of the machine
+    lsof       # List open files
+    nmap       # Network exploration tool and security / port scanner
+    procs      # Modern replacement for ps
+    ps_mem     # Usage: sudo ps_mem -p $(pgrep -d, -u $USER) (Why is Emacs using so much RAM?)
+    traceroute # Print the route packets trace to network host
+    unrar      # Utility for RAR archives
+    unzip      # list, test and extract compressed files in a ZIP archive
+    usbutils   # Tools for working with USB devices, such as lsusb
+    zip        # package and compress (archive) files
+  ];
+
   desktop = with pkgs; [
     transmission-gtk
     cinnamon.nemo-with-extensions
+    gnome.gnome-disk-utility
   ];
 in {
   config = {
@@ -76,8 +90,8 @@ in {
       desktop
       ++ fonts
       ++ monitoring
-      ++ media
-      ++ social;
+      ++ utilities
+      ++ media;
 
     fonts.fontconfig.enable = true;
 

@@ -27,12 +27,20 @@ in {
 
       allowSFTP = true;
 
-      # extraConfig = ''
-      #   AllowTcpForwarding no
-      #   AllowAgentForwarding no
-      #   AllowStreamLocalForwarding no
-      #   AuthenticationMethods publickey
-      # '';
+      extraConfig = ''
+        AllowTcpForwarding no
+        AllowAgentForwarding no
+        AllowStreamLocalForwarding no
+        AuthenticationMethods publickey
+      '';
+
+      hostKeys = [
+        {
+          path = "/home/valentino/.ssh/id_homelab";
+          bits = 4096;
+          type = "ed25519";
+        }
+      ];
     };
   };
 }

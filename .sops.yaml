@@ -1,0 +1,15 @@
+# Public keys
+keys:
+  - &hosts:
+      - &atlas age1gef7ypvn8lzjppymnnj0lxyq60jsmcnagqayfevjpu9qx64ll9rqv6hzf9
+      # - &kronos
+# Creation rules referencing the upon public keys
+creation_rules:
+  - path_regex: home/valentino/modules/credentials/ssh/config/*
+    key_groups:
+    - age:
+        - *atlas
+  # - path_regex: secrets/secrets.yaml
+  #   key_groups:
+  #   - age:
+  #       - *atlas

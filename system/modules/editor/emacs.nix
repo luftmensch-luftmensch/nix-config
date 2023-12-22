@@ -34,8 +34,8 @@ in {
               src = pkgs.fetchFromGitHub {
                 owner = "zevlg";
                 repo = "telega.el";
-								rev = "e0ad17b5650b98313219ece3fc371ec051f7a597";
-								sha256 = "049xv1ysg0r46k47z3dkdkwqh1f086c5l9yp7c9cs45vg8cj283x";
+                rev = "c522d366aebcdf2178c34978f7f5d3167840a641";
+                sha256 = "0vsdcdj3b9sbmjcihd4zqfdnspdjh2806c77kzsl62jpyj55zkj4";
               };
             }))
             vterm
@@ -48,16 +48,17 @@ in {
         (writeScriptBin "emacs-daemon" ''
           emacs --fg-daemon
         '')
+        tdlib # Cross-platform library for building Telegram clients
       ];
 
       # Install emacs icons symbols if we have any kind of graphical emacs
       fonts.packages = with pkgs; [emacs-all-the-icons-fonts];
     }
     (mkIf cfg.mails.enable {
-      environment.systemPackages = with pkgs; [afew isync libsecret mu notmuch notmuch.emacs thunderbird];
-      programs.msmtp = {
-        enable = true;
-      };
+      # environment.systemPackages = with pkgs; [afew isync mu notmuch notmuch.emacs];
+      environment.systemPackages = with pkgs; [
+        notmuch.emacs
+      ];
     })
 
     (mkIf cfg.enableSpelling {

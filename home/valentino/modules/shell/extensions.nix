@@ -19,6 +19,7 @@ in {
     {
       home.packages = with pkgs; [
         fd # A much faster lternative to find
+        jq # command-line JSON processor
       ];
     }
 

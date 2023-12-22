@@ -64,8 +64,8 @@ in {
           guioptions = "sv";
         };
         mappings = {
-          "<c-+>" = "zoom in";
-          "<c-->" = "zoom out";
+          "<C-+>" = "zoom in";
+          "<C-->" = "zoom out";
           "t" = "toggle_statusbar";
           "r" = "reload";
           "p" = "print";
