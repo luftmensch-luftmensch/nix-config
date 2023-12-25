@@ -7,7 +7,7 @@
 
     wayland = {
       enable = true;
-      wm = "sway";
+      wm = ["sway"];
     };
 
     browsers = {
@@ -48,7 +48,7 @@
         localsend.enable = true;
         qrcp = {
           enable = true;
-          interface = "enp2s0";
+          interface = "wlp3s0";
         };
       };
       images = {

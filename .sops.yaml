@@ -14,6 +14,7 @@
 keys:
   - &hosts:
       - &atlas age1gef7ypvn8lzjppymnnj0lxyq60jsmcnagqayfevjpu9qx64ll9rqv6hzf9
+      - &kronos age1lta8402ylegpswhwuwe6n87a9fhqfmlt49u762pc6l25pqk5j4hqhnugmz
       # - &kronos
 # Creation rules referencing the upon public keys
 creation_rules:
@@ -21,6 +22,7 @@ creation_rules:
     key_groups:
     - age:
         - *atlas
+        - *kronos
   # - path_regex: secrets/secrets.yaml
   #   key_groups:
   #   - age:

@@ -17,33 +17,36 @@ in {
     programs.foot = {
       enable = true;
       settings = {
-        shell = "fish";
-        term = "foot";
-        app-id = "foot";
-        title = "foot";
-        locker-title = "no";
-        font = let
-          inherit (cfgTheme.font.term) family;
-          inherit (cfgTheme.font.term) size;
-        in {
-          normal = {
-            inherit family;
-            style = "Regular";
-          };
-          bold = {
-            inherit family;
-            style = "Bold";
-          };
-          italic = {
-            inherit family;
-            style = "Italic";
-          };
-          inherit size;
-        };
+				main = {
+					shell = "fish";
+					term = "foot";
+					app-id = "foot";
+					title = "foot";
+					locked-title = "no";
 
-        dpi-aware = "no";
-        pad = "0x0";
-        notify = "notify-send -a ${app-id} -i ${app-id} ${title} ${body}";
+					dpi-aware = "no";
+					pad = "0x0";
+					notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
+				};
+        # font = let
+        #   inherit (cfgTheme.font.term) family;
+        #   inherit (cfgTheme.font.term) size;
+        # in {
+        #   normal = {
+        #     inherit family;
+        #     style = "Regular";
+        #   };
+        #   bold = {
+        #     inherit family;
+        #     style = "Bold";
+        #   };
+        #   italic = {
+        #     inherit family;
+        #     style = "Italic";
+        #   };
+        #   inherit size;
+        # };
+
         bell = {
         };
 
@@ -52,7 +55,7 @@ in {
         };
 
         url = {
-          launch = "xdg-open ${url}";
+          launch = "xdg-open \${url}";
         };
 
         cursor = {
@@ -66,25 +69,25 @@ in {
         };
 
         colors = {
-          background = "#${colors.base00}";
-          foreground = "#${colors.base05}";
-          regular0 = "#${colors.base00}";
-          regular1 = "#${colors.base08}";
-          regular2 = "#${colors.base0B}";
-          regular3 = "#${colors.base09}";
-          regular4 = "#${colors.base0D}";
-          regular5 = "#${colors.base0E}";
-          regular6 = "#${colors.base0C}";
-          regular7 = "#${colors.base05}";
+          background = "${colors.base00}";
+          foreground = "${colors.base05}";
+          regular0 = "${colors.base00}";
+          regular1 = "${colors.base08}";
+          regular2 = "${colors.base0B}";
+          regular3 = "${colors.base09}";
+          regular4 = "${colors.base0D}";
+          regular5 = "${colors.base0E}";
+          regular6 = "${colors.base0C}";
+          regular7 = "${colors.base05}";
 
-          bright0 = "#${colors.base03}";
-          bright1 = "#${colors.base06}";
-          bright2 = "#${colors.base0B}";
-          bright3 = "#${colors.base09}";
-          bright4 = "#${colors.base0D}";
-          bright5 = "#${colors.base0E}";
-          bright6 = "#${colors.base0C}";
-          bright7 = "#${colors.base05}";
+          bright0 = "${colors.base03}";
+          bright1 = "${colors.base06}";
+          bright2 = "${colors.base0B}";
+          bright3 = "${colors.base09}";
+          bright4 = "${colors.base0D}";
+          bright5 = "${colors.base0E}";
+          bright6 = "${colors.base0C}";
+          bright7 = "${colors.base05}";
         };
 
         csd = {

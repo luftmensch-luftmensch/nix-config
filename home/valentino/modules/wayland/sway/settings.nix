@@ -96,7 +96,7 @@ in {
     # Start mode
     "${default_mod}+r" = "mode resize; exec ${packages.libnotify}/bin/notify-send -t 1000 -u low \"Resize\"";
 
-    Print = "exec --no-startup-id ${pkgs.grim}/bin/grim -g  \"$(${pkgs.slurp}/bin/slurp)\" $(date +'%d-%m-%Y-%H:%M:%S').png";
+    Print = "exec --no-startup-id ${packages.grim}/bin/grim -g  \"$(${packages.slurp}/bin/slurp)\" $(date +'%d-%m-%Y-%H:%M:%S').png";
 
     "${default_mod}+Return" = "exec --no-startup-id ${packages.foot}/bin/foot -a=default_term -e fish";
     "${default_mod}+Shift+Return" = "exec --no-startup-id ${packages.foot}/bin/foot -a=floating_term -e fish";
@@ -189,7 +189,6 @@ in {
     {
       command = "emacs --fg-daemon";
       always = true;
-      notification = false;
     }
 
     {
@@ -200,4 +199,191 @@ in {
       command = "swaync";
     }
   ];
+
+  window = {
+    titlebar = false;
+    border = 1;
+    commands = [
+      # Enable it to select a correct for_window option
+      # {
+      #   command = "title_format \"%title -- %class -- %instance\"";
+      #   criteria = {
+      #     app_id = ".*";
+      #   };
+      # }
+
+      {
+        command = "title_format \"%title <small>[XWayland]</small>\"";
+        criteria = {
+          shell = "xwayland";
+        };
+      }
+
+      {
+        command = "floating enable, sticky enable";
+        criteria = {
+          app_id = "firefox";
+          title = "^Picture-in-Picture$";
+        };
+      }
+      {
+        command = "floating enable, sticky enable, border none, nofocus";
+        criteria = {
+          title = " — Sharing Indicator$";
+        };
+      }
+
+      {
+        command = "floating enable, resize set 480 480";
+        criteria = {
+          app_id = "pavucontrol";
+        };
+      }
+
+      {
+        command = "floating enable, resize set 480 480";
+        criteria = {
+          app_id = "imv";
+        };
+      }
+
+      {
+        command = "floating enable, resize set 480 480, move right 300px, move down 50px, sticky enable";
+        criteria = {
+          app_id = "mpv";
+        };
+      }
+
+      {
+        command = "floating enable, resize set 800 480";
+        criteria = {
+          app_id = "floating_term";
+        };
+      }
+
+      # Opacity rules
+      {
+        command = "opacity $opacity";
+        criteria = {
+          app_id = "floating_term";
+        };
+      }
+
+      {
+        command = "opacity $opacity";
+        criteria = {
+          app_id = "default_term";
+        };
+      }
+
+      {
+        command = "opacity $opacity";
+        criteria = {
+          app_id = "foot";
+        };
+      }
+
+      {
+        command = "opacity $opacity";
+        criteria = {
+          app_id = "Alacritty";
+        };
+      }
+
+      {
+        command = "opacity $opacity";
+        criteria = {
+          app_id = "Alacritty";
+        };
+      }
+
+      {
+        command = "opacity $opacity";
+        criteria = {
+          app_id = "emacs";
+        };
+      }
+
+      # Inhibitors
+      {
+        command = "shortcuts_inhibitor disable";
+        criteria = {
+          app_id = "^chrome-.*";
+        };
+      }
+
+      {
+        command = "inhibit_idle fullscreen";
+        criteria = {
+          # Match all
+          shell = ".*";
+        };
+      }
+
+      {
+        command = "inhibit_idle fullscreen";
+        criteria = {
+          # Match all
+          app_id = "chromium";
+        };
+      }
+    ];
+  };
+
+  modes = {
+    resize = {
+      "h" = "resize shrink width 10 px or 10 ppt";
+      "j" = "resize grow height 10 px or 10 ppt";
+      "k" = "resize shrink height 10 px or 10 ppt";
+      "l" = "resize grow width 10 px or 10 ppt";
+
+      # same bindings, but for the arrow keys
+      "Left" = "resize shrink width 10 px or 10 ppt";
+      "Down" = "resize grow height 10 px or 10 ppt";
+      "Up" = "resize shrink height 10 px or 10 ppt";
+      "Right" = "resize grow width 10 px or 10 ppt";
+
+      # back to normal: Enter or Escape or $mod+r
+      "Return" = "mode default";
+      "Escape" = "mode default";
+      "${default_mod}+r" = "mode default";
+    };
+  };
+
+  input = {
+    "*" = {
+      xkb_layout = "it";
+    };
+
+    "type:mouse" = {
+      accel_profile = "adaptive";
+      pointer_accel = "0.4";
+    };
+
+    "type:touchpad" = {
+      accel_profile = "adaptive";
+      middle_emulation = "disabled";
+      tap = "enabled";
+      pointer_accel = "0.1";
+      natural_scroll = "enabled";
+      dwt = "enabled";
+      drag = "enabled";
+      scroll_method = "two_finger";
+    };
+
+    "2:14:ETPS/2_Elantech_TrackPoint" = {
+      pointer_accel = "0.1";
+    };
+  };
+
+  output = {
+    "$laptop" = {
+      res = "1920x1080  position 0,0";
+    };
+
+    "$monitor" = {
+      res = "1920x1080  position 1920,0";
+    };
+
+  };
 }
