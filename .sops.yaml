@@ -1,3 +1,15 @@
+# .sops.yaml
+#
+# Add servers with:
+#   ssh-keyscan -t ed25519 hostname | nix run nixpkgs#ssh-to-age.
+#
+# Edit secrets with:
+#   nix run nixpkgs#sops -- hosts/name/secrets/secrets.yml
+#
+# Use sops updatekeys command to re-key corresponding files:
+#   nix run nixpkgs#sops -- updatekeys file.
+#
+
 # Public keys
 keys:
   - &hosts:

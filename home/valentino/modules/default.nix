@@ -57,10 +57,10 @@
     "term/foot"              = import ./term/foot.nix;
 
     "wayland"                = import ./wayland;
-    # "wayland/sway"         = import ./wayland/sway.nix;
-    # "wayland/hyprland"     = import ./wayland/hyprland.nix;
-    # "wayland/locker"       = import ./wayland/locker.nix;
-    # "wayland/waybar"       = import ./wayland/waybar.nix;
+    "wayland/sway"           = import ./wayland/sway;
+    "wayland/hyprland"       = import ./wayland/hyprland.nix;
+    "wayland/locker"         = import ./wayland/locker.nix;
+    "wayland/waybar"         = import ./wayland/waybar.nix;
 
     "xorg"                   = import ./xorg;
     "xorg/i3"                = import ./xorg/i3;

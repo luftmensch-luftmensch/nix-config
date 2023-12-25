@@ -84,9 +84,9 @@
 
       font = {
         regular = {
-          family = "Roboto";
-          package = pkgs.roboto;
-          size = 12;
+          family = "Sarasa Mono Slab SC";
+          package = pkgs.sarasa-gothic;
+          size = 11;
         };
 
         monospace = {

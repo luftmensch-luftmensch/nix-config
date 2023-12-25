@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.xorg;
+  cfgTheme = config.valentino.modules.themes;
   mod = "Mod4";
   mod1 = "Mod1";
 in {
@@ -19,6 +20,7 @@ in {
           settings = import ./settings.nix {
             default_mod = "${mod}";
             alt_mod = "${mod1}";
+            font = cfgTheme.font.regular;
             packages = pkgs;
           };
         in {
@@ -32,7 +34,7 @@ in {
             # smartBorders = "off";
           };
 
-          keybindings = settings.keybindings;
+          inherit (settings) keybindings;
 
           assigns = {
             "2" = [{class = "^obs";}];
@@ -58,7 +60,7 @@ in {
             };
           };
 
-          startup = settings.startup;
+          inherit (settings) startup;
         };
 
         extraConfig = ''

@@ -29,7 +29,6 @@ in {
       grim
       slurp
       sway-contrib.grimshot
-      # libinput-gestures
 
       swayidle
       swaylock-effects

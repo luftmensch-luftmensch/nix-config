@@ -40,7 +40,7 @@
 </div>
 #+END_HTML
 * About
-This is my configuration for NixOS, meant to harmonize my different systems.
+This is my configuration for *NixOS* and *home-manager*, meant to harmonize my different systems.
 
 -----
 This is *not* necessarily an example of good practices. This is what I am (probably) currently using.
@@ -65,6 +65,9 @@ The entire system configuration is written in Nix. A top-level structure is writ
 └── system      # Top level system configuration
     ├── hosts   # System host specific configuration
     └── modules # Modules containing custom system configuration
+└── home/<user> # Top level home-manager configuration
+    ├── hosts   # System host specific configuration
+    └── modules # Modules containing custom configuration for the user
 #+end_src
 
 A convenience [[file:nix-install.sh][script]] is provided to setup the system on the live ISO (currently btrfs).
@@ -79,6 +82,59 @@ A convenience [[file:nix-install.sh][script]] is provided to setup the system on
 7. Reboot!
 8. Change your ~$USER~ password
 9. Enjoy!
+** Secret Management with Sops-Nix
+Secret management is performed using the excellent [sops-nix](https://github.com/Mic92/sops-nix).
+
+Generate an age based key for myself from an existing SSH key:
+#+begin_src bash
+mkdir -p .config/sops/age
+# Remove passphrase from key.
+cp ~/.ssh/id_ed25519 tmp-key
+chmod 0600 tmp-key
+ssh-keygen -p -N "" -f tmp-key
+nix run nixpkgs#ssh-to-age -- -private-key \
+    -i ~/tmp-key >.config/sops/age/keys.txt
+# Protect private key.
+chmod 0600 .config/sops/age/keys.txt
+#+end_src
+
+Get the public age key:
+#+begin_src bash
+nix-shell -p age --run "age-keygen -y ~/.config/sops/age/keys.txt"
+#+end_src
+
+This key is then put into ~.sops.yaml~.
+
+Generate a public key for a target host:
+
+#+begin_src bash
+ssh-keyscan -t ed25519 host | nix run nixpkgs#ssh-to-age
+#+end_src
+
+This key is then also put into ~.sops.yaml~.
+
+Create an encrypted file:
+#+begin_src bash
+nix run nixpkgs#sops -- secrets/example.yaml
+cat secrets/example.yaml
+#+end_src
+
+Reference the secrets in the system configuration:
+#+begin_src nix
+sops.defaultSopsFile = ./../example.yaml;
+sops.secrets.example-key = {};
+sops.secrets."myservice/my_subdir/my_secret" = {};
+#+end_src
+** Bootstrapping home-manager
+To install home-manager, which is no longer applied automatically (at a bare minimum Git is required):
+
+#+begin_src bash
+nix shell nixpkgs#git
+nix build --no-link .#homeConfigurations.marcus@hostname.activationPackage
+"$(nix path-info .#homeConfigurations.<user>@<hostname>.activationPackage)"/activate
+#+end_src
+
+home-manager is then available through ~home-manager --flake .#username@hostname' switch~.
 * Some useful guide
 ** Written guide / blogs (Flakes)
 1. ~man nix-flake~ (22.05);

@@ -34,12 +34,13 @@
 
     # These are useless to me
     desktop = null;
+    documents = null;
     publicShare = null;
     templates = null;
     pictures = null;
     # pictures = "${config.home.homeDirectory}/pics";
 
-    documents = "${config.home.homeDirectory}/Documenti";
+    # documents = "${config.home.homeDirectory}/Documenti";
     download = "${config.home.homeDirectory}/Scaricati";
     music = "${config.home.homeDirectory}/Music";
     videos = "${config.home.homeDirectory}/Video";

@@ -34,6 +34,11 @@ in {
       type = int;
       default = 12;
     };
+
+		dpi = mkOption {
+      type = int;
+      default = 120;
+    };
   };
 
   config = mkIf (cfg.active != null) (mkMerge [
@@ -83,7 +88,10 @@ in {
     # Xorg
     (mkIf xorg.enable {
       home.pointerCursor.x11.enable = true;
-      xresources.properties = {"Xcursor.theme" = config.gtk.cursorTheme.name;};
+      xresources.properties = {
+        "Xcursor.theme" = config.gtk.cursorTheme.name;
+				"Xft.dpi" = cfg.dpi;
+      };
     })
   ]);
 }

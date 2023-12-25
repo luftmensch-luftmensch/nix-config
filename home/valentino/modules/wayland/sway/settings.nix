@@ -3,20 +3,33 @@
   alt_mod,
   font,
   packages,
-}: {
+}: let
+  audio_cmd = "${packages.wireplumber}/bin/wpctl";
+  noti_cmd = "${packages.swaynotificationcenter}/bin/swaync-client -t -sw";
+  bright_cmd = "${packages.brightnessctl}/bin/brightnessctl set";
+in {
+  # menu =
   keybindings = {
-    "F1" = "exec --no-startup-id ${packages.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && echo $(${packages.pamixer}/bin/pamixer --get-volume) > $xob_sock";
-    "F2" = "exec --no-startup-id ${packages.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && echo $(${packages.pamixer}/bin/pamixer --get-volume) > $xob_sock";
+    # Recently wireplumber (v 0.4.11) added a few utilities for their wpctl tool. You can do:
+    # set-volume and set-mute works with that helper, alternatively you can run wpctl status to get the ID.
+    # Volume
+    XF86AudioRaiseVolume = "exec --no-startup-id ${audio_cmd} set-volume @DEFAULT_SINK@ 10%+ && ${audio_cmd} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
+    XF86AudioLowerVolume = "exec --no-startup-id ${audio_cmd} set-volume @DEFAULT_SINK@ 10%- && ${audio_cmd} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
+    XF86AudioMute = "exec --no-startup-id ${audio_cmd} set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
-    "F3" = "exec --no-startup-id ~/.local/bin/audio -a";
-    "F4" = "exec --no-startup-id ~/.local/bin/audio -m";
+    # TODO: complete it
+    XF86AudioMicMute = "exec --no-startup-id ${audio_cmd} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; # dunstify -h string:x-dunst-stack-tag:mute -t 800 -u low -a mic_unmuted "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d "[" -f2 | cut -d "]" -f1 | awk '{if ($1 == "MUTED") print " Mic Muted"; else print " Unmuted"}')"
 
-    "F7" = "exec ~/.local/bin/playerctl-handler -p"; # Prev
-    "F8" = "exec ~/.local/bin/playerctl-handler -x"; # Play/Pause
-    "F9" = "exec ~/.local/bin/playerctl-handler -n"; # Next
+    # BRIGHTNESS
+    XF86MonBrightnessUp = "exec --no-startup-id exec ${bright_cmd} 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wob_sock";
+    XF86MonBrightnessDown = "exec --no-startup-id exec ${bright_cmd} 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wob_sock";
+
+    # Notification
+    XF86Messenger = "exec --no-startup-id ${noti_cmd}";
+    "${default_mod}+x" = "exec --no-startup-id ${noti_cmd}";
+    "${default_mod}+Shift+n" = "exec --no-startup-id ${noti_cmd}";
 
     "${default_mod}+q" = "kill";
-    "--release ${default_mod}+Escape" = "exec xkill";
     "${default_mod}+Shift+r" = "restart";
 
     # Focus
@@ -49,10 +62,6 @@
     "${default_mod}+Shift+space" = "floating toggle";
     # change focus between tiling / floating windows
     "${default_mod}+space" = "focus mode_toggle";
-
-    "${default_mod}+x" = "exec rofi-powermenu";
-
-    # $mod+x exec --no-startup-id "$menu"
 
     # switch to workspace
     "${default_mod}+1" = "workspace number 1";
@@ -87,12 +96,15 @@
     # Start mode
     "${default_mod}+r" = "mode resize; exec ${packages.libnotify}/bin/notify-send -t 1000 -u low \"Resize\"";
 
-    "Print" = "exec --no-startup-id ${packages.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
-    "${default_mod}+Return" = "exec --no-startup-id ${packages.alacritty}/bin/alacritty -t Alacritty -e fish";
-    "${default_mod}+Shift+Return" = "exec --no-startup-id ${packages.alacritty}/bin/alacritty -t floating_term -e fish";
+    Print = "exec --no-startup-id ${pkgs.grim}/bin/grim -g  \"$(${pkgs.slurp}/bin/slurp)\" $(date +'%d-%m-%Y-%H:%M:%S').png";
+
+    "${default_mod}+Return" = "exec --no-startup-id ${packages.foot}/bin/foot -a=default_term -e fish";
+    "${default_mod}+Shift+Return" = "exec --no-startup-id ${packages.foot}/bin/foot -a=floating_term -e fish";
 
     "${default_mod}+b" = "exec --no-startup-id ${packages.firefox}/bin/firefox";
-    "${default_mod}+d" = "exec --no-startup-id ${packages.dmenu}/bin/dmenu_run -nb '#0F0F0F' -nf '#c5c8c6' -sb '#3B4252' -sf '#c5c8c6' -fn '${font.family}:size=${(toString font.size)}' -p 'Run: '";
+
+    # TODO: Fix theming
+    "${default_mod}+d" = "exec ${packages.bemenu}/bin/bemenu-run -i -p '▶ Run: ' --fn '${font.family}:size=${(toString font.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' | xargs swaymsg exec";
 
     "${default_mod}+e" = "exec --no-startup-id ${packages.cinnamon.nemo}/bin/nemo";
 
@@ -103,37 +115,89 @@
     "${default_mod}+Shift+b" = "exec --no-startup-id ${packages.chromium}/bin/chromium";
     "${default_mod}+Shift+c" = "exec --no-startup-id ${packages.vscodium}/bin/codium";
     "${default_mod}+Shift+i" = "exec --no-startup-id ${packages.jetbrains.idea-community}/bin/idea-community";
-    "${default_mod}+Shift+p" = "exec --no-startup-id ~/.local/bin/screenshot";
-    "${default_mod}+Shift+v" = "exec --no-startup-id ~/.local/bin/copy-to-clipboard";
     "${default_mod}+Shift+s" = "exec --no-startup-id ${packages.spotify}/bin/spotify";
   };
+  workspaceOutputAssign = [
+    # Laptop
+    {
+      workspace = "1";
+      output = "$laptop";
+    }
+
+    {
+      workspace = "3";
+      output = "$laptop";
+    }
+
+    {
+      workspace = "5";
+      output = "$laptop";
+    }
+
+    {
+      workspace = "7";
+      output = "$laptop";
+    }
+
+    {
+      workspace = "9";
+      output = "$laptop";
+    }
+
+    # Monitor
+    {
+      workspace = "2";
+      output = "$monitor";
+    }
+
+    {
+      workspace = "4";
+      output = "$monitor";
+    }
+
+    {
+      workspace = "6";
+      output = "$monitor";
+    }
+
+    {
+      workspace = "8";
+      output = "$monitor";
+    }
+
+    {
+      workspace = "0";
+      output = "$monitor";
+    }
+  ];
 
   startup = [
+    {
+      command = "corectrl";
+    }
+
     {
       command = "autotiling";
       always = true;
     }
 
     {
-      command = "parcellite";
+      # Info about brightness & volume using wob
+      command = "rm -f $wob_sock && mkfifo $wob_sock && tail -f $wob_sock | wob";
     }
 
-    {
-      command = "nm-applet";
-    }
-    {
-      command = "rm -f $xob_sock && mkfifo $xob_sock && tail -f $xob_sock | xob -t 700";
-    }
-    {
-      command = "systemctl --user restart polybar";
-      always = true;
-      notification = false;
-    }
-    # { command = "polybar --reload main &"; always = true; notification = false; }
     {
       command = "emacs --fg-daemon";
       always = true;
       notification = false;
+    }
+
+    {
+      command = "wl-paste --watch cliphist store";
+    }
+
+    {
+      command = "swaync";
     }
   ];
 }
