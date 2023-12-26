@@ -46,12 +46,7 @@ in {
         };
 
         workspaceAutoBackAndForth = true;
-        inherit (settings) input;
-        inherit (settings) keybindings;
-        inherit (settings) modes;
-        inherit (settings) workspaceOutputAssign;
-        inherit (settings) window;
-        inherit (settings) startup;
+        inherit (settings) input keybindings modes workspaceOutputAssign window startup;
       };
 
       extraConfig = ''
