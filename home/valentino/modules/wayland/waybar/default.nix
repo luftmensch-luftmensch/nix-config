@@ -1,0 +1,111 @@
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.valentino.modules.wayland.waybar;
+  theme = config.valentino.modules.themes;
+  inherit (config.colorScheme) colors;
+in {
+  options.valentino.modules.wayland.waybar = {
+    enable = mkEnableOption "waybar configuration";
+
+    # default_output = mkOption {
+    #   type = types.nullOr types.str;
+    #   default = null;
+    # };
+
+    # external_output = mkOption {
+    #   type = types.nullOr types.str;
+    #   default = null;
+    # };
+
+    # output_alt = mkOption {
+    #   type = types.nullOr types.str;
+    #   default = null;
+    # };
+  };
+
+  config = mkIf cfg.enable {
+    programs.waybar = let
+      configuration = import ./config.nix {
+        inherit theme colors pkgs;
+      };
+    in {
+      enable = true;
+      package = pkgs.waybar.override {pulseSupport = true;};
+      inherit (configuration) style;
+      settings = [
+        # Default monitor
+        {
+          layer = "top";
+          position = "bottom";
+          # height = "auto";
+          # output = optionalAttrs (cfg.default_output != null) "${cfg.default_output}";
+          # FIXME: Hardcoded config
+          output = "eDP-1";
+
+          modules-left =
+            [
+              "custom/menu"
+            ]
+            ++ (optionals config.wayland.windowManager.sway.enable [
+              "sway/workspaces"
+              "sway/mode"
+              "sway/window"
+            ])
+            ++ (optionals config.wayland.windowManager.hyprland.enable [
+              "hyprland/workspaces"
+            ]);
+
+          modules-center = ["clock"];
+          modules-right = [
+            "idle_inhibitor"
+            "pulseaudio"
+            "network"
+            "battery"
+            "cpu"
+            "memory"
+            "tray"
+          ];
+          inherit (configuration) default_modules default_monitor_modules;
+        }
+
+        # External monitor
+        {
+          layer = "top";
+          # output = optionalAttrs (cfg.external_output != null) "${cfg.external_output}";
+          # FIXME: Hardcoded config
+          output = "HDMI-A-1";
+          position = "bottom";
+          # height = "auto";
+
+          modules-left =
+            [
+              "custom/menu"
+            ]
+            ++ (optionals config.wayland.windowManager.sway.enable [
+              "sway/workspaces"
+              "sway/mode"
+              "sway/window"
+            ])
+            ++ (optionals config.wayland.windowManager.hyprland.enable [
+              "hyprland/workspaces"
+            ]);
+
+          modules-center = ["clock"];
+          modules-right = [
+            "custom/weather"
+            # "custom/mail"
+            "temperature"
+          ];
+
+          inherit (configuration) default_modules external_monitor_modules;
+        }
+      ];
+    };
+  };
+}

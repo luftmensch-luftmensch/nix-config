@@ -36,8 +36,8 @@ in {
     XF86AudioMicMute = "exec --no-startup-id ${audio_cmd} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; # dunstify -h string:x-dunst-stack-tag:mute -t 800 -u low -a mic_unmuted "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d "[" -f2 | cut -d "]" -f1 | awk '{if ($1 == "MUTED") print " Mic Muted"; else print " Unmuted"}')"
 
     # BRIGHTNESS
-    XF86MonBrightnessUp = "exec --no-startup-id exec ${bright_cmd} 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wob_sock";
-    XF86MonBrightnessDown = "exec --no-startup-id exec ${bright_cmd} 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wob_sock";
+    XF86MonBrightnessUp = "exec ${bright_cmd} 5%+ | ${pkgs.gnused}/bin/sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wob_sock";
+    XF86MonBrightnessDown = "exec ${bright_cmd} 5%- | ${pkgs.gnused}/bin/sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wob_sock";
 
     # Notification
     XF86Messenger = "exec --no-startup-id ${noti_cmd}";

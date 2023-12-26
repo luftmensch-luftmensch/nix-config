@@ -60,7 +60,7 @@
     "wayland/sway"           = import ./wayland/sway;
     "wayland/hyprland"       = import ./wayland/hyprland.nix;
     "wayland/locker"         = import ./wayland/locker.nix;
-    "wayland/waybar"         = import ./wayland/waybar.nix;
+    "wayland/waybar"         = import ./wayland/waybar;
 
     "xorg"                   = import ./xorg;
     "xorg/i3"                = import ./xorg/i3;

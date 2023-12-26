@@ -69,7 +69,7 @@ in {
     valentino.modules = {
       wayland = {
         locker.enable = true;
-        # waybar.enable = true;
+        waybar.enable = true;
       };
     };
   };
