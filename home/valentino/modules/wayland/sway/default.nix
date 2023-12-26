@@ -6,10 +6,10 @@
 }:
 with lib; let
   cfg = config.valentino.modules.wayland;
-  cfgTheme = config.valentino.modules.themes;
+  theme = config.valentino.modules.themes;
   mod = "Mod4";
   mod1 = "Mod1";
-
+  wallpaper_path = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
 in {
   config = mkIf (cfg.enable && (elem "sway" cfg.wm)) {
     wayland.windowManager.sway = {
@@ -21,9 +21,7 @@ in {
         settings = import ./settings.nix {
           default_mod = "${mod}";
           alt_mod = "${mod1}";
-          wallpaper_path = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
-          inherit cfgTheme;
-          inherit pkgs;
+          inherit theme wallpaper_path pkgs;
         };
       in {
         bars = [{command = "waybar";}];
@@ -42,9 +40,9 @@ in {
         focus.followMouse = true;
 
         fonts = {
-          names = [cfgTheme.font.regular.family];
+          names = [theme.font.regular.family];
           # Sum required: floating point value but int option defined
-          size = cfgTheme.font.regular.size + 0.0;
+          size = theme.font.regular.size + 0.0;
         };
 
         workspaceAutoBackAndForth = true;
@@ -76,7 +74,7 @@ in {
     valentino.modules = {
       wayland = {
         locker.enable = true;
-        waybar.enable = true;
+        # waybar.enable = true;
       };
     };
   };

@@ -7,7 +7,7 @@
   _wlcp = "${pkgs.wl-clipboard}/bin/wl-copy";
 
   # TODO: Do not hardcode the style
-  _menu = "${pkgs.bemenu}/bin/bemenu -c -i -W 0.5 -l 5 --fn '${theme.font.regular.font.family}:size=${(toString theme.font.regular.font.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' -p";
+  _menu = "${pkgs.bemenu}/bin/bemenu -c -i -W 0.5 -l 5 --fn '${theme.font.regular.family}:size=${(toString theme.font.regular.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' -p";
 in
   pkgs.writeShellScriptBin "cms" ''
     set -e

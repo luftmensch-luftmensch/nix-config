@@ -44,7 +44,8 @@ in {
     home.sessionVariables = {
       # export QT_QPA_PLATFORMTHEME=qt5ct
 
-      GDK_BACKEND = "wayland,x11";
+      # GDK_BACKEND = "wayland,x11";
+      GDK_BACKEND = "wayland";
       XDG_SESSION_TYPE = "wayland";
       SDL_VIDEODRIVER = "wayland";
       # GTK_USE_PORTAL = "1";

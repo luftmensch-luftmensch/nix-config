@@ -13,6 +13,7 @@
   rws = pkgs.callPackage ./scripts/random-wallpaper.nix {
     inherit wallpaper_path;
   };
+  bss = pkgs.callPackage ./scripts/battery-status.nix {};
 
   cms = pkgs.callPackage ./scripts/clipboard-manager.nix {
     inherit theme;
@@ -22,7 +23,6 @@
     inherit theme;
   };
 
-  bss = pkgs.callPackage ./scripts/battery-status.nix;
 in {
   # menu =
   keybindings = {
@@ -108,8 +108,6 @@ in {
 
     "${alt_mod}+Ctrl+h" = "exec --no-startup-id ${cms}/bin/cms";
 
-
-
     "${default_mod}+Tab" = "workspace back_and_forth";
     "${default_mod}+Shift+Tab" = "workspace prev";
 
@@ -124,13 +122,13 @@ in {
     "${default_mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
 
     # TODO: Fix theming
-    "${default_mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run -i -p '▶ Run: ' --fn '${theme.font.regular.font.family}:size=${(toString theme.font.regular.font.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' | xargs swaymsg exec";
+    "${default_mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run -i -p '▶ Run: ' --fn '${theme.font.regular.family}:size=${(toString theme.font.regular.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' | xargs swaymsg exec";
 
 
 
     "${default_mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
 
-    "${default_mod}+m" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -c";
+    "${default_mod}+m" = "exec --no-startup-id emacsclient -c";
     "${default_mod}+o" = "exec --no-startup-id ${pkgs.obs-studio}/bin/obs";
     "${default_mod}+p" = "exec --no-startup-id ${pkgs.pavucontrol}/bin/pavucontrol";
 
