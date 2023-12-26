@@ -2,11 +2,12 @@
   default_mod,
   alt_mod,
   font,
-  packages,
+  pkgs,
+  ...
 }: {
   keybindings = {
-    "F1" = "exec --no-startup-id ${packages.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && echo $(${packages.pamixer}/bin/pamixer --get-volume) > $xob_sock";
-    "F2" = "exec --no-startup-id ${packages.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && echo $(${packages.pamixer}/bin/pamixer --get-volume) > $xob_sock";
+    "F1" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
+    "F2" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
 
     "F3" = "exec --no-startup-id ~/.local/bin/audio -a";
     "F4" = "exec --no-startup-id ~/.local/bin/audio -m";
@@ -40,8 +41,8 @@
     "${default_mod}+Shift+l" = "move right";
 
     # # Splitting
-    "${default_mod}+z" = "split v; exec ${packages.libnotify}/bin/notify-send -t 600 -u low  'Tile horizontally'";
-    "${default_mod}+v" = "split h; exec ${packages.libnotify}/bin/notify-send -t 600 -u low  'Tile vertically'";
+    "${default_mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -t 600 -u low  'Tile horizontally'";
+    "${default_mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -t 600 -u low  'Tile vertically'";
 
     "${default_mod}+f" = "fullscreen toggle";
 
@@ -85,27 +86,27 @@
     "${default_mod}+Shift+Tab" = "workspace prev";
 
     # Start mode
-    "${default_mod}+r" = "mode resize; exec ${packages.libnotify}/bin/notify-send -t 1000 -u low \"Resize\"";
+    "${default_mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -t 1000 -u low \"Resize\"";
 
-    "Print" = "exec --no-startup-id ${packages.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
-    "${default_mod}+Return" = "exec --no-startup-id ${packages.alacritty}/bin/alacritty -t Alacritty -e fish";
-    "${default_mod}+Shift+Return" = "exec --no-startup-id ${packages.alacritty}/bin/alacritty -t floating_term -e fish";
+    "Print" = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
+    "${default_mod}+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t Alacritty -e fish";
+    "${default_mod}+Shift+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t floating_term -e fish";
 
-    "${default_mod}+b" = "exec --no-startup-id ${packages.firefox}/bin/firefox";
-    "${default_mod}+d" = "exec --no-startup-id ${packages.dmenu}/bin/dmenu_run -nb '#0F0F0F' -nf '#c5c8c6' -sb '#3B4252' -sf '#c5c8c6' -fn '${font.family}:size=${(toString font.size)}' -p 'Run: '";
+    "${default_mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
+    "${default_mod}+d" = "exec --no-startup-id ${pkgs.dmenu}/bin/dmenu_run -nb '#0F0F0F' -nf '#c5c8c6' -sb '#3B4252' -sf '#c5c8c6' -fn '${font.family}:size=${(toString font.size)}' -p 'Run: '";
 
-    "${default_mod}+e" = "exec --no-startup-id ${packages.cinnamon.nemo}/bin/nemo";
+    "${default_mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
 
-    "${default_mod}+m" = "exec --no-startup-id ${packages.emacs}/bin/emacsclient -c";
-    "${default_mod}+o" = "exec --no-startup-id ${packages.obs-studio}/bin/obs";
-    "${default_mod}+p" = "exec --no-startup-id ${packages.pavucontrol}/bin/pavucontrol";
+    "${default_mod}+m" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -c";
+    "${default_mod}+o" = "exec --no-startup-id ${pkgs.obs-studio}/bin/obs";
+    "${default_mod}+p" = "exec --no-startup-id ${pkgs.pavucontrol}/bin/pavucontrol";
 
-    "${default_mod}+Shift+b" = "exec --no-startup-id ${packages.chromium}/bin/chromium";
-    "${default_mod}+Shift+c" = "exec --no-startup-id ${packages.vscodium}/bin/codium";
-    "${default_mod}+Shift+i" = "exec --no-startup-id ${packages.jetbrains.idea-community}/bin/idea-community";
+    "${default_mod}+Shift+b" = "exec --no-startup-id ${pkgs.chromium}/bin/chromium";
+    "${default_mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
+    "${default_mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
     "${default_mod}+Shift+p" = "exec --no-startup-id ~/.local/bin/screenshot";
     "${default_mod}+Shift+v" = "exec --no-startup-id ~/.local/bin/copy-to-clipboard";
-    "${default_mod}+Shift+s" = "exec --no-startup-id ${packages.spotify}/bin/spotify";
+    "${default_mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
   };
 
   startup = [

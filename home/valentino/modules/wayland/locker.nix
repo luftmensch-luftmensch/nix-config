@@ -26,6 +26,7 @@ in {
         transparent = "#00000000";
       in {
         font = cfgTheme.font.regular.family;
+        datestr = "%a, %d-%M-%Y";
         # image = outputs.wallpapers.digital-flowers.src;
         effect-blur = "7x5";
         effect-vignette = "0.2:0.5";
@@ -38,8 +39,8 @@ in {
 
         clock = true;
         indicator = true;
-        indicator-radius = 100;
-        indicator-thickness = 7;
+        indicator-radius = 150;
+        indicator-thickness = 10;
 
         layout-text-color = colors.base0E;
 

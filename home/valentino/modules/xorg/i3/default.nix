@@ -21,7 +21,7 @@ in {
             default_mod = "${mod}";
             alt_mod = "${mod1}";
             font = cfgTheme.font.regular;
-            packages = pkgs;
+            inherit pkgs;
           };
         in {
           modifier = "${mod}";

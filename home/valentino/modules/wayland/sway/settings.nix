@@ -1,12 +1,28 @@
 {
   default_mod,
   alt_mod,
-  font,
-  packages,
+  theme,
+  wallpaper_path,
+  pkgs,
 }: let
-  audio_cmd = "${packages.wireplumber}/bin/wpctl";
-  noti_cmd = "${packages.swaynotificationcenter}/bin/swaync-client -t -sw";
-  bright_cmd = "${packages.brightnessctl}/bin/brightnessctl set";
+  audio_cmd = "${pkgs.wireplumber}/bin/wpctl";
+  noti_cmd = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
+  bright_cmd = "${pkgs.brightnessctl}/bin/brightnessctl set";
+
+  # Custom scripts
+  rws = pkgs.callPackage ./scripts/random-wallpaper.nix {
+    inherit wallpaper_path;
+  };
+
+  cms = pkgs.callPackage ./scripts/clipboard-manager.nix {
+    inherit theme;
+  };
+
+  sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
+    inherit theme;
+  };
+
+  bss = pkgs.callPackage ./scripts/battery-status.nix;
 in {
   # menu =
   keybindings = {
@@ -53,8 +69,8 @@ in {
     "${default_mod}+Shift+l" = "move right";
 
     # # Splitting
-    "${default_mod}+z" = "split v; exec ${packages.libnotify}/bin/notify-send -t 600 -u low  'Tile horizontally'";
-    "${default_mod}+v" = "split h; exec ${packages.libnotify}/bin/notify-send -t 600 -u low  'Tile vertically'";
+    "${default_mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -t 600 -u low  'Tile horizontally'";
+    "${default_mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -t 600 -u low  'Tile vertically'";
 
     "${default_mod}+f" = "fullscreen toggle";
 
@@ -90,33 +106,42 @@ in {
     "${alt_mod}+Ctrl+Right" = "workspace next";
     "${alt_mod}+Ctrl+Left" = "workspace prev";
 
+    "${alt_mod}+Ctrl+h" = "exec --no-startup-id ${cms}/bin/cms";
+
+
+
     "${default_mod}+Tab" = "workspace back_and_forth";
     "${default_mod}+Shift+Tab" = "workspace prev";
 
     # Start mode
-    "${default_mod}+r" = "mode resize; exec ${packages.libnotify}/bin/notify-send -t 1000 -u low \"Resize\"";
+    "${default_mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -t 1000 -u low \"Resize\"";
 
-    Print = "exec --no-startup-id ${packages.grim}/bin/grim -g  \"$(${packages.slurp}/bin/slurp)\" $(date +'%d-%m-%Y-%H:%M:%S').png";
+    Print = "exec --no-startup-id ${pkgs.grim}/bin/grim -g  \"$(${pkgs.slurp}/bin/slurp)\" $(date +'%d-%m-%Y-%H:%M:%S').png";
 
-    "${default_mod}+Return" = "exec --no-startup-id ${packages.foot}/bin/foot -a=default_term -e fish";
-    "${default_mod}+Shift+Return" = "exec --no-startup-id ${packages.foot}/bin/foot -a=floating_term -e fish";
+    "${default_mod}+Return" = "exec --no-startup-id ${pkgs.foot}/bin/foot -a=default_term -e fish";
+    "${default_mod}+Shift+Return" = "exec --no-startup-id ${pkgs.foot}/bin/foot -a=floating_term -e fish";
 
-    "${default_mod}+b" = "exec --no-startup-id ${packages.firefox}/bin/firefox";
+    "${default_mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
 
     # TODO: Fix theming
-    "${default_mod}+d" = "exec ${packages.bemenu}/bin/bemenu-run -i -p '▶ Run: ' --fn '${font.family}:size=${(toString font.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' | xargs swaymsg exec";
+    "${default_mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run -i -p '▶ Run: ' --fn '${theme.font.regular.font.family}:size=${(toString theme.font.regular.font.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' | xargs swaymsg exec";
 
-    "${default_mod}+e" = "exec --no-startup-id ${packages.cinnamon.nemo}/bin/nemo";
 
-    "${default_mod}+m" = "exec --no-startup-id ${packages.emacs}/bin/emacsclient -c";
-    "${default_mod}+o" = "exec --no-startup-id ${packages.obs-studio}/bin/obs";
-    "${default_mod}+p" = "exec --no-startup-id ${packages.pavucontrol}/bin/pavucontrol";
 
-    "${default_mod}+Shift+b" = "exec --no-startup-id ${packages.chromium}/bin/chromium";
-    "${default_mod}+Shift+c" = "exec --no-startup-id ${packages.vscodium}/bin/codium";
-    "${default_mod}+Shift+i" = "exec --no-startup-id ${packages.jetbrains.idea-community}/bin/idea-community";
-    "${default_mod}+Shift+s" = "exec --no-startup-id ${packages.spotify}/bin/spotify";
+    "${default_mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
+
+    "${default_mod}+m" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -c";
+    "${default_mod}+o" = "exec --no-startup-id ${pkgs.obs-studio}/bin/obs";
+    "${default_mod}+p" = "exec --no-startup-id ${pkgs.pavucontrol}/bin/pavucontrol";
+
+    "${default_mod}+Shift+b" = "exec --no-startup-id ${pkgs.chromium}/bin/chromium";
+    "${default_mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
+    "${default_mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
+    "${default_mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
+
+    "${default_mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
   };
+
   workspaceOutputAssign = [
     # Laptop
     {
@@ -198,6 +223,16 @@ in {
     {
       command = "swaync";
     }
+
+    # Custom scripts
+    {
+      command = "${rws}/bin/rws";
+      always = true;
+    }
+
+    {
+      command = "${bss}/bin/bss";
+    }
   ];
 
   window = {
@@ -219,6 +254,7 @@ in {
         };
       }
 
+      # FF related
       {
         command = "floating enable, sticky enable";
         criteria = {
@@ -226,6 +262,15 @@ in {
           title = "^Picture-in-Picture$";
         };
       }
+
+      {
+        command = "floating enable, resize set 800 400";
+        criteria = {
+          app_id = "firefox";
+          title = "^Lib$";
+        };
+      }
+
       {
         command = "floating enable, sticky enable, border none, nofocus";
         criteria = {
@@ -306,6 +351,7 @@ in {
 
       # Inhibitors
       {
+        # Stop Chrome from Stealing Sway's Hotkeys - https://artemis.sh/2022/09/15/stop-chrome-stealing-hotkeys-sway.html
         command = "shortcuts_inhibitor disable";
         criteria = {
           app_id = "^chrome-.*";
@@ -384,6 +430,5 @@ in {
     "$monitor" = {
       res = "1920x1080  position 1920,0";
     };
-
   };
 }

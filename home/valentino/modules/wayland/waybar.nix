@@ -128,7 +128,7 @@ in {
 						max-length = 50;
 						on-click = "sleep 0.1 ; pgrep ${pkgs.slurp}/bin/slurp || (${pkgs.sway}/bin/swaymsg -t get_tree | ${pkgs.jq}/bin/jq -r '.. | select(.pid? and .visible?) | .rect | \"\\(.x);\\(.y) \\(.width)x\\(.height)\"' | XCURSOR_SIZE=48 ${pkgs.slurp}/bin/slurp -w 1 -c A5BAD1 -s C3DFFE94 | ${pkgs.grim}/bin/grim -g - ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png'))";
 						on-click-right = "sleep 0.1 ; pgrep ${pkgs.slurp}/bin/slurp || (XCURSOR_SIZE=48 ${pkgs.slurp}/bin/slurp -w 1 -c A5BAD1 -s C3DFFE94 | ${pkgs.grim}/bin/grim -g - ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png'))";
-						on-click-middle = "${pkgs/sway}/bin/swaymsg kill";
+						on-click-middle = "${pkgs.sway}/bin/swaymsg kill";
 					};
 
 					"sway/workspaces" = {
