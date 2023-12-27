@@ -32,7 +32,11 @@ in {
   config = mkIf cfg.enable {
     programs.waybar = let
       configuration = import ./config.nix {
-        inherit theme colors pkgs;
+        inherit theme colors;
+      };
+
+      custom_modules = import ./modules.nix {
+        inherit pkgs;
       };
     in {
       enable = true;
@@ -71,7 +75,10 @@ in {
             "memory"
             "tray"
           ];
-          inherit (configuration) default_modules default_monitor_modules;
+          # Shared modules
+          inherit (custom_modules) "custom/menu" "sway/workspaces" "sway/mode" "sway/window" clock;
+          # Specific modules
+          inherit (custom_modules) "idle_inhibitor" "pulseaudio" "network" "battery" "cpu" "memory" "tray";
         }
 
         # External monitor
@@ -103,7 +110,10 @@ in {
             "temperature"
           ];
 
-          inherit (configuration) default_modules external_monitor_modules;
+          # Shared modules
+          inherit (custom_modules) "custom/menu" "sway/workspaces" "sway/mode" "sway/window" clock;
+          # Specific modules
+          inherit (custom_modules) "custom/weather" "temperature";
         }
       ];
     };

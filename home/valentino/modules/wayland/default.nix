@@ -57,5 +57,11 @@ in {
       NIXOS_OZONE_WL = "1";
       # WLR_RENDERER_ALLOW_SOFTWARE = "1";
     };
+
+    services = {
+      easyeffects.enable = true;
+      # Try out if there is some problems with it on wayland
+      pasystray.enable = true;
+    };
   };
 }
