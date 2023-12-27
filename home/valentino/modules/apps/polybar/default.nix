@@ -35,11 +35,11 @@ in {
           c-cmd = "${pkgs.xfce.orage}/bin/orage";
           n-cmd = "${pkgs.dunst}/bin/dunstctl";
           temp = "${cfg.temperature}";
-					volume = "${pkgs.pavucontrol}/bin/pavucontrol";
+          volume = "${pkgs.pavucontrol}/bin/pavucontrol";
           palette = colors;
         };
       in
-				barConfig // moduleConfig;
+        barConfig // moduleConfig;
 
       # for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
       #     MONITOR=$m polybar --reload main &

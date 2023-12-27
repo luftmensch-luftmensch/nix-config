@@ -1,6 +1,6 @@
 {inputs, ...}:
 with builtins; let
-  inherit (inputs) self nixpkgs home-manager;
+  inherit (inputs) self nixpkgs home-manager nur;
   inherit (self) outputs overlays homeModules;
 
   genConfiguration = {
@@ -13,7 +13,9 @@ with builtins; let
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      overlays = attrValues overlays;
+      overlays = attrValues overlays ++ [
+        nur.overlay
+      ];
     };
 
     baseHome = {

@@ -3,7 +3,7 @@
   c-cmd,
   n-cmd,
   temp,
-	volume,
+  volume,
   palette,
 }: {
   "module/tray" = {
@@ -20,7 +20,7 @@
     type = "custom/script";
     exec = "${b-cmd}";
     tail = true;
-		format-foreground = "${palette.base0D}";
+    format-foreground = "${palette.base0D}";
     # click-left = "${bluetoothScript}/bin/bluetooth-ctl --toggle &";
     # label-maxlen = 55;
   };
@@ -32,7 +32,7 @@
     format = "%{A1:${c-cmd}:}<label>%{A}";
     format-prefix = " ";
     format-prefix-font = 2;
-		format-prefix-foreground = "#${palette.base08}";
+    format-prefix-foreground = "#${palette.base08}";
     label = "%time%";
   };
 
@@ -44,7 +44,7 @@
     format-volume = "<ramp-volume>  <label-volume>";
     format-muted-prefix = "婢";
     format-muted-prefix-font = 2;
-		format-muted-prefix-foreground = "${palette.base08}";
+    format-muted-prefix-foreground = "${palette.base08}";
 
     label-volume = "%percentage%%";
     label-muted = "  Muted";
@@ -64,7 +64,7 @@
     format-prefix = " ";
     label-font = 1;
     format = "<label>";
-		format-prefix-foreground = "${palette.base0B}";
+    format-prefix-foreground = "${palette.base0B}";
     label = "Cpu %percentage:%%";
   };
 
@@ -72,20 +72,20 @@
     type = "internal/memory";
     interval = 1;
     format-prefix = "  ";
-		format-prefix-foreground = "${palette.base0A}";
+    format-prefix-foreground = "${palette.base0A}";
   };
 
   "module/temp" = {
     type = "internal/temperature";
     interval = 5;
-		hwmon-path = "${temp}";
+    hwmon-path = "${temp}";
     format = "<label>";
     format-padding = 2;
     format-font = 2;
 
     label = " %temperature-c%";
     label-warn = "   %temperature-c%";
-		label-warn-foreground = "${palette.base08}";
+    label-warn-foreground = "${palette.base08}";
     content-font = 2;
   };
 

@@ -308,6 +308,7 @@ in {
           "extensions.pocket.enabled" = false;
           "extensions.screenshots.disabled" = true;
           "extensions.shield-recipe-client.enabled" = false;
+					"extensions.unifiedExtensions.enabled" = false;
 
           /*
           * TAB BEHAVIOR *
@@ -497,6 +498,12 @@ in {
           # Moved here to be able to know about error in the configuration
           "browser.aboutConfig.showWarning" = false;
         };
+
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          bitwarden
+          ublock-origin
+          sidebery
+        ];
       };
     };
 

@@ -4,6 +4,7 @@
 
     "apps/polybar"           = import ./apps/polybar;
     "apps/rofi"              = import ./apps/rofi;
+    "apps/swaync"            = import ./apps/swaync;
     "apps/api_tools"         = import ./apps/api_tools.nix;
     "apps/dunst"             = import ./apps/dunst.nix;
     "apps/discord"           = import ./apps/discord.nix;

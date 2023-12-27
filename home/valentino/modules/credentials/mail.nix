@@ -212,9 +212,21 @@ in {
       };
 
       # TODO: Complete configuration for thunderbird
-      # thunderbird = {
-      #   enable = true;
-      # };
+      thunderbird = {
+        enable = true;
+        settings = {
+          "privacy.donottrackheader.enabled" = true;
+        };
+        profiles = {
+          personal = {
+            isDefault = true;
+            settings = {
+              "mail.spellcheck.inline" = false;
+              "javascript.enabled" = false;
+            };
+          };
+        };
+      };
     };
 
     home.packages = with pkgs; [
