@@ -29,6 +29,5 @@ in {
         target = ".config/swaync/configSchema.json";
       };
     };
-
   };
 }

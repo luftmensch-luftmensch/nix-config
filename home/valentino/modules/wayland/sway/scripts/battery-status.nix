@@ -20,6 +20,6 @@ in
 
     while true; do
       check_battery
-      sleep 900
+      sleep 5m
     done
   ''

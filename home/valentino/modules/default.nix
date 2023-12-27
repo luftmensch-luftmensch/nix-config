@@ -7,6 +7,7 @@
     "apps/swaync"            = import ./apps/swaync;
     "apps/api_tools"         = import ./apps/api_tools.nix;
     "apps/dunst"             = import ./apps/dunst.nix;
+    "apps/playerctl"         = import ./apps/playerctl.nix;
     "apps/discord"           = import ./apps/discord.nix;
     "apps/teams"             = import ./apps/teams.nix;
 

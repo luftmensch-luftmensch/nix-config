@@ -1,10 +1,15 @@
 {
   default_mod,
   alt_mod,
-  font,
+	theme,
   pkgs,
   ...
-}: {
+}: let
+  sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
+    inherit theme;
+  };
+in
+{
   keybindings = {
     "F1" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
     "F2" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
@@ -12,9 +17,9 @@
     "F3" = "exec --no-startup-id ~/.local/bin/audio -a";
     "F4" = "exec --no-startup-id ~/.local/bin/audio -m";
 
-    "F7" = "exec ~/.local/bin/playerctl-handler -p"; # Prev
-    "F8" = "exec ~/.local/bin/playerctl-handler -x"; # Play/Pause
-    "F9" = "exec ~/.local/bin/playerctl-handler -n"; # Next
+    "F7" = "exec playerctl-wrapper -p"; # Prev
+    "F8" = "exec playerctl-wrapper -x"; # Play/Pause
+    "F9" = "exec playerctl-wrapper -n"; # Next
 
     "${default_mod}+q" = "kill";
     "--release ${default_mod}+Escape" = "exec xkill";
@@ -93,7 +98,7 @@
     "${default_mod}+Shift+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t floating_term -e fish";
 
     "${default_mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
-    "${default_mod}+d" = "exec --no-startup-id ${pkgs.dmenu}/bin/dmenu_run -nb '#0F0F0F' -nf '#c5c8c6' -sb '#3B4252' -sf '#c5c8c6' -fn '${font.family}:size=${(toString font.size)}' -p 'Run: '";
+    "${default_mod}+d" = "exec --no-startup-id ${pkgs.dmenu}/bin/dmenu_run -nb '#0F0F0F' -nf '#c5c8c6' -sb '#3B4252' -sf '#c5c8c6' -fn '${theme.font.regular.family}:size=${(toString theme.font.regular.size)}' -p 'Run: '";
 
     "${default_mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
 
@@ -104,7 +109,7 @@
     "${default_mod}+Shift+b" = "exec --no-startup-id ${pkgs.chromium}/bin/chromium";
     "${default_mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
     "${default_mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
-    "${default_mod}+Shift+p" = "exec --no-startup-id ~/.local/bin/screenshot";
+		"${default_mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
     "${default_mod}+Shift+v" = "exec --no-startup-id ~/.local/bin/copy-to-clipboard";
     "${default_mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
   };

@@ -9,12 +9,12 @@
 
   src = pkgs.fetchurl {
     url = "https://github.com/ArchGPT/insomnium/releases/download/core%400.2.1-b/Insomnium.Core-${version}.AppImage";
-    
-		sha256 = "0q4bdlj4sj6ggpmkyd6yvahjc0lwwmd247jrw545rx0x20fxil4f";
-  };
 
+    sha256 = "0q4bdlj4sj6ggpmkyd6yvahjc0lwwmd247jrw545rx0x20fxil4f";
+  };
 in
-  pkgs.appimageTools.wrapType1 rec { # ISO 9660 file that are also ELF executables.
+  pkgs.appimageTools.wrapType1 rec {
+    # ISO 9660 file that are also ELF executables.
     inherit name src;
 
     extraInstallCommands = ''

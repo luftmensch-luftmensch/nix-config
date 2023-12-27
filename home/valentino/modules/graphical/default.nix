@@ -45,7 +45,7 @@ with lib; let
     pavucontrol
     brightnessctl
     ffmpeg-full
-    playerctl
+    # playerctl
     exiftool
     imagemagick
   ];

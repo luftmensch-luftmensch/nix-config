@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.xorg;
-  cfgTheme = config.valentino.modules.themes;
+  theme = config.valentino.modules.themes;
   mod = "Mod4";
   mod1 = "Mod1";
 in {
@@ -20,8 +20,7 @@ in {
           settings = import ./settings.nix {
             default_mod = "${mod}";
             alt_mod = "${mod1}";
-            font = cfgTheme.font.regular;
-            inherit pkgs;
+            inherit theme pkgs;
           };
         in {
           modifier = "${mod}";
@@ -131,6 +130,7 @@ in {
     valentino.modules = {
       apps = {
         dunst.enable = true;
+        playerctl.enable = true;
         polybar = {
           enable = true;
           temperature = "/sys/class/thermal/thermal_zone2/temp";

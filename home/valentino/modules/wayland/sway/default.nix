@@ -71,6 +71,9 @@ in {
         locker.enable = true;
         waybar.enable = true;
       };
+      apps = {
+        playerctl.enable = true;
+      };
     };
   };
 }

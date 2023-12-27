@@ -9,9 +9,8 @@
 
   src = pkgs.fetchurl {
     url = "https://github.com/httpie/desktop/releases/download/v${version}/HTTPie-${version}.AppImage";
-		sha256 = "1qq8rfk5jm7k2ncp5q01zzbkhai3p9dxrmllc8nw8z3knmjzfw00";
+    sha256 = "1qq8rfk5jm7k2ncp5q01zzbkhai3p9dxrmllc8nw8z3knmjzfw00";
   };
-
 in
   pkgs.appimageTools.wrapType2 rec {
     inherit name src;

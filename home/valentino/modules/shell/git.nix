@@ -1,11 +1,13 @@
 {
   options,
+	pkgs,
   config,
   lib,
   ...
 }:
 with lib; let
   cfg = config.valentino.modules.shell.git;
+	undo-git = pkgs.writeScriptBin "undo-git" (builtins.readFile ./scripts/undo-git.sh);
 in {
   options.valentino.modules.shell.git = {
     enable = mkEnableOption "main user git configuration";
@@ -73,5 +75,10 @@ in {
         };
       };
     };
+
+		home.packages = with pkgs; [
+			undo-git
+		];
+
   };
 }
