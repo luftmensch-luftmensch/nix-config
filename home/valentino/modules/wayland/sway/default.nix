@@ -66,6 +66,12 @@ in {
 
     home.packages = with pkgs; [autotiling];
 
+    services = {
+      easyeffects.enable = true;
+      # Try out if there is some problems with it on wayland
+      pasystray.enable = true;
+    };
+
     valentino.modules = {
       wayland = {
         locker.enable = true;

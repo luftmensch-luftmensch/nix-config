@@ -35,7 +35,7 @@ in {
       default = 12;
     };
 
-		dpi = mkOption {
+    dpi = mkOption {
       type = int;
       default = 120;
     };
@@ -66,6 +66,13 @@ in {
             else 0;
         in {
           gtk-application-prefer-dark-theme = is-dark;
+
+          # TODO: Investigate
+          # gtk-xft-hinting = 1;
+          # gtk-xft-hintstyle = "slight";
+          # gtk-xft-antialias = 1; # => font-antialiasing="grayscale"
+          # gtk-xft-rgba = "rgb"; # => font-rgb-order="rgb"
+          # gtk-cursor-theme-size = cursor.size;
         };
       };
 
@@ -90,7 +97,7 @@ in {
       home.pointerCursor.x11.enable = true;
       xresources.properties = {
         "Xcursor.theme" = config.gtk.cursorTheme.name;
-				"Xft.dpi" = cfg.dpi;
+        "Xft.dpi" = cfg.dpi;
       };
     })
   ]);

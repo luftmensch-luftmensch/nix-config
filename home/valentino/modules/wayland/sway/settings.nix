@@ -191,6 +191,11 @@ in {
     }
   ];
 
+  ### Sway logging & jorunalctl###
+  # If you'd like sway's output to be handled by journald (like a systemd service), systemd-cat can be used for this:
+  #exec systemd-cat --identifier=sway sway
+  # You can print the logs with: `journalctl --user --identifier sway (Adding --follow & --this-boot might be handy)
+  # dbus-sway-environment
   startup = [
     {
       command = "corectrl";
@@ -255,6 +260,13 @@ in {
         criteria = {
           app_id = "firefox";
           title = "^Picture-in-Picture$";
+        };
+      }
+
+      {
+        command = "floating enable position center, resize set 480 480, focus";
+        criteria = {
+          app_id = "Organizer";
         };
       }
 
