@@ -2,12 +2,13 @@
   pkgs,
   config,
   lib,
+  modulesPath,
   ...
 }: {
   imports = [
-    ./filesystem-configuration.nix
     ./options.nix
     ../common.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   # Kernel related

@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  # inputs,
   ...
 }:
 with lib; let
@@ -23,13 +22,11 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      # nixpkgs.overlays = [inputs.emacs-overlay.overlays.default];
-
       environment.systemPackages = with pkgs; [
         ((emacsPackagesFor cfg.package).emacsWithPackages (epkgs:
           with epkgs; [
             # melpaPackages.telega is outdated. Pull a newer version directly from the repo
-            (melpaPackages.telega.overrideAttrs (oldAttrs: {
+            (melpaPackages.telega.overrideAttrs (_oldAttrs: {
               version = "0.8.220";
               src = pkgs.fetchFromGitHub {
                 owner = "zevlg";

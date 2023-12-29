@@ -2,7 +2,6 @@
   options,
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -76,7 +75,7 @@ in {
       };
     };
 
-    # Sessio variables
+    # Session variables
     environment = {
       sessionVariables = {
         XDG_CACHE_HOME = "$HOME/.cache";

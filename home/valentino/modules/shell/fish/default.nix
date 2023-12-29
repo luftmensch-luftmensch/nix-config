@@ -55,16 +55,29 @@ in {
           color-picker = {
             body = ''
               set color (${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -b 1B1F2800 -p)" -t ppm - | ${pkgs.imagemagick}/bin/convert - -format '%[pixel:p{0,0}]' txt:- | ${pkgs.coreutils}/bin/tail -n1 | ${pkgs.coreutils}/bin/cut -d' ' -f4)
-							set image /tmp/color_picker_image.png
+              set image /tmp/color_picker_image.png
 
-							if [ $color ];
-								echo "$color" | tr -d "\n" | ${pkgs.wl-clipboard}/bin/wl-copy 
-								# generate preview
+              if [ $color ];
+								echo "$color" | tr -d "\n" | ${pkgs.wl-clipboard}/bin/wl-copy
 								${pgs.imagemagick}/bin/convert -size 48x48 xc:"$color" $image
-								# notify about it
 								${pkgs.libnotify}/bin/notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$image" "$color, copied to clipboard."
 								[ -f "$image" ] && rm "$image"
-							end
+              end
+            '';
+          };
+        })
+        (mkIf config.programs.git.enable {
+          git-purge-history = let
+            _git = "${pkgs.git}/bin/git";
+          in {
+            body = ''
+              set current_branch (${_git} rev-parse --abbrev-ref HEAD)
+              ${_git} checkout --orphan temp
+              ${_git} add -A
+              ${_git} commit -am "¯\_(ツ)_/¯"
+              ${_git} branch -D $current_branch
+              ${_git} branch -m $current_branch
+              ${_git} push -f origin main
             '';
           };
         })

@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+_: let
   localRanges = [
     {
       from = 9000;

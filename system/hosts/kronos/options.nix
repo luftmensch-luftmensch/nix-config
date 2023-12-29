@@ -1,7 +1,13 @@
 {pkgs, ...}: {
   system.modules = {
     core = {
-      boot.quietboot.enable = true;
+      boot = {
+        luks = {
+          enable = true;
+          keyFile = "/dev/disk/by-id/usb-Innostor_Innostor_ALF3DAEARV00000001519-0:0";
+        };
+        quietboot.enable = true;
+      };
       cachix.enable = true;
       environment.enable = true;
       impermanence.enable = true;
@@ -27,16 +33,7 @@
       # virtualisation.enable = true;
     };
 
-    editor = {
-      emacs = {
-        enable = true;
-        package = pkgs.emacs29-pgtk;
-        daemon.enable = true;
-        mails.enable = true;
-        enableSpelling = true;
-      };
-      neovim.enable = true;
-    };
+    editor.neovim.enable = true;
 
     graphical = {
       wayland.enable = true;

@@ -29,6 +29,7 @@ in {
     valentino.modules.browsers.chromium.enable = true;
 
     home.packages = with pkgs; [
+			# To fix copy/paste enable the Legacy chat input from Settings
       discord-chromium
 
       # Enable again when WebRTC is hooked in Pipewire

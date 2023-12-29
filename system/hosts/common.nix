@@ -118,5 +118,5 @@ in {
     interval = "monthly";
   };
 
-    environment.systemPackages = [ fs-diff ];
+  environment.systemPackages = [fs-diff];
 }

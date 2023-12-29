@@ -31,6 +31,7 @@ pkgs: {
   jctl = "journalctl -p 3 -xb";
   clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
   clear-journaling = "sudo journalctl --rotate && sudo journalctl --vacuum-time=1s";
+  journaling-disk-size = "journalctl --disk-usage";
   reload-sddm = "sudo systemctl restart display-manager.service";
 
   ps = "ps auxf | less";

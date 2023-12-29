@@ -34,6 +34,8 @@ pkgs: {
     '';
   };
 
+  # sudo dd bs=4M if=<input> of=<output> conv=fdatasync status=progress
+  # Check with cmp (If you get an EOF message then the files are identical, otherwise cmp will tell you at which byte they differ.)
   burn-iso = {
     body = ''
       if [ -z "$argv" ] || test -z "$argv[1]" || test -z "argv[2]"
