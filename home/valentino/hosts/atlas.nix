@@ -33,6 +33,11 @@
     };
 
     editors = {
+			emacs = {
+				enable = true;
+        daemon.enable = true;
+        telega.enable = false;
+			};
       intellij.enable = true;
       vscode.enable = true;
     };

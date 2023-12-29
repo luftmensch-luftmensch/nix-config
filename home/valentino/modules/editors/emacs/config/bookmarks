@@ -1,0 +1,28 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;;; This format is meant to be slightly human-readable;
+;;;; nevertheless, you probably don't want to edit it.
+;;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("AGENDA"
+ (filename . "~/Dropbox/org/Agenda.org")
+ (rear-context-string)
+ (position . 1))
+
+("BOOKMARKS"
+ (filename . "~/config/emacs/bookmarks")
+ (rear-context-string)
+ (position . 1))
+
+("EMACS.ORG"
+ (filename . "~/nix-config/home/valentino/modules/editors/emacs/config/setup.org")
+ (rear-context-string)
+ (position . 1))
+
+("CV"
+ (filename . "~/Dropbox/Documenti/Valentino/CV/CV.org")
+ (rear-context-string)
+ (position . 1))
+
+("README"
+ (filename . "~/config/README.org")
+ (rear-context-string)
+ (position . 1)))

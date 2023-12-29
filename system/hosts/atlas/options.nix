@@ -28,13 +28,13 @@
     };
 
     editor = {
-      emacs = {
-        enable = true;
-        package = pkgs.emacs29-gtk3;
-        daemon.enable = true;
-        mails.enable = true;
-        enableSpelling = true;
-      };
+      # emacs = {
+      #   enable = true;
+      #   package = pkgs.emacs29-gtk3;
+      #   daemon.enable = true;
+      #   mails.enable = true;
+      #   enableSpelling = true;
+      # };
       neovim.enable = true;
     };
 

@@ -29,6 +29,7 @@
     "dev/rust"               = import ./dev/rust.nix;
     "dev/tex"                = import ./dev/tex.nix;
 
+    "editors/emacs"          = import ./editors/emacs;
     "editors/android-studio" = import ./editors/android-studio.nix;
     "editors/intellij"       = import ./editors/intellij.nix;
     "editors/vscode"         = import ./editors/vscode.nix;
