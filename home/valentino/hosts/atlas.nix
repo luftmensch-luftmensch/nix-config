@@ -23,6 +23,7 @@
     };
 
     dev = {
+      android.enable = true;
       cc.enable = true;
       generics.enable = true;
       java.enable = true;

@@ -23,6 +23,7 @@
     };
 
     dev = {
+      android.enable = true;
       cc.enable = true;
       generics.enable = true;
       java.enable = true;
@@ -33,6 +34,11 @@
     };
 
     editors = {
+			emacs = {
+				enable = true;
+        daemon.enable = true;
+        telega.enable = false;
+			};
       intellij.enable = true;
       vscode.enable = true;
     };
@@ -54,6 +60,7 @@
       images = {
         imv = {
           enable = true;
+					# FIXME: change to swaybg
           setWallpaper = "feh --bg-scale";
         };
         feh.enable = true;
@@ -70,10 +77,7 @@
     shell = {
       bash.enable = true;
       extensions.enable = true;
-      fish = {
-        enable = true;
-        cpuTuning = true;
-      };
+      fish.enable = true;
       tmux.enable = true;
       direnv.enable = true;
       git.enable = true;

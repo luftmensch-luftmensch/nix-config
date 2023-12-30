@@ -49,7 +49,6 @@ with lib; let
       opacity: 0.6 !important;
     }
   '';
-
 in {
   options.valentino.modules.browsers.firefox = {
     enable = mkEnableOption "firefox";
@@ -308,7 +307,7 @@ in {
           "extensions.pocket.enabled" = false;
           "extensions.screenshots.disabled" = true;
           "extensions.shield-recipe-client.enabled" = false;
-					"extensions.unifiedExtensions.enabled" = false;
+          "extensions.unifiedExtensions.enabled" = false;
 
           /*
           * TAB BEHAVIOR *

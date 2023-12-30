@@ -136,10 +136,10 @@ in
       notification = false;
     }
     # { command = "polybar --reload main &"; always = true; notification = false; }
-    {
-      command = "emacs --fg-daemon";
-      always = true;
-      notification = false;
-    }
+    # {
+    #   command = "emacs --fg-daemon";
+    #   always = true;
+    #   notification = false;
+    # }
   ];
 }

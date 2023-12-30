@@ -8,21 +8,11 @@
  (position . 1))
 
 ("BOOKMARKS"
- (filename . "~/config/emacs/bookmarks")
+ (filename . "~/nix-config/home/valentino/modules/editors/emacs/config/bookmarks")
  (rear-context-string)
  (position . 1))
 
 ("EMACS.ORG"
  (filename . "~/nix-config/home/valentino/modules/editors/emacs/config/setup.org")
- (rear-context-string)
- (position . 1))
-
-("CV"
- (filename . "~/Dropbox/Documenti/Valentino/CV/CV.org")
- (rear-context-string)
- (position . 1))
-
-("README"
- (filename . "~/config/README.org")
  (rear-context-string)
  (position . 1)))

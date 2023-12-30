@@ -201,7 +201,7 @@ in {
         ];
         # Dart
         "dart.checkForSdkUpdates" = false;
-				"dart.lineLength"= 130;
+        "dart.lineLength" = 130;
         "[dart]" = {
           "editor.formatOnSave" = true;
           "editor.formatOnType" = true;

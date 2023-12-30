@@ -48,14 +48,10 @@
       bluetooth.enable = true;
     };
 
-    packages = {
-      ricing.enable = true;
-    };
-
     services = {
       printing = {
         enableCups = true;
-        # enableSane = true;
+        enableSane = true;
       };
       udev-rules.enable = true;
       syncthing = {

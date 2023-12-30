@@ -16,7 +16,6 @@
 
   "dev/adb"            = import ./dev/adb.nix;
   "dev/docker"         = import ./dev/docker.nix;
-  "dev/kubernetes"     = import ./dev/kubernetes.nix;
   "dev/manpages"       = import ./dev/manpages.nix;
   "dev/virtualisation" = import ./dev/virtualisation.nix;
 
@@ -31,7 +30,6 @@
   "hardware/audio"     = import ./hardware/audio.nix;
   "hardware/bluetooth" = import ./hardware/bluetooth.nix;
 
-  "packages/ricing"    = import ./packages/ricing.nix;
   "packages/unstable"  = import ./packages/unstable.nix;
 
   "services/battery"   = import ./services/battery.nix;

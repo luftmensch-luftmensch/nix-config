@@ -58,10 +58,6 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    # nixpkgs-unstable,
-    # impermanence,
-    # sops-nix,
-    # neovim-flake,
     ...
   }: let
     inherit (self) outputs;

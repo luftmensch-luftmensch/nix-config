@@ -44,6 +44,7 @@ pkgs: {
   list-generation = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
   next-cg = "sudo systemctl status nix-gc.timer";
   nix-diff-generation = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
+  hm-diff-generation = "nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager";
   nix-show-inputs = "nix flake archive --json | jq '.path, ( .inputs | to_entries[] | {\"input\": .key, \"path\": .value.path})'";
 
   ls = "${pkgs.eza}/bin/eza --icons --color=always --group-directories-first";

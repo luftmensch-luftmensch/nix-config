@@ -34,6 +34,7 @@ in {
         "image/jpeg" = ["${image}"];
         "image/tiff" = ["${image}"];
         "image/svg+xml" = ["${image}"];
+        "image/gif" = ["${video}"];
         "video/x-matroska" = ["${video}"];
         "video/mp4" = ["${video}"];
         "audio/mpeg" = ["${video}"];

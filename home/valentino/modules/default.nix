@@ -20,6 +20,7 @@
     "credentials/gpg"        = import ./credentials/gpg.nix;
     "credentials/mail"       = import ./credentials/mail.nix;
 
+    "dev/android"            = import ./dev/android.nix;
     "dev/cc"                 = import ./dev/cc.nix;
     "dev/generics"           = import ./dev/generics.nix;
     "dev/java"               = import ./dev/java.nix;
