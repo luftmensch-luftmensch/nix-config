@@ -34,11 +34,11 @@
     };
 
     editors = {
-			emacs = {
-				enable = true;
+      emacs = {
+        enable = true;
         daemon.enable = true;
         telega.enable = false;
-			};
+      };
       intellij.enable = true;
       vscode.enable = true;
     };
@@ -60,7 +60,7 @@
       images = {
         imv = {
           enable = true;
-          setWallpaper = "feh --bg-scale";
+          setWallpaper = "feh --bg-scale ~/.cache/wallpaper";
         };
         feh.enable = true;
       };

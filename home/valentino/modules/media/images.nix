@@ -14,7 +14,6 @@ in {
       enable = mkEnableOption "an option to view images";
       setWallpaper = mkOption {
         type = types.str;
-        default = "swaymsg output \"*\" background fill";
       };
     };
     feh.enable = mkEnableOption "an option to view images";
@@ -79,7 +78,7 @@ in {
             # Slideshow control
             t = "slideshow +1";
             "<Shift+T>" = "slideshow -1";
-            "<Shift+W>" = "exec cp -f \"\$imv_current_file\" ~/.cache/wallpaper && ${cfg.imv.setWallpaper} ~/.cache/wallpaper";
+            "<Shift+W>" = "exec cp -f \"\$imv_current_file\" ~/.cache/wallpaper && ${cfg.imv.setWallpaper}";
           };
         };
       };

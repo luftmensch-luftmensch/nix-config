@@ -121,7 +121,7 @@ in {
     "${default_mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
 
     # TODO: Fix theming
-    "${default_mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run -i -p '▶ Run: ' --fn '${theme.font.regular.family}:size=${(toString theme.font.regular.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' | xargs swaymsg exec";
+    "${default_mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run -i -p '▶ Run: ' --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' | xargs swaymsg exec";
 
     "${default_mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
 

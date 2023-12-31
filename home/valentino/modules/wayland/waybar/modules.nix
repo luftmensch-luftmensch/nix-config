@@ -27,6 +27,7 @@ in {
       text = "";
       tooltip = ''$(cat /etc/os-release | grep PRETTY_NAME | cut -d '"' -f2)'';
     };
+    on-click = "rofi-powermenu";
   };
   "sway/workspaces" = {
     disable-scroll = true;

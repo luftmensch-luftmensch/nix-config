@@ -13,25 +13,20 @@ in {
   options.valentino.modules.wayland.waybar = {
     enable = mkEnableOption "waybar configuration";
 
-    # default_output = mkOption {
-    #   type = types.nullOr types.str;
-    #   default = null;
-    # };
+    default_output = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+    };
 
-    # external_output = mkOption {
-    #   type = types.nullOr types.str;
-    #   default = null;
-    # };
-
-    # output_alt = mkOption {
-    #   type = types.nullOr types.str;
-    #   default = null;
-    # };
+    external_output = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+    };
   };
 
   config = mkIf cfg.enable {
     programs.waybar = let
-      configuration = import ./config.nix {
+      style = import ./style.nix {
         inherit theme colors;
       };
 
@@ -41,16 +36,14 @@ in {
     in {
       enable = true;
       package = pkgs.waybar.override {pulseSupport = true;};
-      inherit (configuration) style;
+      inherit (style) style;
       settings = [
         # Default monitor
         {
           layer = "top";
           position = "bottom";
           # height = "auto";
-          # output = optionalAttrs (cfg.default_output != null) "${cfg.default_output}";
-          # FIXME: Hardcoded config
-          output = "eDP-1";
+          output = optionalAttrs (cfg.default_output != null) "${cfg.default_output}";
 
           modules-left =
             [
@@ -84,9 +77,7 @@ in {
         # External monitor
         {
           layer = "top";
-          # output = optionalAttrs (cfg.external_output != null) "${cfg.external_output}";
-          # FIXME: Hardcoded config
-          output = "HDMI-A-1";
+          output = optionalAttrs (cfg.external_output != null) "${cfg.external_output}";
           position = "bottom";
           # height = "auto";
 

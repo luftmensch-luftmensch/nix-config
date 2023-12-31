@@ -59,7 +59,7 @@ in {
 
               if [ $color ];
 								echo "$color" | tr -d "\n" | ${pkgs.wl-clipboard}/bin/wl-copy
-								${pgs.imagemagick}/bin/convert -size 48x48 xc:"$color" $image
+								${pkgs.imagemagick}/bin/convert -size 48x48 xc:"$color" $image
 								${pkgs.libnotify}/bin/notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$image" "$color, copied to clipboard."
 								[ -f "$image" ] && rm "$image"
               end

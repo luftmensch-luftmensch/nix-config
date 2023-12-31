@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.term.foot;
-  cfgTheme = config.valentino.modules.themes;
+  theme = config.valentino.modules.themes;
   inherit (config.colorScheme) colors;
 in {
   options.valentino.modules.term.foot = {
@@ -17,35 +17,24 @@ in {
     programs.foot = {
       enable = true;
       settings = {
-				main = {
-					shell = "fish";
-					term = "foot";
-					app-id = "foot";
-					title = "foot";
-					locked-title = "no";
+        main = let
+          inherit (theme.font.regular) family;
+          inherit (theme.font.regular) size;
+        in {
+          shell = "fish";
+          term = "foot";
+          app-id = "foot";
+          title = "foot";
+          locked-title = "no";
 
-					dpi-aware = "no";
-					pad = "0x0";
-					notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
-				};
-        # font = let
-        #   inherit (cfgTheme.font.term) family;
-        #   inherit (cfgTheme.font.term) size;
-        # in {
-        #   normal = {
-        #     inherit family;
-        #     style = "Regular";
-        #   };
-        #   bold = {
-        #     inherit family;
-        #     style = "Bold";
-        #   };
-        #   italic = {
-        #     inherit family;
-        #     style = "Italic";
-        #   };
-        #   inherit size;
-        # };
+          dpi-aware = "no";
+          pad = "0x0";
+          notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
+          font = "${family}:${toString size}";
+          font-bold = "${family}:${toString size}";
+          font-italic = "${family}:${toString size}";
+          font-bold-italic = "${family}:${toString size}";
+        };
 
         bell = {
         };
@@ -121,7 +110,6 @@ in {
         };
 
         search-bindings = {
-          
         };
 
         url-bindings = {

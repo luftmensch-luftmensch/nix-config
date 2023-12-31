@@ -69,7 +69,11 @@ in {
     valentino.modules = {
       wayland = {
         locker.enable = true;
-        waybar.enable = true;
+        waybar = {
+					enable = true;
+					default_output = "eDP-1";
+					external_output = "HDMI-A-1";
+				};
       };
       apps = {
         playerctl.enable = true;

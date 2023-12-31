@@ -34,11 +34,11 @@
     };
 
     editors = {
-			emacs = {
-				enable = true;
+      emacs = {
+        enable = true;
         daemon.enable = true;
         telega.enable = false;
-			};
+      };
       intellij.enable = true;
       vscode.enable = true;
     };
@@ -60,8 +60,7 @@
       images = {
         imv = {
           enable = true;
-					# FIXME: change to swaybg
-          setWallpaper = "feh --bg-scale";
+          setWallpaper = "swaymsg output \"*\" background ~/.cache/wallpaper fill";
         };
         feh.enable = true;
       };
@@ -91,7 +90,7 @@
         regular = {
           family = "Sarasa Mono Slab SC";
           package = pkgs.sarasa-gothic;
-          size = 11;
+          size = 14;
         };
 
         monospace = {
