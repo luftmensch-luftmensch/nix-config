@@ -1,0 +1,772 @@
+#+LaTeX_CLASS: extreport
+#+LaTeX_CLASS_OPTIONS: [letterpaper, 11pt]
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Package requirements
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \usepackage{xcolor}				 % Colores
+#+LATEX_HEADER: \usepackage{graphicx}				 % Load images
+#+LATEX_HEADER: \usepackage{geometry}				 % Page layout
+#+LATEX_HEADER: \usepackage{tikz}                                  % Drawings
+#+LATEX_HEADER: \usepackage{afterpage}				 % Macro to run after the page has ended
+#+LATEX_HEADER: \usepackage[compatV3]{fancyhdr}			 % Page headers and footers
+#+LATEX_HEADER: \usepackage[no-math]{fontspec}			 % font family
+#+LATEX_HEADER: \usepackage[explicit]{titlesec}			 % Change document style
+#+LATEX_HEADER: \usepackage{titletoc}				 % Change document style
+#+LATEX_HEADER: \usepackage{etoolbox}				 % Patch environments
+#+LATEX_HEADER: \usepackage[italian]{babel}			 % Change document lang to it
+#+LATEX_HEADER: \usepackage{hyphenat}				 % Hypernat words that requires to
+#+LATEX_HEADER: \usepackage{parskip}				 % Change parskip/parindent
+#+LATEX_HEADER: \usepackage {listings, lstautogobble, lstfiracode} % lstlisting for code, autogobble and firacode for good looking
+#+LATEX_HEADER: \usepackage{hyperref}				 % Add urls
+#+LATEX_HEADER: \usepackage{amsmath,amssymb, fdsymbol}             % Symbols
+#+LATEX_HEADER: \usepackage{enumitem}				 % Customize itemize/enumerate envs
+#+LATEX_HEADER: \usepackage{calc}                                  % latex calculations
+#+LATEX_HEADER: \usepackage{tabularray}                            % Tables
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Commands
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand\blankpage
+#+LATEX_HEADER:    {\null\thispagestyle{empty}\addtocounter{page}{-1}\newpage}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Colors
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: %% Gradients
+
+#+LATEX_HEADER: % Azure
+#+LATEX_HEADER: \definecolor{customAzure1}{HTML}{B1E7E1}
+#+LATEX_HEADER: \definecolor{customAzure2}{HTML}{A1E2DB}
+#+LATEX_HEADER: \definecolor{customAzure3}{HTML}{92DDD6}
+#+LATEX_HEADER: \definecolor{customAzure4}{HTML}{83D8CF}
+#+LATEX_HEADER: \definecolor{customAzure5}{HTML}{73D3C9}
+#+LATEX_HEADER: \definecolor{customAzure6}{HTML}{64CEC3}
+
+#+LATEX_HEADER: % Pink
+#+LATEX_HEADER: \definecolor{customPink1}{HTML}{ECD7D5}
+#+LATEX_HEADER: \definecolor{customPink2}{HTML}{E6C9C7}
+#+LATEX_HEADER: \definecolor{customPink3}{HTML}{DFBBB9}
+#+LATEX_HEADER: \definecolor{customPink4}{HTML}{D8ADAB}
+#+LATEX_HEADER: \definecolor{customPink5}{HTML}{D2A09D}
+#+LATEX_HEADER: \definecolor{customPink6}{HTML}{CC928F}
+
+#+LATEX_HEADER: % Purple
+#+LATEX_HEADER: \definecolor{customPurple1}{HTML}{C5C2EB} % Lavanda
+#+LATEX_HEADER: \definecolor{customPurple2}{HTML}{B5B2E6}
+#+LATEX_HEADER: \definecolor{customPurple3}{HTML}{A6A3E1}
+#+LATEX_HEADER: \definecolor{customPurple4}{HTML}{9793DC}
+#+LATEX_HEADER: \definecolor{customPurple5}{HTML}{8884D7}
+#+LATEX_HEADER: \definecolor{customPurple6}{HTML}{7974D2}
+
+#+LATEX_HEADER: % Yellow
+#+LATEX_HEADER: \definecolor{customYellow1}{HTML}{EDE8AB}
+#+LATEX_HEADER: \definecolor{customYellow2}{HTML}{EAE39A}
+#+LATEX_HEADER: \definecolor{customYellow3}{HTML}{EAE39A}
+#+LATEX_HEADER: \definecolor{customYellow4}{HTML}{E3DA78}
+#+LATEX_HEADER: \definecolor{customYellow5}{HTML}{E0D667}
+#+LATEX_HEADER: \definecolor{customYellow6}{HTML}{DCD156}
+
+#+LATEX_HEADER: % Red
+#+LATEX_HEADER: \definecolor{customRed1}{HTML}{FF7073}
+#+LATEX_HEADER: \definecolor{customRed2}{HTML}{FF5C5F}
+#+LATEX_HEADER: \definecolor{customRed3}{HTML}{FF474A}
+#+LATEX_HEADER: \definecolor{customRed4}{HTML}{FF3336}
+#+LATEX_HEADER: \definecolor{customRed5}{HTML}{FF1F22}
+#+LATEX_HEADER: \definecolor{customRed6}{HTML}{FF0A0E}
+
+#+LATEX_HEADER: % Orange
+#+LATEX_HEADER: \definecolor{customOrange1}{HTML}{FABE75}
+#+LATEX_HEADER: \definecolor{customOrange2}{HTML}{F9B562}
+#+LATEX_HEADER: \definecolor{customOrange3}{HTML}{F9AC4E}
+#+LATEX_HEADER: \definecolor{customOrange4}{HTML}{F8A23A}
+#+LATEX_HEADER: \definecolor{customOrange5}{HTML}{F79926}
+#+LATEX_HEADER: \definecolor{customOrange6}{HTML}{F69013}
+
+#+LATEX_HEADER: % Brown
+#+LATEX_HEADER: \definecolor{customBrown1}{HTML}{BCA576}
+#+LATEX_HEADER: \definecolor{customBrown2}{HTML}{B59C69}
+#+LATEX_HEADER: \definecolor{customBrown3}{HTML}{AE925B}
+#+LATEX_HEADER: \definecolor{customBrown4}{HTML}{A48851}
+#+LATEX_HEADER: \definecolor{customBrown5}{HTML}{967D4A}
+#+LATEX_HEADER: \definecolor{customBrown6}{HTML}{897243}
+
+#+LATEX_HEADER: % Green
+#+LATEX_HEADER: \definecolor{customGreen1}{HTML}{D4E5B3}
+#+LATEX_HEADER: \definecolor{customGreen2}{HTML}{CCE0A4}
+#+LATEX_HEADER: \definecolor{customGreen3}{HTML}{C3DB95}
+#+LATEX_HEADER: \definecolor{customGreen4}{HTML}{B9D585}
+#+LATEX_HEADER: \definecolor{customGreen5}{HTML}{B1D076}
+#+LATEX_HEADER: \definecolor{customGreen6}{HTML}{A8CB67}
+
+#+LATEX_HEADER: % Miscellaneous
+#+LATEX_HEADER: \definecolor{orange}{HTML}{FF9507}
+#+LATEX_HEADER: \definecolor{blue}{HTML}{179AFF}
+#+LATEX_HEADER: \definecolor{sapphire}{HTML}{2B50AA}
+#+LATEX_HEADER: \definecolor{cherryred}{HTML}{FF004D}
+#+LATEX_HEADER: \definecolor{turquoise}{HTML}{00F5CC}
+#+LATEX_HEADER: \definecolor{seagreen}{HTML}{22AAA1}
+#+LATEX_HEADER: \definecolor{green}{HTML}{17FF7C}
+#+LATEX_HEADER: \definecolor{red}{HTML}{FF3E4B}
+#+LATEX_HEADER: \definecolor{yellow}{HTML}{DBED00}
+#+LATEX_HEADER: \definecolor{naplesyellow}{HTML}{FFDF64}
+#+LATEX_HEADER: \definecolor{violet}{HTML}{47007D}
+#+LATEX_HEADER: \definecolor{pink}{HTML}{FF69B4}
+#+LATEX_HEADER: \definecolor{neutral}{HTML}{888888}
+
+#+LATEX_HEADER: % Color palette
+#+LATEX_HEADER: \colorlet{primary}{sapphire}
+#+LATEX_HEADER: \colorlet{accent}{violet}
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Icons
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \newfontfamily\IcoMoon{IcoMoon}[
+#+LATEX_HEADER: Path = /home/valentino/Dropbox/fonts/icons/,
+#+LATEX_HEADER: Extension = .ttf,
+#+LATEX_HEADER: UprightFont = *,
+#+LATEX_HEADER: ]
+#+LATEX_HEADER:
+#+LATEX_HEADER: \def\inumber{{\IcoMoon\char"E918}}
+#+LATEX_HEADER: \def\inumbernegative{{\IcoMoon\char"E919}}
+#+LATEX_HEADER: \def\itick{{\IcoMoon\char"E915}}
+#+LATEX_HEADER: \def\icross{{\IcoMoon\char"E916}}
+#+LATEX_HEADER: \def\ihome{{\IcoMoon\char"E914}}
+#+LATEX_HEADER: \def\ifolder{{\IcoMoon\char"E92F}}
+#+LATEX_HEADER: \def\iquotel{{\IcoMoon\char"E977}}
+#+LATEX_HEADER: \def\iquoter{{\IcoMoon\char"E978}}
+#+LATEX_HEADER: \def\iwrench{{\IcoMoon\char"E991}}
+#+LATEX_HEADER: \def\ieqh{{\IcoMoon\char"E992}}
+#+LATEX_HEADER: \def\ieqv{{\IcoMoon\char"E993}}
+#+LATEX_HEADER: \def\icog{{\IcoMoon\char"E994}}
+#+LATEX_HEADER: \def\icogs{{\IcoMoon\char"E995}}
+#+LATEX_HEADER: \def\istats{{\IcoMoon\char"E99B}}
+#+LATEX_HEADER: \def\iwinnerflag{{\IcoMoon\char"E9CC}}
+#+LATEX_HEADER: \def\iwarning{{\IcoMoon\char"EA07}}
+#+LATEX_HEADER: \def\inotification{{\IcoMoon\char"EA08}}
+#+LATEX_HEADER: \def\iquestion{{\IcoMoon\char"EA09}}
+#+LATEX_HEADER: \def\iinfo{{\IcoMoon\char"EA0C}}
+#+LATEX_HEADER: \def\icancel{{\IcoMoon\char"EA0D}}
+#+LATEX_HEADER: \def\ialphaaasc{{\IcoMoon\char"EA48}}
+#+LATEX_HEADER: \def\ialphaddesc{{\IcoMoon\char"EA49}}
+#+LATEX_HEADER: \def\inumberasc{{\IcoMoon\char"EA4A}}
+#+LATEX_HEADER: \def\inumberdesc{{\IcoMoon\char"EA4B}}
+#+LATEX_HEADER: \def\iorderasc{{\IcoMoon\char"EA4C}}
+#+LATEX_HEADER: \def\iorderdesc{{\IcoMoon\char"EA4D}}
+#+LATEX_HEADER: \def\iboxdone{{\IcoMoon\char"EA52}}
+#+LATEX_HEADER: \def\iboxundone{{\IcoMoon\char"EA53}}
+#+LATEX_HEADER: \def\iradiodone{{\IcoMoon\char"EA54}}
+#+LATEX_HEADER: \def\iradiodonenegative{{\IcoMoon\char"EA55}}
+#+LATEX_HEADER: \def\iradioundone{{\IcoMoon\char"EA56}}
+#+LATEX_HEADER: \def\isuperscript{{\IcoMoon\char"EA69}}
+#+LATEX_HEADER: \def\icodeopentag{{\IcoMoon\char"EA7F}}
+#+LATEX_HEADER: \def\icodeclosetag{{\IcoMoon\char"EA80}}
+#+LATEX_HEADER: \def\iterminal{{\IcoMoon\char"EA81}}
+#+LATEX_HEADER: \def\imail{{\IcoMoon\char"E900}}
+#+LATEX_HEADER: \def\iwindow{{\IcoMoon\char"E906}}
+#+LATEX_HEADER: \def\icpu{{\IcoMoon\char"E907}}
+#+LATEX_HEADER: \def\ieye{{\IcoMoon\char"E908}}
+#+LATEX_HEADER: \def\icomplexcox{{\IcoMoon\char"E901}}
+#+LATEX_HEADER: \def\ibug{{\IcoMoon\char"E902}}
+#+LATEX_HEADER: \def\iattachment{{\IcoMoon\char"E909}}
+#+LATEX_HEADER: \def\ilabel{{\IcoMoon\char"E90A}}
+#+LATEX_HEADER: \def\ibookmark{{\IcoMoon\char"E90B}}
+#+LATEX_HEADER: \def\ibadge{{\IcoMoon\char"E90C}}
+#+LATEX_HEADER: \def\iuser{{\IcoMoon\char"E903}}
+#+LATEX_HEADER: \def\ibusinessman{{\IcoMoon\char"E904}}
+#+LATEX_HEADER: \def\ibusinesswoman{{\IcoMoon\char"E905}}
+#+LATEX_HEADER: \def\iidea{{\IcoMoon\char"E90D}}
+#+LATEX_HEADER: \def\isettings{{\IcoMoon\char"E90E}}
+#+LATEX_HEADER: \def\ifatinfo{{\IcoMoon\char"E90F}}
+#+LATEX_HEADER: \def\iclock{{\IcoMoon\char"E910}}
+#+LATEX_HEADER: \def\itimer{{\IcoMoon\char"E911}}
+#+LATEX_HEADER: \def\iflag{{\IcoMoon\char"E912}}
+#+LATEX_HEADER: \def\iwinnercup{{\IcoMoon\char"E913}}
+#+LATEX_HEADER: \def\igraduate{{\IcoMoon\char"E917}}
+#+LATEX_HEADER: \def\igithub{{\IcoMoon\char"EAB0}}
+#+LATEX_HEADER:
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newfontfamily\IcoFont{IcoFont}[
+#+LATEX_HEADER: Path = /home/valentino/Dropbox/fonts/icons/,
+#+LATEX_HEADER: Extension = .ttf,
+#+LATEX_HEADER: UprightFont = *,
+#+LATEX_HEADER: ]
+#+LATEX_HEADER:
+#+LATEX_HEADER: \def\imail{{\IcoFont\char"EF12}}
+#+LATEX_HEADER: \def\igraduate{{\IcoFont\char"EADB}}
+#+LATEX_HEADER: \def\iid{{\IcoFont\char"EF4A}}
+#+LATEX_HEADER: \def\isettings{{\IcoFont\char"EFE1}}
+#+LATEX_HEADER: \def\isettingsalt{{\IcoFont\char"EC83}}
+#+LATEX_HEADER: \def\iterminalalt{{\IcoFont\char"F00A}}
+#+LATEX_HEADER: \def\iauto{{\IcoFont\char"EEA9}}
+#+LATEX_HEADER: \def\ifile{{\IcoFont\char"EB08}}
+#+LATEX_HEADER: \def\ifilecode{{\IcoFont\char"EB0C}}
+#+LATEX_HEADER: \def\ibook{{\IcoFont\char"EAD1}}
+#+LATEX_HEADER: \def\ibookmark{{\IcoFont\char"EEC0}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \makeatother
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Fonts
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: 	\newfontfamily\Lato{Lato}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .ttf,
+#+LATEX_HEADER: 		UprightFont = *-Regular,
+#+LATEX_HEADER: 		BoldFont = *-Bold,
+#+LATEX_HEADER: 		ItalicFont = *-Italic,
+#+LATEX_HEADER: 		BoldItalicFont = *-BoldItalic
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: 	\newfontfamily\Scientifica{scientifica}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .ttf,
+#+LATEX_HEADER: 		UprightFont = *,
+#+LATEX_HEADER: 		BoldFont = *Bold,
+#+LATEX_HEADER: 		ItalicFont = *Italic,
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: 	\newfontfamily\FiraCode{FiraCode}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .ttf,
+#+LATEX_HEADER: 		UprightFont = *-Regular,
+#+LATEX_HEADER: 		BoldFont = *-Bold,
+#+LATEX_HEADER: 		Contextuals=Alternate
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: 	\newfontfamily\Karla{Karla}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .ttf,
+#+LATEX_HEADER: 		UprightFont = *-Regular,
+#+LATEX_HEADER: 		BoldFont = *-Bold,
+#+LATEX_HEADER: 		ItalicFont = *-Italic,
+#+LATEX_HEADER: 		BoldItalicFont = *-BoldItalic
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: 	\newfontfamily\Agency{Agency}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .ttf,
+#+LATEX_HEADER: 		UprightFont = *,
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: 	\newfontfamily\Alte{Alte DIN 1451 Mittelschrift}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .ttf,
+#+LATEX_HEADER: 		UprightFont = *,
+#+LATEX_HEADER: 		BoldFont=*,
+#+LATEX_HEADER: 		ItalicFont=*,
+#+LATEX_HEADER: 		BoldItalicFont=*,
+#+LATEX_HEADER: 		BoldFeatures={FakeBold=2},
+#+LATEX_HEADER: 		ItalicFeatures={FakeSlant=0.25},
+#+LATEX_HEADER: 		BoldItalicFeatures={FakeBold=2, FakeSlant=0.25},
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: 	\newfontfamily\AlteG{Alte DIN 1451 Mittelschrift G}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .ttf,
+#+LATEX_HEADER: 		UprightFont = *,
+#+LATEX_HEADER: 		BoldFont=*,
+#+LATEX_HEADER: 		ItalicFont=*,
+#+LATEX_HEADER: 		BoldItalicFont=*,
+#+LATEX_HEADER: 		BoldFeatures={FakeBold=2},
+#+LATEX_HEADER: 		ItalicFeatures={FakeSlant=0.25},
+#+LATEX_HEADER: 		BoldItalicFeatures={FakeBold=2, FakeSlant=0.25},
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: 	\newfontfamily\Gobold{Gobold}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .otf,
+#+LATEX_HEADER: 		UprightFont = *-Regular,
+#+LATEX_HEADER: 		BoldFont=*-Bold,
+#+LATEX_HEADER: 		ItalicFont=*-Italic,
+#+LATEX_HEADER: 		BoldItalicFont=*-BoldItalic,
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: 	\newfontfamily\GoboldHollow{GoboldHollow}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .otf,
+#+LATEX_HEADER: 		UprightFont = *-Regular,
+#+LATEX_HEADER: 		BoldFont=*-Bold,
+#+LATEX_HEADER: 		ItalicFont=*-Italic,
+#+LATEX_HEADER: 		BoldItalicFont=*-BoldItalic,
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: 	\newfontfamily\Mononoki{mononoki}[
+#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Extension = .ttf,
+#+LATEX_HEADER: 		UprightFont = *-Regular,
+#+LATEX_HEADER: 		BoldFont=*-Bold,
+#+LATEX_HEADER: 		ItalicFont=*-Italic,
+#+LATEX_HEADER: 		BoldItalicFont=*-BoldItalic,
+#+LATEX_HEADER: 	]
+
+#+LATEX_HEADER: \makeatother
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Document Style
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: 	%% Global
+#+LATEX_HEADER: 	\setlength\parindent{0pt}
+#+LATEX_HEADER: 	\setlength\parskip{0.75em}
+#+LATEX_HEADER: 	\setlength{\headsep}{2cm}
+
+#+LATEX_HEADER: 	%% Define no Par Skip
+#+LATEX_HEADER: 	\let\svpar\par
+#+LATEX_HEADER: 	\edef\svparskip{\the\parskip}
+#+LATEX_HEADER: 	\def\revertpar{\svpar\setlength\parskip{\svparskip}\let\par\svpar}
+#+LATEX_HEADER: 	\def\noparskip{\leavevmode\setlength\parskip{0pt}\def\par{\svpar\let\par\revertpar}}
+
+#+LATEX_HEADER: 	%% Chapter
+#+LATEX_HEADER: 	\setcounter{chapter}{-1}
+#+LATEX_HEADER: 	\def\currentchapter{}
+#+LATEX_HEADER: 	\titlespacing*{\chapter}{0pt}{-10pt}{30pt}
+
+#+LATEX_HEADER: 	\titleformat{\chapter}[frame]
+#+LATEX_HEADER: 		{\setlength{\fboxrule}{5pt}\color{primary!85!black}}
+#+LATEX_HEADER: 		{\hspace{0.25cm}\fontsize{260}{0}\selectfont\AlteG \textcolor{primary!20!white}{\thechapter}\hspace{0.25cm}}
+#+LATEX_HEADER: 		{1cm}
+#+LATEX_HEADER: 		{\color{primary}\fontsize{30}{42}\selectfont\Gobold\centering\chaptertitlename: #1\global\def\currentchapter{#1}}
+
+#+LATEX_HEADER: 	\titleformat{name=\chapter,numberless}[frame]
+#+LATEX_HEADER: 		{\setlength{\fboxrule}{5pt}\color{primary!85!black}}
+#+LATEX_HEADER: 		{}
+#+LATEX_HEADER: 		{1cm}
+#+LATEX_HEADER: 		{\color{primary}\fontsize{30}{42}\selectfont\Gobold\centering #1\global\def\currentchapter{#1}}
+
+#+LATEX_HEADER: 	%% Table of Contents
+#+LATEX_HEADER: 	\titlecontents*{chapter}
+#+LATEX_HEADER: 		[0pt]
+#+LATEX_HEADER: 		{\addvspace{0.5cm}}
+#+LATEX_HEADER: 		{\color{primary!60!black}\fontsize{12}{0}\selectfont\Gobold\thecontentslabel\hspace{0.125cm}\color{primary}}
+#+LATEX_HEADER: 		{}
+#+LATEX_HEADER: 		{\color{primary!80!black}\hfill\bfseries\Scientifica\fontsize{12}{0}\selectfont\contentspage\hrule height 1pt width \textwidth\relax}
+
+#+LATEX_HEADER: 	\titlecontents{section}
+#+LATEX_HEADER: 		[0.5cm]
+#+LATEX_HEADER: 		{}
+#+LATEX_HEADER: 		{\color{primary!60!black}\fontsize{10}{0}\selectfont\AlteG\thecontentslabel\hspace{0.125cm}\color{primary}}
+#+LATEX_HEADER: 		{}
+#+LATEX_HEADER: 		{\color{primary!80!black}\hfill\bfseries\Scientifica\fontsize{10}{0}\selectfont\contentspage}
+
+#+LATEX_HEADER: 	\titlecontents{subsection}
+#+LATEX_HEADER: 		[1cm]
+#+LATEX_HEADER: 		{}
+#+LATEX_HEADER: 		{\color{primary!60!black}\fontsize{8}{0}\selectfont\Lato\thecontentslabel\hspace{0.125cm}\color{primary}}
+#+LATEX_HEADER: 		{}
+#+LATEX_HEADER: 		{\color{primary!80!black}\hfill\bfseries\Scientifica\fontsize{8}{0}\selectfont\contentspage}
+
+#+LATEX_HEADER: 	%% Section
+#+LATEX_HEADER: 	\titlespacing*{\section}{0pt}{3mm}{5mm}
+#+LATEX_HEADER: 	\titleformat{\section}[hang]
+#+LATEX_HEADER: 	{}
+#+LATEX_HEADER: 	{\rlap{\color{primary!85!black}\rule[-6pt]{\textwidth}{1.2pt}}\colorbox{primary!85!black}{%
+#+LATEX_HEADER: 		\raisebox{0pt}[13pt][3pt]{ \makebox[60pt]{% height, width
+#+LATEX_HEADER: 					\fontsize{15}{12}\AlteG\color{white}{\thesection}}
+#+LATEX_HEADER: 			}}}%
+#+LATEX_HEADER: 	{15pt}%
+#+LATEX_HEADER: 	{\color{primary}\fontsize{20}{12}\selectfont\Gobold#1\hspace{\fill}\ibook}
+
+#+LATEX_HEADER: 	%% Subsection
+#+LATEX_HEADER: 	\titlespacing*{\subsection}{0pt}{3mm}{0pt}
+#+LATEX_HEADER: 	\titleformat{\subsection}[hang]
+#+LATEX_HEADER: 		{\color{primary!20!black}\fontsize{12}{12}\selectfont\Lato}
+#+LATEX_HEADER: 		{\thesubsection\fontsize{8}{6}\selectfont\ibookmark\hspace{10pt}}
+#+LATEX_HEADER: 		{0pt}
+#+LATEX_HEADER: 		{\color{accent!65!black}#1}
+
+#+LATEX_HEADER: 	%% Abstract
+#+LATEX_HEADER: 	\renewenvironment{abstract}
+#+LATEX_HEADER: 		{\thispagestyle{empty}\vfill{\par\raggedleft\fontsize{16}{18}\selectfont\Gobold\color{primary!75!black} Estratto\par\vspace{0.25cm}\hrule height 2pt \relax\par\noparskip}%
+#+LATEX_HEADER: 		\setlength{\parskip}{0.5em}\color{primary!35!black}\fontsize{12}{10}\selectfont\Lato}
+#+LATEX_HEADER: 		{\newpage}
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: 	%% Highlight
+#+LATEX_HEADER: 	\def\hi#1{{\color{accent!80!black}\LatoBlack\mbox{#1}}}
+#+LATEX_HEADER: 	\def\dir#1{{\color{primary!80!black}\Mononoki\mbox{\penalty 100\ifolder\hspace{1pt}#1}}}
+#+LATEX_HEADER: 	\def\file#1{{\color{accent!80!white}\Mononoki\mbox{\penalty 100\ifile\hspace{1pt}#1}}}
+
+#+LATEX_HEADER: 	%% Scale text size using current font size
+#+LATEX_HEADER: 	\def\t@scale#1{\fontsize{#1\dimexpr\f@size pt\relax}{\dimexpr\f@size pt\relax}\selectfont}
+#+LATEX_HEADER: 	\def\t@apex@measure#1#2{\raisebox{#2\dimexpr\f@size pt\relax}{\t@scale{#2}#1}}
+#+LATEX_HEADER: 	\def\t@apex#1{\t@apex@measure{#1}{0.65}}
+#+LATEX_HEADER: 	\def\sp@text#1#2{{#1\t@scale{0.7}\t@apex{#2}}}
+#+LATEX_HEADER: 	\def\sp@rtext#1#2{{\t@scale{0.7}\t@apex{#2}}{#1}}
+
+#+LATEX_HEADER: 	\def\dir#1{{\color{primary!75!black}\sp@rtext{#1}{\ifolder}}}
+#+LATEX_HEADER: 	\def\qmake{\sp@text{gnu make}{\iauto}}
+#+LATEX_HEADER: 	\def\qmakefile{\sp@text{makefile}{\ifile\iauto}}
+#+LATEX_HEADER: 	\def\qterm{{\color{primary}\sp@rtext{terminal emulator}{\iterminal}}\ }
+#+LATEX_HEADER: 	\def\qstruct#1{{\color{primary}\t@apex@measure{struct}{0.5}\sp@text{#1}{\iwrench}}}
+#+LATEX_HEADER: 	\def\qfunction#1{{\color{cherryred}\sp@text{#1}{\ifile\icodeopentag}}}
+
+#+LATEX_HEADER: 	\newcommand{\mycbox}[1]{\tikz{\path[draw=#1,fill=#1] (0,0) rectangle (1cm,1cm);}}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Footer & Header
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: 	\fancypagestyle{luftmensch@style}{
+#+LATEX_HEADER: 		\fancyhf{}
+#+LATEX_HEADER: 		\fancyhead[L]{}
+#+LATEX_HEADER: 		\fancyhead[C]{}
+#+LATEX_HEADER: 		\fancyhead[R]{}
+#+LATEX_HEADER: 		\renewcommand{\headrule}{}
+#+LATEX_HEADER:
+#+LATEX_HEADER: 		\fancyfoot[L]{{\fontsize{10}{0}\selectfont\Lato\color{primary}InfoPoint}}
+#+LATEX_HEADER: 		\fancyfoot[C]{{\fontsize{14}{0}\selectfont\bfseries\Scientifica{\color{primary}\thepage}}}
+#+LATEX_HEADER: 		\fancyfoot[R]{{\fontsize{10}{0}\selectfont\Gobold\color{primary}\currentchapter\hspace{2pt}\ibook}}
+#+LATEX_HEADER: 		\renewcommand{\footrule}{{\color{primary}\hrule height 1pt width \textwidth \relax}}
+#+LATEX_HEADER: 	}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \makeatother
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Page layout w/ geometry
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \geometry{
+#+LATEX_HEADER:   a4paper,
+#+LATEX_HEADER:   margin = 7.5mm,
+#+LATEX_HEADER:   bottom = 12mm,
+#+LATEX_HEADER:   footskip = 3mm,
+#+LATEX_HEADER:   heightrounded,
+#+LATEX_HEADER:   nohead,
+#+LATEX_HEADER:   nomarginpar
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Graphics w/ tikz
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usetikzlibrary{calc, arrows, shapes.geometric}
+#+LATEX_HEADER: \tikzset{
+#+LATEX_HEADER: 	mpath/.style={
+#+LATEX_HEADER: 		fill=#1,
+#+LATEX_HEADER: 		draw=#1,
+#+LATEX_HEADER: 		line width=0.1pt
+#+LATEX_HEADER: 	},
+#+LATEX_HEADER: 	square/.style={regular polygon,regular polygon sides=4, inner sep=0pt, outer sep=0pt},
+#+LATEX_HEADER: }
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Coverpage
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand\coverpage{%
+#+LATEX_HEADER: 	\newgeometry{noheadfoot=true, margin=0pt}\newpage\thispagestyle{empty}%
+#+LATEX_HEADER: 	\noindent\begin{tikzpicture}[remember picture, overlay, shift=(current page.south west)]%
+#+LATEX_HEADER: 		\begin{scope}[x={(current page.south east)},y={(current page.north west)}, overlay]
+#+LATEX_HEADER: 			% Background
+#+LATEX_HEADER: 			\fill [primary!75!white] (0,0) rectangle (1,1);
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			%% Layout
+#+LATEX_HEADER: 			% Text box
+#+LATEX_HEADER: 			\path [mpath=primary!25!white]  (0,0.25) -- (0.2,0.4) -- (0.8, 0.4) -- (1, 0.55) -- (1, 0.1) -- (0.93, 0.05) -- (0.07, 0.05) -- (0,0) -- cycle;
+#+LATEX_HEADER: 			% Left Wing
+#+LATEX_HEADER: 			\path [mpath=primary!85!white]	(0,0.27) -- (0.17,0.40) -- (0.2, 0.40) -- (0,0.25) -- cycle;
+#+LATEX_HEADER: 			% Right Wing
+#+LATEX_HEADER: 			\path [mpath=primary!85!white]	(0.77,0.4) -- (0.8, 0.40) -- (1, 0.55) -- (1, 0.57) -- cycle;
+#+LATEX_HEADER: 			% Under Wing
+#+LATEX_HEADER: 			\path [mpath=primary!65!black]  (0,0) -- (0.025,0) -- (0.075, 0.035) -- (0.94, 0.035) -- (1, 0.08) -- (1, 0.1) -- (0.93, 0.05) -- (0.07, 0.05) -- (0, 0) -- cycle;
+#+LATEX_HEADER: 			% Central Wing
+#+LATEX_HEADER: 			\path [mpath=primary!35!black]	(0,0.27) -- (0.17,0.40) -- (0.77, 0.40) -- (1, 0.57) -- (1, 0.8) -- (0.85, 0.8) -- (0.6, 0.6) -- (0.13, 0.6) -- (0,0.5) -- cycle;
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			%% Text nodes
+#+LATEX_HEADER: 			% Icon
+#+LATEX_HEADER: 			\node (fiisymbol) at ([yshift=-0.5cm, xshift=0.5cm]0,1)[align=center, anchor=north west, inner sep=0pt, outer sep=0pt]
+#+LATEX_HEADER: 				{ \color{primary!65!black}\includegraphics[%
+#+LATEX_HEADER: 						width=3cm,%
+#+LATEX_HEADER: 						height=3cm,%
+#+LATEX_HEADER: 						keepaspectratio%
+#+LATEX_HEADER: 					] {/home/valentino/Dropbox/latex/content/img/uni_logo.pdf}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			\node (fiitext) at ([xshift=0.25cm] fiisymbol.north east) [align=left, anchor=north west]
+#+LATEX_HEADER: 				{{\color{primary!65!black}\Lato\fontsize{10}{0}\selectfont Università degli Studi di Napoli}};
+#+LATEX_HEADER: 			\node (fiiname) at ([xshift=0.01cm, yshift=0.2cm]fiitext.south west) [align=left, anchor=north west]
+#+LATEX_HEADER: 				{{\color{primary!65!black}\Agency\fontsize{24}{0}\selectfont Federico II}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Date and academic year
+#+LATEX_HEADER: 			\node (academicyear) at ([xshift=-0.5cm] fiitext.north -| 1,1) [align=right, anchor=north east]
+#+LATEX_HEADER: 				{{\color{primary!65!black}\Gobold\fontsize{26}{0}\selectfont A.A.\ 2022-2023}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Title of the documentation
+#+LATEX_HEADER: 			\node at ([xshift=0.1cm, yshift=0.1cm] $(0,0)!0.5!(1,1)$) [align=center, anchor=center, inner sep=0pt, outer sep=0pt]
+#+LATEX_HEADER: 				{{\color{primary!10!black}\Gobold\fontsize{72}{0}\selectfont Info}{\color{primary!10!black}\Gobold\fontsize{50}{0}\selectfont Point}};
+#+LATEX_HEADER: 			\node at ($(0,0)!0.5!(1,1)$) [align=center, anchor=center, inner sep=0pt, outer sep=0pt]
+#+LATEX_HEADER: 				{{\color{primary!85!white}\Gobold\fontsize{72}{0}\selectfont Info}{\color{primary!70!white}\Gobold\fontsize{50}{0}\selectfont Point}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			\node at ([yshift=-0.31cm, xshift=-0.170cm]0.77, 0.40) [align=center, anchor=north east, inner sep=0pt, outer sep=0pt]
+#+LATEX_HEADER: 				{\color{primary!10!black}\itshape\fontsize{18}{12}\selectfont\Gobold ID Gruppo: <TODO>};
+#+LATEX_HEADER: 			\node at ([yshift=-0.25cm, xshift=-0.125cm]0.77, 0.40) [align=center, anchor=north east, inner sep=0pt, outer sep=0pt]
+#+LATEX_HEADER: 				{\color{primary!85!white}\itshape\fontsize{18}{12}\selectfont\Gobold ID Gruppo: <TODO>};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			%% Authors
+#+LATEX_HEADER: 			% Author 1
+#+LATEX_HEADER: 			\node (auth1graduate) at ([xshift=1cm, yshift=1.5cm] 0.07, 0.05) []
+#+LATEX_HEADER: 				{{\color{primary!80!black}\fontsize{26}{0}\selectfont\igraduate}};
+#+LATEX_HEADER: 			\node (auth1name) at ([xshift=0.05cm] auth1graduate.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\Alte\fontsize{18}{0}\selectfont Valentino Bocchetti}};
+#+LATEX_HEADER: 			\node (auth1mailcon) at ([xshift=0.05cm] auth1name.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\fontsize{14}{0}\selectfont\imail}};
+#+LATEX_HEADER: 			\node (auth1mail) at ([xshift=0.025cm] auth1mailcon.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\Alte\fontsize{12}{0}\selectfont vale.bocchetti@studenti.unina.it}};
+#+LATEX_HEADER: 			\node (auth1imatr) at ([xshift=0.15cm] auth1mail.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\fontsize{14}{0}\selectfont\iid}};
+#+LATEX_HEADER: 			\node (auth1matr) at ([xshift=0.05cm] auth1imatr.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\Alte\fontsize{12}{0}\selectfont N86003405}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Separator
+#+LATEX_HEADER: 			\path [mpath=primary] ([xshift=0.15cm, yshift=0.15cm] auth1graduate.north) -- ([xshift=0.25cm, yshift=0.25cm]auth1graduate.north)
+#+LATEX_HEADER: 				-- ([xshift=0.65cm, yshift=0.25cm] auth1matr.east |- auth1graduate.north) -- ([xshift=0.5cm, yshift=0.15cm] auth1matr.east |- auth1graduate.north) -- cycle;
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Author 2 (Dario)
+#+LATEX_HEADER: 			\node (auth2graduate) at ([xshift=0.40cm, yshift=0.40cm] auth1graduate.north) [anchor=south west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\fontsize{26}{0}\selectfont\igraduate}};
+#+LATEX_HEADER: 			\node (auth2name) at ([xshift=0.05cm] auth2graduate.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\Alte\fontsize{18}{0}\selectfont Dario Morace}};
+#+LATEX_HEADER: 			\node (auth2mailcon) at (auth1mailcon.north |- auth2graduate.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\fontsize{14}{0}\selectfont\imail}};
+#+LATEX_HEADER: 			\node (auth2mail) at ([xshift=0.025cm] auth2mailcon.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\Alte\fontsize{12}{0}\selectfont da.morace@studenti.unina.it}};
+#+LATEX_HEADER: 			\node (auth2imatr) at (auth1imatr.north |- auth2mail.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\fontsize{14}{0}\selectfont\iid}};
+#+LATEX_HEADER: 			\node (auth2matr) at ([xshift=0.05cm] auth2imatr.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\Alte\fontsize{12}{0}\selectfont N86003778}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Separator 2
+#+LATEX_HEADER: 			\path [mpath=primary] ([xshift=0.15cm, yshift=0.15cm] auth2graduate.north) -- ([xshift=0.25cm, yshift=0.25cm]auth2graduate.north)
+#+LATEX_HEADER: 				-- ([xshift=0.65cm, yshift=0.25cm] auth2matr.east |- auth2graduate.north) -- ([xshift=0.5cm, yshift=0.15cm] auth2matr.east |- auth2graduate.north) -- cycle;
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Author 3 (Lucia)
+#+LATEX_HEADER: 			\node (auth3graduate) at ([xshift=0.40cm, yshift=0.40cm] auth2graduate.north) [anchor=south west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\fontsize{26}{0}\selectfont\igraduate}};
+#+LATEX_HEADER: 			\node (auth3name) at ([xshift=0.05cm] auth3graduate.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\Alte\fontsize{18}{0}\selectfont Lucia Brando}};
+#+LATEX_HEADER: 			\node (auth3mailcon) at (auth2mailcon.north |- auth3graduate.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\fontsize{14}{0}\selectfont\imail}};
+#+LATEX_HEADER: 			\node (auth3mail) at ([xshift=0.025cm] auth3mailcon.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\Alte\fontsize{12}{0}\selectfont l.brando@studenti.unina.it}};
+#+LATEX_HEADER: 			\node (auth3imatr) at (auth2imatr.north |- auth3mail.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\fontsize{14}{0}\selectfont\iid}};
+#+LATEX_HEADER: 			\node (auth3matr) at ([xshift=0.05cm] auth3imatr.east) [anchor=west]
+#+LATEX_HEADER: 				{{\color{primary!80!black}\Alte\fontsize{12}{0}\selectfont N86003382}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 		\end{scope}%
+#+LATEX_HEADER: 	\end{tikzpicture}\restoregeometry\newpage}
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Credits
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand\credits{%
+#+LATEX_HEADER: 	\newgeometry{noheadfoot=true, margin=0pt}\newpage\thispagestyle{empty}%
+#+LATEX_HEADER: 	\noindent\begin{tikzpicture}[remember picture, overlay, shift=(current page.south west)]%
+#+LATEX_HEADER: 		\begin{scope}[x={(current page.south east)},y={(current page.north west)}, overlay]%
+#+LATEX_HEADER: 			% Background
+#+LATEX_HEADER: 			\path [mpath=accent!15!white] (0,0.5) rectangle (1,1);
+#+LATEX_HEADER: 			\path [mpath=primary!15!white] (0,0) rectangle (1,0.5);
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Characterize Background
+#+LATEX_HEADER: 			\path [mpath=accent!15!white] (0,0.5) rectangle (0.15,0.4);
+#+LATEX_HEADER: 			\path [mpath=primary!15!white] (1,0.5) rectangle (0.85,0.6);
+#+LATEX_HEADER: 			\path [mpath=primary!35!white] (0,0) rectangle (1,0.025);
+#+LATEX_HEADER: 			\path [mpath=accent!35!white] (0,1) rectangle (1,0.975);
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Heading
+#+LATEX_HEADER: 			\node (header) at ([xshift=0.5cm] 0, 0.975) [inner sep=0pt, outer sep=0pt, anchor=north west]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{20}{20}\selectfont };
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			\path [draw=primary, line width=3pt] (0, 0.75) -- ([xshift=2cm] 0.125, 0.75) -- ($([xshift=2cm] 0.125, 0.75)!0.5!([xshift=-2cm] 0.875, 0.25)$);
+#+LATEX_HEADER: 			\path [draw=accent, line width=3pt]  ($([xshift=2cm] 0.125, 0.75)!0.5!([xshift=-2cm] 0.875, 0.25)$) --  ([xshift=-2cm] 0.875, 0.25) -- (1, 0.25);
+#+LATEX_HEADER:
+#+LATEX_HEADER:                         % Auth-Block-1
+#+LATEX_HEADER:                         \node (auth1-block-img) at(current page.center) {\includegraphics[width=3cm]{content/img/luftmensch-luftmensch.png}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			\node (auth1-block-name) at ([xshift=0.05cm, yshift=-0.6cm] auth1-block-img.north east) [anchor=north west]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{20}{20}\selectfont\Gobold Valentino\hspace{3pt}Bocchetti};
+#+LATEX_HEADER: 			\node (auth1-block-matr-icon) at (auth1-block-name.south west) [anchor=north west, square]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{16}{20}\selectfont\iid};
+#+LATEX_HEADER: 			\node (auth1-block-matr-text) at (auth1-block-matr-icon.east) [anchor=west, align=left]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{14}{20}\selectfont N86003405};
+#+LATEX_HEADER: 			\node (auth1-block-mail-icon) at ([xshift=0.45cm] auth1-block-matr-icon.south west) [anchor=north west, square]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{16}{20}\selectfont\imail};
+#+LATEX_HEADER: 			\node (auth1-block-mail-text) at (auth1-block-mail-icon.east) [anchor=west, align=left]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{14}{20}\selectfont vale.bocchetti@studenti.unina.it};
+#+LATEX_HEADER: 			\node (auth1-block-git-icon) at ([xshift=0.45cm] auth1-block-mail-icon.south west) [anchor=north west, square]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{16}{20}\selectfont\iuser};
+#+LATEX_HEADER: 			\node (auth1-block-git-text) at (auth1-block-git-icon.east) [anchor=west, align=left]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{14}{20}\selectfont \href{https://github.com/luftmensch-luftmensch/}{\hi{Profilo}}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Auth-Block-2 (Lucia)
+#+LATEX_HEADER: 			\node (auth2-block-img) at (0.125, 0.75) [anchor=west, circle, minimum width=4cm,
+#+LATEX_HEADER: 				path picture={\node at (path picture bounding box.center) [anchor=center] {\includegraphics[width=3cm]{content/img/lbrando.png}};}]{};
+#+LATEX_HEADER: 			\node (auth2-block-name) at ([xshift=0.05cm, yshift=-0.6cm] auth2-block-img.north east) [anchor=north west]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{20}{20}\selectfont\Gobold Lucia\hspace{3pt}Brando};
+#+LATEX_HEADER: 			\node (auth2-block-matr-icon) at (auth2-block-name.south west) [anchor=north west, square]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{16}{20}\selectfont\iid};
+#+LATEX_HEADER: 			\node (auth2-block-matr-text) at (auth2-block-matr-icon.east) [anchor=west, align=left]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{14}{20}\selectfont N86003382};
+#+LATEX_HEADER: 			\node (auth2-block-mail-icon) at ([xshift=0.45cm] auth2-block-matr-icon.south west) [anchor=north west, square]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{16}{20}\selectfont\imail};
+#+LATEX_HEADER: 			\node (auth2-block-mail-text) at (auth2-block-mail-icon.east) [anchor=west, align=left]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{14}{20}\selectfont l.brando@studenti.unina.it};
+#+LATEX_HEADER: 			\node (auth2-block-git-icon) at ([xshift=0.45cm] auth2-block-mail-icon.south west) [anchor=north west, square]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{16}{20}\selectfont\iuser};
+#+LATEX_HEADER: 			\node (auth2-block-git-text) at (auth2-block-git-icon.east) [anchor=west, align=left]
+#+LATEX_HEADER: 				{\color{primary}\fontsize{14}{20}\selectfont  \href{https://github.com/lbrando/}{\hi{Profilo}}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 			% Auth-Block-3 (Dario)
+#+LATEX_HEADER: 			\node (auth3-block-img) at (0.875, 0.25) [anchor=east, circle, minimum width=4cm,
+#+LATEX_HEADER: 				path picture={\node at (path picture bounding box.center) [anchor=center] {\includegraphics[width=3cm]{content/img/goblino.png}};}]{};
+#+LATEX_HEADER: 			\node (auth3-block-name) at ([xshift=-0.10cm, yshift=-0.6cm] auth3-block-img.north west) [anchor=north east]
+#+LATEX_HEADER: 				{\color{accent!80!black}\fontsize{20}{20}\selectfont\Gobold Dario\hspace{3pt}Morace};
+#+LATEX_HEADER: 			\node (auth3-block-matr-icon) at (auth3-block-name.north east) [anchor=south east, square]
+#+LATEX_HEADER: 				{\color{accent!80!black}\fontsize{16}{20}\selectfont\iid};
+#+LATEX_HEADER: 			\node (auth3-block-matr-text) at (auth3-block-matr-icon.west) [anchor=east, align=right]
+#+LATEX_HEADER: 				{\color{accent!80!black}\fontsize{14}{20}\selectfont N86003778};
+#+LATEX_HEADER: 			\node (auth3-block-mail-icon) at ([xshift=-0.45cm] auth3-block-matr-icon.north east) [anchor=south east, square]
+#+LATEX_HEADER: 				{\color{accent!80!black}\fontsize{16}{20}\selectfont\imail};
+#+LATEX_HEADER: 			\node (auth3-block-mail-text) at (auth3-block-mail-icon.west) [anchor=east, align=right]
+#+LATEX_HEADER: 				{\color{accent!80!black}\fontsize{14}{20}\selectfont da.morace@studenti.unina.it};
+#+LATEX_HEADER: 			\node (auth3-block-git-icon) at ([xshift=-0.45cm] auth3-block-mail-icon.north east) [anchor=south east, square]
+#+LATEX_HEADER: 				{\color{accent!80!black}\fontsize{16}{20}\selectfont\iuser};
+#+LATEX_HEADER: 			\node (auth3-block-git-text) at (auth3-block-git-icon.west) [anchor=east, align=right]
+#+LATEX_HEADER: 				{\color{accent!80!black}\fontsize{14}{20}\selectfont \href{https://github.com/saltyDario/}{\hi{Profilo}}};
+#+LATEX_HEADER:
+#+LATEX_HEADER: 		\end{scope}
+#+LATEX_HEADER: 	\end{tikzpicture}\restoregeometry\newpage}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Code styling
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: 	\lst@Key{firstlineandnumber}\relax{\def\lst@firstline{#1\relax}\def\lst@firstnumber{#1\relax}}
+#+LATEX_HEADER: \makeatother
+#+LATEX_HEADER:
+#+LATEX_HEADER: \lstset{%
+#+LATEX_HEADER: 	autogobble=true,
+#+LATEX_HEADER: 	style=FiraCodeStyle,
+#+LATEX_HEADER: 	backgroundcolor=\color{naplesyellow!10!white},
+#+LATEX_HEADER: 	commentstyle=\itshape\color{seagreen},
+#+LATEX_HEADER: 	keywordstyle=\color{cherryred},
+#+LATEX_HEADER: 	stringstyle=\color{naplesyellow!80!black},
+#+LATEX_HEADER: 	basicstyle=\linespread{1.15}\footnotesize\FiraCode,
+#+LATEX_HEADER: 	breaklines=true,
+#+LATEX_HEADER: 	tabsize=2,
+#+LATEX_HEADER:   escapeinside={(*@}{@*)},
+#+LATEX_HEADER: 	xleftmargin=0.5cm,
+#+LATEX_HEADER: 	xrightmargin=0.5cm,
+#+LATEX_HEADER: 	framesep=0mm,
+#+LATEX_HEADER: 	extendedchars=true,
+#+LATEX_HEADER: 	showstringspaces=false,
+#+LATEX_HEADER: 	showtabs=false,
+#+LATEX_HEADER: 	showstringspaces=false,
+#+LATEX_HEADER: 	captionpos=b,
+#+LATEX_HEADER: 	title=\color{primary}\fontsize{10}{12}\selectfont\sp@rtext{\lstname}{\ifilecode},
+#+LATEX_HEADER: 	columns=fixed }
+
+#+LATEX_HEADER: \lstdefinestyle{wnumbers}{
+#+LATEX_HEADER: 	% Style of numbers
+#+LATEX_HEADER: 	xleftmargin=1cm,
+#+LATEX_HEADER: 	numbers=left,
+#+LATEX_HEADER: 	numberstyle=\Lato\scriptsize\color{orange!80!black},
+#+LATEX_HEADER: 	frame=l,
+#+LATEX_HEADER: 	framesep=0.5cm,
+#+LATEX_HEADER: 	framexleftmargin=0.3cm,
+#+LATEX_HEADER: 	rulecolor=\color{white},
+#+LATEX_HEADER: 	fillcolor=\color{naplesyellow!40!white}
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: \lstdefinelanguage{makefile}{%
+#+LATEX_HEADER: 	morecomment=[l][commentstyle]{\#},%
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: \lstdefinelanguage[POSIX]{C}
+#+LATEX_HEADER: 	[]{}
+#+LATEX_HEADER: 	{ alsoletter={\#},
+#+LATEX_HEADER: 		sensitive=true,
+#+LATEX_HEADER: 		%% Handle directives
+#+LATEX_HEADER: 		moredelim=*[s][{\color{violet!60!white}}]{\#include\ <}{.h>},
+#+LATEX_HEADER: 		moredelim=*[l][{\color{blue!65!white}}]\#if,
+#+LATEX_HEADER: 		moredelim=*[l][{\color{blue!65!white}}]\#endif,
+#+LATEX_HEADER: 		moredelim=*[s][{\color{violet!60!white!70!black}}]{\#include\ "}{.h"},
+#+LATEX_HEADER: 		moredelim=*[l][{\color{blue!90!white!70!black}}]\#define,
+#+LATEX_HEADER: 		moredelim=*[s][{\color{turquoise!70!black}}]{[}{]},
+#+LATEX_HEADER: 		%% Comments
+#+LATEX_HEADER: 		comment=[l]//,
+#+LATEX_HEADER: 		morecomment=[s]{/*}{*/},
+#+LATEX_HEADER: 		% Strings
+#+LATEX_HEADER: 		string=[b]{"},
+#+LATEX_HEADER: 		morestring=[b]{'},
+#+LATEX_HEADER: 		% Modifiers
+#+LATEX_HEADER: 		keywords=[0]{const, unsigned, signed, static, volatile, typedef, struct, union, enum, atomic_t},
+#+LATEX_HEADER: 		% Primitives
+#+LATEX_HEADER: 		keywords=[1]{int, float, double, long, short, char, void, bool},
+#+LATEX_HEADER: 		% Logical constructs
+#+LATEX_HEADER: 		keywords=[2]{if, else, return, for, while, do},
+#+LATEX_HEADER: 		% Operators
+#+LATEX_HEADER: 		otherkeywords={*, &},
+#+LATEX_HEADER: 		keywords=[3]{*, &},
+#+LATEX_HEADER: 		% API structs
+#+LATEX_HEADER: 		keywords=[8]{sockaddr\_in, sockaddr, transport, pthread\_t, ssize\_t, size\_t, epoll\_event, timeval},
+#+LATEX_HEADER: 		% API functions
+#+LATEX_HEADER:   	keywords=[9]{epoll\_event, epoll\_wait, epoll\_ctl, send, recv, close, open, read, write, exit, assert, perror, gettimeofday},
+#+LATEX_HEADER: 		% API Constants
+#+LATEX_HEADER: 		keywords=[10]{EPOLLIN, EPOLLET, EPOLL\_CTL\_ADD, EPOLL\_CTL\_DEL, false, true, errno, NULL, MSG\_PEEK, MSG\_NOSIGNAL},
+#+LATEX_HEADER: 		% OWN structs
+#+LATEX_HEADER: 		keywords=[11]{handler, socket, server, event, client, connection, conn, status, conn\_status, waiting\_room},
+#+LATEX_HEADER: 		% OWN structs
+#+LATEX_HEADER: 		keywords=[12]{PRCLEAR, PRCHAT, READY, CHAT},
+#+LATEX_HEADER: 		% Colors
+#+LATEX_HEADER: 		%  TODO: Move elsewhere
+#+LATEX_HEADER: 		directivestyle=\color{blue!85!white},
+#+LATEX_HEADER: 		keywordstyle=[0]\color{cherryred},
+#+LATEX_HEADER: 		keywordstyle=[1]\color{green!75!black},
+#+LATEX_HEADER: 		keywordstyle=[2]\color{cherryred},
+#+LATEX_HEADER: 		keywordstyle=[3]\color{naplesyellow!75!black},
+#+LATEX_HEADER: 		keywordstyle=[8]\color{seagreen!80!black},
+#+LATEX_HEADER: 		keywordstyle=[9]\color{pink!70!black},
+#+LATEX_HEADER: 		keywordstyle=[10]\color{turquoise!80!black},
+#+LATEX_HEADER: 		keywordstyle=[11]\color{sapphire!80!black},
+#+LATEX_HEADER: 		keywordstyle=[12]\color{turquoise!70!black},
+#+LATEX_HEADER: 		}[keywords,comments,strings,directives]
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Itemize, Enumerate, Description
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: \setlist{leftmargin=*,noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt, after=\vspace{0.5em}}
+#+LATEX_HEADER: \setlist[enumerate, 1]{label=\Roman*.}
+#+LATEX_HEADER: \setlist[enumerate, 2]{label=\arabic*.}
+#+LATEX_HEADER: \setlist[enumerate, 3]{label=\alph*.}
+#+LATEX_HEADER: \setlist[itemize, 1]{label=$\smallblacktriangleright$}
+#+LATEX_HEADER: \setlist[itemize, 2]{label=$\smalldiamond$}
+#+LATEX_HEADER: \setlist[itemize, 3]{label=$\smallcircle$}
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Hooks
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: \AtBeginDocument{\Karla\pagestyle{luftmensch@style}}
+#+LATEX_HEADER: % For some reason emacs is a nigger with the languages -> select italian as default language
+#+LATEX_HEADER: \AtBeginDocument{\selectlanguage{italian}}

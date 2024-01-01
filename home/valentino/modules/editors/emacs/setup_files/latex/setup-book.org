@@ -1,0 +1,830 @@
+* Documentation
+** Usage
+In order to use this class:
++ Include in the actual ~.org~ file using the ~#+SETUPFILE:~ option
+** Customization
+*** Titlepage
+#+begin_src latex
+\titlepage % Output the title page
+	{\includegraphics[width=\paperwidth]{/home/valentino/Dropbox/latex/backgrounds/background.pdf}} % Code to output the background image, which should be the same dimensions as the paper to fill the page entirely; leave empty for no background image
+	{ % Title(s) and author(s)
+		\centering\sffamily % Font styling
+		{\Huge\bfseries <TITLE>\par} % Book title
+		\vspace{16pt} % Vertical whitespace
+		{\LARGE <SUBTITLE>\par} % Subtitle
+		\vspace{24pt} % Vertical whitespace
+		{\huge\bfseries Valentino Bocchetti\par} % Author name
+	}
+#+end_src
+*** Chapters
+#+begin_src latex
+% Just before \chapter
+\chapterimage{lava.jpg} % Chapter heading image
+\chapterspaceabove{6.5cm} % Default whitespace from the top of the page to the chapter title on chapter pages
+\chapterspacebelow{6.75cm} % Default amount of vertical whitespace from the top margin to the start of the text on chapter pages
+#+end_src
+*** TOC
+#+begin_src latex
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\pagestyle{empty} % Disable headers and footers for the following pages
+
+\tableofcontents % Output the table of contents
+
+\listoffigures % Output the list of figures, comment or remove this command if not required
+
+\listoftables % Output the list of tables, comment or remove this command if not required
+
+\pagestyle{fancy} % Enable default headers and footers again
+
+%\cleardoublepage % Start the following content on a new page
+\pagebreak
+#+end_src
+* Actual code
+#+LaTeX_CLASS: book
+#+LaTeX_CLASS_OPTIONS: [letterpaper, 11pt, fleqn]
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Package requirements
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \usepackage{graphicx}                          % Required for including pictures
+#+LATEX_HEADER: \graphicspath{{/home/valentino/Dropbox/latex/content/img}} % Add Global paths for graphicx
+#+LATEX_HEADER: \usepackage{float}                             % Allows more precisely positioning floats e.g. \begin{figure}[H]
+#+LATEX_HEADER: \usepackage[usenames, svgnames, table]{xcolor} % Required for defining and using custom colors
+#+LATEX_HEADER: \usepackage{calc}                              % For simpler calculations - used for spacing the index letter headings correctly
+#+LATEX_HEADER: \usepackage{changepage}                        % Required for temporarily indenting text blocks
+#+LATEX_HEADER: \usepackage[toc]{appendix}                     % Required for the appendices chapters
+#+LATEX_HEADER: \usepackage{etoolbox}                          % Required for conditional logic and easily changing commands
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	MARGINS
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{geometry} % Required for adjusting page dimensions and margins
+#+LATEX_HEADER:
+#+LATEX_HEADER: \geometry{
+#+LATEX_HEADER: 	top=3cm, % Top margin
+#+LATEX_HEADER: 	bottom=2.5cm, % Bottom margin
+#+LATEX_HEADER: 	inner=3cm, % Inner margin (left on odd pages, right on even or left in oneside mode)
+#+LATEX_HEADER: 	outer=3cm, % Outer margin (right on odd pages, left on even or right in oneside mode)
+#+LATEX_HEADER: 	headsep=10pt, % Space from the top margin to the baseline of the header
+#+LATEX_HEADER: 	headheight=0.5cm, % Header height
+#+LATEX_HEADER: 	footskip=1.4cm, % Space from the bottom margin to the baseline of the footer
+#+LATEX_HEADER: 	columnsep=1cm, % Horizontal space between columns when in two column mode
+#+LATEX_HEADER: 	%showframe, % Uncomment to show how the type block is set on the page
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{pgfkeys}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/lmargin}{lmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/left}{lmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/inner}{lmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/innermargin}{lmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/rmargin}{rmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/right}{rmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/outer}{rmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/outermargin}{rmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/tmargin}{tmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/top}{tmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/bmargin}{bmargin}
+#+LATEX_HEADER: \pgfkeyssetvalue{/geometry/bottom}{bmargin}
+#+LATEX_HEADER: \newcommand{\geometryget}[1] {\csname Gm@\pgfkeysvalueof{/geometry/#1}\endcsname}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Colors
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Azure
+#+LATEX_HEADER: \definecolor{customAzure1}{HTML}{B1E7E1}
+#+LATEX_HEADER: \definecolor{customAzure2}{HTML}{A1E2DB}
+#+LATEX_HEADER: \definecolor{customAzure3}{HTML}{92DDD6}
+#+LATEX_HEADER: \definecolor{customAzure4}{HTML}{83D8CF}
+#+LATEX_HEADER: \definecolor{customAzure5}{HTML}{73D3C9}
+#+LATEX_HEADER: \definecolor{customAzure6}{HTML}{64CEC3}
+
+#+LATEX_HEADER: % Pink
+#+LATEX_HEADER: \definecolor{customPink1}{HTML}{ECD7D5}
+#+LATEX_HEADER: \definecolor{customPink2}{HTML}{E6C9C7}
+#+LATEX_HEADER: \definecolor{customPink3}{HTML}{DFBBB9}
+#+LATEX_HEADER: \definecolor{customPink4}{HTML}{D8ADAB}
+#+LATEX_HEADER: \definecolor{customPink5}{HTML}{D2A09D}
+#+LATEX_HEADER: \definecolor{customPink6}{HTML}{CC928F}
+
+#+LATEX_HEADER: % Purple
+#+LATEX_HEADER: \definecolor{customPurple1}{HTML}{C5C2EB} % Lavanda
+#+LATEX_HEADER: \definecolor{customPurple2}{HTML}{B5B2E6}
+#+LATEX_HEADER: \definecolor{customPurple3}{HTML}{A6A3E1}
+#+LATEX_HEADER: \definecolor{customPurple4}{HTML}{9793DC}
+#+LATEX_HEADER: \definecolor{customPurple5}{HTML}{8884D7}
+#+LATEX_HEADER: \definecolor{customPurple6}{HTML}{7974D2}
+
+#+LATEX_HEADER: % Yellow
+#+LATEX_HEADER: \definecolor{customYellow1}{HTML}{EDE8AB}
+#+LATEX_HEADER: \definecolor{customYellow2}{HTML}{EAE39A}
+#+LATEX_HEADER: \definecolor{customYellow3}{HTML}{EAE39A}
+#+LATEX_HEADER: \definecolor{customYellow4}{HTML}{E3DA78}
+#+LATEX_HEADER: \definecolor{customYellow5}{HTML}{E0D667}
+#+LATEX_HEADER: \definecolor{customYellow6}{HTML}{DCD156}
+
+#+LATEX_HEADER: % Red
+#+LATEX_HEADER: \definecolor{customRed1}{HTML}{FF7073}
+#+LATEX_HEADER: \definecolor{customRed2}{HTML}{FF5C5F}
+#+LATEX_HEADER: \definecolor{customRed3}{HTML}{FF474A}
+#+LATEX_HEADER: \definecolor{customRed4}{HTML}{FF3336}
+#+LATEX_HEADER: \definecolor{customRed5}{HTML}{FF1F22}
+#+LATEX_HEADER: \definecolor{customRed6}{HTML}{FF0A0E}
+
+#+LATEX_HEADER: % Orange
+#+LATEX_HEADER: \definecolor{customOrange1}{HTML}{FABE75}
+#+LATEX_HEADER: \definecolor{customOrange2}{HTML}{F9B562}
+#+LATEX_HEADER: \definecolor{customOrange3}{HTML}{F9AC4E}
+#+LATEX_HEADER: \definecolor{customOrange4}{HTML}{F8A23A}
+#+LATEX_HEADER: \definecolor{customOrange5}{HTML}{F79926}
+#+LATEX_HEADER: \definecolor{customOrange6}{HTML}{F69013}
+
+#+LATEX_HEADER: % Brown
+#+LATEX_HEADER: \definecolor{customBrown1}{HTML}{BCA576}
+#+LATEX_HEADER: \definecolor{customBrown2}{HTML}{B59C69}
+#+LATEX_HEADER: \definecolor{customBrown3}{HTML}{AE925B}
+#+LATEX_HEADER: \definecolor{customBrown4}{HTML}{A48851}
+#+LATEX_HEADER: \definecolor{customBrown5}{HTML}{967D4A}
+#+LATEX_HEADER: \definecolor{customBrown6}{HTML}{897243}
+
+#+LATEX_HEADER: % Green
+#+LATEX_HEADER: \definecolor{customGreen1}{HTML}{D4E5B3}
+#+LATEX_HEADER: \definecolor{customGreen2}{HTML}{CCE0A4}
+#+LATEX_HEADER: \definecolor{customGreen3}{HTML}{C3DB95}
+#+LATEX_HEADER: \definecolor{customGreen4}{HTML}{B9D585}
+#+LATEX_HEADER: \definecolor{customGreen5}{HTML}{B1D076}
+#+LATEX_HEADER: \definecolor{customGreen6}{HTML}{A8CB67}
+
+#+LATEX_HEADER: % Miscellaneous
+#+LATEX_HEADER: \definecolor{ocre}{RGB}{243, 102, 25} % Define the color used for highlighting throughout the book
+
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	FONTS
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage[utf8]{inputenc} % Required for inputting international characters
+#+LATEX_HEADER: \usepackage[T1]{fontenc}    % Output font encoding for international characters
+#+LATEX_HEADER: \usepackage{avant}          % Use the Avantgarde font for headings
+#+LATEX_HEADER: \usepackage{mathptmx}       % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+#+LATEX_HEADER: \usepackage{microtype}      % Improve typography
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	HEADERS AND FOOTERS
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{fancyhdr}                                                                                   % Required for customizing headers and footers
+#+LATEX_HEADER: \pagestyle{fancy}                                                                                       % Enable the custom headers and footers
+#+LATEX_HEADER:
+#+LATEX_HEADER: \renewcommand{\headrulewidth}{0.5pt}                                                                    % Top horizontal rule thickness
+#+LATEX_HEADER: \renewcommand{\chaptermark}[1]{\markboth{\sffamily\normalsize\bfseries\chaptername\ \thechapter.~#1}{}} % Redefine the styling of the current chapter name in the header
+#+LATEX_HEADER: \renewcommand{\sectionmark}[1]{\markright{\sffamily\normalsize\thesection~#1}{}}                        % Redefine the styling of the current section name in the header
+#+LATEX_HEADER:
+#+LATEX_HEADER: \fancyhf{}                                                                                              % Clear default headers and footers
+#+LATEX_HEADER: \fancyhead[LE, RO]{\sffamily\thepage}                                                                   % Header for left even pages and right odd pages
+#+LATEX_HEADER: \fancyhead[LO]{\rightmark}                                                                              % Header for left odd pages
+#+LATEX_HEADER: \fancyhead[RE]{\leftmark}                                                                               % Header for right even pages
+#+LATEX_HEADER: \fancypagestyle{plain}{                                                                                 % Style for when a plain pagestyle is specified
+#+LATEX_HEADER: 	\fancyhead{}                                                                                          % Clear headers
+#+LATEX_HEADER: 	\renewcommand{\headrulewidth}{0pt}                                                                    % Remove header rule
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{emptypage}                                                                                  % This package removes headers and footers on empty pages between chapters
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	SECTION STYLING
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \setcounter{secnumdepth}{3} % Number sections down to subsubsections, a value of 2 will number to subsections only and 1 to sections only
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage[
+#+LATEX_HEADER: 	explicit, % Specify section names explicitly in \titleformat with #1
+#+LATEX_HEADER: 	newparttoc, % Required for writing the part toc entry number in a standard way (overriding default LaTeX behavior) so the titletoc package can style it
+#+LATEX_HEADER: ]{titlesec} % Required for modifying sections
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: % Command to create and output the parts pages
+#+LATEX_HEADER: \newcommand{\outputpartpage}[2]{
+#+LATEX_HEADER: 	\begin{tikzpicture}[remember picture, overlay]
+#+LATEX_HEADER: 		\node[anchor=center, rectangle, fill=ocre!20, inner sep=0pt, minimum height=\paperheight, minimum width=\paperwidth] at (current page.center) {}; % Background color
+#+LATEX_HEADER: 		\node[anchor=north west, inner sep=0pt, xshift=\geometryget{lmargin}, yshift=-\geometryget{tmargin}] at (current page.north west) {\fontsize{220pt}{220pt}\selectfont\sffamily\bfseries\textcolor{ocre!40}{#1}}; % Part number
+#+LATEX_HEADER: 		\node[anchor=north east, inner sep=0pt, xshift=-\geometryget{rmargin}, yshift=-\geometryget{tmargin}] at (current page.north east) {\fontsize{30pt}{30pt}\selectfont\sffamily\bfseries\textcolor{white}{\strut #2}}; % Part title
+#+LATEX_HEADER: 		\node[anchor=south east, inner sep=0pt, xshift=-\geometryget{rmargin}, yshift=\geometryget{bmargin}] at (current page.south east) { % Mini table of contents
+#+LATEX_HEADER: 			\parbox[t][][t]{8.5cm}{ % Width of box holding the mini ToC
+#+LATEX_HEADER: 				\printcontents[part]{l}{0}{\setcounter{tocdepth}{1}} % Display the mini table of contents showing chapters and sections, change tocdepth to 2 to also show subsections or 0 to only show chapters
+#+LATEX_HEADER: 			}
+#+LATEX_HEADER: 		};
+#+LATEX_HEADER: 	\end{tikzpicture}
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{\part} % Section type being modified
+#+LATEX_HEADER: 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\startcontents[part]\outputpartpage{\thepart}{#1}} % Format of the whole section
+#+LATEX_HEADER: 	{} % Format of the section label
+#+LATEX_HEADER: 	{0em} % Space between the title and label
+#+LATEX_HEADER: 	{} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: %-------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Command to store the current chapter image to use for all future chapters, can be changed any time in the document and can be empty
+#+LATEX_HEADER: \newcommand{\thechapterimage}{}
+#+LATEX_HEADER: \newcommand{\chapterimage}[1]{\renewcommand{\thechapterimage}{#1}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Command to store the current whitespace above the chapter title box for all future chapters, can be changed at any time in the document
+#+LATEX_HEADER: \newcommand{\thechapterspaceabove}{}
+#+LATEX_HEADER: \newcommand{\chapterspaceabove}[1]{\renewcommand{\thechapterspaceabove}{#1}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Command to store the current whitespace below the chapter title box for all future chapters, can be changed at any time in the document
+#+LATEX_HEADER: \newcommand{\thechapterspacebelow}{}
+#+LATEX_HEADER: \newcommand{\chapterspacebelow}[1]{\renewcommand{\thechapterspacebelow}{#1}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Command to output the chapter title with optional background image
+#+LATEX_HEADER: \newcommand{\outputchaptertitle}[2]{
+#+LATEX_HEADER: 	\begin{tikzpicture}[remember picture,overlay]
+#+LATEX_HEADER: 		% If a chapter image has been specified
+#+LATEX_HEADER: 		\expandafter\ifstrequal\expandafter{\thechapterimage}{}{}{
+#+LATEX_HEADER: 			% Output the chapter image
+#+LATEX_HEADER: 			\node[
+#+LATEX_HEADER: 				anchor=north west, % Anchor point on the image
+#+LATEX_HEADER: 				inner sep=0pt, % Inner padding
+#+LATEX_HEADER: 			] at (current page.north west) {\includegraphics[width=\paperwidth]{\thechapterimage}};
+#+LATEX_HEADER: 		}
+#+LATEX_HEADER: 		% Box with the chapter title
+#+LATEX_HEADER: 		\draw[anchor=west] (current page.north west) node [
+#+LATEX_HEADER: 			anchor=north west, % Anchor point of the chapter box
+#+LATEX_HEADER: 			xshift=\geometryget{lmargin}, % Horizontal distance from the left side of the page
+#+LATEX_HEADER: 			yshift=-\thechapterspaceabove, % Vertical distance from the top of the page
+#+LATEX_HEADER: 			line width=2pt, % Border line thickness
+#+LATEX_HEADER: 			rounded corners=10pt, % Rounded corners amount
+#+LATEX_HEADER: 			draw=ocre, % Border line color
+#+LATEX_HEADER: 			fill=black!5, % Box background color
+#+LATEX_HEADER: 			fill opacity=0.6, % Background transparency
+#+LATEX_HEADER: 			text opacity=1, % Text transparency
+#+LATEX_HEADER: 			inner ysep=12.5pt, % Inner vertical padding
+#+LATEX_HEADER: 			inner xsep=20pt, % Inner horizontal padding
+#+LATEX_HEADER: 			align=flush left, % Text alignment inside box
+#+LATEX_HEADER: 			text width=1.2\linewidth, % Box width (wider than page to go off the right side)
+#+LATEX_HEADER: 			font=\huge\sffamily\bfseries, % Font styling for chapter title
+#+LATEX_HEADER: 		] {\parbox{0.85\linewidth}{\strut\raggedright\expandafter\ifstrequal\expandafter{#1}{}{}{#1. }#2\vspace{-3pt}}}; % Chapter title in a fixed width box for wrapping
+#+LATEX_HEADER: 	\end{tikzpicture}
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Numbered chapters
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{\chapter} % Section type being modified
+#+LATEX_HEADER: 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\outputchaptertitle{\thechapter}{#1}} % Format of the whole section
+#+LATEX_HEADER: 	{} % Format of the section label
+#+LATEX_HEADER: 	{0cm} % Space between the title and label
+#+LATEX_HEADER: 	{} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Unnumbered chapters
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{name=\chapter, numberless} % Section type being modified
+#+LATEX_HEADER: 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\outputchaptertitle{}{#1}} % Format of the whole section
+#+LATEX_HEADER: 	{} % Format of the section label
+#+LATEX_HEADER: 	{0cm} % Space between the title and label
+#+LATEX_HEADER: 	{} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlespacing*{\chapter}{0pt}{0pt}{\thechapterspacebelow} % Spacing around section titles, the order is: left, before and after
+#+LATEX_HEADER:
+#+LATEX_HEADER: %-------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{\section} % Section type being modified
+#+LATEX_HEADER: 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\bfseries\sffamily\Large} % Format of the whole section
+#+LATEX_HEADER: 	{\llap{\textcolor{ocre}{\thesection}\hspace{1em}}#1} % Format of the section label
+#+LATEX_HEADER: 	{0cm} % Space between the title and label
+#+LATEX_HEADER: 	{} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{name=\section, numberless} % Section type being modified
+#+LATEX_HEADER: 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\bfseries\sffamily\Large} % Format of the whole section
+#+LATEX_HEADER: 	{#1} % Format of the section label
+#+LATEX_HEADER: 	{0cm} % Space between the title and label
+#+LATEX_HEADER: 	{} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlespacing*{\section}{0pt}{12pt}{6pt} % Spacing around section titles, the order is: left, before and after
+#+LATEX_HEADER:
+#+LATEX_HEADER: %-------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{\subsection} % Section type being modified
+#+LATEX_HEADER: 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\bfseries\sffamily\large} % Format of the whole section
+#+LATEX_HEADER: 	{\llap{\textcolor{ocre}{\thesubsection}\hspace{1em}}#1} % Format of the section label
+#+LATEX_HEADER: 	{0cm} % Space between the title and label
+#+LATEX_HEADER: 	{} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{name=\subsection, numberless} % Section type being modified
+#+LATEX_HEADER: 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\bfseries\sffamily\large} % Format of the whole section
+#+LATEX_HEADER: 	{#1} % Format of the section label
+#+LATEX_HEADER: 	{0cm} % Space between the title and label
+#+LATEX_HEADER: 	{} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlespacing*{\subsection}{0pt}{12pt}{4pt} % Spacing around section titles, the order is: left, before and after
+#+LATEX_HEADER:
+#+LATEX_HEADER: %-------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{\subsubsection} % Section type being modified
+#+LATEX_HEADER: 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\bfseries\sffamily} % Format of the whole section
+#+LATEX_HEADER: 	{\llap{{\thesubsubsection}\hspace{1em}}#1} % Format of the section label
+#+LATEX_HEADER: 	{0cm} % Space between the title and label
+#+LATEX_HEADER: 	{} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{name=\subsubsection, numberless} % Section type being modified
+#+LATEX_HEADER: 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\bfseries\sffamily} % Format of the whole section
+#+LATEX_HEADER: 	{#1} % Format of the section label
+#+LATEX_HEADER: 	{0cm} % Space between the title and label
+#+LATEX_HEADER: 	{} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlespacing*{\subsubsection}{0pt}{8pt}{4pt} % Spacing around section titles, the order is: left, before and after
+#+LATEX_HEADER:
+#+LATEX_HEADER: %-------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titleformat
+#+LATEX_HEADER: 	{\paragraph} % Section type being modified
+#+LATEX_HEADER: 	[runin] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+#+LATEX_HEADER: 	{\bfseries\sffamily} % Format of the whole section
+#+LATEX_HEADER: 	{} % Format of the section label
+#+LATEX_HEADER: 	{0cm} % Space between the title and label
+#+LATEX_HEADER: 	{#1} % Code before the label
+#+LATEX_HEADER: 	[] % Code after the label
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlespacing*{\paragraph}{0pt}{0pt}{6pt} % Spacing around section titles, the order is: left, before and after
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	TABLE OF CONTENTS
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{titletoc} % Required for manipulating the table of contents
+#+LATEX_HEADER:
+#+LATEX_HEADER: \setcounter{tocdepth}{2} % Display down to subsections in the table of contents
+#+LATEX_HEADER:
+#+LATEX_HEADER: \contentsmargin{0cm} % Removes the default right margin
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Styling of numbered parts in the table of contents
+#+LATEX_HEADER: \newcommand{\tocentrypartnumbered}[1]{%
+#+LATEX_HEADER: 	\setlength\fboxsep{0pt}% Remove box padding
+#+LATEX_HEADER: 	\contentslabel[%
+#+LATEX_HEADER: 		% Part number box
+#+LATEX_HEADER: 		\colorbox{ocre!20}{% Background color
+#+LATEX_HEADER: 			\strut\parbox[c][.7cm]{1.1cm}{% Box size
+#+LATEX_HEADER: 				\color{ocre!70}\Large\sffamily\bfseries\centering\thecontentslabel% Part number
+#+LATEX_HEADER: 			}%
+#+LATEX_HEADER: 		}%
+#+LATEX_HEADER: 		\hspace{4pt}%
+#+LATEX_HEADER: 		% Part title box
+#+LATEX_HEADER: 		\colorbox{ocre!40}{% Background color
+#+LATEX_HEADER: 			\strut\parbox[c][.7cm]{\linewidth-1.25cm}{% Box size
+#+LATEX_HEADER: 				\centering\Large\sffamily #1% Part title
+#+LATEX_HEADER: 			}%
+#+LATEX_HEADER: 		}%
+#+LATEX_HEADER: 	]{1.25cm}
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Styling of unnumbered parts in the table of contents
+#+LATEX_HEADER: \newcommand{\tocentrypartunnumbered}[1]{%
+#+LATEX_HEADER: 	\setlength\fboxsep{0pt}% Remove box padding
+#+LATEX_HEADER: 	\contentslabel[%
+#+LATEX_HEADER: 		% Part title box
+#+LATEX_HEADER: 		\colorbox{ocre!40}{% Background color
+#+LATEX_HEADER: 			\strut\parbox[c][.7cm]{\linewidth}{% Box size
+#+LATEX_HEADER: 				\centering\Large\sffamily #1% Part title
+#+LATEX_HEADER: 			}%
+#+LATEX_HEADER: 		}%
+#+LATEX_HEADER: 	]{1.25cm}
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlecontents{part} % Section type being modified
+#+LATEX_HEADER: 	[1.25cm] % Left indentation
+#+LATEX_HEADER: 	{\addvspace{20pt}\Large\sffamily\bfseries\hypersetup{linkcolor=black}} % Before code
+#+LATEX_HEADER: 	{\tocentrypartnumbered} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{\tocentrypartunnumbered} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{} % Formatting of the filler to the right of the heading and the page number
+#+LATEX_HEADER: 	[] % After code
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlecontents{chapter} % Section type being modified
+#+LATEX_HEADER: 	[1.25cm] % Left indentation
+#+LATEX_HEADER: 	{\addvspace{12pt}\large\sffamily\bfseries\hypersetup{linkcolor=ocre}} % Before code
+#+LATEX_HEADER: 	{\color{ocre}\contentslabel[\Large\thecontentslabel]{1.25cm}} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{\color{ocre!60}\normalsize\;\titlerule*[6pt]{.}\;\color{ocre}\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+#+LATEX_HEADER: 	[] % After code
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlecontents{section} % Section type being modified
+#+LATEX_HEADER: 	[1.25cm] % Left indentation
+#+LATEX_HEADER: 	{\addvspace{3pt}\sffamily\bfseries} % Before code
+#+LATEX_HEADER: 	{\contentslabel[\thecontentslabel]{1.25cm}} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{~{\normalfont\titlerule*[6pt]{.}}~\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+#+LATEX_HEADER: 	[] % After code
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlecontents{subsection} % Section type being modified
+#+LATEX_HEADER: 	[1.25cm] % Left indentation
+#+LATEX_HEADER: 	{\addvspace{1pt}\sffamily\small} % Before code
+#+LATEX_HEADER: 	{\contentslabel[\thecontentslabel]{1.25cm}} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{~\titlerule*[6pt]{.}~\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+#+LATEX_HEADER: 	[] % After code
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlecontents{subsubsection} % Section type being modified
+#+LATEX_HEADER: 	[1.75cm] % Left indentation
+#+LATEX_HEADER: 	{\sffamily\small} % Before code
+#+LATEX_HEADER: 	{\contentslabel[\thecontentslabel]{1.75cm}} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{~\titlerule*[6pt]{.}~\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+#+LATEX_HEADER: 	[] % After code
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % List of figures entries
+#+LATEX_HEADER: \titlecontents{figure} % Section type being modified
+#+LATEX_HEADER: 	[0cm] % Left indentation
+#+LATEX_HEADER: 	{\addvspace{2pt}\sffamily\small} % Before code
+#+LATEX_HEADER: 	{\thecontentslabel\hspace*{1em}} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{~\titlerule*[6pt]{.}~\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+#+LATEX_HEADER: 	[] % After code
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % List of tables entries
+#+LATEX_HEADER: \titlecontents{table} % Section type being modified
+#+LATEX_HEADER: 	[0cm] % Left indentation
+#+LATEX_HEADER: 	{\addvspace{2pt}\sffamily\small} % Before code
+#+LATEX_HEADER: 	{\thecontentslabel\hspace*{1em}} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{~\titlerule*[6pt]{.}~\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+#+LATEX_HEADER: 	[] % After code
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlecontents{lchapter} % Chapter headings on part pages
+#+LATEX_HEADER: 	[0cm] % Left indentation
+#+LATEX_HEADER: 	{\addvspace{12pt}\large\sffamily\bfseries\hypersetup{linkcolor=ocre}} % Before code
+#+LATEX_HEADER: 	{\color{ocre}\contentslabel[\Large\thecontentslabel]{1.25cm}} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{\color{ocre}} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{~\color{ocre!60}\normalsize\titlerule*[6pt]{.}~\color{ocre}\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlecontents{lsection} % Section headings on part pages
+#+LATEX_HEADER: 	[0cm] % Left indentation
+#+LATEX_HEADER: 	{\sffamily\small} % Before code
+#+LATEX_HEADER: 	{\contentslabel[\thecontentslabel]{1.25cm}} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{~{\normalfont\titlerule*[6pt]{.}}~\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \titlecontents{lsubsection} % Subsection headings on part pages
+#+LATEX_HEADER: 	[0cm] % Left indentation
+#+LATEX_HEADER: 	{\sffamily\footnotesize} % Before code
+#+LATEX_HEADER: 	{\contentslabel[\thecontentslabel]{1.25cm}\hspace{0.5cm}} % Formatting of numbered sections of this type
+#+LATEX_HEADER: 	{} % Formatting of numberless sections of this type
+#+LATEX_HEADER: 	{~{\normalfont\titlerule*[6pt]{.}}~\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	BIBLIOGRAPHY
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage[
+#+LATEX_HEADER: 	backend=biber, % Use the biber engine for compiling the bibliography
+#+LATEX_HEADER: 	bibstyle=numeric, % Main bibliography style
+#+LATEX_HEADER: 	citestyle=numeric, % In-text citation style
+#+LATEX_HEADER: 	sorting=nyt, % Sort references in the bibliography by name, then year, then title
+#+LATEX_HEADER: 	sortcites=true, % If multiple citekeys are passed to a citation command, sort them in the citation
+#+LATEX_HEADER: 	abbreviate=false, % Suppress abbreviations such as "Ed." for Editor
+#+LATEX_HEADER: 	backref=true, % List the page where references were cited in the bibliography
+#+LATEX_HEADER: 	defernumbers=true,
+#+LATEX_HEADER: ]{biblatex}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \defbibheading{bibempty}{} % Suppress default bibliography headings
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	INDEX
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{makeidx} % Required to make an index
+#+LATEX_HEADER:
+#+LATEX_HEADER: \makeindex % Tells LaTeX to create the files required for indexing
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Modify the command to output the index to output the correctly styled Index name to the page headers
+#+LATEX_HEADER: \patchcmd{\theindex}
+#+LATEX_HEADER: 	{\MakeUppercase\indexname} % Find
+#+LATEX_HEADER: 	{\sffamily\normalsize\bfseries\indexname} % Replace
+#+LATEX_HEADER: 	{}
+#+LATEX_HEADER: 	{}
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	 TABLES
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{array} % Required for manipulating table elements
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}} % Define a new right-aligned paragraph column type
+#+LATEX_HEADER: \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}} % Define a new left-aligned (no justification) paragraph column type
+#+LATEX_HEADER: \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} % Define a new centered paragraph column type
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{booktabs} % Required for high quality horizontal rules in tables
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	 LISTS
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{enumitem} % Required for list customization
+#+LATEX_HEADER:
+#+LATEX_HEADER: \setlist{nolistsep, noitemsep} % Customize spacing inside and outside lists
+#+LATEX_HEADER:
+#+LATEX_HEADER: \renewcommand{\labelenumi}{\arabic{enumi}.} % Customize the first level numbered list characters
+#+LATEX_HEADER: \renewcommand{\labelenumii}{\alph{enumii}.} % Customize the second level numbered list characters
+#+LATEX_HEADER: \renewcommand{\labelenumiii}{\roman{enumiii}.} % Customize the third level numbered list characters
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \renewcommand{\labelitemi}{\raisebox{-2pt}{\Large \textbullet}} % Customize the first level bullet point character
+#+LATEX_HEADER: \renewcommand{\labelitemii}{--} % Customize the second level bullet point character
+#+LATEX_HEADER: \renewcommand{\labelitemiii}{$\circ$} % Customize the third level bullet point character
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	LINKS
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{hyperref}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \hypersetup{
+#+LATEX_HEADER: 	colorlinks=true, % Whether to color links (a thin box is output around links if this is false)
+#+LATEX_HEADER: 	%hidelinks, % Hide the default boxes around links
+#+LATEX_HEADER: 	urlcolor=ocre, % Color for \url and \href links
+#+LATEX_HEADER: 	linkcolor=black, % Color for \ref/\nameref links
+#+LATEX_HEADER: 	citecolor=ocre, % Color for reference citations like \cite{}
+#+LATEX_HEADER: 	hyperindex=true, % Adds links from the page numbers in the index to the relevant page
+#+LATEX_HEADER: 	linktoc=all, % Link from section names and page numbers in the table of contents
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	BOOKMARKS
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{bookmark} % Required for customizing PDF bookmarks
+#+LATEX_HEADER:
+#+LATEX_HEADER: \bookmarksetup{
+#+LATEX_HEADER: 	open, % Open all bookmark drawers automatically
+#+LATEX_HEADER: 	numbered, % Add section numbers to bookmarks
+#+LATEX_HEADER: 	addtohook={%
+#+LATEX_HEADER: 		\ifnum\bookmarkget{level}=-1 % Customize part bookmarks
+#+LATEX_HEADER: 			\bookmarksetup{color=ocre, bold}% Bold and colored
+#+LATEX_HEADER: 		\fi
+#+LATEX_HEADER: 		\ifnum\bookmarkget{level}=0 % Customize chapter bookmarks
+#+LATEX_HEADER: 			\bookmarksetup{bold}% Bold
+#+LATEX_HEADER: 		\fi
+#+LATEX_HEADER: 	}
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	TITLE PAGE
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \renewcommand{\titlepage}[2]{
+#+LATEX_HEADER: 	\thispagestyle{empty} % Suppress headers and footers on the title page
+#+LATEX_HEADER:
+#+LATEX_HEADER: 	\begin{tikzpicture}[remember picture, overlay]
+#+LATEX_HEADER: 		\node [inner sep=0pt] at (current page.center) {#1}; % Background image
+#+LATEX_HEADER: 		\node [anchor=center, inner sep=1.25cm, rectangle, fill=ocre!30!white, fill opacity=0.6, text opacity=1, minimum height=0.2\paperheight, minimum width=\paperwidth, text width=0.8\paperwidth] at (current page.center) {#2}; % Title highlight box with title(s) and author(s)
+#+LATEX_HEADER: 	\end{tikzpicture}
+#+LATEX_HEADER:
+#+LATEX_HEADER: 	\newpage
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	THEOREM STYLES
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{amsmath, amsfonts, amssymb, amsthm} % For math equations, theorems, symbols, etc
+#+LATEX_HEADER:
+#+LATEX_HEADER: \renewcommand{\qedsymbol}{$\blacksquare$} % Redefine the QED symbol to be a filled square vs. the default unfilled square
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Orange theorem number and optional black title with padding above and below
+#+LATEX_HEADER: \newtheoremstyle{ocrenum} % Theorem style name
+#+LATEX_HEADER: 	{6pt} % Space above
+#+LATEX_HEADER: 	{6pt} % Space below
+#+LATEX_HEADER: 	{\normalfont} % Body font
+#+LATEX_HEADER: 	{} % Indent amount
+#+LATEX_HEADER: 	{} % Theorem head font
+#+LATEX_HEADER: 	{} % Punctuation after theorem head
+#+LATEX_HEADER: 	{0.25em} % Space after theorem head
+#+LATEX_HEADER: 	{\small\sffamily\bfseries\color{ocre}\thmname{#1}~\thmnumber{\@ifnotempty{#1}{}\@upn{#2}} % Theorem text (e.g. Theorem 2.1)
+#+LATEX_HEADER: 	\thmnote{\the\thm@notefont\sffamily\bfseries\color{black}---~#3.\hspace{0.25em}}} % Optional theorem note
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Orange theorem number and optional black title with no padding above and below
+#+LATEX_HEADER: \newtheoremstyle{ocrenumbox} % Theorem style name
+#+LATEX_HEADER: 	{0pt} % Space above
+#+LATEX_HEADER: 	{0pt} % Space below
+#+LATEX_HEADER: 	{\normalfont} % Body font
+#+LATEX_HEADER: 	{} % Indent amount
+#+LATEX_HEADER: 	{} % Theorem head font
+#+LATEX_HEADER: 	{} % Punctuation after theorem head
+#+LATEX_HEADER: 	{0.25em} % Space after theorem head
+#+LATEX_HEADER: 	{\small\sffamily\bfseries\color{ocre}\thmname{#1}~\thmnumber{\@ifnotempty{#1}{}\@upn{#2}} % Theorem text (e.g. Theorem 2.1)
+#+LATEX_HEADER: 	\thmnote{\the\thm@notefont\sffamily\bfseries\color{black}---~#3.\hspace{0.25em}}} % Optional theorem note
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Black theorem number and optional black title no padding above and below
+#+LATEX_HEADER: \newtheoremstyle{blacknumex} % Theorem style name
+#+LATEX_HEADER: 	{6pt} % Space above
+#+LATEX_HEADER: 	{6pt} % Space below
+#+LATEX_HEADER: 	{\normalfont} % Body font
+#+LATEX_HEADER: 	{} % Indent amount
+#+LATEX_HEADER: 	{} % Theorem head font
+#+LATEX_HEADER: 	{} % Punctuation after theorem head
+#+LATEX_HEADER: 	{0.25em} % Space after theorem head
+#+LATEX_HEADER: 	{\small\sffamily\bfseries{\raisebox{1.25pt}{\tiny\ensuremath{\blacksquare}}}~\thmname{#1}~\thmnumber{\@ifnotempty{#1}{}\@upn{#2}} % Theorem text (e.g. Theorem 2.1)
+#+LATEX_HEADER: 	\thmnote{\the\thm@notefont\sffamily\bfseries---~#3.\hspace{0.25em}}} % Optional theorem note
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Black theorem number and optional black title padding above and below
+#+LATEX_HEADER: \newtheoremstyle{blacknumbox} % Theorem style name
+#+LATEX_HEADER: 	{0pt} % Space above
+#+LATEX_HEADER: 	{0pt} % Space below
+#+LATEX_HEADER: 	{\normalfont} % Body font
+#+LATEX_HEADER: 	{} % Indent amount
+#+LATEX_HEADER: 	{} % Theorem head font
+#+LATEX_HEADER: 	{} % Punctuation after theorem head
+#+LATEX_HEADER: 	{0.25em} % Space after theorem head
+#+LATEX_HEADER: 	{\small\sffamily\bfseries\thmname{#1}~\thmnumber{\@ifnotempty{#1}{}\@upn{#2}} % Theorem text (e.g. Theorem 2.1)
+#+LATEX_HEADER: 	\thmnote{\the\thm@notefont\sffamily\bfseries---~#3.\hspace{0.25em}}} % Optional theorem note
+#+LATEX_HEADER:
+#+LATEX_HEADER: %------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Set the theorem style for each type of theorem-like environment by placing it under the theorem style you would like to use for it
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Orange theorem number and optional black title with padding above and below
+#+LATEX_HEADER: \theoremstyle{ocrenum}
+#+LATEX_HEADER: \newtheorem{proposition}{Proposition}[chapter] % Propositions, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Orange theorem number and optional black title with no padding above and below
+#+LATEX_HEADER: \theoremstyle{ocrenumbox}
+#+LATEX_HEADER: \newtheorem{theoremeT}{Theorem}[chapter] % Theorems, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+#+LATEX_HEADER: \newtheorem{problem}{Problem}[chapter] % Problems, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+#+LATEX_HEADER: \newtheorem{exerciseT}{Exercise}[chapter] % Exercises, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Black theorem number and optional black title no padding above and below
+#+LATEX_HEADER: \theoremstyle{blacknumex}
+#+LATEX_HEADER: \newtheorem{exampleT}{Example}[chapter] % Examples, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+#+LATEX_HEADER: \newtheorem{notation}{Notation}[chapter] % Notations, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+#+LATEX_HEADER: \newtheorem{vocabulary}{Vocabulary}[chapter] % Vocabularies, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Black theorem number and optional black title with padding above and below
+#+LATEX_HEADER: \theoremstyle{blacknumbox}
+#+LATEX_HEADER: \newtheorem{definitionT}{Definition}[chapter] % Definitions, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+#+LATEX_HEADER: \newtheorem{corollaryT}{Corollary}[chapter] % Corollaries, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	COLORED THEOREM BOXES
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: \usepackage[framemethod=default]{mdframed} % Required for creating colored boxes used for theorems, definitions, exercises and corollaries
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Theorem box
+#+LATEX_HEADER: \newmdenv[
+#+LATEX_HEADER: 	skipabove=7pt, % Whitespace above box
+#+LATEX_HEADER: 	skipbelow=7pt, % Whitespace below box
+#+LATEX_HEADER: 	backgroundcolor=black!5, % Background color
+#+LATEX_HEADER: 	linecolor=ocre, % Border color
+#+LATEX_HEADER: 	innerleftmargin=5pt, % Inside left margin width
+#+LATEX_HEADER: 	innerrightmargin=5pt, % Inside right margin width
+#+LATEX_HEADER: 	innertopmargin=5pt, % Inside top margin height
+#+LATEX_HEADER: 	innerbottommargin=5pt, % Inside bottom margin height
+#+LATEX_HEADER: 	leftmargin=0cm, % Outside left margin width
+#+LATEX_HEADER: 	rightmargin=0cm % Outside right margin width
+#+LATEX_HEADER: ]{tBox}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Exercise box
+#+LATEX_HEADER: \newmdenv[
+#+LATEX_HEADER: 	skipabove=7pt, % Whitespace above box
+#+LATEX_HEADER: 	skipbelow=7pt, % Whitespace below box
+#+LATEX_HEADER: 	rightline=false, % Right line visible
+#+LATEX_HEADER: 	leftline=true, % Left line visible
+#+LATEX_HEADER: 	topline=false, % Top line visible
+#+LATEX_HEADER: 	bottomline=false, % Bottom line visible
+#+LATEX_HEADER: 	linecolor=ocre, % Line color
+#+LATEX_HEADER: 	linewidth=4pt, % Line width
+#+LATEX_HEADER: 	backgroundcolor=ocre!10, % Background color
+#+LATEX_HEADER: 	innerleftmargin=5pt, % Inside left margin width
+#+LATEX_HEADER: 	innerrightmargin=5pt, % Inside right margin width
+#+LATEX_HEADER: 	innertopmargin=5pt, % Inside top margin height
+#+LATEX_HEADER: 	innerbottommargin=5pt, % Inside bottom margin height
+#+LATEX_HEADER: 	leftmargin=0cm, % Outside left margin width
+#+LATEX_HEADER: 	rightmargin=0cm % Outside right margin width
+#+LATEX_HEADER: ]{eBox}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Definition box
+#+LATEX_HEADER: \newmdenv[
+#+LATEX_HEADER: 	skipabove=7pt, % Whitespace above box
+#+LATEX_HEADER: 	skipbelow=7pt, % Whitespace below box
+#+LATEX_HEADER: 	rightline=false, % Right line visible
+#+LATEX_HEADER: 	leftline=true, % Left line visible
+#+LATEX_HEADER: 	topline=false, % Top line visible
+#+LATEX_HEADER: 	bottomline=false, % Bottom line visible
+#+LATEX_HEADER: 	linecolor=ocre, % Border color
+#+LATEX_HEADER: 	linewidth=4pt, % Border width
+#+LATEX_HEADER: 	innerleftmargin=5pt, % Inside left margin width
+#+LATEX_HEADER: 	innerrightmargin=5pt, % Inside right margin width
+#+LATEX_HEADER: 	innertopmargin=0pt, % Inside top margin height
+#+LATEX_HEADER: 	innerbottommargin=0pt, % Inside bottom margin height
+#+LATEX_HEADER: 	leftmargin=0cm, % Outside left margin width
+#+LATEX_HEADER: 	rightmargin=0cm % Outside right margin width
+#+LATEX_HEADER: ]{dBox}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Corollary box
+#+LATEX_HEADER: \newmdenv[
+#+LATEX_HEADER: 	skipabove=7pt, % Whitespace above box
+#+LATEX_HEADER: 	skipbelow=7pt, % Whitespace below box
+#+LATEX_HEADER: 	rightline=false, % Right line visible
+#+LATEX_HEADER: 	leftline=true, % Left line visible
+#+LATEX_HEADER: 	topline=false, % Top line visible
+#+LATEX_HEADER: 	bottomline=false, % Bottom line visible
+#+LATEX_HEADER: 	linecolor=gray, % Line color
+#+LATEX_HEADER: 	linewidth=4pt, % Line width
+#+LATEX_HEADER: 	backgroundcolor=black!5, % Background color
+#+LATEX_HEADER: 	innerleftmargin=5pt, % Inside left margin width
+#+LATEX_HEADER: 	innerrightmargin=5pt, % Inside right margin width
+#+LATEX_HEADER: 	innertopmargin=5pt, % Inside top margin height
+#+LATEX_HEADER: 	innerbottommargin=5pt, % Inside bottom margin height
+#+LATEX_HEADER: 	leftmargin=0cm, % Outside left margin width
+#+LATEX_HEADER: 	rightmargin=0cm % Outside right margin width
+#+LATEX_HEADER: ]{cBox}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Creates an environment for each type of theorem and assigns it a theorem text style from the THEOREM STYLES block above and a colored box from above
+#+LATEX_HEADER: \newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
+#+LATEX_HEADER: \newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}
+#+LATEX_HEADER: \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
+#+LATEX_HEADER: \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
+#+LATEX_HEADER: \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	REMARK ENVIRONMENT
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newenvironment{remark}{%
+#+LATEX_HEADER: 	\par\small % Reduce font size for remarks
+#+LATEX_HEADER: 	\vspace{4pt} % Vertical whitespace
+#+LATEX_HEADER: 	\begin{adjustwidth}{35pt}{25pt} % Left and right padding
+#+LATEX_HEADER: 		\hspace{-2.5pt}%
+#+LATEX_HEADER: 		\begin{tikzpicture}[overlay]
+#+LATEX_HEADER: 			\node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=3pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{R}}; % Orange R in a circle
+#+LATEX_HEADER: 		\end{tikzpicture}
+#+LATEX_HEADER: 	\advance\baselineskip -1pt% Reduce line spacing
+#+LATEX_HEADER: }{%
+#+LATEX_HEADER: 	\end{adjustwidth}
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	 LOAD PACKAGES THAT CLASH WITH OTHER PACKAGES
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{tikz} % Required for drawing custom shapes and positioning elements absolutely on the page

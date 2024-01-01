@@ -37,7 +37,8 @@
       emacs = {
         enable = true;
         daemon.enable = true;
-        telega.enable = false;
+        telega.enable = true;
+        orgSetupFiles.enable = true;
       };
       intellij.enable = true;
       vscode.enable = true;

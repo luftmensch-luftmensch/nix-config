@@ -1,0 +1,99 @@
+* Template structure
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [letterpaper, 11pt, fleqn]
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Package requirements
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{tikz}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Hyperlink customization
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: \hypersetup{ colorlinks=true, linkcolor=oneyellow, filecolor=magenta, urlcolor=onecyan }
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Beamer customization
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \useinnertheme{rectangles}
+#+LATEX_HEADER: \setbeamertemplate{itemize subitem}[circle]
+#+LATEX_HEADER: \setbeamertemplate{navigation symbols}{}
+#+LATEX_HEADER: \setbeamercolor{frametitle}{fg=white}
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Color definition
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \definecolor{onedark}{HTML}{282C34}
+#+LATEX_HEADER: \definecolor{oneorange}{HTML}{E0657C}
+#+LATEX_HEADER: \definecolor{oneyellow}{HTML}{E5C07B}
+#+LATEX_HEADER: \definecolor{onegreen}{HTML}{98C379}
+#+LATEX_HEADER: \definecolor{oneblue}{HTML}{61AFEF}
+#+LATEX_HEADER: \definecolor{onecyan}{HTML}{56B6C2}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Beamer structure color customization
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \setbeamercolor{background canvas}{bg=onedark}
+#+LATEX_HEADER: \setbeamercolor{normal text}{fg=white}
+#+LATEX_HEADER: \setbeamercolor{itemize item}{fg=oneyellow}
+#+LATEX_HEADER: \setbeamercolor{itemize subitem}{fg=oneblue}
+#+LATEX_HEADER: \setbeamercolor{itemize subsubitem}{fg=oneocyan}
+#+LATEX_HEADER: \setbeamercolor{title}{fg=oneblue}
+#+LATEX_HEADER: \setbeamercolor{author}{fg=onecyan}
+#+LATEX_HEADER: \setbeamercolor{date}{fg=oneyellow}
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LATEX_HEADER: \setbeamerfont{date}{size=\footnotesize}
+#+LATEX_HEADER: \setbeamercolor{alerted text}{fg=oneyellow}
+#+LATEX_HEADER: \setbeamercolor{frametitle}{fg=oneblue}
+#+LATEX_HEADER: \setbeamertemplate{frametitle}{%
+#+LATEX_HEADER:   \vspace{0.1cm}
+#+LATEX_HEADER:   \insertframetitle
+#+LATEX_HEADER:   \vspace{0.1cm}
+#+LATEX_HEADER:   \hrule
+#+LATEX_HEADER: }
+#+LATEX_HEADER: \setbeamertemplate{itemize item}{
+#+LATEX_HEADER:   \tikz{
+#+LATEX_HEADER:     \draw[fill=oneyellow, draw=none] (0,-0.5pt) circle (1.50pt);
+#+LATEX_HEADER:     \draw[oneyellow, thick] (0.6pt,-1pt) arc(0:270:3pt and 3.5pt);
+#+LATEX_HEADER:     \draw[fill=oneyellow, draw=none] (-3pt, 0) circle (1.5pt);
+#+LATEX_HEADER:     \draw[oneyellow, thick] (-3.6pt,0) arc(180:445:3pt and 3.5pt);
+#+LATEX_HEADER:   }
+#+LATEX_HEADER: }
+* Documentation
+#+begin_src latex
+\title{A beamer dark color theme using onedark colors}
+\author{Md Arif Shaikh}
+\institute{{\color{onecyan}International Centre for Theoretical Sciences, Bangalore, India}}
+\date{\today}
+
+\begin{document}
+\thispagestyle{empty}
+\maketitle
+\begin{frame}
+  {A frame title}
+  First, few bullet points
+  \begin{itemize}
+  \item First item.
+  \item Second item.
+    \begin{itemize}
+    \item First sub item.
+    \item Second sub item.
+    \end{itemize}
+  \item Third bullet point.
+  \end{itemize}
+  Now, an equation
+  \begin{equation}
+    \label{eq:equation}
+    R_{\mu\nu} + \frac{1}{2} g_{\mu\nu} R = \frac{8\pi G}{c^4} T_{\mu \nu}
+  \end{equation}
+  \alert{Some alerted texts}. Finally, the \href{https://github.com/md-arif-shaikh/beamer-one-dark}{link to the repository.}
+\end{frame}
+\end{document}
+#+end_src

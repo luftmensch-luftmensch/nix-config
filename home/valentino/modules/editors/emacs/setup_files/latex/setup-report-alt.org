@@ -1,0 +1,1020 @@
+#+LaTeX_CLASS: report
+#+LaTeX_CLASS_OPTIONS: [letterpaper, 11pt, fleqn]
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Package requirements
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \usepackage[tmargin=2cm,rmargin=1in,lmargin=1in,margin=0.85in,bmargin=2cm,footskip=.2in]{geometry}
+#+LATEX_HEADER: \usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools}
+#+LATEX_HEADER: \usepackage[varbb]{newpxmath}
+#+LATEX_HEADER: \usepackage{xfrac}
+#+LATEX_HEADER: \usepackage[makeroom]{cancel}
+#+LATEX_HEADER: \usepackage{mathtools}
+#+LATEX_HEADER: \usepackage{bookmark}
+#+LATEX_HEADER: \usepackage{enumitem}
+#+LATEX_HEADER: \usepackage{hyperref,theoremref}
+#+LATEX_HEADER: \hypersetup{
+#+LATEX_HEADER: 	pdftitle={Assignment},
+#+LATEX_HEADER: 	colorlinks=true, linkcolor=doc!90,
+#+LATEX_HEADER: 	bookmarksnumbered=true,
+#+LATEX_HEADER: 	bookmarksopen=true
+#+LATEX_HEADER: }
+#+LATEX_HEADER: \usepackage[most,many,breakable]{tcolorbox}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage{varwidth}
+#+LATEX_HEADER: \usepackage{varwidth}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: %\usepackage{authblk}
+#+LATEX_HEADER: \usepackage{nameref}
+#+LATEX_HEADER: \usepackage{multicol,array}
+#+LATEX_HEADER: \usepackage{tikz-cd}
+#+LATEX_HEADER: \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+#+LATEX_HEADER: \usepackage{comment} % enables the use of multi-line comments (\ifx \fi)
+#+LATEX_HEADER: \usepackage{import}
+#+LATEX_HEADER: \usepackage{xifthen}
+#+LATEX_HEADER: \usepackage{pdfpages}
+#+LATEX_HEADER: \usepackage{transparent}
+#+LATEX_HEADER: \usepackage{tikzsymbols}
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Commands
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
+#+LATEX_HEADER: \newcommand{\incfig}[1]{%
+#+LATEX_HEADER:     \def\svgwidth{\columnwidth}
+#+LATEX_HEADER:     \import{./figures/}{#1.pdf_tex}
+#+LATEX_HEADER: }
+#+LATEX_HEADER: \renewcommand\qedsymbol{$\Laughey$}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Macros
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: %From M275 "Topology" at SJSU
+#+LATEX_HEADER: \newcommand{\id}{\mathrm{id}}
+#+LATEX_HEADER: \newcommand{\taking}[1]{\xrightarrow{#1}}
+#+LATEX_HEADER: \newcommand{\inv}{^{-1}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: %From M170 "Introduction to Graph Theory" at SJSU
+#+LATEX_HEADER: \DeclareMathOperator{\diam}{diam}
+#+LATEX_HEADER: \DeclareMathOperator{\ord}{ord}
+#+LATEX_HEADER: \newcommand{\defeq}{\overset{\mathrm{def}}{=}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: %From the USAMO .tex files
+#+LATEX_HEADER: \newcommand{\ts}{\textsuperscript}
+#+LATEX_HEADER: \newcommand{\dg}{^\circ}
+#+LATEX_HEADER: \newcommand{\ii}{\item}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand{\liff}{\leftrightarrow}
+#+LATEX_HEADER: \newcommand{\lthen}{\rightarrow}
+#+LATEX_HEADER: \newcommand{\opname}{\operatorname}
+#+LATEX_HEADER: \newcommand{\surjto}{\twoheadrightarrow}
+#+LATEX_HEADER: \newcommand{\injto}{\hookrightarrow}
+#+LATEX_HEADER: \newcommand{\On}{\mathrm{On}} % ordinals
+#+LATEX_HEADER: \DeclareMathOperator{\img}{im} % Image
+#+LATEX_HEADER: \DeclareMathOperator{\Img}{Im} % Image
+#+LATEX_HEADER: \DeclareMathOperator{\coker}{coker} % Cokernel
+#+LATEX_HEADER: \DeclareMathOperator{\Coker}{Coker} % Cokernel
+#+LATEX_HEADER: \DeclareMathOperator{\Ker}{Ker} % Kernel
+#+LATEX_HEADER: \DeclareMathOperator{\rank}{rank}
+#+LATEX_HEADER: \DeclareMathOperator{\Spec}{Spec} % spectrum
+#+LATEX_HEADER: \DeclareMathOperator{\Tr}{Tr} % trace
+#+LATEX_HEADER: \DeclareMathOperator{\pr}{pr} % projection
+#+LATEX_HEADER: \DeclareMathOperator{\ext}{ext} % extension
+#+LATEX_HEADER: \DeclareMathOperator{\pred}{pred} % predecessor
+#+LATEX_HEADER: \DeclareMathOperator{\dom}{dom} % domain
+#+LATEX_HEADER: \DeclareMathOperator{\ran}{ran} % range
+#+LATEX_HEADER: \DeclareMathOperator{\Hom}{Hom} % homomorphism
+#+LATEX_HEADER: \DeclareMathOperator{\Mor}{Mor} % morphisms
+#+LATEX_HEADER: \DeclareMathOperator{\End}{End} % endomorphism
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand{\eps}{\epsilon}
+#+LATEX_HEADER: \newcommand{\veps}{\varepsilon}
+#+LATEX_HEADER: \newcommand{\ol}{\overline}
+#+LATEX_HEADER: \newcommand{\ul}{\underline}
+#+LATEX_HEADER: \newcommand{\wt}{\widetilde}
+#+LATEX_HEADER: \newcommand{\wh}{\widehat}
+#+LATEX_HEADER: \newcommand{\vocab}[1]{\textbf{\color{blue} #1}}
+#+LATEX_HEADER: \providecommand{\half}{\frac{1}{2}}
+#+LATEX_HEADER: \newcommand{\dang}{\measuredangle} %% Directed angle
+#+LATEX_HEADER: \newcommand{\ray}[1]{\overrightarrow{#1}}
+#+LATEX_HEADER: \newcommand{\seg}[1]{\overline{#1}}
+#+LATEX_HEADER: \newcommand{\arc}[1]{\wideparen{#1}}
+#+LATEX_HEADER: \DeclareMathOperator{\cis}{cis}
+#+LATEX_HEADER: \DeclareMathOperator*{\lcm}{lcm}
+#+LATEX_HEADER: \DeclareMathOperator*{\argmin}{arg min}
+#+LATEX_HEADER: \DeclareMathOperator*{\argmax}{arg max}
+#+LATEX_HEADER: \newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
+#+LATEX_HEADER: \newcommand{\symsum}{\sum_{\mathrm{sym}}}
+#+LATEX_HEADER: \newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
+#+LATEX_HEADER: \newcommand{\symprod}{\prod_{\mathrm{sym}}}
+#+LATEX_HEADER: \newcommand{\Qed}{\begin{flushright}\qed\end{flushright}}
+#+LATEX_HEADER: \newcommand{\parinn}{\setlength{\parindent}{1cm}}
+#+LATEX_HEADER: \newcommand{\parinf}{\setlength{\parindent}{0cm}}
+
+#+LATEX_HEADER: \newcommand{\inorm}{\norm_{\infty}}
+#+LATEX_HEADER: \newcommand{\opensets}{\{V_{\alpha}\}_{\alpha\in I}}
+#+LATEX_HEADER: \newcommand{\oset}{V_{\alpha}}
+#+LATEX_HEADER: \newcommand{\opset}[1]{V_{\alpha_{#1}}}
+#+LATEX_HEADER: \newcommand{\lub}{\text{lub}}
+#+LATEX_HEADER: \newcommand{\del}[2]{\frac{\partial #1}{\partial #2}}
+#+LATEX_HEADER: \newcommand{\Del}[3]{\frac{\partial^{#1} #2}{\partial^{#1} #3}}
+#+LATEX_HEADER: \newcommand{\deld}[2]{\dfrac{\partial #1}{\partial #2}}
+#+LATEX_HEADER: \newcommand{\Deld}[3]{\dfrac{\partial^{#1} #2}{\partial^{#1} #3}}
+#+LATEX_HEADER: \newcommand{\lm}{\lambda}
+#+LATEX_HEADER: \newcommand{\uin}{\mathbin{\rotatebox[origin=c]{90}{$\in$}}}
+#+LATEX_HEADER: \newcommand{\usubset}{\mathbin{\rotatebox[origin=c]{90}{$\subset$}}}
+#+LATEX_HEADER: \newcommand{\lt}{\left}
+#+LATEX_HEADER: \newcommand{\rt}{\right}
+#+LATEX_HEADER: \newcommand{\bs}[1]{\boldsymbol{#1}}
+#+LATEX_HEADER: \newcommand{\exs}{\exists}
+#+LATEX_HEADER: \newcommand{\st}{\strut}
+#+LATEX_HEADER: \newcommand{\dps}[1]{\displaystyle{#1}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand{\sol}{\setlength{\parindent}{0cm}\textbf{\textit{Solution:}}\setlength{\parindent}{1cm} }
+#+LATEX_HEADER: \newcommand{\solve}[1]{\setlength{\parindent}{0cm}\textbf{\textit{Solution: }}\setlength{\parindent}{1cm}#1 \Qed}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Letterfonts
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: % Things Lie
+#+LATEX_HEADER: \newcommand{\kb}{\mathfrak b}
+#+LATEX_HEADER: \newcommand{\kg}{\mathfrak g}
+#+LATEX_HEADER: \newcommand{\kh}{\mathfrak h}
+#+LATEX_HEADER: \newcommand{\kn}{\mathfrak n}
+#+LATEX_HEADER: \newcommand{\ku}{\mathfrak u}
+#+LATEX_HEADER: \newcommand{\kz}{\mathfrak z}
+#+LATEX_HEADER: \DeclareMathOperator{\Ext}{Ext} % Ext functor
+#+LATEX_HEADER: \DeclareMathOperator{\Tor}{Tor} % Tor functor
+#+LATEX_HEADER: \newcommand{\gl}{\opname{\mathfrak{gl}}} % frak gl group
+#+LATEX_HEADER: \renewcommand{\sl}{\opname{\mathfrak{sl}}} % frak sl group chktex 6
+#+LATEX_HEADER:
+#+LATEX_HEADER: % More script letters etc.
+#+LATEX_HEADER: \newcommand{\SA}{\mathcal A}
+#+LATEX_HEADER: \newcommand{\SB}{\mathcal B}
+#+LATEX_HEADER: \newcommand{\SC}{\mathcal C}
+#+LATEX_HEADER: \newcommand{\SF}{\mathcal F}
+#+LATEX_HEADER: \newcommand{\SG}{\mathcal G}
+#+LATEX_HEADER: \newcommand{\SH}{\mathcal H}
+#+LATEX_HEADER: \newcommand{\OO}{\mathcal O}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand{\SCA}{\mathscr A}
+#+LATEX_HEADER: \newcommand{\SCB}{\mathscr B}
+#+LATEX_HEADER: \newcommand{\SCC}{\mathscr C}
+#+LATEX_HEADER: \newcommand{\SCD}{\mathscr D}
+#+LATEX_HEADER: \newcommand{\SCE}{\mathscr E}
+#+LATEX_HEADER: \newcommand{\SCF}{\mathscr F}
+#+LATEX_HEADER: \newcommand{\SCG}{\mathscr G}
+#+LATEX_HEADER: \newcommand{\SCH}{\mathscr H}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Mathfrak primes
+#+LATEX_HEADER: \newcommand{\km}{\mathfrak m}
+#+LATEX_HEADER: \newcommand{\kp}{\mathfrak p}
+#+LATEX_HEADER: \newcommand{\kq}{\mathfrak q}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % number sets
+#+LATEX_HEADER: \newcommand{\RR}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{R}}{\mathbb{R}^{#1}}}}
+#+LATEX_HEADER: \newcommand{\NN}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{N}}{\mathbb{N}^{#1}}}}
+#+LATEX_HEADER: \newcommand{\ZZ}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Z}}{\mathbb{Z}^{#1}}}}
+#+LATEX_HEADER: \newcommand{\QQ}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Q}}{\mathbb{Q}^{#1}}}}
+#+LATEX_HEADER: \newcommand{\CC}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{C}}{\mathbb{C}^{#1}}}}
+#+LATEX_HEADER: \newcommand{\PP}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{P}}{\mathbb{P}^{#1}}}}
+#+LATEX_HEADER: \newcommand{\HH}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{H}}{\mathbb{H}^{#1}}}}
+#+LATEX_HEADER: \newcommand{\FF}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{F}}{\mathbb{F}^{#1}}}}
+#+LATEX_HEADER: % expected value
+#+LATEX_HEADER: \newcommand{\EE}{\ensuremath{\mathbb{E}}}
+#+LATEX_HEADER: \newcommand{\charin}{\text{ char }}
+#+LATEX_HEADER: \DeclareMathOperator{\sign}{sign}
+#+LATEX_HEADER: \DeclareMathOperator{\Aut}{Aut}
+#+LATEX_HEADER: \DeclareMathOperator{\Inn}{Inn}
+#+LATEX_HEADER: \DeclareMathOperator{\Syl}{Syl}
+#+LATEX_HEADER: \DeclareMathOperator{\Gal}{Gal}
+#+LATEX_HEADER: \DeclareMathOperator{\GL}{GL} % General linear group
+#+LATEX_HEADER: \DeclareMathOperator{\SL}{SL} % Special linear group
+#+LATEX_HEADER:
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER: % BlackBoard Math Fonts :-
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: %Captital Letters
+#+LATEX_HEADER: \newcommand{\bbA}{\mathbb{A}}	\newcommand{\bbB}{\mathbb{B}}
+#+LATEX_HEADER: \newcommand{\bbC}{\mathbb{C}}	\newcommand{\bbD}{\mathbb{D}}
+#+LATEX_HEADER: \newcommand{\bbE}{\mathbb{E}}	\newcommand{\bbF}{\mathbb{F}}
+#+LATEX_HEADER: \newcommand{\bbG}{\mathbb{G}}	\newcommand{\bbH}{\mathbb{H}}
+#+LATEX_HEADER: \newcommand{\bbI}{\mathbb{I}}	\newcommand{\bbJ}{\mathbb{J}}
+#+LATEX_HEADER: \newcommand{\bbK}{\mathbb{K}}	\newcommand{\bbL}{\mathbb{L}}
+#+LATEX_HEADER: \newcommand{\bbM}{\mathbb{M}}	\newcommand{\bbN}{\mathbb{N}}
+#+LATEX_HEADER: \newcommand{\bbO}{\mathbb{O}}	\newcommand{\bbP}{\mathbb{P}}
+#+LATEX_HEADER: \newcommand{\bbQ}{\mathbb{Q}}	\newcommand{\bbR}{\mathbb{R}}
+#+LATEX_HEADER: \newcommand{\bbS}{\mathbb{S}}	\newcommand{\bbT}{\mathbb{T}}
+#+LATEX_HEADER: \newcommand{\bbU}{\mathbb{U}}	\newcommand{\bbV}{\mathbb{V}}
+#+LATEX_HEADER: \newcommand{\bbW}{\mathbb{W}}	\newcommand{\bbX}{\mathbb{X}}
+#+LATEX_HEADER: \newcommand{\bbY}{\mathbb{Y}}	\newcommand{\bbZ}{\mathbb{Z}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER: % MathCal Fonts :-
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: %Captital Letters
+#+LATEX_HEADER: \newcommand{\mcA}{\mathcal{A}}	\newcommand{\mcB}{\mathcal{B}}
+#+LATEX_HEADER: \newcommand{\mcC}{\mathcal{C}}	\newcommand{\mcD}{\mathcal{D}}
+#+LATEX_HEADER: \newcommand{\mcE}{\mathcal{E}}	\newcommand{\mcF}{\mathcal{F}}
+#+LATEX_HEADER: \newcommand{\mcG}{\mathcal{G}}	\newcommand{\mcH}{\mathcal{H}}
+#+LATEX_HEADER: \newcommand{\mcI}{\mathcal{I}}	\newcommand{\mcJ}{\mathcal{J}}
+#+LATEX_HEADER: \newcommand{\mcK}{\mathcal{K}}	\newcommand{\mcL}{\mathcal{L}}
+#+LATEX_HEADER: \newcommand{\mcM}{\mathcal{M}}	\newcommand{\mcN}{\mathcal{N}}
+#+LATEX_HEADER: \newcommand{\mcO}{\mathcal{O}}	\newcommand{\mcP}{\mathcal{P}}
+#+LATEX_HEADER: \newcommand{\mcQ}{\mathcal{Q}}	\newcommand{\mcR}{\mathcal{R}}
+#+LATEX_HEADER: \newcommand{\mcS}{\mathcal{S}}	\newcommand{\mcT}{\mathcal{T}}
+#+LATEX_HEADER: \newcommand{\mcU}{\mathcal{U}}	\newcommand{\mcV}{\mathcal{V}}
+#+LATEX_HEADER: \newcommand{\mcW}{\mathcal{W}}	\newcommand{\mcX}{\mathcal{X}}
+#+LATEX_HEADER: \newcommand{\mcY}{\mathcal{Y}}	\newcommand{\mcZ}{\mathcal{Z}}
+#+LATEX_HEADER:
+#+LATEX_HEADER:
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER: % Bold Math Fonts :-
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: %Captital Letters
+#+LATEX_HEADER: \newcommand{\bmA}{\boldsymbol{A}}	\newcommand{\bmB}{\boldsymbol{B}}
+#+LATEX_HEADER: \newcommand{\bmC}{\boldsymbol{C}}	\newcommand{\bmD}{\boldsymbol{D}}
+#+LATEX_HEADER: \newcommand{\bmE}{\boldsymbol{E}}	\newcommand{\bmF}{\boldsymbol{F}}
+#+LATEX_HEADER: \newcommand{\bmG}{\boldsymbol{G}}	\newcommand{\bmH}{\boldsymbol{H}}
+#+LATEX_HEADER: \newcommand{\bmI}{\boldsymbol{I}}	\newcommand{\bmJ}{\boldsymbol{J}}
+#+LATEX_HEADER: \newcommand{\bmK}{\boldsymbol{K}}	\newcommand{\bmL}{\boldsymbol{L}}
+#+LATEX_HEADER: \newcommand{\bmM}{\boldsymbol{M}}	\newcommand{\bmN}{\boldsymbol{N}}
+#+LATEX_HEADER: \newcommand{\bmO}{\boldsymbol{O}}	\newcommand{\bmP}{\boldsymbol{P}}
+#+LATEX_HEADER: \newcommand{\bmQ}{\boldsymbol{Q}}	\newcommand{\bmR}{\boldsymbol{R}}
+#+LATEX_HEADER: \newcommand{\bmS}{\boldsymbol{S}}	\newcommand{\bmT}{\boldsymbol{T}}
+#+LATEX_HEADER: \newcommand{\bmU}{\boldsymbol{U}}	\newcommand{\bmV}{\boldsymbol{V}}
+#+LATEX_HEADER: \newcommand{\bmW}{\boldsymbol{W}}	\newcommand{\bmX}{\boldsymbol{X}}
+#+LATEX_HEADER: \newcommand{\bmY}{\boldsymbol{Y}}	\newcommand{\bmZ}{\boldsymbol{Z}}
+#+LATEX_HEADER: %Small Letters
+#+LATEX_HEADER: \newcommand{\bma}{\boldsymbol{a}}	\newcommand{\bmb}{\boldsymbol{b}}
+#+LATEX_HEADER: \newcommand{\bmc}{\boldsymbol{c}}	\newcommand{\bmd}{\boldsymbol{d}}
+#+LATEX_HEADER: \newcommand{\bme}{\boldsymbol{e}}	\newcommand{\bmf}{\boldsymbol{f}}
+#+LATEX_HEADER: \newcommand{\bmg}{\boldsymbol{g}}	\newcommand{\bmh}{\boldsymbol{h}}
+#+LATEX_HEADER: \newcommand{\bmi}{\boldsymbol{i}}	\newcommand{\bmj}{\boldsymbol{j}}
+#+LATEX_HEADER: \newcommand{\bmk}{\boldsymbol{k}}	\newcommand{\bml}{\boldsymbol{l}}
+#+LATEX_HEADER: \newcommand{\bmm}{\boldsymbol{m}}	\newcommand{\bmn}{\boldsymbol{n}}
+#+LATEX_HEADER: \newcommand{\bmo}{\boldsymbol{o}}	\newcommand{\bmp}{\boldsymbol{p}}
+#+LATEX_HEADER: \newcommand{\bmq}{\boldsymbol{q}}	\newcommand{\bmr}{\boldsymbol{r}}
+#+LATEX_HEADER: \newcommand{\bms}{\boldsymbol{s}}	\newcommand{\bmt}{\boldsymbol{t}}
+#+LATEX_HEADER: \newcommand{\bmu}{\boldsymbol{u}}	\newcommand{\bmv}{\boldsymbol{v}}
+#+LATEX_HEADER: \newcommand{\bmw}{\boldsymbol{w}}	\newcommand{\bmx}{\boldsymbol{x}}
+#+LATEX_HEADER: \newcommand{\bmy}{\boldsymbol{y}}	\newcommand{\bmz}{\boldsymbol{z}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER: % Scr Math Fonts :-
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand{\sA}{{\mathscr{A}}}   \newcommand{\sB}{{\mathscr{B}}}
+#+LATEX_HEADER: \newcommand{\sC}{{\mathscr{C}}}   \newcommand{\sD}{{\mathscr{D}}}
+#+LATEX_HEADER: \newcommand{\sE}{{\mathscr{E}}}   \newcommand{\sF}{{\mathscr{F}}}
+#+LATEX_HEADER: \newcommand{\sG}{{\mathscr{G}}}   \newcommand{\sH}{{\mathscr{H}}}
+#+LATEX_HEADER: \newcommand{\sI}{{\mathscr{I}}}   \newcommand{\sJ}{{\mathscr{J}}}
+#+LATEX_HEADER: \newcommand{\sK}{{\mathscr{K}}}   \newcommand{\sL}{{\mathscr{L}}}
+#+LATEX_HEADER: \newcommand{\sM}{{\mathscr{M}}}   \newcommand{\sN}{{\mathscr{N}}}
+#+LATEX_HEADER: \newcommand{\sO}{{\mathscr{O}}}   \newcommand{\sP}{{\mathscr{P}}}
+#+LATEX_HEADER: \newcommand{\sQ}{{\mathscr{Q}}}   \newcommand{\sR}{{\mathscr{R}}}
+#+LATEX_HEADER: \newcommand{\sS}{{\mathscr{S}}}   \newcommand{\sT}{{\mathscr{T}}}
+#+LATEX_HEADER: \newcommand{\sU}{{\mathscr{U}}}   \newcommand{\sV}{{\mathscr{V}}}
+#+LATEX_HEADER: \newcommand{\sW}{{\mathscr{W}}}   \newcommand{\sX}{{\mathscr{X}}}
+#+LATEX_HEADER: \newcommand{\sY}{{\mathscr{Y}}}   \newcommand{\sZ}{{\mathscr{Z}}}
+#+LATEX_HEADER:
+#+LATEX_HEADER:
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER: % Math Fraktur Font
+#+LATEX_HEADER: %---------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: %Captital Letters
+#+LATEX_HEADER: \newcommand{\mfA}{\mathfrak{A}}	\newcommand{\mfB}{\mathfrak{B}}
+#+LATEX_HEADER: \newcommand{\mfC}{\mathfrak{C}}	\newcommand{\mfD}{\mathfrak{D}}
+#+LATEX_HEADER: \newcommand{\mfE}{\mathfrak{E}}	\newcommand{\mfF}{\mathfrak{F}}
+#+LATEX_HEADER: \newcommand{\mfG}{\mathfrak{G}}	\newcommand{\mfH}{\mathfrak{H}}
+#+LATEX_HEADER: \newcommand{\mfI}{\mathfrak{I}}	\newcommand{\mfJ}{\mathfrak{J}}
+#+LATEX_HEADER: \newcommand{\mfK}{\mathfrak{K}}	\newcommand{\mfL}{\mathfrak{L}}
+#+LATEX_HEADER: \newcommand{\mfM}{\mathfrak{M}}	\newcommand{\mfN}{\mathfrak{N}}
+#+LATEX_HEADER: \newcommand{\mfO}{\mathfrak{O}}	\newcommand{\mfP}{\mathfrak{P}}
+#+LATEX_HEADER: \newcommand{\mfQ}{\mathfrak{Q}}	\newcommand{\mfR}{\mathfrak{R}}
+#+LATEX_HEADER: \newcommand{\mfS}{\mathfrak{S}}	\newcommand{\mfT}{\mathfrak{T}}
+#+LATEX_HEADER: \newcommand{\mfU}{\mathfrak{U}}	\newcommand{\mfV}{\mathfrak{V}}
+#+LATEX_HEADER: \newcommand{\mfW}{\mathfrak{W}}	\newcommand{\mfX}{\mathfrak{X}}
+#+LATEX_HEADER: \newcommand{\mfY}{\mathfrak{Y}}	\newcommand{\mfZ}{\mathfrak{Z}}
+#+LATEX_HEADER: %Small Letters
+#+LATEX_HEADER: \newcommand{\mfa}{\mathfrak{a}}	\newcommand{\mfb}{\mathfrak{b}}
+#+LATEX_HEADER: \newcommand{\mfc}{\mathfrak{c}}	\newcommand{\mfd}{\mathfrak{d}}
+#+LATEX_HEADER: \newcommand{\mfe}{\mathfrak{e}}	\newcommand{\mff}{\mathfrak{f}}
+#+LATEX_HEADER: \newcommand{\mfg}{\mathfrak{g}}	\newcommand{\mfh}{\mathfrak{h}}
+#+LATEX_HEADER: \newcommand{\mfi}{\mathfrak{i}}	\newcommand{\mfj}{\mathfrak{j}}
+#+LATEX_HEADER: \newcommand{\mfk}{\mathfrak{k}}	\newcommand{\mfl}{\mathfrak{l}}
+#+LATEX_HEADER: \newcommand{\mfm}{\mathfrak{m}}	\newcommand{\mfn}{\mathfrak{n}}
+#+LATEX_HEADER: \newcommand{\mfo}{\mathfrak{o}}	\newcommand{\mfp}{\mathfrak{p}}
+#+LATEX_HEADER: \newcommand{\mfq}{\mathfrak{q}}	\newcommand{\mfr}{\mathfrak{r}}
+#+LATEX_HEADER: \newcommand{\mfs}{\mathfrak{s}}	\newcommand{\mft}{\mathfrak{t}}
+#+LATEX_HEADER: \newcommand{\mfu}{\mathfrak{u}}	\newcommand{\mfv}{\mathfrak{v}}
+#+LATEX_HEADER: \newcommand{\mfw}{\mathfrak{w}}	\newcommand{\mfx}{\mathfrak{x}}
+#+LATEX_HEADER: \newcommand{\mfy}{\mathfrak{y}}	\newcommand{\mfz}{\mathfrak{z}}
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Style customization
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \SetCommentSty{mycommfont} % Customize comments style in algorithm env
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Colors
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \definecolor{myg}{RGB}{56, 140, 70}
+#+LATEX_HEADER: \definecolor{myb}{RGB}{45, 111, 177}
+#+LATEX_HEADER: \definecolor{myr}{RGB}{199, 68, 64}
+#+LATEX_HEADER: \definecolor{mytheorembg}{HTML}{F2F2F9}
+#+LATEX_HEADER: \definecolor{mytheoremfr}{HTML}{00007B}
+#+LATEX_HEADER: \definecolor{mylenmabg}{HTML}{FFFAF8}
+#+LATEX_HEADER: \definecolor{mylenmafr}{HTML}{983b0f}
+#+LATEX_HEADER: \definecolor{mypropbg}{HTML}{f2fbfc}
+#+LATEX_HEADER: \definecolor{mypropfr}{HTML}{191971}
+#+LATEX_HEADER: \definecolor{myexamplebg}{HTML}{F2FBF8}
+#+LATEX_HEADER: \definecolor{myexamplefr}{HTML}{88D6D1}
+#+LATEX_HEADER: \definecolor{myexampleti}{HTML}{2A7F7F}
+#+LATEX_HEADER: \definecolor{mydefinitbg}{HTML}{E5E5FF}
+#+LATEX_HEADER: \definecolor{mydefinitfr}{HTML}{3F3FA3}
+#+LATEX_HEADER: \definecolor{notesgreen}{RGB}{0,162,0}
+#+LATEX_HEADER: \definecolor{myp}{RGB}{197, 92, 212}
+#+LATEX_HEADER: \definecolor{mygr}{HTML}{2C3338}
+#+LATEX_HEADER: \definecolor{myred}{RGB}{127,0,0}
+#+LATEX_HEADER: \definecolor{myyellow}{RGB}{169,121,69}
+#+LATEX_HEADER: \definecolor{myexercisebg}{HTML}{F2FBF8}
+#+LATEX_HEADER: \definecolor{myexercisefg}{HTML}{88D6D1}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: %	Tcolorbox setup
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \setlength{\parindent}{1cm}
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % THEOREM BOX
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=section]{Theorem}{Theorem}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback = mytheorembg,
+#+LATEX_HEADER: 	frame hidden,
+#+LATEX_HEADER: 	boxrule = 0sp,
+#+LATEX_HEADER: 	borderline west = {2pt}{0pt}{mytheoremfr},
+#+LATEX_HEADER: 	sharp corners,
+#+LATEX_HEADER: 	detach title,
+#+LATEX_HEADER: 	before upper = \tcbtitle\par\smallskip,
+#+LATEX_HEADER: 	coltitle = mytheoremfr,
+#+LATEX_HEADER: 	fonttitle = \bfseries\sffamily,
+#+LATEX_HEADER: 	description font = \mdseries,
+#+LATEX_HEADER: 	separator sign none,
+#+LATEX_HEADER: 	segmentation style={solid, mytheoremfr},
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=chapter]{theorem}{Theorem}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback = mytheorembg,
+#+LATEX_HEADER: 	frame hidden,
+#+LATEX_HEADER: 	boxrule = 0sp,
+#+LATEX_HEADER: 	borderline west = {2pt}{0pt}{mytheoremfr},
+#+LATEX_HEADER: 	sharp corners,
+#+LATEX_HEADER: 	detach title,
+#+LATEX_HEADER: 	before upper = \tcbtitle\par\smallskip,
+#+LATEX_HEADER: 	coltitle = mytheoremfr,
+#+LATEX_HEADER: 	fonttitle = \bfseries\sffamily,
+#+LATEX_HEADER: 	description font = \mdseries,
+#+LATEX_HEADER: 	separator sign none,
+#+LATEX_HEADER: 	segmentation style={solid, mytheoremfr},
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+#+LATEX_HEADER:
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcolorbox{Theoremcon}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced
+#+LATEX_HEADER: 	,breakable
+#+LATEX_HEADER: 	,colback = mytheorembg
+#+LATEX_HEADER: 	,frame hidden
+#+LATEX_HEADER: 	,boxrule = 0sp
+#+LATEX_HEADER: 	,borderline west = {2pt}{0pt}{mytheoremfr}
+#+LATEX_HEADER: 	,sharp corners
+#+LATEX_HEADER: 	,description font = \mdseries
+#+LATEX_HEADER: 	,separator sign none
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Corollery
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=section]{Corollary}{Corollary}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced
+#+LATEX_HEADER: 	,breakable
+#+LATEX_HEADER: 	,colback = myp!10
+#+LATEX_HEADER: 	,frame hidden
+#+LATEX_HEADER: 	,boxrule = 0sp
+#+LATEX_HEADER: 	,borderline west = {2pt}{0pt}{myp!85!black}
+#+LATEX_HEADER: 	,sharp corners
+#+LATEX_HEADER: 	,detach title
+#+LATEX_HEADER: 	,before upper = \tcbtitle\par\smallskip
+#+LATEX_HEADER: 	,coltitle = myp!85!black
+#+LATEX_HEADER: 	,fonttitle = \bfseries\sffamily
+#+LATEX_HEADER: 	,description font = \mdseries
+#+LATEX_HEADER: 	,separator sign none
+#+LATEX_HEADER: 	,segmentation style={solid, myp!85!black}
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=chapter]{corollary}{Corollary}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced
+#+LATEX_HEADER: 	,breakable
+#+LATEX_HEADER: 	,colback = myp!10
+#+LATEX_HEADER: 	,frame hidden
+#+LATEX_HEADER: 	,boxrule = 0sp
+#+LATEX_HEADER: 	,borderline west = {2pt}{0pt}{myp!85!black}
+#+LATEX_HEADER: 	,sharp corners
+#+LATEX_HEADER: 	,detach title
+#+LATEX_HEADER: 	,before upper = \tcbtitle\par\smallskip
+#+LATEX_HEADER: 	,coltitle = myp!85!black
+#+LATEX_HEADER: 	,fonttitle = \bfseries\sffamily
+#+LATEX_HEADER: 	,description font = \mdseries
+#+LATEX_HEADER: 	,separator sign none
+#+LATEX_HEADER: 	,segmentation style={solid, myp!85!black}
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Lemma
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=section]{Lenma}{Lenma}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback = mylenmabg,
+#+LATEX_HEADER: 	frame hidden,
+#+LATEX_HEADER: 	boxrule = 0sp,
+#+LATEX_HEADER: 	borderline west = {2pt}{0pt}{mylenmafr},
+#+LATEX_HEADER: 	sharp corners,
+#+LATEX_HEADER: 	detach title,
+#+LATEX_HEADER: 	before upper = \tcbtitle\par\smallskip,
+#+LATEX_HEADER: 	coltitle = mylenmafr,
+#+LATEX_HEADER: 	fonttitle = \bfseries\sffamily,
+#+LATEX_HEADER: 	description font = \mdseries,
+#+LATEX_HEADER: 	separator sign none,
+#+LATEX_HEADER: 	segmentation style={solid, mylenmafr},
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=chapter]{lenma}{Lenma}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback = mylenmabg,
+#+LATEX_HEADER: 	frame hidden,
+#+LATEX_HEADER: 	boxrule = 0sp,
+#+LATEX_HEADER: 	borderline west = {2pt}{0pt}{mylenmafr},
+#+LATEX_HEADER: 	sharp corners,
+#+LATEX_HEADER: 	detach title,
+#+LATEX_HEADER: 	before upper = \tcbtitle\par\smallskip,
+#+LATEX_HEADER: 	coltitle = mylenmafr,
+#+LATEX_HEADER: 	fonttitle = \bfseries\sffamily,
+#+LATEX_HEADER: 	description font = \mdseries,
+#+LATEX_HEADER: 	separator sign none,
+#+LATEX_HEADER: 	segmentation style={solid, mylenmafr},
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Proposition
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=section]{Prop}{Proposition}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback = mypropbg,
+#+LATEX_HEADER: 	frame hidden,
+#+LATEX_HEADER: 	boxrule = 0sp,
+#+LATEX_HEADER: 	borderline west = {2pt}{0pt}{mypropfr},
+#+LATEX_HEADER: 	sharp corners,
+#+LATEX_HEADER: 	detach title,
+#+LATEX_HEADER: 	before upper = \tcbtitle\par\smallskip,
+#+LATEX_HEADER: 	coltitle = mypropfr,
+#+LATEX_HEADER: 	fonttitle = \bfseries\sffamily,
+#+LATEX_HEADER: 	description font = \mdseries,
+#+LATEX_HEADER: 	separator sign none,
+#+LATEX_HEADER: 	segmentation style={solid, mypropfr},
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=chapter]{prop}{Proposition}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback = mypropbg,
+#+LATEX_HEADER: 	frame hidden,
+#+LATEX_HEADER: 	boxrule = 0sp,
+#+LATEX_HEADER: 	borderline west = {2pt}{0pt}{mypropfr},
+#+LATEX_HEADER: 	sharp corners,
+#+LATEX_HEADER: 	detach title,
+#+LATEX_HEADER: 	before upper = \tcbtitle\par\smallskip,
+#+LATEX_HEADER: 	coltitle = mypropfr,
+#+LATEX_HEADER: 	fonttitle = \bfseries\sffamily,
+#+LATEX_HEADER: 	description font = \mdseries,
+#+LATEX_HEADER: 	separator sign none,
+#+LATEX_HEADER: 	segmentation style={solid, mypropfr},
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Claim
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=section]{claim}{Claim}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced
+#+LATEX_HEADER: 	,breakable
+#+LATEX_HEADER: 	,colback = myg!10
+#+LATEX_HEADER: 	,frame hidden
+#+LATEX_HEADER: 	,boxrule = 0sp
+#+LATEX_HEADER: 	,borderline west = {2pt}{0pt}{myg}
+#+LATEX_HEADER: 	,sharp corners
+#+LATEX_HEADER: 	,detach title
+#+LATEX_HEADER: 	,before upper = \tcbtitle\par\smallskip
+#+LATEX_HEADER: 	,coltitle = myg!85!black
+#+LATEX_HEADER: 	,fonttitle = \bfseries\sffamily
+#+LATEX_HEADER: 	,description font = \mdseries
+#+LATEX_HEADER: 	,separator sign none
+#+LATEX_HEADER: 	,segmentation style={solid, myg!85!black}
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Exercise
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=section]{Exercise}{Exercise}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback = myexercisebg,
+#+LATEX_HEADER: 	frame hidden,
+#+LATEX_HEADER: 	boxrule = 0sp,
+#+LATEX_HEADER: 	borderline west = {2pt}{0pt}{myexercisefg},
+#+LATEX_HEADER: 	sharp corners,
+#+LATEX_HEADER: 	detach title,
+#+LATEX_HEADER: 	before upper = \tcbtitle\par\smallskip,
+#+LATEX_HEADER: 	coltitle = myexercisefg,
+#+LATEX_HEADER: 	fonttitle = \bfseries\sffamily,
+#+LATEX_HEADER: 	description font = \mdseries,
+#+LATEX_HEADER: 	separator sign none,
+#+LATEX_HEADER: 	segmentation style={solid, myexercisefg},
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \tcbuselibrary{theorems,skins,hooks}
+#+LATEX_HEADER: \newtcbtheorem[number within=chapter]{exercise}{Exercise}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback = myexercisebg,
+#+LATEX_HEADER: 	frame hidden,
+#+LATEX_HEADER: 	boxrule = 0sp,
+#+LATEX_HEADER: 	borderline west = {2pt}{0pt}{myexercisefg},
+#+LATEX_HEADER: 	sharp corners,
+#+LATEX_HEADER: 	detach title,
+#+LATEX_HEADER: 	before upper = \tcbtitle\par\smallskip,
+#+LATEX_HEADER: 	coltitle = myexercisefg,
+#+LATEX_HEADER: 	fonttitle = \bfseries\sffamily,
+#+LATEX_HEADER: 	description font = \mdseries,
+#+LATEX_HEADER: 	separator sign none,
+#+LATEX_HEADER: 	segmentation style={solid, myexercisefg},
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {th}
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Example box
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newtcbtheorem[number within=section]{Example}{Example}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	colback = myexamplebg
+#+LATEX_HEADER: 	,breakable
+#+LATEX_HEADER: 	,colframe = myexamplefr
+#+LATEX_HEADER: 	,coltitle = myexampleti
+#+LATEX_HEADER: 	,boxrule = 1pt
+#+LATEX_HEADER: 	,sharp corners
+#+LATEX_HEADER: 	,detach title
+#+LATEX_HEADER: 	,before upper=\tcbtitle\par\smallskip
+#+LATEX_HEADER: 	,fonttitle = \bfseries
+#+LATEX_HEADER: 	,description font = \mdseries
+#+LATEX_HEADER: 	,separator sign none
+#+LATEX_HEADER: 	,description delimiters parenthesis
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {ex}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newtcbtheorem[number within=chapter]{example}{Example}
+#+LATEX_HEADER: {%
+#+LATEX_HEADER: 	colback = myexamplebg
+#+LATEX_HEADER: 	,breakable
+#+LATEX_HEADER: 	,colframe = myexamplefr
+#+LATEX_HEADER: 	,coltitle = myexampleti
+#+LATEX_HEADER: 	,boxrule = 1pt
+#+LATEX_HEADER: 	,sharp corners
+#+LATEX_HEADER: 	,detach title
+#+LATEX_HEADER: 	,before upper=\tcbtitle\par\smallskip
+#+LATEX_HEADER: 	,fonttitle = \bfseries
+#+LATEX_HEADER: 	,description font = \mdseries
+#+LATEX_HEADER: 	,separator sign none
+#+LATEX_HEADER: 	,description delimiters parenthesis
+#+LATEX_HEADER: }
+#+LATEX_HEADER: {ex}
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Definition box
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newtcbtheorem[number within=section]{Definition}{Definition}{enhanced,
+#+LATEX_HEADER: 	before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=0.5mm,
+#+LATEX_HEADER: 	attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight}, varwidth boxed title*=-3cm,
+#+LATEX_HEADER: 	boxed title style={frame code={
+#+LATEX_HEADER: 					\path[fill=tcbcolback]
+#+LATEX_HEADER: 					([yshift=-1mm,xshift=-1mm]frame.north west)
+#+LATEX_HEADER: 					arc[start angle=0,end angle=180,radius=1mm]
+#+LATEX_HEADER: 					([yshift=-1mm,xshift=1mm]frame.north east)
+#+LATEX_HEADER: 					arc[start angle=180,end angle=0,radius=1mm];
+#+LATEX_HEADER: 					\path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
+#+LATEX_HEADER: 						middle color=tcbcolback!80!black]
+#+LATEX_HEADER: 					([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+#+LATEX_HEADER: 					[rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+#+LATEX_HEADER: 					-- (frame.south east) -- (frame.south west)
+#+LATEX_HEADER: 					-- ([xshift=-1mm,yshift=-1mm]frame.north west)
+#+LATEX_HEADER: 					[sharp corners]-- cycle;
+#+LATEX_HEADER: 				},interior engine=empty,
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	fonttitle=\bfseries,
+#+LATEX_HEADER: 	title={#2},#1}{def}
+#+LATEX_HEADER: \newtcbtheorem[number within=chapter]{definition}{Definition}{enhanced,
+#+LATEX_HEADER: 	before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=0.5mm,
+#+LATEX_HEADER: 	attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight}, varwidth boxed title*=-3cm,
+#+LATEX_HEADER: 	boxed title style={frame code={
+#+LATEX_HEADER: 					\path[fill=tcbcolback]
+#+LATEX_HEADER: 					([yshift=-1mm,xshift=-1mm]frame.north west)
+#+LATEX_HEADER: 					arc[start angle=0,end angle=180,radius=1mm]
+#+LATEX_HEADER: 					([yshift=-1mm,xshift=1mm]frame.north east)
+#+LATEX_HEADER: 					arc[start angle=180,end angle=0,radius=1mm];
+#+LATEX_HEADER: 					\path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
+#+LATEX_HEADER: 						middle color=tcbcolback!80!black]
+#+LATEX_HEADER: 					([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+#+LATEX_HEADER: 					[rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+#+LATEX_HEADER: 					-- (frame.south east) -- (frame.south west)
+#+LATEX_HEADER: 					-- ([xshift=-1mm,yshift=-1mm]frame.north west)
+#+LATEX_HEADER: 					[sharp corners]-- cycle;
+#+LATEX_HEADER: 				},interior engine=empty,
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	fonttitle=\bfseries,
+#+LATEX_HEADER: 	title={#2},#1}{def}
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Solution box
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \newtcbtheorem{question}{Question}{enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback=white,
+#+LATEX_HEADER: 	colframe=myb!80!black,
+#+LATEX_HEADER: 	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+#+LATEX_HEADER: 	fonttitle=\bfseries,
+#+LATEX_HEADER: 	title={#2},
+#+LATEX_HEADER: 	boxed title size=title,
+#+LATEX_HEADER: 	boxed title style={%
+#+LATEX_HEADER: 			sharp corners,
+#+LATEX_HEADER: 			rounded corners=northwest,
+#+LATEX_HEADER: 			colback=tcbcolframe,
+#+LATEX_HEADER: 			boxrule=0pt,
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	underlay boxed title={%
+#+LATEX_HEADER: 			\path[fill=tcbcolframe] (title.south west)--(title.south east)
+#+LATEX_HEADER: 			to[out=0, in=180] ([xshift=5mm]title.east)--
+#+LATEX_HEADER: 			(title.center-|frame.east)
+#+LATEX_HEADER: 			[rounded corners=\kvtcb@arc] |-
+#+LATEX_HEADER: 			(frame.north) -| cycle;
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	#1
+#+LATEX_HEADER: }{def}
+#+LATEX_HEADER: \makeatother
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \newtcolorbox{solution}{enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback=white,
+#+LATEX_HEADER: 	colframe=myg!80!black,
+#+LATEX_HEADER: 	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+#+LATEX_HEADER: 	title=Solution,
+#+LATEX_HEADER: 	boxed title size=title,
+#+LATEX_HEADER: 	boxed title style={%
+#+LATEX_HEADER: 			sharp corners,
+#+LATEX_HEADER: 			rounded corners=northwest,
+#+LATEX_HEADER: 			colback=tcbcolframe,
+#+LATEX_HEADER: 			boxrule=0pt,
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	underlay boxed title={%
+#+LATEX_HEADER: 			\path[fill=tcbcolframe] (title.south west)--(title.south east)
+#+LATEX_HEADER: 			to[out=0, in=180] ([xshift=5mm]title.east)--
+#+LATEX_HEADER: 			(title.center-|frame.east)
+#+LATEX_HEADER: 			[rounded corners=\kvtcb@arc] |-
+#+LATEX_HEADER: 			(frame.north) -| cycle;
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: }
+#+LATEX_HEADER: \makeatother
+
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \newtcbtheorem{qstion}{Question}{enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback=white,
+#+LATEX_HEADER: 	colframe=mygr,
+#+LATEX_HEADER: 	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+#+LATEX_HEADER: 	fonttitle=\bfseries,
+#+LATEX_HEADER: 	title={#2},
+#+LATEX_HEADER: 	boxed title size=title,
+#+LATEX_HEADER: 	boxed title style={%
+#+LATEX_HEADER: 			sharp corners,
+#+LATEX_HEADER: 			rounded corners=northwest,
+#+LATEX_HEADER: 			colback=tcbcolframe,
+#+LATEX_HEADER: 			boxrule=0pt,
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	underlay boxed title={%
+#+LATEX_HEADER: 			\path[fill=tcbcolframe] (title.south west)--(title.south east)
+#+LATEX_HEADER: 			to[out=0, in=180] ([xshift=5mm]title.east)--
+#+LATEX_HEADER: 			(title.center-|frame.east)
+#+LATEX_HEADER: 			[rounded corners=\kvtcb@arc] |-
+#+LATEX_HEADER: 			(frame.north) -| cycle;
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	#1
+#+LATEX_HEADER: }{def}
+#+LATEX_HEADER: \makeatother
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newtcbtheorem[number within=chapter]{wconc}{Wrong Concept}{
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	enhanced,
+#+LATEX_HEADER: 	colback=white,
+#+LATEX_HEADER: 	colframe=myr,
+#+LATEX_HEADER: 	arc=0pt,
+#+LATEX_HEADER: 	outer arc=0pt,
+#+LATEX_HEADER: 	fonttitle=\bfseries\sffamily\large,
+#+LATEX_HEADER: 	colbacktitle=myr,
+#+LATEX_HEADER: 	attach boxed title to top left={},
+#+LATEX_HEADER: 	boxed title style={
+#+LATEX_HEADER: 			enhanced,
+#+LATEX_HEADER: 			skin=enhancedfirst jigsaw,
+#+LATEX_HEADER: 			arc=3pt,
+#+LATEX_HEADER: 			bottom=0pt,
+#+LATEX_HEADER: 			interior style={fill=myr}
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	#1
+#+LATEX_HEADER: }{def}
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Note box
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usetikzlibrary{arrows,calc,shadows.blur}
+#+LATEX_HEADER: \tcbuselibrary{skins}
+#+LATEX_HEADER: \newtcolorbox{note}[1][]{%
+#+LATEX_HEADER: 	enhanced jigsaw,
+#+LATEX_HEADER: 	colback=gray!20!white,%
+#+LATEX_HEADER: 	colframe=gray!80!black,
+#+LATEX_HEADER: 	size=small,
+#+LATEX_HEADER: 	boxrule=1pt,
+#+LATEX_HEADER: 	title=\textbf{Note:-},
+#+LATEX_HEADER: 	halign title=flush center,
+#+LATEX_HEADER: 	coltitle=black,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	drop shadow=black!50!white,
+#+LATEX_HEADER: 	attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
+#+LATEX_HEADER: 	minipage boxed title=1.5cm,
+#+LATEX_HEADER: 	boxed title style={%
+#+LATEX_HEADER: 			colback=white,
+#+LATEX_HEADER: 			size=fbox,
+#+LATEX_HEADER: 			boxrule=1pt,
+#+LATEX_HEADER: 			boxsep=2pt,
+#+LATEX_HEADER: 			underlay={%
+#+LATEX_HEADER: 					\coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
+#+LATEX_HEADER: 					\coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
+#+LATEX_HEADER: 					\begin{scope}
+#+LATEX_HEADER: 						\clip (interior.north west) rectangle ([xshift=3ex]interior.east);
+#+LATEX_HEADER: 						\filldraw [white, blur shadow={shadow opacity=60, shadow yshift=-.75ex}, rounded corners=2pt] (interior.north west) rectangle (interior.south east);
+#+LATEX_HEADER: 					\end{scope}
+#+LATEX_HEADER: 					\begin{scope}[gray!80!black]
+#+LATEX_HEADER: 						\fill (dotA) circle (2pt);
+#+LATEX_HEADER: 						\fill (dotB) circle (2pt);
+#+LATEX_HEADER: 					\end{scope}
+#+LATEX_HEADER: 				},
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	#1,
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Self made commands
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \newcommand{\thm}[2]{\begin{Theorem}{#1}{}#2\end{Theorem}}
+#+LATEX_HEADER: \newcommand{\cor}[2]{\begin{Corollary*}{#1}{}#2\end{Corollary*}}
+#+LATEX_HEADER: \newcommand{\mlenma}[2]{\begin{Lenma}{#1}{}#2\end{Lenma}}
+#+LATEX_HEADER: \newcommand{\mprop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
+#+LATEX_HEADER: \newcommand{\clm}[3]{\begin{claim}{#1}{#2}#3\end{claim}}
+#+LATEX_HEADER: \newcommand{\wc}[2]{\begin{wconc}{#1}{}\setlength{\parindent}{1cm}#2\end{wconc}}
+#+LATEX_HEADER: \newcommand{\thmcon}[1]{\begin{Theoremcon}{#1}\end{Theoremcon}}
+#+LATEX_HEADER: \newcommand{\ex}[2]{\begin{Example}{#1}{}#2\end{Example}}
+#+LATEX_HEADER: \newcommand{\dfn}[2]{\begin{Definition}[colbacktitle=red!75!black]{#1}{}#2\end{Definition}}
+#+LATEX_HEADER: \newcommand{\dfnc}[2]{\begin{definition}[colbacktitle=red!75!black]{#1}{}#2\end{definition}}
+#+LATEX_HEADER: \newcommand{\qs}[2]{\begin{question}{#1}{}#2\end{question}}
+#+LATEX_HEADER: \newcommand{\pf}[2]{\begin{myproof}[#1]#2\end{myproof}}
+#+LATEX_HEADER: \newcommand{\nt}[1]{\begin{note}#1\end{note}}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+#+LATEX_HEADER: 		\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+#+LATEX_HEADER: \newcommand\getcurrentref[1]{%
+#+LATEX_HEADER: 	\ifnumequal{\value{#1}}{0}
+#+LATEX_HEADER: 	{??}
+#+LATEX_HEADER: 	{\the\value{#1}}%
+#+LATEX_HEADER: }
+#+LATEX_HEADER: \newcommand{\getCurrentSectionNumber}{\getcurrentref{section}}
+#+LATEX_HEADER: \newenvironment{myproof}[1][\proofname]{%
+#+LATEX_HEADER: 	\proof[\bfseries #1: ]%
+#+LATEX_HEADER: }{\endproof}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcommand{\mclm}[2]{\begin{myclaim}[#1]#2\end{myclaim}}
+#+LATEX_HEADER: \newenvironment{myclaim}[1][\claimname]{\proof[\bfseries #1: ]}{}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcounter{mylabelcounter}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \newcommand{\setword}[2]{%
+#+LATEX_HEADER: 	\phantomsection
+#+LATEX_HEADER: 	#1\def\@currentlabel{\unexpanded{#1}}\label{#2}%
+#+LATEX_HEADER: }
+#+LATEX_HEADER: \makeatother
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Tikz setup
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \tikzset{
+#+LATEX_HEADER:   symbol/.style={
+#+LATEX_HEADER:       draw=none,
+#+LATEX_HEADER:       every to/.append style={
+#+LATEX_HEADER:         edge node={node [sloped, allow upside down, auto=false]{$#1$}}
+#+LATEX_HEADER:       }
+#+LATEX_HEADER:   }
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Delimeters
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+#+LATEX_HEADER: \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+#+LATEX_HEADER: \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+#+LATEX_HEADER: \DeclarePairedDelimiter{\round}{\lfloor}{\rceil}
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newsavebox\diffdbox
+#+LATEX_HEADER: \newcommand{\slantedromand}{{\mathpalette\makesl{d}}}
+#+LATEX_HEADER: \newcommand{\makesl}[2]{%
+#+LATEX_HEADER: \begingroup
+#+LATEX_HEADER: \sbox{\diffdbox}{$\mathsurround=0pt#1\mathrm{#2}$}%
+#+LATEX_HEADER: \pdfsave
+#+LATEX_HEADER: \pdfsetmatrix{1 0 0.2 1}%
+#+LATEX_HEADER: \rlap{\usebox{\diffdbox}}%
+#+LATEX_HEADER: \pdfrestore
+#+LATEX_HEADER: \hskip\wd\diffdbox
+#+LATEX_HEADER: \endgroup
+#+LATEX_HEADER: }
+#+LATEX_HEADER: \newcommand{\dd}[1][]{\ensuremath{\mathop{}\!\ifstrempty{#1}{%
+#+LATEX_HEADER: \slantedromand\@ifnextchar^{\hspace{0.2ex}}{\hspace{0.1ex}}}%
+#+LATEX_HEADER: {\slantedromand\hspace{0.2ex}^{#1}}}}
+#+LATEX_HEADER: \ProvideDocumentCommand\dv{o m g}{%
+#+LATEX_HEADER:   \ensuremath{%
+#+LATEX_HEADER:     \IfValueTF{#3}{%
+#+LATEX_HEADER:       \IfNoValueTF{#1}{%
+#+LATEX_HEADER:         \frac{\dd #2}{\dd #3}%
+#+LATEX_HEADER:       }{%
+#+LATEX_HEADER:         \frac{\dd^{#1} #2}{\dd #3^{#1}}%
+#+LATEX_HEADER:       }%
+#+LATEX_HEADER:     }{%
+#+LATEX_HEADER:       \IfNoValueTF{#1}{%
+#+LATEX_HEADER:         \frac{\dd}{\dd #2}%
+#+LATEX_HEADER:       }{%
+#+LATEX_HEADER:         \frac{\dd^{#1}}{\dd #2^{#1}}%
+#+LATEX_HEADER:       }%
+#+LATEX_HEADER:     }%
+#+LATEX_HEADER:   }%
+#+LATEX_HEADER: }
+#+LATEX_HEADER: \providecommand*{\pdv}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}
+#+LATEX_HEADER: %  - others
+#+LATEX_HEADER: \DeclareMathOperator{\Lap}{\mathcal{L}}
+#+LATEX_HEADER: \DeclareMathOperator{\Var}{Var} % varience
+#+LATEX_HEADER: \DeclareMathOperator{\Cov}{Cov} % covarience
+#+LATEX_HEADER: \DeclareMathOperator{\E}{E} % expected
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Since the amsthm package isn't loaded
+#+LATEX_HEADER:
+#+LATEX_HEADER: % I prefer the slanted \leq
+#+LATEX_HEADER: \let\oldleq\leq % save them in case they're every wanted
+#+LATEX_HEADER: \let\oldgeq\geq
+#+LATEX_HEADER: \renewcommand{\leq}{\leqslant}
+#+LATEX_HEADER: \renewcommand{\geq}{\geqslant}
+
+
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER: % Table of contents
+#+LATEX_HEADER: %----------------------------------------------------------------------------------------
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \definecolor{doc}{RGB}{0,60,110}
+#+LATEX_HEADER: \usepackage{titletoc}
+#+LATEX_HEADER: \contentsmargin{0cm}
+#+LATEX_HEADER: \titlecontents{chapter}[3.7pc]
+#+LATEX_HEADER: {\addvspace{30pt}%
+#+LATEX_HEADER: 	\begin{tikzpicture}[remember picture, overlay]%
+#+LATEX_HEADER: 		\draw[fill=doc!60,draw=doc!60] (-7,-.1) rectangle (-0.9,.5);%
+#+LATEX_HEADER: 		\pgftext[left,x=-3.5cm,y=0.2cm]{\color{white}\Large\sc\bfseries Chapter\ \thecontentslabel};%
+#+LATEX_HEADER: 	\end{tikzpicture}\color{doc!60}\large\sc\bfseries}%
+#+LATEX_HEADER: {}
+#+LATEX_HEADER: {}
+#+LATEX_HEADER: {\;\titlerule\;\large\sc\bfseries Page \thecontentspage
+#+LATEX_HEADER: 	\begin{tikzpicture}[remember picture, overlay]
+#+LATEX_HEADER: 		\draw[fill=doc!60,draw=doc!60] (2pt,0) rectangle (4,0.1pt);
+#+LATEX_HEADER: 	\end{tikzpicture}}%
+#+LATEX_HEADER: \titlecontents{section}[3.7pc]
+#+LATEX_HEADER: {\addvspace{2pt}}
+#+LATEX_HEADER: {\contentslabel[\thecontentslabel]{2pc}}
+#+LATEX_HEADER: {}
+#+LATEX_HEADER: {\hfill\small \thecontentspage}
+#+LATEX_HEADER: []
+#+LATEX_HEADER: \titlecontents*{subsection}[3.7pc]
+#+LATEX_HEADER: {\addvspace{-1pt}\small}
+#+LATEX_HEADER: {}
+#+LATEX_HEADER: {}
+#+LATEX_HEADER: {\ --- \small\thecontentspage}
+#+LATEX_HEADER: [ \textbullet\ ][]
+#+LATEX_HEADER:
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \renewcommand{\tableofcontents}{%
+#+LATEX_HEADER: 	\chapter*{%
+#+LATEX_HEADER: 	  \vspace*{-20\p@}%
+#+LATEX_HEADER: 	  \begin{tikzpicture}[remember picture, overlay]%
+#+LATEX_HEADER: 		  \pgftext[right,x=15cm,y=0.2cm]{\color{doc!60}\Huge\sc\bfseries \contentsname};%
+#+LATEX_HEADER: 		  \draw[fill=doc!60,draw=doc!60] (13,-.75) rectangle (20,1);%
+#+LATEX_HEADER: 		  \clip (13,-.75) rectangle (20,1);
+#+LATEX_HEADER: 		  \pgftext[right,x=15cm,y=0.2cm]{\color{white}\Huge\sc\bfseries \contentsname};%
+#+LATEX_HEADER: 	  \end{tikzpicture}}%
+#+LATEX_HEADER: 	\@starttoc{toc}}
+#+LATEX_HEADER: \makeatother

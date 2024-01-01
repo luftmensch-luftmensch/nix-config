@@ -13,6 +13,7 @@ in {
     enable = mkEnableOption "emacs and its configuration";
     daemon.enable = mkEnableOption "emacs daemon";
     telega.enable = mkEnableOption "telegram client";
+    orgSetupFiles.enable = mkEnableOption "custom classes for org writing";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -38,30 +39,21 @@ in {
             pdf-tools
             treesit-grammars.with-all-grammars
             vterm
-
-            (melpaPackages.telega.overrideAttrs (oldAttrs: {
-              version = "0.8.220";
-              src = pkgs.fetchFromGitHub {
-                owner = "zevlg";
-                repo = "telega.el";
-                rev = "c522d366aebcdf2178c34978f7f5d3167840a641";
-                sha256 = "0vsdcdj3b9sbmjcihd4zqfdnspdjh2806c77kzsl62jpyj55zkj4";
-              };
-            }))
-          ];
-        # ++ (optionals cfg.telega.enable [
-        #   # melpaPackages.telega is outdated. Pull a newer version directly from the repo
-        #   # (melpaPackages.telega.overrideAttrs (oldAttrs: {
-        #   #   version = "0.8.220";
-        #   #   src = pkgs.fetchFromGitHub {
-        #   #     owner = "zevlg";
-        #   #     repo = "telega.el";
-        #   #     rev = "c522d366aebcdf2178c34978f7f5d3167840a641";
-        #   #     sha256 = "0vsdcdj3b9sbmjcihd4zqfdnspdjh2806c77kzsl62jpyj55zkj4";
-        #   #   };
-        #   # }))
-        #   telega
-        # ]);
+          ] ++ (optionals cfg.telega.enable [
+          # melpaPackages.telega is outdated. Pull a newer version directly from the repo
+          (melpaPackages.telega.overrideAttrs (oldAttrs: {
+            # version = "0.8.220";
+            version = "0.8.230";
+            src = pkgs.fetchFromGitHub {
+              owner = "zevlg";
+              repo = "telega.el";
+              rev = "304705fa007c3dae3c5d0c6dc66641ae783f0081";
+              sha256 = "02yxjaxpf2f6pjg3ixw7jvx56x6lfh30mnsmiz1p2yi64kyllaan";
+              # rev = "c522d366aebcdf2178c34978f7f5d3167840a641";
+              # sha256 = "0vsdcdj3b9sbmjcihd4zqfdnspdjh2806c77kzsl62jpyj55zkj4";
+            };
+          }))
+        ]);
       };
 
       xdg.configFile = {
@@ -69,22 +61,20 @@ in {
         "emacs/early-init.el".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/early-init.el";
         "emacs/lisp".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/lisp";
         "emacs/bookmarks".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/bookmarks";
-
-        # "emacs/Emacs.org".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/Emacs.org";
-        # "emacs/straight/versions".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/straight/versions";
       };
     }
+
+    (mkIf cfg.orgSetupFiles.enable {
+      xdg.configFile = {
+        "emacs/setup_files".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/setup_files";
+      };
+    })
 
     (mkIf cfg.daemon.enable {
       services.emacs = {
         enable = true;
         client.enable = true;
         startWithUserSession = "graphical";
-      };
-
-      home.sessionVariables = {
-        # EDITOR = "emacsclient -t";
-        # VISUAL = "emacsclient -c -a emacs";
       };
     })
 
