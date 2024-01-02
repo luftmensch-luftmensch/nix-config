@@ -1,0 +1,540 @@
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [letterpaper, 11pt]
+#+LATEX_HEADER: \usepackage{lmodern} % Ensures we have the right font
+
+#+LATEX_HEADER: \usepackage[T1]{fontenc} % Basic font & characters selection
+#+LATEX_HEADER: \usepackage[AUTO]{inputenc}
+#+LATEX_HEADER: \usepackage{fontspec}
+
+
+% DEFINE MULTIPLE FAMILY FONTS
+
+#+LATEX_HEADER: % Define font family to use (Other options are: Iosevka, Source Code Pro, Ubuntu, Titillium -> see setup file)
+%IOSEVKA FONT
+%#+LATEX_HEADER: \setmainfont{iosevka}[Extension=.ttf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic, BoldItalicFont=*-bolditalic, Path=/home/valentino/Dropbox/fonts/]
+
+% SOURCE CODE PRO
+%#+LATEX_HEADER: \setmainfont{SourceCodePro}[Extension=.ttf, UprightFont=*-Regular, BoldFont=*-SemiBold, ItalicFont=*-Italic, BoldItalicFont=*-SemiBoldItalic, Path=/home/valentino/Dropbox/fonts/]
+﻿
+% UBUNTU
+%#+LATEX_HEADER: \setmainfont{Ubuntu}[Extension=.ttf, UprightFont=*-Light, BoldFont=*-Medium, ItalicFont=*-LightItalic, BoldItalicFont=*-MediumItalic, Path=/home/valentino/Dropbox/fonts/]
+
+% ROBOTO CONDENSED
+#+LATEX_HEADER: \setmainfont{RobotoCondensed}[Extension=.ttf, UprightFont=*-Light, BoldFont=*-Regular, ItalicFont=*-LightItalic, BoldItalicFont=*-BoldItalic, Path=/home/valentino/Dropbox/fonts/]
+
+% TITILLIUM WEB
+%#+LATEX_HEADER: \setmainfont{TitilliumWeb}[Extension=.ttf, UprightFont=*-Light, BoldFont=*-SemiBold, ItalicFont=*-LightItalic, BoldItalicFont=*-SemiBoldItalic, Path=/home/valentino/Dropbox/fonts/]
+
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Tables, wrapping, and other options
+#+LATEX_HEADER: %\usepackage{longtable} % This package defines the longtable environment, a multi-page version of tabular
+#+LATEX_HEADER: % For a long time, the tabular environment was used to build tables.
+#+LATEX_HEADER: % However, writing tables with tabular can be troublesome for beginners and really complex tables can be near impossible to write
+#+LATEX_HEADER: % Also, tables built with the tabular environment have some typographical issues and, when color is used, can be misread by PDF readers.
+#+LATEX_HEADER: % Therefore, more and more LaTeX users are calling to use the tblr environment from the tabularray package instead.
+#+LATEX_HEADER: % Guide at https://www.latex-tables.com/ressources/tabularray.html (To merge cells cell{5}{1} = {c=2}{})
+#+LATEX_HEADER: \usepackage{tabularray} % In order to get tblr env
+#+LATEX_HEADER: \usepackage{wrapfig} % This makes the wrapfigure environment available
+#+LATEX_HEADER: \usepackage{rotating} % Pretty obvious
+#+LATEX_HEADER: \usepackage[normalem]{ulem} % underlining and strike-through
+#+LATEX_HEADER: \usepackage{capt-of} % Captions outside of floats
+
+#+LATEX_HEADER: \usepackage{graphicx} % Include images
+#+LATEX_HEADER: \usepackage{amsmath, amsthm, amssymb, mathtools} % Subscript & superscript and math environments (amsmath),  Various symbols used for interpreting the entities (amssymb)
+
+#+LATEX_HEADER: %% Memo for table setup
+#+LATEX_HEADER: %% h -> Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
+#+LATEX_HEADER: %% t -> Position at the top of the page
+#+LATEX_HEADER: %% b -> Position at the bottom of the page
+#+LATEX_HEADER: %% p -> Put on a special page for floats only
+#+LATEX_HEADER: %% ! -> Override internal parameters LaTeX uses for determining "good" float positions
+#+LATEX_HEADER: %% H -> Places the float at precisely the location in the LaTeX code (Requires the float package)
+#+LATEX_HEADER: \usepackage[table, xcdraw]{xcolor}
+#+LATEX_HEADER: \usepackage{float} % Needed for table[H] override
+#+LATEX_HEADER: \usepackage{listings} % Code highlighting
+#+LATEX_HEADER: \usepackage{mdframed} % \usepackage[framemethod=TikZ]{mdframed} (Alternativa in caso si voglia usare Tikz come metodo)
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: % TCOLORBOX DEFINITION AND CUSTOMIZATION
+#+LATEX_HEADER: \usepackage[most, many, breakable]{tcolorbox}
+#+LATEX_HEADER: \tcbuselibrary{skins}
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: \newtcbtheorem[number within=section]{Definition}{}{enhanced,
+#+LATEX_HEADER: 	before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=0.5mm,
+#+LATEX_HEADER: 	attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight},
+#+LATEX_HEADER: 	boxed title style={frame code={
+#+LATEX_HEADER: 					\path[fill=tcbcolback]
+#+LATEX_HEADER: 					([yshift=-1mm,xshift=-1mm]frame.north west)
+#+LATEX_HEADER: 					arc[start angle=0,end angle=180,radius=1mm]
+#+LATEX_HEADER: 					([yshift=-1mm,xshift=1mm]frame.north east)
+#+LATEX_HEADER: 					arc[start angle=180,end angle=0,radius=1mm];
+#+LATEX_HEADER: 					\path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
+#+LATEX_HEADER: 						middle color=tcbcolback!80!black]
+#+LATEX_HEADER: 					([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+#+LATEX_HEADER: 					[rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+#+LATEX_HEADER: 					-- (frame.south east) -- (frame.south west)
+#+LATEX_HEADER: 					-- ([xshift=-1mm,yshift=-1mm]frame.north west)
+#+LATEX_HEADER: 					[sharp corners]-- cycle;
+#+LATEX_HEADER: 				},interior engine=empty,
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	fonttitle=\bfseries,
+#+LATEX_HEADER: 	label={#2},#1}{def}
+
+
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \newtcbtheorem{Note}{Nota}{enhanced,
+#+LATEX_HEADER: 	breakable,
+#+LATEX_HEADER: 	colback=white,
+#+LATEX_HEADER: 	colframe=customAzure2!80!black,
+#+LATEX_HEADER: 	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+#+LATEX_HEADER: 	fonttitle=\bfseries,
+#+LATEX_HEADER: 	title={#2},
+#+LATEX_HEADER: 	boxed title size=title,
+#+LATEX_HEADER: 	boxed title style={
+#+LATEX_HEADER: 			sharp corners,
+#+LATEX_HEADER: 			rounded corners=northwest,
+#+LATEX_HEADER: 			colback=tcbcolframe,
+#+LATEX_HEADER: 			boxrule=0pt,
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	underlay boxed title={%
+#+LATEX_HEADER: 			\path[fill=tcbcolframe] (title.south west)--(title.south east)
+#+LATEX_HEADER: 			to[out=0, in=180] ([xshift=5mm]title.east)--
+#+LATEX_HEADER: 			(title.center-|frame.east)
+#+LATEX_HEADER: 			[rounded corners=\kvtcb@arc] |-
+#+LATEX_HEADER: 			(frame.north) -| cycle;
+#+LATEX_HEADER: 		},
+#+LATEX_HEADER: 	#1
+#+LATEX_HEADER: }{def}
+#+LATEX_HEADER: \makeatother
+
+
+#+LATEX_HEADER: \newtcolorbox{note}[1][]{%
+#+LATEX_HEADER:   enhanced jigsaw,
+#+LATEX_HEADER:   colback=gray!20!white,%
+#+LATEX_HEADER:   colframe=gray!80!black,
+#+LATEX_HEADER:   size=small,
+#+LATEX_HEADER:   boxrule=1pt,
+#+LATEX_HEADER:   title=\textbf{\textit{Nota}},
+#+LATEX_HEADER:   halign title=flush center,
+#+LATEX_HEADER:   coltitle=black,
+#+LATEX_HEADER:   breakable,
+#+LATEX_HEADER:   drop shadow=black!50!white,
+#+LATEX_HEADER:   attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
+#+LATEX_HEADER:   minipage boxed title=3cm,
+#+LATEX_HEADER:   boxed title style={%
+#+LATEX_HEADER:     colback=white,
+#+LATEX_HEADER:     size=fbox,
+#+LATEX_HEADER:     boxrule=1pt,
+#+LATEX_HEADER:     boxsep=2pt,
+#+LATEX_HEADER:     underlay={%
+#+LATEX_HEADER:       \coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
+#+LATEX_HEADER:       \coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
+#+LATEX_HEADER:       \begin{scope}
+#+LATEX_HEADER:         \clip (interior.north west) rectangle ([xshift=3ex]interior.east);
+#+LATEX_HEADER:         \filldraw [white, blur shadow={shadow opacity=60, shadow yshift=-.75ex}, rounded corners=2pt] (interior.north west) rectangle (interior.south east);
+#+LATEX_HEADER:       \end{scope}
+#+LATEX_HEADER:       \begin{scope}[gray!80!black]
+#+LATEX_HEADER:         \fill (dotA) circle (2pt);
+#+LATEX_HEADER:         \fill (dotB) circle (2pt);
+#+LATEX_HEADER:       \end{scope}
+#+LATEX_HEADER:     },
+#+LATEX_HEADER:   },
+#+LATEX_HEADER:   #1,
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: % Abbreviation for tcolorbox envs
+#+LATEX_HEADER: \newcommand{\dfn}[2]{\begin{Definition*}[colbacktitle=red!75!black]{#1}{}#2\end{Definition*}} % Invoke with \dfn{Title}{CONTENT}
+#+LATEX_HEADER: \newcommand{\qs}[2]{\begin{Note*}{#1}{}#2\end{Note*}} % Invoke with \qs{}{Content}
+
+
+#+LATEX_HEADER: % COLOR DEFINITION
+#+LATEX_HEADER: \definecolor{classTIKZcolor}{RGB}{222,222,222}
+
+#+LATEX_HEADER: % DEFINIZIONE COLORI TIKZ
+#+LATEX_HEADER: \definecolor{darkblue}{RGB}{0,60,104}
+#+LATEX_HEADER: \definecolor{darkdark}{RGB}{22,22,22}
+
+#+LATEX_HEADER: % DEFINIZIONE COLORI DA USARE PER IL CODICE
+#+LATEX_HEADER: \definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Definizione colori per i linguaggi da usare
+#+LATEX_HEADER: \definecolor{orangered}{RGB}{239,134,64}
+#+LATEX_HEADER: \definecolor{includeStatementCPP}{RGB}{148,123,155}
+#+LATEX_HEADER: \definecolor{libraryStatementCPP}{RGB}{126,190,184}
+#+LATEX_HEADER: \definecolor{colorMainCPP}{RGB}{190,116,67}
+#+LATEX_HEADER: \definecolor{colorTypesCPP}{RGB}{188,90,69}
+#+LATEX_HEADER: \definecolor{colorReservedKeywordsCPP}{RGB}{130,183,75}
+#+LATEX_HEADER: \definecolor{colorLoopsCPP}{RGB}{185,176,176}
+#+LATEX_HEADER: \definecolor{colorOtherKeywordsCPP}{RGB}{254,178,54}
+
+#+LATEX_HEADER: \definecolor{headerJava}{HTML}{006b3C}
+#+LATEX_HEADER: \definecolor{packageNameJavaDefinition}{HTML}{007BA7}
+#+LATEX_HEADER: \definecolor{classKeywordJava}{HTML}{CD5C5C}
+#+LATEX_HEADER: \definecolor{classNameJava}{HTML}{D2691E}
+#+LATEX_HEADER: \definecolor{methodKeyword}{HTML}{FE6F5E}
+#+LATEX_HEADER: \definecolor{constantsKeyword}{HTML}{FFA812}
+#+LATEX_HEADER: \definecolor{attributesKeyword}{HTML}{9955BB}
+#+LATEX_HEADER: \definecolor{testKeyword}{HTML}{1E90FF}
+#+LATEX_HEADER: \definecolor{assertKeyword}{HTML}{6082B6}
+#+LATEX_HEADER: \definecolor{expectedKeyword}{HTML}{29AB87}
+#+LATEX_HEADER: \definecolor{nullKeyword}{HTML}{E66771}
+#+LATEX_HEADER: \definecolor{variableKeyword}{HTML}{778899}
+
+#+LATEX_HEADER: % Definizione colori definitiva
+#+LATEX_HEADER: \definecolor{orangelight}{RGB}{238,162,82}
+#+LATEX_HEADER: \definecolor{orange-apricot}{HTML}{FBCEB1}
+#+LATEX_HEADER: \definecolor{greenlight}{RGB}{147,196,125}
+#+LATEX_HEADER: \definecolor{purplelight}{RGB}{176,159,222}
+#+LATEX_HEADER: \definecolor{bluelight}{RGB}{122,171,216}
+#+LATEX_HEADER: \definecolor{lavanda}{HTML}{F4BBFF}
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Definizione gradiente di colori
+#+LATEX_HEADER: % Azure
+#+LATEX_HEADER: \definecolor{customAzure1}{HTML}{B1E7E1}
+#+LATEX_HEADER: \definecolor{customAzure2}{HTML}{A1E2DB}
+#+LATEX_HEADER: \definecolor{customAzure3}{HTML}{92DDD6}
+#+LATEX_HEADER: \definecolor{customAzure4}{HTML}{83D8CF}
+#+LATEX_HEADER: \definecolor{customAzure5}{HTML}{73D3C9}
+#+LATEX_HEADER: \definecolor{customAzure6}{HTML}{64CEC3}
+
+#+LATEX_HEADER: % Pink
+#+LATEX_HEADER: \definecolor{customPink1}{HTML}{ECD7D5}
+#+LATEX_HEADER: \definecolor{customPink2}{HTML}{E6C9C7}
+#+LATEX_HEADER: \definecolor{customPink3}{HTML}{DFBBB9}
+#+LATEX_HEADER: \definecolor{customPink4}{HTML}{D8ADAB}
+#+LATEX_HEADER: \definecolor{customPink5}{HTML}{D2A09D}
+#+LATEX_HEADER: \definecolor{customPink6}{HTML}{CC928F}
+
+#+LATEX_HEADER: % Purple
+#+LATEX_HEADER: \definecolor{customPurple1}{HTML}{C5C2EB} % Lavanda
+#+LATEX_HEADER: \definecolor{customPurple2}{HTML}{B5B2E6}
+#+LATEX_HEADER: \definecolor{customPurple3}{HTML}{A6A3E1}
+#+LATEX_HEADER: \definecolor{customPurple4}{HTML}{9793DC}
+#+LATEX_HEADER: \definecolor{customPurple5}{HTML}{8884D7}
+#+LATEX_HEADER: \definecolor{customPurple6}{HTML}{7974D2}
+
+#+LATEX_HEADER: % Yellow
+#+LATEX_HEADER: \definecolor{customYellow1}{HTML}{EDE8AB}
+#+LATEX_HEADER: \definecolor{customYellow2}{HTML}{EAE39A}
+#+LATEX_HEADER: \definecolor{customYellow3}{HTML}{EAE39A}
+#+LATEX_HEADER: \definecolor{customYellow4}{HTML}{E3DA78}
+#+LATEX_HEADER: \definecolor{customYellow5}{HTML}{E0D667}
+#+LATEX_HEADER: \definecolor{customYellow6}{HTML}{DCD156}
+
+#+LATEX_HEADER: % Red
+#+LATEX_HEADER: \definecolor{customRed1}{HTML}{FF7073}
+#+LATEX_HEADER: \definecolor{customRed2}{HTML}{FF5C5F}
+#+LATEX_HEADER: \definecolor{customRed3}{HTML}{FF474A}
+#+LATEX_HEADER: \definecolor{customRed4}{HTML}{FF3336}
+#+LATEX_HEADER: \definecolor{customRed5}{HTML}{FF1F22}
+#+LATEX_HEADER: \definecolor{customRed6}{HTML}{FF0A0E}
+
+#+LATEX_HEADER: % Orange
+#+LATEX_HEADER: \definecolor{customOrange1}{HTML}{FABE75}
+#+LATEX_HEADER: \definecolor{customOrange2}{HTML}{F9B562}
+#+LATEX_HEADER: \definecolor{customOrange3}{HTML}{F9AC4E}
+#+LATEX_HEADER: \definecolor{customOrange4}{HTML}{F8A23A}
+#+LATEX_HEADER: \definecolor{customOrange5}{HTML}{F79926}
+#+LATEX_HEADER: \definecolor{customOrange6}{HTML}{F69013}
+
+#+LATEX_HEADER: % Brown
+#+LATEX_HEADER: \definecolor{customBrown1}{HTML}{BCA576}
+#+LATEX_HEADER: \definecolor{customBrown2}{HTML}{B59C69}
+#+LATEX_HEADER: \definecolor{customBrown3}{HTML}{AE925B}
+#+LATEX_HEADER: \definecolor{customBrown4}{HTML}{A48851}
+#+LATEX_HEADER: \definecolor{customBrown5}{HTML}{967D4A}
+#+LATEX_HEADER: \definecolor{customBrown6}{HTML}{897243}
+
+#+LATEX_HEADER: % Green
+#+LATEX_HEADER: \definecolor{customGreen1}{HTML}{D4E5B3}
+#+LATEX_HEADER: \definecolor{customGreen2}{HTML}{CCE0A4}
+#+LATEX_HEADER: \definecolor{customGreen3}{HTML}{C3DB95}
+#+LATEX_HEADER: \definecolor{customGreen4}{HTML}{B9D585}
+#+LATEX_HEADER: \definecolor{customGreen5}{HTML}{B1D076}
+#+LATEX_HEADER: \definecolor{customGreen6}{HTML}{A8CB67}
+
+
+#+LATEX_HEADER: \definecolor{redstrong}{RGB}{255,40,50}
+#+LATEX_HEADER: \definecolor{greendark}{RGB}{144,161,106}
+
+
+
+#+LATEX_HEADER: \definecolor{footerColor}{RGB}{0,163,243}
+#+LATEX_HEADER: \definecolor{footerColorSurrounding}{RGB}{22,154,255}
+#+LATEX_HEADER: \definecolor{ygroblue}{HTML}{179AFF}
+
+#+LATEX_HEADER: % TIKZ
+#+LATEX_HEADER: \usepackage{tikz}
+
+#+LATEX_HEADER: % DEFINIZIONE CAMPI E FORME PER TIKZ
+#+LATEX_HEADER: \usetikzlibrary{calc,shadows.blur,shapes,arrows,backgrounds,graphdrawing.trees, decorations.pathreplacing,positioning, arrows.meta, automata}
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: % DEFINIZIONE FORME GEOMETRICHE PER DIAGRAMMI
+#+LATEX_HEADER: \tikzstyle{CIRCLE} = [circle, minimum width=0.8cm, minimum height=0.8cm,text centered, draw=black, fill=blue!30]
+#+LATEX_HEADER: \tikzstyle{CIRCLESMALL} = [circle, minimum width=0.2cm, minimum height=0.2cm,text centered, draw=black, fill=black]
+#+LATEX_HEADER: \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+#+LATEX_HEADER: \tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+#+LATEX_HEADER: \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
+#+LATEX_HEADER: \tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+#+LATEX_HEADER: \tikzstyle{class}=[rectangle, draw=black, text centered, anchor=north, text=black, text width=3cm, shading=axis, bottom color=classTIKZcolor,top color=white,shading angle=45]
+#+LATEX_HEADER: \tikzstyle{arrow} = [thick,->,>=stealth]
+
+#+LATEX_HEADER: % Tree forest
+#+LATEX_HEADER: \usepackage[linguistics]{forest} %\usepackage{forest}
+
+#+LATEX_HEADER:
+
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: % OPTIONS FOR MDFRAMES (ENVIRONMENT)
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \mdfdefinestyle{@mdf@stubenv}{
+#+LATEX_HEADER:              leftmargin=2pt,
+#+LATEX_HEADER:	             rightmargin=2pt,
+#+LATEX_HEADER:	             innermargin=0pt,
+#+LATEX_HEADER:	             outermargin=0pt,
+#+LATEX_HEADER:	             skipabove=2pt,
+#+LATEX_HEADER:	             skipbelow=2pt,
+#+LATEX_HEADER:	             linewidth=1pt,
+#+LATEX_HEADER:	             linecolor=stub@tmp!80!black,
+#+LATEX_HEADER:              frametitlebackgroundcolor=stub@tmp!80!black,
+#+LATEX_HEADER:              backgroundcolor=stub@tmp,
+#+LATEX_HEADER:              innertopmargin=1pt,
+#+LATEX_HEADER:              innerbottommargin=1pt,
+#+LATEX_HEADER:              innerleftmargin=1pt,
+#+LATEX_HEADER:              innerrightmargin=1pt,
+#+LATEX_HEADER:              nobreak=true}
+
+%#+LATEX_HEADER: % Definisco una macro nascosta che farà uso dello stub nascosto
+%#+LATEX_HEADER: \def\make@stubenv#1#2#3#4{
+%#+LATEX_HEADER:   \global\newcounter{stub@#1}[#4]
+%#+LATEX_HEADER:     \newenvironment{#1}[1][]{
+%#+LATEX_HEADER:       \colorlet{stub@tmp}{#2!25}
+%#+LATEX_HEADER:       \begin{mdframed}[style=@mdf@stubenv, frametitle={\scriptsize \% #3 ##1}]
+%%#+LATEX_HEADER:       \begin{mdframed}[style=@mdf@stubenv, frametitle={\scriptsize \% #3 \roman{stub@#1} ##1}] % \roman{stub@#1} add a LIST
+%#+LATEX_HEADER:     }{
+%#+LATEX_HEADER:       \global\stepcounter{stub@#1}\end{mdframed}
+%#+LATEX_HEADER:     }
+%#+LATEX_HEADER:     \message{#1 is a stub environment!}
+%#+LATEX_HEADER:   }
+
+#+LATEX_HEADER:  % CREATE A DEFINITION WITH YGROBLUE COLOR
+%#+LATEX_HEADER: \make@stubenv{definition}{ygroblue}{}{subsection}
+%#+LATEX_HEADER: \makeatother
+
+#+LATEX_HEADER: % PER UTILIZZARE LA DEFINITION CREATA -> \begin{definition}[TITOLO] Contenuto \end{definition}
+
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: % SET DEFAULT OPTION FOR CODE BLOCKS
+#+LATEX_HEADER: \lstset {
+#+LATEX_HEADER:		frame=trBL, %frame=single
+#+LATEX_HEADER:		framesep=\fboxsep,
+#+LATEX_HEADER:		framerule=\fboxrule,
+#+LATEX_HEADER:		frameround=fttt,
+#+LATEX_HEADER:		rulecolor=\color{black},
+#+LATEX_HEADER:		xleftmargin=\dimexpr\fboxsep+\fboxrule,
+#+LATEX_HEADER:		xrightmargin=\dimexpr\fboxsep+\fboxrule,
+#+LATEX_HEADER:		breaklines=true,
+#+LATEX_HEADER:		basicstyle=\small\tt,
+#+LATEX_HEADER:		keywordstyle=\color{blue}\sf,
+#+LATEX_HEADER:		columns=flexible,
+#+LATEX_HEADER:         }
+
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Settaggio stile per i linguaggi da usare
+
+
+#+LATEX_HEADER: \lstdefinestyle{CPP}{
+#+LATEX_HEADER:   language=C++,
+#+LATEX_HEADER:   backgroundcolor=\color{white},
+#+LATEX_HEADER:   escapeinside={`'},
+#+LATEX_HEADER:	  numbers=left,
+#+LATEX_HEADER:	  numbersep=15pt,
+#+LATEX_HEADER:	  numberstyle=\tiny,
+#+LATEX_HEADER:	  commentstyle=\color{gray},
+#+LATEX_HEADER:   % #include statement
+#+LATEX_HEADER:   keywords=[1]{\#include},
+#+LATEX_HEADER:   keywords=[2]{ main },
+#+LATEX_HEADER:   % types
+#+LATEX_HEADER:   keywords=[3]{int, char, short, long, float, double},
+#+LATEX_HEADER:   % List of reserved keywords
+#+LATEX_HEADER:   keywords=[4]{auto, struct , unsigned, signed, enum, register, typedef, extern, return, union, continue, goto, volatile, default, define, static},
+#+LATEX_HEADER:   % Loops
+#+LATEX_HEADER:   keywords=[5]{do, while, case, else, switch, break, for, if},
+#+LATEX_HEADER:   % List of other keywords
+#+LATEX_HEADER:   keywords=[6]{void, boolean, const, sizeof, sleep},
+#+LATEX_HEADER:   % Colors of the keywords:
+#+LATEX_HEADER:   keywordstyle=[1]\color{includeStatementCPP},
+#+LATEX_HEADER:   keywordstyle=[2]\color{colorMainCPP},
+#+LATEX_HEADER:   keywordstyle=[3]\color{colorTypesCPP},
+#+LATEX_HEADER:   keywordstyle=[4]\color{colorReservedKeywordsCPP},
+#+LATEX_HEADER:   keywordstyle=[6]\color{colorOtherKeywordsCPP}
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: \lstdefinestyle{BASH}{
+#+LATEX_HEADER:   language=bash,
+#+LATEX_HEADER:   commentstyle=\color{gray},
+#+LATEX_HEADER:   backgroundcolor=\color{white},
+#+LATEX_HEADER:	  numbers=left,
+#+LATEX_HEADER:	  numbersep=15pt,
+#+LATEX_HEADER:	  numberstyle=\tiny,
+#+LATEX_HEADER:   stringstyle=\color{greendark},
+#+LATEX_HEADER:	  commentstyle=\color{gray},
+#+LATEX_HEADER:	  keywords=[1]{exit, print_error, fail},
+#+LATEX_HEADER:	  keywords=[2]{printf, cut, print_ok, basename, while, usage, run},
+#+LATEX_HEADER:	  keywords=[3]{ls, find, touch, egrep, print_info, read, done},
+#+LATEX_HEADER:	  keywords=[4]{wc},
+#+LATEX_HEADER:   keywordstyle=[1]\color{redstrong},
+#+LATEX_HEADER:   keywordstyle=[2]\color{greenlight},
+#+LATEX_HEADER:   keywordstyle=[3]\color{bluelight},
+#+LATEX_HEADER:   keywordstyle=[4]\color{purplelight}
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: \lstdefinestyle{JAVA}{
+#+LATEX_HEADER:   language=Java,
+#+LATEX_HEADER:   backgroundcolor=\color{white},
+#+LATEX_HEADER:	  numbers=left,
+#+LATEX_HEADER:	  numbersep=15pt,
+#+LATEX_HEADER:	  numberstyle=\tiny,
+#+LATEX_HEADER:	  commentstyle=\color{gray},
+#+LATEX_HEADER:   stringstyle=\color{gray},
+#+LATEX_HEADER:   keywords=[1]{package, import, static, public, return, true},
+#+LATEX_HEADER:   keywords=[2]{android, Manifest, content, Context, util, Log, androidx, core, app, ActivityCompat, org, test, platform, app, InstrumentationRegistry, ext, junit, runner, runners, AndroidJUnit4, Test, RunWith, Assert, com, natour, utils, constants, Constants, persistence, LocalUser, LocalUserDbManager, java, regex, Pattern, Before},
+#+LATEX_HEADER:   keywords=[3]{void, boolean, int, String, while, synchronized, volatile, long, double},
+#+LATEX_HEADER:   keywords=[4]{class, @RunWith, super},
+#+LATEX_HEADER:   keywords=[5]{if, Employee, try, catch},
+#+LATEX_HEADER:   keywords=[6]{localUser, dbManager, checkFineLocation, checkCoarseLocation, appContext, controlloRecuperoPassword},
+#+LATEX_HEADER:   keywords=[7]{private},
+#+LATEX_HEADER:   keywords=[8]{@Test, @Before},
+#+LATEX_HEADER:   keywords=[9]{assertTrue, assertFalse},
+#+LATEX_HEADER:   keywords=[10]{expected, IllegalArgumentException},
+#+LATEX_HEADER:   keywords=[11]{null, false},
+#+LATEX_HEADER:   keywords=[12]{username, email, password, confermaPassword, pattern},
+#+LATEX_HEADER:   keywordstyle=[1]\color{headerJava},
+#+LATEX_HEADER:   keywordstyle=[2]\color{packageNameJavaDefinition},
+#+LATEX_HEADER:   keywordstyle=[3]\color{methodKeyword},
+#+LATEX_HEADER:   keywordstyle=[4]\color{classKeywordJava},
+#+LATEX_HEADER:   keywordstyle=[5]\color{classNameJava},
+#+LATEX_HEADER:   keywordstyle=[6]\color{attributesKeyword},
+#+LATEX_HEADER:   keywordstyle=[7]\color{constantsKeyword},
+#+LATEX_HEADER:   keywordstyle=[8]\color{testKeyword},
+#+LATEX_HEADER:   keywordstyle=[9]\color{assertKeyword},
+#+LATEX_HEADER:   keywordstyle=[10]\color{expectedKeyword},
+#+LATEX_HEADER:   keywordstyle=[11]\color{nullKeyword},
+#+LATEX_HEADER:   keywordstyle=[12]\color{variableKeyword},
+#+LATEX_HEADER:   morekeywords={*,...}
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: \lstdefinestyle{XML}{
+#+LATEX_HEADER:   language=XML,
+#+LATEX_HEADER:   backgroundcolor=\color{white},
+#+LATEX_HEADER:   numbers=left,
+#+LATEX_HEADER:   numbersep=15pt,
+#+LATEX_HEADER:   numberstyle=\tiny,
+#+LATEX_HEADER:   commentstyle=\color{gray},
+#+LATEX_HEADER:   keywords=[1]{article, author, title, description, text, formula, math},
+#+LATEX_HEADER:   keywords=[2]{dbs:,dbs:book,<dbs:description>},
+#+LATEX_HEADER:   keywordstyle=[1]\color{colorMainCPP},
+#+LATEX_HEADER:   keywordstyle=[2]\color{includeStatementCPP},
+#+LATEX_HEADER: }
+
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Colorizing links in a nicer way.
+#+LATEX_HEADER: \usepackage{hyperref} % Links
+#+LATEX_HEADER: \hypersetup{colorlinks, linkcolor=black, urlcolor=blue}
+#+LATEX_HEADER: %\hypersetup{pdfauthor={%a}, pdftitle={%t}, pdfkeywords={%k}, pdfsubject={%d}, pdfcreator={%c}, pdflang={%L}, breaklinks=true, colorlinks=true, linkcolor=link, urlcolor=url, citecolor=cite\n}
+
+#+LATEX_HEADER: %Bibliography
+#+LATEX_HEADER: \usepackage[backend=biber,sortcites,style=verbose-trad2]{biblatex} % maxcitenames=1, maxbibnames=3, backref=true
+#+LATEX_HEADER: \bibliography{./Bibliography.bib}
+
+% Moving up the title.
+#+LATEX_HEADER: \usepackage{titling}
+#+LATEX_HEADER: \setlength{\droptitle}{-9em}
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: \setlength{\parskip}{1em}
+#+LATEX_HEADER: \usepackage[stretch=10]{microtype}
+#+LATEX_HEADER: \usepackage{hyphenat}
+#+LATEX_HEADER: \usepackage{ragged2e}
+#+LATEX_HEADER: \usepackage{subfig} % Subfigures (not needed in Org I think)
+# #+LATEX_HEADER: \RaggedRight % Disables flush alighment on the right side. Personal preference.
+
+#+LATEX_HEADER: \usepackage[top=1in, bottom=1.25in, left=0.55in, right=0.55in, showframe]{geometry} % Page geometry (to show frames add showframe options)
+
+% Line spacing
+#+LATEX_HEADER: \renewcommand{\baselinestretch}{1.15}
+
+% Page numbering - this disables it
+# #+LATEX_HEADER: \pagenumbering{gobble}
+
+#+LATEX_HEADER: % Page numbering - Footer
+#+LATEX_HEADER: \usepackage{fancyhdr} % Custom headers and footers
+#+LATEX_HEADER: \pagestyle{fancy} % Makes all pages in the document conform to the custom headers and footers
+#+LATEX_HEADER: \fancyhead{} % No page header
+#+LATEX_HEADER: \renewcommand{\headrulewidth}{0pt}
+#+LATEX_HEADER: \fancyfoot[L]{} % Empty left footer
+#+LATEX_HEADER: \fancyfoot[C]{} % Empty center footer
+%#+LATEX_HEADER: \fancyfoot[R]{\thepage} % Page numbering for right footer
+%#+LATEX_HEADER: \fancyhead[R]{\hrulefill \raisebox{-2.1pt}[10pt][10pt]{\thepage}\hrulefill}
+
+#+LATEX_HEADER: \newcommand\FrameBoxR[1]{
+#+LATEX_HEADER:   \fcolorbox{footerColorSurrounding}{footerColor}{\makebox[3cm][r]{\textcolor{white}{\bfseries#1}}}
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: \fancyfoot[R]{\FrameBoxR{\thepage}}
+
+
+% Spacing, titling, text setting.
+#+LATEX_HEADER: \usepackage[explicit]{titlesec}
+
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Title customization
+#+LATEX_HEADER: \pretitle{\begin{center}\fontsize{20pt}{20pt}\selectfont}
+#+LATEX_HEADER: \posttitle{\par\end{center}}
+#+LATEX_HEADER: \preauthor{\begin{center}\vspace{-6bp}\fontsize{14pt}{14pt}\selectfont}
+#+LATEX_HEADER: \postauthor{\par\end{center}\vspace{-25bp}}
+
+#+LATEX_HEADER: \predate{\begin{center}\fontsize{12pt}{12pt}\selectfont}
+#+LATEX_HEADER: \postdate{\par\end{center}\vspace{0em}}
+
+
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Section/subsection headings:
+
+#+LATEX_HEADER: %Section
+#+LATEX_HEADER: \titlespacing\section{0pt}{2pt}{2pt} % left margin, space before section header, space after section header
+
+#+LATEX_HEADER: %Subsection
+#+LATEX_HEADER: \titlespacing\subsection{0pt}{5pt}{-2pt} % left margin, space before subsection header, space after subsection header
+
+#+LATEX_HEADER: %Subsubsection
+#+LATEX_HEADER: \titlespacing\subsubsection{0pt}{5pt}{-2pt} % left margin, space before subsection header, space after subsection header
+
+#+LATEX_HEADER:
+
+#+LATEX_HEADER: % List spacing & options
+#+LATEX_HEADER: \usepackage{enumitem}
+#+LATEX_HEADER: \usepackage{fdsymbol}
+#+LATEX_HEADER: \setlist{itemsep=-2pt} % or \setlist{noitemsep} to leave space around whole list
+#+LATEX_HEADER: \setlist[enumerate, 1]{label=\arabic*.}
+#+LATEX_HEADER: \setlist[enumerate, 2]{label=\Roman*.}
+#+LATEX_HEADER: \setlist[enumerate, 3]{label=\alph*.}
+#+LATEX_HEADER: \setlist[itemize, 1]{label=$\smallblacktriangleright$}
+#+LATEX_HEADER: \setlist[itemize, 2]{label=$\smalldiamond$}
+#+LATEX_HEADER: \setlist[itemize, 3]{label=$\smallcircle$}
+
+
+#+LATEX_HEADER: % Enumeration labels
+#+LATEX_HEADER: % Invoke it with: \begin{enumerate}[label=\bfseries\tiny\protect\circled{\small\arabic*}] \end{enumerate}
+#+LATEX_HEADER: \newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt] (char) {#1};}} % Numeration with number inside circle
