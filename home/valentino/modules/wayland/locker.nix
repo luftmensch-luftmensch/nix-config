@@ -1,9 +1,7 @@
 {
-  options,
   config,
   lib,
   pkgs,
-  outputs,
   ...
 }:
 with lib; let
@@ -27,7 +25,6 @@ in {
       in {
         font = cfgTheme.font.regular.family;
         datestr = "%a, %d-%M-%Y";
-        # image = outputs.wallpapers.digital-flowers.src;
         effect-blur = "7x5";
         effect-vignette = "0.2:0.5";
         effect-scale = "0.4";

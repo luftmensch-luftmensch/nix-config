@@ -68,7 +68,7 @@
 
     "xorg"                   = import ./xorg;
     "xorg/i3"                = import ./xorg/i3;
-    "xorg/dmenu"             = import ./xorg/dmenu.nix;
+    "xorg/dmenu"             = import ./xorg/dmenu;
     "xorg/locker"            = import ./xorg/locker.nix;
     "xorg/picom"             = import ./xorg/picom.nix;
     "xorg/xob"               = import ./xorg/xob.nix;

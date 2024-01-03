@@ -41,7 +41,7 @@ in {
             vterm
           ] ++ (optionals cfg.telega.enable [
           # melpaPackages.telega is outdated. Pull a newer version directly from the repo
-          (melpaPackages.telega.overrideAttrs (oldAttrs: {
+          (melpaPackages.telega.overrideAttrs (_oldAttrs: {
             # version = "0.8.220";
             version = "0.8.230";
             src = pkgs.fetchFromGitHub {

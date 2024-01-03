@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -11,44 +10,6 @@ with lib; let
   cfgWayland = config.valentino.modules.wayland;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
 
-  # See: https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs
-  # Open about:config and set toolkit.legacyUserProfileCustomizations.stylesheets to true.
-  # In Sidebery settings/general:
-  # - Add preface to the browser window's title if Sidebery sidebar is active: true
-  # - Preface value: Vtabs
-  firefoxUserChrome = pkgs.writeText "firefox-userChrome.css" ''
-    /**
-     * Dynamic native tabs.
-     */
-    #main-window #titlebar {
-      overflow: hidden;
-      transition: height 0.3s 0.3s !important;
-    }
-    /* Default state: Set initial height to enable animation */
-    #main-window #titlebar { height: 3em !important; }
-    #main-window[uidensity="touch"] #titlebar { height: 3.35em !important; }
-    #main-window[uidensity="compact"] #titlebar { height: 2.7em !important; }
-    /* Hidden state: Hide native tabs strip */
-    #main-window[titlepreface*="Vtabs"] #titlebar { height: 0 !important; }
-    /* Hidden state: Fix z-index of active pinned tabs */
-    #main-window[titlepreface*="Vtabs"] #tabbrowser-tabs { z-index: 0 !important; }
-
-    /**
-     * Decrease size of the sidebar header
-     */
-    #sidebar-header {
-      font-size: 1.2em !important;
-      padding: 2px 6px 2px 3px !important;
-    }
-    #sidebar-header #sidebar-close {
-      padding: 3px !important;
-    }
-    #sidebar-header #sidebar-close .toolbarbutton-icon {
-      width: 14px !important;
-      height: 14px !important;
-      opacity: 0.6 !important;
-    }
-  '';
 in {
   options.valentino.modules.browsers.firefox = {
     enable = mkEnableOption "firefox";
@@ -63,7 +24,6 @@ in {
         else pkgs.firefox;
 
       profiles.default = {
-        userChrome = builtins.readFile firefoxUserChrome;
         name = "Default";
         #                       Disable automatic downloading of OpenH264 codec
         #  1. https://support.mozilla.org/en-US/kb/how-stop-firefox-making-automatic-connections#w_media-capabilities
@@ -501,7 +461,6 @@ in {
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
           ublock-origin
-          sidebery
         ];
       };
     };

@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -14,7 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      (dmenu.overrideAttrs (oldAttrs: {
+      (dmenu.overrideAttrs (_oldAttrs: {
         patches = [
           ./patches/case-insensitive
           ./patches/borders
