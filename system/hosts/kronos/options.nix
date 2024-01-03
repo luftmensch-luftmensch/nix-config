@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   system.modules = {
     core = {
       boot = {
@@ -30,10 +30,7 @@
       adb.enable = true;
       docker.enable = true;
       manpages.enable = true;
-      # virtualisation.enable = true;
     };
-
-    editor.neovim.enable = true;
 
     graphical = {
       wayland.enable = true;
@@ -65,7 +62,6 @@
       openvpn.enable = true;
       wireguard.enable = true;
     };
-
 
     shell = {
       bash.enable = true;

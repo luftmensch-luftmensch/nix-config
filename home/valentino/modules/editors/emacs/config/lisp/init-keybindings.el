@@ -54,10 +54,8 @@
 
     ;; Magit
     "g"  '(:ignore t :which-key "Git")
-    "gg" #'((lambda () (interactive) (magit "~/config")) :which-key "Personal Config")
-    "gG" #'((lambda () (interactive) (magit "~/nix-config")) :which-key "Nixos Config")
-    "g." #'((lambda () (interactive) (magit "~/nix-config")) :which-key "Nixos Config")
-    "g." '(magit :which-key "Open Magit in current directory")
+    "gg" #'((lambda () (interactive) (magit "~/nix-config")) :which-key "Nixos Config")
+    "g." '(magit :which-key "Launch Magit in current directory")
 
     ;; Mail with NotMuch
     "o" '(:ignore t :which-key "Mail")

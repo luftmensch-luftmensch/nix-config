@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   system.modules = {
     core = {
       boot = {
@@ -32,8 +32,6 @@
       manpages.enable = true;
       virtualisation.enable = true;
     };
-
-    editor.neovim.enable = true;
 
     graphical = {
       xorg.enable = true;

@@ -8,16 +8,12 @@
 with lib; let
   cfg = config.valentino.modules.xorg.locker;
   ff-locker = pkgs.writeShellScriptBin "ff-locker" ''
-    #!/usr/bin/env bash
     TMPBG=/tmp/screen.png
-    display=$(xrandr | grep ' connected ' | awk '{print$1}' | wc -l)
-
     [ -f "$TMPBG" ] && rm $TMPBG
 
-    ${pkgs.ffmpeg-full}/bin/ffmpeg -f x11grab -video_size "1920x1080" -i "$DISPLAY" -filter_complex "boxblur=8:8" -vframes 1 $TMPBG
+    ${pkgs.ffmpeg-full}/bin/ffmpeg -y -vf x11grab -video_size "1920x1080" -i "$DISPLAY" -filter_complex "boxblur=8:8" -vframes 1 $TMPBG
 
     ${pkgs.i3lock}/bin/i3lock -i $TMPBG
-
   '';
 in {
   options.valentino.modules.xorg.locker = {
@@ -29,10 +25,7 @@ in {
       enable = true;
       xautolock = {
         enable = true;
-        extraOptions = [
-          "-time 10"
-          # "-locker ${ff-locker}"
-        ];
+        extraOptions = ["-time 10"];
       };
       lockCmd = "${ff-locker}/bin/ff-locker";
     };

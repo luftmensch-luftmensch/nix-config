@@ -33,6 +33,7 @@
     "editors/emacs"          = import ./editors/emacs;
     "editors/android-studio" = import ./editors/android-studio.nix;
     "editors/intellij"       = import ./editors/intellij.nix;
+    "editors/neovim"         = import ./editors/neovim.nix;
     "editors/vscode"         = import ./editors/vscode.nix;
 
     "gaming/emulators"       = import ./gaming/emulators.nix;

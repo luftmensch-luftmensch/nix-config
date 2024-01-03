@@ -41,6 +41,7 @@
         orgSetupFiles.enable = true;
       };
       intellij.enable = true;
+      neovim.enable = true;
       vscode.enable = true;
     };
 

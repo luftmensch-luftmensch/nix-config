@@ -19,8 +19,6 @@
   "dev/manpages"       = import ./dev/manpages.nix;
   "dev/virtualisation" = import ./dev/virtualisation.nix;
 
-  "editor/neovim"      = import ./editor/neovim.nix;
-
   "graphical/common"   = import ./graphical/common.nix;
   "graphical/portals"  = import ./graphical/portals.nix;
   "graphical/sddm"     = import ./graphical/sddm.nix;
@@ -29,8 +27,6 @@
 
   "hardware/audio"     = import ./hardware/audio.nix;
   "hardware/bluetooth" = import ./hardware/bluetooth.nix;
-
-  "packages/unstable"  = import ./packages/unstable.nix;
 
   "services/battery"   = import ./services/battery.nix;
   "services/fprintd"   = import ./services/fprintd.nix;
