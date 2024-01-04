@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   ...
@@ -60,11 +59,9 @@ in {
       };
 
       ${cfg.username} = {
-        description = cfg.description;
+				inherit (cfg) description hashedPassword uid;
         isNormalUser = true;
-        hashedPassword = cfg.hashedPassword;
         extraGroups = ["wheel"] ++ cfg.extraGroups;
-        uid = cfg.uid;
 
         openssh.authorizedKeys.keys =
           [

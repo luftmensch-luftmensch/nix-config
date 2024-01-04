@@ -50,7 +50,7 @@ in {
         "editor.linkedEditing" = true;
         "editor.mouseWheelZoom" = true;
         "editor.smoothScrolling" = true;
-        "editor.fontSize" = theme.font.regular.size;
+        "editor.fontSize" = theme.font.regular.size + 6;
         "editor.fontFamily" = "'${theme.font.regular.family}', 'monospace', monospace";
         "workbench.startupEditor" = "none";
         "workbench.list.smoothScrolling" = true;

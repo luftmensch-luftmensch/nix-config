@@ -30,5 +30,8 @@
 ;; Organize and send HTTP requests from Emacs with verb
 (setup (:pkg verb))
 
+;; Organize and send HTTP requests from Emacs with plz-see (wrapper around plz)
+(setup (:pkg plz-see))
+
 (provide 'init-extra-modes)
 ;;; init-extra-modes.el ends here

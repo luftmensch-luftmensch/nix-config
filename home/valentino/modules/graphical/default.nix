@@ -25,7 +25,7 @@ with lib; let
     sarasa-gothic # A CJK programming font based on Iosevka and Source Han Sans
     victor-mono
     cantarell-fonts
-    scientifica   
+    scientifica
 
     # Micro$oft
     corefonts
@@ -33,12 +33,13 @@ with lib; let
     noto-fonts
     noto-fonts-emoji
     noto-fonts-cjk-sans
-    # Icons
+
     material-design-icons
-    # Fira
-    # fira
-    # IBM Plex Mono - Waybar
     ibm-plex
+
+    # mononoki
+    # google-fonts
+    # roboto
   ];
 
   media = with pkgs; [
@@ -58,18 +59,18 @@ with lib; let
   ];
 
   utilities = with pkgs; [
-    bind       # Domain name server
+    bind # Domain name server
     lm_sensors # Tools for reading hardware sensors
-    lshw       # Info on the HW configuration of the machine
-    lsof       # List open files
-    nmap       # Network exploration tool and security / port scanner
-    procs      # Modern replacement for ps
-    ps_mem     # Usage: sudo ps_mem -p $(pgrep -d, -u $USER) (Why is Emacs using so much RAM?)
+    lshw # Info on the HW configuration of the machine
+    lsof # List open files
+    nmap # Network exploration tool and security / port scanner
+    procs # Modern replacement for ps
+    ps_mem # Usage: sudo ps_mem -p $(pgrep -d, -u $USER) (Why is Emacs using so much RAM?)
     traceroute # Print the route packets trace to network host
-    unrar      # Utility for RAR archives
-    unzip      # list, test and extract compressed files in a ZIP archive
-    usbutils   # Tools for working with USB devices, such as lsusb
-    zip        # package and compress (archive) files
+    unrar # Utility for RAR archives
+    unzip # list, test and extract compressed files in a ZIP archive
+    usbutils # Tools for working with USB devices, such as lsusb
+    zip # package and compress (archive) files
   ];
 
   desktop = with pkgs; [

@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+{pkgs, ...}: let
   fs_options = ["autodefrag" "space_cache=v2" "noatime" "compress=zstd:3"];
 
   fs-diff = pkgs.writeShellScriptBin "fs-diff" ''
@@ -74,41 +70,42 @@ in {
   };
 
   # An handy way to retrieve the corresponding label from UUID is using `blkid`
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/vault";
-    fsType = "btrfs";
-    # options = [ "subvol=@" "autodefrag" "space_cache=v2" "noatime" "compress=zstd:3" ];
-    options = ["subvol=@"] ++ fs_options;
-  };
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/vault";
+      fsType = "btrfs";
+      options = ["subvol=@"] ++ fs_options;
+    };
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-label/vault";
-    fsType = "btrfs";
-    options = ["subvol=@home"] ++ fs_options;
-  };
+    "/home" = {
+      device = "/dev/disk/by-label/vault";
+      fsType = "btrfs";
+      options = ["subvol=@home"] ++ fs_options;
+    };
 
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-label/vault";
-    fsType = "btrfs";
-    options = ["subvol=@nix"] ++ fs_options;
-  };
+    "/nix" = {
+      device = "/dev/disk/by-label/vault";
+      fsType = "btrfs";
+      options = ["subvol=@nix"] ++ fs_options;
+    };
 
-  fileSystems."/persist" = {
-    device = "/dev/disk/by-label/vault";
-    fsType = "btrfs";
-    options = ["subvol=@persist"] ++ fs_options;
-    neededForBoot = true;
-  };
+    "/persist" = {
+      device = "/dev/disk/by-label/vault";
+      fsType = "btrfs";
+      options = ["subvol=@persist"] ++ fs_options;
+      neededForBoot = true;
+    };
 
-  fileSystems."/var/log" = {
-    device = "/dev/disk/by-label/vault";
-    fsType = "btrfs";
-    options = ["subvol=@var_log"] ++ fs_options;
-  };
+    "/var/log" = {
+      device = "/dev/disk/by-label/vault";
+      fsType = "btrfs";
+      options = ["subvol=@var_log"] ++ fs_options;
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
+    "/boot" = {
+      device = "/dev/disk/by-label/boot";
+      fsType = "vfat";
+    };
   };
 
   swapDevices = [{device = "/dev/disk/by-label/SWAP";}];

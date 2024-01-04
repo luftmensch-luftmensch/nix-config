@@ -11,7 +11,7 @@ with lib; let
     TMPBG=/tmp/screen.png
     [ -f "$TMPBG" ] && rm $TMPBG
 
-    ${pkgs.ffmpeg-full}/bin/ffmpeg -y -vf x11grab -video_size "1920x1080" -i "$DISPLAY" -filter_complex "boxblur=8:8" -vframes 1 $TMPBG
+    ${pkgs.ffmpeg-full}/bin/ffmpeg -y -f x11grab -video_size "1920x1080" -i "$DISPLAY" -filter_complex "boxblur=8:8" -frames:v 1 $TMPBG
 
     ${pkgs.i3lock}/bin/i3lock -i $TMPBG
   '';

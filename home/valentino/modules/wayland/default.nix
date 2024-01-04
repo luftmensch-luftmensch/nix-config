@@ -36,7 +36,6 @@ in {
       swaynotificationcenter
 
       wtype
-      slurp
       swaybg
       cliphist
     ];

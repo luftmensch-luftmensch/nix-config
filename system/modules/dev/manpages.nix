@@ -1,6 +1,5 @@
 {
   pkgs,
-  options,
   config,
   lib,
   ...
@@ -15,7 +14,8 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [man-pages man-pages-posix];
     documentation = {
-      nixos.enable = false; # Remove bloatware (NixOS HTML file)
+      # Remove bloatware (NixOS HTML file)
+      nixos.enable = false;
       man = {
         enable = true;
         # This allows searching for a page or keyword using utilities
