@@ -58,8 +58,7 @@ in {
     };
 
     services = {
-      easyeffects.enable = true;
-      # Try out if there is some problems with it on wayland
+      # easyeffects.enable = true;
       pasystray.enable = true;
     };
   };

@@ -213,8 +213,9 @@ pkgs: {
     '';
   };
 
-  # Rebuild configuration / update flake.lock file (--commit-lock-file --recreate-lock-file)
-  # If git fails add : sudo git config --add safe.directory ~/Nixos
+  # Rebuild configuration / update flake.lock file
+  # If git fails add : sudo git config --add safe.directory <directory>
+  # You can pass `--option eval-cache false` to turn off caching so that Nix will always show you the error message instead of error: cached failure of attribute 'nixosConfigurations.default.config.system.build.toplevel'
   update = {
     body = ''
       set -l base_path $HOME/nix-config
@@ -222,7 +223,7 @@ pkgs: {
         case "--flake"
             nix flake update $base_path
         case "*"
-          sudo nixos-rebuild switch --flake "$base_path/.#$hostname" -v -L --use-remote-sudo # (In case of git error)
+          sudo nixos-rebuild switch --flake "$base_path/.#$hostname" -v -L --use-remote-sudo
       end
     '';
   };

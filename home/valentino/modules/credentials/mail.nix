@@ -54,7 +54,7 @@ in {
         unina = {
           primary = false;
           realName = "Valentino Bocchetti";
-          userName = "vale.bocchetti";
+          userName = "vale.bocchetti@studenti.unina.it";
           address = "vale.bocchetti@studenti.unina.it";
           passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup unina password";
 
