@@ -1,5 +1,4 @@
 pkgs: {
-  # pdf-compress = " \gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dEmbedAllFonts=true -dSubsetFonts=true -dColorImageDownsampleType=/Bicubic -dColorImageResolution=144 -dGrayImageDownsampleType=/Bicubic -dGrayImageResolution=144 -dMonoImageDownsampleType=/Bicubic -dMonoImageResolution=144 -sOutputFile=\${1%.*}_compressed.pdf $1; ";
   mkdir = "mkdir -p ";
   free = "free -gt";
   exe = "chmod +x ";
@@ -110,9 +109,10 @@ pkgs: {
   v = "vim";
 
   getpass = "${pkgs.openssl}/bin/openssl rand -base64 20";
-  # gpg encryption
   # verify signature for isos
   gpg-check = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve --verify";
   # receive the key of a developer
   gpg-retrieve = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve --receive-keys";
+
+  adb-force-restart = "sudo adb kill-server; sudo adb start-server";
 }
