@@ -21,7 +21,6 @@
     exec = "${b-cmd}";
     tail = true;
     format-foreground = "${palette.base0D}";
-    # click-left = "${bluetoothScript}/bin/bluetooth-ctl --toggle &";
     # label-maxlen = 55;
   };
 

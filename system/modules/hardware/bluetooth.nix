@@ -2,7 +2,7 @@
   options,
   config,
   lib,
-	pkgs,
+  pkgs,
   ...
 }:
 with lib; let
@@ -13,7 +13,14 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware.bluetooth.enable = true;
+    hardware.bluetooth = {
+      enable = true;
+      settings = {
+        General = {
+          Experimental = true;
+        };
+      };
+    };
 
     environment.systemPackages = [pkgs.bluez];
   };

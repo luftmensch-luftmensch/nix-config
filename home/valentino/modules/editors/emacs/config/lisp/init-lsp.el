@@ -71,16 +71,14 @@
 								                                     #'eglot-completion-at-point
 								                                     #'cape-yasnippet
 								                                     #'cape-file))))
+  (:bind-into eglot-mode-map
+    [remap evil-lookup] #'eldoc-doc-buffer)
   ;; (:bind-into eglot-mode-map
   ;;   "gd" 'xref-find-definitions
   ;;   "gD" 'xref-find-definitions-other-window
   ;;   "g5" 'xref-find-definitions-other-frame
 
-  ;;   "gr" 'xref-find-references
-  ;;   "gR" 'eglot-rename
-  ;;   "gn" 'flymake-goto-next-error
-  ;;   "gp" 'flymake-goto-prev-error
-  ;;   "K" 'eldoc-doc-buffer)
+  ;;   "gp" 'flymake-goto-prev-error)
 
 	;; Hooks
 	(:with-mode (c-mode c++-mode go-mode nix-mode python-mode)
@@ -89,6 +87,9 @@
 (setup (:if-feature gcmh)
 	(:with-hook (eglot-managed-mode-hook)
 		(:hook vb/lsp-optimization-mode)))
+
+;; TODO: https://github.com/svaante/dape
+;; (setup (:pkg dape))
 
 (setup (:if-feature general)
   ;; Additional keymaps using <SPC> prefix
