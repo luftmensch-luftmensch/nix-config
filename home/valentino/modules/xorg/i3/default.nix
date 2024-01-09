@@ -25,6 +25,7 @@ in {
         config = {
           modifier = "${mod}";
           floating.modifier = "${mod}";
+					bars = []; # use polybar instead
           workspaceAutoBackAndForth = true;
 
           inherit (settings) assigns gaps keybindings modes startup;
