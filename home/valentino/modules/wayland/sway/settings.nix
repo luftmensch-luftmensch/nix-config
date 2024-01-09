@@ -23,7 +23,19 @@
     inherit theme;
   };
 in {
-  # menu =
+  gaps = {
+    inner = 5;
+    outer = 5;
+    smartGaps = true;
+    smartBorders = "on";
+  };
+
+  fonts = {
+    names = [theme.font.regular.family];
+    # Sum required: floating point value but int option defined
+    size = theme.font.regular.size + 0.0;
+  };
+
   keybindings = {
     # Recently wireplumber (v 0.4.11) added a few utilities for their wpctl tool. You can do:
     # set-volume and set-mute works with that helper, alternatively you can run wpctl status to get the ID.
