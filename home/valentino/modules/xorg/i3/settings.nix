@@ -1,15 +1,25 @@
 {
   default_mod,
   alt_mod,
-	theme,
+  theme,
   pkgs,
   ...
 }: let
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
     inherit theme;
   };
-in
-{
+in {
+  assigns = {
+    "2" = [{class = "^obs";}];
+  };
+
+  gaps = {
+    inner = 5;
+    outer = 5;
+    smartGaps = true;
+    smartBorders = "on";
+  };
+
   keybindings = {
     "F1" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
     "F2" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
@@ -109,9 +119,29 @@ in
     "${default_mod}+Shift+b" = "exec --no-startup-id ${pkgs.chromium}/bin/chromium";
     "${default_mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
     "${default_mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
-		"${default_mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
+    "${default_mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
     "${default_mod}+Shift+v" = "exec --no-startup-id ~/.local/bin/copy-to-clipboard";
     "${default_mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
+  };
+
+  modes = {
+    resize = {
+      "h" = "resize shrink width 10 px or 10 ppt";
+      "j" = "resize grow height 10 px or 10 ppt";
+      "k" = "resize shrink height 10 px or 10 ppt";
+      "l" = "resize grow width 10 px or 10 ppt";
+
+      # same bindings, but for the arrow keys
+      "Left" = "resize shrink width 10 px or 10 ppt";
+      "Down" = "resize grow height 10 px or 10 ppt";
+      "Up" = "resize shrink height 10 px or 10 ppt";
+      "Right" = "resize grow width 10 px or 10 ppt";
+
+      # back to normal: Enter or Escape or $mod+r
+      "Return" = "mode default";
+      "Escape" = "mode default";
+      "${default_mod}+r" = "mode default";
+    };
   };
 
   startup = [
@@ -142,4 +172,51 @@ in
     #   notification = false;
     # }
   ];
+
+  extraConfig = ''
+    set $xob_sock $XDG_RUNTIME_DIR/wob.sock
+    # title_format "%title -- %class -- %instance" # (Enable it to select a correct for_window option)
+    for_window [class=".*"] border pixel 1
+    floating_minimum_size 75 x 50
+    floating_maximum_size 1000 x 1000
+
+    # Alacritty
+    for_window [title="floating_term"] floating enable, move position center, resize set 700 400
+
+    # Feh
+    for_window [class="feh"] floating enable position center; focus
+    for_window [instance="feh"] border none, move right 300px, move down 50px
+
+    # Firefox windows
+    for_window [window_role="Organizer"] floating enable position center; focus
+    for_window [class="Organizer"] resize set 480 480
+    for_window [class="Navigator"] floating enable position center; focus
+    for_window [class="Navigator"] resize set 480 480
+    for_window [class="Firefox" title="^Libreria"] floating enable
+    for_window [class="Firefox" title="^Libreria"] resize set 800 400 for_window [class="Places"] floating enable position center; focus
+    for_window [class="firefox" title="^Picture-in-Picture$"] floating enable, resize set 480px 270px, sticky enable
+
+    for_window [window_role="Organizer"] floating enable position center; focus
+    for_window [window_role="GtkFileChooserDialog"] floating enable position center; focus
+    for_window [window_role="pop-up"] floating enable position center
+    for_window [window_role="task_dialog"] floating enable position center
+    for_window [class="Organizer"] resize set 480 480
+    for_window [window_role="(?i)GtkFileChooserDialog"] floating enable, move absolute position 550 100
+
+    # IMV
+    for_window [class="imv"] floating enable, resize set 480 480, border none, move right 300px, move down 50px
+
+    # Mpv
+    for_window [class="mpv"] floating enable, sticky enable, resize set 480 480, move absolute position 1438 1
+
+    # Pavucontrol
+    for_window [class="Pavucontrol"] floating enable position center; focus
+    for_window [class="Pavucontrol"] resize set 480 480
+
+    # Teams
+    for_window [title="Microsoft Teams Notification"] floating enable
+
+    # Thunderbird
+    for_window [window_role="Msgcompose" class="(?i)Thunderbird"] floating enable
+  '';
 }
