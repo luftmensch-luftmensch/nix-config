@@ -29,6 +29,32 @@ in {
           key = "ctrl+shift+e";
           command = "workbench.action.toggleSidebarVisibility";
         }
+
+        {
+          key = "ctrl+a";
+          command = "cursorLineStart";
+        }
+
+        {
+          key = "ctrl+e";
+          command = "cursorLineEnd";
+        }
+
+        {
+          key = "alt+t";
+          command = "workbench.action.terminal.toggleTerminal";
+          when = "terminal.active";
+        }
+
+        {
+          key = "alt+p";
+          command = "workbench.action.quickOpen";
+        }
+
+        {
+          key = "alt+e";
+          command = "workbench.view.explorer";
+        }
       ];
       userSettings = {
         "window.menuBarVisibility" = "toggle";
@@ -52,6 +78,7 @@ in {
         "editor.smoothScrolling" = true;
         "editor.fontSize" = theme.font.regular.size + 6;
         "editor.fontFamily" = "'${theme.font.regular.family}', 'monospace', monospace";
+        "editor.renderFinalNewline" = "off";
         "workbench.startupEditor" = "none";
         "workbench.list.smoothScrolling" = true;
         "workbench.editor.highlightModifiedTabs" = true;

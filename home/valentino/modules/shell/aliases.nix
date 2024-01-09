@@ -85,7 +85,7 @@ pkgs: {
   buytime = "${pkgs.coreutils}/bin/dd if=/dev/urandom of=homework.pdf bs=1K count=4";
 
   # ----------- CPU settings ----------#
-  cpuinfo = "watch -n.1 'grep \'^[c]pu MHz\' /proc/cpuinfo'";
+  cpuinfo = "watch -n .1 \"grep '^[c]pu MHz' /proc/cpuinfo\"";
 
   # ----------- Network ----------#
   nmcon = "${pkgs.networkmanager}/bin/nmcli device wifi connect";

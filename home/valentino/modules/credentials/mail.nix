@@ -7,6 +7,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.credentials.mail-defaults;
+  inherit (config.colorScheme) colors;
   channelExtraConfig = {
     Create = "Near";
     SyncState = "*";
@@ -223,7 +224,202 @@ in {
             settings = {
               "mail.spellcheck.inline" = false;
               "javascript.enabled" = false;
+
+              # General
+              "general.useragent.override" = "";
+              "general.warnOnAboutConfig" = false;
+              "gfx.downloadable_fonts.disable_cache" = true;
+              "privacy.donottrackheader.enabled" = true;
+              "dom.webaudio.enabled" = false;
+              "media.video_stats.enabled" = false;
+              "geo.enabled" = false;
+              "browser.search.geoip.timeout" = 1;
+
+              # Disable cookie tracking and history
+              "network.cookie.cookieBehavior" = 1;
+              "network.cookie.lifetimePolicy" = 2;
+              "network.cookie.prefsMigrated" = true;
+              "places.history.enabled" = false;
+
+              # Disable telemetry data for Mozilla
+              "datareporting.policy.dataSubmissionEnabled" = false;
+              "toolkit.telemetry.enabled" = false;
+              "toolkit.telemetry.unified" = false;
+              "toolkit.telemetry.server" = "";
+
+              "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
             };
+
+            userChrome = ''
+              @namespace xul url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+              element {
+                  -tab-max-width: 200px !important;
+              }
+              #unifiedToolbarContainer,
+              #unifiedToolbar {
+                  display: none !important;
+              }
+              #threadTree[rows="thread-card"] {
+                  background-color: ${colors.base00} !important;
+              }
+              table[is="tree-view-table"] {
+                  background-color: ${colors.base02} !important;
+                  color: ${colors.base01} !important;
+              }
+              .button {
+                  background-color: ${colors.base02} !important;
+              }
+              .button.button-primary {
+                  background-color: ${colors.base06} !important;
+                  color: ${colors.base00} !important;
+                  border-color: ${colors.base06} !important;
+              }
+              #messagePane {
+                  background-color: ${colors.base00} !important;
+              }
+              #accountCentral {
+                  background-color: ${colors.base00} !important;
+              }
+              #messageHeader {
+                  background-color: ${colors.base02} !important;
+              }
+              #calendarViewHeader {
+                  background-color: ${colors.base02} !important;
+              }
+              .calview-toggle {
+                  background-color: ${colors.base00} !important;
+              }
+              button.calview-toggle-item {
+                  background-color ${colors.base02} !important;
+              }
+              .minimonth-month-box,
+              .minimonth-cal-box {
+                  background-color: ${colors.base02} !important;
+              }
+              .minimonth-nav-section {
+                  background-color: ${colors.base06} !important;
+              }
+              #folderTree:focus-within li.selected > .container, #folderTree li.drop-target > .container,
+              .minimonth-week {
+                  background-color: ${colors.base09} !important;
+                  color: ${colors.base01} !important;
+              }
+              .minimonth-day[selected="true"][today="true"] {
+                  background-color: ${colors.base06} !important;
+                  border: 1px solid ${colors.base06} !important;
+                  color: ${colors.base00} !important;
+              }
+              .btn-hub,
+              li:not(.selected) > .container:hover,
+              .tab-background[selected="true"],
+              .thread-card-container:focus,
+              .thread-card-container:active,
+              .container:focus,
+              .calendar-month-day-box-other-month,
+              .calendar-month-day-box-current-month[selected="true"],
+              .calendar-month-day-box-other-month.calendar-month-day-box-day-off,
+              #agenda-toolbar,
+              .agenda-date-header,
+              tr[is="thread-card"][data-properties~="unread"]:not(.selected, :hover) {
+                  background-color: ${colors.base09} !important;
+              }
+              .minimonth-day[selected="true"],
+              .calendar-month-day-box-current-month[selected="true"], .calendar-month-day-box-day-off[selected="true"], .calendar-month-day-box-other-month[selected="true"]{
+                  border: 1px solid ${colors.base06} !important;
+              }
+              .calendar-month-day-box-date-label[relation="today"][selected="true"]{
+                  color: ${colors.base00} !important;
+              }
+              .calendar-month-day-box-date-label[relation="today"] {
+                  background-color: ${colors.base06} !important;
+              }
+              .calendar-month-day-box-day-off,
+              button.calview-toggle-item,
+              #agenda-toolbar,
+              .tab-content {
+                  background-color: ${colors.base02} !important;
+              }
+              .tabmail-tab:not([selected], :-moz-lwcolors),
+              .new-messages > .container > .name,
+              #threadTree [data-properties~="new"]:not(.selected) .thread-card-container :is(.subject, .date) {
+                  color: ${colors.base06} !important;
+              }
+              .notification-button-container, .notification-message {
+                  color: ${colors.base00} !important;
+              }
+              .unread > .container > .unread-count,
+              .new-messages > .container > .unread-count,
+              li.selected > .container,
+              [is="tree-view-table-body"]:focus > .selected, [is="tree-view-table-body"]:focus-within > .selected, [is="tree-view-table-body"] > .selected:focus-within,
+              .unread > .container > .unread-count, .new-messages > .container > .unread-count, li.selected > .container, button.calview-toggle-item[role="tab"][aria-selected="true"],
+              button.calview-toggle-item[role="tab"][aria-selected="true"] {
+                  color: ${colors.base00} !important;
+                  background-color: ${colors.base06} !important;
+              }
+              .recipient-avatar {
+                  background-color: ${colors.base00} !important;
+                  color: ${colors.base06} !important;
+              }
+              .message-header-view-button {
+                  fill: ${colors.base06 + "DD"} !important;
+              }
+              calendar-day-label {
+                  color: ${colors.base01} !important;
+                  background-color: ${colors.base00} !important;
+              }
+              calendar-day-label[relation="today"] {
+                  color: ${colors.base06} !important;
+                  background-color: ${colors.base06 + "30"} !important;
+              }
+              #agenda {
+                  background-color: ${colors.base00}  !important;
+                  --selected-background: ${colors.base06} !important;
+                  --selected-foreground: ${colors.base00} !important;
+              }
+              .notificationbox-stack,
+              :host([type="info"]) .icon,
+              .list-header-bar:not([hidden]),
+              .monthtable,
+              .calendar-month-day-box-current-month,
+              #mini-day-image,
+              #today-pane-panel > .sidebar-header,
+              #calendar-task-tree,
+              #quick-filter-bar,
+              #task-addition-box,
+              #unifinder-searchBox,
+              #calendar-panel,
+              #calSidebar,
+              #view-box,
+              #tabs-toolbar,
+              #toolbar-menubar,
+              #statusTextBox,
+              #calendar-list > li.selected,
+              #folderPaneHeaderBar:not([hidden]),
+              calendar-month-view, calendar-multiweek-view,
+              #folderPane {
+                  background-color: ${colors.base00} !important;
+              }
+            '';
+            userContent = ''
+              .sidebar-footer-icon, .category-icon {
+                  fill: ${colors.base06 + "DD"} !important;
+              }
+              #categories > .category[selected],
+              #searchInput {
+                  background-color: ${colors.base02} !important;
+              }
+              .sticky-container,
+              .main-search,
+              .main-heading,
+              #content,
+              #sidebar,
+              #pref-category-box,
+              #accountTreeBox,
+              #containerBox,
+              #preferencesContainer {
+                  background-color: ${colors.base00} !important;
+              }
+            '';
           };
         };
       };
