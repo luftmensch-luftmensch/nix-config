@@ -33,13 +33,13 @@ in {
         {
           key = "ctrl+a";
           command = "cursorLineStart";
-					when = "editorTextFocus";
+          when = "editorTextFocus";
         }
 
         {
           key = "ctrl+e";
           command = "cursorLineEnd";
-					when = "editorTextFocus";
+          when = "editorTextFocus";
         }
 
         {

@@ -1,5 +1,5 @@
 {
-  settings = ''
+  shellInit = ''
 		set -l foreground ffffff
 		set -l selection 7030af
 		set -l comment 989898
