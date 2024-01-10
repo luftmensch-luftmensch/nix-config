@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  # outputs,
   ...
 }: let
   homeDir = "${config.home.homeDirectory}";
@@ -73,19 +72,10 @@ in {
       publicShare = null;
       templates = null;
       pictures = null;
-      # pictures = "${config.home.homeDirectory}/pics";
+      music = null;
 
-      # documents = "${config.home.homeDirectory}/Documenti";
       download = "${homeDir}/Scaricati";
-      music = "${homeDir}/Music";
       videos = "${homeDir}/Video";
-
-      # extraConfig = {
-      #   XDG_PROJECTS_DIR = "${config.home.homeDirectory}/projects";
-      #   XDG_WORK_DIR = "${config.home.homeDirectory}/work";
-      #   XDG_GAMES_DIR = "${config.home.homeDirectory}/games";
-      #   XDG_MAILS_DIR = "${config.home.homeDirectory}/mails";
-      # };
     };
   };
 }

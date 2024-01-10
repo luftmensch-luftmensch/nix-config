@@ -16,14 +16,24 @@ in {
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
-      extensions = with pkgs.vscode-extensions; [
-        mkhl.direnv
-        bbenoist.nix
-        vscodevim.vim
-        gruntfuggly.todo-tree
-        dart-code.dart-code
-        dart-code.flutter
-      ];
+      extensions = with pkgs.vscode-extensions;
+        [
+          mkhl.direnv
+          bbenoist.nix
+          vscodevim.vim
+          gruntfuggly.todo-tree
+          dart-code.dart-code
+          dart-code.flutter
+        ]
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "better-comments";
+            publisher = "aaron-bond";
+            version = "3.0.2";
+            sha256 = "sha256-hQmA8PWjf2Nd60v5EAuqqD8LIEu7slrNs8luc3ePgZc=";
+          }
+        ];
+
       keybindings = [
         {
           key = "ctrl+shift+e";
@@ -299,10 +309,5 @@ in {
         ];
       };
     };
-
-    # home.file.".config/VSCodium/User/settings.json" = {
-    # 	enable = true;
-    # 	source = config.lib.file.mkOutOfStoreSymlink "${configDir}/settings.json";
-    # };
   };
 }
