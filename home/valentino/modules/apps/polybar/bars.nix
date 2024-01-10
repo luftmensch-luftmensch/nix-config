@@ -1,7 +1,6 @@
 {
   theme,
   palette,
-  # pkgs,
 }: {
   "global/wm" = {
     margin-bottom = 0;
@@ -43,7 +42,7 @@
     line-size = 1;
 
     border-size = 0;
-    # padding = 1;
+    padding = 1;
     module-margin-left = 1;
     module-margin-right = 1;
     separator = "";
@@ -57,12 +56,11 @@
 
   "bar/main" = {
     "inherit" = "bar/configuration";
-    # monitor = "${cfg.monitor}";
+    # FIXME: Hardcoded config
     monitor = "HDMI1";
 
     modules-left = "i3 title";
     modules-right = "temp bctl volume cpu memory date notifications tray";
-    # modules-right = "mail temp bluetooth volume cpu memory date notifications tray";
     pseudo-transparent = true;
   };
 }
