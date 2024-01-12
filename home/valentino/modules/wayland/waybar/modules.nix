@@ -46,24 +46,24 @@ in {
     on-click-middle = "${pkgs.sway}/bin/swaymsg kill";
   };
 
-  # FIXME: Hardcoded config
   clock = {
     timezone = "Europe/Rome";
     format = " {:%H:%M}";
     format-alt = " {:%A; %d %B, %Y}";
-    tooltip-format = "<span size='12pt'>{calendar}</span>";
-    tooltip = true;
+    # tooltip-format = "<tt><small>{calendar}</small></tt>";
+    # Fonts bigger than this does not display the full year calendar (Maybe for spacing reason?)
+    tooltip-format = "\n<span size='11pt'>{calendar}</span>";
     calendar = {
       mode = "month";
       mode-mon-col = 3;
       weeks-pos = "";
       on-scroll = 1;
-      on-click-middle = "mode";
+      on-click-right = "mode";
       format = {
         months = "<span color='#ffead3'><b>{}</b></span>";
         days = "<span color='#ecc6d9'><b>{}</b></span>";
         weeks = "<span color='#99ffdd'><b>W{}</b></span>";
-        weekdays = "<span color='#ffcc66'><b>{}</b></span>";
+        weekday = "<span color='#ffcc66'><b>{}</b></span>";
         today = "<span color='#ff6699'><b><u>{}</u></b></span>";
       };
     };
@@ -71,8 +71,11 @@ in {
       on-click-middle = "mode";
       on-click-forward = "tz_up";
       on-click-backward = "tz_down";
+      # on-scroll-up = "shift_up";
+      # on-scroll-down = "shift_down";
     };
   };
+
   # Default monitor specific modules
   idle_inhibitor = {
     format = "{icon}";
