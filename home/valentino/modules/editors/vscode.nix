@@ -8,8 +8,12 @@ with lib; let
   cfg = config.valentino.modules.editors.vscode;
   theme = config.valentino.modules.themes;
 in {
-  options.valentino.modules.editors.vscode = {
+  options.valentino.modules.editors.vscode = with types; {
     enable = mkEnableOption "vscode";
+    windowZoomLevel = mkOption {
+      type = int;
+      default = 0;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -70,6 +74,7 @@ in {
       ];
       userSettings = {
         "window.menuBarVisibility" = "toggle";
+        "window.zoomLevel" = cfg.windowZoomLevel;
         "window.title" = "VSCode \${separator} \${activeEditorShort}";
         "workbench.colorCustomizations" = {
           "statusBar.background" = "#005f5f";

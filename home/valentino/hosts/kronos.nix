@@ -42,7 +42,10 @@
       };
       intellij.enable = true;
       neovim.enable = true;
-      vscode.enable = true;
+      vscode = {
+        enable = true;
+        windowZoomLevel = 2;
+      };
     };
 
     media = {

@@ -50,11 +50,11 @@ in {
     timezone = "Europe/Rome";
     format = " {:%H:%M}";
     format-alt = " {:%A; %d %B, %Y}";
-    # tooltip-format = "<tt><small>{calendar}</small></tt>";
     # Fonts bigger than this does not display the full year calendar (Maybe for spacing reason?)
-    tooltip-format = "\n<span size='11pt'>{calendar}</span>";
+    tooltip-format = "<span size='10pt'>{calendar}</span>";
     calendar = {
       mode = "month";
+      # Count of months per row (Relevant for mode=year)
       mode-mon-col = 3;
       weeks-pos = "";
       on-scroll = 1;
