@@ -21,15 +21,15 @@ in {
   };
 
   keybindings = {
-    "F1" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
-    "F2" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
+    F1 = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
+    F2 = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
 
-    "F3" = "exec --no-startup-id ~/.local/bin/audio -a";
-    "F4" = "exec --no-startup-id ~/.local/bin/audio -m";
+    F3 = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+    F4 = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
 
-    "F7" = "exec playerctl-wrapper -p"; # Prev
-    "F8" = "exec playerctl-wrapper -x"; # Play/Pause
-    "F9" = "exec playerctl-wrapper -n"; # Next
+    F7 = "exec playerctl-wrapper -p"; # Prev
+    F8 = "exec playerctl-wrapper -x"; # Play/Pause
+    F9 = "exec playerctl-wrapper -n"; # Next
 
     "${default_mod}+q" = "kill";
     "--release ${default_mod}+Escape" = "exec xkill";
@@ -165,12 +165,6 @@ in {
       always = true;
       notification = false;
     }
-    # { command = "polybar --reload main &"; always = true; notification = false; }
-    # {
-    #   command = "emacs --fg-daemon";
-    #   always = true;
-    #   notification = false;
-    # }
   ];
 
   extraConfig = ''

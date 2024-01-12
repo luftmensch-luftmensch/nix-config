@@ -3,7 +3,7 @@
   pkgs,
 }: let
   # TODO: Do not hardcode the style
-  _menu = "${pkgs.bemenu}/bin/bemenu -i --fn '${theme.font.regular.family}:size=${(toString theme.font.regular.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' -p '▶ Type: '";
+  _menu = "${pkgs.bemenu}/bin/bemenu -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' -p '▶ Type: '";
   _scrot = "${pkgs.scrot}/bin/scrot";
 	_notify = "${pkgs.libnotify}/bin/notify-send -u low -t 700";
 in

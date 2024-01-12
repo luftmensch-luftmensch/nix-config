@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -7,6 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.xorg.xob;
+  inherit (config.colorScheme) colors;
 in {
   options.valentino.modules.xorg.xob = {
     enable = mkEnableOption "A lightweight overlay volume (or anything) bar for the X Window System";
@@ -44,7 +44,7 @@ in {
                     border = "#555555";
                 };
                 overflow = {
-                    fg     = "#ff0000";
+                    fg     = "#${colors.base08}";
                     bg     = "#00000090";
                     border = "#ff0000";
                 };
