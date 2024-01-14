@@ -102,3 +102,4 @@
     "gp" '(flymake-goto-prev-error :which-key "Goto prev error")
     "gR" '(eglot-rename :which-key "Rename variable/function")))
 (provide 'init-lsp)
+;;; init-lsp.el ends here

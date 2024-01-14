@@ -96,3 +96,4 @@ managers such as DWM, BSPWM refer to this state as 'monocle'."
 
   (beframe-mode 1))
 (provide 'init-windows)
+;;; init-windows.el ends here

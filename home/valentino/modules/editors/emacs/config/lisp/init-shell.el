@@ -26,7 +26,10 @@
   (defun alacritty()
     "Open the terminal on the current directory."
     (interactive)
-    (call-process-shell-command "alacritty > /dev/null 2>&1 & disown"))
+    (let ((terminal (pcase (system-name)
+                      ("kronos" "foot -a=default_term")
+                      ("atlas" "alacritty"))))
+      (call-process-shell-command terminal)))
   (add-to-list 'display-buffer-alist
                '("\xe795 " ;; Original regex: "\*vterm\*"
                  (display-buffer-in-side-window)
@@ -41,8 +44,8 @@
   (setup (:if-feature evil)
     (evil-set-initial-state 'vterm-mode 'insert)
     (evil-define-key 'normal vterm-mode-map
-        "u" 'vterm-undo
-        "P" 'vterm-yank)))
+      "u" 'vterm-undo
+      "P" 'vterm-yank)))
 
 (setup (:pkg multi-vterm)
   (:with-after vterm

@@ -24,7 +24,8 @@
            telega-chat-button-width 30
            switch-to-buffer-preserve-window-point t
            telega-chat--display-buffer-action '((display-buffer-reuse-window display-buffer-use-some-window))
-           telega-root-fill-column (+ 40 telega-chat-button-width)
+           telega-root-fill-column (+ 50 telega-chat-button-width)
+           telega-chat-fill-column (+ 50 telega-chat-button-width)
            telega-chat-input-markups '("markdown2" "org"))
 
   (put (get 'telega-chat 'button-category-symbol)

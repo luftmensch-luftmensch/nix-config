@@ -117,25 +117,5 @@
   (cl-letf (((symbol-function 'yes-or-no-p) (lambda (_) t)))
     (kill-matching-buffers regexp)))
 
-(defvar *exes* nil
-  "All the exectuables in $PATH.
-Run `rehash-exes' to refresh this variable.")
-
-(defun rehash-exes ()
-  "List all the executables in $PATH.
-Also sets `*exes*' parameter."
-  (setq *exes*
-        (cl-loop for dir in exec-path
-                 append (file-expand-wildcards (concat dir "*"))
-                 into exes
-                 finally return exes)))
-
-;;;###autoload
-(defun find-script (script)
-  "Find a file in $PATH."
-  (interactive
-   (list (let ((exes (or *exes* (rehash-exes))))
-           (completing-read "Script> " exes nil t))))
-  (find-file script))
-
 (provide 'init-buffers)
+;;; init-buffers.el ends here

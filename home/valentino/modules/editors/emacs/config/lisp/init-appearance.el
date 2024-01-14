@@ -55,3 +55,4 @@
 (setup (:pkg all-the-icons)
   (:require all-the-icons))
 (provide 'init-appearance)
+;;; init-appearance.el ends here

@@ -98,3 +98,4 @@
     "M-m" 'menu-bar-mode ; Opens the menu with M-m, very KDE-ish
     "C-x C-k" '(dirvish-side :which-key "Treemacs view")))
 (provide 'init-keybindings)
+;;; init-keybindings.el ends here

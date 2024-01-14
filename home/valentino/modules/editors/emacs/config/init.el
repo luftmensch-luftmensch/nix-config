@@ -103,9 +103,8 @@
 (require 'init-modeline)
 
 (require 'init-keybindings)
-(require 'init-evil)
 
-;; (require 'init-dash)
+(require 'init-evil)
 
 (require 'init-editing)
 
@@ -143,19 +142,18 @@
 
 (require 'init-mail)
 
-;;(require 'init-tex)
+;; (require 'init-tex)
 
 (require 'init-reading)
 
 (require 'init-shell)
 
 (require 'init-telega)
-(require 'init-games)
 
 ;; (require 'init-media)
 
-;; Nice mode to control your system (and user) services without leaving Emacs.
 (setup (:pkg daemons))
 
+(require 'init-games)
 
 ;;; init.el ends here

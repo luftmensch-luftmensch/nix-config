@@ -57,6 +57,7 @@ in {
       };
 
       xdg.configFile = {
+        "emacs/setup.org".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/setup.org";
         "emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/init.el";
         "emacs/early-init.el".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/early-init.el";
         "emacs/lisp".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/lisp";
