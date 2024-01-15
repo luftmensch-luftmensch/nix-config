@@ -27,8 +27,8 @@
     "Open the terminal on the current directory."
     (interactive)
     (let ((terminal (pcase (system-name)
-                      ("kronos" "foot -a=default_term")
-                      ("atlas" "alacritty"))))
+                      ("kronos" "foot -a=default_term 2>/dev/null & disown")
+                      ("atlas" "alacritty 2>/dev/null & disown"))))
       (call-process-shell-command terminal)))
   (add-to-list 'display-buffer-alist
                '("\xe795 " ;; Original regex: "\*vterm\*"

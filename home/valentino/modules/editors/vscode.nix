@@ -95,6 +95,8 @@ in {
         "editor.smoothScrolling" = true;
         "editor.fontSize" = theme.font.regular.size + 6;
         "editor.fontFamily" = "'${theme.font.regular.family}', 'monospace', monospace";
+        "terminal.integrated.fontFamily" = "'${theme.font.regular.family}', 'monospace', monospace";
+
         "editor.renderFinalNewline" = "off";
         "workbench.startupEditor" = "none";
         "workbench.list.smoothScrolling" = true;
@@ -245,12 +247,12 @@ in {
         ];
         # Dart
         "dart.checkForSdkUpdates" = false;
-        "dart.lineLength" = 130;
+        "dart.lineLength" = 150;
         "[dart]" = {
           "editor.formatOnSave" = true;
           "editor.formatOnType" = true;
           "editor.rulers" = [
-            130
+            150
           ];
           "editor.selectionHighlight" = false;
           "editor.suggestSelection" = "first";
