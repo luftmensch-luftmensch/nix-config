@@ -507,7 +507,12 @@ Beautiful client, maybe the best telegram client around. A PITA, sometimes, due 
 #+end_src
 
 #+include: "lisp/init-telega.el" src emacs-lisp :tangle no
-
+*** Useful commands
++ ~c~ telega-msg-copy-text
++ ~l~ telega-msg-copy-link
++ ~^~ telega-msg-pin-toggle
++ ~M-g ^~ telega-chatbuf-goto-pinned-message
++ telega-msg-redisplay
 ** Media
 Manage your media from Emacs? Possible!
 #+begin_src emacs-lisp
@@ -536,7 +541,7 @@ Did you know that emacs can play games (sort of) too?
 This is the end of my =init.el=, and of my configuration.
 * Useful things
 ** My experience
-I started using Emacs in late 2021, at the beginning of the third year of university.
+I started using Emacs in late 2019, at the beginning of university.
 Why? I needed something to write notes in a fast way, but I didn't last long: writing notes during my lessons slowed me down, probably because slides given by professors were enough.
 Anyway, discovering Emacs was a surprise, and at first it was terrible, because I didn't know where to start!
 Too many things to learn, but the community is awesome, resources are good, documentation is almost perfect, and it's VERY fun. So, I gave a chance to myself to learn Emacs.

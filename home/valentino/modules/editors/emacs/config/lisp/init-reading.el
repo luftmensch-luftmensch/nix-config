@@ -43,43 +43,44 @@
 
 (setup (:pkg elfeed)
   (:global "C-c e l" elfeed)
-  (:option elfeed-feeds (quote
-                         (;; GNU/Linux related
-                          ("https://www.reddit.com/r/linux.rss" linux)
-                          ("https://www.reddit.com/r/linuxmemes.rss" linux linux-memes)
-                          ("https://www.linuxserver.io/blog.rss" linux linux-server)
+  (:option elfeed-feeds
+           (quote
+            (;; GNU/Linux related
+             ("https://www.reddit.com/r/linux.rss" linux)
+             ("https://www.reddit.com/r/linuxmemes.rss" linux linux-memes)
+             ("https://www.linuxserver.io/blog.rss" linux linux-server)
 
-			                    ;; Nixos related
-			                    ("https://www.reddit.com/r/nixos.rss"         nixos)
-			                    ("https://christine.website/blog.rss"         nixos Xe)
+			       ;; Nixos related
+			       ("https://www.reddit.com/r/nixos.rss"         nixos)
+			       ("https://christine.website/blog.rss"         nixos Xe)
 
-			                    ;; Arch related
-			                    ("https://www.reddit.com/r/archlinux.rss" arch)
+			       ;; Arch related
+			       ("https://www.reddit.com/r/archlinux.rss" arch)
 
-			                    ;; Programming languages related
-			                    ("https://nullprogram.com/feed/"                programming nullprogram)
-			                    ("https://www.reddit.com/r/golang.rss"          programming golang)
-			                    ("https://bitfieldconsulting.com/golang?format=rss" programming golang)
+			       ;; Programming languages related
+			       ("https://nullprogram.com/feed/"                programming nullprogram)
+			       ("https://www.reddit.com/r/golang.rss"          programming golang)
+			       ("https://bitfieldconsulting.com/golang?format=rss" programming golang)
 
-			                    ("https://www.reddit.com/r/C_Programming.rss"   programming C)
-			                    ("https://www.reddit.com/r/ProgrammerHumor.rss" programming ProgrammerHumor)
+			       ("https://www.reddit.com/r/C_Programming.rss"   programming C)
+			       ("https://www.reddit.com/r/ProgrammerHumor.rss" programming ProgrammerHumor)
 
-			                    ;; Emacs related
-			                    ("https://www.reddit.com/r/emacs.rss"    emacs)
-			                    ("https://www.reddit.com/r/orgmode.rss"  emacs orgmode)
-			                    ("https://planet.emacslife.com/atom.xml" emacs emacslife)
+			       ;; Emacs related
+			       ("https://www.reddit.com/r/emacs.rss"    emacs)
+			       ("https://www.reddit.com/r/orgmode.rss"  emacs orgmode)
+			       ("https://planet.emacslife.com/atom.xml" emacs emacslife)
 
-			                    ;; Latex related
-			                    ("https://www.reddit.com/r/LaTeX.rss" latex)
+			       ;; Latex related
+			       ("https://www.reddit.com/r/LaTeX.rss" latex)
 
-			                    ;; Mobile related
-                          ("https://www.reddit.com/r/androiddev.rss" android android-dev)
-			                    ("https://www.reddit.com/r/fdroid.rss"     android fdroid)
-			                    ("https://www.reddit.com/r/FlutterDev.rss" android flutter)
+			       ;; Mobile related
+             ("https://www.reddit.com/r/androiddev.rss" android android-dev)
+			       ("https://www.reddit.com/r/fdroid.rss"     android fdroid)
+			       ("https://www.reddit.com/r/FlutterDev.rss" android flutter)
 
-			                    ;; Miscellaneous
-			                    ("https://www.rousette.org.uk/archives/index.xml" geekoides)
-			                    ("https://www.bytelab.codes/rss/" bytelab)))
+			       ;; Miscellaneous
+			       ("https://www.rousette.org.uk/archives/index.xml" geekoides)
+			       ("https://www.bytelab.codes/rss/" bytelab)))
 
            elfeed-search-date-format '("%d-%m-%Y" 10 :left)
            elfeed-db-directory (expand-file-name "elfeed/" .var) ;; "~/.config/emacs/elfeed"
