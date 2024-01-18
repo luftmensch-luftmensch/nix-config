@@ -31,33 +31,34 @@ in {
       [rofi-powermenu]
       ++ optionals cfgBitwarden.enable [rofi-rbw]
       ++ [rofiFonts];
+    xdg.configFile = {
+      "rofi/colors/color.rasi".text = ''
+        /*
+         *
+         * Change here you colorscheme
+         *
+         */
 
-    xdg.configFile."rofi/colors/color.rasi".text = ''
-      /*
-       *
-       * Change here you colorscheme
-       *
-       */
-
-       @import "${config.colorscheme.slug}.rasi"
-    '';
-
-    xdg.configFile."rofi/colors" = {
-      source = ./config/colors;
-      recursive = true;
-    };
-
-    xdg.configFile."rofi/themes" = {
-      source = ./config/themes;
-      recursive = true;
-    };
-
-    xdg.configFile."rofi-rbw.rc" = mkIf cfgBitwarden.enable {
-      text = ''
-        action = type
-        prompt = Select credentials
-        selector-args = -theme ~/.config/rofi/themes/rbw
+         @import "${config.colorscheme.slug}.rasi"
       '';
+
+      "rofi/colors" = {
+        source = ./config/colors;
+        recursive = true;
+      };
+
+      "rofi/themes" = {
+        source = ./config/themes;
+        recursive = true;
+      };
+
+      "rofi-rbw.rc" = mkIf cfgBitwarden.enable {
+        text = ''
+          action = type
+          prompt = Select credentials
+          selector-args = -theme ~/.config/rofi/themes/rbw
+        '';
+      };
     };
   };
 }

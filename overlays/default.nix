@@ -13,7 +13,7 @@ inputs: {
     #   mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
     # });
 
-    tdlib = prev.tdlib.overrideAttrs (oldAttrs: {
+    tdlib = prev.tdlib.overrideAttrs (_oldAttrs: {
       version = "1.8.23";
       src = final.fetchFromGitHub {
         owner = "tdlib";

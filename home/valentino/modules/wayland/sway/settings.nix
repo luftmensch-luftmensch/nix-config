@@ -223,11 +223,6 @@ in {
       command = "rm -f $wob_sock && mkfifo $wob_sock && tail -f $wob_sock | wob";
     }
 
-    # {
-    #   command = "emacs --fg-daemon";
-    #   always = true;
-    # }
-
     {
       command = "wl-paste --watch cliphist store";
     }
