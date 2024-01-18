@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -20,6 +19,7 @@ in {
       nil
       nix-output-monitor
       nix-prefetch-git
+      nix-search-cli
     ];
   };
 }
