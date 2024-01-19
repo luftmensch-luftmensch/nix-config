@@ -1,21 +1,15 @@
 {
-  options,
   config,
   lib,
-  # pkgs,
   ...
 }:
 with lib; let
   cfg = config.valentino.modules.media.images;
+  cfgWayland = config.valentino.modules.wayland;
 in {
   options.valentino.modules.media.images = {
     enable = mkEnableOption "an option to view images";
-    imv = {
-      enable = mkEnableOption "an option to view images";
-      setWallpaper = mkOption {
-        type = types.str;
-      };
-    };
+    imv.enable = mkEnableOption "an option to view images";
     feh.enable = mkEnableOption "an option to view images";
   };
 
@@ -24,13 +18,6 @@ in {
       programs.imv = {
         enable = true;
         settings = {
-          # options = {
-          #   suppress_default_binds = "true";
-          # };
-          # aliases = {
-            
-          # };
-
           binds = {
             "q" = "quit";
             "<Left>" = "prev";
@@ -78,34 +65,42 @@ in {
             # Slideshow control
             t = "slideshow +1";
             "<Shift+T>" = "slideshow -1";
-            "<Shift+W>" = "exec cp -f \"\$imv_current_file\" ~/.cache/wallpaper && ${cfg.imv.setWallpaper}";
+            "<Shift+W>" = let
+              setWallpaperCmd =
+                if cfgWayland.enable
+                then "swaymsg output \"*\" background ~/.cache/wallpaper fill"
+                else "feh --bg-scale ~/.cache/wallpaper";
+            in "exec cp -f \"\$imv_current_file\" ~/.cache/wallpaper && ${setWallpaperCmd}";
           };
         };
       };
-      
     })
 
     (mkIf cfg.feh.enable {
-		  programs.feh = {
-			  enable = true;
-			  keybindings = {
-				  zoom_out = [
-					  "j" "minus"
-				  ];
+      programs.feh = {
+        enable = true;
+        keybindings = {
+          zoom_out = [
+            "j"
+            "minus"
+          ];
 
-				  zoom_in = [
-					  "k" "plus"
-				  ];
+          zoom_in = [
+            "k"
+            "plus"
+          ];
 
-				  next_img = [
-					  "l" "Right"
-				  ];
+          next_img = [
+            "l"
+            "Right"
+          ];
 
-				  prev_img = [
-					  "h" "Left"
-				  ];
-			  };
-		  };
+          prev_img = [
+            "h"
+            "Left"
+          ];
+        };
+      };
     })
   ];
 }

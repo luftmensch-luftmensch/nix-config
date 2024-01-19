@@ -63,10 +63,7 @@
         };
       };
       images = {
-        imv = {
-          enable = true;
-          setWallpaper = "swaymsg output \"*\" background ~/.cache/wallpaper fill";
-        };
+        imv.enable = true;
         feh.enable = true;
       };
       music.enable = true;

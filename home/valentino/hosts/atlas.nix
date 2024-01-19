@@ -60,10 +60,7 @@
         };
       };
       images = {
-        imv = {
-          enable = true;
-          setWallpaper = "feh --bg-scale ~/.cache/wallpaper";
-        };
+        imv.enable = true;
         feh.enable = true;
       };
       music.enable = true;
