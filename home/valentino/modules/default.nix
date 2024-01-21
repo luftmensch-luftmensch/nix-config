@@ -34,7 +34,7 @@
     "editors/android-studio" = import ./editors/android-studio.nix;
     "editors/intellij"       = import ./editors/intellij.nix;
     "editors/neovim"         = import ./editors/neovim.nix;
-    "editors/vscode"         = import ./editors/vscode.nix;
+    "editors/vscode"         = import ./editors/vscode;
 
     "gaming/emulators"       = import ./gaming/emulators.nix;
     "gaming/steam"           = import ./gaming/steam.nix;
