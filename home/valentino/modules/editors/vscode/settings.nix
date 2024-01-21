@@ -14,43 +14,12 @@
       command = "workbench.action.toggleSidebarVisibility";
     }
 
-    # {
-    #   key = "ctrl+a";
-    #   command = "cursorLineStart";
-    #   when = "editorTextFocus";
-    # }
-
-    # {
-    #   key = "ctrl+e";
-    #   command = "cursorLineEnd";
-    #   when = "editorTextFocus";
-    # }
-
-    # Toggle terminal
-    {
-      key = "alt+t";
-      command = "workbench.action.terminal.toggleTerminal";
-      when = "terminal.active";
-    }
-
     # Quick Open
     {
       key = "alt+p";
       command = "workbench.action.quickOpen";
     }
 
-    {
-      command = "vscode-neovim.compositeEscape1";
-      key = "j";
-      when = "neovim.mode == insert && editorTextFocus";
-      args = "j";
-    }
-    {
-      command = "vscode-neovim.compositeEscape2";
-      key = "k";
-      when = "neovim.mode == insert && editorTextFocus";
-      args = "k";
-    }
     {
       key = "ctrl+e";
       command = "-actions.findWithSelection";
@@ -304,18 +273,19 @@
       }
 
       {
-        key = "w";
-        name = "Save file";
-        type = "command";
-        command = "workbench.action.files.save";
-      }
-
-      {
         key = "q";
         name = "Close file";
         type = "command";
         command = "workbench.action.closeActiveEditor";
       }
+
+      {
+        key = "z";
+        name = "Close file";
+        type = "command";
+        command = "workbench.action.closeActiveEditor";
+      }
+
 
       # Comment line
       {
@@ -334,6 +304,7 @@
         when = "editorHasReferenceProvider";
       }
 
+      # Buffers
       {
         key = "b";
         name = "Buffers/Editors...";
@@ -417,109 +388,114 @@
           }
         ];
       }
-      {
-        key = "d";
-        name = "Debug...";
-        type = "bindings";
-        bindings = [
-          {
-            key = "d";
-            name = "Start debug";
-            type = "command";
-            command = "workbench.action.debug.start";
-          }
-          {
-            key = "S";
-            name = "Stop debug";
-            type = "command";
-            command = "workbench.action.debug.stop";
-          }
-          {
-            key = "c";
-            name = "Continue debug";
-            type = "command";
-            command = "workbench.action.debug.continue";
-          }
-          {
-            key = "p";
-            name = "Pause debug";
-            type = "command";
-            command = "workbench.action.debug.pause";
-          }
-          {
-            key = "r";
-            name = "Run without debugging";
-            type = "command";
-            command = "workbench.action.debug.run";
-          }
-          {
-            key = "R";
-            name = "Restart ebug";
-            type = "command";
-            command = "workbench.action.debug.restart";
-          }
-          {
-            key = "i";
-            name = "Step into";
-            type = "command";
-            command = "workbench.action.debug.stepInto";
-          }
-          {
-            key = "s";
-            name = "Step over";
-            type = "command";
-            command = "workbench.action.debug.stepOver";
-          }
-          {
-            key = "o";
-            name = "Step out";
-            type = "command";
-            command = "workbench.action.debug.stepOut";
-          }
-          {
-            key = "b";
-            name = "Toggle breakpoint";
-            type = "command";
-            command = "editor.debug.action.toggleBreakpoint";
-          }
-          {
-            key = "B";
-            name = "Toggle inline breakpoint";
-            type = "command";
-            command = "editor.debug.action.toggleInlineBreakpoint";
-          }
-          {
-            key = "j";
-            name = "Jump to cursor";
-            type = "command";
-            command = "debug.jumpToCursor";
-          }
-          {
-            key = "v";
-            name = "REPL";
-            type = "command";
-            command = "workbench.debug.action.toggleRepl";
-          }
-          {
-            key = "w";
-            name = "Focus on watch window";
-            type = "command";
-            command = "workbench.debug.action.focusWatchView";
-          }
-          {
-            key = "W";
-            name = "Add to watch";
-            type = "command";
-            command = "editor.debug.action.selectionToWatch";
-          }
-        ];
-      }
+
+      # Debugging
+      # {
+      #   key = "d";
+      #   name = "Debug...";
+      #   type = "bindings";
+      #   bindings = [
+      #     {
+      #       key = "d";
+      #       name = "Start debug";
+      #       type = "command";
+      #       command = "workbench.action.debug.start";
+      #     }
+      #     {
+      #       key = "S";
+      #       name = "Stop debug";
+      #       type = "command";
+      #       command = "workbench.action.debug.stop";
+      #     }
+      #     {
+      #       key = "c";
+      #       name = "Continue debug";
+      #       type = "command";
+      #       command = "workbench.action.debug.continue";
+      #     }
+      #     {
+      #       key = "p";
+      #       name = "Pause debug";
+      #       type = "command";
+      #       command = "workbench.action.debug.pause";
+      #     }
+      #     {
+      #       key = "r";
+      #       name = "Run without debugging";
+      #       type = "command";
+      #       command = "workbench.action.debug.run";
+      #     }
+      #     {
+      #       key = "R";
+      #       name = "Restart ebug";
+      #       type = "command";
+      #       command = "workbench.action.debug.restart";
+      #     }
+      #     {
+      #       key = "i";
+      #       name = "Step into";
+      #       type = "command";
+      #       command = "workbench.action.debug.stepInto";
+      #     }
+      #     {
+      #       key = "s";
+      #       name = "Step over";
+      #       type = "command";
+      #       command = "workbench.action.debug.stepOver";
+      #     }
+      #     {
+      #       key = "o";
+      #       name = "Step out";
+      #       type = "command";
+      #       command = "workbench.action.debug.stepOut";
+      #     }
+      #     {
+      #       key = "b";
+      #       name = "Toggle breakpoint";
+      #       type = "command";
+      #       command = "editor.debug.action.toggleBreakpoint";
+      #     }
+      #     {
+      #       key = "B";
+      #       name = "Toggle inline breakpoint";
+      #       type = "command";
+      #       command = "editor.debug.action.toggleInlineBreakpoint";
+      #     }
+      #     {
+      #       key = "j";
+      #       name = "Jump to cursor";
+      #       type = "command";
+      #       command = "debug.jumpToCursor";
+      #     }
+      #     {
+      #       key = "v";
+      #       name = "REPL";
+      #       type = "command";
+      #       command = "workbench.debug.action.toggleRepl";
+      #     }
+      #     {
+      #       key = "w";
+      #       name = "Focus on watch window";
+      #       type = "command";
+      #       command = "workbench.debug.action.focusWatchView";
+      #     }
+      #     {
+      #       key = "W";
+      #       name = "Add to watch";
+      #       type = "command";
+      #       command = "editor.debug.action.selectionToWatch";
+      #     }
+      #   ];
+      # }
+
       {
         key = "e";
         name = "Toggle Explorer";
         type = "command";
         command = "workbench.action.toggleSidebarVisibility";
       }
+
+      # Find
       {
         key = "f";
         name = "Find & Replace...";
@@ -546,8 +522,10 @@
           }
         ];
       }
+
+      # Git support
       {
-        key = "g";
+        key = "G";
         name = "Git...";
         type = "bindings";
         bindings = [
@@ -707,12 +685,21 @@
           }
         ];
       }
+
+      # Splitting
       {
         key = "h";
         name = "Split Horizontal";
         type = "command";
         command = "workbench.action.splitEditorDown";
       }
+      {
+        key = "v";
+        name = "Split Vertical";
+        type = "command";
+        command = "workbench.action.splitEditor";
+      }
+
       {
         key = "i";
         name = "Insert...";
@@ -738,8 +725,10 @@
           }
         ];
       }
+
+      # LSP support
       {
-        key = "l";
+        key = "g";
         name = "LSP...";
         type = "bindings";
         bindings = [
@@ -872,6 +861,7 @@
           }
         ];
       }
+
       {
         key = "m";
         name = "Mark...";
@@ -925,12 +915,7 @@
           }
         ];
       }
-      {
-        key = "M";
-        name = "Minimap";
-        type = "command";
-        command = "editor.action.toggleMinimap";
-      }
+
       {
         key = "n";
         name = "No Highlight";
@@ -938,6 +923,8 @@
         command = "vscode-neovim.send";
         args = ":noh<CR>";
       }
+
+      # Open files & directories
       {
         key = "o";
         name = "Open...";
@@ -963,6 +950,7 @@
           }
         ];
       }
+
       {
         key = "p";
         name = "Peek...";
@@ -1009,6 +997,7 @@
           }
         ];
       }
+
       {
         key = "s";
         name = "Search...";
@@ -1028,6 +1017,7 @@
           }
         ];
       }
+
       {
         key = "S";
         name = "Show...";
@@ -1089,6 +1079,8 @@
           }
         ];
       }
+
+      # Terminal
       {
         key = "t";
         name = "Terminal...";
@@ -1109,17 +1101,12 @@
           }
         ];
       }
+
       {
         key = "u";
         name = "UI toggles...";
         type = "bindings";
         bindings = [
-          {
-            key = "a";
-            name = "Toggle tool/activity bar visibility";
-            type = "command";
-            command = "workbench.action.toggleActivityBarVisibility";
-          }
           {
             key = "b";
             name = "Toggle side bar visibility";
@@ -1133,7 +1120,7 @@
             command = "workbench.action.togglePanel";
           }
           {
-            key = "F";
+            key = "f";
             name = "Toggle full screen";
             type = "command";
             command = "workbench.action.toggleFullScreen";
@@ -1150,20 +1137,10 @@
             type = "command";
             command = "workbench.action.toggleMaximizedPanel";
           }
-          {
-            key = "T";
-            name = "Toggle tab visibility";
-            type = "command";
-            command = "workbench.action.toggleTabsVisibility";
-          }
         ];
       }
-      {
-        key = "v";
-        name = "Split Vertical";
-        type = "command";
-        command = "workbench.action.splitEditor";
-      }
+
+			# Windows
       {
         key = "w";
         name = "Window...";
@@ -1243,37 +1220,7 @@
           }
         ];
       }
-      {
-        key = "x";
-        name = "Extensions";
-        type = "command";
-        command = "workbench.view.extensions";
-      }
-      {
-        key = "y";
-        name = "Sync...";
-        type = "bindings";
-        bindings = [
-          {
-            key = "d";
-            name = "Download Settings";
-            type = "command";
-            command = "extension.downloadSettings";
-          }
-          {
-            key = "u";
-            name = "Upload Settings";
-            type = "command";
-            command = "extension.updateSettings";
-          }
-        ];
-      }
-      {
-        key = "z";
-        name = "Toggle zen mode";
-        type = "command";
-        command = "workbench.action.toggleZenMode";
-      }
+
     ];
 
     # Dart
