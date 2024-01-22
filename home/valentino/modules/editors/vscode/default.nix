@@ -19,7 +19,7 @@ in {
         inherit theme;
         zoomLevel =
           if cfgWayland.enable
-          then 2
+          then 1.5
           else 0;
       };
     in {
@@ -27,14 +27,23 @@ in {
       package = pkgs.vscodium;
       extensions = with pkgs.vscode-extensions;
         [
+          # Direnv support
           mkhl.direnv
-          bbenoist.nix
-          # vscodevim.vim
+
+          # Neovim + whichkey overlay
           asvetliakov.vscode-neovim
           vspacecode.whichkey
+
+          # Todo tree view
           gruntfuggly.todo-tree
+
+          # Language support
           dart-code.dart-code
           dart-code.flutter
+          bbenoist.nix
+
+          # Theming
+          vscode-icons-team.vscode-icons
         ]
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {

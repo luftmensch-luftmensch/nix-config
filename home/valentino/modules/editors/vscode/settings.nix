@@ -219,6 +219,7 @@
     "window.zoomLevel" = zoomLevel;
     "window.title" = "VSCode \${separator} \${activeEditorShort}";
     "window.commandCenter" = false;
+    "workbench.iconTheme" = "vscode-icons";
     "workbench.colorCustomizations" = {
       "statusBar.background" = "#005f5f";
       "statusBar.noFolderBackground" = "#005f5f";
@@ -285,7 +286,6 @@
         type = "command";
         command = "workbench.action.closeActiveEditor";
       }
-
 
       # Comment line
       {
@@ -1140,7 +1140,7 @@
         ];
       }
 
-			# Windows
+      # Windows
       {
         key = "w";
         name = "Window...";
@@ -1220,7 +1220,6 @@
           }
         ];
       }
-
     ];
 
     # Dart
