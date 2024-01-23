@@ -21,6 +21,7 @@ with lib; let
     monoid # https://larsenwork.com/monoid/
 
     (nerdfonts.override {fonts = ["Iosevka"];})
+    iosevka-comfy.comfy
     source-code-pro
     sarasa-gothic # A CJK programming font based on Iosevka and Source Han Sans
     victor-mono

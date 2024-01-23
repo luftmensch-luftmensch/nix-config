@@ -15,12 +15,14 @@
   :group 'vb/faces)
 
 (setup (:pkg fontaine)
-  (:option x-underline-at-descent-line nil
-           use-default-font-for-symbols t)
+  (:option use-default-font-for-symbols t
+           ;; This is defined in Emacs C code: it belongs to font settings.
+           x-underline-at-descent-line nil)
 
   (unless (version< emacs-version "28")
-	  (setq-default text-scale-remap-header-line t))
+	  (setq-default text-scale-remap-header-line nil))
 
+	;;; Height: point-size * 10
   (:option vb/font-height (pcase (system-name)
                             ("atlas" 110)
                             ("kronos" 140)))
