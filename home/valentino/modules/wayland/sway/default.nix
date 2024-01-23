@@ -20,9 +20,7 @@ in {
 
       config = let
         settings = import ./settings.nix {
-          default_mod = "${mod}";
-          alt_mod = "${mod1}";
-          inherit theme colors wallpaper_path pkgs;
+          inherit mod mod1 theme colors wallpaper_path pkgs;
         };
       in {
         bars = [{command = "waybar";}];

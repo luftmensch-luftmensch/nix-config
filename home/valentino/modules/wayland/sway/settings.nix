@@ -1,6 +1,6 @@
 {
-  default_mod,
-  alt_mod,
+  mod,
+  mod1,
   theme,
   colors,
   wallpaper_path,
@@ -55,99 +55,99 @@ in {
 
     # Notification
     XF86Messenger = "exec --no-startup-id ${noti_cmd}";
-    "${default_mod}+x" = "exec --no-startup-id ${noti_cmd}";
-    "${default_mod}+Shift+n" = "exec --no-startup-id ${noti_cmd}";
+    "${mod}+x" = "exec --no-startup-id ${noti_cmd}";
+    "${mod}+Shift+n" = "exec --no-startup-id ${noti_cmd}";
 
-    "${default_mod}+q" = "kill";
-    "${default_mod}+Shift+r" = "restart";
+    "${mod}+q" = "kill";
+    "${mod}+Shift+r" = "restart";
 
     # Focus
-    "${default_mod}+Left" = "focus left";
-    "${default_mod}+Down" = "focus down";
-    "${default_mod}+Up" = "focus up";
-    "${default_mod}+Right" = "focus right";
-    "${default_mod}+h" = "focus left";
-    "${default_mod}+j" = "focus down";
-    "${default_mod}+k" = "focus up";
-    "${default_mod}+l" = "focus right";
+    "${mod}+Left" = "focus left";
+    "${mod}+Down" = "focus down";
+    "${mod}+Up" = "focus up";
+    "${mod}+Right" = "focus right";
+    "${mod}+h" = "focus left";
+    "${mod}+j" = "focus down";
+    "${mod}+k" = "focus up";
+    "${mod}+l" = "focus right";
 
     # Move
-    "${default_mod}+Shift+Left" = "move left";
-    "${default_mod}+Shift+Down" = "move down";
-    "${default_mod}+Shift+Up" = "move up";
-    "${default_mod}+Shift+Right" = "move right";
-    "${default_mod}+Shift+h" = "move left";
-    "${default_mod}+Shift+j" = "move down";
-    "${default_mod}+Shift+k" = "move up";
-    "${default_mod}+Shift+l" = "move right";
+    "${mod}+Shift+Left" = "move left";
+    "${mod}+Shift+Down" = "move down";
+    "${mod}+Shift+Up" = "move up";
+    "${mod}+Shift+Right" = "move right";
+    "${mod}+Shift+h" = "move left";
+    "${mod}+Shift+j" = "move down";
+    "${mod}+Shift+k" = "move up";
+    "${mod}+Shift+l" = "move right";
 
-    # # Splitting
-    "${default_mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile horizontally'";
-    "${default_mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile vertically'";
+    # Splitting
+    "${mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile horizontally'";
+    "${mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile vertically'";
 
-    "${default_mod}+f" = "fullscreen toggle";
+    "${mod}+f" = "fullscreen toggle";
 
     # toggle tiling / floating
-    "${default_mod}+Shift+space" = "floating toggle";
+    "${mod}+Shift+space" = "floating toggle";
     # change focus between tiling / floating windows
-    "${default_mod}+space" = "focus mode_toggle";
+    "${mod}+space" = "focus mode_toggle";
 
     # switch to workspace
-    "${default_mod}+1" = "workspace number 1";
-    "${default_mod}+2" = "workspace number 2";
-    "${default_mod}+3" = "workspace number 3";
-    "${default_mod}+4" = "workspace number 4";
-    "${default_mod}+5" = "workspace number 5";
-    "${default_mod}+6" = "workspace number 6";
-    "${default_mod}+7" = "workspace number 7";
-    "${default_mod}+8" = "workspace number 8";
-    "${default_mod}+9" = "workspace number 9";
-    "${default_mod}+0" = "workspace number 10";
+    "${mod}+1" = "workspace number 1";
+    "${mod}+2" = "workspace number 2";
+    "${mod}+3" = "workspace number 3";
+    "${mod}+4" = "workspace number 4";
+    "${mod}+5" = "workspace number 5";
+    "${mod}+6" = "workspace number 6";
+    "${mod}+7" = "workspace number 7";
+    "${mod}+8" = "workspace number 8";
+    "${mod}+9" = "workspace number 9";
+    "${mod}+0" = "workspace number 10";
 
     # move focused container to workspace
-    "${default_mod}+Shift+1" = "move container to workspace number 1";
-    "${default_mod}+Shift+2" = "move container to workspace number 2";
-    "${default_mod}+Shift+3" = "move container to workspace number 3";
-    "${default_mod}+Shift+4" = "move container to workspace number 4";
-    "${default_mod}+Shift+5" = "move container to workspace number 5";
-    "${default_mod}+Shift+6" = "move container to workspace number 6";
-    "${default_mod}+Shift+7" = "move container to workspace number 7";
-    "${default_mod}+Shift+8" = "move container to workspace number 8";
-    "${default_mod}+Shift+9" = "move container to workspace number 9";
-    "${default_mod}+Shift+0" = "move container to workspace number 10";
+    "${mod}+Shift+1" = "move container to workspace number 1";
+    "${mod}+Shift+2" = "move container to workspace number 2";
+    "${mod}+Shift+3" = "move container to workspace number 3";
+    "${mod}+Shift+4" = "move container to workspace number 4";
+    "${mod}+Shift+5" = "move container to workspace number 5";
+    "${mod}+Shift+6" = "move container to workspace number 6";
+    "${mod}+Shift+7" = "move container to workspace number 7";
+    "${mod}+Shift+8" = "move container to workspace number 8";
+    "${mod}+Shift+9" = "move container to workspace number 9";
+    "${mod}+Shift+0" = "move container to workspace number 10";
 
-    "${alt_mod}+Ctrl+Right" = "workspace next";
-    "${alt_mod}+Ctrl+Left" = "workspace prev";
+    "${mod1}+Ctrl+Right" = "workspace next";
+    "${mod1}+Ctrl+Left" = "workspace prev";
 
-    "${alt_mod}+Ctrl+h" = "exec --no-startup-id ${cms}/bin/cms";
+    "${mod1}+Ctrl+h" = "exec --no-startup-id ${cms}/bin/cms";
 
-    "${default_mod}+Tab" = "workspace back_and_forth";
-    "${default_mod}+Shift+Tab" = "workspace prev";
+    "${mod}+Tab" = "workspace back_and_forth";
+    "${mod}+Shift+Tab" = "workspace prev";
 
     # Start mode
-    "${default_mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i video-display -t 1000 -u low \"Resize\"";
+    "${mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i video-display -t 1000 -u low \"Resize\"";
 
     Print = "exec --no-startup-id ${pkgs.grim}/bin/grim -g  \"$(${pkgs.slurp}/bin/slurp)\" $(date +'%d-%m-%Y-%H:%M:%S').png";
 
-    "${default_mod}+Return" = "exec --no-startup-id ${pkgs.foot}/bin/foot -a=default_term -e fish";
-    "${default_mod}+Shift+Return" = "exec --no-startup-id ${pkgs.foot}/bin/foot -a=floating_term -e fish";
+    "${mod}+Return" = "exec --no-startup-id ${pkgs.foot}/bin/foot -a=default_term -e fish";
+    "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.foot}/bin/foot -a=floating_term -e fish";
 
-    "${default_mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
+    "${mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
 
-    "${default_mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: ' | xargs swaymsg exec";
+    "${mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: ' | xargs swaymsg exec";
 
-    "${default_mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
+    "${mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
 
-    "${default_mod}+m" = "exec --no-startup-id emacsclient -c";
-    "${default_mod}+o" = "exec --no-startup-id ${pkgs.obs-studio}/bin/obs";
-    "${default_mod}+p" = "exec --no-startup-id ${pkgs.pavucontrol}/bin/pavucontrol";
+    "${mod}+m" = "exec --no-startup-id emacsclient -c";
+    "${mod}+o" = "exec --no-startup-id ${pkgs.obs-studio}/bin/obs";
+    "${mod}+p" = "exec --no-startup-id ${pkgs.pavucontrol}/bin/pavucontrol";
 
-    "${default_mod}+Shift+b" = "exec --no-startup-id ${pkgs.chromium}/bin/chromium";
-    "${default_mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
-    "${default_mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
-    "${default_mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
+    "${mod}+Shift+b" = "exec --no-startup-id ${pkgs.chromium}/bin/chromium";
+    "${mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
+    "${mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
+    "${mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
 
-    "${default_mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
+    "${mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
   };
 
   workspaceOutputAssign = [
@@ -407,7 +407,7 @@ in {
       # back to normal: Enter or Escape or $mod+r
       "Return" = "mode default";
       "Escape" = "mode default";
-      "${default_mod}+r" = "mode default";
+      "${mod}+r" = "mode default";
     };
   };
 

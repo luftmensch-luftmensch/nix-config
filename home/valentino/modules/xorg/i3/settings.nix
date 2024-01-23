@@ -6,6 +6,7 @@
   pkgs,
   ...
 }: let
+  audio_cmd = "${pkgs.pulseaudio}/bin/pactl";
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
     inherit theme colors;
   };
@@ -22,11 +23,11 @@ in {
   };
 
   keybindings = {
-    F1 = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
-    F2 = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
+    F1 = "exec --no-startup-id ${audio_cmd} set-sink-volume @DEFAULT_SINK@ -10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
+    F2 = "exec --no-startup-id ${audio_cmd} set-sink-volume @DEFAULT_SINK@ +10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
 
-    F3 = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
-    F4 = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+    F3 = "exec --no-startup-id ${audio_cmd} set-sink-mute @DEFAULT_SINK@ toggle && ${pkgs.libnotify}/bin/notify-send -r 1 -t 1000 -i audio-input-microphone -u low \"$(${audio_cmd} get-sink-mute @DEFAULT_SINK@ | grep -q 'no' && echo 'Unmuted' || echo 'Muted')\"";
+    F4 = "exec --no-startup-id ${audio_cmd} set-source-mute @DEFAULT_SOURCE@ toggle && ${pkgs.libnotify}/bin/notify-send -r 1 -t 1000 -i audio-input-microphone -u low \"$(${audio_cmd} get-source-mute @DEFAULT_SOURCE@ | grep -q 'no' && echo 'Mic unmuted' || echo 'Mic muted')\"";
 
     F7 = "exec playerctl-wrapper -p"; # Prev
     F8 = "exec playerctl-wrapper -x"; # Play/Pause
@@ -56,9 +57,9 @@ in {
     "${mod}+Shift+k" = "move up";
     "${mod}+Shift+l" = "move right";
 
-    # # Splitting
-    "${mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -t 600 -u low  'Tile horizontally'";
-    "${mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -t 600 -u low  'Tile vertically'";
+    # Splitting
+    "${mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile horizontally'";
+    "${mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile vertically'";
 
     "${mod}+f" = "fullscreen toggle";
 
@@ -100,7 +101,7 @@ in {
     "${mod}+Shift+Tab" = "workspace prev";
 
     # Start mode
-    "${mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -t 1000 -u low \"Resize\"";
+    "${mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i video-display -t 1000 -u low \"Resize\"";
 
     "Print" = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
     "${mod}+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t Alacritty -e fish";
