@@ -91,7 +91,7 @@
         regular = {
           family = "Sarasa Mono Slab SC";
           package = pkgs.sarasa-gothic;
-          size = 11;
+          size = 12;
         };
 
         monospace = {

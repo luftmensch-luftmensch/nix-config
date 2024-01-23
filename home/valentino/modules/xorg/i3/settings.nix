@@ -2,7 +2,7 @@
   mod,
   mod1,
   theme,
-	colors,
+  colors,
   pkgs,
   ...
 }: let
@@ -69,8 +69,6 @@ in {
 
     "${mod}+x" = "exec rofi-powermenu";
 
-    # $mod+x exec --no-startup-id "$menu"
-
     # switch to workspace
     "${mod}+1" = "workspace number 1";
     "${mod}+2" = "workspace number 2";
@@ -109,7 +107,8 @@ in {
     "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t floating_term -e fish";
 
     "${mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
-    "${mod}+d" = "exec --no-startup-id ${pkgs.dmenu}/bin/dmenu_run -nb '#0F0F0F' -nf '#c5c8c6' -sb '#3B4252' -sf '#c5c8c6' -fn '${theme.font.regular.family}:size=${(toString theme.font.regular.size)}' -p 'Run: '";
+
+    "${mod}+d" = "exec --no-startup-id ${pkgs.bemenu}/bin/bemenu-run -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${colors.base00}'  --tb '#${colors.base01}' --hb '#${colors.base02}' --tf '#${colors.base0D}' --hf '#${colors.base0D}' -p '▶ Run: '";
 
     "${mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
 

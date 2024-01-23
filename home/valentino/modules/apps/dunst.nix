@@ -108,7 +108,7 @@ in {
           title = "Dunst";
           class = "Dunst";
 
-          dmenu = "${pkgs.dmenu}/bin/dmenu -p dunst:";
+          dmenu = "${pkgs.bemenu}/bin/bemenu-run -p dunst:";
           browser = "${pkgs.firefox}bin/firefox -new-tab";
           always_run_script = true;
           ignore_dbusclose = false;
