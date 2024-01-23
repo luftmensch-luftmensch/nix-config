@@ -44,6 +44,7 @@ in {
 
           # Theming
           vscode-icons-team.vscode-icons
+          viktorqvarfordt.vscode-pitch-black-theme
         ]
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {

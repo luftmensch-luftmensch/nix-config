@@ -3,11 +3,10 @@
   sctl = "${pkgs.systemd}/bin/systemctl";
   _grep = "${pkgs.gnugrep}/bin/grep";
   _cut = "${pkgs.coreutils}/bin/cut";
-
-  # FIXME: Hardcoded config
-  # _device_battery_info = "$(${pkgs.dbus}/bin/dbus-send --print-reply=literal --system --dest=org.bluez /org/bluez/hci0/dev_18_95_52_69_80_59 org.freedesktop.DBus.Properties.Get string:\"org.bluez.Battery1\" string:\"Percentage\" | awk '{print $3}')";
 in
   pkgs.writeShellScriptBin "bluetooth-ctl" ''
+    # https://www.jvt.me/posts/2021/12/10/bluetooth-percent-linux/
+
     bluetooth_print() {
       ${bctl} | while read -r; do
         if [ "$(${sctl} is-active "bluetooth.service")" = "active" ]; then
@@ -57,7 +56,6 @@ in
       fi
     }
 
-    # TODO: Complete it using https://www.jvt.me/posts/2021/12/10/bluetooth-percent-linux/
     case "$1" in
       --toggle) bluetooth_toggle ;;
       *) bluetooth_print ;;

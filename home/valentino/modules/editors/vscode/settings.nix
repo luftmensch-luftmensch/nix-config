@@ -220,6 +220,7 @@
     "window.title" = "VSCode \${separator} \${activeEditorShort}";
     "window.commandCenter" = false;
     "workbench.iconTheme" = "vscode-icons";
+    "vsicons.dontShowNewVersionMessage" = true;
     "workbench.colorCustomizations" = {
       "statusBar.background" = "#005f5f";
       "statusBar.noFolderBackground" = "#005f5f";
@@ -238,12 +239,16 @@
     "editor.linkedEditing" = true;
     "editor.mouseWheelZoom" = true;
     "editor.smoothScrolling" = true;
+    # Disable the annoying sticky scroll as it takes too much precious space for my taste
+    "editor.stickyScroll.enabled" = false;
     "editor.fontSize" = theme.font.regular.size + 6;
     "editor.fontFamily" = "'${theme.font.regular.family}', 'monospace', monospace";
     "terminal.integrated.fontFamily" = "'${theme.font.regular.family}', 'monospace', monospace";
 
     "editor.renderFinalNewline" = "off";
     "workbench.startupEditor" = "none";
+
+    "workbench.colorTheme" = "Pitch Black";
     "workbench.list.smoothScrolling" = true;
     "workbench.editor.highlightModifiedTabs" = true;
     "workbench.editor.showTabs" = "multiple";
