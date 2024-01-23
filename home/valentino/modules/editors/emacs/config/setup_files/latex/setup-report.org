@@ -738,7 +738,6 @@
 #+LATEX_HEADER: 		% OWN structs
 #+LATEX_HEADER: 		keywords=[12]{PRCLEAR, PRCHAT, READY, CHAT},
 #+LATEX_HEADER: 		% Colors
-#+LATEX_HEADER: 		%  TODO: Move elsewhere
 #+LATEX_HEADER: 		directivestyle=\color{blue!85!white},
 #+LATEX_HEADER: 		keywordstyle=[0]\color{cherryred},
 #+LATEX_HEADER: 		keywordstyle=[1]\color{green!75!black},

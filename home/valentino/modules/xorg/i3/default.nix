@@ -9,6 +9,7 @@ with lib; let
   theme = config.valentino.modules.themes;
   mod = "Mod4";
   mod1 = "Mod1";
+	inherit (config.colorScheme) colors;
 in {
   config = mkIf (cfg.enable && cfg.wm == "i3") {
     xsession = {
@@ -16,9 +17,7 @@ in {
       initExtra = "xset b off";
       windowManager.i3 = let
         settings = import ./settings.nix {
-          default_mod = "${mod}";
-          alt_mod = "${mod1}";
-          inherit theme pkgs;
+          inherit mod mod1 theme colors pkgs;
         };
       in {
         enable = true;

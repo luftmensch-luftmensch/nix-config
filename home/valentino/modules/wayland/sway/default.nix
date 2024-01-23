@@ -10,6 +10,7 @@ with lib; let
   mod = "Mod4";
   mod1 = "Mod1";
   wallpaper_path = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
+  inherit (config.colorScheme) colors;
 in {
   config = mkIf (cfg.enable && (elem "sway" cfg.wm)) {
     wayland.windowManager.sway = {
@@ -21,7 +22,7 @@ in {
         settings = import ./settings.nix {
           default_mod = "${mod}";
           alt_mod = "${mod1}";
-          inherit theme wallpaper_path pkgs;
+          inherit theme colors wallpaper_path pkgs;
         };
       in {
         bars = [{command = "waybar";}];
@@ -32,7 +33,6 @@ in {
         };
 
         focus.followMouse = true;
-
 
         workspaceAutoBackAndForth = true;
         inherit (settings) input keybindings modes workspaceOutputAssign window startup gaps fonts;
@@ -59,10 +59,10 @@ in {
       wayland = {
         locker.enable = true;
         waybar = {
-					enable = true;
-					default_output = "eDP-1";
-					external_output = "HDMI-A-1";
-				};
+          enable = true;
+          default_output = "eDP-1";
+          external_output = "HDMI-A-1";
+        };
       };
       apps = {
         playerctl.enable = true;

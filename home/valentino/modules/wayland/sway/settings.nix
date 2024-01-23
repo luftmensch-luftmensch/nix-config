@@ -2,12 +2,15 @@
   default_mod,
   alt_mod,
   theme,
+  colors,
   wallpaper_path,
   pkgs,
 }: let
   audio_cmd = "${pkgs.wireplumber}/bin/wpctl";
   noti_cmd = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
   bright_cmd = "${pkgs.brightnessctl}/bin/brightnessctl set";
+
+  menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${colors.base00}'  --tb '#${colors.base01}' --hb '#${colors.base02}' --tf '#${colors.base0D}' --hf '#${colors.base0D}'";
 
   # Custom scripts
   rws = pkgs.callPackage ./scripts/random-wallpaper.nix {
@@ -16,11 +19,11 @@
   bss = pkgs.callPackage ./scripts/battery-status.nix {};
 
   cms = pkgs.callPackage ./scripts/clipboard-manager.nix {
-    inherit theme;
+    inherit menu_opts;
   };
 
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
-    inherit theme;
+    inherit menu_opts;
   };
 in {
   gaps = {
@@ -44,8 +47,7 @@ in {
     XF86AudioLowerVolume = "exec --no-startup-id ${audio_cmd} set-volume @DEFAULT_SINK@ 10%- && ${audio_cmd} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
     XF86AudioMute = "exec --no-startup-id ${audio_cmd} set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
-    # TODO: complete it
-    XF86AudioMicMute = "exec --no-startup-id ${audio_cmd} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; # dunstify -h string:x-dunst-stack-tag:mute -t 800 -u low -a mic_unmuted "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d "[" -f2 | cut -d "]" -f1 | awk '{if ($1 == "MUTED") print " Mic Muted"; else print " Unmuted"}')"
+    XF86AudioMicMute = "exec --no-startup-id ${audio_cmd} set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ${pkgs.libnotify}/bin/notify-send -r 1 -t 1000 -i audio-input-microphone -u low \"$(${audio_cmd} get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo 'Mic Muted' || echo 'Mic Unmuted')\"";
 
     # BRIGHTNESS
     XF86MonBrightnessUp = "exec ${bright_cmd} 5%+ | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
@@ -80,8 +82,8 @@ in {
     "${default_mod}+Shift+l" = "move right";
 
     # # Splitting
-    "${default_mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -t 600 -u low  'Tile horizontally'";
-    "${default_mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -t 600 -u low  'Tile vertically'";
+    "${default_mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile horizontally'";
+    "${default_mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile vertically'";
 
     "${default_mod}+f" = "fullscreen toggle";
 
@@ -123,7 +125,7 @@ in {
     "${default_mod}+Shift+Tab" = "workspace prev";
 
     # Start mode
-    "${default_mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -t 1000 -u low \"Resize\"";
+    "${default_mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i video-display -t 1000 -u low \"Resize\"";
 
     Print = "exec --no-startup-id ${pkgs.grim}/bin/grim -g  \"$(${pkgs.slurp}/bin/slurp)\" $(date +'%d-%m-%Y-%H:%M:%S').png";
 
@@ -132,8 +134,7 @@ in {
 
     "${default_mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
 
-    # TODO: Fix theming
-    "${default_mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run -i -p '▶ Run: ' --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --tb '#3B4252' --nb '#0F0F0F' --nf '#c5c8c6' --sb '#3B4252' --sf '#c5c8c6' --tf '#FFFFFF' --hf '#FFFFFF' --hb '#3B4252' | xargs swaymsg exec";
+    "${default_mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: ' | xargs swaymsg exec";
 
     "${default_mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
 

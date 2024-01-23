@@ -111,7 +111,7 @@
                            ("@Uni"      . ?W))
 
            ;; Configure custom agenda views
-           ;; TODO:  Try out this symbols          ⭐
+           ;; Other symbols:        ⭐
            org-agenda-custom-commands
 
            '(("A" "Anime"

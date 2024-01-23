@@ -212,7 +212,6 @@ in {
         '';
       };
 
-      # TODO: Complete configuration for thunderbird
       thunderbird = {
         enable = true;
         settings = {

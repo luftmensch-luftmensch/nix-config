@@ -55,7 +55,7 @@ with lib; let
   monitoring = with pkgs; [
     btop
     s-tui
-    speedtest-cli
+    speedtest-go
   ];
 
   utilities = with pkgs; [

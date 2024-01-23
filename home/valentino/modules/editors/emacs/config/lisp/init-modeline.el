@@ -578,7 +578,6 @@ Specific to the current window's mode line.")
 ;;      `(mode-line-active ((t :inherit mode-line :box ,subtle)))
 ;;      `(mode-line-inactive ((t :background unspecified :foreground ,subtle :box unspecified :overline ,subtle))))))
 
-;; TODO: Find why subtle does not work on daemon-mode
 (defun vb/modeline-set-faces (_theme)
   "Make THEME mode lines subtle."
   (let ((subtle (face-foreground 'shadow)))
