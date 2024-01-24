@@ -39,7 +39,8 @@
 
   (:bind-into telega-chat-mode-map
     [remap telega-msg-resend] 'telega-msg-forward-marked-or-at-point
-    [remap evil-record-macro] #'bury-buffer
+    ;; [remap evil-record-macro] #'bury-buffer
+    [remap evil-record-macro] #'kill-this-buffer
     [remap evil-ret] #'telega-chatbuf-newline-or-input-send)
 
   (:bind-into telega-image-mode-map
