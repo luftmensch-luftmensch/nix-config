@@ -11,7 +11,7 @@ pkgs.writeShellScriptBin "rws" ''
         fi
     done
     function set_wallpaper() {
-      ${pkgs.sway}/bin/swaymsg -r -q output "*" bg "$(find ${wallpaper_path} -type f | shuf -n1)" fill
+      ${pkgs.sway}/bin/swaymsg -r -q output "*" bg '"$(find ${wallpaper_path} -type f | shuf -n1)"' fill
     }
 
   while true; do
