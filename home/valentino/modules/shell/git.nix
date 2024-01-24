@@ -1,14 +1,14 @@
 {
   options,
-	pkgs,
+  pkgs,
   config,
   lib,
   ...
 }:
 with lib; let
   cfg = config.valentino.modules.shell.git;
-	undo-git = pkgs.writeScriptBin "undo-git" (builtins.readFile ./scripts/undo-git.sh);
-	git-blame-someone-else = pkgs.writeScriptBin "git-blame-someone-else" (builtins.readFile ./scripts/git-blame-someone-else.sh);
+  undo-git = pkgs.writeScriptBin "undo-git" (builtins.readFile ./scripts/undo-git.sh);
+  git-blame-someone-else = pkgs.writeScriptBin "git-blame-someone-else" (builtins.readFile ./scripts/git-blame-someone-else.sh);
 in {
   options.valentino.modules.shell.git = {
     enable = mkEnableOption "main user git configuration";
@@ -77,10 +77,13 @@ in {
       };
     };
 
-		home.packages = [
-			undo-git
-			git-blame-someone-else
-		];
+    programs.lazygit = {
+      enable = true;
+    };
 
+    home.packages = [
+      undo-git
+      git-blame-someone-else
+    ];
   };
 }
