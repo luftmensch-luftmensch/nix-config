@@ -103,7 +103,9 @@
     ;; list-buffers-directory is the variable set in dired buffers
     (if-let* ((path (or (buffer-file-name) list-buffers-directory)))
         (message (kill-new path))
-      (error "Buffer not visiting a file"))))
+      (error "Buffer not visiting a file")))
+
+	(setq-default subword-mode))
 
 
 (setup debug

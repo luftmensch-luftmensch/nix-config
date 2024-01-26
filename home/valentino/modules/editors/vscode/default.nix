@@ -14,15 +14,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.vscode = let
-      settings = import ./settings.nix {
-        inherit theme;
-        zoomLevel =
-          if cfgWayland.enable
-          then 1.5
-          else 0;
-      };
-    in {
+    programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
       extensions = with pkgs.vscode-extensions;
@@ -62,7 +54,14 @@ in {
           }
         ];
 
-      inherit (settings) keybindings userSettings;
+      keybindings = import ./test.nix;
+      userSettings = import ./settings.nix {
+        inherit theme;
+        zoomLevel =
+          if cfgWayland.enable
+          then 1.5
+          else 0;
+      };
     };
 
     home.file.".config/nvim-vscode/init.vim" = {
