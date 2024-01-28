@@ -54,7 +54,7 @@ in {
           }
         ];
 
-      keybindings = import ./test.nix;
+      keybindings = import ./keybindings.nix;
       userSettings = import ./settings.nix {
         inherit theme;
         zoomLevel =

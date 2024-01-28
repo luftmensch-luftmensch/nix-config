@@ -46,6 +46,7 @@
   "editor.minimap.enabled" = false;
   "telemetry.telemetryLevel" = "off";
   "files.trimTrailingWhitespace" = true;
+  "files.trimFinalNewlines" = true;
 
   # Neovim support
   "extensions.experimental.affinity" = {
