@@ -1,13 +1,12 @@
 {
   config,
-  options,
   lib,
   pkgs,
   ...
 }:
 with lib; let
   cfg = config.valentino.modules.credentials.mail-defaults;
-  inherit (config.colorScheme) colors;
+  inherit (config.colorScheme) palette;
   channelExtraConfig = {
     Create = "Near";
     SyncState = "*";
@@ -259,54 +258,54 @@ in {
                   display: none !important;
               }
               #threadTree[rows="thread-card"] {
-                  background-color: ${colors.base00} !important;
+                  background-color: ${palette.base00} !important;
               }
               table[is="tree-view-table"] {
-                  background-color: ${colors.base02} !important;
-                  color: ${colors.base01} !important;
+                  background-color: ${palette.base02} !important;
+                  color: ${palette.base01} !important;
               }
               .button {
-                  background-color: ${colors.base02} !important;
+                  background-color: ${palette.base02} !important;
               }
               .button.button-primary {
-                  background-color: ${colors.base06} !important;
-                  color: ${colors.base00} !important;
-                  border-color: ${colors.base06} !important;
+                  background-color: ${palette.base06} !important;
+                  color: ${palette.base00} !important;
+                  border-color: ${palette.base06} !important;
               }
               #messagePane {
-                  background-color: ${colors.base00} !important;
+                  background-color: ${palette.base00} !important;
               }
               #accountCentral {
-                  background-color: ${colors.base00} !important;
+                  background-color: ${palette.base00} !important;
               }
               #messageHeader {
-                  background-color: ${colors.base02} !important;
+                  background-color: ${palette.base02} !important;
               }
               #calendarViewHeader {
-                  background-color: ${colors.base02} !important;
+                  background-color: ${palette.base02} !important;
               }
               .calview-toggle {
-                  background-color: ${colors.base00} !important;
+                  background-color: ${palette.base00} !important;
               }
               button.calview-toggle-item {
-                  background-color ${colors.base02} !important;
+                  background-color ${palette.base02} !important;
               }
               .minimonth-month-box,
               .minimonth-cal-box {
-                  background-color: ${colors.base02} !important;
+                  background-color: ${palette.base02} !important;
               }
               .minimonth-nav-section {
-                  background-color: ${colors.base06} !important;
+                  background-color: ${palette.base06} !important;
               }
               #folderTree:focus-within li.selected > .container, #folderTree li.drop-target > .container,
               .minimonth-week {
-                  background-color: ${colors.base09} !important;
-                  color: ${colors.base01} !important;
+                  background-color: ${palette.base09} !important;
+                  color: ${palette.base01} !important;
               }
               .minimonth-day[selected="true"][today="true"] {
-                  background-color: ${colors.base06} !important;
-                  border: 1px solid ${colors.base06} !important;
-                  color: ${colors.base00} !important;
+                  background-color: ${palette.base06} !important;
+                  border: 1px solid ${palette.base06} !important;
+                  color: ${palette.base00} !important;
               }
               .btn-hub,
               li:not(.selected) > .container:hover,
@@ -320,31 +319,31 @@ in {
               #agenda-toolbar,
               .agenda-date-header,
               tr[is="thread-card"][data-properties~="unread"]:not(.selected, :hover) {
-                  background-color: ${colors.base09} !important;
+                  background-color: ${palette.base09} !important;
               }
               .minimonth-day[selected="true"],
               .calendar-month-day-box-current-month[selected="true"], .calendar-month-day-box-day-off[selected="true"], .calendar-month-day-box-other-month[selected="true"]{
-                  border: 1px solid ${colors.base06} !important;
+                  border: 1px solid ${palette.base06} !important;
               }
               .calendar-month-day-box-date-label[relation="today"][selected="true"]{
-                  color: ${colors.base00} !important;
+                  color: ${palette.base00} !important;
               }
               .calendar-month-day-box-date-label[relation="today"] {
-                  background-color: ${colors.base06} !important;
+                  background-color: ${palette.base06} !important;
               }
               .calendar-month-day-box-day-off,
               button.calview-toggle-item,
               #agenda-toolbar,
               .tab-content {
-                  background-color: ${colors.base02} !important;
+                  background-color: ${palette.base02} !important;
               }
               .tabmail-tab:not([selected], :-moz-lwcolors),
               .new-messages > .container > .name,
               #threadTree [data-properties~="new"]:not(.selected) .thread-card-container :is(.subject, .date) {
-                  color: ${colors.base06} !important;
+                  color: ${palette.base06} !important;
               }
               .notification-button-container, .notification-message {
-                  color: ${colors.base00} !important;
+                  color: ${palette.base00} !important;
               }
               .unread > .container > .unread-count,
               .new-messages > .container > .unread-count,
@@ -352,28 +351,28 @@ in {
               [is="tree-view-table-body"]:focus > .selected, [is="tree-view-table-body"]:focus-within > .selected, [is="tree-view-table-body"] > .selected:focus-within,
               .unread > .container > .unread-count, .new-messages > .container > .unread-count, li.selected > .container, button.calview-toggle-item[role="tab"][aria-selected="true"],
               button.calview-toggle-item[role="tab"][aria-selected="true"] {
-                  color: ${colors.base00} !important;
-                  background-color: ${colors.base06} !important;
+                  color: ${palette.base00} !important;
+                  background-color: ${palette.base06} !important;
               }
               .recipient-avatar {
-                  background-color: ${colors.base00} !important;
-                  color: ${colors.base06} !important;
+                  background-color: ${palette.base00} !important;
+                  color: ${palette.base06} !important;
               }
               .message-header-view-button {
-                  fill: ${colors.base06 + "DD"} !important;
+                  fill: ${palette.base06 + "DD"} !important;
               }
               calendar-day-label {
-                  color: ${colors.base01} !important;
-                  background-color: ${colors.base00} !important;
+                  color: ${palette.base01} !important;
+                  background-color: ${palette.base00} !important;
               }
               calendar-day-label[relation="today"] {
-                  color: ${colors.base06} !important;
-                  background-color: ${colors.base06 + "30"} !important;
+                  color: ${palette.base06} !important;
+                  background-color: ${palette.base06 + "30"} !important;
               }
               #agenda {
-                  background-color: ${colors.base00}  !important;
-                  --selected-background: ${colors.base06} !important;
-                  --selected-foreground: ${colors.base00} !important;
+                  background-color: ${palette.base00}  !important;
+                  --selected-background: ${palette.base06} !important;
+                  --selected-foreground: ${palette.base00} !important;
               }
               .notificationbox-stack,
               :host([type="info"]) .icon,
@@ -396,16 +395,16 @@ in {
               #folderPaneHeaderBar:not([hidden]),
               calendar-month-view, calendar-multiweek-view,
               #folderPane {
-                  background-color: ${colors.base00} !important;
+                  background-color: ${palette.base00} !important;
               }
             '';
             userContent = ''
               .sidebar-footer-icon, .category-icon {
-                  fill: ${colors.base06 + "DD"} !important;
+                  fill: ${palette.base06 + "DD"} !important;
               }
               #categories > .category[selected],
               #searchInput {
-                  background-color: ${colors.base02} !important;
+                  background-color: ${palette.base02} !important;
               }
               .sticky-container,
               .main-search,
@@ -416,7 +415,7 @@ in {
               #accountTreeBox,
               #containerBox,
               #preferencesContainer {
-                  background-color: ${colors.base00} !important;
+                  background-color: ${palette.base00} !important;
               }
             '';
           };

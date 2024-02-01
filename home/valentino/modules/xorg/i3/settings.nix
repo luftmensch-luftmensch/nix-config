@@ -2,13 +2,13 @@
   mod,
   mod1,
   theme,
-  colors,
+  palette,
   pkgs,
   ...
 }: let
   audio_cmd = "${pkgs.pulseaudio}/bin/pactl";
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
-    inherit theme colors;
+    inherit theme palette;
   };
 in {
   assigns = {
@@ -109,7 +109,7 @@ in {
 
     "${mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
 
-    "${mod}+d" = "exec --no-startup-id ${pkgs.bemenu}/bin/bemenu-run -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${colors.base00}'  --tb '#${colors.base01}' --hb '#${colors.base02}' --tf '#${colors.base0D}' --hf '#${colors.base0D}' -p '▶ Run: '";
+    "${mod}+d" = "exec --no-startup-id ${pkgs.bemenu}/bin/bemenu-run -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}' -p '▶ Run: '";
 
     "${mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
 

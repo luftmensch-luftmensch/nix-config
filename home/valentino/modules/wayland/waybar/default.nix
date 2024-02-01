@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -8,7 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.wayland.waybar;
   theme = config.valentino.modules.themes;
-  inherit (config.colorScheme) colors;
+  inherit (config.colorScheme) palette;
 in {
   options.valentino.modules.wayland.waybar = {
     enable = mkEnableOption "waybar configuration";
@@ -27,7 +26,7 @@ in {
   config = mkIf cfg.enable {
     programs.waybar = let
       style = import ./style.nix {
-        inherit theme colors;
+        inherit theme palette;
       };
 
       custom_modules = import ./modules.nix {

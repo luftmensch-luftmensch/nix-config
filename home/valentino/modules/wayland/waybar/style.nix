@@ -1,6 +1,6 @@
 {
   theme,
-  colors,
+  palette,
   ...
 }: {
   style = ''
@@ -13,8 +13,8 @@
     }
 
     #custom-menu {
-      background-color: #${colors.base0C};
-      color: #${colors.base00};
+      background-color: #${palette.base0C};
+      color: #${palette.base00};
       margin-top: 5px;
       margin-bottom: 5px;
       margin-left: 2px;
@@ -25,8 +25,8 @@
     }
 
     #custom-hostname {
-      background-color: #${colors.base0C};
-      color: #${colors.base00};
+      background-color: #${palette.base0C};
+      color: #${palette.base00};
       margin-top: 5px;
       margin-bottom: 5px;
       margin-left: 5px;
@@ -37,15 +37,15 @@
     }
 
     tooltip {
-      background-color: #${colors.base00};
-      color: #${colors.base07};
+      background-color: #${palette.base00};
+      color: #${palette.base07};
       border-radius: 10px;
       padding: 4px;
     }
 
     window#waybar {
-      background-color: #${colors.base00};
-      color: #${colors.base07};
+      background-color: #${palette.base00};
+      color: #${palette.base07};
       transition-property: background-color;
       transition-duration: 0.5s;
     }
@@ -65,13 +65,13 @@
     }
 
     #idle_inhibitor.activated {
-      background-color: #${colors.base03};
-      color: #${colors.base00};
+      background-color: #${palette.base03};
+      color: #${palette.base00};
     }
 
     #idle_inhibitor.deactivated {
-      background-color: #${colors.base02};
-      color: #${colors.base00};
+      background-color: #${palette.base02};
+      color: #${palette.base00};
     }
 
     #workspaces {
@@ -80,8 +80,8 @@
     }
 
     #workspaces button {
-      background: #${colors.base02};
-      color: #${colors.base07};
+      background: #${palette.base02};
+      color: #${palette.base07};
       padding: 0 8px;
       margin-top: 5px;
       margin-bottom: 5px;
@@ -92,28 +92,28 @@
     }
 
     #workspaces button:hover {
-      background-color: #${colors.base03};
-      color: #${colors.base07};
+      background-color: #${palette.base03};
+      color: #${palette.base07};
       transition-duration: 0.2s;
     }
 
     #workspaces button.active {
-      background-color: #${colors.base0B};
-      color: #${colors.base00};
+      background-color: #${palette.base0B};
+      color: #${palette.base00};
       padding: 0 12px;
       transition-duration: 0.2s;
     }
 
     #workspaces button.focused {
-      background-color: #${colors.base0B};
-      color: #${colors.base00};
+      background-color: #${palette.base0B};
+      color: #${palette.base00};
       padding: 0 12px;
       transition-duration: 0.2s;
     }
 
     #workspaces button.urgent {
-      background: #${colors.base08};
-      color: #${colors.base00};
+      background: #${palette.base08};
+      color: #${palette.base00};
     }
 
     #tray,
@@ -126,7 +126,7 @@
     #idle_inhibitor,
     #clock {
       padding: 0 10px;
-      color: #${colors.base07};
+      color: #${palette.base07};
       margin-top: 5px;
       margin-bottom: 5px;
       margin-left: 5px;
@@ -135,12 +135,12 @@
     }
 
     #network {
-      background-color: #${colors.base02};
+      background-color: #${palette.base02};
     }
 
     #tray {
-      background-color: #${colors.base02};
-      color: #${colors.base00};
+      background-color: #${palette.base02};
+      color: #${palette.base00};
     }
 
     #tray > .passive {
@@ -153,33 +153,33 @@
     }
 
     #cpu {
-      background-color: #${colors.base0C};
-      color: #${colors.base00};
+      background-color: #${palette.base0C};
+      color: #${palette.base00};
     }
 
     #temperature {
-      background-color: #${colors.base09};
-      color: #${colors.base00};
+      background-color: #${palette.base09};
+      color: #${palette.base00};
     }
 
     #memory {
-      background-color: #${colors.base0B};
-      color: #${colors.base00};
+      background-color: #${palette.base0B};
+      color: #${palette.base00};
     }
 
     #battery {
-      background-color: #${colors.base0A};
-      color: #${colors.base00};
+      background-color: #${palette.base0A};
+      color: #${palette.base00};
     }
 
     #pulseaudio {
-      background-color: #${colors.base0E};
-      color: #${colors.base00};
+      background-color: #${palette.base0E};
+      color: #${palette.base00};
     }
 
     #clock {
-      background-color: #${colors.base0D};
-      color: #${colors.base00};
+      background-color: #${palette.base0D};
+      color: #${palette.base00};
     }
   '';
 }

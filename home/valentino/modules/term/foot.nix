@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   ...
@@ -7,7 +6,7 @@
 with lib; let
   cfg = config.valentino.modules.term.foot;
   theme = config.valentino.modules.themes;
-  inherit (config.colorScheme) colors;
+  inherit (config.colorScheme) palette;
 in {
   options.valentino.modules.term.foot = {
     enable = mkEnableOption "foot configuration";
@@ -58,25 +57,25 @@ in {
         };
 
         colors = {
-          background = "${colors.base00}";
-          foreground = "${colors.base05}";
-          regular0 = "${colors.base00}";
-          regular1 = "${colors.base08}";
-          regular2 = "${colors.base0B}";
-          regular3 = "${colors.base09}";
-          regular4 = "${colors.base0D}";
-          regular5 = "${colors.base0E}";
-          regular6 = "${colors.base0C}";
-          regular7 = "${colors.base05}";
+          background = "${palette.base00}";
+          foreground = "${palette.base05}";
+          regular0 = "${palette.base00}";
+          regular1 = "${palette.base08}";
+          regular2 = "${palette.base0B}";
+          regular3 = "${palette.base09}";
+          regular4 = "${palette.base0D}";
+          regular5 = "${palette.base0E}";
+          regular6 = "${palette.base0C}";
+          regular7 = "${palette.base05}";
 
-          bright0 = "${colors.base03}";
-          bright1 = "${colors.base06}";
-          bright2 = "${colors.base0B}";
-          bright3 = "${colors.base09}";
-          bright4 = "${colors.base0D}";
-          bright5 = "${colors.base0E}";
-          bright6 = "${colors.base0C}";
-          bright7 = "${colors.base05}";
+          bright0 = "${palette.base03}";
+          bright1 = "${palette.base06}";
+          bright2 = "${palette.base0B}";
+          bright3 = "${palette.base09}";
+          bright4 = "${palette.base0D}";
+          bright5 = "${palette.base0E}";
+          bright6 = "${palette.base0C}";
+          bright7 = "${palette.base05}";
         };
 
         csd = {

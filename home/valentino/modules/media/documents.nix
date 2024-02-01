@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -8,7 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.media.documents;
   cfgTheme = config.valentino.modules.themes;
-  inherit (config.colorScheme) colors;
+  inherit (config.colorScheme) palette;
 in {
   options.valentino.modules.media.documents = {
     zathura.enable = mkEnableOption "pdf support (zathura)";
@@ -24,32 +23,32 @@ in {
             "${cfgTheme.font.term.family} "
             + (toString cfgTheme.font.term.size);
 
-          default-bg = "#${colors.base00}";
-          default-fg = "#${colors.base01}";
+          default-bg = "#${palette.base00}";
+          default-fg = "#${palette.base01}";
 
-          statusbar-fg = "#${colors.base04}";
-          statusbar-bg = "#${colors.base02}";
+          statusbar-fg = "#${palette.base04}";
+          statusbar-bg = "#${palette.base02}";
 
-          inputbar-bg = "#${colors.base00}";
-          inputbar-fg = "#${colors.base07}";
+          inputbar-bg = "#${palette.base00}";
+          inputbar-fg = "#${palette.base07}";
 
-          notification-bg = "#${colors.base00}";
-          notification-fg = "#${colors.base07}";
+          notification-bg = "#${palette.base00}";
+          notification-fg = "#${palette.base07}";
 
-          notification-error-bg = "#${colors.base00}";
-          notification-error-fg = "#${colors.base06}";
+          notification-error-bg = "#${palette.base00}";
+          notification-error-fg = "#${palette.base06}";
 
-          notification-warning-bg = "#${colors.base00}";
-          notification-warning-fg = "#${colors.base06}";
+          notification-warning-bg = "#${palette.base00}";
+          notification-warning-fg = "#${palette.base06}";
 
-          highlight-color = "#${colors.base0A}";
-          highlight-active-color = "#${colors.base0D}";
+          highlight-color = "#${palette.base0A}";
+          highlight-active-color = "#${palette.base0D}";
 
-          completion-bg = "#${colors.base01}";
-          completion-fg = "#${colors.base0D}";
+          completion-bg = "#${palette.base01}";
+          completion-fg = "#${palette.base0D}";
 
-          recolor-lightcolor = "#${colors.base00}";
-          recolor-darkcolor = "#${colors.base06}";
+          recolor-lightcolor = "#${palette.base00}";
+          recolor-darkcolor = "#${palette.base06}";
 
           recolor = "true";
           recolor-keephue = "false";

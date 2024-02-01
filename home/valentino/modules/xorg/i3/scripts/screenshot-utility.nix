@@ -1,9 +1,9 @@
 {
   theme,
-	colors,
+	palette,
   pkgs,
 }: let
-  _menu = "${pkgs.bemenu}/bin/bemenu -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${colors.base00}'  --tb '#${colors.base01}' --hb '#${colors.base02}' --tf '#${colors.base0D}' --hf '#${colors.base0D}' -p '▶ Type: '";
+  _menu = "${pkgs.bemenu}/bin/bemenu -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}' -p '▶ Type: '";
   _scrot = "${pkgs.scrot}/bin/scrot";
 	_notify = "${pkgs.libnotify}/bin/notify-send -u low -t 700";
 in

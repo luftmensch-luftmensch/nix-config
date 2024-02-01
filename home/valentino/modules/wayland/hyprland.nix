@@ -2,13 +2,12 @@
   config,
   lib,
   pkgs,
-  inputs,
   outputs,
   ...
 }:
 with lib; let
   cfg = config.valentino.modules.wayland;
-  inherit (config.colorScheme) colors;
+  inherit (config.colorScheme) palette;
 in {
   config = mkIf (cfg.enable && (elem "hyprland" cfg.wm)) {
     wayland.windowManager.hyprland = {
@@ -30,8 +29,8 @@ in {
           gaps_out = 6;
           border_size = 3.5;
           layout = "master";
-          "col.active_border" = "0xff${colors.base0B}";
-          "col.inactive_border" = "0xff${colors.base02}";
+          "col.active_border" = "0xff${palette.base0B}";
+          "col.inactive_border" = "0xff${palette.base02}";
         };
 
         decoration = {

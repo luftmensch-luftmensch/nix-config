@@ -2,7 +2,7 @@
   mod,
   mod1,
   theme,
-  colors,
+  palette,
   wallpaper_path,
   pkgs,
 }: let
@@ -10,7 +10,7 @@
   noti_cmd = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
   bright_cmd = "${pkgs.brightnessctl}/bin/brightnessctl set";
 
-  menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${colors.base00}'  --tb '#${colors.base01}' --hb '#${colors.base02}' --tf '#${colors.base0D}' --hf '#${colors.base0D}'";
+  menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
 
   # Custom scripts
   rws = pkgs.callPackage ./scripts/random-wallpaper.nix {

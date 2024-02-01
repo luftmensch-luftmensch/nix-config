@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -7,9 +6,9 @@
 }:
 with lib; let
   cfg = config.valentino.modules.apps.polybar;
-  cfgTheme = config.valentino.modules.themes;
+  theme = config.valentino.modules.themes;
   bluetoothScript = pkgs.callPackage ./scripts/bluetooth.nix {};
-  inherit (config.colorScheme) colors;
+  inherit (config.colorScheme) palette;
 in {
   options.valentino.modules.apps.polybar = {
     enable = mkEnableOption "polybar configuration";
@@ -26,8 +25,7 @@ in {
       package = pkgs.polybarFull;
       settings = let
         barConfig = import ./bars.nix {
-          theme = cfgTheme;
-          palette = colors;
+					inherit theme palette;
         };
 
         moduleConfig = import ./modules.nix {
@@ -36,7 +34,7 @@ in {
           n-cmd = "${pkgs.dunst}/bin/dunstctl";
           temp = "${cfg.temperature}";
           volume = "${pkgs.pavucontrol}/bin/pavucontrol";
-          palette = colors;
+					inherit palette;
         };
       in
         barConfig // moduleConfig;

@@ -25,16 +25,11 @@ in {
       cursorTheme = let
         cursor =
           if cfg.darkTheme
-					then "Capitaine Cursors"
-					else "Capitaine Cursors";
-          # then "Capitaine Dark"
-          # else "Capitaine Light";
-          # then "Bibata-Modern-Ice"
-          # else "Bibata-Modern-Classic";
+          then "Capitaine Cursors"
+          else "Capitaine Cursors";
       in {
         name = cursor;
         inherit (cfg.cursor) size;
-        # package = pkgs.bibata-cursors;
         package = pkgs.capitaine-cursors-themed;
       };
     };
@@ -43,7 +38,7 @@ in {
       modus-operandi = {
         slug = "modus-operandi";
         name = "Modus Operandi";
-        colors = {
+        palette = {
           base00 = "ffffff"; # bg-main
           base01 = "f0f0f0"; # bg-alt
           base02 = "d7d7d7"; # bg-active
@@ -66,7 +61,7 @@ in {
       modus-vivendi = {
         slug = "modus-vivendi";
         name = "Modus Vivendi";
-        colors = {
+        palette = {
           base00 = "000000"; # bg-main
           base01 = "191A1B"; # bg-alt
           base02 = "323232"; # bg-active

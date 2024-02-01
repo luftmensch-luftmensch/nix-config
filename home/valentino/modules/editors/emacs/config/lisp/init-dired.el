@@ -102,39 +102,38 @@
            '(:left (path) :right (free-space))
            dirvish-mode-line-format
            '(:left (sort file-time " " file-size symlink) :right (omit yank index))
-           dirvish-mode-line-format '(:left (sort symlink) :right (omit yank index))
            ;;dirvish-path-separators (list " " "  " " ⋗ ")
+           dirvish-mode-line-format '(:left (sort symlink) :right (omit yank index)))
 
-           ) 
+  (:bind-into dirvish-mode-map
+    "C-c f" #'dirvish-fd
+    "a" #'dirvish-quick-access
+    "." #'dired-create-empty-file
+    "f" #'dirvish-file-info-menu
+    "y" #'dirvish-yank-menu
+    "s" #'dirvish-quicksort ;; remapped `dired-sort-toggle-or-edit'
+    "v" #'dirvish-vc-menu ;; remapped `dired-view-file'
+    "q" #'dirvish-quit
+    "L" #'dirvish-history-go-forward
+    "H" #'dired-omit-mode
+    "m" #'dired-mark
+    "M" #'dirvish-mark-menu
+    "o" #'vb/dired-open-file
+    "TAB" #'dirvish-subtree-toggle
+
+    "M-f" #'dirvish-history-go-forward
+    "M-b" #'dirvish-history-go-backward
+    "M-l" #'dirvish-ls-switches-menu
+    "M-t" #'dirvish-layout-toggle
+    "M-s" #'dirvish-setup-menu
+    "M-e" #'dirvish-emerge-menu
+    "M-j" #'dirvish-fd-jump)
   (dirvish-override-dired-mode))
 
-;; TODO: Handle using bind-into
 (setup (:if-feature evil)
-  (evil-define-key 'normal dirvish-mode-map
-    (kbd "C-c f") #'dirvish-fd
-    (kbd "a")     #'dirvish-quick-access
-    (kbd ".")     #'dired-create-empty-file
-    (kbd "f")     #'dirvish-file-info-menu
-    (kbd "y")     #'dirvish-yank-menu
-    (kbd "h")     #'dired-up-directory
-    (kbd "l")     #'dired-find-file
-    (kbd "s")     #'dirvish-quicksort ;; remapped `dired-sort-toggle-or-edit'
-    (kbd "v")     #'dirvish-vc-menu ;; remapped `dired-view-file'
-    (kbd "q")     #'dirvish-quit
-    (kbd "L")     #'dirvish-history-go-forward
-    (kbd "H")     #'dired-omit-mode
-    (kbd "m")     #'dired-mark
-    (kbd "M")     #'dirvish-mark-menu
-    (kbd "o")     #'vb/dired-open-file
-    (kbd "TAB")   #'dirvish-subtree-toggle
-
-    (kbd "M-f")   #'dirvish-history-go-forward
-    (kbd "M-b")   #'dirvish-history-go-backward
-    (kbd "M-l")   #'dirvish-ls-switches-menu
-    (kbd "M-t")   #'dirvish-layout-toggle
-    (kbd "M-s")   #'dirvish-setup-menu
-    (kbd "M-e")   #'dirvish-emerge-menu
-    (kbd "M-j")   #'dirvish-fd-jump))
+  (:bind-into dirvish-mode-map
+    [remap evil-backward-char] #'dired-up-directory
+    [remap evil-forward-char] #'dired-find-file))
 
 (provide 'init-dired)
 ;;; init-dired.el ends here

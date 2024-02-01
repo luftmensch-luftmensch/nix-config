@@ -255,6 +255,11 @@
          "X" 'org-agenda-clock-cancel
          "]" 'org-agenda-manipulate-query-subtract))))
 
+(setup (:if-feature verb)
+  (:bind-into org-mode-map
+    [org-fold-reveal] 'verb-command-map))
+
+
 (setup (:pkg org-appear)
   (:autoload org-appear-mode)
   (:hook-into org-mode)

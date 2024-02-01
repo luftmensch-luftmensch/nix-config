@@ -10,7 +10,7 @@ with lib; let
   mod = "Mod4";
   mod1 = "Mod1";
   wallpaper_path = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
-  inherit (config.colorScheme) colors;
+  inherit (config.colorScheme) palette;
 in {
   config = mkIf (cfg.enable && (elem "sway" cfg.wm)) {
     wayland.windowManager.sway = {
@@ -20,7 +20,7 @@ in {
 
       config = let
         settings = import ./settings.nix {
-          inherit mod mod1 theme colors wallpaper_path pkgs;
+          inherit mod mod1 theme palette wallpaper_path pkgs;
         };
       in {
         bars = [{command = "waybar";}];
