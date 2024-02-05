@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
+
+# ugit: Undo git commands with ease. Powered by FZF
+
 set -uo pipefail;
 
+SCRIPT_NAME="$0"
 SCRIPT_URL="https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit"
-SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 TMP_FILE="/tmp/ugit.sh"
-VERSION="5.6"
+VERSION="5.8"
 
-pointer="👉"
+pointer=""
 BOLD_ORG_FG=$(tput bold)$(tput setaf 208)
 BOLD=$(tput bold)
 RESET=$(tput sgr0)
@@ -36,7 +39,9 @@ display_menu() {
 }
 
 perror() {
-    printf "\e[31m%b\e[0m" "$1"
+    printf "%s\n" "$(tput bold)$(tput setaf 196)ugit error${RESET}: $1"
+    printf "%s\n" "If you think this is a Ugit bug, please follow this link to report it:"
+    printf "%s\n" "${BOLD_ORG_FG}https://github.com/Bhupesh-V/ugit/issues/new?template=bug-report.yml${RESET}"
     exit
 }
 
@@ -44,10 +49,10 @@ undo_git_commit() {
     # undo last commit (don't unstage everything)
     # git reset --soft HEAD^
     commit=$(git log --color --oneline | fzf --ansi --height 80% \
-					     --reverse --multi --header="Choose commit to undo" \
-					     --preview "echo {} | cut -d' ' -f1 | xargs -I{} git show --color --pretty=format:%b {}" \
-					     --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-space:toggle-preview' --preview-window right:60% \
-		 | awk '{print $1}')
+        --reverse --multi --header="Choose commit to undo" \
+        --preview "echo {} | cut -d' ' -f1 | xargs -I{} git show --color --pretty=format:%b {}" \
+        --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-space:toggle-preview' --preview-window right:60% \
+        | awk '{print $1}')
 
     # exit if no commit selected
     [ -z "$commit" ] && exit
@@ -63,17 +68,20 @@ undo_git_commit() {
                 printf "%s\n" "Initial commit: $initial_commit successfully undone. Commit state is clean."
             else
                 perror "Error: Failed to revert initial commit"
+                exit
             fi
         elif git reset HEAD~; then
             printf "%s\n" "Commit: $last_commit successfully undone"
         else 
             perror "Failed to revert commit $last_commit"
+            exit
         fi
     elif git revert "$commit"; then
         printf "%s\n" "Commit: $commit successfully reverted. Check ${BOLD_ORG_FG}git status${RESET}"
     else 
         perror "Error: unable to perfom operation"
     fi
+
 }
 
 do_git_reset() {
@@ -83,12 +91,7 @@ do_git_reset() {
     # check if working tree is clean or not
     [[ $(git status --porcelain 2>/dev/null) != "" ]] && read -p "You have uncommited changes, still proceed? [Y/n]: " -n 1 -r USER_INPUT
     USER_INPUT=${USER_INPUT:-Y}
-
-    if [[ "${USER_INPUT}" == Y ]]; then
-	git reset --hard "$last_good_state" 
-    else
-	perror "Error: unable to perform reset operation"
-    fi
+    [[ "$USER_INPUT" == Y ]] && git reset --hard "$last_good_state" || perror "Error: unable to perform reset operation"
 }
 
 undo_git_add() {
@@ -110,12 +113,8 @@ change_commit_message() {
     printf "%s" "Enter New Commit Message (Ctrl+d to save):"
     msg=$(</dev/stdin)
     echo
-
-    if [ -n "$msg" ] && git commit --amend -m "$msg" ; then
-	printf "%s\n" "Remember to run ${BOLD_ORG_FG}git push -f <remoteName> <branchName>${RESET} if this was a pushed commit"
-    else
-	perror "Empty Commit string!"
-    fi
+    [[ "$msg" != "" ]] && git commit --amend -m "$msg" && printf "%s\n" "Remember to run ${BOLD_ORG_FG}git push -f <remoteName> <branchName>${RESET} if this was a pushed commit" \
+    || perror "Empty Commit string!"
 }
 
 undo_git_push() {
@@ -217,9 +216,9 @@ undo_git_stash_apply() {
             printf "%s\n" "Done 👍️"
         fi
     else
-        printf "%s\n" "Please change diff color to auto in .gitconfig & run ${SCRIPT_NAME} again"
+        perror "Undoing git stash apply failed"
+        printf "%s\n" "Please change diff color to auto in .gitconfig & run ugit again"
         printf "%s\n" "Or use the following command ${BOLD}git config --global color.diff \"auto\"${RESET}"
-        # perror "Undoing git stash apply failed"
     fi
 }
 
@@ -300,6 +299,7 @@ restore_file() {
 }
 
 undo_all() {
+    # TODO: Ask user for permanent deletion (use git clean for this)
     if [[ $(git status --porcelain 2>/dev/null) == "" ]]; then
         printf "%s\n" "Working history already clean 👌"
         exit
@@ -308,6 +308,7 @@ undo_all() {
     printf "%s\n" "Stashing current changes ..."
     read -p "Enter Stash Description (optional): " -r STASH_MSG
     if git stash save -au "${STASH_MSG}"; then
+        # TODO: only display this if there are untracked changes (new files)
         # printf "%s\n" "Note: Stashing untracked files might take some time, hold on"
         printf "%s\n" "Cleared all changes 👍️"
         printf "%s\n" "Run ${BOLD_ORG_FG}git stash apply${RESET} to redo changes or ${BOLD_ORG_FG}git stash drop${RESET} to remove them"
@@ -322,8 +323,9 @@ undo_git_tag() {
         printf "\nFetching tags from remote"
     else
         perror "Unable to fetch tags from remote.Please check repository access."
+        exit
     fi
-    tag=$(git tag | fzf --ansi --height 80% \
+    tag=$(git tag --sort=v:refname | fzf --ansi --height 80% \
         --reverse --multi --header="Choose a tag to remove" \
         --preview "echo {} | cut -d' ' -f1 | xargs -I{} git show --color --pretty=format:%b {}" \
         --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-space:toggle-preview' --preview-window right:60% )
@@ -416,17 +418,22 @@ check_deps() {
     fi
 }
 
-usage() {
-    printf "%s\n\n" "Usage: ${SCRIPT_NAME} [-h] [-v] [-u] [-g]"
-    printf "%s\n%s\n\n" "${SCRIPT_NAME} helps you undo git commands without much effort" "Just run '${SCRIPT_NAME}' and search for what you want to undo"
+show_version() {
+    printf "ugit version %s\n" "$VERSION"
+}
 
-    echo "Available options:"
-    echo "-h, --help      Print this help and exit"
-    echo "-v, --version   Print current ${SCRIPT_NAME} version"
-    echo "-u, --update    Update ${SCRIPT_NAME}"
-    echo "-g, --guide     Open ${SCRIPT_NAME} undo text guide"
-
-    printf "\n%s\n" "Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
+print_help() {
+    printf "Usage: %s [-h] [-v] [-u] [-g]\n" "ugit"
+    printf "ugit helps you undo git commands without much effort\n"
+    printf "Just run 'ugit' and search for what you want to undo\n\n"
+    printf "Available options:\n"
+    printf "  -h, --help      Print this help and exit\n"
+    printf "  -v, --version   Print current ugit version\n"
+    printf "  -u, --update    Update ugit\n"
+    printf "  -g, --guide     Open the ugit undo text guide\n\n"
+    printf "Contact 📬️: %s for assistance\n" "$(tput bold)varshneybhupesh@gmail.com${RESET}"
+    printf "Read the guide: %s\n" "https://til.bhupesh.me/git/how-to-undo-anything-in-git"
+    printf "Please give us a ⭐ if you liked ugit %s\n" "${BOLD_ORG_FG}https://github.com/Bhupesh-V/ugit${RESET}"
 }
 
 get_changelog() {
@@ -436,59 +443,97 @@ get_changelog() {
     printf "Read Full Changelog: %s\n" "${BOLD}${CHANGELOG}${RESET}"
 }
 
-check_update() {
+ugit_update() {
+    if [ -n "${UGIT_RUNNING_IN_DOCKER-}" ] && [ "$UGIT_RUNNING_IN_DOCKER" = true ]; then
+        printf "%s\n\n" "You are running version ${VERSION} of ugit via Docker. Please pull the latest docker image to update."
+        printf "\t%s\n" "${BOLD_ORG_FG}docker pull bhupeshimself/ugit${RESET}"
+        return
+    fi
+
     printf "%s\n" "Checking for updates ..."
     curl -s -L "$SCRIPT_URL" > "$TMP_FILE"
     NEW_VER=$(grep "^VERSION" "$TMP_FILE" | awk -F'[="]' '{print $3}')
 
     if [[ "$VERSION" < "$NEW_VER" ]]; then
-        printf "${SCRIPT_NAME} has a newer version! \e[31;1m%s\e[0m -> \e[32;1m%s\e[0m\n" "$VERSION" "$NEW_VER"
-        rm -r "$TMP_FILE"
+        printf "Updating ugit \e[31;1m%s\e[0m -> \e[32;1m%s\e[0m\n" "$VERSION" "$NEW_VER"
+        chmod +x "$TMP_FILE"
+        # WIP
+        if cp "$TMP_FILE" "$SCRIPT_NAME"; then printf "%s\n" "Done"; fi
+        rm -f "$TMP_FILE"
         get_changelog
     else
-        printf "%s\n" "${SCRIPT_NAME} is already at the latest version ($VERSION)"
+        printf "%s\n" "ugit is already at the latest version ($VERSION)"
         rm -f "$TMP_FILE"
     fi
     exit 0
 }
 
-header() {
-    printf "%s (%s)\n" "$(tput bold)What are we doing?" "$(tput setaf 238)Press ctrl+c to exit anytime${RESET}"
+open_guide() {
+    GUIDE="https://til.bhupesh.me/git/how-to-undo-anything-in-git"
+    
+    if [ -n "${UGIT_RUNNING_IN_DOCKER-}" ] && [ "$UGIT_RUNNING_IN_DOCKER" = true ]; then
+        printf "%s\n" "You can find how ugit does its magic at: ${BOLD_ORG_FG}${GUIDE}${RESET}"
+        return
+    fi
+
+    case "$OSTYPE" in
+        darwin*)
+            # MacOS
+            open $GUIDE;;
+        msys)
+            # Git Bash on Windows
+            start $GUIDE;;
+        linux*)
+            # Handle WSL on Windows
+            if uname -a | grep -i -q Microsoft; then
+                powershell.exe -NoProfile start $GUIDE
+            else
+                xdg-open > /dev/null 2>&1 $GUIDE
+            fi;;
+        *)
+            xdg-open > /dev/null 2>&1 $GUIDE;;
+    esac
 }
 
-is_inside_git() {
+header() {
+    printf "%s\n" "$(tput bold)Undo your last oopsie in Git 🙈️${RESET}"
+    printf "%s\n" "$(tput setaf 248)Press ctrl+c to exit anytime ${RESET}"
+}
+
+init_test() {
     # test if user is in a git directory or not
     if git rev-parse --git-dir > /dev/null 2>&1; then
-	# check if the current working directory is top level or not
-	[ "" != "$(git rev-parse --show-cdup)" ] && printf "ugit: %s\n" "Not inside top level dir $(git rev-parse --show-toplevel)"
+        # check if the current working directory is top level or not
+        [ "" != "$(git rev-parse --show-cdup)" ] && printf "ugit: %s\n" "Not inside top level dir $(git rev-parse --show-toplevel)"
     else
-	printf "%s\n" "Ummm, you are not inside a Git repo 😟"
-	exit
+        printf "%s\n" "Ummm, you are not inside a Git repo 😟"
+        exit
     fi
 }
 
 main() {
     if [[ $# -gt 0 ]]; then
-	local key="$1"
-	case "$key" in
-	    --version|-v)	
-		printf "${SCRIPT_NAME} version %s\n" "$VERSION";;
-	    --update|-u)
-		check_update;;
-	    --help|-h)
-		usage;;
-	    --guide|-g)
-		xdg-open > /dev/null 2>&1 "https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git" ;;
-	    *)
-		printf "%s\n" "ERROR: Unrecognized argument $key"
-		exit 1;;
-	esac
+        local key="$1"
+        case "$key" in
+            --version|-v)
+                show_version;;
+            --update|-u)
+                ugit_update;;
+            --help|-h)
+                print_help
+                exit;;
+            --guide|-g)
+                open_guide ;;
+            *)
+                printf "%s\n" "ERROR: Unrecognized argument $key"
+                exit 1;;
+        esac
     else
-	check_deps
-	is_inside_git
-	header
-	option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 50% --ansi --reverse "$pointer" --cycle | awk '{print $1}')
-	ugit_menu
+        check_deps
+        init_test
+        header
+        option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 50% --ansi --reverse "$pointer" --cycle | awk '{print $1}')
+        ugit_menu
     fi
 }
 

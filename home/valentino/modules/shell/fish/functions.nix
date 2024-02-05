@@ -234,4 +234,16 @@ pkgs: {
       home-manager switch --flake "$base_path/.#$USER@$hostname"
     '';
   };
+
+  # [net]work [u]sage: check network usage stats
+  netu = {
+    body = ''
+      set -l net_device (ip route | awk '/via/ {print $5}')
+      set -l transmitted (ifconfig "$net_device" | awk '/TX packets/ {print $6$7}')
+      set -l received (ifconfig "$net_device" | awk '/RX packets/ {print $6$7}')
+
+      printf "%s\n" "$(tput bold)🔼 TRANSMITTED $(tput sgr0): $transmitted"
+      printf "%s\n" "$(tput bold)🔽 RECEIVED    $(tput sgr0): $received"
+    '';
+  };
 }

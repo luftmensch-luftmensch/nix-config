@@ -1,5 +1,4 @@
 {
-  options,
   pkgs,
   config,
   lib,
@@ -74,6 +73,10 @@ in {
           untracked = "red";
           changed = "yellow";
         };
+      };
+      aliases = {
+        # Taken from https://bhupesh.me/git-cake-when-is-my-readme-birthday/
+        cake = "log --date=format:'%d %b %Y' --diff-filter=A --name-only --pretty='%n%C(yellow bold)🎂️ %ad%Creset by (%C(blue bold)%h%Creset)'";
       };
     };
 
