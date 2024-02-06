@@ -6,8 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.browsers.chromium;
-  cfgTheme = config.valentino.modules.themes;
-  cfgWayland = config.valentino.modules.wayland;
+  inherit (config.valentino.modules) themes wayland;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
   userChrome = ''
     * {
@@ -176,12 +175,12 @@ in {
     programs.firefox = {
       enable = true;
       package =
-        if cfgWayland.enable
+        if wayland.enable
         then pkgs.firefox-wayland
         else pkgs.firefox;
 
       profiles.default = {
-				inherit userChrome userContent;
+        inherit userChrome userContent;
         name = "Default";
         #                       Disable automatic downloading of OpenH264 codec
         #  1. https://support.mozilla.org/en-US/kb/how-stop-firefox-making-automatic-connections#w_media-capabilities
@@ -433,9 +432,9 @@ in {
           "findbar.highlightAll" = true;
 
           # FONTS
-          "font.name.monospace.x-western" = "${cfgTheme.font.regular.family}";
-          "font.name.sans-serif.x-western" = "${cfgTheme.font.regular.family}";
-          "font.name.serif-x-western" = "${cfgTheme.font.regular.family}";
+          "font.name.monospace.x-western" = "${themes.font.regular.family}";
+          "font.name.sans-serif.x-western" = "${themes.font.regular.family}";
+          "font.name.serif-x-western" = "${themes.font.regular.family}";
 
           # GEO Preference
           "geo.provider.network.url" = "https:#location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
@@ -619,7 +618,7 @@ in {
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
           ublock-origin
-					user-agent-string-switcher
+          user-agent-string-switcher
         ];
       };
     };

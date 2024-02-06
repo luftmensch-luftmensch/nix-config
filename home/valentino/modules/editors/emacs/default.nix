@@ -6,8 +6,8 @@
 }:
 with lib; let
   cfg = config.valentino.modules.editors.emacs;
-  cfgXorg = config.valentino.modules.xorg;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/editors/emacs/config";
+  inherit (config.valentino.modules) xorg;
 in {
   options.valentino.modules.editors.emacs = {
     enable = mkEnableOption "emacs and its configuration";
@@ -29,7 +29,7 @@ in {
       programs.emacs = {
         enable = true;
         package =
-          if cfgXorg.enable
+          if xorg.enable
           then pkgs.emacs29-gtk3
           else pkgs.emacs29-pgtk;
 
@@ -46,8 +46,6 @@ in {
             src = pkgs.fetchFromGitHub {
               owner = "zevlg";
               repo = "telega.el";
-              # rev = "304705fa007c3dae3c5d0c6dc66641ae783f0081";
-              # sha256 = "02yxjaxpf2f6pjg3ixw7jvx56x6lfh30mnsmiz1p2yi64kyllaan";
               rev = "0c5fb62b90a8ba2792036512ce4ea4c4bf359b63";
               sha256 = "0j77fcjyh735xm0sw8lzhza21qanidw88x0nn2sbvi8h8mymhna9";
             };

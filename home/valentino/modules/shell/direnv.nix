@@ -1,14 +1,11 @@
 {
-  options,
   config,
   lib,
   ...
 }:
 with lib; let
   cfg = config.valentino.modules.shell.direnv;
-  cfgBash = config.valentino.modules.shell.bash;
-  cfgZsh = config.valentino.modules.shell.zsh;
-  # cfgFish = config.valentino.modules.shell.fish;
+  inherit (config.valentino.modules.shell) bash zsh;
 in {
   options.valentino.modules.shell.direnv = {
     enable = mkEnableOption "direnv and extensions";
@@ -18,21 +15,15 @@ in {
     programs.direnv = {
       enable = true;
       enableBashIntegration =
-        if cfgBash.enable
+        if bash.enable
         then true
         else false;
       enableZshIntegration =
-        if cfgZsh.enable
+        if zsh.enable
         then true
         else false;
 
-      # enableFishIntegration =
-      #   if cfgFish.enable
-      #   then true
-      #   else false;
-      nix-direnv.enable = true; # better than lorri?
+      nix-direnv.enable = true;
     };
-
-    # services.lorri.enable = true;
   };
 }

@@ -6,8 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.editors.vscode;
-  cfgWayland = config.valentino.modules.wayland;
-  theme = config.valentino.modules.themes;
+	inherit (config.valentino.modules) themes wayland;
 in {
   options.valentino.modules.editors.vscode = with types; {
     enable = mkEnableOption "vscode";
@@ -56,9 +55,9 @@ in {
 
       keybindings = import ./keybindings.nix;
       userSettings = import ./settings.nix {
-        inherit theme;
+        inherit themes;
         zoomLevel =
-          if cfgWayland.enable
+          if wayland.enable
           then 1.5
           else 0;
       };

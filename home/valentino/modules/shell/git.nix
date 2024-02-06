@@ -35,9 +35,7 @@ in {
         ".DS_Store"
         ".DS_Store?"
       ];
-      # config = {
 
-      # };
       extraConfig = {
         core = {
           # avoid git status showing all your files as modified because of the

@@ -299,7 +299,6 @@ restore_file() {
 }
 
 undo_all() {
-    # TODO: Ask user for permanent deletion (use git clean for this)
     if [[ $(git status --porcelain 2>/dev/null) == "" ]]; then
         printf "%s\n" "Working history already clean 👌"
         exit
@@ -308,8 +307,6 @@ undo_all() {
     printf "%s\n" "Stashing current changes ..."
     read -p "Enter Stash Description (optional): " -r STASH_MSG
     if git stash save -au "${STASH_MSG}"; then
-        # TODO: only display this if there are untracked changes (new files)
-        # printf "%s\n" "Note: Stashing untracked files might take some time, hold on"
         printf "%s\n" "Cleared all changes 👍️"
         printf "%s\n" "Run ${BOLD_ORG_FG}git stash apply${RESET} to redo changes or ${BOLD_ORG_FG}git stash drop${RESET} to remove them"
     else

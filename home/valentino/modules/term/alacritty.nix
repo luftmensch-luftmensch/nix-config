@@ -5,7 +5,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.term.alacritty;
-  cfgTheme = config.valentino.modules.themes;
+  inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
 in {
   options.valentino.modules.term.alacritty = {
@@ -41,8 +41,8 @@ in {
 
         # Font configuration
         font = let
-          inherit (cfgTheme.font.term) family;
-          inherit (cfgTheme.font.term) size;
+          inherit (themes.font.term) family;
+          inherit (themes.font.term) size;
         in {
           normal = {
             inherit family;

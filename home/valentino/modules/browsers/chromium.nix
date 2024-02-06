@@ -1,12 +1,11 @@
 {
-  options,
   config,
   lib,
   ...
 }:
 with lib; let
   cfg = config.valentino.modules.browsers.chromium;
-  cfgWayland = config.valentino.modules.wayland;
+  inherit (config.valentino.modules) wayland;
 in {
   options.valentino.modules.browsers.chromium = {
     enable = mkEnableOption "chromium";
@@ -17,7 +16,7 @@ in {
       enable = true;
       commandLineArgs =
         # chrome://flags/#enable-webrtc-pipewire-capturer (Enable it to share entire screen)
-        if cfgWayland.enable
+        if wayland.enable
         then [
           "--enable-features=UseOzonePlatform"
           "--ozone-platform=wayland"

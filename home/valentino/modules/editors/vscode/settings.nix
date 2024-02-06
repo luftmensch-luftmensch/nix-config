@@ -1,5 +1,5 @@
 {
-  theme,
+  themes,
   zoomLevel ? 0,
 }: {
   "window.menuBarVisibility" = "toggle";
@@ -28,9 +28,9 @@
   "editor.smoothScrolling" = true;
   # Disable the annoying sticky scroll as it takes too much precious space for my taste
   "editor.stickyScroll.enabled" = false;
-  "editor.fontSize" = theme.font.regular.size + 6;
-  "editor.fontFamily" = "'${theme.font.regular.family}', 'monospace', monospace";
-  "terminal.integrated.fontFamily" = "'${theme.font.regular.family}', 'monospace', monospace";
+  "editor.fontSize" = themes.font.regular.size + 6;
+  "editor.fontFamily" = "'${themes.font.regular.family}', 'monospace', monospace";
+  "terminal.integrated.fontFamily" = "'${themes.font.regular.family}', 'monospace', monospace";
 
   "editor.renderFinalNewline" = "off";
   "workbench.startupEditor" = "none";

@@ -1,18 +1,17 @@
 {
-  options,
   config,
   lib,
   pkgs,
   ...
 }:
 with lib; let
-  cfgWayland = config.valentino.modules.wayland;
+  inherit (config.valentino.modules) wayland;
 in {
   options.valentino.modules.apps.swaync = {
     enable = mkEnableOption "swaync configuration";
   };
 
-  config = mkIf cfgWayland.enable {
+  config = mkIf wayland.enable {
     home.packages = with pkgs; [swaynotificationcenter];
 
     home.file = {

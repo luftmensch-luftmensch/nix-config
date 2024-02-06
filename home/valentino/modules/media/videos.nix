@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -7,8 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.media.videos;
-  cfgTheme = config.valentino.modules.themes;
-  # inherit (config.colorScheme) colors;
+  inherit (config.valentino.modules) themes;
 in {
   options.valentino.modules.media.videos = {
     enable = mkEnableOption "an option to watch videos";
@@ -24,8 +22,8 @@ in {
         osd-duration = 2500;
         # osd-status-msg = "'\${time-pos} / \${duration}\${?percent-pos: (\${percent-pos}%)}\${?frame-drop-count:\${!frame-drop-count==0: Dropped: \${frame-drop-count}}}\n\${?chapter:Chapter: \${chapter}}'";
 
-        osd-font = "${cfgTheme.font.term.family}";
-        osd-font-size = cfgTheme.font.term.size;
+        osd-font = "${themes.font.term.family}";
+        osd-font-size = themes.font.term.size;
         osd-border-size = 2;
 
         screenshot-format = "png";

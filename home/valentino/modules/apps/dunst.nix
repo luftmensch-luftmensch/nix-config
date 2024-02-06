@@ -6,8 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.apps.dunst;
-  cfgWayland = config.valentino.modules.wayland;
-  cfgTheme = config.valentino.modules.themes;
+  inherit (config.valentino.modules) wayland themes;
   inherit (config.colorScheme) palette;
 in {
   options.valentino.modules.apps.dunst = {
@@ -34,7 +33,7 @@ in {
           origin = "top-right";
           offset = let
             vMargin =
-              if cfgWayland.enable
+              if wayland.enable
               then "10"
               else "40";
           in "10x${vMargin}";
@@ -68,8 +67,8 @@ in {
 
           # Text
           font = let
-            fontName = cfgTheme.font.monospace.family;
-            fontSize = cfgTheme.font.monospace.size;
+            fontName = themes.font.monospace.family;
+            fontSize = themes.font.monospace.size;
           in "${fontName} ${toString fontSize}, Material Design Icons ${
             toString fontSize
           }";

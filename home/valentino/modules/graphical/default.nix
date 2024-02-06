@@ -5,13 +5,10 @@
   ...
 }:
 with lib; let
-  cfgXorg = config.valentino.modules.xorg;
-  cfgWayland = config.valentino.modules.wayland;
+  inherit (config.valentino.modules) wayland xorg;
 
   # Creative XOR operator :D
-  cfgExclusive =
-    (cfgXorg.enable || cfgWayland.enable)
-    && (!(cfgXorg.enable && cfgWayland.enable));
+  cfgExclusive = (xorg.enable || wayland.enable) && (!(xorg.enable && wayland.enable));
 
   # To get list of the font installed: (fc-list : family)
   # Valid font names https://github.com/NixOS/nixpkgs/blob/6ba3207643fd27ffa25a172911e3d6825814d155/pkgs/data/fonts/nerdfonts/shas.nix
@@ -47,7 +44,6 @@ with lib; let
     pavucontrol
     brightnessctl
     ffmpeg-full
-    # playerctl
     exiftool
     imagemagick
   ];

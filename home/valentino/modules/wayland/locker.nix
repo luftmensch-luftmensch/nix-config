@@ -6,10 +6,8 @@
 }:
 with lib; let
   cfg = config.valentino.modules.wayland.locker;
-  cfgSway = config.wayland.windowManager.sway;
-  cfgHyprland = config.wayland.windowManager.hyprland;
-
-  cfgTheme = config.valentino.modules.themes;
+	inherit (config.wayland.windowManager) sway hyprland;
+  inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
 in {
   options.valentino.modules.wayland.locker = {
@@ -23,7 +21,7 @@ in {
       settings = let
         transparent = "#00000000";
       in {
-        font = cfgTheme.font.regular.family;
+        font = themes.font.regular.family;
         datestr = "%a, %d-%M-%Y";
         effect-blur = "7x5";
         effect-vignette = "0.2:0.5";
@@ -93,7 +91,7 @@ in {
             command = "${swaylock}";
           }
         ]
-        ++ (optionals cfgSway.enable
+        ++ (optionals sway.enable
           [
             {
               timeout = 360;
@@ -101,7 +99,7 @@ in {
               resumeCommand = "${swaymsg} output * dpms on";
             }
           ])
-        ++ (optionals cfgHyprland.enable [
+        ++ (optionals hyprland.enable [
           {
             timeout = 360;
             command = "${hyprctl} dispatch dpms off";
@@ -112,10 +110,10 @@ in {
 
     systemd.user.services.swayidle.Install = {
       WantedBy =
-        (optionals cfgSway.enable [
+        (optionals sway.enable [
           "sway-session.target"
         ])
-        ++ (optionals cfgHyprland.enable [
+        ++ (optionals hyprland.enable [
           "hyprland-session.target"
         ]);
     };

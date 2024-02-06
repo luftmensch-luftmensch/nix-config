@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -7,36 +6,33 @@
 }:
 with lib; let
   cfg = config.valentino.modules.shell.extensions;
-  cfgBash = config.valentino.modules.shell.bash;
-  cfgZsh = config.valentino.modules.shell.zsh;
-  cfgTmux = config.valentino.modules.shell.tmux;
+  inherit (config.valentino.modules.shell) bash zsh tmux;
 in {
   options.valentino.modules.shell.extensions = {
-    enable = mkEnableOption "shell useful commands (e.g. bat, eza) ";
+    enable = mkEnableOption "shell useful commands (e.g. bat, eza)";
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    {
-      home.packages = with pkgs; [
-        fd # A much faster lternative to find
-        jq # command-line JSON processor
-      ];
-    }
-
-    {
-      # Blazing fast grep
-      programs.ripgrep = {
-        enable = true;
-        # arguments = [
-        #   "--max-columns=150"
-        #   "--max-columns-preview"
-        #   "--smart-case"
-        # ];
+  config = mkIf cfg.enable {
+    home = {
+      shellAliases = {
+        cat = "${pkgs.bat}/bin/bat";
+        rg = "${pkgs.ripgrep}/bin/rg -L";
       };
-    }
+      packages = with pkgs; [fd jq];
+    };
 
-    {
-      programs.bat = {
+    programs = {
+      # Blazing fast grep
+      ripgrep = {
+        enable = true;
+        arguments = [
+          # "--max-columns=150"
+          # "--max-columns-preview"
+          # "--smart-case"
+        ];
+      };
+
+      bat = {
         enable = true;
         config = {
           theme = "base16";
@@ -44,23 +40,10 @@ in {
         extraPackages = with pkgs.bat-extras; [batman batdiff batgrep];
       };
 
-      home.shellAliases = {
-        cat = "${pkgs.bat}/bin/bat";
-      };
-    }
-
-    {
       # A better alternative to boring ls
-      programs.eza = {
-        enable = true;
-        # enableAliases = true;
-        # git = true;
-        # icons = true;
-      };
-    }
+      eza.enable = true;
 
-    {
-      programs.fzf = {
+      fzf = {
         enable = true;
 
         defaultOptions = [
@@ -72,37 +55,33 @@ in {
         ];
 
         enableBashIntegration =
-          if cfgBash.enable
+          if bash.enable
           then true
           else false;
         enableZshIntegration =
-          if cfgZsh.enable
+          if zsh.enable
           then true
           else false;
 
         tmux.enableShellIntegration =
-          if cfgTmux.enable
+          if tmux.enable
           then true
           else false;
       };
-    }
 
-    {
-      programs.nix-index = {
+      nix-index = {
         enable = true;
         enableBashIntegration =
-          if cfgBash.enable
+          if bash.enable
           then true
           else false;
         enableZshIntegration =
-          if cfgZsh.enable
+          if zsh.enable
           then true
           else false;
       };
-    }
 
-    {
-      programs.htop = {
+      htop = {
         enable = true;
         settings = {
           sort_key = 46;
@@ -145,40 +124,12 @@ in {
           screen_tabs = 1;
           # header_layout=two_50_50;
           column_meters_0 = "LeftCPUs2 CPU Memory Swap NetworkIO DiskIO";
-          column_meter_modes_0 = [
-            1
-            1
-            1
-            1
-            2
-            2
-          ];
+          column_meter_modes_0 = [1 1 1 1 2 2];
           column_meters_1 = "RightCPUs2 Tasks LoadAverage Uptime Systemd System";
-          column_meter_modes_1 = [
-            1
-            2
-            2
-            2
-            2
-            2
-          ];
-
-          fields = [
-            0
-            48
-            17
-            18
-            38
-            39
-            40
-            2
-            46
-            47
-            49
-            1
-          ];
+          column_meter_modes_1 = [1 2 2 2 2 2];
+          fields = [0 48 17 18 38 39 40 2 46 47 49 1];
         };
       };
-    }
-  ]);
+    };
+  };
 }

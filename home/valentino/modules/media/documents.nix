@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.media.documents;
-  cfgTheme = config.valentino.modules.themes;
+  inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
 in {
   options.valentino.modules.media.documents = {
@@ -19,9 +19,7 @@ in {
       programs.zathura = {
         enable = true;
         options = {
-          font =
-            "${cfgTheme.font.term.family} "
-            + (toString cfgTheme.font.term.size);
+          font = "${themes.font.term.family} " + (toString themes.font.term.size);
 
           default-bg = "#${palette.base00}";
           default-fg = "#${palette.base01}";
@@ -82,7 +80,7 @@ in {
       };
 
       home.packages = with pkgs; [
-        pandoc  # General markup converter
+        pandoc # General markup converter
         poppler # A PDF rendering library
       ];
     })

@@ -514,9 +514,9 @@
 #+LATEX_HEADER: 				{{\color{primary!85!white}\Gobold\fontsize{72}{0}\selectfont Info}{\color{primary!70!white}\Gobold\fontsize{50}{0}\selectfont Point}};
 #+LATEX_HEADER:
 #+LATEX_HEADER: 			\node at ([yshift=-0.31cm, xshift=-0.170cm]0.77, 0.40) [align=center, anchor=north east, inner sep=0pt, outer sep=0pt]
-#+LATEX_HEADER: 				{\color{primary!10!black}\itshape\fontsize{18}{12}\selectfont\Gobold ID Gruppo: <TODO>};
+#+LATEX_HEADER: 				{\color{primary!10!black}\itshape\fontsize{18}{12}\selectfont\Gobold ID Gruppo: <GROUP-ID>};
 #+LATEX_HEADER: 			\node at ([yshift=-0.25cm, xshift=-0.125cm]0.77, 0.40) [align=center, anchor=north east, inner sep=0pt, outer sep=0pt]
-#+LATEX_HEADER: 				{\color{primary!85!white}\itshape\fontsize{18}{12}\selectfont\Gobold ID Gruppo: <TODO>};
+#+LATEX_HEADER: 				{\color{primary!85!white}\itshape\fontsize{18}{12}\selectfont\Gobold ID Gruppo: <GROUP-ID>};
 #+LATEX_HEADER:
 #+LATEX_HEADER: 			%% Authors
 #+LATEX_HEADER: 			% Author 1
