@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -28,15 +27,9 @@ in {
   config = mkIf cfg.enable {
     valentino.modules.browsers.chromium.enable = true;
 
-    home.packages = with pkgs; [
-			# To fix copy/paste enable the Legacy chat input from Settings
+    home.packages = [
+      # To fix copy/paste enable the Legacy chat input from Settings
       discord-chromium
-
-      # Enable again when WebRTC is hooked in Pipewire
-      # (discord-canary.override {
-      #   nss = pkgs.nss_latest;
-      #   withOpenASAR = true;
-      # })
     ];
   };
 }

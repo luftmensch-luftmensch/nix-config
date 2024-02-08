@@ -6,7 +6,9 @@
   pkgs,
   ...
 }: let
-  audio_cmd = "${pkgs.pulseaudio}/bin/pactl";
+  _pactl = "${pkgs.pulseaudio}/bin/pactl";
+	_pamixer = "${pkgs.pamixer}/bin/pamixer --get-volume";
+	_notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 800";
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
     inherit theme palette;
   };
@@ -23,11 +25,11 @@ in {
   };
 
   keybindings = {
-    F1 = "exec --no-startup-id ${audio_cmd} set-sink-volume @DEFAULT_SINK@ -10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
-    F2 = "exec --no-startup-id ${audio_cmd} set-sink-volume @DEFAULT_SINK@ +10% && echo $(${pkgs.pamixer}/bin/pamixer --get-volume) > $xob_sock";
+    F1 = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ -10% && echo $(${_pamixer}) > $xob_sock";
+    F2 = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ +10% && echo $(${_pamixer}) > $xob_sock";
 
-    F3 = "exec --no-startup-id ${audio_cmd} set-sink-mute @DEFAULT_SINK@ toggle && ${pkgs.libnotify}/bin/notify-send -r 1 -t 1000 -i audio-input-microphone -u low \"$(${audio_cmd} get-sink-mute @DEFAULT_SINK@ | grep -q 'no' && echo 'Unmuted' || echo 'Muted')\"";
-    F4 = "exec --no-startup-id ${audio_cmd} set-source-mute @DEFAULT_SOURCE@ toggle && ${pkgs.libnotify}/bin/notify-send -r 1 -t 1000 -i audio-input-microphone -u low \"$(${audio_cmd} get-source-mute @DEFAULT_SOURCE@ | grep -q 'no' && echo 'Mic unmuted' || echo 'Mic muted')\"";
+    F3 = "exec --no-startup-id ${_pactl} set-sink-mute @DEFAULT_SINK@ toggle && ${_notify} -i audio-input-microphone \"$(${_pactl} get-sink-mute @DEFAULT_SINK@ | grep -q 'no' && echo 'Unmuted' || echo 'Muted')\"";
+    F4 = "exec --no-startup-id ${_pactl} set-source-mute @DEFAULT_SOURCE@ toggle && ${_notify} -i audio-input-microphone \"$(${_pactl} get-source-mute @DEFAULT_SOURCE@ | grep -q 'no' && echo 'Mic unmuted' || echo 'Mic muted')\"";
 
     F7 = "exec playerctl-wrapper -p"; # Prev
     F8 = "exec playerctl-wrapper -x"; # Play/Pause
@@ -58,8 +60,8 @@ in {
     "${mod}+Shift+l" = "move right";
 
     # Splitting
-    "${mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile horizontally'";
-    "${mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile vertically'";
+    "${mod}+z" = "split v; exec ${_notify} -i computer 'Tile horizontally'";
+    "${mod}+v" = "split h; exec ${_notify} -i computer 'Tile vertically'";
 
     "${mod}+f" = "fullscreen toggle";
 
@@ -101,9 +103,9 @@ in {
     "${mod}+Shift+Tab" = "workspace prev";
 
     # Start mode
-    "${mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i video-display -t 1000 -u low \"Resize\"";
+    "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
 
-    "Print" = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
+    Print = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
     "${mod}+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t Alacritty -e fish";
     "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t floating_term -e fish";
 
@@ -121,7 +123,6 @@ in {
     "${mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
     "${mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
     "${mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
-    "${mod}+Shift+v" = "exec --no-startup-id ~/.local/bin/copy-to-clipboard";
     "${mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
   };
 

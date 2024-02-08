@@ -1,11 +1,11 @@
 {
   theme,
-	palette,
+  palette,
   pkgs,
 }: let
   _menu = "${pkgs.bemenu}/bin/bemenu -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}' -p '▶ Type: '";
   _scrot = "${pkgs.scrot}/bin/scrot";
-	_notify = "${pkgs.libnotify}/bin/notify-send -u low -t 700";
+  _notify = "${pkgs.libnotify}/bin/notify-send -u low -t 700";
 in
   pkgs.writeShellScriptBin "sus" ''
 

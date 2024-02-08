@@ -16,13 +16,13 @@ logout=" "
 
 logout() {
     if [[ "$DESKTOP_SESSION" =~ "qtile" ]]; then
-        execute_with_confirm "qtile cmd-obj -o cmd -f shutdown"
+        qtile cmd-obj -o cmd -f shutdown
     elif [[ "$DESKTOP_SESSION" =~ "i3" ]]; then
-        execute_with_confirm "i3-msg exit"
+        i3-msg exit
     elif [[ "$XDG_CURRENT_DESKTOP" =~ "sway" ]]; then
-        execute_with_confirm "swaymsg exit && systemctl stop --user sway-session.target"
+        swaymsg exit && systemctl stop --user sway-session.target
     elif [[ "$XDG_CURRENT_DESKTOP" =~ "Hyprland" ]]; then
-        execute_with_confirm "hyprctl dispatch -- exit && systemctl stop --user hyprland-session.target"
+        hyprctl dispatch -- exit && systemctl stop --user hyprland-session.target
     fi
 }
 

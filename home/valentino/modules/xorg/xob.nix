@@ -34,9 +34,9 @@ in {
 
             color = {
                 normal = {
-                    fg     = "#ffffff";
-                    bg     = "#00000090";
-                    border = "#ffffff";
+                    fg     = "#${palette.base06}";
+                    bg     = "#${palette.base00}";
+                    border = "#${palette.base06}";
                 };
                 alt = {
                     fg     = "#555555";

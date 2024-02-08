@@ -1,6 +1,5 @@
 {
   config,
-  options,
   lib,
   pkgs,
   ...
@@ -23,19 +22,19 @@ in {
     xsession.enable = true;
 
     home.packages = with pkgs; [
-      networkmanagerapplet     # NetworkManager control applet
+      networkmanagerapplet
       parcellite
       scrot
       xclip
       xdotool
 
-      xautolock # Fire  up programs  in case  of user  inactivity under X
-      xclip # Command line interface to X selections (clipboard)
-      xorg.xev # Print contents of X events
-      xorg.xkill # Kill a client by its X resource
-      xorg.xrdb # X server resource database utility
-      xss-lock # Use external locker as X screen saver
-      xfce.xfce4-screenshooter # Screenshoter utility
+      xautolock
+      xclip
+      xorg.xev
+      xorg.xkill
+      xorg.xrdb
+      xss-lock
+      xfce.xfce4-screenshooter
     ];
 
     home.file.".config/parcellite/parcelliterc" = {
