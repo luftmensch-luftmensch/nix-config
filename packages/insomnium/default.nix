@@ -4,13 +4,12 @@
   ...
 }: let
   pname = "insomnium";
-  version = "0.2.1-b";
+  version = "0.2.3-a";
   name = "${pname}-${version}";
 
   src = pkgs.fetchurl {
-    url = "https://github.com/ArchGPT/insomnium/releases/download/core%400.2.1-b/Insomnium.Core-${version}.AppImage";
-
-    sha256 = "0q4bdlj4sj6ggpmkyd6yvahjc0lwwmd247jrw545rx0x20fxil4f";
+    url = "https://github.com/ArchGPT/insomnium/releases/download/core%40${version}/Insomnium.Core-${version}.AppImage";
+    sha256 = "sha256-hFpAFxyoBtQPH+NPeQz9wjJSpyPm6yLfjXOQSomnoXE=";
   };
 in
   pkgs.appimageTools.wrapType1 rec {
