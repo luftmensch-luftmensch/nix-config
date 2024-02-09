@@ -1,6 +1,5 @@
 {
   config,
-  options,
   lib,
   pkgs,
   ...
@@ -36,7 +35,7 @@ in {
       #  ATTR{bInterfaceClass}!="00", ATTR{bInterfaceClass}!="03", ATTR{bInterfaceClass}!="09", \
       #  ATTR{bDeviceClass}!="00", ATTR{bDeviceClass}!="03", ATTR{bDeviceClass}!="09", \
       #  ATTR{power/control}="auto"
-      #SUBSYSTEM=="usb", TEST=="power/control", \
+      #  SUBSYSTEM=="usb", TEST=="power/control", \
       #  ENV{ID_USB_INTERFACES}!="", ENV{ID_USB_INTERFACES}!=":03*", ENV{ID_USB_INTERFACES}!=":09*" \
       #  ATTR{bDeviceClass}=="00", \
       #  ATTR{power/control}="auto"

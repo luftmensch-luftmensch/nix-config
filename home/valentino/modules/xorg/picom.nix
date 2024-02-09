@@ -89,27 +89,19 @@ in {
           "_GTK_FRAME_EXTENTS@:c"
         ];
 
-        wintypes = {
-          tooltip = {
-            fade = true;
-            shadow = true;
-            opacity = 0.75;
-            focus = true;
-            full-shadow = false;
-          };
-          dock = {
-            shadow = false;
-          };
-          dnd = {
-            shadow = false;
-          };
-          popup_menu = {
-            shadow = false;
-          };
-          dropdown_menu = {
-            shadow = false;
-          };
-        };
+				wintypes = {
+					tooltip = {
+						fade = true;
+						shadow = true;
+						opacity = 0.75;
+						focus = true;
+						full-shadow = false;
+					};
+					dock.shadow = false;
+					dnd.shadow = false;
+					popup_menu.shadow = false;
+					dropdown_menu.shadow = false;
+				};
 
         log-level = "warn";
       };

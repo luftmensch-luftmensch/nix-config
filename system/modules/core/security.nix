@@ -21,9 +21,8 @@
     };
     # Whether to enable the RealtimeKit system service, which hands out realtime scheduling priority to user processes on demand.
     # For example, the PulseAudio server uses this to acquire realtime priority.
-    rtkit = {
-      enable = true; # Recommended for pipewire
-    };
+    # Recommended for pipewire
+    rtkit.enable = true;
 
     # So we don't have to do this later...
     acme.acceptTerms = true;

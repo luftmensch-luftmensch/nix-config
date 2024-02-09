@@ -1,8 +1,14 @@
-pkgs: {
+pkgs: 
+let 
+_curl = "${pkgs.curl}/bin/curl";
+_docker = "${pkgs.docker}/bin/docker";
+_gpg = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve";
+_nmcli = "${pkgs.networkmanager}/bin/nmcli device";
+in
+{
   mkdir = "mkdir -p ";
   free = "free -gt";
   exe = "chmod +x ";
-  untar = "tar -zxvf ";
   rm = "rm -rf ";
 
   ",," = "cd ..";
@@ -12,20 +18,20 @@ pkgs: {
   q = "exit";
   ":q" = "exit";
 
-  ipe = "${pkgs.curl}/bin/curl ipinfo.io/ip";
-  myip = "${pkgs.curl}/bin/curl ipv4.icanhazip.com";
+  ipe = "${_curl} ipinfo.io/ip";
+  myip = "${_curl} ipv4.icanhazip.com";
 
-  weather = "${pkgs.curl}/bin/curl wttr.in/naples";
-  wttr = "${pkgs.curl}/bin/curl -s wttr.in/naples | head -n 7 | tail -n 6; printf '\n'"; # https://wttr.in/?format=%l++%m++%C+%c+%t+%w++%p
+  weather = "${_curl} wttr.in/naples";
+  wttr = "${_curl} -s wttr.in/naples | head -n 7 | tail -n 6; printf '\n'"; # https://wttr.in/?format=%l++%m++%C+%c+%t+%w++%p
 
-  utftest = "${pkgs.curl}/bin/curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt";
-  parrot = "${pkgs.curl}/bin/curl parrot.live";
-  rr = "${pkgs.curl}/bin/curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash";
+  utftest = "${_curl} https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt";
+  parrot = "${_curl} parrot.live";
+  rr = "${_curl} -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash";
 
   # LICENSE
-  gpl = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt";
-  agpl = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/agpl-3.0.txt";
-  mit = "${pkgs.curl}/bin/curl https://mit-license.org/license.txt";
+  gpl = "${_curl} https://www.gnu.org/licenses/gpl-3.0.txt";
+  agpl = "${_curl} https://www.gnu.org/licenses/agpl-3.0.txt";
+  mit = "${_curl} https://mit-license.org/license.txt";
 
   jctl = "journalctl -p 3 -xb";
   clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
@@ -88,9 +94,9 @@ pkgs: {
   cpuinfo = "watch -n .1 \"grep '^[c]pu MHz' /proc/cpuinfo\"";
 
   # ----------- Network ----------#
-  nmcon = "${pkgs.networkmanager}/bin/nmcli device wifi connect";
-  nmls = "${pkgs.networkmanager}/bin/nmcli device wifi list";
-  nmst = "${pkgs.networkmanager}/bin/nmcli device status";
+  nmcon = "${_nmcli} wifi connect";
+  nmls = "${_nmcli} wifi list";
+  nmst = "${_nmcli} device status";
 
   ip = "ip -color=auto -br";
   wifikey = "sudo grep -r \"^psk=\" /etc/NetworkManager/system-connections/";
@@ -100,9 +106,9 @@ pkgs: {
   sap = "systemd-analyze plot > systemd-analyze-user.svg";
 
   # Docker related
-  dcu = "${pkgs.docker}/bin/docker compose up -d";
-  dcd = "${pkgs.docker}/bin/docker compose down";
-  dps = "${pkgs.docker}/bin/docker ps";
+  dcu = "${_docker} compose up -d";
+  dcd = "${_docker} compose down";
+  dps = "${_docker} ps";
 
   # Misc
   vim = "nvim";
@@ -110,9 +116,9 @@ pkgs: {
 
   getpass = "${pkgs.openssl}/bin/openssl rand -base64 20";
   # verify signature for isos
-  gpg-check = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve --verify";
+  gpg-check = "${_gpg} --verify";
   # receive the key of a developer
-  gpg-retrieve = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve --receive-keys";
+  gpg-retrieve = "${_gpg} --receive-keys";
 
   adb-force-restart = "sudo adb kill-server; sudo adb start-server";
 }

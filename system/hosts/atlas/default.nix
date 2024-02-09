@@ -26,9 +26,7 @@
 
   # Hardware specifics
   hardware = {
-    cpu = {
-      intel.updateMicrocode = true; # lib.mkDefault config.hardware.enableRedistributableFirmware;
-    };
+    cpu.intel.updateMicrocode = true; # lib.mkDefault config.hardware.enableRedistributableFirmware;
 
     # nvidia = {
     #   package = config.boot.kernelPackages.nvidiaPackages.legacy_470; # beta

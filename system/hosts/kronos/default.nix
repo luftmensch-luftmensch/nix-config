@@ -33,9 +33,7 @@
 
   # Hardware specifics
   hardware = {
-    cpu = {
-      amd.updateMicrocode = true; # lib.mkDefault config.hardware.enableRedistributableFirmware;
-    };
+    cpu.amd.updateMicrocode = true; # lib.mkDefault config.hardware.enableRedistributableFirmware;
 
     opengl = {
       enable = true;

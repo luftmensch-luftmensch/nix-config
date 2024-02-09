@@ -21,10 +21,7 @@ _: {
       };
     };
 
-    credentials = {
-      ssh.enable = true;
-      # gpg.enable = true;
-    };
+    credentials.ssh.enable = true;
 
     dev = {
       adb.enable = true;
@@ -54,17 +51,12 @@ _: {
       udev-rules.enable = true;
       syncthing = {
         enable = true;
-        device-id = "7V7Y5YT-MOLUCYZ-434QHLQ-BJDAMRJ-Z2PDSSG-XKAQX4M-W3CONND-LHDWQQB";
+        id = "7V7Y5YT-MOLUCYZ-434QHLQ-BJDAMRJ-Z2PDSSG-XKAQX4M-W3CONND-LHDWQQB";
       };
     };
 
-    vpn = {
-      openvpn.enable = true;
-    };
+    vpn.openvpn.enable = true;
 
-    shell = {
-      bash.enable = true;
-      # fish.enable = true;
-    };
+    shell.bash.enable = true;
   };
 }

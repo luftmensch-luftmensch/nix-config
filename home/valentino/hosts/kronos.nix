@@ -1,9 +1,6 @@
 {pkgs, ...}: {
   valentino.modules = {
-    apps = {
-      api_tools.enable = true;
-      rofi.enable = true;
-    };
+    apps.rofi.enable = true;
 
     wayland = {
       enable = true;
@@ -46,9 +43,7 @@
     };
 
     media = {
-      documents = {
-        zathura.enable = true;
-      };
+      documents.zathura.enable = true;
       editing.enable = true;
       files = {
         filezilla.enable = true;

@@ -1,7 +1,5 @@
-
 {
   config,
-  options,
   lib,
   ...
 }:
@@ -13,12 +11,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-		services.fprintd = {
-			enable = true;
-		};
-		security.pam.services = {
-			# swaylock = {};
-			swaylock.fprintAuth = true;
-		};
+    services.fprintd = {
+      enable = true;
+    };
+    security.pam.services = {
+      swaylock.fprintAuth = true;
+    };
   };
 }

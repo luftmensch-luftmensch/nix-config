@@ -1,16 +1,15 @@
 {
   config,
-  options,
   lib,
   ...
 }:
 with lib; let
   cfg = config.system.modules.services.syncthing;
-  cfgUser = config.system.modules.core.user.username;
+  user = config.system.modules.core.user.username;
 in {
   options.system.modules.services.syncthing = {
     enable = mkEnableOption "Enable syncthing capabilities";
-    device-id = mkOption {
+    id = mkOption {
       type = types.str;
       default = "";
       description = lib.mdDoc ''
@@ -21,11 +20,13 @@ in {
 
   config = mkIf cfg.enable {
     services = {
-      syncthing = {
+      syncthing = let
+        dir = "/home/${user}/.config/syncthing";
+      in {
         enable = true;
-        user = cfgUser;
-        configDir = "/home/valentino/.config/syncthing";
-        dataDir = "/home/valentino/.config/syncthing";
+        inherit user;
+        configDir = dir;
+        dataDir = dir;
         openDefaultPorts = true; # TCP 22000 for transfer, UDP 21027 for discovery
 
         overrideFolders = true; # Purge folders not declaratively configured!
@@ -38,7 +39,7 @@ in {
               id = "POGJUQZ-LA6JNGT-T7VN6AL-ZYVOEGE-HHNDWPN-6SXXULO-IQKO7KQ-6HNPBQP"; # P30-PRO
             };
             nixos-device = {
-              id = cfg.device-id;
+              inherit (cfg) id;
             };
           };
           folders = {
@@ -55,12 +56,6 @@ in {
             };
           };
         };
-
-        # extraOptions = {
-        #   gui = {
-        #     theme = "black";
-        #   };
-        # };
       };
     };
   };

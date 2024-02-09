@@ -1,4 +1,9 @@
-pkgs: {
+pkgs: let
+  _git = "${pkgs.git}/bin/git";
+  _gs = "${pkgs.ghostscript}/bin/gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite";
+  _ffmpeg = "${pkgs.ffmpeg}/bin/ffmpeg";
+  _lualatex = "${pkgs.texliveTeTeX}/bin/lualatex -shell-escape --interaction=nonstopmode --file-line-error";
+in {
   fish_prompt = {
     body = ''
       set -l last_status $status
@@ -26,11 +31,9 @@ pkgs: {
   fish_right_prompt = {
     body = ''
       if test $CMD_DURATION
-           # Show duration of the last command in seconds
-           set duration (echo "$CMD_DURATION 1000" | awk '{printf "%.3fs", $1 / $2}')
-           echo $duration
-       end
-       echo " "
+        echo "$CMD_DURATION 1000" | awk '{printf "%.3fs", $1 / $2}'
+      end
+      echo " "
     '';
   };
 
@@ -49,13 +52,13 @@ pkgs: {
   # Adapted from: https://gist.github.com/junegunn/f4fca918e937e6bf5bad
   log = {
     body = ''
-      if ${pkgs.git}/bin/git rev-parse --git-dir > /dev/null 2>&1
-        ${pkgs.git}/bin/git log --graph --format="%C(auto)%h%d %s %C(white)%C(bold)%cr" --color=always | \
+      if ${_git} rev-parse --git-dir > /dev/null 2>&1
+        ${_git} log --graph --format="%C(auto)%h%d %s %C(white)%C(bold)%cr" --color=always | \
             fzf --ansi \
                 --reverse \
                 --tiebreak=index \
                 --no-sort \
-                --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || ${pkgs.git}/bin/git show --color=always $1; }; f {}' \
+                --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || ${_git} show --color=always $1; }; f {}' \
                 --bind "alt-j:preview-down,alt-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up" \
                 --bind "ctrl-m:execute:echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |  xargs -I % sh -c 'git show --color=always % | less -R'" \
                 --preview-window=right:60%
@@ -67,8 +70,8 @@ pkgs: {
     body = ''
       set -l green (set_color -o green)
       set -g normal (set_color normal)
-      if ${pkgs.git}/bin/git rev-parse --git-dir > /dev/null 2>&1
-         ${pkgs.git}/bin/git shortlog -sn --no-merges && echo -e "★ $green $(${pkgs.git}/bin/git rev-list --count HEAD) $normal commits so far"
+      if ${_git} rev-parse --git-dir > /dev/null 2>&1
+         ${_git} shortlog -sn --no-merges && echo -e "★ $green $(${_git} rev-list --count HEAD) $normal commits so far"
       end
     '';
   };
@@ -83,14 +86,14 @@ pkgs: {
 
   concatenate-pdf = {
     body = ''
-      ${pkgs.ghostscript}/bin/gs -dNOPAUSE -sDEVICE=pdfwrite -dBATCH -sOUTPUTFILE=(path change-extension "" $argv[1])_concatenated.pdf $argv[1]
+      ${_gs} -sOUTPUTFILE=(path change-extension "" $argv[1])_concatenated.pdf $argv[1]
     '';
   };
 
   # Adapted from: https://gist.github.com/ahmed-musallam/27de7d7c5ac68ecbd1ed65b6b48416f9
   pdf-compress = {
     body = ''
-      ${pkgs.ghostscript}/bin/gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dEmbedAllFonts=true -dSubsetFonts=true -dColorImageDownsampleType=/Bicubic -dColorImageResolution=144 -dGrayImageDownsampleType=/Bicubic -dGrayImageResolution=144 -dMonoImageDownsampleType=/Bicubic -dMonoImageResolution=144 -sOutputFile=(path change-extension "" $argv[1])_compressed.pdf $argv[1]
+      ${_gs} -q -dSAFER -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dEmbedAllFonts=true -dSubsetFonts=true -dColorImageDownsampleType=/Bicubic -dColorImageResolution=144 -dGrayImageDownsampleType=/Bicubic -dGrayImageResolution=144 -dMonoImageDownsampleType=/Bicubic -dMonoImageResolution=144 -sOutputFile=(path change-extension "" $argv[1])_compressed.pdf $argv[1]
     '';
   };
 
@@ -101,11 +104,11 @@ pkgs: {
         return
       else
         echo "1° round"
-        ${pkgs.texliveTeTeX}/bin/lualatex -shell-escape --interaction=nonstopmode --file-line-error "$argv[1]" > /dev/null 2>&1
+        ${_lualatex} "$argv[1]" > /dev/null 2>&1
         echo "2° round"
-        ${pkgs.texliveTeTeX}/bin/lualatex -shell-escape --interaction=nonstopmode --file-line-error "$argv[1]" > /dev/null 2>&1
+        ${_lualatex} "$argv[1]" > /dev/null 2>&1
         echo "3° round"
-        ${pkgs.texliveTeTeX}/bin/lualatex -shell-escape --interaction=nonstopmode --file-line-error "$argv[1]" > /dev/null 2>&1
+        ${_lualatex} "$argv[1]" > /dev/null 2>&1
         echo "DONE!"
         return
       end
@@ -135,38 +138,38 @@ pkgs: {
 
   ex = {
     body = ''
-       for file in $argv
-         if test -f $file
-           echo -s "Extracting " (set_color --bold blue) $file (set_color normal)
-           switch $file
-             case "*.tar"
-               tar -xvf $file
-             case "*.tar.bz2" "*.tbz2"
-               tar --bzip2 -xvf $file
-             case "*.tar.gz" "*.tgz"
-               tar --gzip -xvf $file
-             case "*.bz" "*.bz2"
-               bunzip2 $file
-             case "*.gz"
-               gunzip $file
-             case "*.rar"
-               unrar x $file
-             case "*.zip"
-               #unzip -uo $file -d (basename $file .zip)
-               unzip $file
-             case "*.Z"
-               uncompress $file
-             case "*.pax"
-               pax -r < $file
-      case "*.zstd"
-        unzstd $file
-             case '*'
-               echo "Extension not recognized, cannot extract $file"
-           end
-         else
-           echo "$file is not a valid file"
-         end
-       end
+      for file in $argv
+        if test -f $file
+          echo -s "Extracting " (set_color --bold blue) $file (set_color normal)
+          switch $file
+            case "*.tar"
+              tar -xvf $file
+            case "*.tar.bz2" "*.tbz2"
+              tar --bzip2 -xvf $file
+            case "*.tar.gz" "*.tgz"
+              tar --gzip -xvf $file
+            case "*.bz" "*.bz2"
+              bunzip2 $file
+            case "*.gz"
+              gunzip $file
+            case "*.rar"
+              unrar x $file
+            case "*.zip"
+              #unzip -uo $file -d (basename $file .zip)
+              unzip $file
+            case "*.Z"
+              uncompress $file
+            case "*.pax"
+              pax -r < $file
+            case "*.zstd"
+              unzstd $file
+            case '*'
+              echo "Extension not recognized, cannot extract $file"
+          end
+        else
+          echo "$file is not a valid file"
+        end
+      end
     '';
   };
 
@@ -192,7 +195,7 @@ pkgs: {
         echo "fcut {input} {start} {end} {output}"
         return 1
       end
-      ${pkgs.ffmpeg}/bin/ffmpeg -i "$argv[1]" -ss "$argv[2]"  -t "$argv[3]" -c:v copy -c:a copy "$argv[4]"
+      ${_ffmpeg} -i "$argv[1]" -ss "$argv[2]"  -t "$argv[3]" -c:v copy -c:a copy "$argv[4]"
     '';
   };
 
@@ -209,7 +212,7 @@ pkgs: {
       end
       echo file "$argv[1]" >> mylist.txt
       echo file "$argv[2]" >> mylist.txt
-      ${pkgs.ffmpeg}/bin/ffmpeg -f concat -safe 0 -i mylist.txt -c copy "$argv[3]" && rm mylist.txt
+      ${_ffmpeg} -f concat -safe 0 -i mylist.txt -c copy "$argv[3]" && rm mylist.txt
     '';
   };
 

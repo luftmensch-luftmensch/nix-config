@@ -1,6 +1,5 @@
 {
   config,
-  options,
   lib,
   ...
 }:
@@ -15,7 +14,7 @@ in {
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-      pinentryFlavor = "gnome3"; # Other possible values: "curses", "tty", "gtk2", "qt", "emacs"
+      pinentryFlavor = "gnome3";
     };
   };
 }

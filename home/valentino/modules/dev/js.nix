@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -14,15 +13,9 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # base
       nodejs
-
-      # Npm extra packages
       node2nix
-
       yarn
-
-      # Language server
       nodePackages.typescript-language-server
     ];
 

@@ -12,15 +12,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware.bluetooth = {
-      enable = true;
-      # settings = {
-      #   General = {
-      #     Experimental = true;
-      #   };
-      # };
-    };
-
+    hardware.bluetooth.enable = true;
     environment.systemPackages = [pkgs.bluez];
   };
 }

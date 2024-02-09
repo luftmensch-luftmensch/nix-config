@@ -9,6 +9,7 @@
   _pactl = "${pkgs.pulseaudio}/bin/pactl";
 	_pamixer = "${pkgs.pamixer}/bin/pamixer --get-volume";
 	_notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 800";
+	_alacritty = "${pkgs.alacritty}/bin/alacritty";
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
     inherit theme palette;
   };
@@ -106,8 +107,8 @@ in {
     "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
 
     Print = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
-    "${mod}+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t Alacritty -e fish";
-    "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty -t floating_term -e fish";
+    "${mod}+Return" = "exec --no-startup-id ${_alacritty} -t Alacritty -e fish";
+    "${mod}+Shift+Return" = "exec --no-startup-id ${_alacritty} -t floating_term -e fish";
 
     "${mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
 

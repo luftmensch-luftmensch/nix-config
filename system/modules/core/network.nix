@@ -1,13 +1,13 @@
-_: let
-  localRanges = [
-    {
-      from = 9000;
-      to = 9091;
-    }
-  ];
-in {
+_: {
   networking = {
-    firewall = {
+    firewall = let
+      localRanges = [
+        {
+          from = 9000;
+          to = 9091;
+        }
+      ];
+    in {
       enable = true;
       allowedTCPPortRanges = localRanges;
       allowedUDPPortRanges = localRanges;
@@ -29,13 +29,10 @@ in {
       wifi.powersave = true;
     };
   };
-  services = {
-    # DNS
-    resolved.enable = true;
 
-    # VPN
-    # tailscale.enable = true;
-  };
+  # DNS
+  services.resolved.enable = true;
+
   # Don't wait for network startup
   # https://old.reddit.com/r/NixOS/comments/vdz86j/how_to_remove_boot_dependency_on_network_for_a
   # systemd = {

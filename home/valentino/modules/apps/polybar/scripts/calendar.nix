@@ -1,7 +1,4 @@
-{pkgs}: let
-  #   current_date = "${pkgs.coreutils}/bin/date '+%a %d %B %Y'";
-  #   today = "${pkgs.coreutils}/bin/date '+%-d'";
-  #   body =
+pkgs: let
   _date = "${pkgs.coreutils}/bin/date";
   _tail = "${pkgs.coreutils}/bin/tail";
   _cal = "${pkgs.busybox}/bin/cal";

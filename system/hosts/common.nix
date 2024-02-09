@@ -1,6 +1,4 @@
 {pkgs, ...}: let
-  fs_options = ["autodefrag" "space_cache=v2" "noatime" "compress=zstd:3"];
-
   fs-diff = pkgs.writeShellScriptBin "fs-diff" ''
     #!/usr/bin/env bash
     # fs-diff.sh
@@ -70,7 +68,9 @@ in {
   };
 
   # An handy way to retrieve the corresponding label from UUID is using `blkid`
-  fileSystems = {
+  fileSystems = let
+    fs_options = ["autodefrag" "space_cache=v2" "noatime" "compress=zstd:3"];
+  in {
     "/" = {
       device = "/dev/disk/by-label/vault";
       fsType = "btrfs";

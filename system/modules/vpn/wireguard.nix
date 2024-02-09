@@ -1,6 +1,5 @@
 {
   config,
-  options,
   lib,
   pkgs,
   ...
@@ -56,7 +55,7 @@ in {
     };
 
     environment.systemPackages = [
-      pkgs.wireguard-tools # Tools for the WireGuard secure network tunnel (wg-quick...)
+      pkgs.wireguard-tools
     ];
   };
 }

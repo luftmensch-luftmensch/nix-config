@@ -1,9 +1,6 @@
 {pkgs, ...}: {
   valentino.modules = {
-    apps = {
-      api_tools.enable = true;
-      rofi.enable = true;
-    };
+    apps.rofi.enable = true;
 
     xorg = {
       enable = true;
@@ -46,9 +43,7 @@
     };
 
     media = {
-      documents = {
-        zathura.enable = true;
-      };
+      documents.zathura.enable = true;
       editing.enable = true;
       files = {
         filezilla.enable = true;
@@ -67,9 +62,7 @@
       videos.enable = true;
     };
 
-    term = {
-      alacritty.enable = true;
-    };
+    term.alacritty.enable = true;
 
     shell = {
       bash.enable = true;

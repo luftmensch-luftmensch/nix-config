@@ -12,7 +12,6 @@ with lib; let
 in {
   options.valentino.modules.apps.polybar = {
     enable = mkEnableOption "polybar configuration";
-    # monitor = with types; (oneOf (enum ["HDMI" "eDP1"]));
     temperature = mkOption {
       type = types.nullOr types.str;
       default = null;
@@ -39,9 +38,6 @@ in {
       in
         barConfig // moduleConfig;
 
-      # for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-      #     MONITOR=$m polybar --reload main &
-      # done
       script = ''
         polybar --reload main &
       '';

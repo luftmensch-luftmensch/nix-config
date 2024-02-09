@@ -20,11 +20,6 @@ in
 
     cliphist_db_location="$HOME/.cache/cliphist/db"
 
-    print_error() {
-        printf "\e[31m%b\e[0m" "$1"
-        printf "\n"
-    }
-
     chosen=$(printf '%s\n' "''${menu[@]}" | ${_menu} -p '▶ Choose an option: ' -W 0.2)
 
     select_item(){

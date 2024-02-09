@@ -21,10 +21,7 @@ _: {
       };
     };
 
-    credentials = {
-      ssh.enable = true;
-      # gpg.enable = true;
-    };
+    credentials.ssh.enable = true;
 
     dev = {
       adb.enable = true;
@@ -53,7 +50,7 @@ _: {
       udev-rules.enable = true;
       syncthing = {
         enable = true;
-        device-id = "6LMWCO4-HGJ5WVU-W3CKJYV-GLBR2KF-IMB6E7A-NKLI7ZF-SZ7N4YX-YBE26AN";
+        id = "6LMWCO4-HGJ5WVU-W3CKJYV-GLBR2KF-IMB6E7A-NKLI7ZF-SZ7N4YX-YBE26AN";
       };
       touchpad.enable = true;
     };
@@ -63,8 +60,6 @@ _: {
       wireguard.enable = true;
     };
 
-    shell = {
-      bash.enable = true;
-    };
+    shell.bash.enable = true;
   };
 }

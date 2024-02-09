@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   ...
@@ -17,9 +16,7 @@ in {
       layout = "it";
       libinput.enable = true;
       displayManager.defaultSession = "none+i3";
-      windowManager = {
-        i3.enable = true;
-      };
+      windowManager.i3.enable = true;
     };
   };
 }
