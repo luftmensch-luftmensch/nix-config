@@ -6,9 +6,10 @@
   wallpaper_path,
   pkgs,
 }: let
-  audio_cmd = "${pkgs.wireplumber}/bin/wpctl";
-  noti_cmd = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
-  bright_cmd = "${pkgs.brightnessctl}/bin/brightnessctl set";
+  _wpctl = "${pkgs.wireplumber}/bin/wpctl";
+  _notification-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
+	_notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 1000";
+  _brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl set";
 
   menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
 
@@ -43,20 +44,20 @@ in {
     # Recently wireplumber (v 0.4.11) added a few utilities for their wpctl tool. You can do:
     # set-volume and set-mute works with that helper, alternatively you can run wpctl status to get the ID.
     # Volume
-    XF86AudioRaiseVolume = "exec --no-startup-id ${audio_cmd} set-volume @DEFAULT_SINK@ 10%+ && ${audio_cmd} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
-    XF86AudioLowerVolume = "exec --no-startup-id ${audio_cmd} set-volume @DEFAULT_SINK@ 10%- && ${audio_cmd} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
-    XF86AudioMute = "exec --no-startup-id ${audio_cmd} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+    XF86AudioRaiseVolume = "exec --no-startup-id ${_wpctl} set-volume @DEFAULT_SINK@ 10%+ && ${_wpctl} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
+    XF86AudioLowerVolume = "exec --no-startup-id ${_wpctl} set-volume @DEFAULT_SINK@ 10%- && ${_wpctl} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
+    XF86AudioMute = "exec --no-startup-id ${_wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
-    XF86AudioMicMute = "exec --no-startup-id ${audio_cmd} set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ${pkgs.libnotify}/bin/notify-send -r 1 -t 1000 -i audio-input-microphone -u low \"$(${audio_cmd} get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo 'Mic Muted' || echo 'Mic Unmuted')\"";
+    XF86AudioMicMute = "exec --no-startup-id ${_wpctl} set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ${_notify} -i audio-input-microphone \"$(${_wpctl} get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo 'Mic Muted' || echo 'Mic Unmuted')\"";
 
     # BRIGHTNESS
-    XF86MonBrightnessUp = "exec ${bright_cmd} 5%+ | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
-    XF86MonBrightnessDown = "exec ${bright_cmd} 5%- | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
+    XF86MonBrightnessUp = "exec ${_brightnessctl} 5%+ | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
+    XF86MonBrightnessDown = "exec ${_brightnessctl} 5%- | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
 
     # Notification
-    XF86Messenger = "exec --no-startup-id ${noti_cmd}";
-    "${mod}+x" = "exec --no-startup-id ${noti_cmd}";
-    "${mod}+Shift+n" = "exec --no-startup-id ${noti_cmd}";
+    XF86Messenger = "exec --no-startup-id ${_notification-center}";
+    "${mod}+x" = "exec --no-startup-id ${_notification-center}";
+    "${mod}+Shift+n" = "exec --no-startup-id ${_notification-center}";
 
     "${mod}+q" = "kill";
     "${mod}+Shift+r" = "restart";
@@ -82,8 +83,8 @@ in {
     "${mod}+Shift+l" = "move right";
 
     # Splitting
-    "${mod}+z" = "split v; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile horizontally'";
-    "${mod}+v" = "split h; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i computer -t 600 -u low  'Tile vertically'";
+    "${mod}+z" = "split v; exec ${_notify} -i computer 'Tile horizontally'";
+    "${mod}+v" = "split h; exec ${_notify} -i computer 'Tile vertically'";
 
     "${mod}+f" = "fullscreen toggle";
 
@@ -125,7 +126,7 @@ in {
     "${mod}+Shift+Tab" = "workspace prev";
 
     # Start mode
-    "${mod}+r" = "mode resize; exec ${pkgs.libnotify}/bin/notify-send -r 1 -i video-display -t 1000 -u low \"Resize\"";
+    "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
 
     Print = "exec --no-startup-id ${pkgs.grim}/bin/grim -g  \"$(${pkgs.slurp}/bin/slurp)\" $(date +'%d-%m-%Y-%H:%M:%S').png";
 
@@ -384,7 +385,6 @@ in {
       {
         command = "inhibit_idle fullscreen";
         criteria = {
-          # Match all
           app_id = "chromium";
         };
       }
@@ -393,20 +393,20 @@ in {
 
   modes = {
     resize = {
-      "h" = "resize shrink width 10 px or 10 ppt";
-      "j" = "resize grow height 10 px or 10 ppt";
-      "k" = "resize shrink height 10 px or 10 ppt";
-      "l" = "resize grow width 10 px or 10 ppt";
+      h = "resize shrink width 10 px or 10 ppt";
+      j = "resize grow height 10 px or 10 ppt";
+      k = "resize shrink height 10 px or 10 ppt";
+      l = "resize grow width 10 px or 10 ppt";
 
       # same bindings, but for the arrow keys
-      "Left" = "resize shrink width 10 px or 10 ppt";
-      "Down" = "resize grow height 10 px or 10 ppt";
-      "Up" = "resize shrink height 10 px or 10 ppt";
-      "Right" = "resize grow width 10 px or 10 ppt";
+      Left = "resize shrink width 10 px or 10 ppt";
+      Down = "resize grow height 10 px or 10 ppt";
+      Up = "resize shrink height 10 px or 10 ppt";
+      Right = "resize grow width 10 px or 10 ppt";
 
       # back to normal: Enter or Escape or $mod+r
-      "Return" = "mode default";
-      "Escape" = "mode default";
+      Return = "mode default";
+      Escape = "mode default";
       "${mod}+r" = "mode default";
     };
   };

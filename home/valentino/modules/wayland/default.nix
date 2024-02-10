@@ -40,9 +40,6 @@ in {
     ];
 
     home.sessionVariables = {
-      # export QT_QPA_PLATFORMTHEME=qt5ct
-
-      # GDK_BACKEND = "wayland,x11";
       GDK_BACKEND = "wayland";
       XDG_SESSION_TYPE = "wayland";
       SDL_VIDEODRIVER = "wayland";
@@ -56,9 +53,6 @@ in {
       # WLR_RENDERER_ALLOW_SOFTWARE = "1";
     };
 
-    services = {
-      # easyeffects.enable = true;
-      pasystray.enable = true;
-    };
+    services.pasystray.enable = true;
   };
 }

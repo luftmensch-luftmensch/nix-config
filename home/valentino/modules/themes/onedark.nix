@@ -25,12 +25,12 @@ in {
       cursorTheme = let
         cursor =
           if cfg.darkTheme
-          then "Bibata-Modern-Ice"
-          else "Bibata-Modern-Classic";
+          then "Capitaine Cursors"
+          else "Capitaine Cursors";
       in {
         name = cursor;
         inherit (cfg.cursor) size;
-        package = pkgs.bibata-cursors;
+        package = pkgs.capitaine-cursors-themed;
       };
     };
 

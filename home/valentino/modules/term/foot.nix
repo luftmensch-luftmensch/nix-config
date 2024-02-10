@@ -35,8 +35,7 @@ in {
           font-bold-italic = "${family}:${toString size}";
         };
 
-        bell = {
-        };
+        bell = {};
 
         scrollback = {
           lines = 1000;
@@ -78,8 +77,7 @@ in {
           bright7 = "${palette.base05}";
         };
 
-        csd = {
-        };
+        csd = {};
 
         key-bindings = {
           scrollback-up-page = "Page_Up";
@@ -108,15 +106,13 @@ in {
           show-urls-copy = "Control+Shift+o";
         };
 
-        search-bindings = {
-        };
+        search-bindings = {};
 
         url-bindings = {
           toggle-url-visible = "t";
         };
 
-        mouse-bindings = {
-        };
+        mouse-bindings = {};
       };
     };
   };

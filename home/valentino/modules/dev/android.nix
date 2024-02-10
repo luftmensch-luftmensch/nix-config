@@ -13,9 +13,9 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      jmtpfs  # sudo jmtpfs -o allow_other ~/DIRECTORY
-      gphoto2 # digital camera software applications
-      scrcpy  # Display & control Android device
+      jmtpfs
+      gphoto2
+      scrcpy
     ];
   };
 }

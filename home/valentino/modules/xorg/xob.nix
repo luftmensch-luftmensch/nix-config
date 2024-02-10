@@ -13,9 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      xob
-    ];
+    home.packages = with pkgs; [xob];
 
     home.file.".config/xob/styles.cfg" = {
       enable = true;

@@ -11,14 +11,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.gpg = {
-      enable = true;
-    };
+    programs.gpg.enable = true;
 
     services.gpg-agent = {
       enable = true;
       enableSshSupport = true;
-      pinentryFlavor = "gnome3"; # Other possible values: "curses", "tty", "gtk2", "qt", "emacs"
+      pinentryFlavor = "gnome3";
     };
   };
 }

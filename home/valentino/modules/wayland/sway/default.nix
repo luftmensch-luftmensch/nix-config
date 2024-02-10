@@ -62,9 +62,7 @@ in {
           external_output = "HDMI-A-1";
         };
       };
-      apps = {
-        playerctl.enable = true;
-      };
+      apps.playerctl.enable = true;
     };
   };
 }

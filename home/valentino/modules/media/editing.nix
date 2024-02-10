@@ -13,8 +13,9 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      gimp-with-plugins # An image manipulation and paint program
-      darktable # Virtual lighttable and darkroom for photographers
+      darktable
+      gimp-with-plugins
+      inkscape-with-extensions
     ];
   };
 }

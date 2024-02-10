@@ -1,10 +1,7 @@
 {
-  b-cmd,
-  c-cmd,
-  n-cmd,
-  temp,
-  volume,
+  temperature,
   palette,
+	pkgs,
 }: {
   "module/tray" = {
     type = "internal/tray";
@@ -16,9 +13,11 @@
     tray-padding = 5;
     tray-scale = 1.0;
   };
-  "module/bctl" = {
+  "module/bctl" = let 
+		cmd = pkgs.callPackage ./scripts/bluetooth.nix {};
+	in {
     type = "custom/script";
-    exec = "${b-cmd}";
+    exec = "${cmd}/bin/bluetooth-ctl";
     tail = true;
     format-foreground = "${palette.base0D}";
     # label-maxlen = 55;
@@ -28,7 +27,7 @@
     type = "internal/date";
     interval = "1.0";
     time = "%H:%M";
-    format = "%{A1:${c-cmd}:}<label>%{A}";
+    format = "%{A1:${pkgs.xfce.orage}/bin/orage:}<label>%{A}";
     format-prefix = " ";
     format-prefix-font = 2;
     format-prefix-foreground = "#${palette.base08}";
@@ -54,7 +53,7 @@
     };
 
     ramp-volume-font = 2;
-    click-right = "${volume}";
+    click-right = "${pkgs.pavucontrol}/bin/pavucontrol";
   };
 
   "module/cpu" = {
@@ -77,7 +76,7 @@
   "module/temp" = {
     type = "internal/temperature";
     interval = 5;
-    hwmon-path = "${temp}";
+    hwmon-path = "${temperature}";
     format = "<label>";
     format-padding = 2;
     format-font = 2;
@@ -117,12 +116,14 @@
     label-maxlen = 35;
   };
 
-  "module/notifications" = {
+  "module/notifications" = let 
+		notify = "${pkgs.dunst}/bin/dunstctl";
+	in {
     type = "custom/script";
     tail = true;
     format-padding = 0;
-    click-left = "${n-cmd} set-paused toggle";
-    click-right = "${n-cmd} close-all";
-    exec = "if [[ \$(${n-cmd} is-paused) = false ]]; then echo ' '; else echo ' '; fi";
+    click-left = "${notify} set-paused toggle";
+    click-right = "${notify} close-all";
+    exec = "if [[ \$(${notify} is-paused) = false ]]; then echo ' '; else echo ' '; fi";
   };
 }

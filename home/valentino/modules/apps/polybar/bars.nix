@@ -1,4 +1,5 @@
 {
+  monitor,
   theme,
   palette,
 }: {
@@ -56,8 +57,7 @@
 
   "bar/main" = {
     "inherit" = "bar/configuration";
-    # FIXME: Hardcoded config
-    monitor = "HDMI1";
+    inherit monitor;
 
     modules-left = "i3 title";
     modules-right = "temp bctl volume cpu memory date notifications tray";

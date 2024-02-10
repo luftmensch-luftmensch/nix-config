@@ -17,7 +17,7 @@
   };
 
   home.packages = with pkgs; [
-    age # Modern encryption tool with small explicit keys
-    sops # editor of encrypted files
+    age
+    sops
   ];
 }

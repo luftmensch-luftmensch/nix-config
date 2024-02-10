@@ -7,9 +7,9 @@
   ...
 }: let
   _pactl = "${pkgs.pulseaudio}/bin/pactl";
-	_pamixer = "${pkgs.pamixer}/bin/pamixer --get-volume";
-	_notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 800";
-	_alacritty = "${pkgs.alacritty}/bin/alacritty";
+  _pamixer = "${pkgs.pamixer}/bin/pamixer --get-volume";
+  _notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 800";
+  _alacritty = "${pkgs.alacritty}/bin/alacritty";
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
     inherit theme palette;
   };
@@ -107,8 +107,8 @@ in {
     "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
 
     Print = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
-    "${mod}+Return" = "exec --no-startup-id ${_alacritty} -t Alacritty -e fish";
-    "${mod}+Shift+Return" = "exec --no-startup-id ${_alacritty} -t floating_term -e fish";
+    "${mod}+Return" = "exec --no-startup-id ${_alacritty} -t Alacritty";
+    "${mod}+Shift+Return" = "exec --no-startup-id ${_alacritty} -t floating_term";
 
     "${mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
 
@@ -129,20 +129,20 @@ in {
 
   modes = {
     resize = {
-      "h" = "resize shrink width 10 px or 10 ppt";
-      "j" = "resize grow height 10 px or 10 ppt";
-      "k" = "resize shrink height 10 px or 10 ppt";
-      "l" = "resize grow width 10 px or 10 ppt";
+      h = "resize shrink width 10 px or 10 ppt";
+      j = "resize grow height 10 px or 10 ppt";
+      k = "resize shrink height 10 px or 10 ppt";
+      l = "resize grow width 10 px or 10 ppt";
 
       # same bindings, but for the arrow keys
-      "Left" = "resize shrink width 10 px or 10 ppt";
-      "Down" = "resize grow height 10 px or 10 ppt";
-      "Up" = "resize shrink height 10 px or 10 ppt";
-      "Right" = "resize grow width 10 px or 10 ppt";
+      Left = "resize shrink width 10 px or 10 ppt";
+      Down = "resize grow height 10 px or 10 ppt";
+      Up = "resize shrink height 10 px or 10 ppt";
+      Right = "resize grow width 10 px or 10 ppt";
 
       # back to normal: Enter or Escape or $mod+r
-      "Return" = "mode default";
-      "Escape" = "mode default";
+      Return = "mode default";
+      Escape = "mode default";
       "${mod}+r" = "mode default";
     };
   };
@@ -160,9 +160,11 @@ in {
     {
       command = "nm-applet";
     }
+
     {
       command = "rm -f $xob_sock && mkfifo $xob_sock && tail -f $xob_sock | xob -t 700";
     }
+
     {
       command = "systemctl --user restart polybar";
       always = true;

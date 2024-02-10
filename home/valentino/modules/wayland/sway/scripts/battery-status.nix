@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+pkgs: let
   _acpi = "${pkgs.acpi}/bin/acpi -b";
   _notify = "${pkgs.libnotify}/bin/notify-send -t 1000 -u critical";
 in

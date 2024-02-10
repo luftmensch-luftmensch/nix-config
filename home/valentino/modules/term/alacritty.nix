@@ -98,17 +98,12 @@ in {
             blinking = "off";
           };
         };
-        shell = {
-          program = "fish";
-        };
+
+        shell.program = "fish";
 
         mouse = {
           hide_when_typing = false;
-          hints = {
-            launcher = {
-              program = "xdg-open";
-            };
-          };
+          hints.launcher.program = "xdg-open";
         };
 
         mouse_bindings = [

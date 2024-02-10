@@ -8,7 +8,7 @@ with lib; let
   cfg = config.valentino.modules.editors.android;
 in {
   options.valentino.modules.editors.android = {
-    enable = mkEnableOption "Android IDE and screen mirroring";
+    enable = mkEnableOption "Android IDE";
   };
 
   config = mkIf cfg.enable {

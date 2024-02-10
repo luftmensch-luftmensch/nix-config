@@ -13,6 +13,8 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+			# Since both gcc & clang provides a c++ binary to have both installed setting an high priority solves the issue
+			(hiPrio gcc)
       clang
       clang-tools
       bear
@@ -22,12 +24,10 @@ in {
       valgrind
       gdb
       gef
-      # gcc
       gnumake
     ];
 
     # Configuration specific for gdb
-    #
     home.file.".config/gdb/gdbinit" = {
       enable = true;
       text = ''

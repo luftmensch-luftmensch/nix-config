@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.editors.vscode;
-	inherit (config.valentino.modules) themes wayland;
+  inherit (config.valentino.modules) themes wayland;
 in {
   options.valentino.modules.editors.vscode = with types; {
     enable = mkEnableOption "vscode";
@@ -36,6 +36,7 @@ in {
           # Theming
           vscode-icons-team.vscode-icons
           viktorqvarfordt.vscode-pitch-black-theme
+          bierner.docs-view
         ]
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
