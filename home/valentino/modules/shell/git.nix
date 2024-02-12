@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.shell.git;
+	inherit (config.valentino.modules.editors) neovim;
   undo-git = pkgs.writeScriptBin "undo-git" (builtins.readFile ./scripts/undo-git.sh);
   git-blame-someone-else = pkgs.writeScriptBin "git-blame-someone-else" (builtins.readFile ./scripts/git-blame-someone-else.sh);
 in {
@@ -41,8 +42,7 @@ in {
           # avoid git status showing all your files as modified because of the
           # automatic EOL conversion done when cloning a Unix-based EOL Git repo to a Windows one
           autocrfl = false;
-          # FIXME: Hardcoded config
-          editor = "nvim";
+          editor = if neovim.enable then "nvim" else "";
         };
 
         init = {
@@ -54,8 +54,13 @@ in {
           stat = true;
         };
 
+        column = {
+          ui = "auto";
+        };
+
         branch = {
           autoSetupMerge = true;
+          sort = "-committerdate";
         };
 
         push = {
@@ -66,10 +71,25 @@ in {
           mnemonicPrefix = true;
         };
 
+        # https://git-scm.com/book/en/v2/Git-Tools-Rerere
+        rerere.enable = true;
+
         color.status = {
           added = "green";
           untracked = "red";
           changed = "yellow";
+        };
+
+        commit = {
+          gpgsign = true;
+        };
+
+        user = {
+          signingkey = "~/.ssh/id_homelab.pub";
+        };
+
+        gpg = {
+          format = "ssh";
         };
       };
       aliases = {

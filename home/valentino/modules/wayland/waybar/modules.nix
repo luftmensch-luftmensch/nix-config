@@ -1,4 +1,4 @@
-pkgs: let
+{pkgs, ...}: let
   # Function to simplify making waybar outputs
   # https://github.com/Misterio77/nix-config/blob/main/home/misterio/features/desktop/common/wayland-wm/waybar.nix
   jsonOutput = name: {

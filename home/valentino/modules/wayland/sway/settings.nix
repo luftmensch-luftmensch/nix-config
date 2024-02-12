@@ -8,7 +8,7 @@
 }: let
   _wpctl = "${pkgs.wireplumber}/bin/wpctl";
   _notification-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
-	_notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 1000";
+  _notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 1000";
   _brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl set";
 
   menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
@@ -17,6 +17,7 @@
   rws = pkgs.callPackage ./scripts/random-wallpaper.nix {
     inherit wallpaper_path;
   };
+
   bss = pkgs.callPackage ./scripts/battery-status.nix {};
 
   cms = pkgs.callPackage ./scripts/clipboard-manager.nix {
