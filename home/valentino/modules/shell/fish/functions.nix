@@ -222,12 +222,7 @@ in {
   update = {
     body = ''
       set -l base_path $HOME/nix-config
-      switch $argv
-        case "--flake"
-            nix flake update $base_path
-        case "*"
-          sudo nixos-rebuild switch --flake "$base_path/.#$hostname" -v -L --use-remote-sudo
-      end
+			sudo nixos-rebuild switch --flake "$base_path/.#$hostname" -v -L --use-remote-sudo
     '';
   };
 
