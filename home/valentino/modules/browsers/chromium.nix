@@ -24,6 +24,12 @@ in {
           "--enable-usermedia-screen-capturing"
         ]
         else ["--ozone-platform-hint=auto"];
+
+      extensions = [
+        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock
+        {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
+        {id = "iaiomicjabeggjcfkbimgmglanimpnae";} # tab manager
+      ];
     };
   };
 }

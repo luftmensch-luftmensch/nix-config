@@ -1,0 +1,34 @@
+#+TITLE: Custom ISO installer
+#+description: Create a custom prebuilt iso w/ btrfs support
+* Show GC roots
+#+begin_src bash
+nix-store --gc --print-roots | grep -v "<hostName>" | column -t | sort -k3 -k1
+#+end_src
+* List all packages
+#+begin_src bash
+nix-store -q --requisites /run/current-system | cut -d- -f2- | sort | uniq
+#+end_src
+
+You can add a ~wc -l~ at the end of the above command, but that will not be an accurate representation of your package count, as the same package can be repeated with different versions.
+* Find biggest packages
+#+begin_src bash
+nix path-info -hsr /run/current-system/ | sort -hrk2 | head -n10
+#+end_src
+* Find biggest closures (packages including dependencies)
+#+begin_src bash
+nix path-info -hSr /run/current-system/ | sort -hrk2 | head -n10
+#+end_src
+* Show package dependencies as tree
+~Assuming =hello= is in PATH~
+
+#+begin_src bash
+nix-store -q --tree $(realpath $(which hello))
+#+end_src
+* Show package dependencies including size
+#+begin_src bash
+nix path-info -hSr nixpkgs#hello
+#+end_src
+* Show the things that will change on reboot
+#+begin_src bash
+diff <(nix-store -qR /run/current-system) <(nix-store -qR  /run/booted-system)
+#+end_src

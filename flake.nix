@@ -39,7 +39,7 @@
     ### Handle persistent state on systems with ephemeral root storage ###
     impermanence.url = "github:nix-community/impermanence";
 
-		### Community-driven meta repository for Nix packages ###
+    ### Community-driven meta repository for Nix packages ###
     nur.url = "github:nix-community/NUR";
 
     ###      Atomic secret provisioning for NixOS based on sops      ###

@@ -35,6 +35,7 @@ in {
         volume-max = 115;
         volume = 90;
         save-position-on-quit = "yes";
+        osc = "no";
       };
       bindings = {
         "h" = "seek -10";
@@ -77,13 +78,9 @@ in {
         "Alt+s" = "screenshot each-frame";
         "DEL" = "script-binding osc/visibility";
       };
-      scripts = with pkgs; [
-        mpvScripts.mpris
-      ];
+      scripts = with pkgs.mpvScripts; [mpris thumbnail sponsorblock];
     };
 
-    home.packages = with pkgs; [
-      obs-studio
-    ];
+    home.packages = [pkgs.obs-studio];
   };
 }

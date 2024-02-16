@@ -1,11 +1,9 @@
-pkgs: 
-let 
-_curl = "${pkgs.curl}/bin/curl";
-_docker = "${pkgs.docker}/bin/docker";
-_gpg = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve";
-_nmcli = "${pkgs.networkmanager}/bin/nmcli device";
-in
-{
+pkgs: let
+  _curl = "${pkgs.curl}/bin/curl";
+  _docker = "${pkgs.docker}/bin/docker";
+  _gpg = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve";
+  _nmcli = "${pkgs.networkmanager}/bin/nmcli device";
+in {
   mkdir = "mkdir -p ";
   free = "free -gt";
   exe = "chmod +x ";
@@ -29,9 +27,11 @@ in
   rr = "${_curl} -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash";
 
   # LICENSE
-  gpl = "${_curl} https://www.gnu.org/licenses/gpl-3.0.txt";
-  agpl = "${_curl} https://www.gnu.org/licenses/agpl-3.0.txt";
-  mit = "${_curl} https://mit-license.org/license.txt";
+  gpl = "${_curl} https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
+  agpl = "${_curl} https://www.gnu.org/licenses/agpl-3.0.txt -o LICENSE";
+  mit = "${_curl} https://mit-license.org/license.txt -o LICENSE";
+
+  webcam = "ffplay /dev/video0";
 
   jctl = "journalctl -p 3 -xb";
   clear = "printf '\\033[2J\\033[3J\\033[1;1H'";

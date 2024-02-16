@@ -19,7 +19,7 @@ in {
         cppcheck
         nodePackages.bash-language-server
       ]
-      ++ (with inputs.neovim-flake.packages.x86_64-linux; [
+      ++ (with inputs.neovim-flake.packages.${pkgs.system}; [
         nvim
       ]);
   };
