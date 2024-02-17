@@ -1,11 +1,10 @@
-{ lib
-, stdenvNoCC
-, fetchzip
-, pkgs
-, util-linux
+{
+  lib,
+  stdenvNoCC,
+  fetchzip,
+  util-linux,
 }:
-
-stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation {
   pname = "phosphor-icons";
   version = "dev";
 
@@ -15,7 +14,7 @@ stdenvNoCC.mkDerivation rec {
     stripRoot = false;
   };
 
-  nativeBuildInputs = [ util-linux ];
+  nativeBuildInputs = [util-linux];
 
   installPhase = ''
     runHook preInstall
@@ -27,6 +26,6 @@ stdenvNoCC.mkDerivation rec {
   meta = {
     description = "Phosphor icons";
     homepage = "https://github.com/phosphor-icons/homepage";
-    maintainers = [ lib.maintainers.phosphor-icons ];
+    maintainers = [lib.maintainers.phosphor-icons];
   };
 }

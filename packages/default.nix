@@ -7,4 +7,7 @@
 
   rofi-powermenu = pkgs.callPackage ./rofi-powermenu {};
   theme-toggle = pkgs.callPackage ./theme-toggle {};
+
+  icomoon-feather-icons = pkgs.callPackage ./fonts/icomoon-feather-icon.nix {};
+  phosphor-icons = pkgs.callPackage ./fonts/phosphor.nix {};
 }

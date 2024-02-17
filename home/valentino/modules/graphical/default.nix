@@ -11,34 +11,28 @@ with lib; let
   cfgExclusive = (xorg.enable || wayland.enable) && (!(xorg.enable && wayland.enable));
 
   # To get list of the font installed: (fc-list : family)
-  # Valid font names https://github.com/NixOS/nixpkgs/blob/6ba3207643fd27ffa25a172911e3d6825814d155/pkgs/data/fonts/nerdfonts/shas.nix
   fonts = with pkgs; [
     font-awesome
     fira-code
-    monoid # https://larsenwork.com/monoid/
-
+    monoid
     (nerdfonts.override {fonts = ["Iosevka"];})
     iosevka-comfy.comfy
     source-code-pro
-    sarasa-gothic # A CJK programming font based on Iosevka and Source Han Sans
+    sarasa-gothic
     victor-mono
     cantarell-fonts
     scientifica
 
     # Micro$oft
     corefonts
-    # Noto
+
     noto-fonts
     noto-fonts-emoji
     noto-fonts-cjk-sans
 
     material-design-icons
     ibm-plex
-
-    # mononoki
-    # google-fonts
-    # roboto
-  ];
+  ] ++ [icomoon-feather-icons phosphor-icons];
 
   media = with pkgs; [
     pavucontrol
