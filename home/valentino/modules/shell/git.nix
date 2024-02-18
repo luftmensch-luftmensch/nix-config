@@ -38,7 +38,6 @@ in {
           ".DS_Store?"
         ];
 
-        delta.enable = true;
         extraConfig = {
           core = {
             # avoid git status showing all your files as modified because of the
@@ -101,7 +100,7 @@ in {
         aliases = {
           s = "status -sb";
           a = "add .";
-          commit = "commit -m";
+          c = "commit -m";
           undo = "reset HEAD~1 --mixed";
 
           # List all branches

@@ -22,7 +22,6 @@ in {
     xsession.enable = true;
 
     home.packages = with pkgs; [
-      networkmanagerapplet
       parcellite
       scrot
       xclip

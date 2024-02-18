@@ -11,28 +11,30 @@ with lib; let
   cfgExclusive = (xorg.enable || wayland.enable) && (!(xorg.enable && wayland.enable));
 
   # To get list of the font installed: (fc-list : family)
-  fonts = with pkgs; [
-    font-awesome
-    fira-code
-    monoid
-    (nerdfonts.override {fonts = ["Iosevka"];})
-    iosevka-comfy.comfy
-    source-code-pro
-    sarasa-gothic
-    victor-mono
-    cantarell-fonts
-    scientifica
+  fonts = with pkgs;
+    [
+      font-awesome
+      fira-code
+      monoid
+      (nerdfonts.override {fonts = ["Iosevka"];})
+      iosevka-comfy.comfy
+      source-code-pro
+      sarasa-gothic
+      victor-mono
+      cantarell-fonts
+      scientifica
 
-    # Micro$oft
-    corefonts
+      # Micro$oft
+      corefonts
 
-    noto-fonts
-    noto-fonts-emoji
-    noto-fonts-cjk-sans
+      noto-fonts
+      noto-fonts-emoji
+      noto-fonts-cjk-sans
 
-    material-design-icons
-    ibm-plex
-  ] ++ [icomoon-feather-icons phosphor-icons];
+      material-design-icons
+      ibm-plex
+    ]
+    ++ [icomoon-feather-icons phosphor-icons];
 
   media = with pkgs; [
     pavucontrol
@@ -68,6 +70,7 @@ with lib; let
     transmission-gtk
     cinnamon.nemo-with-extensions
     gnome.gnome-disk-utility
+    networkmanagerapplet
   ];
 in {
   config = {
