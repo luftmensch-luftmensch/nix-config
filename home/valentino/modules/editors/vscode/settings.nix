@@ -43,6 +43,7 @@
   "workbench.editor.enablePreview" = false;
   "security.workspace.trust.untrustedFiles" = "open";
   "update.mode" = "none";
+  "update.showReleaseNotes" = false;
   "editor.minimap.enabled" = false;
   "telemetry.telemetryLevel" = "off";
   "files.trimTrailingWhitespace" = true;
