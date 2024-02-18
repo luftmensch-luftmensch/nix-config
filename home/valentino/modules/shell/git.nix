@@ -98,15 +98,35 @@ in {
           };
         };
         aliases = {
-          s = "status -sb";
-          a = "add .";
-          c = "commit -m";
+          alias = "config --get-regexp alias\\.";
+          f = "fetch";
+          fuckit = "reset --hard";
+          d = "diff";
           undo = "reset HEAD~1 --mixed";
+          last = "!git log -1 HEAD --stat";
 
           # List all branches
+          b = "rev-parse --abbrev-ref HEAD";
           br = "branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
+          bra = "branch -vva";
+          cb = "create-branch";
+          db = "delete-branch";
+          bcontains = "branch -a --contains";
+          branches = "!git -c color.ui=always branch -a --sort=-committerdate | grep -Ev '(/HEAD|/(main|master))' | sed -r -e 's,^[\\* ]*,,' -e 's,remotes/[^/]+/,,'";
+
           # Taken from https://bhupesh.me/git-cake-when-is-my-readme-birthday/
           cake = "log --date=format:'%d %b %Y' --diff-filter=A --name-only --pretty='%n%C(yellow bold)🎂️ %ad%Creset by (%C(blue bold)%h%Creset)'";
+
+          clh = "! f() { git clone https://github.com/$1/$2.git ; }; f";
+          cls = "! f() { git clone git@github.com:$1/$2.git ; }; f";
+          refresh = "pull --rebase --autostash origin HEAD";
+
+          workon = "! f(){ git fetch && git checkout -b $1 origin/HEAD; }; f";
+          cleanup-merged = "!f(){ git fetch && git branch --merged | grep -v '* ' | xargs git branch --delete; }; f";
+          switch-branch = ''
+            !f() { [ $# -gt 0 ] && exec git switch "$@"; branch=$( git branches 2>/dev/null | fzf +s --no-multi --prompt 'branches» ' ) && git switch "$branch"; }; f
+          '';
+					wip = "!git commit -m \"WIP: Changes in $( echo $( git diff --cached --name-only ) )\"";
         };
       };
 

@@ -14,13 +14,11 @@ in {
   "...." = "cd ../../..";
   "....." = "cd ../../../..";
   q = "exit";
-  ":q" = "exit";
 
   ipe = "${_curl} ipinfo.io/ip";
   myip = "${_curl} ipv4.icanhazip.com";
 
-  weather = "${_curl} wttr.in/naples";
-  wttr = "${_curl} -s wttr.in/naples | head -n 7 | tail -n 6; printf '\n'"; # https://wttr.in/?format=%l++%m++%C+%c+%t+%w++%p
+  weather = "${_curl} -s wttr.in/naples?format=%l++%m++%C+%c+%t+%w++%p";
 
   utftest = "${_curl} https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt";
   parrot = "${_curl} parrot.live";
@@ -61,14 +59,14 @@ in {
   lll = "ls --header --git --classify --long --binary --group --time-style=long-iso --links --all --sort=name";
   tree = "ls -aT";
 
-  clone = "git clone";
-  commit = "git commit -m";
-  # gs = "git status -sb";
-  gf = "git fetch";
+  g = "git ";
+
+  gs = "git status -sb";
+  ga = "git add .";
   gp = "git pull";
-  gP = "git push origin";
-  # ga = "git add .";
-  # gr = "git reset --hard && git clean -fd";
+  gP = "git push";
+  gcm = "git commit -m";
+  gco = "git clone";
 
   git-diff = "git log --oneline --color=always | fzf --reverse -i --pointer=\"▶\"   --info=inline --border=rounded --cycle --ansi --preview=\"echo {} | cut -d ' ' -f 1 | xargs -I @ sh -c 'git log --pretty=medium -n 1 @; git diff @^ @' | bat --color=always\" | cut -d ' ' -f 1 | xargs git log --pretty=short -n 1";
 

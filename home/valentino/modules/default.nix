@@ -2,9 +2,7 @@
   valentino = {
     "global"                 = import ./global;
 
-    "apps/polybar"           = import ./apps/polybar;
     "apps/rofi"              = import ./apps/rofi;
-    "apps/swaync"            = import ./apps/swaync;
     "apps/dunst"             = import ./apps/dunst.nix;
     "apps/playerctl"         = import ./apps/playerctl.nix;
     "apps/discord"           = import ./apps/discord.nix;
@@ -62,6 +60,7 @@
 
     "wayland"                = import ./wayland;
     "wayland/sway"           = import ./wayland/sway;
+    "wayland/swaync"         = import ./wayland/swaync;
     "wayland/hyprland"       = import ./wayland/hyprland.nix;
     "wayland/locker"         = import ./wayland/locker.nix;
     "wayland/waybar"         = import ./wayland/waybar;
@@ -70,6 +69,7 @@
     "xorg/i3"                = import ./xorg/i3;
     "xorg/locker"            = import ./xorg/locker.nix;
     "xorg/picom"             = import ./xorg/picom.nix;
+    "xorg/polybar"           = import ./xorg/polybar;
     "xorg/xob"               = import ./xorg/xob.nix;
 
     "themes"                 = import ./themes;

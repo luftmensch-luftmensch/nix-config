@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.shell.fish;
-  inherit (config.valentino.modules.apps) polybar;
+  inherit (config.valentino.modules.xorg) polybar;
   inherit (config.valentino.modules.term) foot;
   inherit (config.valentino.modules) wayland;
   inherit (config.valentino.modules.shell) git;

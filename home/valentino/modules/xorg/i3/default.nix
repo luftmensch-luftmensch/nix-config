@@ -54,12 +54,15 @@ in {
       apps = {
         dunst.enable = true;
         playerctl.enable = true;
+      };
+
+      xorg = {
+				xob.enable = true;
         polybar = {
           enable = true;
           temperature = "/sys/class/thermal/thermal_zone2/temp";
         };
-      };
-      xorg.xob.enable = true;
+			};
     };
   };
 }

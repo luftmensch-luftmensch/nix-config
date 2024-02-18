@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.valentino.modules.apps.swaync;
+  cfg = config.valentino.modules.wayland.swaync;
   inherit (config.valentino.modules) wayland;
   inherit (config.colorScheme) palette;
   theme = config.valentino.modules.themes;
 in {
-  options.valentino.modules.apps.swaync = {
+  options.valentino.modules.wayland.swaync = {
     enable = mkEnableOption "swaync configuration";
     package = lib.mkPackageOption pkgs "swaynotificationcenter" {};
   };

@@ -5,11 +5,11 @@
   ...
 }:
 with lib; let
-  cfg = config.valentino.modules.apps.polybar;
+  cfg = config.valentino.modules.xorg.polybar;
   theme = config.valentino.modules.themes;
   inherit (config.colorScheme) palette;
 in {
-  options.valentino.modules.apps.polybar = {
+  options.valentino.modules.xorg.polybar = {
     enable = mkEnableOption "polybar configuration";
     monitor = mkOption {
       type = types.nullOr types.str;

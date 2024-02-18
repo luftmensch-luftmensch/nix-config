@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.wayland.locker;
-	inherit (config.wayland.windowManager) sway hyprland;
+  inherit (config.wayland.windowManager) sway hyprland;
   inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
 in {
