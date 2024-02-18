@@ -61,15 +61,14 @@ in {
   lll = "ls --header --git --classify --long --binary --group --time-style=long-iso --links --all --sort=name";
   tree = "ls -aT";
 
-  branch = "git branch";
   clone = "git clone";
   commit = "git commit -m";
-  gs = "git status -sb";
+  # gs = "git status -sb";
   gf = "git fetch";
   gp = "git pull";
   gP = "git push origin";
-  ga = "git add .";
-  gr = "git reset --hard && git clean -fd";
+  # ga = "git add .";
+  # gr = "git reset --hard && git clean -fd";
 
   git-diff = "git log --oneline --color=always | fzf --reverse -i --pointer=\"▶\"   --info=inline --border=rounded --cycle --ansi --preview=\"echo {} | cut -d ' ' -f 1 | xargs -I @ sh -c 'git log --pretty=medium -n 1 @; git diff @^ @' | bat --color=always\" | cut -d ' ' -f 1 | xargs git log --pretty=short -n 1";
 

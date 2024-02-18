@@ -5,27 +5,32 @@
   ...
 }:
 with lib; let
+  cfg = config.valentino.modules.apps.swaync;
   inherit (config.valentino.modules) wayland;
+  inherit (config.colorScheme) palette;
+  theme = config.valentino.modules.themes;
 in {
   options.valentino.modules.apps.swaync = {
     enable = mkEnableOption "swaync configuration";
+    package = lib.mkPackageOption pkgs "swaynotificationcenter" {};
   };
 
   config = mkIf wayland.enable {
-    home.packages = with pkgs; [swaynotificationcenter];
+    home.packages = [cfg.package];
 
-    home.file = {
-      "swaync-config" = {
-        source = ./config.json;
-        target = ".config/swaync/config.json";
+    home.file = let
+      schema = "${cfg.package}/etc/xdg/swaync/configSchema.json";
+      config = import ./config.nix {inherit schema;};
+      style = import ./style.nix {inherit theme palette;};
+    in {
+      ".config/swaync/config.json" = {
+        enable = true;
+        inherit (config) text;
       };
-      "swaync-style" = {
-        source = ./style.css;
-        target = ".config/swaync/style.css";
-      };
-      "swaync-scheme" = {
-        source = ./configSchema.json;
-        target = ".config/swaync/configSchema.json";
+
+      ".config/swaync/style.css" = {
+        enable = true;
+        inherit (style) text;
       };
     };
   };
