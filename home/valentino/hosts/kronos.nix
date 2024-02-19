@@ -54,10 +54,7 @@
           interface = "wlp3s0";
         };
       };
-      images = {
-        imv.enable = true;
-        feh.enable = true;
-      };
+      images.imv.enable = true;
       music.enable = true;
       videos.enable = true;
     };

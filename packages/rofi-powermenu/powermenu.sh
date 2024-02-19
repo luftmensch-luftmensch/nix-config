@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 
 # Configurations folder
-themes_dir="$HOME/.config/rofi/themes"
-theme="$themes_dir/powermenu"
+theme="$HOME/.config/rofi/themes/powermenu"
 
 uptime_command=$(uptime -p | sed -e 's/up //g')
 rofi_command="rofi -theme $theme"
 
 # Options
-shutdown=" "
-reboot=" "
-lock=""
+shutdown="󰐥"
+reboot="󰑓"
+lock="󰌾"
 suspend=" "
-logout=" "
+logout="󰍃"
 
 logout() {
     if [[ "$DESKTOP_SESSION" =~ "qtile" ]]; then

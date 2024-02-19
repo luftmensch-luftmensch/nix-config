@@ -59,10 +59,9 @@ in {
   lll = "ls --header --git --classify --long --binary --group --time-style=long-iso --links --all --sort=name";
   tree = "ls -aT";
 
-  g = "git ";
-
   gs = "git status -sb";
   ga = "git add .";
+  gf = "git fetch";
   gp = "git pull";
   gP = "git push";
   gcm = "git commit -m";

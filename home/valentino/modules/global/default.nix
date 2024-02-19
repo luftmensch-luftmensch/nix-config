@@ -25,12 +25,12 @@ in {
 
   programs.home-manager.enable = true;
 
+  # XDG_UTILS_DEBUG_LEVEL=3 xdg-mime query default <type>
   xdg = {
     mimeApps = {
       enable = true;
       associations.added = {
-        "image/png" = ["${image}"];
-        "image/jpeg" = ["${image}"];
+        # "image/png" = ["${image}"];
         "image/tiff" = ["${image}"];
         "image/svg+xml" = ["${image}"];
         "image/gif" = ["${video}"];
