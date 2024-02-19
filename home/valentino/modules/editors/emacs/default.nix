@@ -36,6 +36,7 @@ in {
         extraPackages = epkgs:
           with epkgs; [
             auctex
+            jinx
             pdf-tools
             treesit-grammars.with-all-grammars
             vterm
