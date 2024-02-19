@@ -92,8 +92,9 @@ in {
 
   # ----------- Network ----------#
   nmcon = "${_nmcli} wifi connect";
+  nmrs = "${_nmcli} wifi rescan";
   nmls = "${_nmcli} wifi list";
-  nmst = "${_nmcli} device status";
+  nmst = "${_nmcli} status";
 
   ip = "ip -color=auto -br";
   wifikey = "sudo grep -r \"^psk=\" /etc/NetworkManager/system-connections/";

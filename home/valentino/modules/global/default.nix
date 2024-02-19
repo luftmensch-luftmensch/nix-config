@@ -48,6 +48,7 @@ in {
       defaultApplications = {
         "image/png" = ["${image}"];
         "image/jpeg" = ["${image}"];
+        "image/jpg" = ["${image}"];
         "image/tiff" = ["${image}"];
         "image/svg+xml" = ["${image}"];
         "video/x-matroska" = ["${video}"];
