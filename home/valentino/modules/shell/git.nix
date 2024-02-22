@@ -98,7 +98,8 @@ in {
           };
         };
         aliases = {
-          alias = "config --get-regexp alias\\.";
+					aliases = "!git config --get-regexp '^alias\\.' | cut -c 7- | sed 's/ / = /'";
+          # alias = "config --get-regexp alias\\.";
           f = "fetch";
           fuckit = "reset --hard";
           d = "diff";
@@ -117,8 +118,8 @@ in {
           # Taken from https://bhupesh.me/git-cake-when-is-my-readme-birthday/
           cake = "log --date=format:'%d %b %Y' --diff-filter=A --name-only --pretty='%n%C(yellow bold)🎂️ %ad%Creset by (%C(blue bold)%h%Creset)'";
 
-          clh = "! f() { git clone https://github.com/$1/$2.git ; }; f";
-          cls = "! f() { git clone git@github.com:$1/$2.git ; }; f";
+          clh = "!f() { git clone $1 $(echo $1 | awk -F '/' '{print $4}'); }; f";
+          # cls = "! f() { git clone git@github.com:$1/$2.git ; }; f";
           refresh = "pull --rebase --autostash origin HEAD";
 
           workon = "! f(){ git fetch && git checkout -b $1 origin/HEAD; }; f";
@@ -126,7 +127,7 @@ in {
           switch-branch = ''
             !f() { [ $# -gt 0 ] && exec git switch "$@"; branch=$( git branches 2>/dev/null | fzf +s --no-multi --prompt 'branches» ' ) && git switch "$branch"; }; f
           '';
-					wip = "!git commit -m \"WIP: Changes in $( echo $( git diff --cached --name-only ) )\"";
+          wip = "!git commit -m \"WIP: Changes in $( echo $( git diff --cached --name-only ) )\"";
         };
       };
 

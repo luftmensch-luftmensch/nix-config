@@ -97,7 +97,7 @@ in {
     '';
   };
 
-  compile = {
+  build-pdf = {
     body = ''
       if [ -z "$argv" ];
         echo "No arguments supplied"
