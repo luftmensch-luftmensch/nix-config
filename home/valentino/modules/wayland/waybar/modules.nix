@@ -82,6 +82,8 @@ in {
     format-icons = {
       activated = " ";
       deactivated = " ";
+      # activated = " ";
+      # deactivated = " ";
     };
   };
 
