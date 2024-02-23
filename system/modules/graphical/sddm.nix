@@ -18,8 +18,8 @@ in {
         theme = "${(pkgs.fetchFromGitHub {
           owner = "luftmensch-luftmensch";
           repo = "sddm-theme";
-          rev = "32ae9e1aec7270290eeb6df6a1aaf7542b49793d";
-          sha256 = "1w187bgv6fflax39ag3ifglsdy33127vz3ssd8axslvsj375668y";
+          rev = "95821cca2b283a83325d46548c41d813dd09d8a1";
+          sha256 = "1j0gmvw4ys4brghixrg3x5kp11jdbmdnbgjnfinnr94am8bsb0kv";
         })}";
       };
     };
