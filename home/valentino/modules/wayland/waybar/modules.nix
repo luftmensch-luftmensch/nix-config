@@ -51,7 +51,9 @@ in {
     format = " {:%H:%M}";
     format-alt = " {:%A; %d %B, %Y}";
     # Fonts bigger than this does not display the full year calendar (Maybe for spacing reason?)
-    tooltip-format = "<span size='10pt'>{calendar}</span>";
+    # tooltip-format = "<small>\n<span size='10pt'>{calendar}</span></small>";
+    # tooltip-format = "<small>{calendar}</small>";
+    tooltip-format = "{calendar}";
     calendar = {
       mode = "month";
       # Count of months per row (Relevant for mode=year)

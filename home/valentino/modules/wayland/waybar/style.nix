@@ -123,8 +123,8 @@
     #battery,
     #pulseaudio,
     #network,
-    #idle_inhibitor,
-    #clock {
+    #clock,
+    #idle_inhibitor {
       padding: 0 10px;
       color: #${palette.base07};
       margin-top: 5px;

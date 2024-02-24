@@ -34,18 +34,18 @@
     "eu" '(elfeed-update :which-key "Elfeed - update")
 
     ;; EMMS
-    "a"  '(:ignore t :which-key "Music")
-    "a a" '(emms-play-directory :which-key "Play playlist")
-    "a s" '(emms-play-directory :which-key "Play/Pause")
-    "a x" '(emms-stop :which-key "Stop")
-    "a n" '(emms-next :which-key "Next track")
-    "a p" '(emms-previous :which-key "Previous track")
+    ;; "a"  '(:ignore t :which-key "Music")
+    ;; "a a" '(emms-play-directory :which-key "Play playlist")
+    ;; "a s" '(emms-play-directory :which-key "Play/Pause")
+    ;; "a x" '(emms-stop :which-key "Stop")
+    ;; "a n" '(emms-next :which-key "Next track")
+    ;; "a p" '(emms-previous :which-key "Previous track")
 
-    "s" '(vterm :which-key "Apri terminale")
+    "s" '(vterm :which-key "Open terminal")
 
     ;; Reload
-    "r" '(:ignore t :which-key "Reload")
-    "r r" '(config-reload :which-key "Reload")
+    ;; "r" '(:ignore t :which-key "Reload")
+    ;; "r r" '(config-reload :which-key "Reload")
 
     ;; Agenda
     "b"  '(:ignore t :which-key "Agenda")
