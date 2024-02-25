@@ -98,7 +98,7 @@ in {
           };
         };
         aliases = {
-					aliases = "!git config --get-regexp '^alias\\.' | cut -c 7- | sed 's/ / = /'";
+          aliases = "!git config --get-regexp '^alias\\.' | cut -c 7- | sed 's/ / = /'";
           # alias = "config --get-regexp alias\\.";
           f = "fetch";
           fuckit = "reset --hard";
@@ -128,6 +128,36 @@ in {
             !f() { [ $# -gt 0 ] && exec git switch "$@"; branch=$( git branches 2>/dev/null | fzf +s --no-multi --prompt 'branches» ' ) && git switch "$branch"; }; f
           '';
           wip = "!git commit -m \"WIP: Changes in $( echo $( git diff --cached --name-only ) )\"";
+          stats = ''
+            !f(){
+              default_since_date=$(date -d "1 week ago" +%Y-%m-%d); \
+              default_until_date=$(date +%Y-%m-%d); \
+              default_branch_name="$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD))"; \
+
+              read -rp "Since  [$default_since_date]: " since_date; \
+              since_date=''${since_date:-$default_since_date}; \
+
+              read -rp "Until  [$default_until_date]: " until_date; \
+              until_date=''${until_date:-$default_until_date}; \
+
+              read -rp "Branch [main]: " branch_name; \
+              branch_name=''${branch_name:-$default_branch_name}; \
+
+              days=$((($(date -d "$until_date" +%s) - $(date -d "$since_date" +%s)) / 86400 + 1)); \
+              git log --since="$since_date" --until="$until_date" --branches="$branch_name" --oneline --numstat "$branch_name" | awk \
+              -v days="$days" '$1 ~ /^[0-9]+$/ && $2 ~ /^[0-9]+$/ {; \
+                  added+=$1; \
+                  deleted+=$2; \
+                } END {; \
+                print "\nFrom " "'"$since_date"'" " to " "'"$until_date"'" " (" days " days)\n"; \
+                print "🟢 Added lines:   " added; \
+                print "🔴 Deleted lines: " deleted "\n"; \
+                if (days > 0) {; \
+                  print "🚀 Average lines changed per day: " (added+deleted)/days; \
+                }; \
+              }';\
+            }; f
+          '';
         };
       };
 
