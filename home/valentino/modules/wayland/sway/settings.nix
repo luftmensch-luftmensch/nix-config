@@ -2,6 +2,8 @@
   mod,
   mod1,
   theme,
+  default_output,
+  external_output,
   palette,
   wallpaper_path,
   pkgs,
@@ -156,53 +158,53 @@ in {
     # Laptop
     {
       workspace = "1";
-      output = "$laptop";
+      output = default_output;
     }
 
     {
       workspace = "3";
-      output = "$laptop";
+      output = default_output;
     }
 
     {
       workspace = "5";
-      output = "$laptop";
+      output = default_output;
     }
 
     {
       workspace = "7";
-      output = "$laptop";
+      output = default_output;
     }
 
     {
       workspace = "9";
-      output = "$laptop";
+      output = default_output;
     }
 
     # Monitor
     {
       workspace = "2";
-      output = "$monitor";
+      output = external_output;
     }
 
     {
       workspace = "4";
-      output = "$monitor";
+      output = external_output;
     }
 
     {
       workspace = "6";
-      output = "$monitor";
+      output = external_output;
     }
 
     {
       workspace = "8";
-      output = "$monitor";
+      output = external_output;
     }
 
     {
       workspace = "0";
-      output = "$monitor";
+      output = external_output;
     }
   ];
 
@@ -439,11 +441,11 @@ in {
   };
 
   output = {
-    "$laptop" = {
+    default_output = {
       res = "1920x1080  position 0,0";
     };
 
-    "$monitor" = {
+    external_output = {
       res = "1920x1080  position 1920,0";
     };
   };

@@ -61,7 +61,7 @@
             },
             {
               "label": "",
-              "command": "swaync-client -cp && emacs-daemon"
+              "command": "swaync-client -cp && emacsclient -c"
             },
             {
               "label": "",

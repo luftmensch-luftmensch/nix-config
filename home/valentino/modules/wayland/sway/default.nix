@@ -9,6 +9,8 @@ with lib; let
   theme = config.valentino.modules.themes;
   mod = "Mod4";
   mod1 = "Mod1";
+  default_output = "eDP-1";
+  external_output = "HDMI-A-1";
   wallpaper_path = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
   inherit (config.colorScheme) palette;
 in {
@@ -20,7 +22,7 @@ in {
 
       config = let
         settings = import ./settings.nix {
-          inherit mod mod1 theme palette wallpaper_path pkgs;
+          inherit mod mod1 default_output external_output theme palette wallpaper_path pkgs;
         };
       in {
         bars = [{command = "waybar";}];
@@ -33,13 +35,11 @@ in {
         focus.followMouse = true;
 
         workspaceAutoBackAndForth = true;
-        inherit (settings) input keybindings modes workspaceOutputAssign window startup gaps fonts;
+        inherit (settings) input output keybindings modes workspaceOutputAssign window startup gaps fonts;
       };
 
       extraConfig = ''
         set {
-          $laptop eDP-1
-          $monitor HDMI-A-1
           $externalmonitor DP-5
           $opacity 0.9
           # Wob - Overlay volume/backlight/progress/anything bar for Wayland
@@ -58,8 +58,8 @@ in {
         locker.enable = true;
         waybar = {
           enable = true;
-          default_output = "eDP-1";
-          external_output = "HDMI-A-1";
+          inherit default_output;
+          inherit external_output;
         };
       };
       apps.playerctl.enable = true;

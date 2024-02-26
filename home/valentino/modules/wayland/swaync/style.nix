@@ -5,14 +5,6 @@
 }: {
   # TODO: Complete configuration
   text = ''
-    @define-color noti-bg rgb(48, 48, 48);
-    @define-color noti-bg-hover rgb(56, 56, 56);
-    @define-color noti-bg-focus rgba(68, 68, 68, 0.6);
-    @define-color noti-close-bg rgba(255, 255, 255, 0.1);
-    @define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
-
-    @define-color bg-selected rgb(0, 128, 255);
-
     * {
       border: none;
       border-radius: 0;
@@ -27,7 +19,7 @@
 
     .notification-row:focus,
     .notification-row:hover {
-      background: @noti-bg-focus;
+      background: #${palette.base02};
     }
 
     .notification {
@@ -49,7 +41,7 @@
     }
 
     .close-button {
-      background: @noti-close-bg;
+      background: #${palette.base04};
       color: white;
       text-shadow: none;
       padding: 0;
@@ -64,7 +56,7 @@
 
     .close-button:hover {
       box-shadow: none;
-      background: @noti-close-bg-hover;
+      background: #${palette.base08};
       transition: all 0.15s ease-in-out;
       border: none;
     }
@@ -74,7 +66,7 @@
       padding: 4px;
       margin: 0;
       box-shadow: none;
-      background: @noti-bg;
+      background: #${palette.base00};
       border: 1px solid #${palette.base01};
       color: white;
     }
@@ -82,7 +74,7 @@
     .notification-default-action:hover,
     .notification-action:hover {
       -gtk-icon-effect: none;
-      background: @noti-bg-hover;
+      background: #${palette.base01};
     }
 
     .notification-default-action {
@@ -183,13 +175,13 @@
       font-size: initial;
       color: white;
       text-shadow: none;
-      background: @noti-bg;
+      background: #${palette.base00};
       border: 1px solid #${palette.base00};
       box-shadow: none;
       border-radius: 12px;
     }
     .widget-title > button:hover {
-      background: @noti-bg-hover;
+      background: #${palette.base01};
     }
 
     /* DND widget */
@@ -200,15 +192,15 @@
     .widget-dnd > switch {
       font-size: initial;
       border-radius: 12px;
-      background: @noti-bg;
+      background: #${palette.base00};
       border: 1px solid #${palette.base01};
       box-shadow: none;
     }
     .widget-dnd > switch:checked {
-      background: @bg-selected;
+      background: #${palette.base0D};
     }
     .widget-dnd > switch slider {
-      background: @noti-bg-hover;
+      background: #${palette.base01};
       border-radius: 12px;
     }
 
@@ -238,12 +230,12 @@
     /* Menubar widget */
     .widget-menubar>box{
       border-radius: 4px 4px 0px 0px;
-      background-color: @noti-bg;
+      background-color: #${palette.base00};
     }
 
     .widget-menubar>box>.menu-button-bar>button{
       border: 1px solid #${palette.base01};
-      background: @noti-bg;
+      background: #${palette.base00};
       border-radius: 4px;
       margin: 4px 30px 4px;
       font-size: 30px;
@@ -257,7 +249,7 @@
     /* Volume widget */
 
     .widget-volume {
-      background-color: @noti-bg;
+      background-color: #${palette.base00};
       padding: 8px;
       margin: 8px;
       border-radius: 12px;
@@ -278,7 +270,7 @@
 
     /* Backlight widget */
     .widget-backlight {
-      background-color: @noti-bg;
+      background-color: #${palette.base00};
       padding: 8px;
       margin: 8px;
       border-radius: 12px;
@@ -294,31 +286,31 @@
       font-size: initial;
       color: white;
       text-shadow: none;
-      background: @noti-bg;
+      background: #${palette.base00};
       border: 1px solid #${palette.base01};
       box-shadow: none;
       border-radius: 12px;
     }
     .widget-inhibitors > button:hover {
-      background: @noti-bg-hover;
+      background: #${palette.base01};
     }
 
     .widget-buttons-grid{
       padding: 8px;
       margin: 20px 10px 10px;
       border-radius: 12px;
-      background-color: @noti-bg;
+      background-color: #${palette.base00};
       font-size: 35px;
     }
 
     .widget-buttons-grid>flowbox>flowboxchild>button{
-      background: @noti-bg;
+      background: #${palette.base00};
       border-radius: 12px;
       margin: 3px;
     }
 
     .widget-buttons-grid>flowbox>flowboxchild>button:hover {
-      background: @noti-bg-hover;
+      background: #${palette.base01};
     }
 
     .screenshot-buttons,
@@ -342,7 +334,7 @@
     .screencast-buttons>button:hover,
     .powermode-buttons>button:hover,
     .power-buttons>button:hover{
-      background: @noti-bg-hover;
+      background: #${palette.base01};
     }
   '';
 }
