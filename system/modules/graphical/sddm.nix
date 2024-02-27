@@ -27,7 +27,7 @@ in {
     environment.systemPackages = with pkgs.libsForQt5.qt5; [
       qtgraphicaleffects
       qtsvg
-      qtquickcontrols2
+      # qtquickcontrols2 # already included with SDDM
     ];
   };
 }

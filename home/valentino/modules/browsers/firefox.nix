@@ -617,6 +617,8 @@ in {
 
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
+          # TODO: try out: https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean (alternative to https://12ft.io/)
+          # bypass-paywalls-clean
           ublock-origin
           user-agent-string-switcher
         ];
