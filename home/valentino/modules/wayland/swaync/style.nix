@@ -9,7 +9,7 @@
       border: none;
       border-radius: 0;
       font-family: "${theme.font.bar.family}";
-      font-size: ${toString theme.font.bar.size}px;
+      /* font-size: ${toString theme.font.bar.size}px; */
       font-weight: normal;
     }
 

@@ -63,7 +63,7 @@ in {
     "${mod}+Shift+n" = "exec --no-startup-id ${_notification-center}";
 
     "${mod}+q" = "kill";
-    "${mod}+Shift+r" = "restart";
+    "${mod}+Shift+r" = "reload";
 
     # Focus
     "${mod}+Left" = "focus left";
