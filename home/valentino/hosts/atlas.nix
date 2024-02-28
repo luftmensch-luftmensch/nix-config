@@ -22,12 +22,12 @@
     dev = {
       android.enable = true;
       cc.enable = true;
-      generics.enable = true;
       java.enable = true;
       js.enable = true;
       nix.enable = true;
       python.enable = true;
       tex.enable = true;
+      tools.enable = true;
     };
 
     editors = {

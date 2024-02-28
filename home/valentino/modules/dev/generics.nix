@@ -34,12 +34,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages =
-      [
-        pkgs.httpie-desktop
-        pkgs.insomnium
-        pkgs.mongodb-compass
-      ]
-      ++ [run-as-service];
+    home.packages = [run-as-service];
   };
 }

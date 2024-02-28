@@ -26,6 +26,7 @@
     "dev/python"             = import ./dev/python.nix;
     "dev/rust"               = import ./dev/rust.nix;
     "dev/tex"                = import ./dev/tex.nix;
+    "dev/tooling"            = import ./dev/tooling.nix;
 
     "editors/emacs"          = import ./editors/emacs;
     "editors/android-studio" = import ./editors/android-studio.nix;
