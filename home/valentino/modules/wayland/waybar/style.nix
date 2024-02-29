@@ -74,25 +74,16 @@
       color: #${palette.base00};
     }
 
-    #workspaces {
-      margin-left: 4px;
-      margin-right: 4px;
-    }
-
     #workspaces button {
-      background: #${palette.base02};
+      background: #${palette.base01};
       color: #${palette.base07};
-      padding: 0 8px;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      margin-left: 2px;
-      margin-right: 2px;
-      border-radius: 14px;
+      margin: 0.2rem;
+      border-radius: 0.2em;
       transition-duration: 0.2s;
     }
 
     #workspaces button:hover {
-      background-color: #${palette.base03};
+      background-color: #${palette.base0D};
       color: #${palette.base07};
       transition-duration: 0.2s;
     }
@@ -105,7 +96,7 @@
     }
 
     #workspaces button.focused {
-      background-color: #${palette.base0B};
+      background-color: #${palette.base05};
       color: #${palette.base00};
       padding: 0 12px;
       transition-duration: 0.2s;
@@ -127,10 +118,11 @@
     #idle_inhibitor {
       padding: 0 10px;
       color: #${palette.base07};
-      margin-top: 5px;
-      margin-bottom: 5px;
-      margin-left: 5px;
-      margin-right: 5px;
+      margin: 0.2rem;
+      /* margin-top: 5px; */
+      /* margin-bottom: 5px; */
+      /* margin-left: 5px; */
+      /* margin-right: 5px; */
       border-radius: 14px;
     }
 

@@ -32,7 +32,7 @@ in {
   "sway/workspaces" = {
     disable-scroll = true;
     all-outputs = false;
-    format = "   {name}   ";
+    format = "{name}";
   };
 
   "sway/mode" = {
