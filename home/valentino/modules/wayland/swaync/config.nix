@@ -68,12 +68,12 @@
               "command": "swaync-client -cp && firefox"
             },
             {
-              "label": "",
-              "command": "swaync-client -cp && nemo"
-            },
-            {
               "label": "",
               "command": "swaync-client -cp && zathura"
+            },
+            {
+              "label": "⏻",
+              "command": "swaync-client -cp && rofi-powermenu"
             }
           ]
         },

@@ -41,14 +41,10 @@ in {
         {
           layer = "top";
           position = "bottom";
-          # height = "auto";
           output = optionalAttrs (cfg.default_output != null) "${cfg.default_output}";
 
           modules-left =
-            [
-              "custom/menu"
-            ]
-            ++ (optionals config.wayland.windowManager.sway.enable [
+            (optionals config.wayland.windowManager.sway.enable [
               "sway/workspaces"
               "sway/mode"
               "sway/window"
@@ -68,7 +64,7 @@ in {
             "tray"
           ];
           # Shared modules
-          inherit (custom_modules) "custom/menu" "sway/workspaces" "sway/mode" "sway/window" clock;
+          inherit (custom_modules) "sway/workspaces" "sway/mode" "sway/window" clock;
           # Specific modules
           inherit (custom_modules) "idle_inhibitor" "pulseaudio" "network" "battery" "cpu" "memory" "tray";
         }
@@ -78,13 +74,9 @@ in {
           layer = "top";
           output = optionalAttrs (cfg.external_output != null) "${cfg.external_output}";
           position = "bottom";
-          # height = "auto";
 
           modules-left =
-            [
-              "custom/menu"
-            ]
-            ++ (optionals config.wayland.windowManager.sway.enable [
+            (optionals config.wayland.windowManager.sway.enable [
               "sway/workspaces"
               "sway/mode"
               "sway/window"
@@ -96,12 +88,11 @@ in {
           modules-center = ["clock"];
           modules-right = [
             "custom/weather"
-            # "custom/mail"
             "temperature"
           ];
 
           # Shared modules
-          inherit (custom_modules) "custom/menu" "sway/workspaces" "sway/mode" "sway/window" clock;
+          inherit (custom_modules) "sway/workspaces" "sway/mode" "sway/window" clock;
           # Specific modules
           inherit (custom_modules) "custom/weather" "temperature";
         }

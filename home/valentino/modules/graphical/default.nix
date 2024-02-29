@@ -13,7 +13,6 @@ with lib; let
   # To get list of the font installed: (fc-list : family)
   fonts = with pkgs;
     [
-      apple-fonts
       font-awesome
       fira-code
       monoid
@@ -34,6 +33,7 @@ with lib; let
 
       material-design-icons
       ibm-plex
+      san-francisco
     ]
     ++ [icomoon-feather-icons phosphor-icons];
 

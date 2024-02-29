@@ -19,15 +19,18 @@ in {
         [
           "--force-dark-mode"
           "--no-first-run"
+
           "--no-default-browser-check"
           "--no-service-autorun"
+          "--enable-features=WebUIDarkMode"
         ]
         ++ optionals wayland.enable [
           "--enable-features=UseOzonePlatform"
           "--ozone-platform=wayland"
           "--enable-features=WebRTCPipeWireCapturer"
           "--enable-usermedia-screen-capturing"
-        ] ++ optionals xorg.enable ["--ozone-platform-hint=auto"];
+        ]
+        ++ optionals xorg.enable ["--ozone-platform-hint=auto"];
 
       extensions = [
         {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock
