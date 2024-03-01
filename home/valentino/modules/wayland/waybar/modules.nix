@@ -82,36 +82,31 @@ in {
   idle_inhibitor = {
     format = "{icon}";
     format-icons = {
-      activated = " ";
-      deactivated = " ";
-      # activated = " ";
-      # deactivated = " ";
+      activated = " "; # " ";
+      deactivated = " "; #  " ";
     };
   };
 
   pulseaudio = {
-    # scroll-step"= 1; // %, can be a float
     format = "{icon} {volume}% {format_source}";
-    format-bluetooth = "{icon} {volume}%  {format_source}";
-    format-bluetooth-muted = "    {format_source}";
+    format-bluetooth = "() {icon} {volume}% {format_source}";
+    format-bluetooth-muted = "()   {format_source}";
     format-muted = " {format_source}";
     format-source = "{volume}% ";
     format-source-muted = "";
     format-icons = {
-      headphone = " ";
-      # hands-free"= " ";
-      # headset"= " ";
-      # phone"= "";
-      # portable"= "";
-      # car"= "";
-      default = [" " " " " "];
+      headphone = " 󰋋 ";
+      hands-free = " ";
+      headset = "󰋎 ";
+      phone = "";
+      # portable= "";
+      car = "";
+      # default = [" " " " " "];
     };
     on-click = "pavucontrol";
   };
 
   network = {
-    # "interface"= "wlp2*"; // (Optional) To force the use of this interface
-    # "format-wifi"= "  {essid}%";
     format-wifi = "  {signalStrength}%";
     format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
     format-linked = "{ifname} (No IP) ";
@@ -119,8 +114,8 @@ in {
     format-alt = "{ifname}: {ipaddr}/{cidr}";
 
     tooltip-format = "{ifname} via {gwaddr}";
-    tooltip-format-wifi = "{essid}  | Signal: {signalStrength}% | Download: {bandwidthDownBits}; Upload: {bandwidthUpBits}";
-    tooltip-format-ethernet = "{ifname} {ipaddr} ";
+    tooltip-format-wifi = "{essid}  | Signal: {signalStrength}% | 󰇚 {bandwidthDownBits}; 󰕒 {bandwidthUpBits}";
+    tooltip-format-ethernet = "{ifname} {ipaddr} 󰈀";
     tooltip-format-disconnected = "Disconnected";
     on-click-right = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
     tooltip = true;
@@ -136,9 +131,7 @@ in {
     on-click = "${pkgs.foot}/bin/foot -e htop";
   };
 
-  tray = {
-    spacing = 10;
-  };
+  tray.spacing = 10;
 
   "wlr/taskbar" = {
     format = "{icon}";
@@ -154,22 +147,24 @@ in {
       warning = 30;
       critical = 15;
     };
-
-    interval = 30;
+    interval = 50;
     format = "{capacity} % {icon}";
     format-charging = " {capacity} %";
     format-plugged = "{capacity} %  ";
     format-alt = "{time} {icon}";
     format-full = "{capacity} % ";
-    format-icons = ["" "" "" "" ""]; #  
+    format-icons = ["" "" "" "" ""];
     tooltip-format = "{time} ({power} )";
+    tooltip-format-charging = "{timeTo} ({power} )";
   };
+
   # External monitor specific modules
   "custom/weather" = {
     format = "{}     ";
     exec = "${pkgs.curl}/bin/curl -H 'Accept-Language: it' 'https://wttr.in/Naples?format=%c+%C++%t'";
     interval = 900;
   };
+
   temperature = {
     format = "{temperatureC}°C {icon}";
     # format-critical = "{temperatureC}°C";

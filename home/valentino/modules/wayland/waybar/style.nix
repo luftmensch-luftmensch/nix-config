@@ -91,14 +91,14 @@
     #workspaces button.active {
       background-color: #${palette.base0B};
       color: #${palette.base00};
-      padding: 0 12px;
+      padding: 0 6px;
       transition-duration: 0.2s;
     }
 
     #workspaces button.focused {
       background-color: #${palette.base05};
       color: #${palette.base00};
-      padding: 0 12px;
+      padding: 0 6px;
       transition-duration: 0.2s;
     }
 
@@ -119,10 +119,6 @@
       padding: 0 10px;
       color: #${palette.base07};
       margin: 0.2rem;
-      /* margin-top: 5px; */
-      /* margin-bottom: 5px; */
-      /* margin-left: 5px; */
-      /* margin-right: 5px; */
       border-radius: 14px;
     }
 
@@ -162,6 +158,28 @@
     #battery {
       background-color: #${palette.base0A};
       color: #${palette.base00};
+    }
+
+    #battery.warning {
+      background-color: #${palette.base09};
+      color: #${palette.base00};
+    }
+
+    @keyframes blink {
+      to {
+        background-color: #${palette.base06};
+        color: #${palette.base00};
+      }
+    }
+
+    #battery.critical:not(.charging) {
+      background-color: #${palette.base09};
+      color: #${palette.base06};
+      animation-name: blink;
+      animation-duration: 0.5s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
     }
 
     #pulseaudio {
