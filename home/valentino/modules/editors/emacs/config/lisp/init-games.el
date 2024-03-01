@@ -6,8 +6,10 @@
 
 ;;; Code:
 (setup tetris
-  (:option gamegrid-glyph-height-mm 10
-           gamegrid-user-score-file-directory (expand-file-name "games/" .var))
+  (:option gamegrid-glyph-height-mm (pcase (system-name)
+                                      ("kronos" 6.0)
+                                      ("atlas" 10))
+   gamegrid-user-score-file-directory (expand-file-name "games/" .var))
 
   (:bind-into tetris-mode-map
     "è" tetris-pause-game
@@ -23,4 +25,4 @@
     [remap evil-record-macro] #'quit-window))
 
 (provide 'init-games)
-;;; init-mail.el ends here
+;;; init-games.el ends here

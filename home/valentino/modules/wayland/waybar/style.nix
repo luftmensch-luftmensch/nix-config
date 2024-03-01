@@ -79,6 +79,7 @@
       color: #${palette.base07};
       margin: 0.2rem;
       border-radius: 0.2em;
+      padding: 0 6px;
       transition-duration: 0.2s;
     }
 
@@ -119,7 +120,7 @@
       padding: 0 10px;
       color: #${palette.base07};
       margin: 0.2rem;
-      border-radius: 14px;
+      border-radius: 20px;
     }
 
     #network {
