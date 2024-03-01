@@ -39,11 +39,22 @@ in {
     format = "<span style=\"italic\"> {}</span>";
   };
 
-  "sway/window" = {
+  "sway/window" = let 
+	_grim = "${pkgs.grim}/bin/grim -g";
+	_slurp = "${pkgs.slurp}/bin/slurp";
+	_swaymsg = "${pkgs.sway}/bin/swaymsg";
+
+	# I fucking hate this mess but I cannot find a way to escape this
+	_screenshot_current_window = pkgs.writeShellScriptBin "_screenshot_current_window" ''
+		${_grim} "$(${_swaymsg} -t get_tree | ${pkgs.jq}/bin/jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png')
+	'';
+
+	_cmd_r = "(XCURSOR_SIZE=48 ${_slurp} -w 1 -c A5BAD1 -s C3DFFE94 | ${_grim} -g - ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png'))";
+	in{
     max-length = 50;
-    on-click = "sleep 0.1 ; pgrep ${pkgs.slurp}/bin/slurp || (${pkgs.sway}/bin/swaymsg -t get_tree | ${pkgs.jq}/bin/jq -r '.. | select(.pid? and .visible?) | .rect | \"\\(.x);\\(.y) \\(.width)x\\(.height)\"' | XCURSOR_SIZE=48 ${pkgs.slurp}/bin/slurp -w 1 -c A5BAD1 -s C3DFFE94 | ${pkgs.grim}/bin/grim -g - ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png'))";
-    on-click-right = "sleep 0.1 ; pgrep ${pkgs.slurp}/bin/slurp || (XCURSOR_SIZE=48 ${pkgs.slurp}/bin/slurp -w 1 -c A5BAD1 -s C3DFFE94 | ${pkgs.grim}/bin/grim -g - ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png'))";
-    on-click-middle = "${pkgs.sway}/bin/swaymsg kill";
+		on-click = "${_screenshot_current_window}/bin/_screenshot_current_window";
+    on-click-right = "sleep 0.1 ; pgrep ${_slurp} || ${_cmd_r}";
+    on-click-middle = "${_swaymsg} kill";
   };
 
   clock = {
