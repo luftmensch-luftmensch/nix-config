@@ -34,24 +34,26 @@ in {
           else pkgs.emacs29-pgtk;
 
         extraPackages = epkgs:
-          with epkgs; [
-            auctex
-            jinx
-            pdf-tools
-            treesit-grammars.with-all-grammars
-            vterm
-          ] ++ (optionals cfg.telega.enable [
-          # melpaPackages.telega is outdated. Pull a newer version directly from the repo
-          (melpaPackages.telega.overrideAttrs (_oldAttrs: {
-            version = "0.8.250";
-            src = pkgs.fetchFromGitHub {
-              owner = "zevlg";
-              repo = "telega.el";
-              rev = "d1cf1ffe289a18f366b7f3b64f827f0d0755947a";
-              sha256 = "0s1w4zb252d70n05dbsv2rnlfsg53paklafqxasl566nnzbi0d2q";
-            };
-          }))
-        ]);
+          with epkgs;
+            [
+              auctex
+              jinx
+              pdf-tools
+              treesit-grammars.with-all-grammars
+              vterm
+            ]
+            ++ (optionals cfg.telega.enable [
+              # melpaPackages.telega is outdated. Pull a newer version directly from the repo
+              (melpaPackages.telega.overrideAttrs (_oldAttrs: {
+                version = "0.8.250";
+                src = pkgs.fetchFromGitHub {
+                  owner = "zevlg";
+                  repo = "telega.el";
+                  rev = "d1cf1ffe289a18f366b7f3b64f827f0d0755947a";
+                  sha256 = "0s1w4zb252d70n05dbsv2rnlfsg53paklafqxasl566nnzbi0d2q";
+                };
+              }))
+            ]);
       };
 
       xdg.configFile = {

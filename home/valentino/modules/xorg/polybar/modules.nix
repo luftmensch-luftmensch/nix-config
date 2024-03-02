@@ -1,7 +1,7 @@
 {
   temperature,
   palette,
-	pkgs,
+  pkgs,
 }: {
   "module/tray" = {
     type = "internal/tray";
@@ -13,9 +13,9 @@
     tray-padding = 5;
     tray-scale = 1.0;
   };
-  "module/bctl" = let 
-		cmd = pkgs.callPackage ./scripts/bluetooth.nix {};
-	in {
+  "module/bctl" = let
+    cmd = pkgs.callPackage ./scripts/bluetooth.nix {};
+  in {
     type = "custom/script";
     exec = "${cmd}/bin/bluetooth-ctl";
     tail = true;
@@ -116,9 +116,9 @@
     label-maxlen = 35;
   };
 
-  "module/notifications" = let 
-		notify = "${pkgs.dunst}/bin/dunstctl";
-	in {
+  "module/notifications" = let
+    notify = "${pkgs.dunst}/bin/dunstctl";
+  in {
     type = "custom/script";
     tail = true;
     format-padding = 0;

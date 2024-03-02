@@ -9,7 +9,7 @@ with lib; let
   theme = config.valentino.modules.themes;
   mod = "Mod4";
   mod1 = "Mod1";
-	inherit (config.colorScheme) palette;
+  inherit (config.colorScheme) palette;
 in {
   config = mkIf (cfg.enable && cfg.wm == "i3") {
     xsession = {
@@ -57,12 +57,12 @@ in {
       };
 
       xorg = {
-				xob.enable = true;
+        xob.enable = true;
         polybar = {
           enable = true;
           temperature = "/sys/class/thermal/thermal_zone2/temp";
         };
-			};
+      };
     };
   };
 }

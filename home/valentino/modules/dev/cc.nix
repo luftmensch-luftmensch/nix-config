@@ -13,8 +13,8 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-			# Since both gcc & clang provides a c++ binary to have both installed setting an high priority solves the issue
-			(hiPrio gcc)
+      # Since both gcc & clang provides a c++ binary to have both installed setting an high priority solves the issue
+      (hiPrio gcc)
       clang
       clang-tools
       bear

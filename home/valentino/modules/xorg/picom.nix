@@ -33,19 +33,19 @@ in {
         # flickering when redirecting/unredirecting windows.
         # unredir-if-possible = true;
 
-				shadow = false;
-				# shadow-radius = 7;
-				# shadowOffsets = [(-7) (-7)];
-				# shadowExclude = [
-				# 	"name = 'Notification'"
-				# 	"class_g = 'Conky'"
-				# 	"class_g ?= 'Notify-osd'"
-				# 	"class_g = 'Cairo-clock'"
-				# 	"_GTK_FRAME_EXTENTS@:c"
-				# ];
+        shadow = false;
+        # shadow-radius = 7;
+        # shadowOffsets = [(-7) (-7)];
+        # shadowExclude = [
+        # 	"name = 'Notification'"
+        # 	"class_g = 'Conky'"
+        # 	"class_g ?= 'Notify-osd'"
+        # 	"class_g = 'Cairo-clock'"
+        # 	"_GTK_FRAME_EXTENTS@:c"
+        # ];
 
-				frame-opacity = 0.7;
-				inactive-opacity-override = false;
+        frame-opacity = 0.7;
+        inactive-opacity-override = false;
 
         opacityRules = [
           "90:class_g = 'floating_term'"
@@ -89,19 +89,19 @@ in {
           "_GTK_FRAME_EXTENTS@:c"
         ];
 
-				wintypes = {
-					tooltip = {
-						fade = true;
-						shadow = true;
-						opacity = 0.75;
-						focus = true;
-						full-shadow = false;
-					};
-					dock.shadow = false;
-					dnd.shadow = false;
-					popup_menu.shadow = false;
-					dropdown_menu.shadow = false;
-				};
+        wintypes = {
+          tooltip = {
+            fade = true;
+            shadow = true;
+            opacity = 0.75;
+            focus = true;
+            full-shadow = false;
+          };
+          dock.shadow = false;
+          dnd.shadow = false;
+          popup_menu.shadow = false;
+          dropdown_menu.shadow = false;
+        };
 
         log-level = "warn";
       };
