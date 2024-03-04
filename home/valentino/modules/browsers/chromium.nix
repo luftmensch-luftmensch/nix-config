@@ -5,7 +5,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.browsers.chromium;
-  inherit (config.valentino.modules) wayland xorg;
+  inherit (config.valentino.modules) wayland;
 in {
   options.valentino.modules.browsers.chromium = {
     enable = mkEnableOption "chromium";
@@ -16,21 +16,8 @@ in {
       enable = true;
       # chrome://flags/#enable-webrtc-pipewire-capturer (Enable it to share entire screen)
       commandLineArgs =
-        [
-          "--force-dark-mode"
-          "--no-first-run"
-
-          "--no-default-browser-check"
-          "--no-service-autorun"
-          "--enable-features=WebUIDarkMode"
-        ]
-        ++ optionals wayland.enable [
-          "--enable-features=UseOzonePlatform"
-          "--ozone-platform=wayland"
-          "--enable-features=WebRTCPipeWireCapturer"
-          "--enable-usermedia-screen-capturing"
-        ]
-        ++ optionals xorg.enable ["--ozone-platform-hint=auto"];
+        ["--force-dark-mode" "--no-first-run" "--no-default-browser-check" "--no-service-autorun" "--enable-features=WebUIDarkMode"]
+        ++ optionals wayland.enable ["--ozone-platform=wayland" "--enable-usermedia-screen-capturing"];
 
       extensions = [
         {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock
