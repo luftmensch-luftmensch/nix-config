@@ -13,7 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     networking.wg-quick.interfaces = {
-      # "wg0" is the network interface name. You can name the interface arbitrarily.
+      # "wg0" is the network interface name. You can name the interface arbitrarily. -> run with `systemctl start wg-quick-<interface-name>.service`
       wg0 = {
         address = ["10.8.0.3/24"];
         listenPort = 51820;
