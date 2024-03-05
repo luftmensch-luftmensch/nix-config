@@ -71,11 +71,12 @@ managers such as DWM, BSPWM refer to this state as 'monocle'."
 (setup (:pkg beframe)
   (:option beframe-functions-in-frames '(project-prompt-project-dir)
            beframe-global-buffers '("*scratch*"
-                				            "*Messages"
-                				            "*Async-native-compile-log*"
-                				            "*straight-byte-compilation*"
-                				            "*straight-process*"
-                				            "*dashboard*"))
+                                    "*Messages"
+                                    "*Backtrace*"
+                                    "*Async-native-compile-log*"
+                                    "*straight-byte-compilation*"
+                                    "*straight-process*"
+                                    "*dashboard*"))
 
   (:with-after consult
     (defface beframe-buffer

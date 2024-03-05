@@ -7,6 +7,7 @@
     "apps/playerctl"         = import ./apps/playerctl.nix;
     "apps/discord"           = import ./apps/discord.nix;
     "apps/teams"             = import ./apps/teams.nix;
+    "apps/thunderbird"       = import ./apps/thunderbird.nix;
 
     "browsers/firefox"       = import ./browsers/firefox.nix;
     "browsers/chromium"      = import ./browsers/chromium.nix;
