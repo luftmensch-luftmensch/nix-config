@@ -14,11 +14,11 @@ in {
     services.openvpn = {
       servers = {
         office = {
-          config = '' config /home/valentino/Dropbox/vpn/openvpn/office.ovpn '';
+          config = ''config /home/valentino/Dropbox/vpn/openvpn/office.ovpn '';
           autoStart = false;
         };
       };
-      # restartAfterSleep = false;
+      restartAfterSleep = false;
     };
   };
 }

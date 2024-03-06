@@ -71,6 +71,10 @@
 								                                     #'eglot-completion-at-point
 								                                     #'cape-yasnippet
 								                                     #'cape-file))))
+  ;; WIP: Test cache busting feature of cape
+  (:with-after (cape)
+    (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster))
+
   (:bind-into eglot-mode-map
     [remap evil-lookup] #'eldoc-doc-buffer)
   ;; (:bind-into eglot-mode-map

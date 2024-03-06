@@ -38,7 +38,7 @@
            org-startup-indented t
 
            ;; Prettify
-	         org-ellipsis " ▾"             ;; "…" " ⤵"  " " " " "⤶" " "
+           org-ellipsis " ▾"             ;; "…" " ⤵"  " " " " "⤶" " "
            org-hide-leading-stars nil
            org-pretty-entities t
            org-pretty-entities-include-sub-superscripts t
@@ -76,83 +76,89 @@
            org-src-fontify-natively t         ;; use lang-specific fontification
            org-src-window-setup 'other-window ;; edit source in other window
            org-src-tab-acts-natively t        ;; use lang bindings
-           org-confirm-babel-evaluate nil       ;; no confirm evaluation
+           org-confirm-babel-evaluate nil     ;; no confirm evaluation
 
-		       ;; Agenda
-		       org-agenda-files `(,"~/Dropbox/org/Agenda.org")
-		       org-log-done 'time                  ;; Having the time a item is done sounds convenient
-		       org-agenda-restore-windows-after-quit t
-		       org-agenda-skip-unavailable-files t ;; just skip non-reachable files in org-agenda-files
-
-		       ;; Taken from https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
-		       org-agenda-span 7
-		       org-agenda-start-on-weekday nil
-		       org-agenda-compact-blocks t ;; Make agenda shorter
-		       org-agenda-skip-deadline-if-done t
-		       org-agenda-skip-scheduled-if-done t
-		       org-agenda-skip-archived-trees nil
-		       org-agenda-include-deadlines t
-		       org-agenda-dim-blocked-tasks t
-		       org-agenda-inhibit-startup t ;; ~50x speedup
-		       org-agenda-current-time-string "← now ─────────────────────────────────────────────────" ;; "ᐊ---------- now"
-		       org-agenda-window-frame-fractions '(0.3 . 0.4) ; define min and max height for org-agenda buffers
+           ;; Agenda
+           org-agenda-files `(,"~/Dropbox/org/Agenda.org")
+           org-log-done 'time                  ;; Having the time a item is done sounds convenient
+           org-agenda-restore-windows-after-quit t
+           org-agenda-skip-unavailable-files t ;; just skip non-reachable files in org-agenda-files
+           ;; Taken from https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
+           org-agenda-span 7 ;; 7
+           org-agenda-start-day "+0d"
+           org-agenda-start-on-weekday nil
+           org-agenda-compact-blocks t ;; Make agenda shorter
+           org-agenda-skip-deadline-if-done t
+           org-agenda-skip-scheduled-if-done t
+           org-agenda-skip-scheduled-if-deadline-is-shown t
+           org-agenda-skip-timestamp-if-deadline-is-shown t
+           org-agenda-skip-archived-trees nil
+           org-agenda-include-deadlines t
+           org-agenda-dim-blocked-tasks t
+           org-agenda-inhibit-startup t ;; ~50x speedup
+           org-agenda-current-time-string "← now ─────────────────────────────────────────────────" ;; "ᐊ---------- now"
+           org-agenda-time-grid '((daily) () "" "")
+           org-agenda-window-frame-fractions '(0.3 . 0.4) ; define min and max height for org-agenda buffers
+           org-agenda-hide-tags-regexp ".*" ;; Hide tags
+           org-agenda-prefix-format '((agenda . " %?-2i %t ")
+                                      (todo . " %i %-12:c")
+                                      (tags . " %i ")
+                                      (search . " %i %-12:c"))
+           
+           org-agenda-category-icon-alist `(("Anime" ,(list (all-the-icons-faicon "home" :height 0.8)) nil nil :ascent center))
 
            ;; Refile
-           org-refile-targets '(("Archived.org" :maxlevel . 2))
+           ;; org-refile-targets '(("Archived.org" :maxlevel . 2))
 
            ;; Agenda tags
            org-tag-alist '(("@Anime"    . ?A)
                            ("@Emacs"    . ?E)
-                           ("@Nixos"    . ?A)
+                           ("@Nixos"    . ?N)
                            ("@Movies"   . ?M)
                            ("@Personal" . ?P)
                            ("@Work"     . ?W)
                            ("@TVSeries" . ?T)
-                           ("@Uni"      . ?W))
+                           ("@Uni"      . ?U))
 
-           ;; Configure custom agenda views
-           ;; Other symbols:        ⭐
-           org-agenda-custom-commands
+           org-agenda-custom-commands '(("A" "Anime"
+                                         tags-todo "@Anime"
+                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
+                                          (org-agenda-overriding-header "⚡ Anime")))
 
-           '(("A" "Anime"
-              tags-todo "@Anime"
-              ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-               (org-agenda-overriding-header "⚡ Anime")))
+                                        ("E" "Emacs"
+                                         tags-todo "@Emacs"
+                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
+                                          (org-agenda-overriding-header " Emacs")))
 
-             ("E" "Emacs"
-              tags-todo "@Emacs"
-              ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-               (org-agenda-overriding-header " Emacs")))
+                                        ("N" "Nixos"
+                                         tags-todo "@Nixos"
+                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
+                                          (org-agenda-overriding-header " Nixos")))
 
-             ("N" "Nixos"
-              tags-todo "@Nixos"
-              ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-               (org-agenda-overriding-header " Nixos")))
+                                        ("M" "Movies"
+                                         tags-todo "@Movies"
+                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
+                                          (org-agenda-overriding-header " Movies")))
 
-             ("M" "Movies"
-              tags-todo "@Movies"
-              ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-               (org-agenda-overriding-header " Movies")))
+                                        ("P" "Personale"
+                                         tags-todo "@Personal"
+                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
+                                          (org-agenda-overriding-header " Personale")))
 
-             ("P" "Personale"
-              tags-todo "@Personal"
-              ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-               (org-agenda-overriding-header " Personale")))
+                                        ("W" "Work"
+                                         tags-todo "@Work"
+                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
+                                          (org-agenda-overriding-header " Work")))
 
-             ("W" "Work"
-              tags-todo "@Work"
-              ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-               (org-agenda-overriding-header " Work")))
+                                        ("T" "TVSeries"
+                                         tags-todo "@TVSeries"
+                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
+                                          (org-agenda-overriding-header "  Serie TV")))
 
-             ("T" "TVSeries"
-              tags-todo "@TVSeries"
-              ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-               (org-agenda-overriding-header "  Serie TV")))
-
-             ("U" "Uni"
-              tags-todo "@Uni"
-              ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-               (org-agenda-overriding-header "  Uni"))))
+                                        ("U" "Uni"
+                                         tags-todo "@Uni"
+                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
+                                          (org-agenda-overriding-header "  Uni"))))
            org-capture-templates
            '(("A" "Anime" entry (file+headline "~/Dropbox/org/Agenda.org" "Anime")
               "* TODO %? :@Anime:\n%U" :empty-lines 0)
@@ -178,8 +184,7 @@
 
            ;; TODOS
            org-use-fast-todo-selection 'expert ;; don't use popup window for todos
-           ;; don't set to DONE if children aren’t DONE
-           org-enforce-todo-dependencies t
+           org-enforce-todo-dependencies t ;; don't set to DONE if children aren’t DONE
            org-enforce-todo-checkbox-dependencies t
 
            ;; TODO customization
@@ -193,12 +198,14 @@
 
   (org-babel-do-load-languages
    'org-babel-load-languages '((emacs-lisp . t)
-                               (shell . t)
-                               (groovy . t)))
+                               (shell . t)))
 
-  (push '("conf-unix" . conf-unix) org-src-lang-modes)
+  ;; TODO: I don't remember why I added it
+  ;; (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
   (:local-set completion-at-point-functions '(cape-dabbrev cape-file))
+
+  ;; (:hook vb/org-mode-setup)
   (:bind-into org-mode-map
     [tab] 'org-cycle
     [S-tab] 'org-shifttab
@@ -208,52 +215,18 @@
     "M-l" 'org-demote-subtree
 
     "C-j" 'org-move-subtree-down
-    "C-k" 'org-move-subtree-up)
+    "C-k" 'org-move-subtree-up))
 
-  (:hook vb/org-mode-setup))
-
+;; TODO; Map 'org-agenda-view-mode-dispatch
 (setup (:if-feature evil)
-  (eval-after-load 'org-agenda
-    '(progn
-       (evil-set-initial-state 'org-agenda-mode 'normal)
-       (evil-define-key 'normal org-agenda-mode-map
-         (kbd "<RET>") 'org-agenda-switch-to
-         (kbd "\t") 'org-agenda-goto
-         "q" 'org-agenda-quit
-         "r" 'org-agenda-redo
-         "S" 'org-save-all-org-buffers
-         "+" 'org-agenda-priority-up
-         "," 'org-agenda-priority
-         "-" 'org-agenda-priority-down
-         "n" 'org-agenda-add-note
-         "t" 'org-agenda-todo
-         ":" 'org-agenda-set-tags
-         ";" 'org-timer-set-timer
-         "I" 'helm-org-task-file-headings
-         "i" 'org-agenda-clock-in-avy
-         "O" 'org-agenda-clock-out-avy
-         "j"  'org-agenda-next-line
-         "k"  'org-agenda-previous-line
-         "o" 'delete-other-windows
-         "gv" 'org-agenda-view-mode-dispatch
-         "f" nil
-         "c" 'helm-org-capture-templates
-         "e" 'org-agenda-set-effort
-         "n" nil
-         "A" 'org-agenda-toggle-archive-tag
-         "." 'org-agenda-goto-today
-         "<" 'org-agenda-filter-by-category
-         ">" 'org-agenda-date-prompt
-         "F" 'org-agenda-follow-mode
-         "D" 'org-agenda-deadline
-         "J" 'org-agenda-next-date-line
-         "K" 'org-agenda-previous-date-line
-         "L" 'org-agenda-recenter
-         "P" 'org-agenda-show-priority
-         "R" 'org-agenda-clockreport-mode
-         "T" 'org-agenda-show-tags
-         "X" 'org-agenda-clock-cancel
-         "]" 'org-agenda-manipulate-query-subtract))))
+  (:bind-into org-agenda-mode-map
+    [remap evil-shift-right] 'org-agenda-later
+    [remap evil-shift-left] 'org-agenda-earlier
+    [remap evil-record-macro] 'org-agenda-quit
+    [remap evil-find-char-to] 'org-agenda-todo
+    [remap evil-find-char-to-backward] 'org-agenda-show-tags
+    [remap evil-replace] 'org-agenda-redo
+    [remap evil-ret] 'org-agenda-switch-to))
 
 (setup (:pkg org-appear)
   (:autoload org-appear-mode)
@@ -266,7 +239,7 @@
 (setup (:pkg org-modern)
   (:load-after org)
   (:hook-into org-mode)
-  (set-face-attribute 'org-modern-symbol nil :family "Hack")
+  ;; (set-face-attribute 'org-modern-symbol nil :family "Hack")
   (:option org-modern-label-border 1
            org-modern-list '((43 . "▶") (45 . "–") (42 . "•"))
            org-modern-hide-stars nil      ;; Compatibility with org-indent
