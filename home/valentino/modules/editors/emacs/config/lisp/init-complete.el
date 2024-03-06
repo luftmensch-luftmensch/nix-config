@@ -11,8 +11,9 @@
 (setup minibuffer
   ;; Answers
   (fset #'yes-or-no-p #'y-or-n-p)
-  (setq read-answer-short t)
-  (setq use-short-answers t)
+
+  (:option read-answer-short t
+           use-short-answers t)
 
   ;; Files
   (setq file-name-shadow-properties '(invisible t intangible t))

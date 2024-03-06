@@ -24,7 +24,7 @@
   (:option tab-always-indent 'complete
            tab-first-completion 'word-or-paren-or-punct
            tab-width 2
-           indent-tabs-mode nil)) ; Use spaces!
+           indent-tabs-mode nil))
 
 (setup (:pkg rainbow-delimiters)
   (:hook-into prog-mode))
