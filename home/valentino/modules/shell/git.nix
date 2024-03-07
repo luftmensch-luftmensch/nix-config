@@ -164,6 +164,6 @@ in {
       lazygit.enable = true;
     };
 
-    home.packages = [undo-git git-blame-someone-else];
+    home.packages = [undo-git git-blame-someone-else pkgs.oh-my-git];
   };
 }

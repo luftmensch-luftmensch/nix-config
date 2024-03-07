@@ -23,6 +23,7 @@ in {
         {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock
         {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
         {id = "iaiomicjabeggjcfkbimgmglanimpnae";} # tab manager
+        # {id = "mcnbfjjgfmgcbljkoaaadoddokbmnlln";} # teleparty
       ];
     };
   };
