@@ -182,6 +182,25 @@ in {
       profiles.default = {
         inherit userChrome userContent;
         name = "Default";
+        search = {
+          force = true;
+          default = "DuckDuckGo";
+          engines = {
+            "DuckDuckGo".metaData.alias = "@d";
+            "Google".metaData = {
+              alias = "@g";
+              hidden = true;
+            };
+            "Bing".metaData.hidden = true;
+            "eBay".metaData.hidden = true;
+            "Wikipedia".metaData.hidden = true;
+            "Nix Packages" = {
+              urls = [{template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@np"];
+            };
+          };
+        };
         #                       Disable automatic downloading of OpenH264 codec
         #  1. https://support.mozilla.org/en-US/kb/how-stop-firefox-making-automatic-connections#w_media-capabilities
         #  2. https://andreasgal.com/2014/10/14/openh264-now-in-firefox/
