@@ -85,6 +85,7 @@ in {
 
           gpg.format = "ssh";
         };
+
         aliases = {
           aliases = "!git config --get-regexp '^alias\\.' | cut -c 7- | sed 's/ / = /'";
           amend = "!git commit amend";
@@ -97,9 +98,7 @@ in {
           undo = "reset HEAD~1 --mixed";
           last = "log -1 HEAD --stat";
 
-          # List all branches
-          br = "branch -vva --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
-          branches = "!git -c color.ui=always branch -a --sort=-committerdate | grep -Ev '(/HEAD|/(main|master))' | sed -r -e 's,^[\\* ]*,,' -e 's,remotes/[^/]+/,,'";
+          branches = "branch -vva --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
 
           # Taken from https://bhupesh.me/git-cake-when-is-my-readme-birthday/
           cake = "log --date=format:'%d %b %Y' --diff-filter=A --name-only --pretty='%n%C(yellow bold)🎂️ %ad%Creset by (%C(blue bold)%h%Creset)'";
@@ -107,34 +106,36 @@ in {
           clh = "!f() { git clone $1 $(echo $1 | awk -F '/' '{print $4}'); }; f";
           refresh = "pull --rebase --autostash origin HEAD";
 
-          workon = "! f(){ git fetch && git checkout -b $1 origin/HEAD; }; f";
-          cleanup-merged = "!f(){ git fetch && git branch --merged | grep -v '* ' | xargs git branch --delete; }; f";
-          switch-branch = ''
-            !f() { [ $# -gt 0 ] && exec git switch "$@"; branch=$( git branches 2>/dev/null | fzf +s --no-multi --prompt 'branches» ' ) && git switch "$branch"; }; f
-          '';
+          # workon = "! f(){ git fetch && git checkout -b $1 origin/HEAD; }; f";
+          # cleanup-merged = "!f(){ git fetch && git branch --merged | grep -v '* ' | xargs git branch --delete; }; f";
+          workon = "!git fetch && git switch -c";
+          cleanup-merged = "!git fetch && git branch --merged | grep -v '* ' | xargs git branch --delete";
           wip = "!git commit -m \"WIP: Changes in $( echo $( git diff --cached --name-only ) )\"";
           stats = ''
             !f(){
-              default_since_date=$(date -d "1 week ago" +%Y-%m-%d); \
-              default_until_date=$(date +%Y-%m-%d); \
-              default_branch_name="$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD))"; \
+              default_since="$(date -d "1 week ago" +%d-%m-%Y)"; \
+              default_until=$(date +%d-%m-%Y); \
+              default_branch="$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD))"; \
 
-              read -rp "Since  [$default_since_date]: " since_date; \
-              since_date=''${since_date:-$default_since_date}; \
+              read -rp "Since  ($default_since): " since; \
+              since=''${since:-$default_since}; \
 
-              read -rp "Until  [$default_until_date]: " until_date; \
-              until_date=''${until_date:-$default_until_date}; \
+              read -rp "Until  ($default_until): " until; \
+              until=''${until:-$default_until}; \
 
               read -rp "Branch [main]: " branch_name; \
-              branch_name=''${branch_name:-$default_branch_name}; \
+              branch_name=''${branch_name:-$default_branch}; \
+              formatted_since=$(echo $since | awk -F'-' '{printf("%s/%s/%s", $3, $2, $1)}'); \
+              formatted_until=$(echo $until | awk -F'-' '{printf("%s/%s/%s", $3, $2, $1)}'); \
 
-              days=$((($(date -d "$until_date" +%s) - $(date -d "$since_date" +%s)) / 86400 + 1)); \
-              git log --since="$since_date" --until="$until_date" --branches="$branch_name" --oneline --numstat "$branch_name" | awk \
+              days=$((($(date -d "$formatted_until" +%s) - $(date -d "$formatted_since" +%s)) / 86400 + 1)); \
+
+              git log --since="$formatted_since" --until="$formatted_until" --branches="$branch_name" --oneline --numstat "$branch_name" | awk \
               -v days="$days" '$1 ~ /^[0-9]+$/ && $2 ~ /^[0-9]+$/ {; \
                   added+=$1; \
                   deleted+=$2; \
                 } END {; \
-                print "\nFrom " "'"$since_date"'" " to " "'"$until_date"'" " (" days " days)\n"; \
+                print "\nFrom " "'"$formatted_since"'" " to " "'"$formatted_until"'" " (" days " days)\n"; \
                 print "🟢 Added lines:   " added; \
                 print "🔴 Deleted lines: " deleted "\n"; \
                 if (days > 0) {; \
