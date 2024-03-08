@@ -88,11 +88,14 @@ in {
         aliases = {
           aliases = "!git config --get-regexp '^alias\\.' | cut -c 7- | sed 's/ / = /'";
           amend = "!git commit amend";
+          st = "status -sb";
+          co = "checkout";
+          ci = "commit -m";
+          aa = "add -A";
           ac = "!git add -A && git commit";
-          # alias = "config --get-regexp alias\\.";
           fuckit = "reset --hard";
           undo = "reset HEAD~1 --mixed";
-          last = "!git log -1 HEAD --stat";
+          last = "log -1 HEAD --stat";
 
           # List all branches
           br = "branch -vva --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";

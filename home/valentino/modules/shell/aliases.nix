@@ -59,13 +59,13 @@ in {
   lll = "ls --header --git --classify --long --binary --group --time-style=long-iso --links --all --sort=name";
   tree = "ls -aT";
 
-  gs = "git status -sb";
-  ga = "git add .";
-  gf = "git fetch";
-  gp = "git pull";
-  gP = "git push";
-  gcm = "git commit -m";
-  gco = "git clone";
+  # gs = "git status -sb";
+  # ga = "git add .";
+  # gf = "git fetch";
+  # gp = "git pull";
+  # gP = "git push";
+  # gcm = "git commit -m";
+  # gco = "git clone";
 
   git-diff = "git log --oneline --color=always | fzf --reverse -i --pointer=\"▶\"   --info=inline --border=rounded --cycle --ansi --preview=\"echo {} | cut -d ' ' -f 1 | xargs -I @ sh -c 'git log --pretty=medium -n 1 @; git diff @^ @' | bat --color=always\" | cut -d ' ' -f 1 | xargs git log --pretty=short -n 1";
 
