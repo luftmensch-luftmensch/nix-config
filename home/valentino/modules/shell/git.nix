@@ -49,27 +49,21 @@ in {
               else "";
           };
 
-          init = {
-            defaultBranch = "master";
-          };
+          init.defaultBranch = "master";
 
           merge = {
             conflictStyle = "zdiff3";
             stat = true;
           };
 
-          column = {
-            ui = "auto";
-          };
+          column.ui = "auto";
 
           branch = {
             autoSetupMerge = true;
             sort = "-committerdate";
           };
 
-          push = {
-            autoSetupRemote = true;
-          };
+          push.autoSetupRemote = true;
 
           diff = {
             algorithm = "histogram";
@@ -85,41 +79,29 @@ in {
             changed = "yellow";
           };
 
-          commit = {
-            gpgsign = true;
-          };
+          commit.gpgsign = true;
 
-          user = {
-            signingkey = "~/.ssh/id_homelab.pub";
-          };
+          user.signingkey = "~/.ssh/id_homelab.pub";
 
-          gpg = {
-            format = "ssh";
-          };
+          gpg.format = "ssh";
         };
         aliases = {
           aliases = "!git config --get-regexp '^alias\\.' | cut -c 7- | sed 's/ / = /'";
+          amend = "!git commit amend";
+          ac = "!git add -A && git commit";
           # alias = "config --get-regexp alias\\.";
-          f = "fetch";
           fuckit = "reset --hard";
-          d = "diff";
           undo = "reset HEAD~1 --mixed";
           last = "!git log -1 HEAD --stat";
 
           # List all branches
-          b = "rev-parse --abbrev-ref HEAD";
-          br = "branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
-          bra = "branch -vva";
-          cb = "create-branch";
-          db = "delete-branch";
-          bcontains = "branch -a --contains";
+          br = "branch -vva --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
           branches = "!git -c color.ui=always branch -a --sort=-committerdate | grep -Ev '(/HEAD|/(main|master))' | sed -r -e 's,^[\\* ]*,,' -e 's,remotes/[^/]+/,,'";
 
           # Taken from https://bhupesh.me/git-cake-when-is-my-readme-birthday/
           cake = "log --date=format:'%d %b %Y' --diff-filter=A --name-only --pretty='%n%C(yellow bold)🎂️ %ad%Creset by (%C(blue bold)%h%Creset)'";
 
           clh = "!f() { git clone $1 $(echo $1 | awk -F '/' '{print $4}'); }; f";
-          # cls = "! f() { git clone git@github.com:$1/$2.git ; }; f";
           refresh = "pull --rebase --autostash origin HEAD";
 
           workon = "! f(){ git fetch && git checkout -b $1 origin/HEAD; }; f";
