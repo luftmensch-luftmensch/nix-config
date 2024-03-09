@@ -135,7 +135,7 @@ in {
                   added+=$1; \
                   deleted+=$2; \
                 } END {; \
-                print "\nFrom " "'"$formatted_since"'" " to " "'"$formatted_until"'" " (" days " days)\n"; \
+                print "\nFrom " "'"$since"'" " to " "'"$until"'" " (" days " days)\n"; \
                 print "🟢 Added lines:   " added; \
                 print "🔴 Deleted lines: " deleted "\n"; \
                 if (days > 0) {; \
