@@ -29,10 +29,8 @@ in {
         PS2="\[\033[32m\]  > \[\e[0m\]"
 
         emptytrash(){
-        	 rm ~/.local/share/Trash/files
-        	 rm ~/.local/share/Trash/info
-        	 mkdir ~/.local/share/Trash/info
-        	 mkdir ~/.local/share/Trash/files
+          rm ~/.local/share/Trash/files ~/.local/share/Trash/info
+          mkdir ~/.local/share/Trash/files ~/.local/share/Trash/info
         }
 
         ex () {
@@ -75,6 +73,7 @@ in {
         "ignorespace"
         "ignoredups"
       ];
+      # Don't forget to create first the actual directory
       historyFile = "\${XDG_STATE_HOME}/bash/history";
       historyFileSize = 10000;
       shellOptions = [
@@ -106,9 +105,6 @@ in {
       };
     };
 
-    home.packages = with pkgs; [
-      beautysh
-      shellcheck
-    ];
+    home.packages = with pkgs; [beautysh shellcheck];
   };
 }

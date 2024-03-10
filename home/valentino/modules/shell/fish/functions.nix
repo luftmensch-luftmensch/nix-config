@@ -110,10 +110,8 @@ in {
   };
 
   emptytrash.body = ''
-    rm ~/.local/share/Trash/files
-    rm ~/.local/share/Trash/info
-    mkdir ~/.local/share/Trash/info
-    mkdir ~/.local/share/Trash/files
+    rm ~/.local/share/Trash/files ~/.local/share/Trash/info
+    mkdir ~/.local/share/Trash/info ~/.local/share/Trash/files
   '';
 
   mkcd.body = ''
