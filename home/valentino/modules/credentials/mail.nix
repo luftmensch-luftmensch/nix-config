@@ -6,7 +6,6 @@
 }:
 with lib; let
   cfg = config.valentino.modules.credentials.mail-defaults;
-  inherit (config.colorScheme) palette;
   channelExtraConfig = {
     Create = "Near";
     SyncState = "*";
@@ -135,10 +134,7 @@ in {
           ignore = [];
         };
 
-        search = {
-          excludeTags = ["deleted" "spam"];
-        };
-
+        search.excludeTags = ["deleted" "spam"];
         maildir.synchronizeFlags = true;
 
         hooks = let
@@ -212,10 +208,7 @@ in {
       };
     };
 
-    home.packages = with pkgs; [
-      notmuch-mailmover
-      tmpmail
-    ];
+    home.packages = with pkgs; [notmuch-mailmover tmpmail];
 
     xdg.configFile."notmuch-mailmover/config.yaml".text = ''
       notmuch_config: ${config.home.sessionVariables.NOTMUCH_CONFIG}

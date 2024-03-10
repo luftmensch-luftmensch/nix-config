@@ -30,7 +30,6 @@ in {
     mimeApps = {
       enable = true;
       associations.added = {
-        # "image/png" = ["${image}"];
         "image/tiff" = ["${image}"];
         "image/svg+xml" = ["${image}"];
         "image/gif" = ["${video}"];

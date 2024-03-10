@@ -18,13 +18,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      home.packages = with pkgs; [
-        hack-font
-
-        hunspell
-        hunspellDicts.it_IT
-        hunspellDicts.en_US
-      ];
+      home.packages = with pkgs; [hunspell hunspellDicts.it_IT hunspellDicts.en_US];
 
       programs.emacs = {
         enable = true;
@@ -66,9 +60,7 @@ in {
     }
 
     (mkIf cfg.orgSetupFiles.enable {
-      xdg.configFile = {
-        "emacs/setup_files".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/setup_files";
-      };
+      xdg.configFile."emacs/setup_files".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/setup_files";
     })
 
     (mkIf cfg.daemon.enable {

@@ -33,9 +33,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      playerctl
-      playerctl-wrapper
-    ];
+    home.packages = with pkgs; [playerctl playerctl-wrapper];
   };
 }

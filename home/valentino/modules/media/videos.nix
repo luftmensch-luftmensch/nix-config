@@ -59,7 +59,7 @@ in {
 
         # Quitting
         "q" = "quit";
-        "Q" = "quit-watch-later"; # exit and remember the playback position
+        "Q" = "quit-watch-later";
         "ctrl+w" = "quit";
 
         "ESC" = "set fullscreen no";

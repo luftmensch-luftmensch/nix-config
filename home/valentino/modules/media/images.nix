@@ -8,7 +8,6 @@ with lib; let
   inherit (config.valentino.modules) wayland;
 in {
   options.valentino.modules.media.images = {
-    enable = mkEnableOption "an option to view images";
     imv.enable = mkEnableOption "an option to view images";
     feh.enable = mkEnableOption "an option to view images";
   };

@@ -20,8 +20,6 @@ in {
       };
     };
 
-    home.packages = with pkgs; [
-      bitwarden
-    ];
+    home.packages = [pkgs.bitwarden];
   };
 }

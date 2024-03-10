@@ -13,9 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     home = {
-      packages = with pkgs.jetbrains; [
-        idea-community
-      ];
+      packages = [pkgs.jetbrains.idea-community];
 
       # https://github.com/JetBrains/ideavim
       file.".config/ideavim/ideavimrc" = {

@@ -13,9 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages =
-      [
-        pkgs.python311
-      ]
+      [pkgs.python311]
       ++ (with pkgs.python311Packages; [
         flake8
         python-lsp-server

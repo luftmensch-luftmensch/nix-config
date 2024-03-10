@@ -44,14 +44,8 @@ in {
           output = optionalAttrs (cfg.default_output != null) "${cfg.default_output}";
 
           modules-left =
-            (optionals config.wayland.windowManager.sway.enable [
-              "sway/workspaces"
-              "sway/mode"
-              "sway/window"
-            ])
-            ++ (optionals config.wayland.windowManager.hyprland.enable [
-              "hyprland/workspaces"
-            ]);
+            (optionals config.wayland.windowManager.sway.enable ["sway/workspaces" "sway/mode" "sway/window"])
+            ++ (optionals config.wayland.windowManager.hyprland.enable ["hyprland/workspaces"]);
 
           modules-center = ["clock"];
           modules-right = [
@@ -76,14 +70,8 @@ in {
           position = "bottom";
 
           modules-left =
-            (optionals config.wayland.windowManager.sway.enable [
-              "sway/workspaces"
-              "sway/mode"
-              "sway/window"
-            ])
-            ++ (optionals config.wayland.windowManager.hyprland.enable [
-              "hyprland/workspaces"
-            ]);
+            (optionals config.wayland.windowManager.sway.enable ["sway/workspaces" "sway/mode" "sway/window"])
+            ++ (optionals config.wayland.windowManager.hyprland.enable ["hyprland/workspaces"]);
 
           modules-center = ["clock"];
           modules-right = [

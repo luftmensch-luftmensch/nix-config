@@ -79,10 +79,7 @@ in {
         };
       };
 
-      home.packages = with pkgs; [
-        pandoc # General markup converter
-        poppler # A PDF rendering library
-      ];
+      home.packages = with pkgs; [pandoc poppler];
     })
 
     (mkIf cfg.okular.enable {home.packages = with pkgs; [okular];})

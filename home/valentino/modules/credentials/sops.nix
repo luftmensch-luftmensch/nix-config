@@ -16,8 +16,5 @@
     generateKey = false;
   };
 
-  home.packages = with pkgs; [
-    age
-    sops
-  ];
+  home.packages = with pkgs; [age sops];
 }

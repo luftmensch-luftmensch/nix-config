@@ -269,7 +269,7 @@ in {
           #"browser.cache.disk.enable"= false;
 
           # BROWSER - CRASH REPORTS
-          #"browser.crashReports.unsubmittedCheck.enabled"=	false;
+          #"browser.crashReports.unsubmittedCheck.enabled"= false;
 
           # BROWSER - CHECK DEFAULT
           "browser.shell.checkDefaultBrowser" = false;

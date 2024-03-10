@@ -12,10 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      darktable
-      gimp-with-plugins
-      inkscape-with-extensions
-    ];
+    home.packages = with pkgs; [darktable gimp-with-plugins inkscape-with-extensions];
   };
 }

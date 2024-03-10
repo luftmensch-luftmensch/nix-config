@@ -23,6 +23,7 @@ with lib; let
       victor-mono
       cantarell-fonts
       scientifica
+      hack-font
 
       # Micro$oft
       corefonts

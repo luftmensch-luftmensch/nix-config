@@ -12,10 +12,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      steam
-      steam-run
-    ];
+    home.packages = with pkgs; [steam steam-run];
 
     # Enable udev rules for steam controller
     # services.udev.packages = with pkgs; [

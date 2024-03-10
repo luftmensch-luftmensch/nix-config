@@ -23,9 +23,7 @@ in {
 
   config = mkMerge [
     (mkIf cfg.qrcp.enable {
-      home.packages = with pkgs; [
-        qrcp
-      ];
+      home.packages = [pkgs.qrcp];
 
       home.file.".config/qrcp/config.json" = {
         enable = true;
@@ -46,21 +44,15 @@ in {
     })
 
     (mkIf cfg.filezilla.enable {
-      home.packages = with pkgs; [
-        filezilla
-      ];
+      home.packages = [pkgs.filezilla];
     })
 
     (mkIf cfg.libreoffice.enable {
-      home.packages = with pkgs; [
-        libreoffice
-      ];
+      home.packages = [pkgs.libreoffice];
     })
 
     (mkIf cfg.localsend.enable {
-      home.packages = with pkgs; [
-        localsend
-      ];
+      home.packages = [pkgs.localsend];
     })
   ];
 }

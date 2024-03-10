@@ -14,13 +14,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs;
-      [
-        alejandra
-        cppcheck
-        nodePackages.bash-language-server
-      ]
-      ++ (with inputs.neovim-flake.packages.${pkgs.system}; [
-        nvim
-      ]);
+      [cppcheck nodePackages.bash-language-server]
+      ++ (with inputs.neovim-flake.packages.${pkgs.system}; [nvim]);
   };
 }

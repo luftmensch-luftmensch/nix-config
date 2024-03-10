@@ -13,10 +13,10 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      pavucontrol # PulseAudio Volume Control
-      yt-dlp # A youtube-dl fork with additional features and patches
-      spotdl # Spotify playlists downloader
-      spotify # Play music from the Spotify music service
+      pavucontrol
+      yt-dlp
+      spotdl
+      spotify
     ];
 
     # yt-dlp configuration

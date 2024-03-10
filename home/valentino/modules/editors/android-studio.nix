@@ -12,8 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      android-studio
-    ];
+    home.packages = [pkgs.android-studio];
   };
 }
