@@ -58,8 +58,7 @@ in {
         locker.enable = true;
         waybar = {
           enable = true;
-          inherit default_output;
-          inherit external_output;
+          inherit default_output external_output;
         };
       };
       apps.playerctl.enable = true;

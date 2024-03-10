@@ -59,14 +59,7 @@ in {
   lll = "ls --header --git --classify --long --binary --group --time-style=long-iso --links --all --sort=name";
   tree = "ls -aT";
 
-  # gs = "git status -sb";
-  # ga = "git add .";
-  # gf = "git fetch";
-  # gp = "git pull";
-  # gP = "git push";
-  # gcm = "git commit -m";
-  # gco = "git clone";
-
+  # TODO: Move to the actual git config
   git-diff = "git log --oneline --color=always | fzf --reverse -i --pointer=\"▶\"   --info=inline --border=rounded --cycle --ansi --preview=\"echo {} | cut -d ' ' -f 1 | xargs -I @ sh -c 'git log --pretty=medium -n 1 @; git diff @^ @' | bat --color=always\" | cut -d ' ' -f 1 | xargs git log --pretty=short -n 1";
 
   used-port = "echo 'User:      Command:   Port:'; echo '----------------------------' ; lsof -i 4 -P -n | grep -i 'listen' | awk '{print \$3, \$1, \$9}' | sed 's/ [a-z0-9\.\*]*:/ /' | sort -k 3 -n |xargs printf '%-10s %-10s %-10s\n' | uniq";

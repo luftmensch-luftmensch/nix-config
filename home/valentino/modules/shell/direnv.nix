@@ -14,15 +14,8 @@ in {
   config = mkIf cfg.enable {
     programs.direnv = {
       enable = true;
-      enableBashIntegration =
-        if bash.enable
-        then true
-        else false;
-      enableZshIntegration =
-        if zsh.enable
-        then true
-        else false;
-
+      enableBashIntegration = bash.enable;
+      enableZshIntegration = zsh.enable;
       nix-direnv.enable = true;
     };
   };

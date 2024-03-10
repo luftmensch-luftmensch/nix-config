@@ -68,41 +68,17 @@ in {
 
       fzf = {
         enable = true;
+        defaultOptions = ["--ansi" "--reverse" "--border" "--inline-info" "--color=16"];
 
-        defaultOptions = [
-          "--ansi"
-          "--reverse"
-          "--border"
-          "--inline-info"
-          "--color=16"
-        ];
-
-        enableBashIntegration =
-          if bash.enable
-          then true
-          else false;
-
-        enableZshIntegration =
-          if zsh.enable
-          then true
-          else false;
-
-        tmux.enableShellIntegration =
-          if tmux.enable
-          then true
-          else false;
+        enableBashIntegration = bash.enable;
+        enableZshIntegration = zsh.enable;
+        tmux.enableShellIntegration = tmux.enable;
       };
 
       nix-index = {
         enable = true;
-        enableBashIntegration =
-          if bash.enable
-          then true
-          else false;
-        enableZshIntegration =
-          if zsh.enable
-          then true
-          else false;
+        enableBashIntegration = bash.enable;
+        enableZshIntegration = zsh.enable;
       };
 
       htop = {

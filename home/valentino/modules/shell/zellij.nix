@@ -15,18 +15,9 @@ in {
     programs.zellij = {
       enable = true;
 
-      enableBashIntegration =
-        if bash.enable
-        then true
-        else false;
-      enableFishIntegration =
-        if fish.enable
-        then true
-        else false;
-      enableZshIntegration =
-        if zsh.enable
-        then true
-        else false;
+      enableBashIntegration = bash.enable;
+      enableFishIntegration = fish.enable;
+      enableZshIntegration = zsh.enable;
 
       settings = {
         default_layout = "compact";

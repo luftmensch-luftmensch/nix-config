@@ -106,8 +106,6 @@ in {
           clh = "!f() { git clone $1 $(echo $1 | awk -F '/' '{print $4}'); }; f";
           refresh = "pull --rebase --autostash origin HEAD";
 
-          # workon = "! f(){ git fetch && git checkout -b $1 origin/HEAD; }; f";
-          # cleanup-merged = "!f(){ git fetch && git branch --merged | grep -v '* ' | xargs git branch --delete; }; f";
           workon = "!git fetch && git switch -c";
           cleanup-merged = "!git fetch && git branch --merged | grep -v '* ' | xargs git branch --delete";
           wip = "!git commit -m \"WIP: Changes in $( echo $( git diff --cached --name-only ) )\"";

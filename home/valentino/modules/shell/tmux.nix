@@ -7,11 +7,7 @@ with lib; let
   cfg = config.valentino.modules.shell.tmux;
 in {
   options.valentino.modules.shell.tmux = {
-    enable = mkOption {
-      default = false;
-      type = types.bool;
-      example = true;
-    };
+    enable = mkEnableOption "tmux configuration";
   };
 
   config = mkIf cfg.enable {

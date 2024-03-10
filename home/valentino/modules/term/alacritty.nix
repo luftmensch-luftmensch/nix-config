@@ -92,11 +92,9 @@ in {
 
         selection.save_to_clipboard = true;
         live_config_reload = true;
-        cursor = {
-          style = {
-            shape = "Beam";
-            blinking = "off";
-          };
+        cursor.style = {
+          shape = "Beam";
+          blinking = "off";
         };
 
         shell.program = "fish";

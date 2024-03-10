@@ -210,7 +210,7 @@ in {
 
   ### Sway logging & jorunalctl###
   # If you'd like sway's output to be handled by journald (like a systemd service), systemd-cat can be used for this:
-  #exec systemd-cat --identifier=sway sway
+  # exec systemd-cat --identifier=sway sway
   # You can print the logs with: `journalctl --user --identifier sway (Adding --follow & --this-boot might be handy)
   # dbus-sway-environment
   startup = [
@@ -415,9 +415,7 @@ in {
   };
 
   input = {
-    "*" = {
-      xkb_layout = "it";
-    };
+    "*".xkb_layout = "it";
 
     "type:mouse" = {
       accel_profile = "adaptive";
@@ -435,18 +433,12 @@ in {
       scroll_method = "two_finger";
     };
 
-    "2:14:ETPS/2_Elantech_TrackPoint" = {
-      pointer_accel = "0.1";
-    };
+    # TODO: This is still valid?
+    "2:14:ETPS/2_Elantech_TrackPoint".pointer_accel = "0.1";
   };
 
   output = {
-    default_output = {
-      res = "1920x1080  position 0,0";
-    };
-
-    external_output = {
-      res = "1920x1080  position 1920,0";
-    };
+    default_output.res = "1920x1080  position 0,0";
+    external_output.res = "1920x1080  position 1920,0";
   };
 }
