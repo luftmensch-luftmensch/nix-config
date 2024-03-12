@@ -5,17 +5,13 @@
   ...
 }:
 with lib; let
-  cfgXorg = config.system.modules.graphical.xorg;
-  cfgWayland = config.system.modules.graphical.wayland;
+  # cfgXorg = config.system.modules.graphical.xorg;
+  # cfgWayland = config.system.modules.graphical.wayland;
+  inherit (config.system.modules.graphical) xorg wayland;
 in {
-  config = mkIf (cfgXorg.enable || cfgWayland.enable) {
+  config = mkIf (xorg.enable || wayland.enable) {
     security = {
-      pam = {
-        services = {
-          sddm.enableGnomeKeyring = true;
-        };
-      };
-
+      pam.services.sddm.enableGnomeKeyring = true;
       polkit.enable = true;
     };
 
@@ -26,11 +22,7 @@ in {
         packages = [pkgs.dconf];
       };
 
-      gnome = {
-        gnome-keyring = {
-          enable = true;
-        };
-      };
+      gnome.gnome-keyring.enable = true;
     };
 
     # Trash and GTK apps features
@@ -43,10 +35,6 @@ in {
     # Who the hell uses xterm these days?
     services.xserver.excludePackages = [pkgs.xterm];
 
-    environment.systemPackages = with pkgs; [
-      gnome.seahorse
-      libsecret
-      libinput
-    ];
+    environment.systemPackages = with pkgs; [gnome.seahorse libsecret libinput];
   };
 }

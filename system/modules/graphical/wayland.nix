@@ -12,12 +12,10 @@ in {
 
   config = mkIf cfg.enable {
     services.xserver.displayManager.defaultSession = "sway";
-    programs = {
-      sway = {
-        enable = true;
-        wrapperFeatures.gtk = true;
-        extraPackages = lib.mkDefault [];
-      };
+    programs.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+      extraPackages = lib.mkDefault [];
     };
   };
 }

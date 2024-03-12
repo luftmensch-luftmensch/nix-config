@@ -12,11 +12,9 @@ in {
 
   config = mkIf cfg.enable {
     services.openvpn = {
-      servers = {
-        office = {
-          config = ''config /home/valentino/Dropbox/vpn/openvpn/office.ovpn '';
-          autoStart = false;
-        };
+      servers.office = {
+        config = ''config /home/valentino/Dropbox/vpn/openvpn/office.ovpn '';
+        autoStart = false;
       };
       restartAfterSleep = false;
     };

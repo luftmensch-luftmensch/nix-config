@@ -644,9 +644,6 @@ in {
       };
     };
 
-    home.file.".config/startpage.html" = {
-      enable = true;
-      source = config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
-    };
+    home.file.".config/startpage.html".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
   };
 }

@@ -12,22 +12,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.xserver.displayManager = {
-      sddm = {
-        enable = true;
-        theme = "${(pkgs.fetchFromGitHub {
-          owner = "luftmensch-luftmensch";
-          repo = "sddm-theme";
-          rev = "95821cca2b283a83325d46548c41d813dd09d8a1";
-          sha256 = "1j0gmvw4ys4brghixrg3x5kp11jdbmdnbgjnfinnr94am8bsb0kv";
-        })}";
-      };
+    services.xserver.displayManager.sddm = {
+      enable = true;
+      theme = "${(pkgs.fetchFromGitHub {
+        owner = "luftmensch-luftmensch";
+        repo = "sddm-theme";
+        rev = "95821cca2b283a83325d46548c41d813dd09d8a1";
+        sha256 = "1j0gmvw4ys4brghixrg3x5kp11jdbmdnbgjnfinnr94am8bsb0kv";
+      })}";
     };
 
-    environment.systemPackages = with pkgs.libsForQt5.qt5; [
-      qtgraphicaleffects
-      qtsvg
-      # qtquickcontrols2 # already included with SDDM
-    ];
+    environment.systemPackages = with pkgs.libsForQt5.qt5; [qtgraphicaleffects qtsvg];
   };
 }

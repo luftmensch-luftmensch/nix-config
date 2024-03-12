@@ -261,9 +261,7 @@ in {
 
       {
         command = "title_format \"%title <small>[XWayland]</small>\"";
-        criteria = {
-          shell = "xwayland";
-        };
+        criteria.shell = "xwayland";
       }
 
       # FF related
@@ -277,9 +275,7 @@ in {
 
       {
         command = "floating enable position center, resize set 480 480, focus";
-        criteria = {
-          app_id = "Organizer";
-        };
+        criteria.app_id = "Organizer";
       }
 
       {
@@ -292,104 +288,75 @@ in {
 
       {
         command = "floating enable, sticky enable, border none, nofocus";
-        criteria = {
-          title = " — Sharing Indicator$";
-        };
+        criteria.title = " — Sharing Indicator$";
       }
 
       {
         command = "floating enable, resize set 480 480";
-        criteria = {
-          app_id = "pavucontrol";
-        };
+        criteria.app_id = "pavucontrol";
       }
 
       {
         command = "floating enable, resize set 480 480";
-        criteria = {
-          app_id = "imv";
-        };
+        criteria.app_id = "imv";
       }
 
       {
         command = "floating enable, resize set 480 480, move right 300px, move down 50px, sticky enable";
-        criteria = {
-          app_id = "mpv";
-        };
+        criteria.app_id = "mpv";
       }
 
       {
         command = "floating enable, resize set 800 480";
-        criteria = {
-          app_id = "floating_term";
-        };
+        criteria.app_id = "floating_term";
       }
 
       # Opacity rules
       {
         command = "opacity $opacity";
-        criteria = {
-          app_id = "floating_term";
-        };
+        criteria.app_id = "floating_term";
       }
 
       {
         command = "opacity $opacity";
-        criteria = {
-          app_id = "default_term";
-        };
+        criteria.app_id = "default_term";
       }
 
       {
         command = "opacity $opacity";
-        criteria = {
-          app_id = "foot";
-        };
+        criteria.app_id = "foot";
       }
 
       {
         command = "opacity $opacity";
-        criteria = {
-          app_id = "Alacritty";
-        };
+        criteria.app_id = "Alacritty";
       }
 
       {
         command = "opacity $opacity";
-        criteria = {
-          app_id = "Alacritty";
-        };
+        criteria.app_id = "Alacritty";
       }
 
       {
         command = "opacity $opacity";
-        criteria = {
-          app_id = "emacs";
-        };
+        criteria.app_id = "emacs";
       }
 
       # Inhibitors
       {
         # Stop Chrome from Stealing Sway's Hotkeys - https://artemis.sh/2022/09/15/stop-chrome-stealing-hotkeys-sway.html
         command = "shortcuts_inhibitor disable";
-        criteria = {
-          app_id = "^chrome-.*";
-        };
+        criteria.app_id = "^chrome-.*";
       }
 
       {
         command = "inhibit_idle fullscreen";
-        criteria = {
-          # Match all
-          shell = ".*";
-        };
+        criteria.shell = ".*"; # Match all
       }
 
       {
         command = "inhibit_idle fullscreen";
-        criteria = {
-          app_id = "chromium";
-        };
+        criteria.app_id = "chromium";
       }
     ];
   };

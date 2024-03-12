@@ -12,10 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      jdk
-      maven
-      gradle
-    ];
+    home.packages = with pkgs; [jdk maven gradle];
   };
 }

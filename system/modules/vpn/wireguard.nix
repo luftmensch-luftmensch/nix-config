@@ -54,8 +54,6 @@ in {
       };
     };
 
-    environment.systemPackages = [
-      pkgs.wireguard-tools
-    ];
+    environment.systemPackages = [pkgs.wireguard-tools];
   };
 }

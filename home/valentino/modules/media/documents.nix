@@ -48,8 +48,8 @@ in {
           recolor-lightcolor = "#${palette.base00}";
           recolor-darkcolor = "#${palette.base06}";
 
-          recolor = "true";
-          recolor-keephue = "false";
+          recolor = true;
+          recolor-keephue = false;
           incremental-search = true;
           adjust-open = "best-fit";
           pages-per-row = 1;
@@ -60,28 +60,29 @@ in {
           statusbar-home-tilde = true;
           guioptions = "sv";
         };
+
         mappings = {
           "<C-+>" = "zoom in";
           "<C-->" = "zoom out";
-          "t" = "toggle_statusbar";
-          "r" = "reload";
-          "p" = "print";
-          "i" = "recolor";
-          "R" = "rotate";
-          "f" = "toggle_fullscreen";
+          t = "toggle_statusbar";
+          r = "reload";
+          p = "print";
+          i = "recolor";
+          R = "rotate";
+          f = "toggle_fullscreen";
           "[fullscreen] f" = "toggle_fullscreen";
           "[fullscreen] d" = "toggle_page_mode 2";
           "[fullscreen] t" = "toggle_statusbar";
           # Available at ~/.local/share/zathura/bookmarks
-          "bs" = "feedkeys \":bmark <Tab>\"";
-          "bd" = "feedkeys \":bdelete <Tab>\"";
-          "bl" = "feedkeys \":blist\"";
+          bs = "feedkeys \":bmark <Tab>\"";
+          bd = "feedkeys \":bdelete <Tab>\"";
+          bl = "feedkeys \":blist\"";
         };
       };
 
       home.packages = with pkgs; [pandoc poppler];
     })
 
-    (mkIf cfg.okular.enable {home.packages = with pkgs; [okular];})
+    (mkIf cfg.okular.enable {home.packages = [pkgs.okular];})
   ];
 }

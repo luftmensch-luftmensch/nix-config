@@ -28,17 +28,13 @@ in {
   };
 
   config = mkIf cfg.luks.enable {
-    boot = {
-      initrd = {
-        luks.devices."nix-enc" = {
-          device = "/dev/disk/by-label/nix-enc";
-          preLVM = true;
-          allowDiscards = true;
-          keyFileSize = 4096;
-          keyFile = "${cfg.luks.keyFile}";
-          fallbackToPassword = true;
-        };
-      };
+    boot.initrd.luks.devices."nix-enc" = {
+      device = "/dev/disk/by-label/nix-enc";
+      preLVM = true;
+      allowDiscards = true;
+      keyFileSize = 4096;
+      keyFile = "${cfg.luks.keyFile}";
+      fallbackToPassword = true;
     };
   };
 }

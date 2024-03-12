@@ -31,13 +31,11 @@ in {
 
         overrideFolders = true; # Purge folders not declaratively configured!
         overrideDevices = true;
-        #relay.enable = true;
+        # relay.enable = true;
 
         settings = {
           devices = {
-            P30-PRO = {
-              id = "POGJUQZ-LA6JNGT-T7VN6AL-ZYVOEGE-HHNDWPN-6SXXULO-IQKO7KQ-6HNPBQP"; # P30-PRO
-            };
+            P30-PRO.id = "POGJUQZ-LA6JNGT-T7VN6AL-ZYVOEGE-HHNDWPN-6SXXULO-IQKO7KQ-6HNPBQP";
             nixos-device = {
               inherit (cfg) id;
             };
@@ -46,13 +44,13 @@ in {
             "Dropbox" = {
               path = "/home/valentino/Dropbox";
               id = "tcfun-ya2ir";
-              devices = ["P30-PRO" "nixos-device"]; # NAS
+              devices = ["P30-PRO" "nixos-device"];
             };
 
             "Video" = {
               path = "/home/valentino/Video";
               id = "tzf49-nwpwz";
-              devices = ["nixos-device"]; # PC
+              devices = ["nixos-device"];
             };
           };
         };

@@ -53,20 +53,11 @@ with lib; let
     speedtest-go
   ];
 
-  utilities = with pkgs; [
-    bind # Domain name server
-    lm_sensors # Tools for reading hardware sensors
-    lshw # Info on the HW configuration of the machine
-    lsof # List open files
-    nmap # Network exploration tool and security / port scanner
-    procs # Modern replacement for ps
-    ps_mem # Usage: sudo ps_mem -p $(pgrep -d, -u $USER) (Why is Emacs using so much RAM?)
-    traceroute # Print the route packets trace to network host
-    unrar # Utility for RAR archives
-    unzip # list, test and extract compressed files in a ZIP archive
-    usbutils # Tools for working with USB devices, such as lsusb
-    zip # package and compress (archive) files
-  ];
+  utilities = with pkgs;
+    [bind nmap traceroute]
+    ++ [procs ps_mem usbutils] # Usage: sudo ps_mem -p $(pgrep -d, -u $USER) (Why is Emacs using so much RAM?)
+    ++ [unrar unzip zip]
+    ++ [lm_sensors lshw lsof];
 
   desktop = with pkgs; [
     transmission-gtk
@@ -92,21 +83,19 @@ in {
 
     fonts.fontconfig.enable = true;
 
-    systemd.user.services = {
-      polkit = {
-        Unit = {
-          Description = "polkit-gnome";
-          Documentation = ["man:polkit(8)"];
-          PartOf = ["graphical-session.target"];
-        };
-        Service = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          RestartSec = 3;
-          Restart = "always";
-        };
-        Install = {WantedBy = ["graphical-session.target"];};
+    systemd.user.services.polkit = {
+      Unit = {
+        Description = "polkit-gnome";
+        Documentation = ["man:polkit(8)"];
+        PartOf = ["graphical-session.target"];
       };
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        RestartSec = 3;
+        Restart = "always";
+      };
+      Install = {WantedBy = ["graphical-session.target"];};
     };
   };
 }

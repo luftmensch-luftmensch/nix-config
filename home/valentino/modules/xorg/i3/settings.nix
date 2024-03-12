@@ -153,17 +153,11 @@ in {
       always = true;
     }
 
-    {
-      command = "parcellite";
-    }
+    {command = "parcellite";}
 
-    {
-      command = "nm-applet";
-    }
+    {command = "nm-applet";}
 
-    {
-      command = "rm -f $xob_sock && mkfifo $xob_sock && tail -f $xob_sock | xob -t 700";
-    }
+    {command = "rm -f $xob_sock && mkfifo $xob_sock && tail -f $xob_sock | xob -t 700";}
 
     {
       command = "systemctl --user restart polybar";

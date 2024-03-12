@@ -25,22 +25,19 @@ in {
     (mkIf cfg.qrcp.enable {
       home.packages = [pkgs.qrcp];
 
-      home.file.".config/qrcp/config.json" = {
-        enable = true;
-        text = ''
-          {
-              "fqdn": "",
-              "interface": "${cfg.qrcp.interface}",
-              "port": 9090,
-              "keepAlive": false,
-              "path": "",
-              "secure": false,
-              "tls-key": "",
-              "tls-cert": "",
-              "output": ""
-          }
-        '';
-      };
+      home.file.".config/qrcp/config.json".text = ''
+        {
+            "fqdn": "",
+            "interface": "${cfg.qrcp.interface}",
+            "port": 9090,
+            "keepAlive": false,
+            "path": "",
+            "secure": false,
+            "tls-key": "",
+            "tls-cert": "",
+            "output": ""
+        }
+      '';
     })
 
     (mkIf cfg.filezilla.enable {

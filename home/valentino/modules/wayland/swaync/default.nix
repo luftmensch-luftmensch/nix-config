@@ -24,12 +24,10 @@ in {
       style = import ./style.nix {inherit theme palette;};
     in {
       ".config/swaync/config.json" = {
-        enable = true;
         inherit (config) text;
       };
 
       ".config/swaync/style.css" = {
-        enable = true;
         inherit (style) text;
       };
     };

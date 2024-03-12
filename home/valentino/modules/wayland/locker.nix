@@ -110,12 +110,8 @@ in {
 
     systemd.user.services.swayidle.Install = {
       WantedBy =
-        (optionals sway.enable [
-          "sway-session.target"
-        ])
-        ++ (optionals hyprland.enable [
-          "hyprland-session.target"
-        ]);
+        (optionals sway.enable ["sway-session.target"])
+        ++ (optionals hyprland.enable ["hyprland-session.target"]);
     };
   };
 }

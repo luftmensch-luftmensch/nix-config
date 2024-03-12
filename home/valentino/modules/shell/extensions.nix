@@ -20,28 +20,25 @@ in {
       };
       packages = with pkgs; [fd jq wget];
 
-      file.".config/wget/wgetrc" = {
-        enable = true;
-        text = ''
-          hsts-file=~/.cache/wget-hsts
-          # timestamping = on
-          # no_parent = on
-          # timeout = 60
-          # tries = 3
-          # retry_connrefused = on
-          # trust_server_names = on
-          # follow_ftp = on
+      file.".config/wget/wgetrc".text = ''
+        hsts-file=~/.cache/wget-hsts
+        # timestamping = on
+        # no_parent = on
+        # timeout = 60
+        # tries = 3
+        # retry_connrefused = on
+        # trust_server_names = on
+        # follow_ftp = on
 
-          # Add a `.html` extension to `text/html` or `application/xhtml+xml` files that lack one, or a `.css` extension to `text/css` files that lack one
-          adjust_extension = on
+        # Add a `.html` extension to `text/html` or `application/xhtml+xml` files that lack one, or a `.css` extension to `text/css` files that lack one
+        adjust_extension = on
 
-          # Ignore `robots.txt` and `<meta name=robots content=nofollow>`
-          robots = off
+        # Ignore `robots.txt` and `<meta name=robots content=nofollow>`
+        robots = off
 
-          # Print the HTTP and FTP server responses
-          server_response = on
-        '';
-      };
+        # Print the HTTP and FTP server responses
+        server_response = on
+      '';
     };
 
     programs = {

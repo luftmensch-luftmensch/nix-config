@@ -21,11 +21,9 @@ in {
     })
 
     (mkIf cfg.enableSane {
-      hardware = {
-        sane = {
-          enable = true;
-          extraBackends = [pkgs.epkowa];
-        };
+      hardware.sane = {
+        enable = true;
+        extraBackends = [pkgs.epkowa];
       };
     })
   ];

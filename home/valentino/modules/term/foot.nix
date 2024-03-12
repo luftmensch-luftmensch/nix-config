@@ -12,6 +12,7 @@ in {
     enable = mkEnableOption "foot configuration";
   };
 
+  # TODO: Collapse config
   config = mkIf cfg.enable {
     programs.foot = {
       enable = true;

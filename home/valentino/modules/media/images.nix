@@ -18,12 +18,12 @@ in {
         enable = true;
         settings = {
           binds = {
-            "q" = "quit";
+            q = "quit";
             "<Left>" = "prev";
             "<bracketleft>" = "prev";
             "<Right>" = "next";
             "<bracketright>" = "next";
-            "gg" = "goto 0";
+            gg = "goto 0";
             "<Shift+G>" = "goto -1";
 
             # Panning

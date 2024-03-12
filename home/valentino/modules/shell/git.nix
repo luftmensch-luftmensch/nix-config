@@ -103,7 +103,7 @@ in {
           # Taken from https://bhupesh.me/git-cake-when-is-my-readme-birthday/
           cake = "log --date=format:'%d %b %Y' --diff-filter=A --name-only --pretty='%n%C(yellow bold)🎂️ %ad%Creset by (%C(blue bold)%h%Creset)'";
 
-          clh = "!f() { git clone $1 $(echo $1 | awk -F '/' '{print $4}'); }; f";
+          # clh = "!f() { git clone $1 $(echo $1 | awk -F '/' '{print $4}'); }; f";
           refresh = "pull --rebase --autostash origin HEAD";
 
           workon = "!git fetch && git switch -c";
@@ -140,6 +140,18 @@ in {
                   print "🚀 Average lines changed per day: " (added+deleted)/days; \
                 }; \
               }';\
+            }; f
+          '';
+
+          rank = "!f(){ if [ $(git rev-parse --git-dir 2> /dev/null) ]; then git shortlog -sn --no-merges && echo -e \"\\033[32;40;1m★  $(git rev-list --count HEAD) \\033[0m commits so far\"; fi };f";
+
+          # Adapted from: https://gist.github.com/junegunn/f4fca918e937e6bf5bad
+          ll = ''
+            !f(){
+              if [ $(git rev-parse --git-dir 2> /dev/null) ]; then \
+                  git log --graph --format="%C(auto)%h%d %s %C(white)%C(bold)%cr" --color=always | \
+                  fzf --ansi --reverse --tiebreak=index --no-sort --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1; }; f {}' --bind "alt-j:preview-down,alt-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up" --bind "ctrl-m:execute:echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |  xargs -I % sh -c 'git show --color=always % | less -R'" --preview-window=right:60%
+              fi; \
             }; f
           '';
         };

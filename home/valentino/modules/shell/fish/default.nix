@@ -48,26 +48,22 @@ in {
         (import ./functions.nix pkgs)
 
         (mkIf polybar.enable {
-          reload-polybar = {
-            body = ''
-              echo "Reloading polybar..."
-              ${pkgs.polybar}/bin/polybar-msg cmd restart > /dev/null 2>&1
-            '';
-          };
+          reload-polybar.body = ''
+            echo "Reloading polybar..."
+            ${pkgs.polybar}/bin/polybar-msg cmd restart > /dev/null 2>&1
+          '';
         })
 
         (mkIf cfg.cpuTuning {
-          set-cpu = {
-            body = ''
-              switch "$argv[1]"
-               case "max"
-                   echo "Setting to max"
-                   sudo ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -f 3.0Ghz > /dev/null 2>&1
-               case '*'
-                   sudo ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -f 2.0Ghz > /dev/null 2>&1
-              end
-            '';
-          };
+          set-cpu.body = ''
+            switch "$argv[1]"
+             case "max"
+                 echo "Setting to max"
+                 sudo ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -f 3.0Ghz > /dev/null 2>&1
+             case '*'
+                 sudo ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -f 2.0Ghz > /dev/null 2>&1
+            end
+          '';
         })
 
         (mkIf wayland.enable {

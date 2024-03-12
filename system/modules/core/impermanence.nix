@@ -33,16 +33,13 @@ in {
         "/var/lib/sddm/state.conf" # Name of the session for the last logged-in user
       ];
     };
-    services = {
-      openssh = {
-        hostKeys = [
-          {
-            path = "/persist/etc/ssh/persist_ssh_key";
-            type = "ed25519";
-          }
-        ];
-      };
-    };
+
+    services.openssh.hostKeys = [
+      {
+        path = "/persist/etc/ssh/persist_ssh_key";
+        type = "ed25519";
+      }
+    ];
 
     security.sudo.extraConfig = ''
       # Rollback results in sudo lectures after each reboot

@@ -38,18 +38,18 @@ in {
         osc = "no";
       };
       bindings = {
-        "h" = "seek -10";
-        "l" = "seek 10";
-        "RIGHT" = "seek 5";
-        "LEFT" = "seek -5";
+        h = "seek -10";
+        l = "seek 10";
+        RIGHT = "seek 5";
+        LEFT = "seek -5";
         "Shift+PGUP" = "seek 600";
         "Shift+PGDWN" = "seek -600";
 
         # Volume
-        "j" = "add volume -2";
-        "k" = "add volume 2";
-        "WHEEL_UP" = "add volume 2";
-        "WHEEL_DOWN" = "add volume -2";
+        j = "add volume -2";
+        k = "add volume 2";
+        WHEEL_UP = "add volume 2";
+        WHEEL_DOWN = "add volume -2";
 
         # Speed
         "[" = "multiply speed 1/1.1";
@@ -58,25 +58,25 @@ in {
         "}" = "multiply speed 2.0";
 
         # Quitting
-        "q" = "quit";
-        "Q" = "quit-watch-later";
+        q = "quit";
+        Q = "quit-watch-later";
         "ctrl+w" = "quit";
 
-        "ESC" = "set fullscreen no";
+        ESC = "set fullscreen no";
 
         # Frame
         "." = "frame-step";
         "," = "frame-back-step";
 
-        "f" = "cycle fullscreen";
-        "SPACE" = "cycle pause";
+        f = "cycle fullscreen";
+        SPACE = "cycle pause";
 
         # Screenshot
-        "s" = "screenshot";
-        "S" = "screenshot video";
+        s = "screenshot";
+        S = "screenshot video";
         "Ctrl+s" = "screenshot window";
         "Alt+s" = "screenshot each-frame";
-        "DEL" = "script-binding osc/visibility";
+        DEL = "script-binding osc/visibility";
       };
       scripts = with pkgs.mpvScripts; [mpris thumbnail sponsorblock];
     };

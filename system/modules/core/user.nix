@@ -59,28 +59,26 @@ in {
       };
 
       ${cfg.username} = {
-				inherit (cfg) description hashedPassword uid;
+        inherit (cfg) description hashedPassword uid;
         isNormalUser = true;
         extraGroups = ["wheel"] ++ cfg.extraGroups;
 
         openssh.authorizedKeys.keys =
           [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXljN45Z1tPnPH0ow3i/w2hCKcc8Q2/KPTB+yl30X7R valentino@pine64" # Rock Pro 64
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII5bHKpkOWDHNEaG5eovp8pQzsNpJIm8+ziHwF5idLKf valentino@P30-Pro" # P30 - Pro
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXljN45Z1tPnPH0ow3i/w2hCKcc8Q2/KPTB+yl30X7R valentino@pine64"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII5bHKpkOWDHNEaG5eovp8pQzsNpJIm8+ziHwF5idLKf valentino@P30-Pro"
           ]
           ++ cfg.extraAuthorizedKeys;
       };
     };
 
     # Session variables
-    environment = {
-      sessionVariables = {
-        XDG_CACHE_HOME = "$HOME/.cache";
-        XDG_CONFIG_HOME = "$HOME/.config";
-        XDG_DATA_HOME = "$HOME/.local/share";
-        XDG_BIN_HOME = "$HOME/.local/bin";
-        XDG_STATE_HOME = "$HOME/.local/state";
-      };
+    environment.sessionVariables = {
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_BIN_HOME = "$HOME/.local/bin";
+      XDG_STATE_HOME = "$HOME/.local/state";
     };
   };
 }

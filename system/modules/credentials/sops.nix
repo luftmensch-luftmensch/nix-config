@@ -9,7 +9,5 @@
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
-  sops = {
-    age.sshKeyPaths = map getKeyPath keys;
-  };
+  sops.age.sshKeyPaths = map getKeyPath keys;
 }

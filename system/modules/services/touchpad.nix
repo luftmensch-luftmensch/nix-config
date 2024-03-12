@@ -11,11 +11,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.xserver = {
-      libinput = {
-        enable = true;
-        touchpad.naturalScrolling = true;
-      };
+    services.xserver.libinput = {
+      enable = true;
+      touchpad.naturalScrolling = true;
     };
   };
 }

@@ -28,7 +28,7 @@ in {
         alsa.support32Bit = true;
         jack.enable = true;
         pulse.enable = true;
-        #lowLatency.enable = true;
+        # lowLatency.enable = true;
       };
     })
 

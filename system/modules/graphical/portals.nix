@@ -5,21 +5,20 @@
   ...
 }:
 with lib; let
-  cfgXorg = config.system.modules.graphical.xorg;
-  cfgWayland = config.system.modules.graphical.wayland;
+  # cfgXorg = config.system.modules.graphical.xorg;
+  # cfgWayland = config.system.modules.graphical.wayland;
+  inherit (config.system.modules.graphical) wayland xorg;
 in {
   # XDG Portals, useful for wayland screen sharing and flatpak).
   config = mkMerge [
-    (mkIf (cfgXorg.enable || cfgWayland.enable) {
+    (mkIf (xorg.enable || wayland.enable) {
       xdg.portal = {
         enable = true;
-        config = {
-          common.default = "*";
-        };
+        config.common.default = "*";
       };
     })
 
-    (mkIf cfgWayland.enable {
+    (mkIf wayland.enable {
       xdg.portal = {
         extraPortals = [pkgs.xdg-desktop-portal-wlr];
         wlr = {
