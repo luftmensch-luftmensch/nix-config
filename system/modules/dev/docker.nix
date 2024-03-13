@@ -12,7 +12,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    virtualisation.docker.enable = true;
+    virtualisation.docker = {
+      enable = true;
+      storageDriver = "btrfs";
+    };
     environment.systemPackages = with pkgs; [docker];
   };
 }

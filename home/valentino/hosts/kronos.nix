@@ -47,7 +47,7 @@
       editing.enable = true;
       files = {
         filezilla.enable = true;
-        libreoffice.enable = true;
+        # libreoffice.enable = true;
         localsend.enable = true;
         qrcp = {
           enable = true;
