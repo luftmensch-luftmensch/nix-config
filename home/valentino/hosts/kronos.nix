@@ -68,7 +68,7 @@
       bash.enable = true;
       extensions.enable = true;
       fish.enable = true;
-      tmux.enable = true;
+      # tmux.enable = true;
       direnv.enable = true;
       git.enable = true;
     };
