@@ -282,7 +282,7 @@ in {
         command = "floating enable, resize set 800 400";
         criteria = {
           app_id = "firefox";
-          title = "^Lib$";
+          title = "^Libreria";
         };
       }
 

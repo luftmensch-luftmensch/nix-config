@@ -43,8 +43,6 @@ in {
   config = mkIf (cfg.active != null) (mkMerge [
     # GTK
     {
-      home.packages = [pkgs.theme-toggle];
-
       gtk = {
         enable = true;
 

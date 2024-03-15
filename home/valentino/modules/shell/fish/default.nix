@@ -97,7 +97,7 @@ in {
               ${_git} commit -am "¯\_(ツ)_/¯"
               ${_git} branch -D $current_branch
               ${_git} branch -m $current_branch
-              ${_git} push -f origin main
+              ${_git} push -f origin master
             '';
           };
         })
