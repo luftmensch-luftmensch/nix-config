@@ -56,6 +56,12 @@ in {
     valentino.modules = {
       wayland = {
         locker.enable = true;
+        random-background = {
+          enable = true;
+          display = "scale";
+          imageDirectory = "%h/Dropbox/Immagini/Anime";
+          interval = "15min";
+        };
         waybar = {
           enable = true;
           inherit default_output external_output;

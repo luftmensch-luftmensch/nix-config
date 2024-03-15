@@ -88,7 +88,7 @@ in {
 
         aliases = {
           aliases = "!git config --get-regexp '^alias\\.' | cut -c 7- | sed 's/ / = /'";
-          amend = "!git commit amend";
+          amend = "!git commit --amend";
           st = "status -sb";
           co = "checkout";
           ci = "commit -m";

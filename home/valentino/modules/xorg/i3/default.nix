@@ -41,7 +41,6 @@ in {
 
     services = {
       pasystray.enable = true;
-      # Random background using feh
       random-background = {
         enable = true;
         display = "scale";
