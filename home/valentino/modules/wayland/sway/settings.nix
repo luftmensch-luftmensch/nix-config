@@ -16,10 +16,6 @@
   menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
 
   # Custom scripts
-  # rws = pkgs.callPackage ./scripts/random-wallpaper.nix {
-  #   inherit wallpaper_path;
-  # };
-
   bss = pkgs.callPackage ./scripts/battery-status.nix {};
 
   cms = pkgs.callPackage ./scripts/clipboard-manager.nix {
@@ -237,11 +233,6 @@ in {
     }
 
     # Custom scripts
-    # {
-    #   command = "${rws}/bin/rws";
-    #   always = true;
-    # }
-
     {
       command = "${bss}/bin/bss";
     }

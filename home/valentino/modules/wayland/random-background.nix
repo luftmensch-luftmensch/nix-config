@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.wayland.random-background;
-  flags = lib.concatStringsSep " " ["-r" "-q" "output" "*"];
+  flags = lib.concatStringsSep " " ["-r" "-q" "output" "*" "bg"];
 in {
   options.valentino.modules.wayland.random-background = {
     enable = mkEnableOption "wayland screen random background";

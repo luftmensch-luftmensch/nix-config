@@ -58,10 +58,11 @@ in {
         locker.enable = true;
         random-background = {
           enable = true;
-          display = "scale";
-          imageDirectory = "%h/Dropbox/Immagini/Anime";
+          display = "fill";
+          imageDirectory = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
           interval = "15min";
         };
+
         waybar = {
           enable = true;
           inherit default_output external_output;
