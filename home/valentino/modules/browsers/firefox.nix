@@ -350,6 +350,11 @@ in {
           "browser.newtabpage.activity-stream.feeds.telemetry" = false;
           "browser.newtabpage.activity-stream.feeds.topsites" = false;
 
+          "browser.newtabpage.activity-stream.showSponsored" = false;
+          "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+          # clear default topsites ([NOTE] This does not block you from adding your own)
+          "browser.newtabpage.activity-stream.default.sites" = "";
+
           # iirc hides pocket stories
           "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
           # Pocket Reading List
