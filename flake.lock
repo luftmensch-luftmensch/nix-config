@@ -337,11 +337,11 @@
         "plugin:plenary-nvim": "plugin:plenary-nvim"
       },
       "locked": {
-        "lastModified": 1710512702,
-        "narHash": "sha256-G6UNsSicX5z/1wkYNqPMjJaEgb1kyJueBKzH4dc/XTk=",
+        "lastModified": 1710587398,
+        "narHash": "sha256-twmrDNnJlc5YRAlX4BnrcH/QSSjU055wAIiRxWCJJow=",
         "owner": "luftmensch-luftmensch",
         "repo": "neovim-flake",
-        "rev": "6301575e6f5de314c5f87e1dda2210c57d8ae257",
+        "rev": "68f7e42a0de775f8ca6aa76bc209ac397d1ed512",
         "type": "github"
       },
       "original": {
@@ -569,11 +569,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1710506669,
-        "narHash": "sha256-9m+oWHbBZi3c7YyiMs5hiOIqCG+WgP1sMA+s60AtWOU=",
+        "lastModified": 1710585864,
+        "narHash": "sha256-S72KUsuZOV4AnecojtPhjC+fk9BrEOEhdKdazRi4yO4=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "90155b2212a941712b74575db564c6afd24492b5",
+        "rev": "529316cbfebac4d81ada47c2b0fb597cbd252e1e",
         "type": "github"
       },
       "original": {

@@ -17,14 +17,8 @@
 
   # Custom scripts
   bss = pkgs.callPackage ./scripts/battery-status.nix {};
-
-  cms = pkgs.callPackage ./scripts/clipboard-manager.nix {
-    inherit menu_opts;
-  };
-
-  sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
-    inherit menu_opts;
-  };
+  cms = pkgs.callPackage ./scripts/clipboard-manager.nix {inherit menu_opts;};
+  sus = pkgs.callPackage ./scripts/screenshot-utility.nix {inherit menu_opts;};
 in {
   gaps = {
     inner = 5;

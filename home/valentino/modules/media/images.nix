@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -42,9 +43,8 @@ in {
 
             "<Up>" = "zoom 1";
             "<Shift+plus>" = "zoom 1";
-            i = "zoom 1";
             "<Down>" = "zoom -1";
-            o = "zoom -1";
+            i = "exec ${pkgs.libnotify}/bin/notify-send -t 800 -u low -i image-x-generic \$imv_current_file";
 
             # Other commands
             x = "close";
@@ -65,11 +65,11 @@ in {
             t = "slideshow +1";
             "<Shift+T>" = "slideshow -1";
             "<Shift+W>" = let
-              setWallpaperCmd =
+              cmd =
                 if wayland.enable
                 then "swaymsg output \"*\" background ~/.cache/wallpaper fill"
                 else "feh --bg-scale ~/.cache/wallpaper";
-            in "exec cp -f \"\$imv_current_file\" ~/.cache/wallpaper && ${setWallpaperCmd}";
+            in "exec cp -f \"\$imv_current_file\" ~/.cache/wallpaper && ${cmd}";
           };
         };
       };
