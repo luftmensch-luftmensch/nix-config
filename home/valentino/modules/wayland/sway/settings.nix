@@ -5,7 +5,6 @@
   default_output,
   external_output,
   palette,
-  wallpaper_path,
   pkgs,
 }: let
   _wpctl = "${pkgs.wireplumber}/bin/wpctl";

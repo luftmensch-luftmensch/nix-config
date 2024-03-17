@@ -13,9 +13,7 @@ with builtins; let
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      overlays = attrValues overlays ++ [
-        nur.overlay
-      ];
+      overlays = attrValues overlays ++ [nur.overlay];
     };
 
     baseHome = {

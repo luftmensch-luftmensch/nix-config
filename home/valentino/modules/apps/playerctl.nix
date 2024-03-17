@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.apps.playerctl;
-  _notify = "${pkgs.libnotify}/bin/notify-send -u low -t 900 -h string:x-dunst-stack-tag:music";
+  _notify = "${pkgs.libnotify}/bin/notify-send -u low -t 900 -i audio-x-generic";
   _handler = "${pkgs.playerctl}/bin/playerctl";
 
   playerctl-wrapper = pkgs.writeShellScriptBin "playerctl-wrapper" ''

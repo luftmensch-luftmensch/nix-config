@@ -1,20 +1,17 @@
 # > Where the snow paradise begins
 #
 # Author:  luftmensch-luftmensch
-# URL:     https://github.com/luftmensch-luftmensch/Nixos/
-# License: GPL-3.0
+# URL:     https://github.com/luftmensch-luftmensch/nix-config/
+# License: MIT
 # You probably shouldn't be using my configuration as a guideline
 # Sure, it works (mostly), but the code is horrible
 # I have no idea what the hell I'm doing... It's true!
 #
 # You can get started with flakes here: https://nixos.wiki/wiki/Flakes
 # Also, you may want to take a look on the flakes that I took inspiration:
-# - https://github.com/ners/NixOS
 # - https://github.com/balsoft/nixos-config
 # - https://github.com/Kranzes/nix-config
-# - https://github.com/jonringer/nixpkgs-config
 # - https://github.com/sebastiant/dotfiles
-# - https://github.com/kotokrad/dotfiles (fennel nvim!)
 #
 # Welcome to ground zero. Where the whole flake gets set up and all its modules
 # are loaded.
@@ -100,19 +97,19 @@
       };
     };
 
-    homeConfigurations = {
+    homeConfigurations = let
+      username = "valentino";
+      system = "x86_64-linux";
+      stateVersion = "23.11";
+    in {
       "valentino@kronos" = mkHome {
-        username = "valentino";
+        inherit username system stateVersion;
         hostname = "kronos";
-        system = "x86_64-linux";
-        stateVersion = "23.11";
       };
 
       "valentino@atlas" = mkHome {
-        username = "valentino";
+        inherit username system stateVersion;
         hostname = "atlas";
-        system = "x86_64-linux";
-        stateVersion = "23.11";
       };
     };
   };

@@ -11,7 +11,7 @@ with lib; let
   mod1 = "Mod1";
   default_output = "eDP-1";
   external_output = "HDMI-A-1";
-  wallpaper_path = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
+  imageDirectory = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
   inherit (config.colorScheme) palette;
 in {
   config = mkIf (cfg.enable && (elem "sway" cfg.wm)) {
@@ -22,7 +22,7 @@ in {
 
       config = let
         settings = import ./settings.nix {
-          inherit mod mod1 default_output external_output theme palette wallpaper_path pkgs;
+          inherit mod mod1 default_output external_output theme palette pkgs;
         };
       in {
         bars = [{command = "waybar";}];
@@ -59,8 +59,8 @@ in {
         random-background = {
           enable = true;
           display = "fill";
-          imageDirectory = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
           interval = "15min";
+          inherit imageDirectory;
         };
 
         waybar = {
