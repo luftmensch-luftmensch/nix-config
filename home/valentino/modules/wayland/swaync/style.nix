@@ -3,13 +3,11 @@
   palette,
   ...
 }: {
-  # TODO: Complete configuration
   text = ''
     * {
       border: none;
       border-radius: 0;
       font-family: "${theme.font.bar.family}";
-      /* font-size: ${toString theme.font.bar.size}px; */
       font-weight: normal;
     }
 
@@ -31,7 +29,7 @@
 
     /* Specific urgency colors (.low, .normal, .critical) */
     .critical {
-      border: 1px solid #${palette.base08};
+      border: 4px solid #${palette.base08};
     }
 
     .notification-content {

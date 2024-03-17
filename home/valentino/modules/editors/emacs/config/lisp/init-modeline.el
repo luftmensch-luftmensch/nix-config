@@ -183,7 +183,7 @@ Specific to the current window's mode line.")
 
 ;;;; Buffer status
 
-;; TODO 2023-07-05: What else is there beside remote files?  If
+;; What else is there beside remote files?  If
 ;; nothing, this must be renamed accordingly.
 (defvar-local vb/modeline-buffer-status
     '(:eval

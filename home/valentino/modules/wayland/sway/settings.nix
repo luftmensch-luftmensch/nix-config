@@ -384,9 +384,6 @@ in {
       drag = "enabled";
       scroll_method = "two_finger";
     };
-
-    # TODO: This is still valid?
-    "2:14:ETPS/2_Elantech_TrackPoint".pointer_accel = "0.1";
   };
 
   output = {

@@ -12,7 +12,6 @@ in {
     enable = mkEnableOption "foot configuration";
   };
 
-  # TODO: Collapse config
   config = mkIf cfg.enable {
     programs.foot = {
       enable = true;
@@ -38,13 +37,9 @@ in {
 
         bell = {};
 
-        scrollback = {
-          lines = 1000;
-        };
+        scrollback.lines = 1000;
 
-        url = {
-          launch = "xdg-open \${url}";
-        };
+        url.launch = "xdg-open \${url}";
 
         cursor = {
           style = "beam";
@@ -52,9 +47,7 @@ in {
           beam-thickness = 1;
         };
 
-        mouse = {
-          hide-when-typing = "yes";
-        };
+        mouse.hide-when-typing = "yes";
 
         colors = {
           background = "${palette.base00}";
@@ -109,9 +102,7 @@ in {
 
         search-bindings = {};
 
-        url-bindings = {
-          toggle-url-visible = "t";
-        };
+        url-bindings.toggle-url-visible = "t";
 
         mouse-bindings = {};
       };
