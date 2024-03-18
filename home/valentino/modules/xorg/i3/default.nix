@@ -44,7 +44,7 @@ in {
       random-background = {
         enable = true;
         display = "scale";
-        imageDirectory = "%h/Dropbox/Immagini/Anime";
+        imageDirectory = "%h/Dropbox/Immagini/wallpapers/miscellaneous";
         interval = "15min";
       };
     };

@@ -11,7 +11,7 @@ with lib; let
   mod1 = "Mod1";
   default_output = "eDP-1";
   external_output = "HDMI-A-1";
-  imageDirectory = "${config.home.homeDirectory}/Dropbox/Immagini/backgrounds/Art/";
+  imageDirectory = "${config.home.homeDirectory}/Dropbox/Immagini/wallpapers/Art/";
   inherit (config.colorScheme) palette;
 in {
   config = mkIf (cfg.enable && (elem "sway" cfg.wm)) {
