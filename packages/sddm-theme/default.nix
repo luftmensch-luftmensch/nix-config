@@ -1,8 +1,7 @@
 {stdenv, ...}:
-# For some fucking reason SDDM does not support full paths -> Hence I had to symlink the background folder to the actual folder on my ~ directory
 stdenv.mkDerivation {
   pname = "clairvoyance";
-  version = "final";
+  version = "1.0";
   dontBuild = true;
   installPhase = ''
     mkdir -p $out/share/sddm/themes

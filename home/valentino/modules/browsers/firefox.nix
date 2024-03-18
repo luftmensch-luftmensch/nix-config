@@ -639,13 +639,10 @@ in {
           "browser.aboutConfig.showWarning" = false;
         };
 
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          bitwarden
-          # TODO: try out: https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean (alternative to https://12ft.io/)
-          # bypass-paywalls-clean
-          ublock-origin
-          user-agent-string-switcher
-        ];
+        extensions = with pkgs.nur.repos.rycee.firefox-addons;
+          [bitwarden ublock-origin user-agent-string-switcher]
+          # https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean (alternative to https://12ft.io/)
+          ++ (with pkgs.nur.repos.colinsane.firefox-extensions; [bypass-paywalls-clean]);
       };
     };
 
