@@ -67,13 +67,14 @@ in {
       createDirectories = true;
 
       # These are useless to me
-      desktop = null;
       documents = null;
       publicShare = null;
       templates = null;
       pictures = null;
       music = null;
 
+      # Curse you nemo the platypus
+      desktop = "$HOME";
       download = "${homeDir}/Scaricati";
       videos = "${homeDir}/Video";
     };
