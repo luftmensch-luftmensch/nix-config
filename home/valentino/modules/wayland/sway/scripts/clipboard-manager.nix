@@ -24,7 +24,7 @@ in
 
     select_item(){
         if [[ "$(${_clip} list | wc -l)" -eq 0 ]]; then
-          ${_notify} -u normal "No items stored yet!" -a CLIPBOARD_MANAGER -r ''${notification_id} -p -i ~/Dropbox/icons/empty_bin.png
+          ${_notify} -u normal "No items stored yet!" -a CLIPBOARD_MANAGER -r ''${notification_id} -p -i user-trash
         else
           ${_clip} list | ${_menu} -p '▶ Copy to Clipboard: ' -W 0.5 | ${_clip} decode | ${_wlcp}
         fi
@@ -32,7 +32,7 @@ in
 
     delete_item(){
         if [[ "$(${_clip} list | wc -l)" -eq 0 ]]; then
-          ${_notify} -u critical "No items stored yet!" -a CLIPBOARD_MANAGER -r ''${notification_id} -p -i ~/Dropbox/icons/empty_bin.png
+          ${_notify} -u critical "No items stored yet!" -a CLIPBOARD_MANAGER -r ''${notification_id} -p -i user-trash
         else
           ${_clip} list | ${_menu} -p '▶ Copy to Clipboard: ' -W 0.5 | ${_clip} delete
         fi

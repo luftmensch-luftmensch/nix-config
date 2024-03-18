@@ -132,6 +132,7 @@
     (:hook vertico-repeat-save))
 
   ;; (vertico-multiform-mode 1)
+  ;; (vertico-mouse-mode 1)
   (vertico-mode 1))
 
 (setup (:if-feature general)

@@ -22,19 +22,17 @@ in {
       shellInit = mkMerge [
         (import ./init.nix).shellInit
 
-        (
-          mkIf foot.enable ''
-            # Taken from https://codeberg.org/dnkl/foot/wiki#user-content-spawning-new-terminal-instances-in-the-current-working-directory
-            function update_cwd_osc --on-variable PWD --description 'Notify terminals when $PWD changes'
-              if status --is-command-substitution || set -q INSIDE_EMACS
-                  return
-              end
-              printf \e\]7\;file://%s%s\e\\ $hostname (string escape --style=url $PWD)
+        (mkIf foot.enable ''
+          # Taken from https://codeberg.org/dnkl/foot/wiki#user-content-spawning-new-terminal-instances-in-the-current-working-directory
+          function update_cwd_osc --on-variable PWD --description 'Notify terminals when $PWD changes'
+            if status --is-command-substitution || set -q INSIDE_EMACS
+                return
             end
+            printf \e\]7\;file://%s%s\e\\ $hostname (string escape --style=url $PWD)
+          end
 
-            update_cwd_osc # Run once since we might have inherited PWD from a parent shell
-          ''
-        )
+          update_cwd_osc # Run once since we might have inherited PWD from a parent shell
+        '')
       ];
 
       shellAbbrs = {
@@ -55,13 +53,15 @@ in {
         })
 
         (mkIf cfg.cpuTuning {
-          set-cpu.body = ''
+          set-cpu.body = let
+            cpupower = "${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set";
+          in ''
             switch "$argv[1]"
              case "max"
                  echo "Setting to max"
-                 sudo ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -f 3.0Ghz > /dev/null 2>&1
+                 sudo ${cpupower} -f 3.0Ghz > /dev/null 2>&1
              case '*'
-                 sudo ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -f 2.0Ghz > /dev/null 2>&1
+                 sudo ${cpupower} -f 2.0Ghz > /dev/null 2>&1
             end
           '';
         })
