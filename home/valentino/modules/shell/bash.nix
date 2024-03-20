@@ -95,8 +95,8 @@ in {
         # R = ANSI color support
         # S = chop long lines (rather than wrap them onto next line)
         # X = suppress alternate screen
-        LESS = "iFMRSX";
-        MANPAGER = "less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR";
+        # LESS = "iFMRSX";
+        # MANPAGER = "less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR";
         TERM = "xterm-256color";
       };
     };

@@ -79,4 +79,7 @@ in {
       videos = "${homeDir}/Video";
     };
   };
+
+  # Top level session variables
+  home.sessionVariables.PAGER = "bat --theme=default --paging=always --tabs=4 --wrap=never --style=plain";
 }

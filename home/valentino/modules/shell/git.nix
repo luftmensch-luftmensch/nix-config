@@ -47,6 +47,7 @@ in {
               if neovim.enable
               then "nvim"
               else "";
+            # pager = "bat --theme=default --paging=always --tabs=4 --wrap=never --style=plain";
           };
 
           init.defaultBranch = "master";
@@ -150,7 +151,7 @@ in {
             !f(){
               if [ $(git rev-parse --git-dir 2> /dev/null) ]; then \
                   git log --graph --format="%C(auto)%h%d %s %C(white)%C(bold)%cr" --color=always | \
-                  fzf --ansi --reverse --tiebreak=index --no-sort --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1; }; f {}' --bind "alt-j:preview-down,alt-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up" --bind "ctrl-m:execute:echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |  xargs -I % sh -c 'git show --color=always % | less -R'" --preview-window=right:60%
+                  fzf --ansi --reverse --tiebreak=index --no-sort --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1; }; f {}' --bind "alt-j:preview-down,alt-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up" --bind "ctrl-m:execute:echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |  xargs -I % sh -c 'git show --color=always % | bat --theme=default --paging=always --tabs=4 --wrap=never --style=plain'" --preview-window=right:60%
               fi; \
             }; f
           '';

@@ -42,8 +42,8 @@ in {
       # embed thumbnail into audio
       #--embed-thumbnail
 
-      # save all music in the following folder and format
-      # -o '~/Music/untagged/%(artist)s - %(title)s.%(ext)s'
+      # Leave only title and extension
+      -o '%(title)s.%(ext)s'
     '';
   };
 }

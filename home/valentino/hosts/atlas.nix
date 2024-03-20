@@ -71,7 +71,7 @@
         enable = true;
         cpuTuning = true;
       };
-      # tmux.enable = true;
+      tmux.enable = true;
       direnv.enable = true;
       git.enable = true;
     };

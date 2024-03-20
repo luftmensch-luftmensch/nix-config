@@ -19,26 +19,19 @@ in {
       clock24 = true;
       historyLimit = 8000;
       escapeTime = 20;
-      terminal = "xterm-256color";
+      terminal = "\${TERM}";
       sensibleOnTop = false;
       mouse = true;
 
       extraConfig = ''
-        unbind %
-        bind | split-window -h
+        set -g renumber-windows on # renumber any window when any is closed
+        set -g mouse on # Enable mouse control (clickable windows, panes, resizable panes)
+        setw -g mode-keys vi
 
-        unbind '"'
-        bind - split-window -v
-
-        unbind R
-        bind R source-file ~/.config/tmux/tmux.conf
-
-        bind -r j resize-pane -D 5
-        bind -r k resize-pane -U 5
-        bind -r l resize-pane -R 5
-        bind -r h resize-pane -L 5
-
-        bind -r m resize-pane -Z
+        bind -n M-Left select-pane -L
+        bind -n M-Right select-pane -R
+        bind -n M-Up select-pane -U
+        bind -n M-Down select-pane -D
       '';
     };
   };
