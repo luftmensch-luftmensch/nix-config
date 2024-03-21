@@ -26,11 +26,13 @@ in {
   config = mkIf cfg.enable {
     accounts.email = {
       maildirBasePath = "${config.home.homeDirectory}/.config/mails";
-      accounts = {
+      accounts = let
+        realName = "Valentino Bocchetti";
+      in {
         gmail = rec {
           primary = true;
           flavor = "gmail.com";
-          realName = "Valentino Bocchetti";
+          inherit realName;
           address = "valentinobocchetti59@gmail.com";
           userName = address;
           passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup gmail password";
@@ -52,8 +54,8 @@ in {
         };
         unina = {
           primary = false;
-          realName = "Valentino Bocchetti";
-          userName = "vale.bocchetti@studenti.unina.it";
+          inherit realName;
+          userName = "vale.bocchetti";
           address = "vale.bocchetti@studenti.unina.it";
           passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup unina password";
 
@@ -185,10 +187,10 @@ in {
           # folder_transforms = gmail/inbox:inbox gmail/drafts:draft gmail/sent:sent gmail/trash:deleted gmail/spam:spam
           # folder_lowercases = true
 
-          # [FolderNameFilter.2]
-          # folder_explicit_list = unina/inbox unina/drafts unina/sent unina/trash
-          # folder_transforms = unina/inbox:university unina/drafts:university unina/sent:university unina/trash:university
-          # folder_lowercases = true
+          [FolderNameFilter.1]
+          folder_explicit_list = unina/inbox unina/drafts unina/sent unina/trash
+          folder_transforms = unina/inbox:university unina/drafts:university unina/sent:university unina/trash:university
+          folder_lowercases = true
 
           # [FolderNameFilter.3]
           # folder_explicit_list = unina/inbox unina/drafts unina/sent unina/trash

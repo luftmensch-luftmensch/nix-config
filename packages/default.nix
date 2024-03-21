@@ -14,4 +14,6 @@
 
   # Custom sddm theme
   sddm-theme-clairvoyance = pkgs.callPackage ./sddm-theme/default.nix {};
+
+  mpv-modern-x = pkgs.callPackage ./mpv-modern-x/default.nix {};
 }

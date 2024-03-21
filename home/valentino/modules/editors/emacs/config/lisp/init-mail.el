@@ -157,7 +157,9 @@ With optional prefix ARG (\\[universal-argument]) call
 		           :key ,(kbd "p u"))
 		         ;; University
 		         ( :name "📥 inbox (university)"
-		           :query "tag:inbox and tag:university"
+		           ;; :query "tag:inbox and tag:university"
+               ;; TODO: Investigate -> For some reason the mail in unina are not marked as inbox
+		           :query "tag:university"
 		           :sort-order newest-first
 		           :key ,(kbd "u i"))
 		         ( :name "📔 unread (university)"

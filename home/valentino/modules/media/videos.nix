@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.valentino.modules.media.videos;
-  inherit (config.valentino.modules) themes;
+  # inherit (config.valentino.modules) themes;
 in {
   options.valentino.modules.media.videos = {
     enable = mkEnableOption "an option to watch videos";
@@ -18,13 +18,14 @@ in {
       config = {
         hwdec = "auto";
         title = "\${filename}";
-        osd-level = 1;
-        osd-duration = 2500;
-        # osd-status-msg = "'\${time-pos} / \${duration}\${?percent-pos: (\${percent-pos}%)}\${?frame-drop-count:\${!frame-drop-count==0: Dropped: \${frame-drop-count}}}\n\${?chapter:Chapter: \${chapter}}'";
-
-        osd-font = "${themes.font.term.family}";
-        osd-font-size = themes.font.term.size;
-        osd-border-size = 2;
+        osc = "no";
+        border = "no";
+        # osd-level = 1;
+        # osd-duration = 2500;
+        #
+        # osd-font = "${themes.font.term.family}";
+        # osd-font-size = themes.font.term.size;
+        # osd-border-size = 2;
 
         screenshot-format = "png";
         screenshot-png-compression = 8;
@@ -35,8 +36,8 @@ in {
         volume-max = 115;
         volume = 90;
         save-position-on-quit = "yes";
-        osc = "no";
       };
+
       bindings = {
         h = "seek -10";
         l = "seek 10";
@@ -78,7 +79,9 @@ in {
         "Alt+s" = "screenshot each-frame";
         DEL = "script-binding osc/visibility";
       };
-      scripts = with pkgs.mpvScripts; [mpris thumbnail sponsorblock];
+      scripts = with pkgs;
+        [mpv-modern-x]
+        ++ (with pkgs.mpvScripts; [mpris thumbfast sponsorblock]);
     };
 
     home.packages = [pkgs.obs-studio];
