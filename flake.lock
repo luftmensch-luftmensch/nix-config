@@ -350,11 +350,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1711109160,
-        "narHash": "sha256-ejUTLk1rMqp1td5VkJK9Bn1dcAuy9hqyQBjhzqOnh7E=",
+        "lastModified": 1711115729,
+        "narHash": "sha256-Ov/nGkKE5zapCoWcHiZK1iDACHzvf92K9+ea1MEKru8=",
         "owner": "luftmensch-luftmensch",
         "repo": "neovim-flake",
-        "rev": "f237674c0f75e05aa9bb721249fae8edfd242519",
+        "rev": "ae85653dc2c44a32491d8ca00fe53773ad60f1bd",
         "type": "github"
       },
       "original": {
