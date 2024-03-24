@@ -13,6 +13,21 @@
     (let* ((file (dired-get-filename nil t)))
       (call-process "xdg-open" nil 0 nil file)))
 
+  (defun vb/dired-open-marked-files (&optional file)
+    "Open the current FILE or Dired marked files in Emacs."
+    (interactive)
+    (let (doIt (myFileList
+                (cond
+                 ((eq major-mode 'dired-mode)
+                  (dired-get-marked-files))
+                 ((not file) (list (buffer-file-name)))
+                 (file (list file)))))
+      (setq doIt (if (<= (length myFileList) 30) t
+                   (y-or-n-p "Open more than 30 files? ")))
+      (mapc (lambda (fPath)
+              (let ((process-connection-type nil))
+                (start-process "" nil "emacsclient" fPath))) myFileList)))
+
   ;; Kill the current Dired buffer, then visit the file or directory
   (put 'dired-find-alternate-file 'disabled nil)
 
@@ -52,9 +67,10 @@
     "C-c C-c" dired-hide-details-mode)
 
   (:bind-into dired-mode-map
-  	"M-<return>" vb/dired-open-file
-  	"C-c o" vb/dired-open-file
-  	"o" vb/dired-open-file)
+    "M-<return>" vb/dired-open-file
+    "C-c o" vb/dired-open-file
+    "o" vb/dired-open-file
+    "O" vb/dired-open-marked-files)
   (setup (:if-feature general)
     (vb/leader-key "d" '(dired :which-key "File Manager")))
   (setup (:if-feature evil)

@@ -27,6 +27,7 @@
     [remap evil-forward-section-begin] #'pdf-view-next-page-command
     [remap evil-backward-section-begin] #'pdf-view-previous-page-command)
 
+
   (:with-mode pdf-view-mode
     (:file-match "\\.[pP][dD][fF]\\'"))
 
@@ -85,15 +86,6 @@
 		       elfeed-search-filter "@5-days-ago +unread")
 
   ;; Quality of life improvements
-  ;;   (defun vb/elfeed-filter-include-tag ()
-  ;;     "Use `completing-read' to select tags to include `+'.
-  ;; The function reads the tags from the `elfeed' db."
-  ;;     (interactive)
-  ;;     (let ((filtered-tag (completing-read "Select Tags: " (elfeed-db-get-all-tags))))
-  ;;       (progn
-  ;;         (setq elfeed-search-filter (concat elfeed-search-filter " +" filtered-tag))
-  ;;         (elfeed-search-update--force))))
-
   (defun vb/elfeed-filter-include-tag ()
     "Use `completing-read' to select tags to include `+'.
 The function reads the tags from the `elfeed' db."
@@ -102,28 +94,19 @@ The function reads the tags from the `elfeed' db."
       (progn
         (unless (cl-search filtered-tag elfeed-search-filter)
           (setq elfeed-search-filter (concat elfeed-search-filter " +" filtered-tag))
-          (elfeed-search-update--force)
-          )
+          (elfeed-search-update--force))
         (message "Filter %s already set" filtered-tag))))
-
-  ;;; TODO: Edit vb/elfeed-filter-exclude-tag
-  ;; (when (cl-search "unread" elfeed-search-filter)
-  ;;   (message "OK"))
-  ;; (defun replace-in-string (what with in)
-  ;;   (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
-
-  ;; (replace-in-string "+unread" "READ" elfeed-search-filter)
 
   (defun vb/elfeed-filter-exclude-tag ()
     "Use `completing-read' to select tags to exclude `-'.
 The function reads the tags from the `elfeed' db."
     (interactive)
     (let ((filtered-tag (completing-read "Select Tags: " (elfeed-db-get-all-tags))))
-      (progn
-        (setq elfeed-search-filter (concat elfeed-search-filter " -" filtered-tag))
-        (elfeed-search-update--force))))
-
-
+      (if (cl-search filtered-tag elfeed-search-filter)
+          (progn
+            (setq elfeed-search-filter (string-trim (replace-regexp-in-string (regexp-quote (concat "+" filtered-tag)) "" elfeed-search-filter nil 'literal)))
+            (elfeed-search-update--force))
+        (message "Filter %s is not present" filtered-tag))))
 
   (:bind-into elfeed-search-mode-map
     "C-+" 'vb/elfeed-filter-include-tag
