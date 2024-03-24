@@ -44,71 +44,115 @@
 (setup (:pkg elfeed)
   (:global "C-c e l" elfeed)
   (:option elfeed-feeds
-           (quote
-            (;; GNU/Linux related
-             ("https://www.reddit.com/r/linux.rss" linux)
-             ("https://www.reddit.com/r/linuxmemes.rss" linux linux-memes)
-             ("https://www.linuxserver.io/blog.rss" linux linux-server)
+		       '(
+		         ;; GNU/Linux
+		         ("https://www.reddit.com/r/linux.rss" linux)
+		         ("https://www.reddit.com/r/linuxmemes.rss" linux linux-memes)
+		         ("https://www.linuxserver.io/blog.rss" linux linux-server)
+		         ;; Nixos
+		         ("https://www.reddit.com/r/nixos.rss" nixos)
+		         ("https://christine.website/blog.rss" nixos Xe)
+		         ;; ArchLinux
+		         ("https://www.reddit.com/r/archlinux.rss" arch)
 
-			       ;; Nixos related
-			       ("https://www.reddit.com/r/nixos.rss"         nixos)
-			       ("https://christine.website/blog.rss"         nixos Xe)
+		         ;; Programming languages related
+		         ("https://nullprogram.com/feed/" coding nullprogram)
+		         ("https://www.reddit.com/r/golang.rss" coding golang)
+		         ("https://bitfieldconsulting.com/golang?format=rss" coding golang)
 
-			       ;; Arch related
-			       ("https://www.reddit.com/r/archlinux.rss" arch)
+		         ("https://www.reddit.com/r/C_Programming.rss" coding C)
+		         ("https://www.reddit.com/r/ProgrammerHumor.rss" coding meme)
 
-			       ;; Programming languages related
-			       ("https://nullprogram.com/feed/"                programming nullprogram)
-			       ("https://www.reddit.com/r/golang.rss"          programming golang)
-			       ("https://bitfieldconsulting.com/golang?format=rss" programming golang)
+		         ;; Emacs related
+		         ("https://www.reddit.com/r/emacs.rss"    emacs)
+		         ("https://www.reddit.com/r/orgmode.rss"  emacs orgmode)
+		         ("https://planet.emacslife.com/atom.xml" emacs emacslife)
 
-			       ("https://www.reddit.com/r/C_Programming.rss"   programming C)
-			       ("https://www.reddit.com/r/ProgrammerHumor.rss" programming ProgrammerHumor)
+		         ;; Latex related
+		         ("https://www.reddit.com/r/LaTeX.rss" latex)
 
-			       ;; Emacs related
-			       ("https://www.reddit.com/r/emacs.rss"    emacs)
-			       ("https://www.reddit.com/r/orgmode.rss"  emacs orgmode)
-			       ("https://planet.emacslife.com/atom.xml" emacs emacslife)
+		         ;; Mobile related
+		         ("https://www.reddit.com/r/androiddev.rss" android android-dev)
+		         ("https://www.reddit.com/r/fdroid.rss"     android fdroid)
+		         ("https://www.reddit.com/r/FlutterDev.rss" android flutter)
 
-			       ;; Latex related
-			       ("https://www.reddit.com/r/LaTeX.rss" latex)
+		         ;; Miscellaneous
+		         ("https://www.rousette.org.uk/archives/index.xml" geekoides)
+		         ("https://www.bytelab.codes/rss/" bytelab))
 
-			       ;; Mobile related
-             ("https://www.reddit.com/r/androiddev.rss" android android-dev)
-			       ("https://www.reddit.com/r/fdroid.rss"     android fdroid)
-			       ("https://www.reddit.com/r/FlutterDev.rss" android flutter)
+		       elfeed-search-date-format '("%d-%m-%Y" 10 :left)
+		       elfeed-db-directory (expand-file-name "elfeed/" .var) ;; "~/.config/emacs/elfeed"
+		       elfeed-search-filter "@5-days-ago +unread")
 
-			       ;; Miscellaneous
-			       ("https://www.rousette.org.uk/archives/index.xml" geekoides)
-			       ("https://www.bytelab.codes/rss/" bytelab)))
+  ;; Quality of life improvements
+  ;;   (defun vb/elfeed-filter-include-tag ()
+  ;;     "Use `completing-read' to select tags to include `+'.
+  ;; The function reads the tags from the `elfeed' db."
+  ;;     (interactive)
+  ;;     (let ((filtered-tag (completing-read "Select Tags: " (elfeed-db-get-all-tags))))
+  ;;       (progn
+  ;;         (setq elfeed-search-filter (concat elfeed-search-filter " +" filtered-tag))
+  ;;         (elfeed-search-update--force))))
 
-           elfeed-search-date-format '("%d-%m-%Y" 10 :left)
-           elfeed-db-directory (expand-file-name "elfeed/" .var) ;; "~/.config/emacs/elfeed"
-	         elfeed-search-filter "@5-days-ago +unread")
+  (defun vb/elfeed-filter-include-tag ()
+    "Use `completing-read' to select tags to include `+'.
+The function reads the tags from the `elfeed' db."
+    (interactive)
+    (let ((filtered-tag (completing-read "Select Tags: " (elfeed-db-get-all-tags))))
+      (progn
+        (unless (cl-search filtered-tag elfeed-search-filter)
+          (setq elfeed-search-filter (concat elfeed-search-filter " +" filtered-tag))
+          (elfeed-search-update--force)
+          )
+        (message "Filter %s already set" filtered-tag))))
+
+  ;;; TODO: Edit vb/elfeed-filter-exclude-tag
+  ;; (when (cl-search "unread" elfeed-search-filter)
+  ;;   (message "OK"))
+  ;; (defun replace-in-string (what with in)
+  ;;   (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
+
+  ;; (replace-in-string "+unread" "READ" elfeed-search-filter)
+
+  (defun vb/elfeed-filter-exclude-tag ()
+    "Use `completing-read' to select tags to exclude `-'.
+The function reads the tags from the `elfeed' db."
+    (interactive)
+    (let ((filtered-tag (completing-read "Select Tags: " (elfeed-db-get-all-tags))))
+      (progn
+        (setq elfeed-search-filter (concat elfeed-search-filter " -" filtered-tag))
+        (elfeed-search-update--force))))
+
+
+
   (:bind-into elfeed-search-mode-map
-    [remap evil-ret] 'elfeed-search-show-entry
-    [remap evil-goto-char] 'elfeed-search-browse-url
-    ;; filter
-    [remap evil-change-whole-line] #'elfeed-search-set-filter
-    [remap evil-substitute] #'elfeed-search-live-filter
-    [remap evil-change] #'elfeed-search-clear-filter
-    [remap evil-record-macro] #'elfeed-search-quit-window)
+    "C-+" 'vb/elfeed-filter-include-tag
+    "C--" 'vb/elfeed-filter-exclude-tag
+    ;; [remap negative-argument] 'vb/elfeed-filter-exclude-tag
+    [remap negative-argument] 'vb/elfeed-filter-exclude-tag
+		[remap evil-ret] 'elfeed-search-show-entry
+		[remap evil-goto-char] 'elfeed-search-browse-url
+		;; filter
+		[remap evil-change-whole-line] #'elfeed-search-set-filter
+		[remap evil-substitute] #'elfeed-search-live-filter
+		[remap evil-change] #'elfeed-search-clear-filter
+		[remap evil-record-macro] #'elfeed-search-quit-window)
 
   (:bind-into elfeed-show-mode-map
-    [remap elfeed-search-browse-url]  #'elfeed-show-visit
-    [remap evil-goto-char] 'elfeed-show-visit
-    [remap evil-record-macro] #'elfeed-kill-buffer
-    "C-j" 'elfeed-show-next
-    "C-k" 'elfeed-show-prev))
+		[remap elfeed-search-browse-url]  #'elfeed-show-visit
+		[remap evil-goto-char] 'elfeed-show-visit
+		[remap evil-record-macro] #'elfeed-kill-buffer
+		"C-j" 'elfeed-show-next
+		"C-k" 'elfeed-show-prev))
 
 (setup (:if-feature evil)
   (evil-define-key 'normal elfeed-search-mode-map
-    (kbd "+") 'elfeed-search-tag-all
-    (kbd "-")'elfeed-search-untag-all
+    ;; (kbd "+") 'elfeed-search-tag-all
+    ;; (kbd "-")'elfeed-search-untag-all
     (kbd "u") 'elfeed-search-untag-all-unread
     (kbd "U") 'elfeed-search-tag-all-unread
 
-    (kbd "gr") 'elfeed-update))
+    (kbd "gr") 'elfeed-search-update--force))
 
 
 (provide 'init-reading)
