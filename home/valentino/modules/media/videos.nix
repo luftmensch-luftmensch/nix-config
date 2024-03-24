@@ -80,7 +80,7 @@ in {
         DEL = "script-binding osc/visibility";
       };
       scripts = with pkgs;
-        [mpv-modern-x]
+        [mpv-modern-x mpv-navigator mpv-visualizer]
         ++ (with pkgs.mpvScripts; [mpris thumbfast sponsorblock]);
     };
 

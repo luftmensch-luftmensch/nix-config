@@ -44,6 +44,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     description = "";
     homepage = "https://github.com/zydezu/ModernX";
     license = licenses.unlicense;
-    maintainers = with lib.maintainers; [apfelkuchen6];
+    maintainers = with lib.maintainers; [luftmensch-luftmensch];
   };
 })
