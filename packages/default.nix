@@ -19,4 +19,5 @@
   mpv-modern-x = pkgs.callPackage ./mpv-scripts/modern-x.nix {};
   mpv-visualizer = pkgs.callPackage ./mpv-scripts/visualizer {};
   mpv-navigator = pkgs.callPackage ./mpv-scripts/file-navigator {};
+  mpv-m-x = pkgs.callPackage ./mpv-scripts/M-x {};
 }
