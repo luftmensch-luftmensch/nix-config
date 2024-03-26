@@ -57,6 +57,7 @@ with lib; let
     [bind nmap traceroute]
     ++ [procs ps_mem usbutils] # Usage: sudo ps_mem -p $(pgrep -d, -u $USER) (Why is Emacs using so much RAM?)
     ++ [unrar unzip zip]
+    # ++ [figlet] # Liked font: big/doom/calvin-s
     ++ [lm_sensors lshw lsof];
 
   desktop = with pkgs; [

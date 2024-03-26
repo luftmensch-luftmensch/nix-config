@@ -68,6 +68,7 @@
 		         ("https://www.reddit.com/r/emacs.rss"    emacs)
 		         ("https://www.reddit.com/r/orgmode.rss"  emacs orgmode)
 		         ("https://planet.emacslife.com/atom.xml" emacs emacslife)
+             ("https://dotfyle.com/this-week-in-neovim/rss.xml" neovim)
 
 		         ;; Latex related
 		         ("https://www.reddit.com/r/LaTeX.rss" latex)

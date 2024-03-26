@@ -103,7 +103,14 @@
     ;; list-buffers-directory is the variable set in dired buffers
     (if-let* ((path (or (buffer-file-name) list-buffers-directory)))
         (message (kill-new path))
-      (error "Buffer not visiting a file")))
+      (error "Buffer not visiting a file"))
+
+    (defconst *emacs-files* "/home/valentino/nix-config/home/valentino/modules/editors/emacs/config/lisp/"
+      "All init files used by EMACS.")
+
+    (defun emacs-init-files ()
+      (interactive)
+      (find-file (expand-file-name (completing-read "File> " (directory-files *emacs-files* nil directory-files-no-dot-files-regexp)) *emacs-files*))))
 
 	(setq-default subword-mode))
 
