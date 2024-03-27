@@ -27,8 +27,8 @@
   (defun crm-indicator (args)
     (cons (format "[CRM%s] %s"
                   (replace-regexp-in-string
-            			 "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-            			 crm-separator)
+                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                   crm-separator)
                   (car args))
           (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
@@ -66,19 +66,19 @@
     (unless (file-exists-p filename)
       (let ((dir (file-name-directory filename)))
         (unless (file-exists-p dir)
-        	(make-directory dir t)))))
+          (make-directory dir t)))))
 
   (:also-load vertico-indexed
-            	vertico-flat
-            	vertico-grid
-            	vertico-mouse
-            	vertico-quick
-            	vertico-buffer
-            	vertico-repeat
-            	vertico-reverse
-            	vertico-directory
-            	vertico-multiform
-            	vertico-unobtrusive)
+              vertico-flat
+              vertico-grid
+              vertico-mouse
+              vertico-quick
+              vertico-buffer
+              vertico-repeat
+              vertico-reverse
+              vertico-directory
+              vertico-multiform
+              vertico-unobtrusive)
 
   (:option vertico-scroll-margin 0
            vertico-count 7
@@ -96,12 +96,12 @@
   ;; Prefix the current candidate with “» ”. (From https://github.com/minad/vertico/wiki#prefix-current-candidate-with-arrow)
   ;; This does add width to the left side of the minibuffer, which may interfere with your aesthetic-related configurations of other packages.
   (advice-add #'vertico--format-candidate :around
-            	(lambda (orig cand prefix suffix index _start)
+              (lambda (orig cand prefix suffix index _start)
                 (setq cand (funcall orig cand prefix suffix index _start))
                 (concat
                  (if (= vertico--index index)
-            			   (propertize "λ " 'face 'vertico-current)
-            			 "  ")
+                     (propertize "λ " 'face 'vertico-current)
+                   "  ")
                  cand)))
 
   ;; Sort directories before files
@@ -158,7 +158,7 @@
 
 ;; Orderless
 (setup (:pkg orderless)
-  (defun archer-orderless-literal-dispatcher (pattern _index _total)
+  (defun vb/orderless-literal-dispatcher (pattern _index _total)
     "Literal style dispatcher, using equal sign as a suffix."
     (cond
      ((equal "=" pattern)
@@ -166,7 +166,7 @@
      ((string-suffix-p "=" pattern)
       (cons 'orderless-literal (substring pattern 0 -1)))))
 
-  (defun archer-orderless-without-literal-dispatcher (pattern _index _total)
+  (defun vb/orderless-without-literal-dispatcher (pattern _index _total)
     "Literal without style dispatcher using the exclamation mark as a suffix."
     (cond
      ((equal "!" pattern)
@@ -174,7 +174,7 @@
      ((string-suffix-p "!" pattern)
       (cons 'orderless-without-literal (substring pattern 0 -1)))))
 
-  (defun archer-orderless-initialism-dispatcher (pattern _index _total)
+  (defun vb/orderless-initialism-dispatcher (pattern _index _total)
     "Leading initialism dispatcher using comma as suffix."
     (cond
      ((equal "," pattern)
@@ -182,7 +182,7 @@
      ((string-suffix-p "," pattern)
       (cons 'orderless-initialism (substring pattern 0 -1)))))
 
-  (defun archer-orderless-flex-dispatcher (pattern _index _total)
+  (defun vb/orderless-flex-dispatcher (pattern _index _total)
     "Flex dispatcher using the tilde suffix."
     (cond
      ((equal "~" pattern)
@@ -195,10 +195,10 @@
            completion-category-defaults nil)
 
   (:option orderless-style-dispatchers
-           '(archer-orderless-literal-dispatcher
-             archer-orderless-without-literal-dispatcher
-             archer-orderless-initialism-dispatcher
-             archer-orderless-flex-dispatcher))
+           '(vb/orderless-literal-dispatcher
+             vb/orderless-without-literal-dispatcher
+             vb/orderless-initialism-dispatcher
+             vb/orderless-flex-dispatcher))
 
   (:option completion-category-overrides
            '((file (styles . (partial-completion basic orderless)))

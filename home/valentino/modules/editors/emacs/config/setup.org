@@ -346,7 +346,7 @@ To execute or export code in =org-mode= code blocks, we need to set up =org-babe
 Org Mode's [[https://orgmode.org/manual/Structure-Templates.html][structure templates]] feature enables to quickly insert code blocks into your Org files in combination with =org-tempo= by typing =<= followed by the template name like =el= or =py= and then press =TAB=.
 To add more =src= block templates, just copy one of the lines and change the two strings at the end, the first to be the template name and the second to contain the name of the language ([[https://orgmode.org/worg/org-contrib/babel/languages.html][listed here]]).
 
-There's also a snippet that adds a hook to =org-mode= buffers so that ~archer-org-babel-tangle-config~ gets executed each time such a buffer gets saved. This function checks to see if the file being saved is the Emacs.org file you're looking at right now, and if so, automatically exports the configuration here to the associated output files. This function is inspired by David Wilson of System Crafters.
+There's also a snippet that adds a hook to =org-mode= buffers so that ~vb/org-babel-tangle-config~ gets executed each time such a buffer gets saved. This function checks to see if the file being saved is the Emacs.org file you're looking at right now, and if so, automatically exports the configuration here to the associated output files. This function is inspired by David Wilson of System Crafters.
 
 #+begin_src emacs-lisp
 (require 'init-org-languages)

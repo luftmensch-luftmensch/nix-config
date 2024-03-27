@@ -37,8 +37,8 @@ it includes the NAME of the setup form in the warning output."
   (if (memq 'without-error-demotion setup-attributes)
       body
     `(with-demoted-errors ,(format "Error in setup form on line %d (%s): %%S"
-			                             (line-number-at-pos)
-			                             name)
+                                   (line-number-at-pos)
+                                   name)
        ,body)))
 
 (add-to-list 'setup-modifier-list '+setup-wrap-to-demote-errors)
@@ -79,8 +79,8 @@ See `advice-add' for more details."
 (setup-define :autoload
   (lambda (func)
     (let ((fn (if (memq (car-safe func) '(quote function))
-	                (cadr func)
-	              func)))
+                  (cadr func)
+                func)))
       `(unless (fboundp (quote ,fn))
          (autoload (function ,fn) ,(symbol-name (setup-get 'feature)) nil t))))
   :documentation "Autoload COMMAND if not already bound."
@@ -116,11 +116,11 @@ See `advice-add' for more details."
   (lambda (&optional mode)
     (let* ((mode (or mode (setup-get 'mode)))
            (mode (if (string-match-p "-mode\\'" (symbol-name mode))
-	                   mode
-	                 (intern (format "%s-mode" mode)))))
+                     mode
+                   (intern (format "%s-mode" mode)))))
       `(setq minor-mode-alist
              (delq (assq ',mode minor-mode-alist)
-	                 minor-mode-alist))))
+                   minor-mode-alist))))
   :documentation "Hide the mode-line lighter of the current mode.
 Alternatively, MODE can be specified manually, and override the
 current mode."
@@ -147,20 +147,20 @@ current mode."
     (lambda (recipe &rest predicates)
       (let* ((skp (make-symbol "straight-keyword-p"))
              (straight-use-p (cl-mapcar
-			                        (lambda (f) (setup--straight-handle-arg f skp)) predicates))
+                              (lambda (f) (setup--straight-handle-arg f skp)) predicates))
              (form `(unless (and ,@straight-use-p
-			                           (condition-case e (straight-use-package ',recipe)
-			                             (error (+setup-warn ":straight error: %S" ',recipe)
-				                                  ,(setup-quit))
-			                             (:success t)))
-		                  ,(setup-quit))))
+                                 (condition-case e (straight-use-package ',recipe)
+                                   (error (+setup-warn ":straight error: %S" ',recipe)
+                                          ,(setup-quit))
+                                   (:success t)))
+                      ,(setup-quit))))
         ;; Keyword arguments --- :quit is special and should short-circuit
         (if (memq :quit predicates)
             (setq form `,(setup-quit))
           ;; Otherwise, handle the rest of them ...
           (when-let ((after (cadr (memq :after predicates))))
             (setq form `(with-eval-after-load ,(if (eq after t) (setup-get 'feature) after)
-		                      ,form))))
+                          ,form))))
         ;; Finally ...
         form))
     :documentation "Install RECIPE with `straight-use-package'.
@@ -168,12 +168,12 @@ If PREDICATES are given, only install RECIPE if all of them return non-nil.
 The following keyword arguments are also recognized:
 - :quit          --- immediately stop evaluating.  Good for commenting.
 - :after FEATURE --- only install RECIPE after FEATURE is loaded.
-	       If FEATURE is t, install RECIPE after the current feature."
+         If FEATURE is t, install RECIPE after the current feature."
     :repeatable nil
     :indent 1
     :shorthand (lambda (sexp)
-	               (let ((recipe (cadr sexp)))
-	                 (or (car-safe recipe) recipe)))))
+                 (let ((recipe (cadr sexp)))
+                   (or (car-safe recipe) recipe)))))
 
 (provide 'init-setup)
 ;;; init-setup.el ends here

@@ -6,9 +6,6 @@
 ;; (setq-default evil-want-keybinding nil)
 (setup (:pkg evil)
   (:require evil)
-  ;; (:with-after evil
-  ;;   (:pkg evil-collection)
-  ;;   (evil-collection-init))
   (:option evil-want-integration t    ;; This is optional since it's already set to t by default.
            ;; evil-want-keybinding nil
            evil-emacs-state-modes nil
@@ -28,11 +25,6 @@
       ;; Taken from https://github.com/minad/consult/issues/318
       "n" #'(lambda () (interactive) (search-forward (car consult--line-history)))
       "N" #'(lambda () (interactive) (search-backward (car consult--line-history)))
-      ;; "<left>" 'vb/dont-arrow-me-bro
-      ;; "<right>" 'vb/dont-arrow-me-bro
-      ;; "<up>" 'vb/dont-arrow-me-bro
-      ;; "<down>" 'vb/dont-arrow-me-bro
-
       "(" 'evil-previous-open-paren
       ")" 'evil-next-close-paren)))
 (provide 'init-evil)

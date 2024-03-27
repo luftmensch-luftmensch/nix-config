@@ -54,7 +54,6 @@
     (:global "C-c t" telega-prefix-map))
 
   (:with-mode telega-chat-mode
-    ;; (:hook archer-telega-chat-mode)
     ;; From Andrew Tropin <3
     (:local-set completion-at-point-functions (mapcar
                                                #'cape-company-to-capf

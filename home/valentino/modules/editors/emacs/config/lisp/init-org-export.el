@@ -23,26 +23,25 @@
                                       ("breakanywhere" "true"))
            ;; PDF process
            ;; '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f")
-
-		       org-latex-compiler "lualatex"
-		       org-latex-pdf-process '("lualatex -shell-escape -interaction nonstopmode %f"
-					                         "lualatex -shell-escape -interaction nonstopmode %f"))
+           org-latex-compiler "lualatex"
+           org-latex-pdf-process '("lualatex -shell-escape -interaction nonstopmode %f"
+                                   "lualatex -shell-escape -interaction nonstopmode %f"))
 
   ;; (add-to-list 'org-latex-listings-langs '(yaml "yaml"))
   ;; (add-to-list 'org-latex-listings-langs '(groovy "groovy"))
 
   ;; LaTeX base classes
   (:when-loaded (add-to-list 'org-latex-classes
-				                     '("org-plain-latex"
-				                       "\\documentclass{article}
+                             '("org-plain-latex"
+                               "\\documentclass{article}
                  [NO-DEFAULT-PACKAGES]
                  [PACKAGES]
                  [EXTRA]"
-				                       ("\\section{%s}" . "\\section*{%s}")
-				                       ("\\subsection{%s}" . "\\subsection*{%s}")
-				                       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-				                       ("\\paragraph{%s}" . "\\paragraph*{%s}")
-				                       ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
+                               ("\\section{%s}" . "\\section*{%s}")
+                               ("\\subsection{%s}" . "\\subsection*{%s}")
+                               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
 
 ;; Reveal.js
 (setup (:pkg (ox-reveal :type git :host github :repo "yjwen/org-reveal"))

@@ -69,7 +69,7 @@ This function advances to the next thread when finished."
      (interactive (cons current-prefix-arg (notmuch-interactive-region)))
      (when ,tags
        (notmuch-search-tag
-	      (notmuch-tag-change-list ,tags untag) beg end))
+        (notmuch-tag-change-list ,tags untag) beg end))
      (when (eq beg end)
        (notmuch-search-next-thread))))
 
@@ -89,7 +89,7 @@ reverse the application of the tags."
      (interactive "P")
      (when ,tags
        (apply 'notmuch-show-tag-message
-	            (notmuch-tag-change-list ,tags untag)))))
+              (notmuch-tag-change-list ,tags untag)))))
 
 (vb/notmuch-show-tag-message vb/notmuch-show-delete-message vb/notmuch-mark-delete-tags)
 (vb/notmuch-show-tag-message vb/notmuch-show-flag-message vb/notmuch-mark-flag-tags)
@@ -146,90 +146,90 @@ With optional prefix ARG (\\[universal-argument]) call
 
   ;; Saved searches
   (:option notmuch-saved-searches
-		       ;; Personal
-		       `(( :name "📥 inbox (personal)"
-		           :query "tag:inbox and tag:personal"
-		           :sort-order newest-first
-		           :key ,(kbd "p i"))
-		         ( :name "📔 unread (personal)"
-		           :query "tag:unread and tag:inbox and tag:personal"
-		           :sort-order newest-first
-		           :key ,(kbd "p u"))
-		         ;; University
-		         ( :name "📥 inbox (university)"
-		           ;; :query "tag:inbox and tag:university"
+           ;; Personal
+           `(( :name "📥 inbox (personal)"
+               :query "tag:inbox and tag:personal"
+               :sort-order newest-first
+               :key ,(kbd "p i"))
+             ( :name "📔 unread (personal)"
+               :query "tag:unread and tag:inbox and tag:personal"
+               :sort-order newest-first
+               :key ,(kbd "p u"))
+             ;; University
+             ( :name "📥 inbox (university)"
+               ;; :query "tag:inbox and tag:university"
                ;; TODO: Investigate -> For some reason the mail in unina are not marked as inbox
-		           :query "tag:university"
-		           :sort-order newest-first
-		           :key ,(kbd "u i"))
-		         ( :name "📔 unread (university)"
-		           :query "tag:unread and tag:inbox and tag:university"
-		           :sort-order newest-first
-		           :key ,(kbd "u u"))))
+               :query "tag:university"
+               :sort-order newest-first
+               :key ,(kbd "u i"))
+             ( :name "📔 unread (university)"
+               :query "tag:unread and tag:inbox and tag:university"
+               :sort-order newest-first
+               :key ,(kbd "u u"))))
 
   ;; Tags
   (:option notmuch-archive-tags vb/notmuch-mark-archive-tags
-		       notmuch-message-replied-tags '("+replied")
-		       notmuch-message-forwarded-tags '("+forwarded")
-		       notmuch-show-mark-read-tags '("-unread")
-		       notmuch-draft-tags '("+draft")
-		       notmuch-draft-folder "drafts"
-		       notmuch-draft-save-plaintext 'ask)
+           notmuch-message-replied-tags '("+replied")
+           notmuch-message-forwarded-tags '("+forwarded")
+           notmuch-show-mark-read-tags '("-unread")
+           notmuch-draft-tags '("+draft")
+           notmuch-draft-folder "drafts"
+           notmuch-draft-save-plaintext 'ask)
 
   ;; Tag formats (with emojis)
   (:option notmuch-tag-formats
-		       '(("unread" (propertize tag 'face 'notmuch-tag-unread))
-		         ("flagged" (propertize tag 'face 'notmuch-tag-flagged) ;; Icon is enough
-		          (concat "🚩")))
+           '(("unread" (propertize tag 'face 'notmuch-tag-unread))
+             ("flagged" (propertize tag 'face 'notmuch-tag-flagged) ;; Icon is enough
+              (concat "🚩")))
 
-		       notmuch-tag-deleted-formats
-		       '(("unread" (notmuch-apply-face bare-tag 'notmuch-tag-deleted)
-		          (concat "🚫" tag))
-		         (".*" (notmuch-apply-face tag 'notmuch-tag-deleted)
-		          (concat "🚫" tag)))
+           notmuch-tag-deleted-formats
+           '(("unread" (notmuch-apply-face bare-tag 'notmuch-tag-deleted)
+              (concat "🚫" tag))
+             (".*" (notmuch-apply-face tag 'notmuch-tag-deleted)
+              (concat "🚫" tag)))
 
-		       notmuch-tag-added-formats
-		       '((".*" (notmuch-apply-face tag 'notmuch-tag-added)
-		          (concat "✏️" tag))))
+           notmuch-tag-added-formats
+           '((".*" (notmuch-apply-face tag 'notmuch-tag-added)
+              (concat "✏️" tag))))
 
   ;; Reading
   (:option notmuch-show-relative-dates t
-		       notmuch-show-all-multipart/alternative-parts nil
-		       notmuch-show-indent-messages-width 1
-		       notmuch-show-indent-multipart t
-		       notmuch-show-part-button-default-action 'notmuch-show-view-part
-		       notmuch-show-text/html-blocked-images "." ; block everything
-		       notmuch-wash-wrap-lines-length 120
-		       notmuch-unthreaded-show-out nil
-		       notmuch-message-headers '("To" "Cc" "Subject" "Date")
-		       notmuch-message-headers-visible t)
+           notmuch-show-all-multipart/alternative-parts nil
+           notmuch-show-indent-messages-width 1
+           notmuch-show-indent-multipart t
+           notmuch-show-part-button-default-action 'notmuch-show-view-part
+           notmuch-show-text/html-blocked-images "." ; block everything
+           notmuch-wash-wrap-lines-length 120
+           notmuch-unthreaded-show-out nil
+           notmuch-message-headers '("To" "Cc" "Subject" "Date")
+           notmuch-message-headers-visible t)
 
   (:option notmuch-wash-citation-lines-prefix 3
-		       notmuch-wash-citation-lines-suffix 3)
+           notmuch-wash-citation-lines-suffix 3)
 
   ;; Composition
   (:option notmuch-mua-compose-in 'current-window
-		       notmuch-mua-hidden-headers nil
-		       notmuch-address-command 'internal
-		       notmuch-always-prompt-for-sender t
-		       notmuch-mua-cite-function 'message-cite-original
-		       notmuch-mua-reply-insert-header-p-function 'notmuch-show-reply-insert-header-p-never
-		       notmuch-mua-user-agent-function nil
-		       notmuch-maildir-use-notmuch-insert t
-		       notmuch-crypto-process-mime t
-		       notmuch-crypto-get-keys-asynchronously t
-		       notmuch-mua-attachment-regexp   ; see `notmuch-mua-send-hook'
-		       (concat "\\b\\(attache\?ment\\|attached\\|attach\\|"
-			             "pi[èe]ce\s+jointe?\\)\\b"))
+           notmuch-mua-hidden-headers nil
+           notmuch-address-command 'internal
+           notmuch-always-prompt-for-sender t
+           notmuch-mua-cite-function 'message-cite-original
+           notmuch-mua-reply-insert-header-p-function 'notmuch-show-reply-insert-header-p-never
+           notmuch-mua-user-agent-function nil
+           notmuch-maildir-use-notmuch-insert t
+           notmuch-crypto-process-mime t
+           notmuch-crypto-get-keys-asynchronously t
+           notmuch-mua-attachment-regexp   ; see `notmuch-mua-send-hook'
+           (concat "\\b\\(attache\?ment\\|attached\\|attach\\|"
+                   "pi[èe]ce\s+jointe?\\)\\b"))
 
   ;; Tagging keys
   (:option notmuch-tagging-keys
-		       `((,(kbd "d") vb/notmuch-mark-delete-tags "⛔ Mark for deletion")
-		         (,(kbd "a") vb/notmuch-mark-archive-tags "📫 Mark to archive")
-		         (,(kbd "f") vb/notmuch-mark-flag-tags "🚩 Flag as important")
-		         (,(kbd "s") vb/notmuch-mark-spam-tags "⚠️ Mark as spam")
-		         (,(kbd "r") ("-unread") "✅ Mark as read")
-		         (,(kbd "u") ("+unread") "📔 Mark as unread")))
+           `((,(kbd "d") vb/notmuch-mark-delete-tags "⛔ Mark for deletion")
+             (,(kbd "a") vb/notmuch-mark-archive-tags "📫 Mark to archive")
+             (,(kbd "f") vb/notmuch-mark-flag-tags "🚩 Flag as important")
+             (,(kbd "s") vb/notmuch-mark-spam-tags "⚠️ Mark as spam")
+             (,(kbd "r") ("-unread") "✅ Mark as read")
+             (,(kbd "u") ("+unread") "📔 Mark as unread")))
 
   ;; Identities
   (:option notmuch-identies '("valentinobocchetti59@gmail.com" "vale.bocchetti@studenti.unina.it")
@@ -241,10 +241,10 @@ With optional prefix ARG (\\[universal-argument]) call
   (add-to-list 'notmuch-tag-formats '("attachment" (concat tag "📎")))
 
   (:with-hook notmuch-mua-send-hook
-		(:hook notmuch-mua-attachment-check))
+    (:hook notmuch-mua-attachment-check))
 
   (:global "C-c m" notmuch
-		       "C-x m" notmuch-mua-new-mail)
+           "C-x m" notmuch-mua-new-mail)
   (:bind-into notmuch-search-mode-map
     ;; K
     [remap evil-lookup] #'notmuch-tag-jump

@@ -104,7 +104,7 @@
                                       (todo . " %i %-12:c")
                                       (tags . " %i ")
                                       (search . " %i %-12:c"))
-           
+
            org-agenda-category-icon-alist `(("Anime" ,(list (all-the-icons-faicon "home" :height 0.8)) nil nil :ascent center))
 
            ;; Refile
@@ -217,7 +217,7 @@
     "C-j" 'org-move-subtree-down
     "C-k" 'org-move-subtree-up))
 
-;; TODO; Map 'org-agenda-view-mode-dispatch
+;; TODO: Map 'org-agenda-view-mode-dispatch
 (setup (:if-feature evil)
   (:bind-into org-agenda-mode-map
     [remap evil-shift-right] 'org-agenda-later

@@ -13,6 +13,7 @@ WHAT is the string that witll be substituted with WITH in IN"
   (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
 
 (defun vb/toggle-continuation-fringe-indicator ()
+  "Toggle displaying the continuation indicator."
   (interactive)
   (setq-default
    fringe-indicator-alist

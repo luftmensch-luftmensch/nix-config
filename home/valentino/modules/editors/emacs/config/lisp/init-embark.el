@@ -35,11 +35,11 @@ targets."
         embark-highlight-indicator
         embark-isearch-highlight-indicator))
 
-(defun archer-embark-hide-which-key-indicator (fn &rest args)
-  "Hide the which-key indicator immediately when using the completing-read prompter."
+(defun vb/embark-hide-which-key-indicator (fn &rest args)
+  "Hide the which-key (FN with optional ARGS) indicator immediately when using the `completing-read' prompter."
   (which-key--hide-popup-ignore-command)
   (let ((embark-indicators
-         (remq #'archer-embark-which-key-indicator embark-indicators)))
+         (remq #'vb/embark-which-key-indicator embark-indicators)))
     (apply fn args)))
 
 ;; Embark configuration
@@ -49,7 +49,7 @@ targets."
 
   (:with-after which-key
     (setq prefix-help-command #'embark-prefix-help-command)
-    (advice-add #'embark-completing-read-prompter :around #'archer-embark-hide-which-key-indicator))
+    (advice-add #'embark-completing-read-prompter :around #'vb/embark-hide-which-key-indicator))
 
   (:global "C-." embark-act
            "C-;" embark-dwim

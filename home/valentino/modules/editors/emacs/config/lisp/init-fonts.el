@@ -20,9 +20,9 @@
            x-underline-at-descent-line nil)
 
   (unless (version< emacs-version "28")
-	  (setq-default text-scale-remap-header-line nil))
+    (setq-default text-scale-remap-header-line nil))
 
-	;;; Height: point-size * 10
+  ;;; Height: point-size * 10
   (:option vb/font-height (pcase (system-name)
                             ("atlas" 110)
                             ("kronos" 140)))
@@ -32,24 +32,24 @@
   ;; (:option fontaine-latest-state-file (locate-user-emacs-file "var/fontaine-state.eld"))
 
   (:option fontaine-presets
-		       `(
+           `(
              ;; Sarasa
              (sarasa
               :default-family "Sarasa Mono Slab SC"
               :default-height ,vb/font-height)
              ;; Victor Mono
              ;; (victor
-		         ;;  :default-family "VictorMono Nerd Font"
-		         ;;  :default-height ,vb/font-height)
+             ;;  :default-family "VictorMono Nerd Font"
+             ;;  :default-height ,vb/font-height)
              ))
 
   (fontaine-set-preset (or (fontaine-restore-latest-preset) 'sarasa))
 
   (:with-hook kill-emacs-hook
-		(:hook fontaine-store-latest-preset))
+    (:hook fontaine-store-latest-preset))
 
   (:with-hook (modus-themes-after-load-theme-hook ef-themes-post-load-hook)
-		(:hook fontaine-apply-current-preset)))
+    (:hook fontaine-apply-current-preset)))
 
 (provide 'init-fonts)
 ;;; init-fonts.el ends here

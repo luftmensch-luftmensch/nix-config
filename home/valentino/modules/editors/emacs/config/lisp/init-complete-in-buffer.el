@@ -23,36 +23,36 @@
            corfu-scroll-margin 5)
 
   (:bind-into corfu-map
-		"C-n"      corfu-next
-		[tab]      corfu-next
-		"C-p"      corfu-previous
-		[backtab]  corfu-previous
-		"<escape>" corfu-quit
-		"<return>" corfu-insert
-		"M-SPC"    corfu-insert-separator)
+    "C-n"      corfu-next
+    [tab]      corfu-next
+    "C-p"      corfu-previous
+    [backtab]  corfu-previous
+    "<escape>" corfu-quit
+    "<return>" corfu-insert
+    "M-SPC"    corfu-insert-separator)
 
   ;; Cute extras
   (defun contrib-corfu-beginning-of-prompt ()
-	  "Move to beginning of completion input."
-	  (interactive)
-	  (corfu--goto -1)
-	  (goto-char (car completion-in-region--data)))
+    "Move to beginning of completion input."
+    (interactive)
+    (corfu--goto -1)
+    (goto-char (car completion-in-region--data)))
 
   (defun contrib-corfu-end-of-prompt ()
-	  "Move to end of completion input."
-	  (interactive)
-	  (corfu--goto -1)
-	  (goto-char (cadr completion-in-region--data)))
+    "Move to end of completion input."
+    (interactive)
+    (corfu--goto -1)
+    (goto-char (cadr completion-in-region--data)))
 
   (defun contrib-corfu-move-to-minibuffer ()
-	  (interactive)
-	  (let ((completion-extra-properties corfu--extra)
+    (interactive)
+    (let ((completion-extra-properties corfu--extra)
           completion-cycle-threshold completion-cycling)
-	    (apply #'consult-completion-in-region completion-in-region--data)))
+      (apply #'consult-completion-in-region completion-in-region--data)))
 
   (:bind-into corfu-map
-		[remap move-beginning-of-line] #'corfu-beginning-of-prompt
-		[remap move-end-of-line] #'corfu-end-of-prompt
+    [remap move-beginning-of-line] #'corfu-beginning-of-prompt
+    [remap move-end-of-line] #'corfu-end-of-prompt
     ;; Corfu completion is way better than the evil one
     [remap evil-complete-next] #'corfu-next
     [remap evil-complete-previous] #'corfu-previous
@@ -61,16 +61,16 @@
 
   ;; Found in Prot's configuration
   (defun contrib-corfu-enable-always-in-minibuffer ()
-	  "Enable Corfu in the minibuffer if Vertico is not active.
+    "Enable Corfu in the minibuffer if Vertico is not active.
 Useful for prompts such as `eval-expression' and `shell-command'."
-	  (unless (or (bound-and-true-p vertico--input)
+    (unless (or (bound-and-true-p vertico--input)
                 (eq (current-local-map) read-passwd-map))
-	    (setq-local corfu-auto nil) ;; Enable/disable auto completion
-	    (setq-local corfu-popupinfo-delay nil)
-	    (corfu-mode 1)))
+      (setq-local corfu-auto nil) ;; Enable/disable auto completion
+      (setq-local corfu-popupinfo-delay nil)
+      (corfu-mode 1)))
 
   (:with-hook minibuffer-setup-hook
-		(:hook contrib-corfu-enable-always-in-minibuffer))
+    (:hook contrib-corfu-enable-always-in-minibuffer))
 
   (global-corfu-mode))
 

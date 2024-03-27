@@ -15,8 +15,7 @@
     (add-to-list 'org-structure-template-alist '("cc" . "src c"))
     (add-to-list 'org-structure-template-alist '("java" . "src java"))
     (add-to-list 'org-structure-template-alist '("conf" . "src conf"))
-
-		(add-to-list 'org-structure-template-alist '("json" . "src json"))
+    (add-to-list 'org-structure-template-alist '("json" . "src json"))
     (add-to-list 'org-structure-template-alist '("yaml" . "src yaml")))
 
   (:with-mode org-mode
@@ -25,7 +24,7 @@
 
 (setup ob-tangle
   ;; Auto tangling
-  (defun archer-org-babel-tangle-config ()
+  (defun vb/org-babel-tangle-config ()
     "Auto tangle configuration on save if we are in the right directory."
     (when (string-equal (file-name-directory (buffer-file-name))
                         (expand-file-name vb/config-path))
@@ -35,7 +34,7 @@
 
   (:with-mode org-mode
     (:with-hook after-save-hook
-      (:hook archer-org-babel-tangle-config))))
+      (:hook vb/org-babel-tangle-config))))
 
 (provide 'init-org-languages)
 ;;; init-org-languages.el ends here
