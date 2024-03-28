@@ -1,16 +1,10 @@
-/*
- *
- * Author : archer-65
- *
- */
-
 @import "../colors/color.rasi"
 
 configuration {
     font:             "Iosevka Nerd Font 14";
     show-icons:       false;
     disable-history:  false;
-    sidebar-mode: 	  false;
+    sidebar-mode:     false;
 }
 
 * {
@@ -30,7 +24,7 @@ window {
 }
 
 prompt {
-    enabled: 		       true;
+    enabled:             true;
     padding:           10px;
     background-color:  @background;
     text-color:        @selected;
@@ -40,15 +34,15 @@ prompt {
 }
 
 textbox-prompt-colon {
-    expand: 	         false;
-    str: 			         " System ";
+    expand:            false;
+    str:                 " System ";
     background-color:  @selected;
-    text-color: 	     @background;
+    text-color:        @background;
     padding:           12px 10px 0px 10px;
 }
 
 inputbar {
-    children:  		     [ textbox-prompt-colon, prompt ];
+    children:            [ textbox-prompt-colon, prompt ];
     spacing:           0px;
     background-color:  @background;
     text-color:        @foreground;
@@ -63,7 +57,7 @@ inputbar {
 
 listview {
     columns:  5;
-    lines:	  1;
+    lines:    1;
     spacing:  15px;
     cycle:    true;
     dynamic:  true;
@@ -87,7 +81,7 @@ element {
 element-text {
     background-color:  inherit;
     text-color:        inherit;
-  	font:			         "Iosevka Nerd Font 32";
+    font:                "Iosevka Nerd Font 32";
     expand:            true;
     horizontal-align:  0.5;
     vertical-align:    0.5;

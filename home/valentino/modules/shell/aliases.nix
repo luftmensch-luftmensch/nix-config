@@ -63,14 +63,14 @@ in {
   open-port = "used-port";
 
   yt = "${pkgs.yt-dlp}/bin/yt-dlp";
-  yta-aac = "yt --extract-audio --audio-format aac ";
-  yta-best = "yt --extract-audio --audio-format best ";
-  yta-flac = "yt --extract-audio --audio-format flac ";
-  yta-m4a = "yt --extract-audio --audio-format m4a ";
-  yta-mp3 = "yt --extract-audio --audio-format mp3 ";
-  yta-opus = "yt --extract-audio --audio-format opus ";
-  yta-vorbis = "yt --extract-audio --audio-format vorbis ";
-  yta-wav = "yt --extract-audio --audio-format wav ";
+  yt-aac = "yt --extract-audio --audio-format aac ";
+  yt-best = "yt --extract-audio --audio-format best ";
+  yt-flac = "yt --extract-audio --audio-format flac ";
+  yt-m4a = "yt --extract-audio --audio-format m4a ";
+  yt-mp3 = "yt --extract-audio --audio-format mp3 ";
+  yt-opus = "yt --extract-audio --audio-format opus ";
+  yt-vorbis = "yt --extract-audio --audio-format vorbis ";
+  yt-wav = "yt --extract-audio --audio-format wav ";
   ytv-best = "yt -f bestvideo+bestaudio ";
   yt-list-format = "yt -F";
 

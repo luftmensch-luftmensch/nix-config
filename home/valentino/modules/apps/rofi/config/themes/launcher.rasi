@@ -1,27 +1,21 @@
-/*
- *
- * Author  : archer-65
- *
- */
-
 @import "../colors/color.rasi"
 
 configuration {
-    font: 							     "Iosevka Nerd Font 16";
-    fixed-num-lines: 			   true;
- 	  icon-theme: 					   "kora";
-    show-icons: 					   true;
-    sidebar-mode: 					 true;
-    scroll-method: 					 0;
-    window-format: 					 "[{w}] ··· {c} ···   {t}";
-    click-to-exit: 					 true;
-    combi-hide-mode-prefix:  false;
-    display-window: 				 " ";
-    display-windowcd: 			 " ";
-    display-run: 					   " ";
-    display-ssh: 					   " ";
-    display-drun: 					 " ";
-    display-combi: 					 " ";
+    font:                   "Iosevka Nerd Font 16";
+    fixed-num-lines:        true;
+    icon-theme:             "kora";
+    show-icons:             true;
+    sidebar-mode:           true;
+    scroll-method:          0;
+    window-format:          "[{w}] ··· {c} ···   {t}";
+    click-to-exit:          true;
+    combi-hide-mode-prefix: false;
+    display-window:         " ";
+    display-windowcd:       " ";
+    display-run:            " ";
+    display-ssh:            " ";
+    display-drun:           " ";
+    display-combi:          " ";
 }
 
 * {
@@ -29,35 +23,35 @@ configuration {
 }
 
 window {
-    border: 				2px;
-    border-color: 	@wborder;
+    border:         2px;
+    border-color:   @wborder;
     border-radius:  5px;
-    padding:				15;
-    width: 					25%;
+    padding:        15;
+    width:            25%;
 }
 
 prompt {
-    enabled: 					true;
-	  padding: 					4px 4px 6px 6px;
-	  background-color:	@background;
-	  text-color: 			@foreground;
+    enabled:          true;
+    padding:          4px 4px 6px 6px;
+    background-color: @background;
+    text-color:       @foreground;
 }
 
 textbox-prompt-colon {
-    expand: 		 	    false;
-    str: 					    "";
+    expand:           false;
+    str:                "";
     background-color: @background;
     text-color:       @urgent;
     padding:          5px 0px 0px 6px;
-    text-color:  	    inherit;
+    text-color:         inherit;
 }
 
 inputbar {
-    children: 	      [ prompt, textbox-prompt-colon, entry, case-indicator ];
+    children:         [ prompt, textbox-prompt-colon, entry, case-indicator ];
     background-color: @background;
     text-color:       @foreground;
     expand:           false;
-    border:        		0px 0px 1px 0px;
+    border:             0px 0px 1px 0px;
     border-radius:    0px;
     border-color:     @selected;
     margin:           0px 0px 0px 0px;
@@ -89,7 +83,7 @@ mainbox {
 }
 
 listview {
-    lines:	 8;
+    lines:   8;
     columns: 1;
     spacing: 5px;
     dynamic: true;
@@ -103,9 +97,9 @@ element-text, element-icon {
 }
 
 element {
-    border: 				0px;
+    border:         0px;
     border-radius:  4px;
-    padding: 				5px;
+    padding:          5px;
 }
 
 element normal.normal {
@@ -154,8 +148,8 @@ element alternate.active {
 }
 
 sidebar {
-    border:       	0px;
-    border-color: 	@wborder;
+    border:         0px;
+    border-color:   @wborder;
     border-radius:  0px;
 }
 
@@ -163,20 +157,20 @@ button {
     horizontal-align:  0.5;
     vertical-align:    0.5;
     background-color:  @foreground;
-    margin: 					 5px;
-    padding: 					 5px;
-    text-color: 			 @background;
-    border: 					 0px;
-    border-radius: 		 4px;
-    border-color: 		 @foreground;
+    margin:            5px;
+    padding:             5px;
+    text-color:        @background;
+    border:            0px;
+    border-radius:       4px;
+    border-color:      @foreground;
 }
 
 button selected {
     background-color:  @selected;
-    text-color: 		 	 @background;
-    border: 					 0px;
-    border-radius: 		 4px;
-    border-color: 		 @foreground;
+    text-color:          @background;
+    border:            0px;
+    border-radius:       4px;
+    border-color:      @foreground;
 }
 
 scrollbar {
@@ -188,11 +182,11 @@ scrollbar {
 }
 
 message {
-    border: 		   0px;
-    border-color:	 @selected;
-    padding: 			 1px;
+    border:        0px;
+    border-color:  @selected;
+    padding:       1px;
 }
 
 textbox {
-    text-color: 	 @fg;
+    text-color:    @fg;
 }

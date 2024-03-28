@@ -1,20 +1,14 @@
-/*
- *
- * Author  : archer-65
- *
- */
-
 @import "../colors/color.rasi"
 
 configuration {
-    font:                 "Iosevka Nerd Font 16";
-    fixed-num-lines: 			true;
-	  icon-theme: 					"kora";
-    show-icons:           true;
-  	sidebar-mode: 				false;
-    scroll-method:        0;
-    drun-display-format:  "{name}";
-    click-to-exit: 				true;  
+    font:                "Iosevka Nerd Font 16";
+    fixed-num-lines:     true;
+    icon-theme:          "kora";
+    show-icons:          true;
+    sidebar-mode:        false;
+    scroll-method:       0;
+    drun-display-format: "{name}";
+    click-to-exit:       true;
 }
 
 * {
@@ -22,31 +16,31 @@ configuration {
 }
 
 window {
-    border: 			 2px;
+    border:        2px;
     border-color:  @wborder;
     border-radius: 5px;
-    padding:			 15;
-    width: 				 25%;
+    padding:       15;
+    width:         25%;
 }
 
 prompt {
-    enabled: 					true;
-	  padding: 					4px 4px 6px 6px;
-	  background-color: @background;
-	  text-color: 			@foreground;
+    enabled:            true;
+    padding:            4px 4px 6px 6px;
+    background-color: @background;
+    text-color:       @foreground;
 }
 
 textbox-prompt-colon {
-	expand: 					false;
-	str: 							"󰞅 ";
+  expand:           false;
+  str:              "󰞅 ";
   background-color: @background;
   text-color:       @foreground;
   padding:          5px 0px 0px 6px;
-	font:							inherit;
+  font:             inherit;
 }
 
 inputbar {
-	  children: 				[ textbox-prompt-colon, entry ];
+    children:         [ textbox-prompt-colon, entry ];
     background-color: @background;
     text-color:       @foreground;
     expand:           false;
@@ -84,12 +78,12 @@ mainbox {
 
 listview {
     background-color: @background;
-    lines:						8;
+    lines:            8;
     columns:          1;
     spacing:          5px;
     dynamic:          true;
     layout:           vertical;
-    padding: 			    5px 5px 0px 5px;
+    padding:          5px 5px 0px 5px;
 }
 
 element-text, element-icon {
@@ -98,9 +92,9 @@ element-text, element-icon {
 }
 
 element {
-    border: 			 0px;
+    border:        0px;
     border-radius: 4px;
-    padding: 			 5px;
+    padding:       5px;
 }
 
 element normal.normal {
