@@ -54,6 +54,8 @@ in {
         nnoremap <Leader>f :action GotoFile<CR>
         nnoremap <Leader>r :action RecentFiles<CR>
         nnoremap <Leader>u :action GotoTest<CR>
+        nnoremap <Leader>b :action ToggleLineBreakpoint<CR>
+        nnoremap <Leader>gn :action GotoNextError<CR>
 
         nnoremap zd :action CollapseDocComments<CR>
         nnoremap zD :action ExpandDocComments<CR>
