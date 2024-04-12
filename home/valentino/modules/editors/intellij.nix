@@ -50,7 +50,6 @@ in {
         noremap <Leader>rl :source ~/.config/ideavim/ideavimrc<CR>
 
         nnoremap <Leader>p :action SearchEverywhere<CR>
-        nnoremap <Leader>c :action GotoClass<CR>
         nnoremap <Leader>t :action FileStructurePopup<CR>
         nnoremap <Leader>f :action GotoFile<CR>
         nnoremap <Leader>r :action RecentFiles<CR>
@@ -61,9 +60,18 @@ in {
         nnoremap <Leader>gR :action RenameElement<CR>
         nnoremap <Leader>go :action NextOccurence<CR>
         nnoremap <Leader>ge :action Generate<CR>
+
+        "nnoremap <leader>c :action CommentByLineComment<CR>
+        "nnoremap <leader># :action CommentByLineComment<CR>
+        "nnoremap <leader>C :action CommentByBlockComment<CR>
+
+        vnoremap <leader>c :action CommentByLineComment<CR>
+        vnoremap <leader># :action CommentByLineComment<CR>
+        vnoremap <leader>C :action CommentByBlockComment<CR>
+
         " CamelCase/snake_case word motions
-        nnoremap w [w
-        nnoremap b [b
+        " nnoremap w [w
+        " nnoremap b [b
 
         nnoremap zd :action CollapseDocComments<CR>
         nnoremap zD :action ExpandDocComments<CR>
