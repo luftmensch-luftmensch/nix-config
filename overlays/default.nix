@@ -13,6 +13,18 @@ inputs: {
     #   mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
     # });
 
+    rofi-emoji-wayland = prev.rofi-emoji.overrideAttrs (_oldAttrs: {
+      buildInputs = with final; [
+        rofi-wayland-unwrapped
+        cairo
+        glib
+        libnotify
+        wl-clipboard
+        xclip
+        xsel
+      ];
+    });
+
     tdlib = prev.tdlib.overrideAttrs (_oldAttrs: {
       version = "1.8.25";
       src = final.fetchFromGitHub {

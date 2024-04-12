@@ -6,7 +6,7 @@
   insomnium = pkgs.callPackage ./insomnium {};
 
   rofi-powermenu = pkgs.callPackage ./rofi-powermenu {};
-  # theme-toggle = pkgs.callPackage ./theme-toggle {};
+  rofi-powermenu-wayland = pkgs.callPackage ./rofi-powermenu {backend = "wayland";};
 
   san-francisco = pkgs.callPackage ./fonts/san-francisco.nix {};
   icomoon-feather-icons = pkgs.callPackage ./fonts/icomoon-feather-icon.nix {};

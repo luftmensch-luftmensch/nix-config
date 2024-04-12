@@ -41,6 +41,7 @@ in {
         nnoremap <leader>, :bNext<CR>
         nnoremap <leader>v :vsplit<CR>
         nnoremap <leader>h :split<CR>
+        nnoremap <leader>x :action UnsplitAll<CR>
         nnoremap <leader><leader> :ls<CR>
         nnoremap <leader>z :bw<CR>
 
@@ -56,6 +57,13 @@ in {
         nnoremap <Leader>u :action GotoTest<CR>
         nnoremap <Leader>b :action ToggleLineBreakpoint<CR>
         nnoremap <Leader>gn :action GotoNextError<CR>
+        nnoremap <Leader>gp :action GotoPreviousError<CR>
+        nnoremap <Leader>gR :action RenameElement<CR>
+        nnoremap <Leader>go :action NextOccurence<CR>
+        nnoremap <Leader>ge :action Generate<CR>
+        " CamelCase/snake_case word motions
+        nnoremap w [w
+        nnoremap b [b
 
         nnoremap zd :action CollapseDocComments<CR>
         nnoremap zD :action ExpandDocComments<CR>
@@ -66,6 +74,9 @@ in {
         nnoremap mm :tabnext<CR>
         nnoremap M :tabnew<CR>
         nnoremap <C-x> :noh<CR>
+        " Easy visual indentation
+        vnoremap < <gv
+        vnoremap > >gv
       '';
     };
   };

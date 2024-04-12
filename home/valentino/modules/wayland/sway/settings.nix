@@ -141,6 +141,7 @@ in {
     "${mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
 
     "${mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
+    "${mod}+Shift+e" = "exec rofi -show emoji -modi emoji -theme $HOME/.config/rofi/themes/emoji";
   };
 
   workspaceOutputAssign = [

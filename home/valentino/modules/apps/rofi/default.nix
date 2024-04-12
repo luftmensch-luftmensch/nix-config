@@ -8,6 +8,27 @@ with lib; let
   cfg = config.valentino.modules.apps.rofi;
   inherit (config.valentino.modules) wayland;
   inherit (config.valentino.modules.credentials) bitwarden;
+
+  rofiPkg =
+    if wayland.enable
+    then pkgs.rofi-wayland
+    else pkgs.rofi;
+
+  rofi-emoji =
+    if wayland.enable
+    then pkgs.rofi-emoji-wayland
+    else pkgs.rofi-emoji;
+
+  rofi-powermenu =
+    if wayland.enable
+    then pkgs.rofi-powermenu-wayland
+    else pkgs.rofi-powermenu;
+
+  rofi-rbw =
+    if wayland.enable
+    then pkgs.rofi-rbw-wayland
+    else pkgs.rofi-rbw-x11;
+
   rofiFonts = pkgs.nerdfonts.override {
     fonts = ["Iosevka"];
   };
@@ -19,11 +40,8 @@ in {
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      package =
-        if wayland.enable
-        then pkgs.rofi-wayland
-        else pkgs.rofi;
-      plugins = with pkgs; [rofi-emoji];
+      package = rofiPkg;
+      plugins = [rofi-emoji];
     };
 
     home.packages = with pkgs;

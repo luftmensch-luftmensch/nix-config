@@ -8,7 +8,6 @@ with lib; let
   cfg = config.valentino.modules.shell.git;
   inherit (config.valentino.modules.editors) neovim;
   undo-git = pkgs.writeScriptBin "undo-git" (builtins.readFile ./scripts/undo-git.sh);
-  # git-blame-someone-else = pkgs.writeScriptBin "git-blame-someone-else" (builtins.readFile ./scripts/git-blame-someone-else.sh);
   git-blame-someone-else = pkgs.writeScriptBin "git-blame-someone-else" ''
     if [ $# -ne 2 ]; then
       >&2 echo "Usage: $0 <author> <commit>"
@@ -117,6 +116,7 @@ in {
           fuckit = "reset --hard";
           undo = "reset HEAD~1 --mixed";
           last = "log -1 HEAD --stat";
+          last-updated = "!git log --name-only --format='' --since '1 week ago' | perl -lne 'print unless $seen{$_}++'";
 
           branches = "branch -vva --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
 
