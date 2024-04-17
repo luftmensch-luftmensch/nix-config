@@ -496,7 +496,7 @@
 #+LATEX_HEADER: 						width=3cm,%
 #+LATEX_HEADER: 						height=3cm,%
 #+LATEX_HEADER: 						keepaspectratio%
-#+LATEX_HEADER: 					] {/home/valentino/Dropbox/latex/content/img/uni_logo.pdf}};
+#+LATEX_HEADER: 					] {/home/valentino/dots/files/latex/content/img/uni_logo.pdf}};
 #+LATEX_HEADER:
 #+LATEX_HEADER: 			\node (fiitext) at ([xshift=0.25cm] fiisymbol.north east) [align=left, anchor=north west]
 #+LATEX_HEADER: 				{{\color{primary!65!black}\Lato\fontsize{10}{0}\selectfont Università degli Studi di Napoli}};

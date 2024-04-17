@@ -49,11 +49,11 @@
                           (flymake-flycheck-all-chained-diagnostic-functions))))))
 
 ;; Enchanted Spell Checker
-(setup jinx
+(setup (:require jinx)
   (unless (vb/using-nix-p)
     (:pkg jinx))
   (:with-mode text-mode
-    (:hook jinx-mode)))
+    (:hook #'jinx-mode)))
 
 ;; (setup flyspell
 ;;   (:with-mode text-mode

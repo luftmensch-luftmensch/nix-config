@@ -6,7 +6,7 @@ In order to use this class:
 *** Titlepage
 #+begin_src latex
 \titlepage % Output the title page
-	{\includegraphics[width=\paperwidth]{/home/valentino/Dropbox/latex/backgrounds/background.pdf}} % Code to output the background image, which should be the same dimensions as the paper to fill the page entirely; leave empty for no background image
+	{\includegraphics[width=\paperwidth]{/home/valentino/dots/files/latex/backgrounds/background.pdf}} % Code to output the background image, which should be the same dimensions as the paper to fill the page entirely; leave empty for no background image
 	{ % Title(s) and author(s)
 		\centering\sffamily % Font styling
 		{\Huge\bfseries <TITLE>\par} % Book title
@@ -52,7 +52,7 @@ In order to use this class:
 #+LATEX_HEADER:
 
 #+LATEX_HEADER: \usepackage{graphicx}                          % Required for including pictures
-#+LATEX_HEADER: \graphicspath{{/home/valentino/Dropbox/latex/content/img}} % Add Global paths for graphicx
+#+LATEX_HEADER: \graphicspath{{/home/valentino/dots/files/latex/content/img}} % Add Global paths for graphicx
 #+LATEX_HEADER: \usepackage{float}                             % Allows more precisely positioning floats e.g. \begin{figure}[H]
 #+LATEX_HEADER: \usepackage[usenames, svgnames, table]{xcolor} % Required for defining and using custom colors
 #+LATEX_HEADER: \usepackage{calc}                              % For simpler calculations - used for spacing the index letter headings correctly
