@@ -101,38 +101,26 @@
              (date-weekday cyan-cooler)
              (date-weekend blue-faint)))
 
-  (modus-themes-select 'modus-operandi))
+  (modus-themes-select 'modus-vivendi))
 
-(setup (:pkg ef-themes)
-
-  (:option
-   ef-themes-to-toggle '(ef-dark ef-frost)
-
-   ef-themes-mixed-fonts nil ;; enable inheritance from ‘fixed-pitch’ in some faces
-   ;; Heading styles
-   ;; ef-themes-headings '((0 . (variable-pitch light 1.9))
-   ;;                      (1 . (variable-pitch light 1.8))
-   ;;                      (2 . (variable-pitch regular 1.7))
-   ;;                      (3 . (variable-pitch regular 1.6))
-   ;;                      (4 . (variable-pitch regular 1.5))
-   ;;                      ;; absence of weight means `bold'
-   ;;                      (5 . (variable-pitch 1.4))
-   ;;                      (6 . (variable-pitch 1.3))
-   ;;                      (7 . (variable-pitch 1.2))
-   ;;                      (t . (variable-pitch 1.1)))
-
-   ;; Use proportional fonts (‘variable-pitch’) in UI elements.
-   ;; This includes the mode line, header line, tab bar, and tab line.
-   ;; ef-themes-variable-pitch-ui t
-   ;; Control the appearance of the ‘region’ face.
-   ef-themes-region '(intense no-extend neutral)))
+;; (setup (:pkg ef-themes)
+;; 
+;;   (:option
+;;    ef-themes-to-toggle '(ef-dark ef-frost)
+;; 
+;;    ef-themes-mixed-fonts nil ;; enable inheritance from ‘fixed-pitch’ in some faces
+;;    ;; Use proportional fonts (‘variable-pitch’) in UI elements.
+;;    ;; This includes the mode line, header line, tab bar, and tab line.
+;;    ;; ef-themes-variable-pitch-ui t
+;;    ;; Control the appearance of the ‘region’ face.
+;;    ef-themes-region '(intense no-extend neutral)))
 
 ;; I set circadian in the configuration of my themes
-(setup (:pkg circadian)
-  (:load-after modus-themes)
-  (:option circadian-themes '(("8:00" . modus-vivendi)
-                              ("20:00" . modus-vivendi)))
-  (circadian-setup))
+;; (setup (:pkg circadian)
+;;   (:load-after modus-themes)
+;;   (:option circadian-themes '(("8:00" . modus-vivendi)
+;;                               ("20:00" . modus-vivendi)))
+;;   (circadian-setup))
 
 (provide 'init-themes)
 ;;; init-themes.el ends here

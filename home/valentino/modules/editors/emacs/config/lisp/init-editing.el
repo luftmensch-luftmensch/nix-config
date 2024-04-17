@@ -58,7 +58,6 @@
   (:with-hook (dired-mode-hook org-agenda-mode-hook pdf-view-mode-hook)
     (:hook (lambda () (display-line-numbers-mode 0)))))
 
-;;
 ;;; Scrolling
 (setup scrolling
   ;; Enable smooth scroll on Emacs 29

@@ -48,12 +48,19 @@
                   (append flymake-diagnostic-functions
                           (flymake-flycheck-all-chained-diagnostic-functions))))))
 
-(setup flyspell
+;; Enchanted Spell Checker
+(setup jinx
+  (unless (vb/using-nix-p)
+    (:pkg jinx))
   (:with-mode text-mode
-    (:hook flyspell-mode))
+    (:hook jinx-mode)))
 
-  (:with-mode prog-mode
-    (:hook flyspell-prog-mode)))
+;; (setup flyspell
+;;   (:with-mode text-mode
+;;     (:hook flyspell-mode))
+;; 
+;;   (:with-mode prog-mode
+;;     (:hook flyspell-prog-mode)))
 
 (provide 'init-spell-and-check)
 ;;; init-spell-and-check.el ends here

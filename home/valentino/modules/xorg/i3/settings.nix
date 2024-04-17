@@ -168,7 +168,7 @@ in {
   ];
 
   extraConfig = ''
-    set $xob_sock $XDG_RUNTIME_DIR/wob.sock
+    set $xob_sock $XDG_RUNTIME_DIR/xob.sock
     # title_format "%title -- %class -- %instance" # (Enable it to select a correct for_window option)
     for_window [class=".*"] border pixel 1
     floating_minimum_size 75 x 50
