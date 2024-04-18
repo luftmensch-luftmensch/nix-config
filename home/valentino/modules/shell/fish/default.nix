@@ -36,8 +36,8 @@ in {
       ];
 
       shellAbbrs = {
-        pc = "valentino@192.168.1.171";
-        home = "valentino@192.168.1.203";
+        # pc = "valentino@192.168.1.171";
+        # home = "valentino@192.168.1.203";
         sc = "systemctl";
       };
 
