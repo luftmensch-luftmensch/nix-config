@@ -32,6 +32,7 @@ in {
       # To toggle ui : <C-x a>
       set confirm off
       set verbose off
+      set history filename ${config.home.homeDirectory}/.config/gdb/history
 
       set prompt \033[31mgdb $ \033[0m
       set print pretty on
