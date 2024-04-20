@@ -16,7 +16,7 @@ in {
     home.packages = with pkgs; [
       bruno
       httpie-desktop
-      insomnium
+      # insomnium
       mongodb-compass
       # TODO: Enable it when buildGoModule 1.22 lands on stable
       # rHttp
