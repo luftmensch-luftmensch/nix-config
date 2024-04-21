@@ -118,6 +118,9 @@ in {
           last = "log -1 HEAD --stat";
           last-updated = "!git log --name-only --format='' --since '1 week ago' | perl -lne 'print unless $seen{$_}++'";
 
+          # TODO: Try out
+          # redo = git reset --hard HEAD@{1}
+
           branches = "branch -vva --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
 
           # Taken from https://bhupesh.me/git-cake-when-is-my-readme-birthday/
