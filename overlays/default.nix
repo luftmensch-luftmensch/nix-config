@@ -26,7 +26,7 @@ inputs: {
     });
 
     tdlib = prev.tdlib.overrideAttrs (_oldAttrs: {
-      version = "1.8.25";
+      version = "1.8.27";
       src = final.fetchFromGitHub {
         owner = "tdlib";
         repo = "td";
@@ -34,8 +34,8 @@ inputs: {
         # The tdlib authors do not set tags for minor versions, but
         # external programs depending on tdlib constrain the minor
         # version, hence we set a specific commit with a known version.
-        rev = "fe6201556b8a1c0bdd4f9b25027d294d6efd6eba";
-        sha256 = "015spg7khr2bhvnkl86wf0g1kjnk2a8pp40iyvlqsnm0jb1vkhpq";
+        rev = "d7203eb719304866a7eb7033ef03d421459335b8";
+        sha256 = "160d1ijiwh3px0v8ggsqxh39dnb248pjnvgw0ncyw459ywn3y5ba";
       };
     });
   };

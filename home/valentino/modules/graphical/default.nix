@@ -48,7 +48,6 @@ with lib; let
 
   # Why is my laptop so hot? Oh yeah I'm compiling 20 programs while running two games
   monitoring = with pkgs; [
-    btop
     s-tui
     speedtest-go
   ];

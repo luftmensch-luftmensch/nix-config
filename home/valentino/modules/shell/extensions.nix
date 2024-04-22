@@ -78,6 +78,17 @@ in {
         enableZshIntegration = zsh.enable;
       };
 
+      btop = {
+        enable = true;
+        settings = {
+          color_theme = "TTY";
+          theme_background = false;
+          cpu_single_graph = true;
+          show_disks = false;
+          use_fstab = true;
+        };
+      };
+
       htop = {
         enable = true;
         settings = {
