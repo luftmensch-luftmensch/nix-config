@@ -43,10 +43,6 @@
 
     "s" '(vterm :which-key "Open terminal")
 
-    ;; Reload
-    ;; "r" '(:ignore t :which-key "Reload")
-    ;; "r r" '(config-reload :which-key "Reload")
-
     ;; Agenda
     "b"  '(:ignore t :which-key "Agenda")
     "b a" '(org-agenda :which-key "Agenda view")
@@ -70,8 +66,7 @@
 
   (vb/ctrl-x-keys
     "b" '(consult-buffer :wich-key "Show buffers")
-    "C-b" '(consult-buffer :wich-key "Show buffers")
-    )
+    "C-b" '(consult-buffer :wich-key "Show buffers"))
 
   ;; All-mode keymaps [Ovverride normal behaviour]
   (general-def

@@ -134,12 +134,12 @@ in {
 
   cpu = {
     format = "  {avg_frequency}Gz";
-    on-click = "${pkgs.foot}/bin/foot -e htop";
+    on-click = "${pkgs.foot}/bin/foot -e btop";
   };
 
   memory = {
     format = "  {used:0.1f} G";
-    on-click = "${pkgs.foot}/bin/foot -e htop";
+    on-click = "${pkgs.foot}/bin/foot -e btop";
   };
 
   tray.spacing = 10;

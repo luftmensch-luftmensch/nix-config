@@ -68,33 +68,33 @@ managers such as DWM, BSPWM refer to this state as 'monocle'."
       "+" '(enlarge-window :which-key "Expand window height")
       "-" '(shrink-window :which-key "Shrink window height"))))
 
-(setup (:pkg beframe)
-  (:option beframe-functions-in-frames '(project-prompt-project-dir)
-           beframe-global-buffers '("*scratch*"
-                                    "*Messages"
-                                    "*Backtrace*"
-                                    "*Async-native-compile-log*"
-                                    "*straight-byte-compilation*"
-                                    "*straight-process*"
-                                    "*dashboard*"))
+;; (setup (:pkg beframe)
+;;   (:option beframe-functions-in-frames '(project-prompt-project-dir)
+;;            beframe-global-buffers '("*scratch*"
+;;                                     "*Messages"
+;;                                     "*Backtrace*"
+;;                                     "*Async-native-compile-log*"
+;;                                     "*straight-byte-compilation*"
+;;                                     "*straight-process*"
+;;                                     "*dashboard*"))
 
-  (:with-after consult
-    (defface beframe-buffer
-      '((t :inherit font-lock-string-face))
-      "Face for `consult' framed buffers.")
+;;   (:with-after consult
+;;     (defface beframe-buffer
+;;       '((t :inherit font-lock-string-face))
+;;       "Face for `consult' framed buffers.")
 
-    (defvar beframe--consult-source
-      `( :name     "Frame-specific buffers (current frame)"
-         :narrow   ?F
-         :category buffer
-         :face     beframe-buffer
-         :history  beframe-history
-         :items    ,#'beframe-buffer-names
-         :action   ,#'switch-to-buffer
-         :state    ,#'consult--buffer-state))
+;;     (defvar beframe--consult-source
+;;       `( :name     "Frame-specific buffers (current frame)"
+;;          :narrow   ?F
+;;          :category buffer
+;;          :face     beframe-buffer
+;;          :history  beframe-history
+;;          :items    ,#'beframe-buffer-names
+;;          :action   ,#'switch-to-buffer
+;;          :state    ,#'consult--buffer-state))
 
-    (add-to-list 'consult-buffer-sources 'beframe--consult-source))
+;;     (add-to-list 'consult-buffer-sources 'beframe--consult-source))
 
-  (beframe-mode 1))
+;;   (beframe-mode 1))
 (provide 'init-windows)
 ;;; init-windows.el ends here
