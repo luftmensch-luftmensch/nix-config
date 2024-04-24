@@ -18,6 +18,7 @@ in {
       alejandra
       nil
       nix-output-monitor
+      nvd
       nix-prefetch-git
       nix-search-cli
     ];

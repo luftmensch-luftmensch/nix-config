@@ -6,18 +6,13 @@
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "modernx";
-  version = "0.2.9";
+  version = "0.3.1";
   src = fetchFromGitHub {
     owner = "zydezu";
     repo = "ModernX";
     rev = finalAttrs.version;
-    sha256 = "12423k2p5lq3rkx43mb2jdcmjp1dbd3z5vh69f9g73p88vqfzbsf";
+    sha256 = "0gwlg42b903glmv9y9168dz141zdsvxi08z3lrdixpgf9z1pdjsr";
   };
-
-  # postPatch = ''
-  #   substituteInPlace modernx.lua \
-  #     --replace "mp.find_config_file('scripts')" "\"$out/share/mpv/scripts\""
-  # '';
 
   dontBuild = true;
   installPhase = ''
