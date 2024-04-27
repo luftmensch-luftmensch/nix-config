@@ -6,6 +6,7 @@
 with lib; let
   cfg = config.system.modules.services.syncthing;
   user = config.system.modules.core.user.username;
+  availableThemes = ["default" "black" "dark"];
 in {
   options.system.modules.services.syncthing = {
     enable = mkEnableOption "Enable syncthing capabilities";
@@ -14,6 +15,15 @@ in {
       default = "";
       description = lib.mdDoc ''
         The device ID. See <https://docs.syncthing.net/dev/device-ids.html>.
+      '';
+    };
+    theme = mkOption {
+      # type = lib.types.nullOr (lib.types.enum availableThemes);
+      type = lib.types.enum availableThemes;
+      description = ''
+        Name of the theme to use for the Web UI.
+
+        Supported themes are: ${builtins.toString availableThemes}
       '';
     };
   };
@@ -34,6 +44,7 @@ in {
         # relay.enable = true;
 
         settings = {
+          gui.theme = cfg.theme;
           devices = {
             P30-PRO.id = "POGJUQZ-LA6JNGT-T7VN6AL-ZYVOEGE-HHNDWPN-6SXXULO-IQKO7KQ-6HNPBQP";
             nixos-device = {

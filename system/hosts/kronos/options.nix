@@ -51,6 +51,7 @@ _: {
       syncthing = {
         enable = true;
         id = "6LMWCO4-HGJ5WVU-W3CKJYV-GLBR2KF-IMB6E7A-NKLI7ZF-SZ7N4YX-YBE26AN";
+        theme = "black";
       };
       touchpad.enable = true;
     };

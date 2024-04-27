@@ -52,6 +52,7 @@ _: {
       syncthing = {
         enable = true;
         id = "7V7Y5YT-MOLUCYZ-434QHLQ-BJDAMRJ-Z2PDSSG-XKAQX4M-W3CONND-LHDWQQB";
+        theme = "black";
       };
     };
 

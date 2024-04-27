@@ -79,7 +79,9 @@
            org-confirm-babel-evaluate nil     ;; no confirm evaluation
 
            ;; Agenda
-           org-agenda-files `(,"~/Dropbox/org/Agenda.org")
+           ;; org-agenda-files `(,"~/Dropbox/org/Agenda.org")
+	         ;; Set all org files inside org-directory as agenda-files
+	         org-agenda-files (directory-files-recursively org-directory "\\.org$")
            org-log-done 'time                  ;; Having the time a item is done sounds convenient
            org-agenda-restore-windows-after-quit t
            org-agenda-skip-unavailable-files t ;; just skip non-reachable files in org-agenda-files
