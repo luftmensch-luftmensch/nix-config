@@ -16,7 +16,6 @@ _: {
         username = "valentino";
         description = "Valentino Bocchetti";
         hashedPassword = "$6$4CvDCvwb2FE/EnAv$pP65k96pPwwOVu1aspgUbYSwq9HUgwzFCdvOvHq/rj6te1KdFNAWHbo65aql15awsUrKcianHFSTm5GzqA.MZ.";
-        extraGroups = ["networkmanager" "docker" "scanner" "lp" "lpadmin" "adbusers" "plugdev" "libvirtd"];
         extraAuthorizedKeys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO7aU2VLocgIoOxTFPkq+nfbQlhOhicbNSW4mDfuj4vL valentino@homelab"];
       };
     };
@@ -27,7 +26,7 @@ _: {
       adb.enable = true;
       docker.enable = true;
       manpages.enable = true;
-      virtualisation.enable = true;
+      # virtualisation.enable = true;
     };
 
     graphical = {
@@ -38,21 +37,20 @@ _: {
     hardware = {
       audio = {
         enable = true;
-        enablePulseaudio = true;
+        pulseaudio.enable = true;
       };
       bluetooth.enable = true;
     };
 
     services = {
       printing = {
-        enableCups = true;
-        enableSane = true;
+        cups.enable = true;
+        sane.enable = true;
       };
       udev-rules.enable = true;
       syncthing = {
         enable = true;
         id = "7V7Y5YT-MOLUCYZ-434QHLQ-BJDAMRJ-Z2PDSSG-XKAQX4M-W3CONND-LHDWQQB";
-        theme = "black";
       };
     };
 

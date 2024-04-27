@@ -5,46 +5,51 @@
 }:
 with lib; let
   cfg = config.system.modules.core.user;
+  inherit (config.system.modules.dev) adb docker virtualisation;
+  inherit (config.system.modules.services.printing) cups sane;
+  inherit (config.system.modules.services) touchpad;
+  inherit (config.networking) networkmanager;
 in {
   options.system.modules.core.user = {
     enable = mkEnableOption "Enable user configuration";
-    uid = lib.mkOption {
-      type = lib.types.nullOr lib.types.int;
+    uid = mkOption {
+      type = types.nullOr types.int;
       default = 1000;
       description = "User custom id";
     };
 
-    username = lib.mkOption {
-      type = lib.types.str;
+    username = mkOption {
+      type = types.str;
       default = "valentino";
       description = "User username";
     };
 
-    description = lib.mkOption {
-      type = lib.types.str;
+    description = mkOption {
+      type = types.str;
       default = "";
       description = "Realname of the user";
     };
 
-    extraGroups = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
+    extraGroups = mkOption {
+      type = types.listOf types.str;
       default = [];
+      description = "Additional groups for the user. More info at https://wiki.debian.org/SystemGroups";
     };
 
-    extraAuthorizedKeys = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
+    extraAuthorizedKeys = mkOption {
+      type = types.listOf types.str;
       default = [];
       description = "Additional authorized keys.";
     };
 
-    extraRootAuthorizedKeys = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
+    extraRootAuthorizedKeys = mkOption {
+      type = types.listOf types.str;
       default = [];
       description = "Additional authorized keys for root user.";
     };
 
-    hashedPassword = lib.mkOption {
-      type = lib.types.str;
+    hashedPassword = mkOption {
+      type = types.str;
       default = "!";
       description = "Enable hashed password for the user";
     };
@@ -52,16 +57,23 @@ in {
 
   config = mkIf cfg.enable {
     users.users = {
-      root = {
-        # disable root login here, and also when installing nix by running nixos-install --no-root-passwd
-        # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235/3
-        hashedPassword = "!"; # disable root logins, nothing hashes to !
-      };
+      # disable root login here (nothing hashes to !), and also when installing nix by running nixos-install --no-root-passwd
+      # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235/3
+      root.hashedPassword = "!";
 
       ${cfg.username} = {
         inherit (cfg) description hashedPassword uid;
         isNormalUser = true;
-        extraGroups = ["wheel"] ++ cfg.extraGroups;
+        extraGroups =
+          ["wheel" "plugdev"]
+          ++ optionals adb.enable ["adbusers"]
+          ++ optionals docker.enable ["docker"]
+          ++ optionals networkmanager.enable ["networkmanager"]
+          ++ optionals virtualisation.enable ["libvirtd"]
+          ++ optionals cups.enable ["lp" "lpadmin"]
+          ++ optionals sane.enable ["scanner"]
+          ++ optionals touchpad.enable ["input"]
+          ++ cfg.extraGroups;
 
         openssh.authorizedKeys.keys =
           [

@@ -6,9 +6,7 @@
 with lib; let
   cfg = config.system.modules.core.boot;
 in {
-  options.system.modules.core.boot = {
-    quietboot.enable = mkEnableOption "quietboot";
-  };
+  options.system.modules.core.boot.quietboot.enable = mkEnableOption "quietboot";
 
   config = mkIf cfg.quietboot.enable {
     boot = {

@@ -5,8 +5,6 @@
   ...
 }:
 with lib; let
-  # cfgXorg = config.system.modules.graphical.xorg;
-  # cfgWayland = config.system.modules.graphical.wayland;
   inherit (config.system.modules.graphical) wayland xorg;
 in {
   # XDG Portals, useful for wayland screen sharing and flatpak).

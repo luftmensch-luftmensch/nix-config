@@ -6,9 +6,7 @@
 with lib; let
   cfg = config.system.modules.services.battery;
 in {
-  options.system.modules.services.battery = {
-    enable = mkEnableOption "Enable TLP capabilities";
-  };
+  options.system.modules.services.battery.enable = mkEnableOption "Enable TLP capabilities";
 
   config = mkIf cfg.enable {
     # TLP settings: https://linrunner.de/tlp/settings/index.html

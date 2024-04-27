@@ -8,16 +8,14 @@ with lib; let
 in {
   options.system.modules.hardware.audio = {
     enable = mkEnableOption "Enable audio capabilities";
-    enablePipewire = mkEnableOption "Enable audio capabilities w/ pipewire";
-    enablePulseaudio = mkEnableOption "Enable audio capabilities w/ pulseaudio";
+    pipewire.enable = mkEnableOption "Enable audio capabilities w/ pipewire";
+    pulseaudio.enable = mkEnableOption "Enable audio capabilities w/ pulseaudio";
   };
 
   config = mkIf cfg.enable (mkMerge [
-    {
-      sound.enable = true;
-    }
+    {sound.enable = true;}
 
-    (mkIf cfg.enablePipewire {
+    (mkIf cfg.pipewire.enable {
       # To solve the error showed in journalctl (pipewire-pulse[1413]: execvp error 'pactl': No such file or directory)
       # Use: systemd.user.services.pipewire-pulse.path = [ pkgs.pulseaudio ];
       # systemctl --user restart pipewire.service (Taken from https://www.reddit.com/r/pop_os/comments/v3g2w9/is_there_a_cli_command_to_restart_pipewire/)
@@ -32,6 +30,6 @@ in {
       };
     })
 
-    (mkIf cfg.enablePulseaudio {hardware.pulseaudio.enable = true;})
+    (mkIf cfg.pulseaudio.enable {hardware.pulseaudio.enable = true;})
   ]);
 }

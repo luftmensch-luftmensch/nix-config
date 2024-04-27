@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.system.modules.vpn.wireguard;
 in {
-  options.system.modules.vpn.wireguard = {
-    enable = mkEnableOption "Enable wireguard capabilities";
-  };
+  options.system.modules.vpn.wireguard.enable = mkEnableOption "Enable wireguard capabilities";
 
   config = mkIf cfg.enable {
     networking.wg-quick.interfaces = {

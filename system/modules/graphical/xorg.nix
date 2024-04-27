@@ -6,9 +6,7 @@
 with lib; let
   cfg = config.system.modules.graphical.xorg;
 in {
-  options.system.modules.graphical.xorg = {
-    enable = mkEnableOption "xorg basic configuration and packages";
-  };
+  options.system.modules.graphical.xorg.enable = mkEnableOption "xorg basic configuration and packages";
 
   config = mkIf cfg.enable {
     services.xserver = {

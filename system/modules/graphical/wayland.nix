@@ -6,9 +6,7 @@
 with lib; let
   cfg = config.system.modules.graphical.wayland;
 in {
-  options.system.modules.graphical.wayland = {
-    enable = mkEnableOption "Wayland basic configuration and packages";
-  };
+  options.system.modules.graphical.wayland.enable = mkEnableOption "Wayland basic configuration and packages";
 
   config = mkIf cfg.enable {
     services.xserver.displayManager.defaultSession = "sway";

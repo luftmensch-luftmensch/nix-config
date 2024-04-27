@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.system.modules.dev.virtualisation;
 in {
-  options.system.modules.dev.virtualisation = {
-    enable = mkEnableOption "Enable virt-manager";
-  };
+  options.system.modules.dev.virtualisation.enable = mkEnableOption "Enable virtualisation w/ libvirt";
 
   config = mkIf cfg.enable {
     virtualisation.libvirtd = {

@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.system.modules.core.cachix;
 in {
-  options.system.modules.core.cachix = {
-    enable = mkEnableOption "cachix configuration";
-  };
+  options.system.modules.core.cachix.enable = mkEnableOption "cachix configuration";
 
   config = mkIf cfg.enable {
     environment.systemPackages = [pkgs.cachix];

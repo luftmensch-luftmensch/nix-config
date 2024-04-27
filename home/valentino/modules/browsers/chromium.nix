@@ -7,9 +7,7 @@ with lib; let
   cfg = config.valentino.modules.browsers.chromium;
   inherit (config.valentino.modules) wayland;
 in {
-  options.valentino.modules.browsers.chromium = {
-    enable = mkEnableOption "chromium";
-  };
+  options.valentino.modules.browsers.chromium.enable = mkEnableOption "chromium";
 
   config = mkIf cfg.enable {
     programs.chromium = {

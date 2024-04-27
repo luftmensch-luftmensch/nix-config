@@ -6,9 +6,7 @@
 with lib; let
   cfg = config.system.modules.core.impermanence;
 in {
-  options.system.modules.core.impermanence = {
-    enable = mkEnableOption "Erase your darling...";
-  };
+  options.system.modules.core.impermanence.enable = mkEnableOption "Erase your darling...";
 
   config = mkIf cfg.enable {
     environment.persistence."/persist" = {
@@ -30,7 +28,8 @@ in {
         "/var/lib/NetworkManager/secret_key"
         "/var/lib/NetworkManager/seen-bssids"
         "/var/lib/NetworkManager/timestamps"
-        "/var/lib/sddm/state.conf" # Name of the session for the last logged-in user
+        # No more needed as I don't use both Wayland and X11 sessions on the same device
+        # "/var/lib/sddm/state.conf" # Name of the session for the last logged-in user
       ];
     };
 

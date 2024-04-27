@@ -33,9 +33,7 @@ with lib; let
     fonts = ["Iosevka"];
   };
 in {
-  options.valentino.modules.apps.rofi = {
-    enable = mkEnableOption "rofi configuration";
-  };
+  options.valentino.modules.apps.rofi.enable = mkEnableOption "rofi configuration";
 
   config = mkIf cfg.enable {
     programs.rofi = {
@@ -50,13 +48,7 @@ in {
       ++ [rofiFonts];
     xdg.configFile = {
       "rofi/colors/color.rasi".text = ''
-        /*
-         *
-         * Change here you colorscheme
-         *
-         */
-
-         @import "${config.colorscheme.slug}.rasi"
+        @import "${config.colorscheme.slug}.rasi"
       '';
 
       "rofi/colors" = {

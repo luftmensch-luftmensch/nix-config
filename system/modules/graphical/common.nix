@@ -5,8 +5,6 @@
   ...
 }:
 with lib; let
-  # cfgXorg = config.system.modules.graphical.xorg;
-  # cfgWayland = config.system.modules.graphical.wayland;
   inherit (config.system.modules.graphical) xorg wayland;
 in {
   config = mkIf (xorg.enable || wayland.enable) {

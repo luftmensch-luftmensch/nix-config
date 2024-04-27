@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.system.modules.shell.bash;
 in {
-  options.system.modules.shell.bash = {
-    enable = mkEnableOption "Bash system-wide completion and additions";
-  };
+  options.system.modules.shell.bash.enable = mkEnableOption "Bash system-wide completion and additions";
 
   config = mkIf cfg.enable {
     programs.bash = {

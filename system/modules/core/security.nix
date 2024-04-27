@@ -8,11 +8,11 @@
   security = {
     protectKernelImage = true; # Prevent replacing the running kernel w/o reboot
 
-    #lockKernelModules = true; # Disable kernel module loading once the system is fully initialised
+    # lockKernelModules = true; # Disable kernel module loading once the system is fully initialised
 
     # Make hardened profile more usable (This should be enabled alongside the hardened profile)
-    #allowUserNamespaces = true;       # Must be set to true for `nix build` to function (https://nixos.org/manual/nixos/stable/index.html#sec-profile-hardened)
-    #lockKernelModules = false;        # https://discourse.nixos.org/t/default-security-settings/9755
+    # allowUserNamespaces = true;       # Must be set to true for `nix build` to function (https://nixos.org/manual/nixos/stable/index.html#sec-profile-hardened)
+    # lockKernelModules = false;        # https://discourse.nixos.org/t/default-security-settings/9755
 
     # Sudo customization
     sudo = {

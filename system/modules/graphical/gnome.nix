@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.system.modules.graphical.gnome;
 in {
-  options.system.modules.graphical.gnome = {
-    enable = mkEnableOption "enable gnome";
-  };
+  options.system.modules.graphical.gnome.enable = mkEnableOption "enable gnome";
 
   config = mkIf cfg.enable {
     services = {

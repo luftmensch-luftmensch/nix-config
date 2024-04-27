@@ -5,10 +5,9 @@
 }:
 with lib; let
   cfg = config.system.modules.credentials.ssh;
+  user = config.system.modules.core.user.username;
 in {
-  options.system.modules.credentials.ssh = {
-    enable = mkEnableOption "ssh and a secure configuration";
-  };
+  options.system.modules.credentials.ssh.enable = mkEnableOption "sane ssh configuration";
 
   config = mkIf cfg.enable {
     services.openssh = {
@@ -21,21 +20,18 @@ in {
         X11Forwarding = false;
         PermitRootLogin = "no";
         PasswordAuthentication = false;
+        AllowTcpForwarding = false;
+        AllowAgentForwarding = false;
+        AllowStreamLocalForwarding = false;
+        AuthenticationMethods = "publickey";
         # KbdInteractiveAuthentication = false;
       };
 
       allowSFTP = true;
 
-      extraConfig = ''
-        AllowTcpForwarding no
-        AllowAgentForwarding no
-        AllowStreamLocalForwarding no
-        AuthenticationMethods publickey
-      '';
-
       hostKeys = [
         {
-          path = "/home/valentino/.ssh/id_homelab";
+          path = "/home/${user}/.ssh/id_homelab";
           bits = 4096;
           type = "ed25519";
         }

@@ -16,7 +16,6 @@ _: {
         username = "valentino";
         description = "Valentino Bocchetti";
         hashedPassword = "$6$4CvDCvwb2FE/EnAv$pP65k96pPwwOVu1aspgUbYSwq9HUgwzFCdvOvHq/rj6te1KdFNAWHbo65aql15awsUrKcianHFSTm5GzqA.MZ.";
-        extraGroups = ["networkmanager" "docker" "scanner" "lp" "lpadmin" "adbusers" "plugdev" "input"];
         extraAuthorizedKeys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILKiPJdb2rsLRwFGczP8x7KVTjqqY4lPkdbwE6+GcKxP valentino@homelab"];
       };
     };
@@ -37,7 +36,7 @@ _: {
     hardware = {
       audio = {
         enable = true;
-        enablePipewire = true;
+        pipewire.enable = true;
       };
       bluetooth.enable = true;
     };
@@ -46,12 +45,11 @@ _: {
       battery.enable = true;
       fingerprint.enable = true;
       logind.enable = true;
-      printing.enableCups = true;
+      printing.cups.enable = true;
       udev-rules.enable = true;
       syncthing = {
         enable = true;
         id = "6LMWCO4-HGJ5WVU-W3CKJYV-GLBR2KF-IMB6E7A-NKLI7ZF-SZ7N4YX-YBE26AN";
-        theme = "black";
       };
       touchpad.enable = true;
     };

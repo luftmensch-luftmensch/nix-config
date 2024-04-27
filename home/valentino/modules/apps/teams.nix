@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.apps.teams;
 in {
-  options.valentino.modules.apps.teams = {
-    enable = mkEnableOption "teams";
-  };
+  options.valentino.modules.apps.teams.enable = mkEnableOption "teams";
 
   config = mkIf cfg.enable {
     valentino.modules.browsers.chromium.enable = true;

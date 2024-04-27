@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.system.modules.services.udev-rules;
 in {
-  options.system.modules.services.udev-rules = {
-    enable = mkEnableOption "Enable udev custom rules";
-  };
+  options.system.modules.services.udev-rules.enable = mkEnableOption "Enable udev custom rules";
 
   config = mkIf cfg.enable {
     services.udev = {

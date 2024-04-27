@@ -18,8 +18,8 @@ in {
       '';
     };
     theme = mkOption {
-      # type = lib.types.nullOr (lib.types.enum availableThemes);
       type = lib.types.enum availableThemes;
+      default = "black";
       description = ''
         Name of the theme to use for the Web UI.
 
@@ -38,7 +38,6 @@ in {
         configDir = dir;
         dataDir = dir;
         openDefaultPorts = true; # TCP 22000 for transfer, UDP 21027 for discovery
-
         overrideFolders = true; # Purge folders not declaratively configured!
         overrideDevices = true;
         # relay.enable = true;
@@ -53,13 +52,13 @@ in {
           };
           folders = {
             "Dropbox" = {
-              path = "/home/valentino/Dropbox";
+              path = "/home/${user}/Dropbox";
               id = "tcfun-ya2ir";
               devices = ["P30-PRO" "nixos-device"];
             };
 
             "Video" = {
-              path = "/home/valentino/Video";
+              path = "/home/${user}/Video";
               id = "tzf49-nwpwz";
               devices = ["nixos-device"];
             };

@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.system.modules.graphical.sddm;
 in {
-  options.system.modules.graphical.sddm = {
-    enable = mkEnableOption "sddm with dependencies and theme";
-  };
+  options.system.modules.graphical.sddm.enable = mkEnableOption "sddm with dependencies and theme";
 
   config = mkIf cfg.enable {
     services.xserver.displayManager.sddm = {

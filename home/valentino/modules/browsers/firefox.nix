@@ -167,9 +167,7 @@ with lib; let
 
   '';
 in {
-  options.valentino.modules.browsers.firefox = {
-    enable = mkEnableOption "firefox";
-  };
+  options.valentino.modules.browsers.firefox.enable = mkEnableOption "firefox";
 
   config = mkIf cfg.enable {
     programs.firefox = {

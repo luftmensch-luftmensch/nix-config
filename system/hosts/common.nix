@@ -17,7 +17,7 @@
     while read path; do
       path="/$path"
         if [ -L "$path" ]; then
-      : # The path is a symbolic link, so is probably handled by NixOS already
+            : # The path is a symbolic link, so is probably handled by NixOS already
         elif [ -d "$path" ]; then
             : # The path is a directory, ignore
         else

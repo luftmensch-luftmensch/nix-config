@@ -7,9 +7,7 @@ with lib; let
   cfg = config.valentino.modules.apps.thunderbird;
   inherit (config.colorScheme) palette;
 in {
-  options.valentino.modules.apps.thunderbird = {
-    enable = mkEnableOption "thunderbird configuration";
-  };
+  options.valentino.modules.apps.thunderbird.enable = mkEnableOption "thunderbird configuration";
 
   config = mkIf cfg.enable {
     programs.thunderbird = {

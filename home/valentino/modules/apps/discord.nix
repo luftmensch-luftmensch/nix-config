@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.apps.discord;
 in {
-  options.valentino.modules.apps.discord = {
-    enable = mkEnableOption "discord";
-  };
+  options.valentino.modules.apps.discord.enable = mkEnableOption "discord";
 
   config = mkIf cfg.enable {
     valentino.modules.browsers.chromium.enable = true;
