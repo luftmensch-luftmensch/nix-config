@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.dev.js;
 in {
-  options.valentino.modules.dev.js = {
-    enable = mkEnableOption "javascript language tools";
-  };
+  options.valentino.modules.dev.js.enable = mkEnableOption "javascript language tools";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [

@@ -9,9 +9,7 @@ with lib; let
   inherit (config.valentino.modules) wayland themes;
   inherit (config.colorScheme) palette;
 in {
-  options.valentino.modules.apps.dunst = {
-    enable = mkEnableOption "dunst configuration";
-  };
+  options.valentino.modules.apps.dunst.enable = mkEnableOption "dunst configuration";
 
   config = mkIf cfg.enable {
     # A library that sends desktop notifications to a notification daemon (Gonna hel dunst!)

@@ -6,9 +6,7 @@
 with lib; let
   cfg = config.valentino.modules.shell.zsh;
 in {
-  options.valentino.modules.shell.zsh = {
-    enable = mkEnableOption "zsh setup";
-  };
+  options.valentino.modules.shell.zsh.enable = mkEnableOption "zsh setup";
 
   config = mkIf cfg.enable {
     programs.zsh = {

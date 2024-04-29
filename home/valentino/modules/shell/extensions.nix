@@ -8,9 +8,7 @@ with lib; let
   cfg = config.valentino.modules.shell.extensions;
   inherit (config.valentino.modules.shell) bash zsh tmux;
 in {
-  options.valentino.modules.shell.extensions = {
-    enable = mkEnableOption "shell useful commands (e.g. bat, eza)";
-  };
+  options.valentino.modules.shell.extensions.enable = mkEnableOption "shell useful commands (e.g. bat, eza)";
 
   config = mkIf cfg.enable {
     home = {
@@ -55,9 +53,7 @@ in {
 
       bat = {
         enable = true;
-        config = {
-          theme = "base16";
-        };
+        config.theme = "base16";
         extraPackages = with pkgs.bat-extras; [batman batdiff batgrep];
       };
 

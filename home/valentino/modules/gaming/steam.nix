@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.gaming.steam;
 in {
-  options.valentino.modules.gaming.steam = {
-    enable = mkEnableOption "steam support";
-  };
+  options.valentino.modules.gaming.steam.enable = mkEnableOption "steam support";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [steam steam-run];

@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.dev.python;
 in {
-  options.valentino.modules.dev.python = {
-    enable = mkEnableOption "python language support and language server";
-  };
+  options.valentino.modules.dev.python.enable = mkEnableOption "python language support and language server";
 
   config = mkIf cfg.enable {
     home.packages =

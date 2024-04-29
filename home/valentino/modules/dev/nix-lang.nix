@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.dev.nix;
 in {
-  options.valentino.modules.dev.nix = {
-    enable = mkEnableOption "nix language extra tools and language server";
-  };
+  options.valentino.modules.dev.nix.enable = mkEnableOption "nix language extra tools and language server";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [

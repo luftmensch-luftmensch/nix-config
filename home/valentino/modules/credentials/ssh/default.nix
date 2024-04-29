@@ -6,9 +6,7 @@
 with lib; let
   cfg = config.valentino.modules.credentials.ssh;
 in {
-  options.valentino.modules.credentials.ssh = {
-    enable = mkEnableOption "ssh user configuration";
-  };
+  options.valentino.modules.credentials.ssh.enable = mkEnableOption "ssh user configuration";
 
   config = mkIf cfg.enable {
     sops.secrets = {

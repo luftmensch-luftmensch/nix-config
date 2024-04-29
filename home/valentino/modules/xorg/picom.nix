@@ -6,9 +6,7 @@
 with lib; let
   cfg = config.valentino.modules.xorg.picom;
 in {
-  options.valentino.modules.xorg.picom = {
-    enable = mkEnableOption "picom configuration";
-  };
+  options.valentino.modules.xorg.picom.enable = mkEnableOption "picom configuration";
 
   config = mkIf cfg.enable {
     services.picom = {
@@ -37,11 +35,11 @@ in {
         # shadow-radius = 7;
         # shadowOffsets = [(-7) (-7)];
         # shadowExclude = [
-        # 	"name = 'Notification'"
-        # 	"class_g = 'Conky'"
-        # 	"class_g ?= 'Notify-osd'"
-        # 	"class_g = 'Cairo-clock'"
-        # 	"_GTK_FRAME_EXTENTS@:c"
+        #   "name = 'Notification'"
+        #   "class_g = 'Conky'"
+        #   "class_g ?= 'Notify-osd'"
+        #   "class_g = 'Cairo-clock'"
+        #   "_GTK_FRAME_EXTENTS@:c"
         # ];
 
         frame-opacity = 0.7;

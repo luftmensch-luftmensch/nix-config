@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.xorg.locker;
 in {
-  options.valentino.modules.xorg.locker = {
-    enable = mkEnableOption "xorg screen locker";
-  };
+  options.valentino.modules.xorg.locker.enable = mkEnableOption "xorg screen locker";
 
   config = mkIf cfg.enable {
     services.screen-locker = {

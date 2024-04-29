@@ -10,9 +10,7 @@ with lib; let
   inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
 in {
-  options.valentino.modules.wayland.locker = {
-    enable = mkEnableOption "wayland screen locker";
-  };
+  options.valentino.modules.wayland.locker.enable = mkEnableOption "wayland screen locker";
 
   config = mkIf cfg.enable {
     programs.swaylock = {

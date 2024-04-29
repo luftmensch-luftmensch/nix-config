@@ -6,11 +6,8 @@
 }:
 with lib; let
   cfg = config.valentino.modules.media.videos;
-  # inherit (config.valentino.modules) themes;
 in {
-  options.valentino.modules.media.videos = {
-    enable = mkEnableOption "an option to watch videos";
-  };
+  options.valentino.modules.media.videos.enable = mkEnableOption "an option to watch videos";
 
   config = mkIf cfg.enable {
     programs.mpv = {
@@ -20,12 +17,6 @@ in {
         title = "\${filename}";
         osc = "no";
         border = "no";
-        # osd-level = 1;
-        # osd-duration = 2500;
-        #
-        # osd-font = "${themes.font.term.family}";
-        # osd-font-size = themes.font.term.size;
-        # osd-border-size = 2;
 
         screenshot-format = "png";
         screenshot-png-compression = 8;

@@ -46,9 +46,7 @@ with builtins; let
     "$prog" "$@" &
   '';
 in {
-  options.valentino.modules.dev.generics = {
-    enable = mkEnableOption "uncategorized packages for programming";
-  };
+  options.valentino.modules.dev.generics.enable = mkEnableOption "uncategorized packages for programming";
 
   config = mkIf cfg.enable {
     home.packages = [run-as-service runbg];

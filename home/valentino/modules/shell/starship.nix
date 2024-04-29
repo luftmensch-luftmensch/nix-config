@@ -6,9 +6,7 @@
 with lib; let
   cfg = config.valentino.modules.shell.starship;
 in {
-  options.valentino.modules.shell.starship = {
-    enable = mkEnableOption "starship configuration";
-  };
+  options.valentino.modules.shell.starship.enable = mkEnableOption "starship configuration";
 
   config = mkIf cfg.enable {
     programs.starship = {

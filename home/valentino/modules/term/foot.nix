@@ -8,9 +8,7 @@ with lib; let
   theme = config.valentino.modules.themes;
   inherit (config.colorScheme) palette;
 in {
-  options.valentino.modules.term.foot = {
-    enable = mkEnableOption "foot configuration";
-  };
+  options.valentino.modules.term.foot.enable = mkEnableOption "foot configuration";
 
   config = mkIf cfg.enable {
     programs.foot = {

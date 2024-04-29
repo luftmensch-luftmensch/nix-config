@@ -51,7 +51,7 @@ in {
       '';
     };
 
-    home.packages = with pkgs; [autotiling];
+    home.packages = [pkgs.autotiling];
 
     valentino.modules = {
       wayland = {

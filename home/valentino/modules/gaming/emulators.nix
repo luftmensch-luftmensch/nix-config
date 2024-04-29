@@ -7,11 +7,9 @@
 with lib; let
   cfg = config.valentino.modules.gaming.emulators;
 in {
-  options.valentino.modules.gaming.emulators = {
-    switch.enable = mkEnableOption "switch emulator";
-  };
+  options.valentino.modules.gaming.emulators.switch.enable = mkEnableOption "switch emulator";
 
-  config = {
-    home.packages = with pkgs; [(mkIf cfg.switch.enable yuzu-mainline)];
+  config = mkIf cfg.switch.enable {
+    home.packages = [pkgs.yuzu-mainline];
   };
 }

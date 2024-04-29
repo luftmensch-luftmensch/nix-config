@@ -12,9 +12,7 @@ with lib; let
     then 1.5
     else 0;
 in {
-  options.valentino.modules.editors.vscode = with types; {
-    enable = mkEnableOption "vscode";
-  };
+  options.valentino.modules.editors.vscode.enable = mkEnableOption "vscode";
 
   config = mkIf cfg.enable {
     programs.vscode = {

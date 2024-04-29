@@ -8,9 +8,7 @@ with lib; let
   inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
 in {
-  options.valentino.modules.term.alacritty = {
-    enable = mkEnableOption "alacritty configuration";
-  };
+  options.valentino.modules.term.alacritty.enable = mkEnableOption "alacritty configuration";
 
   config = mkIf cfg.enable {
     programs.alacritty = {

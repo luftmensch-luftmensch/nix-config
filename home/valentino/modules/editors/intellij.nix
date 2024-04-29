@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.valentino.modules.editors.intellij;
 in {
-  options.valentino.modules.editors.intellij = {
-    enable = mkEnableOption "Intellij";
-  };
+  options.valentino.modules.editors.intellij.enable = mkEnableOption "Intellij";
 
   config = mkIf cfg.enable {
     home = {

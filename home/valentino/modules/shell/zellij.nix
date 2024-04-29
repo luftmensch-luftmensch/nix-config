@@ -7,9 +7,7 @@ with lib; let
   cfg = config.valentino.modules.shell.zellij;
   inherit (config.valentino.modules.shell) bash zsh fish;
 in {
-  options.valentino.modules.shell.zellij = {
-    enable = mkEnableOption "enable zellij";
-  };
+  options.valentino.modules.shell.zellij.enable = mkEnableOption "enable zellij";
 
   config = mkIf cfg.enable {
     programs.zellij = {

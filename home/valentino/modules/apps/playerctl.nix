@@ -28,9 +28,7 @@ with lib; let
     done
   '';
 in {
-  options.valentino.modules.apps.playerctl = {
-    enable = mkEnableOption "playerct";
-  };
+  options.valentino.modules.apps.playerctl.enable = mkEnableOption "playerct";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [playerctl playerctl-wrapper];

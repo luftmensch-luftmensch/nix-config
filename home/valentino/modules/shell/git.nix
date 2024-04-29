@@ -28,9 +28,7 @@ with lib; let
     echo "$AUTHOR_NAME is now the author of $COMMIT. You're officially an asshole.";
   '';
 in {
-  options.valentino.modules.shell.git = {
-    enable = mkEnableOption "main user git configuration";
-  };
+  options.valentino.modules.shell.git.enable = mkEnableOption "main user git configuration";
 
   config = mkIf cfg.enable {
     programs = {
@@ -119,14 +117,13 @@ in {
           last-updated = "!git log --name-only --format='' --since '1 week ago' | perl -lne 'print unless $seen{$_}++'";
 
           # TODO: Try out
-          # redo = git reset --hard HEAD@{1}
+          redo = "reset --hard HEAD@{1}";
 
           branches = "branch -vva --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
 
           # Taken from https://bhupesh.me/git-cake-when-is-my-readme-birthday/
           cake = "log --date=format:'%d %b %Y' --diff-filter=A --name-only --pretty='%n%C(yellow bold)🎂️ %ad%Creset by (%C(blue bold)%h%Creset)'";
 
-          # clh = "!f() { git clone $1 $(echo $1 | awk -F '/' '{print $4}'); }; f";
           refresh = "pull --rebase --autostash origin HEAD";
 
           workon = "!git fetch && git switch -c";

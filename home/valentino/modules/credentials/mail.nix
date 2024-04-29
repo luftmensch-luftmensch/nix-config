@@ -19,9 +19,7 @@ with lib; let
   lieerAccounts = filter (a: a.lieer.enable) (attrValues config.accounts.email.accounts);
   lieerSyncAccounts = filterAttrs (_: acc: acc.lieer.enable && acc.lieer.sync.enable) config.accounts.email.accounts;
 in {
-  options.valentino.modules.credentials.mail-defaults = {
-    enable = mkEnableOption "mail support";
-  };
+  options.valentino.modules.credentials.mail-defaults.enable = mkEnableOption "mail support";
 
   config = mkIf cfg.enable {
     accounts.email = {
