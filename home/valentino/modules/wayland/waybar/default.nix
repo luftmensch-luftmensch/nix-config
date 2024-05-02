@@ -11,6 +11,8 @@ with lib; let
 in {
   options.valentino.modules.wayland.waybar = {
     enable = mkEnableOption "waybar configuration";
+    backlight.enable = mkEnableOption "enable backlight module";
+    battery.enable = mkEnableOption "enable battery module";
 
     default_output = mkOption {
       type = types.nullOr types.str;
@@ -24,6 +26,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Let it try to start a few more times
+    systemd.user.services.waybar = {
+      Unit.StartLimitBurst = 30;
+    };
+
     programs.waybar = let
       style = import ./style.nix {
         inherit theme palette;
@@ -34,6 +41,7 @@ in {
       };
     in {
       enable = true;
+      systemd.enable = true;
       package = pkgs.waybar.override {pulseSupport = true;};
       inherit (style) style;
       settings = [
@@ -48,15 +56,15 @@ in {
             ++ (optionals config.wayland.windowManager.hyprland.enable ["hyprland/workspaces"]);
 
           modules-center = ["clock"];
-          modules-right = [
-            "idle_inhibitor"
-            "pulseaudio"
-            "network"
-            "battery"
-            "cpu"
-            "memory"
-            "tray"
-          ];
+          modules-right =
+            ["idle_inhibitor" "pulseaudio" "network"]
+            ++ (optionals cfg.battery.enable [
+              "battery"
+            ])
+            ++ (optionals cfg.backlight.enable [
+              "backlight"
+            ])
+            ++ ["cpu" "memory" "tray"];
           # Shared modules
           inherit (custom_modules) "sway/workspaces" "sway/mode" "sway/window" clock;
           # Specific modules

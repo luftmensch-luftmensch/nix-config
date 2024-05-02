@@ -25,7 +25,7 @@ in {
           inherit mod mod1 default_output external_output theme palette pkgs;
         };
       in {
-        bars = [{command = "waybar";}];
+        # bars = [{command = "waybar";}];
         modifier = "${mod}";
         floating = {
           modifier = "${mod}";
@@ -53,6 +53,16 @@ in {
 
     home.packages = [pkgs.autotiling];
 
+    # xdg.portal = {
+    #   enable = true;
+    #    extraPortals = [pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
+    #    configPackages = [pkgs.xdg-desktop-portal-wlr];
+    #    config = {
+    #      common.default = ["*"];
+    #      sway.default = ["gtk" "wlr"];
+    #   };
+    # };
+
     valentino.modules = {
       wayland = {
         locker.enable = true;
@@ -65,6 +75,8 @@ in {
 
         waybar = {
           enable = true;
+          backlight.enable = true;
+          battery.enable = true;
           inherit default_output external_output;
         };
       };

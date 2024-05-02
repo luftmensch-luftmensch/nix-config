@@ -112,6 +112,7 @@
     #cpu,
     #temperature,
     #memory,
+    #backlight,
     #battery,
     #pulseaudio,
     #network,
@@ -153,6 +154,11 @@
 
     #memory {
       background-color: #${palette.base0B};
+      color: #${palette.base00};
+    }
+
+    #backlight {
+      background-color: #${palette.base0C};
       color: #${palette.base00};
     }
 
