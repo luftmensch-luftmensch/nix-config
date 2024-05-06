@@ -20,7 +20,7 @@ in {
 
     home.file = let
       schema = "${cfg.package}/etc/xdg/swaync/configSchema.json";
-      config = import ./config.nix {inherit schema;};
+      config = import ./config.nix {inherit schema pkgs;};
       style = import ./style.nix {inherit theme palette;};
     in {
       ".config/swaync/config.json" = {

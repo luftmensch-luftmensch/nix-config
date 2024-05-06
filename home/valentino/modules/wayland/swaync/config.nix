@@ -1,4 +1,8 @@
-{schema, ...}: {
+{
+  schema,
+  pkgs,
+  ...
+}: {
   text = ''
     {
       "$schema": "${schema}",
@@ -57,23 +61,23 @@
           "actions": [
             {
               "label": "󰛳",
-              "command": "swaync-client -cp && nm-connection-editor"
+              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && nm-connection-editor"
             },
             {
               "label": "",
-              "command": "swaync-client -cp && emacsclient -c"
+              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && emacsclient -c"
             },
             {
               "label": "",
-              "command": "swaync-client -cp && firefox"
+              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && firefox"
             },
             {
               "label": "",
-              "command": "swaync-client -cp && zathura"
+              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && zathura"
             },
             {
               "label": "⏻",
-              "command": "swaync-client -cp && rofi-powermenu"
+              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && rofi-powermenu"
             }
           ]
         },

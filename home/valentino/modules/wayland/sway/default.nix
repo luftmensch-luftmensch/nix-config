@@ -25,7 +25,7 @@ in {
           inherit mod mod1 default_output external_output theme palette pkgs;
         };
       in {
-        # bars = [{command = "waybar";}];
+        bars = [];
         modifier = "${mod}";
         floating = {
           modifier = "${mod}";
