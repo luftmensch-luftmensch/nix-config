@@ -188,11 +188,10 @@ See `no-littering' for examples.")
       ;; used for :fork so don't need to specify settings
       straight-host-usernames '((github . "lufthmensch-luftmensch")
                                 (gitlab . "lufthmensch-luftmensch"))
-      straight-profiles `((nil . ,(expand-file-name "straight/versions/lock.el" user-emacs-directory))))
+      straight-profiles `((nil . ,(expand-file-name "straight/versions/lock.el" straight-base-dir))))
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       ;; (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)
        (expand-file-name "straight/repos/straight.el/bootstrap.el" straight-base-dir))
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)

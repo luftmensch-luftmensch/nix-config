@@ -11,7 +11,7 @@
   (set-frame-parameter nil 'alpha-background 90)
   (add-to-list 'default-frame-alist '(alpha-background . 90))
 
-  (:option frame-title-format '(:eval (concat "emacs@" system-name " - "(format "%s  [%s]" (buffer-name) major-mode)))
+  (:option frame-title-format '(:eval (concat "emacs@" system-name " - "(format "%s  [%s]" (buffer-name) major-mode))) ;; '("%b – Emacs")
            icon-title-format frame-title-format
 
            ;; Calendar & Date setup

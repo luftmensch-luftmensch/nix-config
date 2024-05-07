@@ -56,6 +56,7 @@ in {
         "emacs/early-init.el".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/early-init.el";
         "emacs/lisp".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/lisp";
         "emacs/bookmarks".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/bookmarks";
+        "emacs/.etc/straight/versions".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/straight/versions";
       };
     }
 
