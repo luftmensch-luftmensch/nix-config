@@ -78,13 +78,14 @@
              ("https://www.reddit.com/r/androiddev.rss" android android-dev)
              ("https://www.reddit.com/r/fdroid.rss"     android fdroid)
              ("https://www.reddit.com/r/FlutterDev.rss" android flutter)
+             ("https://codewithandrea.com/rss.xml "     android flutter)
 
              ;; Miscellaneous
              ("https://www.rousette.org.uk/archives/index.xml" geekoides)
              ("https://www.bytelab.codes/rss/" bytelab))
 
            elfeed-search-date-format '("%d-%m-%Y" 10 :left)
-           elfeed-db-directory (expand-file-name "elfeed/" .var) ;; "~/.config/emacs/elfeed"
+           elfeed-db-directory (expand-file-name "elfeed/" .var)
            elfeed-search-filter "@5-days-ago +unread")
 
   ;; Quality of life improvements

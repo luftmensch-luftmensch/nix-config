@@ -77,6 +77,7 @@ managers such as DWM, BSPWM refer to this state as 'monocle'."
                                     "*Async-native-compile-log*"
                                     "*straight-byte-compilation*"
                                     "*straight-process*"))
+  (:global "C-c b" 'beframe-prefix-map)
 
   (:with-after consult
     (defface beframe-buffer

@@ -12,7 +12,8 @@
   ;; C-c bindings (mode specific)
   (:global "C-c h" consult-history
            "C-c M" consult-mode-command
-           "C-c b" consult-bookmark
+           "C-c i" consult-info
+           "C-h i" consult-info
            "C-c k" consult-kmacro
            "C-c C-a" consult-org-agenda)
 

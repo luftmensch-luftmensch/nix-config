@@ -6,12 +6,12 @@
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "modernx";
-  version = "0.3.1";
+  version = "0.3.2";
   src = fetchFromGitHub {
     owner = "zydezu";
     repo = "ModernX";
     rev = finalAttrs.version;
-    sha256 = "0gwlg42b903glmv9y9168dz141zdsvxi08z3lrdixpgf9z1pdjsr";
+    hash = "sha256-iFIkYdTWxKO/UnN187p12/VeKHcGdPw5IN5sr7n1vHo=";
   };
 
   dontBuild = true;
@@ -23,6 +23,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     cp -r *.ttf $out/share/fonts
     runHook postInstall
   '';
+
   passthru.scriptName = "modernx.lua";
 
   # the script uses custom "texture" fonts as the background for ui elements.
@@ -30,13 +31,11 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   passthru.extraWrapperArgs = [
     "--set"
     "FONTCONFIG_FILE"
-    (toString (makeFontsConf {
-      fontDirectories = ["${finalAttrs.finalPackage}/share/fonts"];
-    }))
+    (toString (makeFontsConf {fontDirectories = ["${finalAttrs.finalPackage}/share/fonts"];}))
   ];
 
   meta = with lib; {
-    description = "";
+    description = "A replacement for MPV that retains the functionality of the default OSC";
     homepage = "https://github.com/zydezu/ModernX";
     license = licenses.unlicense;
     maintainers = with lib.maintainers; [luftmensch-luftmensch];
