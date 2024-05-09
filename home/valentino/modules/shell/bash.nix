@@ -67,8 +67,9 @@ in {
         "ignorespace"
         "ignoredups"
       ];
+
       # Don't forget to create first the actual directory
-      historyFile = "\${XDG_STATE_HOME}/bash/history";
+      historyFile = "${config.xdg.stateHome}/bash/history";
       historyFileSize = 10000;
       shellOptions = [
         "histappend"

@@ -98,7 +98,6 @@ in {
   dps = "${_docker} ps";
 
   # Misc
-  vim = "nvim";
   v = "vim";
 
   getpass = "${pkgs.openssl}/bin/openssl rand -base64 20";
