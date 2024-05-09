@@ -8,7 +8,7 @@
 #+begin_src nix
 {
   description = "Build a NixOS installer ISO file with nixos-stable and flake support pre-enabled.";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
   outputs = { self, nixpkgs }: {
     nixosConfigurations = let
       # Shared base configuration
@@ -32,30 +32,31 @@
 #+end_src
 * configuration.nix
 #+begin_src nix
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+let 
+  nix-installer = pkgs.writeScriptBin "nix-installer" (builtins.readFile ../installer.sh);
+  nix-rescue = pkgs.writeScriptBin "nix-rescue" (builtins.readFile ../rescue.sh);
+in
+{
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Needed for https://github.com/NixOS/nixpkgs/issues/58959
   boot.supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
 
   # Enable SSH in the boot process.
-  #systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
+  # systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
   services.sshd.enable = true;
 
   users.users.root.password = "nixos";
   services.openssh.permitRootLogin = lib.mkDefault "yes";
   services.getty.autologinUser = lib.mkDefault "root";
 
-  #networking.firewall.allowedTCPPorts = [ 80 ];
+  # networking.firewall.allowedTCPPorts = [ 80 ];
   # Set up automatically wifi
   networking.wireless = {
     enable = true;
     userControlled.enable = true;
-    networks = {
-      CAP1750_039500_G = {
-        pskRaw = "2a343a0cfea2782acbcfd2302dcda36e3c0f22b819221b9cb83e5e033f607b5c";
-      };
-    };
+    networks.CAP1750_039500_G.pskRaw = "2a343a0cfea2782acbcfd2302dcda36e3c0f22b819221b9cb83e5e033f607b5c";
   };
 
   # Name of the installer
@@ -68,20 +69,24 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "it_IT.UTF-8";
   console = {
-    font = "Lat2-Terminus16";
-    # font = "ter-v32n";
+    # font = "Lat2-Terminus16";
+    font = "ter-v32n"; # Set a sligtly bigger font
     keyMap = "it";
   };
-  environment.systemPackages = with pkgs;[
+
+  environment.systemPackages = with pkgs; [
     git
     wget
     tmux
+    nvim
+    nix-installer
+    nix-rescue
   ];
 
 
-  #users.users.root.openssh.authorizedKeys.keys = [
-  #"ssh-ed25519 AaAeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee username@host" # Take from the id_rsa.pub file on ~/.ssh
-  #];
+  # users.users.root.openssh.authorizedKeys.keys = [
+  #  "ssh-ed25519 AaAeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee username@host" # Take from the id_rsa.pub file on ~/.ssh
+  # ];
 
   nix = {
     package = pkgs.nixUnstable;

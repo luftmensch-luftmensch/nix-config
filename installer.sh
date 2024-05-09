@@ -56,8 +56,8 @@ usage() {
 install_nixos() {
     # Check if the user which run the script is root
     if [[ $EUID -ne 0 ]]; then
-	      log E "This scripts needs to be runned as root!"
-	      exit 1
+        log E "This scripts needs to be runned as root!"
+        exit 1
     fi
 
     log I "Select the device to use to install NixOS:"
@@ -84,7 +84,7 @@ install_nixos() {
     boot_device="${device}${is_nvme}1"
     swap_device="${device}${is_nvme}2"
     root_device="${device}${is_nvme}3"
-    
+
     wipefs --all -f "${device}"
     sgdisk --zap-all "${device}"
 
@@ -163,7 +163,7 @@ install_nixos() {
 }
 
 case "$1" in
-	  -i|--info) info ;;
-	  -r|--run) install_nixos ;;
-	  *) usage ;;
+    -i|--info) info ;;
+    -r|--run) install_nixos ;;
+    *) usage ;;
 esac
