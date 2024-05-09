@@ -299,6 +299,8 @@ in {
           # BROWSER - REGION
           "browser.region.network.url" = "";
           "browser.region.update.enabled" = false;
+          # BROWSER - VPN
+          "browser.privatebrowsing.vpnpromourl" = "";
 
           # BROWSER - SAFEBROWSING
           "browser.safebrowsing.downloads.remote.enabled" = false;
