@@ -5,7 +5,7 @@
   home = "${user}@${host}";
   flake = builtins.getFlake (toString ./.);
   inherit (flake.inputs.nixpkgs) lib;
-in {
+in rec {
   inherit (flake) inputs self;
   inherit (flake.inputs) nixpkgs;
   inherit flake lib host user;
@@ -13,4 +13,7 @@ in {
 
   hm-cfg = flake.homeConfigurations."${home}".config;
   hm-opts = flake.homeConfigurations."${home}".options;
+
+  packageNames = map (p: p.pname or p.name or null) hm-cfg.home.packages;
+  hasPackage = name: lib.any (x: x == name) packageNames;
 }
