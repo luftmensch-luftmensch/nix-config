@@ -16,7 +16,7 @@
            ;; telega-directory (locate-user-emacs-file "telega/")
            telega-use-images t
            telega-emoji-font-family "Noto Color Emoji"
-           telega-emoji-use-images nil 
+           telega-emoji-use-images nil
            ;; telega-emoji-company-backend 'telega-company-emoji
            telega-completing-read-function completing-read-function
            telega-animation-play-inline 2

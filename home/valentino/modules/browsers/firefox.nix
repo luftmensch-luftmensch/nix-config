@@ -197,6 +197,11 @@ in {
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = ["@np"];
             };
+            "Nix Options" = {
+              urls = [{template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";}];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@no"];
+            };
           };
         };
         #                       Disable automatic downloading of OpenH264 codec
@@ -317,6 +322,7 @@ in {
           "browser.safebrowsing.downloads.remote.url" = "";
           "browser.safebrowsing.downloads.enabled" = false;
           "browser.sessionstore.privacy_level" = 2;
+
           # Reduce File IO / SSD abuse
           # Otherwise= Firefox bombards the HD with writes. Not so nice for SSDs.
           # This forces it to write every 30 minutes= rather than 15
@@ -410,7 +416,9 @@ in {
           # Disable that websites can get notifications if you copy= paste, or cut something from a web page, and it lets them know which part of the page had been selected.
           "dom.battery.enabled" = false;
           "dom.event.clipboardevents.enabled" = true;
-          "dom.gamepad.enabled" = false;
+          # TODO: Why the hell i disabled it?
+          # "dom.gamepad.enabled" = false;
+
           "dom.security.https_only_mode" = true;
           #"dom.security.https_only_mode_ever_enabled" = true;
 
@@ -450,9 +458,7 @@ in {
           "extensions.shield-recipe-client.enabled" = false;
           "extensions.unifiedExtensions.enabled" = false;
 
-          /*
-          * TAB BEHAVIOR *
-          */
+          # TAB BEHAVIOR
           "findbar.highlightAll" = true;
 
           # FONTS
@@ -481,6 +487,7 @@ in {
           # MEDIA
           # Enable WebRTC VA-API decoding support
           "media.ffmpeg.vaapi.enabled" = true;
+
           #"media.ffvpx.enabled" = true;
           #"media.navigator.mediadatadecoder_vpx_enabled" = true;
           #"media.gmp-gmpopenh264.enabled"= false;
@@ -511,7 +518,8 @@ in {
           # third party cookies
           #"network.cookie.cookieBehavior" = 1;
           "network.connectivity-service.enabled" = false;
-          "network.captive-portal-service.enabled" = false;
+
+          # "network.captive-portal-service.enabled" = false;
           #"network.http.referer.XOriginPolicy"= 2;
           #"network.http.referer.XOriginTrimmingPolicy"= 2;
 
