@@ -8,7 +8,7 @@
   rofi-powermenu-wayland = pkgs.callPackage ./rofi-powermenu {backend = "wayland";};
 
   san-francisco = pkgs.callPackage ./fonts/san-francisco.nix {};
-  icomoon-feather-icons = pkgs.callPackage ./fonts/icomoon-feather-icon.nix {};
+  icomoon-feather = pkgs.callPackage ./fonts/icomoon-feather.nix {};
 
   # Custom sddm theme
   sddm-theme-clairvoyance = pkgs.callPackage ./sddm-theme/default.nix {};

@@ -4,13 +4,12 @@
   ...
 }: {
   ## System security tweaks
-  # sets hidepid=2 on /proc (make process info visible only to owning user)
   security = {
     protectKernelImage = true; # Prevent replacing the running kernel w/o reboot
 
     # lockKernelModules = true; # Disable kernel module loading once the system is fully initialised
 
-    # Make hardened profile more usable (This should be enabled alongside the hardened profile)
+    # Make hardened profile more usable
     # allowUserNamespaces = true;       # Must be set to true for `nix build` to function (https://nixos.org/manual/nixos/stable/index.html#sec-profile-hardened)
     # lockKernelModules = false;        # https://discourse.nixos.org/t/default-security-settings/9755
 
@@ -19,6 +18,12 @@
       wheelNeedsPassword = false;
       execWheelOnly = true;
     };
+
+    # sudo-rs = {
+    #   enable = true;
+    #   execWheelOnly = true;
+    # };
+
     # Whether to enable the RealtimeKit system service, which hands out realtime scheduling priority to user processes on demand.
     # For example, the PulseAudio server uses this to acquire realtime priority.
     # Recommended for pipewire
@@ -114,5 +119,40 @@
       # Intel GPU Analysis
       #"dev.i915.perf_stream_paranoid" = 0;
     };
+
+    # TODO: Try out
+    # blacklistedKernelModules = [
+    #   # Obscure network protocols
+    #   "ax25"
+    #   "dccp"
+    #   "netrom"
+    #   "rds"
+    #   "rose"
+    #   "stcp"
+    #   "tipc"
+    #
+    #   # Old or rare or insufficiently audited filesystems
+    #   "adfs"
+    #   "affs"
+    #   "bfs"
+    #   "befs"
+    #   "cramfs"
+    #   "efs"
+    #   "erofs"
+    #   "exofs"
+    #   "freevxfs"
+    #   "f2fs"
+    #   "hfs"
+    #   "hpfs"
+    #   "jfs"
+    #   "minix"
+    #   "nilfs2"
+    #   "ntfs"
+    #   "omfs"
+    #   "qnx4"
+    #   "qnx6"
+    #   "sysv"
+    #   "ufs"
+    # ];
   };
 }

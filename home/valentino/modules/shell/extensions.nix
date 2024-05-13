@@ -2,14 +2,12 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 with lib; let
   cfg = config.valentino.modules.shell.extensions;
   inherit (config.valentino.modules.shell) bash zsh tmux;
 in {
-  imports = [inputs.nix-index-database.hmModules.nix-index];
   options.valentino.modules.shell.extensions.enable = mkEnableOption "shell useful commands (e.g. bat, eza)";
 
   config = mkIf cfg.enable {
@@ -69,17 +67,6 @@ in {
         enableBashIntegration = bash.enable;
         enableZshIntegration = zsh.enable;
         tmux.enableShellIntegration = tmux.enable;
-      };
-
-      # `command-not-found` relies on nix-channel.
-      # Enable and use `nix-index` instead.
-      command-not-found.enable = false;
-      nix-index-database.comma.enable = true;
-
-      nix-index = {
-        enable = true;
-        enableBashIntegration = bash.enable;
-        enableZshIntegration = zsh.enable;
       };
 
       btop = {

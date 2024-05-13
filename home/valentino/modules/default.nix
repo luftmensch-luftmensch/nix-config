@@ -53,6 +53,7 @@
     "shell/extensions"          = import ./shell/extensions.nix;
     "shell/fish"                = import ./shell/fish;
     "shell/git"                 = import ./shell/git.nix;
+    "shell/nix-index"           = import ./shell/nix-index.nix;
     "shell/starship"            = import ./shell/starship.nix;
     "shell/tmux"                = import ./shell/tmux.nix;
     "shell/zellij"              = import ./shell/zellij.nix;

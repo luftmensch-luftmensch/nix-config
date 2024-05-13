@@ -241,7 +241,7 @@
 (setup (:pkg org-modern)
   (:load-after org)
   (:hook-into org-mode)
-  ;; (set-face-attribute 'org-modern-symbol nil :family "Hack")
+  (set-face-attribute 'org-modern-symbol nil :family "Iosevka Nerd Font")
   (:option org-modern-label-border 1
            org-modern-list '((43 . "▶") (45 . "–") (42 . "•"))
            org-modern-hide-stars nil      ;; Compatibility with org-indent

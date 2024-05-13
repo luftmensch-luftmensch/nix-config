@@ -36,11 +36,13 @@
              ;; Sarasa
              (sarasa
               :default-family "Sarasa Mono Slab SC"
-              :default-height ,vb/font-height)
+              :default-height ,vb/font-height
+              :variable-pitch-family "Sarasa Mono Slab SC")
              ;; Victor Mono
              ;; (victor
              ;;  :default-family "VictorMono Nerd Font"
-             ;;  :default-height ,vb/font-height)
+             ;;  :default-height ,vb/font-height
+	     ;;  :variable-pitch-family "VictorMono Nerd Font")
              ))
 
   (fontaine-set-preset (or (fontaine-restore-latest-preset) 'sarasa))

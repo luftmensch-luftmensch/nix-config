@@ -34,7 +34,7 @@ with lib; let
     material-design-icons
     ibm-plex
     san-francisco
-    icomoon-feather-icons
+    icomoon-feather
   ];
 
   media = with pkgs; [

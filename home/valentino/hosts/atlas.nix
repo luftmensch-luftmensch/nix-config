@@ -74,6 +74,7 @@
       tmux.enable = true;
       direnv.enable = true;
       git.enable = true;
+      nix-index.enable = true;
     };
 
     themes = {

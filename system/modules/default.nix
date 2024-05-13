@@ -1,12 +1,12 @@
 {
   "core/cachix"        = import ./core/cachix.nix;
   "core/environment"   = import ./core/environment.nix;
+  "core/hardening"     = import ./core/hardening.nix;
   "core/impermanence"  = import ./core/impermanence.nix;
   "core/locale"        = import ./core/locale.nix;
   "core/luks"          = import ./core/luks.nix;
   "core/network"       = import ./core/network.nix;
   "core/quiet-boot"    = import ./core/quiet-boot.nix;
-  "core/security"      = import ./core/security.nix;
   "core/settings"      = import ./core/settings.nix;
   "core/user"          = import ./core/user.nix;
 
