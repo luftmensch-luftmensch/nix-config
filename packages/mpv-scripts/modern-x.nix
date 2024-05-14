@@ -6,12 +6,12 @@
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "modernx";
-  version = "0.3.2";
+  version = "0.3.4";
   src = fetchFromGitHub {
     owner = "zydezu";
     repo = "ModernX";
     rev = finalAttrs.version;
-    hash = "sha256-iFIkYdTWxKO/UnN187p12/VeKHcGdPw5IN5sr7n1vHo=";
+    hash = "sha256-XzzdJLN2DImwo8ZmH1+Q5e2YfwCh7pKyUxjtPd2AMGs=";
   };
 
   dontBuild = true;

@@ -154,24 +154,27 @@ in {
   };
 
   backlight = {
-    interval = 30;
-    align = 0;
-    rotate = 0;
-    #"device": "amdgpu_bl0",
-    format = "{icon} {percent}%";
-    format-icons = [
-      "󰃞 "
-      "󰃝 "
-      "󰃟 "
-      "󰃠 "
-    ];
-    on-click = "";
-    on-click-middle = "";
-    on-click-right = "";
-    on-update = "";
-    on-scroll-up = "brightnessctl s 5%+";
-    on-scroll-down = "brightnessctl s 5%-";
-    smooth-scrolling-threshold = 1;
+    format = "{icon} <b>{percent}%</b>";
+    format-icons = ["󰃞" "󰃟" "󰃠"];
+    tooltip = false;
+    # interval = 30;
+    # align = 0;
+    # rotate = 0;
+    # #"device": "amdgpu_bl0",
+    # format = "{icon} {percent}%";
+    # format-icons = [
+    #   "󰃞 "
+    #   "󰃝 "
+    #   "󰃟 "
+    #   "󰃠 "
+    # ];
+    # on-click = "";
+    # on-click-middle = "";
+    # on-click-right = "";
+    # on-update = "";
+    # on-scroll-up = "brightnessctl s 5%+";
+    # on-scroll-down = "brightnessctl s 5%-";
+    # smooth-scrolling-threshold = 1;
   };
 
   battery = {
