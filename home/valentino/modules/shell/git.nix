@@ -178,6 +178,21 @@ in {
       };
 
       lazygit.enable = true;
+
+      gh = {
+        enable = true;
+        settings = {
+          aliases = {
+            co = "pr checkout";
+            pv = "pr view";
+          };
+
+          editor =
+            if neovim.enable
+            then "nvim"
+            else "";
+        };
+      };
     };
 
     home.packages = [undo-git git-blame-someone-else pkgs.oh-my-git];

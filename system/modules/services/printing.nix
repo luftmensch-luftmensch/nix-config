@@ -16,7 +16,8 @@ in {
     (mkIf cfg.cups.enable {
       services.printing = {
         enable = true;
-        drivers = [pkgs.brlaser];
+        # TODO: Try out cups-brother-hl1210w
+        drivers = with pkgs; [brlaser cups-brother-hl1210w];
       };
     })
 
