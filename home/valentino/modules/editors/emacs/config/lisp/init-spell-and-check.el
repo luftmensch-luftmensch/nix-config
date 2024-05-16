@@ -30,10 +30,12 @@
     "m" #'flymake-mode)
 
   (:bind "C-c ! s" #'flymake-start
-         "C-c ! b" #'flymake-show-buffer-diagnostics ; Emacs28
-         "C-c ! f" #'flymake-show-project-diagnostics ; Emacs28
+         "C-c ! b" #'flymake-show-buffer-diagnostics
+         "C-c ! f" #'flymake-show-project-diagnostics
          "C-c ! n" #'flymake-goto-next-error
          "C-c ! p" #'flymake-goto-prev-error)
+  (:bind-into flymake-diagnostics-buffer-mode-map
+    [remap evil-record-macro] #'quit-window)
   (:hook-into prog-mode text-mode))
 
 ;; From Purcell

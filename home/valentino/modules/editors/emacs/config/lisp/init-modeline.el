@@ -469,77 +469,6 @@ Specific to the current window's mode line.")
   "Mode line construct displaying Eglot information.
 Specific to the current window's mode line.")
 
-;;;; Right side alignment
-
-(defun vb/modeline--right-align-rest ()
-  "Return string if everything after `vb/modeline-align-right'."
-  (format-mode-line
-   `(""
-     ,@(cdr (memq 'vb/modeline-align-right mode-line-format)))))
-
-(defun vb/modeline--right-align-width ()
-  "Return pixel width of `vb/modeline--right-align-rest'."
-  (string-pixel-width (vb/modeline--right-align-rest)))
-
-(defun vb/modeline--box-p ()
-  "Return non-nil if the `mode-line' has a box attribute."
-  (and (face-attribute 'mode-line :box)
-       (null (eq (face-attribute 'mode-line :box) 'unspecified))))
-
-;; NOTE 2023-07-13: I could also do what I am doing in
-;; `fontaine--family-list-variable-pitch' and check if the family is a
-;; member of those, but I don't need that as I always inherit
-;; `variable-pitch' in my themes instead of hardcoding the family.
-(defun vb/modeline--variable-pitch-p ()
-  "Return non-nil if the `mode-line' inherits `variable-pitch'."
-  (when-let* ((mode-line-inherit (face-attribute 'mode-line :inherit))
-              ((string-match-p "variable-pitch" (symbol-name mode-line-inherit)))
-              (family-face (face-attribute mode-line-inherit :inherit))
-              (variable-pitch
-               (if (listp family-face)
-                   (memq 'variable-pitch family-face)
-                 (eq 'variable-pitch family-face))))
-    variable-pitch))
-
-;; I just came up with this experimentally, but I am not sure if it is
-;; the best approach.
-(defun vb/modeline--magic-number ()
-  "Return constant for use in `vb/modeline-align-right'."
-  (let ((height (face-attribute 'mode-line :height nil 'default))
-        (m-width (string-pixel-width (propertize "m" 'face 'mode-line))))
-    (round height (* m-width (* height m-width 0.001)))))
-
-(defvar-local vb/modeline-align-right
-    '(:eval
-      (propertize
-       " "
-       'display
-       (let ((box-p (vb/modeline--box-p))
-             (variable-pitch-p (vb/modeline--variable-pitch-p))
-             (magic-number (vb/modeline--magic-number)))
-         `(space
-           :align-to
-           (- right
-              right-fringe
-              right-margin
-              ,(ceiling
-                (vb/modeline--right-align-width)
-                (string-pixel-width (propertize "m" 'face 'mode-line)))
-              ,(cond
-                ;; FIXME 2023-07-13: These hardcoded numbers are
-                ;; probably wrong in some case. I am still testing.
-                ((and variable-pitch-p box-p)
-                 (* magic-number 0.5))
-                ((and (not variable-pitch-p) box-p)
-                 (* magic-number 0.25))
-                ((and variable-pitch-p (not box-p))
-                 0)
-                ;; No box, no variable pitch, but I am keeping it as
-                ;; the fallback for the time being.
-                (t (* magic-number -0.1))))))))
-  "Mode line construct to align following elements to the right.
-Read Info node `(elisp) Pixel Specification'.")
-
 ;;;; Miscellaneous
 
 (defvar-local vb/modeline-misc-info
@@ -613,30 +542,70 @@ Specific to the current window's mode line.")
       (vb/modeline--enable-mode)
     (vb/modeline--disable-mode)))
 
+(defconst RIGHT_PADDING 1)
+
+;; Wait for emacs30 that adds `mode-line-format-right-align'. More info -> https://www.reddit.com/r/emacs/comments/14u6tsl/news_rightaligned_modeline_and_more/
 (setup modeline
+  ;; Adapted from https://gist.github.com/fhdhsni/990cba7794b4b6918afea94af0b30d66
+  (setq vb/modeline-align-left '("%e"
+                                 vb/modeline-kbd-macro
+                                 vb/modeline-narrow
+                                 vb/modeline-buffer-status
+                                 vb/modeline-input-method
+                                 vb/modeline-evil
+                                 vb/modeline-buffer-identification
+                                 "  "
+                                 vb/modeline-major-mode
+                                 vb/modeline-process
+                                 "  "
+                                 vb/modeline-vc-branch)
+
+        vb/modeline-align-right '("%2 "
+                                  vb/modeline-eglot
+                                  " "
+                                  vb/modeline-flymake
+                                  "%2 "
+                                  vb/modeline-misc-info
+                                  " %p [%l:%c] "))
+
+  (defun vb/mode-line-fill-right (face reserve)
+    "Return empty space using FACE and leaving RESERVE space on the right."
+    (unless reserve
+      (setq reserve 20))
+    (when (and window-system (eq 'right (get-scroll-bar-mode)))
+      (setq reserve (- reserve 3)))
+    (propertize " "
+                'display `((space :align-to (- (+ right right-fringe right-margin) ,reserve)))
+                'face face))
+
+  (defun reserve-middle/right ()
+    "Helper function to reserve space for the right section of the mode-line."
+    (+ RIGHT_PADDING (length (format-mode-line mode-line-align-right))))
+
+  ;; Currently I don't have anything to display in the middle section
+  ;; (defun vb/mode-line-fill-center (face reserve)
+  ;;   "Return empty space using FACE to the center of remaining space leaving RESERVE space on the right."
+  ;;   (unless reserve
+  ;;     (setq reserve 20))
+  ;;   (when (and window-system (eq 'right (get-scroll-bar-mode)))
+  ;;     (setq reserve (- reserve 3)))
+  ;;   (propertize " "
+  ;;               'display `((space :align-to (- (+ center (.5 . right-margin)) ,reserve
+  ;;                                              (.5 . left-margin))))
+  ;;               'face face))
+  ;; (defun reserve-left/middle ()
+  ;;   "Helper function to reserve space for the middle section of the mode-line."
+  ;;   (/ (length (format-mode-line mode-line-align-middle)) 2))
+
+
   (setq-default mode-line-format
-                '("%e"
-                  vb/modeline-kbd-macro
-                  vb/modeline-narrow
-                  vb/modeline-buffer-status
-                  vb/modeline-input-method
-                  vb/modeline-evil
-                  vb/modeline-buffer-identification
-                  "  "
-                  vb/modeline-major-mode
-                  vb/modeline-process
-                  "  "
-                  vb/modeline-vc-branch
-                  "  "
-                  vb/modeline-which-function
-                  vb/modeline-align-right
-                  "  "
-                  vb/modeline-eglot
-                  "  "
-                  vb/modeline-flymake
-                  "  "
-                  vb/modeline-misc-info))
+                (list
+                 vb/modeline-align-left
+                 '(:eval (vb/mode-line-fill-right 'mode-line (+ RIGHT_PADDING (length (format-mode-line vb/modeline-align-right)))))
+                 vb/modeline-align-right))
   (vb/modeline-subtle-mode 1))
 
+
 (provide 'init-modeline)
-;;; vb/modeline.el ends here
+
+;;; init-modeline.el ends here
