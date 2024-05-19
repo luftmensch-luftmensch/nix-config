@@ -15,8 +15,6 @@ in {
       bruno
       httpie-desktop
       mongodb-compass
-      # TODO: Enable it when buildGoModule 1.22 lands on stable
-      # rHttp
     ];
   };
 }
