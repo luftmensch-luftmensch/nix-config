@@ -22,14 +22,14 @@
   ;; General
   (:option org-adapt-indentation nil
            org-fold-catch-invisible-edits 'smart
-           org-cycle-separator-lines 0 ;; Give a more compact and consistent view
+           org-cycle-separator-lines 0    ;; Give a more compact and consistent view
 
            org-directory "~/Dropbox/org/"
            org-auto-align-tags nil
-           ;; It's convenient to have properties inherited
-           org-use-property-inheritance t
-           org-return-follows-link t           ;; make RET follow links
-           org-tags-column 0 ;; place tags directly next to headline text
+
+           org-use-property-inheritance t ;; It's convenient to have properties inherited
+           org-return-follows-link t      ;; make RET follow links
+           org-tags-column 0              ;; place tags directly next to headline text
            org-archive-mark-done nil
            org-startup-folded 'content
            org-insert-heading-respect-content t
@@ -79,14 +79,13 @@
            org-confirm-babel-evaluate nil     ;; no confirm evaluation
 
            ;; Agenda
-           ;; org-agenda-files `(,"~/Dropbox/org/Agenda.org")
-	         ;; Set all org files inside org-directory as agenda-files
-	         org-agenda-files (directory-files-recursively org-directory "\\.org$")
+           ;; Set all org files inside org-directory as agenda-files
+           org-agenda-files (directory-files-recursively org-directory "\\.org$")
            org-log-done 'time                  ;; Having the time a item is done sounds convenient
            org-agenda-restore-windows-after-quit t
            org-agenda-skip-unavailable-files t ;; just skip non-reachable files in org-agenda-files
            ;; Taken from https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
-           org-agenda-span 7 ;; 7
+           org-agenda-span 7
            org-agenda-start-day "+0d"
            org-agenda-start-on-weekday nil
            org-agenda-compact-blocks t ;; Make agenda shorter
@@ -109,10 +108,6 @@
 
            org-agenda-category-icon-alist `(("Anime" ,(list (all-the-icons-faicon "home" :height 0.8)) nil nil :ascent center))
 
-           ;; Refile
-           ;; org-refile-targets '(("Archived.org" :maxlevel . 2))
-
-           ;; Agenda tags
            org-tag-alist '(("@Anime"    . ?A)
                            ("@Emacs"    . ?E)
                            ("@Nixos"    . ?N)
@@ -201,9 +196,6 @@
   (org-babel-do-load-languages
    'org-babel-load-languages '((emacs-lisp . t)
                                (shell . t)))
-
-  ;; TODO: I don't remember why I added it
-  ;; (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
   (:local-set completion-at-point-functions '(cape-dabbrev cape-file))
 

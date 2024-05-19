@@ -47,70 +47,65 @@
     neovim-flake.url = "github:luftmensch-luftmensch/neovim-flake";
 
     nix-colors.url = "github:misterio77/nix-colors";
+
+    # TODO: Try out
+    # spicetify-nix.url = "github:the-argus/spicetify-nix";
   };
 
   # Function of an argument that uses a the inputs for reference
   # - Configure what you imported
   # - Can be pretty much anything: Packages / configurations / modules / etc...
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    ...
-  }: let
-    inherit (self) outputs;
-    lib = import ./lib {inherit inputs;};
-    inherit (lib) mkSystem mkHome forAllSystems;
-  in {
-    nixosModules = import ./system/modules;
-    homeModules = import ./home/valentino/modules;
+  outputs =
+    inputs@{ self, nixpkgs, ... }:
+    let
+      inherit (self) outputs;
+      lib = import ./lib { inherit inputs; };
+      inherit (lib) mkSystem mkHome forAllSystems;
+    in
+    {
+      nixosModules = import ./system/modules;
+      homeModules = import ./home/valentino/modules;
 
-    overlays = import ./overlays inputs;
+      overlays = import ./overlays inputs;
 
-    formatter = forAllSystems (
-      system:
-        nixpkgs.legacyPackages.${system}.alejandra
-    );
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    packages = forAllSystems (
-      system:
-        import ./packages {pkgs = nixpkgs.legacyPackages.${system};}
-    );
+      packages = forAllSystems (system: import ./packages { pkgs = nixpkgs.legacyPackages.${system}; });
 
-    devShells = forAllSystems (
-      system:
-        import ./shell.nix {pkgs = nixpkgs.legacyPackages.${system};}
-    );
+      devShells = forAllSystems (system: import ./shell.nix { pkgs = nixpkgs.legacyPackages.${system}; });
 
-    nixosConfigurations = {
-      # Thinkpad T14-S GEN2 - Laptop
-      kronos = mkSystem {
-        hostname = "kronos";
-        system = "x86_64-linux";
-        stateVersion = "22.05";
+      nixosConfigurations = {
+        # Thinkpad T14-S GEN2 - Laptop
+        kronos = mkSystem {
+          hostname = "kronos";
+          system = "x86_64-linux";
+          stateVersion = "22.05";
+        };
+
+        # Lenovo IdeaCentre K450 - Desktop PC
+        atlas = mkSystem {
+          hostname = "atlas";
+          system = "x86_64-linux";
+          stateVersion = "22.05";
+        };
       };
 
-      # Lenovo IdeaCentre K450 - Desktop PC
-      atlas = mkSystem {
-        hostname = "atlas";
-        system = "x86_64-linux";
-        stateVersion = "22.05";
-      };
+      homeConfigurations =
+        let
+          username = "valentino";
+          system = "x86_64-linux";
+          stateVersion = "23.11";
+        in
+        {
+          "valentino@kronos" = mkHome {
+            inherit username system stateVersion;
+            hostname = "kronos";
+          };
+
+          "valentino@atlas" = mkHome {
+            inherit username system stateVersion;
+            hostname = "atlas";
+          };
+        };
     };
-
-    homeConfigurations = let
-      username = "valentino";
-      system = "x86_64-linux";
-      stateVersion = "23.11";
-    in {
-      "valentino@kronos" = mkHome {
-        inherit username system stateVersion;
-        hostname = "kronos";
-      };
-
-      "valentino@atlas" = mkHome {
-        inherit username system stateVersion;
-        hostname = "atlas";
-      };
-    };
-  };
 }

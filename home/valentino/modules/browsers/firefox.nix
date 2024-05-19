@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib; let
@@ -167,6 +168,7 @@ with lib; let
 
   '';
 in {
+  imports = [inputs.nur.hmModules.nur];
   options.valentino.modules.browsers.firefox.enable = mkEnableOption "firefox";
 
   config = mkIf cfg.enable {
@@ -647,10 +649,10 @@ in {
           "browser.aboutConfig.showWarning" = false;
         };
 
-        extensions = with pkgs.nur.repos.rycee.firefox-addons;
+        extensions = with config.nur.repos.rycee.firefox-addons;
           [bitwarden ublock-origin user-agent-string-switcher]
           # https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean (alternative to https://12ft.io/)
-          ++ (with pkgs.nur.repos.colinsane.firefox-extensions; [bypass-paywalls-clean]);
+          ++ (with config.nur.repos.colinsane.firefox-extensions; [bypass-paywalls-clean]);
       };
     };
 

@@ -382,11 +382,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1715939248,
-        "narHash": "sha256-84M42wNnPXc3KIsZGj88VuOuka+gi8PCmZ7XgOUWL+U=",
+        "lastModified": 1716115625,
+        "narHash": "sha256-Q9MASF1/IMuzLJV7V5iMdLXXqw3Zr0b+r7CJ9hJjeDw=",
         "owner": "luftmensch-luftmensch",
         "repo": "neovim-flake",
-        "rev": "5b75e909e202518dfe5a650d1357f4f21ca9dd35",
+        "rev": "27df1cbd66c90f2b91b99ac2eb76ebe9d75988b9",
         "type": "github"
       },
       "original": {
@@ -571,11 +571,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1715948915,
-        "narHash": "sha256-dxMrggEogQuJQr6f02VAFtsSNtjEPkgxczeiyW7WOQc=",
+        "lastModified": 1716061101,
+        "narHash": "sha256-H0eCta7ahEgloGIwE/ihkyGstOGu+kQwAiHvwVoXaA0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "bacb8503d3a51d9e9b52e52a1ba45e2c380ad07d",
+        "rev": "e7cc61784ddf51c81487637b3031a6dd2d6673a2",
         "type": "github"
       },
       "original": {
@@ -616,11 +616,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1716101626,
-        "narHash": "sha256-NBX9cvZ7WVUcJvein+XMGK92QHEU+fM4Q3yF33QI118=",
+        "lastModified": 1716115534,
+        "narHash": "sha256-ctlGgb9lXEbc8cXTa8S2gXwShqWBVgX4U3CBwS9Yn/Q=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "31704a62583daf17988c1c2167c2e08bcae2793d",
+        "rev": "c8598a0925ed8adb9fc8f0a7e7f9352dce191f98",
         "type": "github"
       },
       "original": {
