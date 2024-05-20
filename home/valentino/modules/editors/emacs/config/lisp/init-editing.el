@@ -36,7 +36,7 @@
            version-control t
            delete-old-versions t
            kept-new-versions 5
-           kept-old-versions 2
+           kept-old-versions 0
            create-lockfiles nil
            auto-save-include-big-deletions t))
 

@@ -198,8 +198,7 @@
                                     ,(concat "* %^{Title}\n"
                                              ":PROPERTIES:\n"
                                              ":CAPTURED: %U\n"
-                                             ":END:\n\n"
-                                             "%i %l")
+                                             ":END:\n")
                                     :empty-lines-after 1)
 
                                    ("m" "Movies" entry
@@ -207,8 +206,7 @@
                                     ,(concat "* %^{Title}\n"
                                              ":PROPERTIES:\n"
                                              ":CAPTURED: %U\n"
-                                             ":END:\n\n"
-                                             "%i %l")
+                                             ":END:\n")
                                     :empty-lines-after 1)
 
                                    ("s" "Series" entry
@@ -216,8 +214,7 @@
                                     ,(concat "* %^{Title}\n"
                                              ":PROPERTIES:\n"
                                              ":CAPTURED: %U\n"
-                                             ":END:\n\n"
-                                             "%i %l")
+                                             ":END:\n")
                                     :empty-lines-after 1)
 
                                    ;; Linux
@@ -226,8 +223,7 @@
                                     ,(concat "* %^{Title}\n"
                                              ":PROPERTIES:\n"
                                              ":CAPTURED: %U\n"
-                                             ":END:\n\n"
-                                             "%i %l")
+                                             ":END:\n")
                                     :empty-lines-after 1)
 
                                    ("n" "Nixos" entry
@@ -235,8 +231,7 @@
                                     ,(concat "* %^{Title}\n"
                                              ":PROPERTIES:\n"
                                              ":CAPTURED: %U\n"
-                                             ":END:\n\n"
-                                             "%i %l")
+                                             ":END:\n")
                                     :empty-lines-after 1))
 
            ;; TODOS
