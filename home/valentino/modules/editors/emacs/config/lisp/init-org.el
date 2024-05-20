@@ -156,32 +156,92 @@
                                          tags-todo "@Uni"
                                          ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
                                           (org-agenda-overriding-header "  Uni"))))
-           org-capture-templates
-           '(("A" "Anime" entry (file+headline "~/Dropbox/org/Agenda.org" "Anime")
-              "* TODO %? :@Anime:\n%U" :empty-lines 0)
-             ("D" "Deadline" entry (file+headline "~/Dropbox/org/Agenda.org" "DEADLINE")
-              "* TODO %? %^G \n  DEADLINE: %^T" :empty-lines 0)
-             ("E" "Emacs" entry (file+headline "~/Dropbox/org/Agenda.org" "Emacs")
-              "* TODO %? :@Emacs:\n%U" :empty-lines 0)
-             ("N" "NIXOS" entry (file+headline "~/Dropbox/org/Agenda.org" "Nixos")
-              "* TODO %? :@Nixos:\n%U" :empty-lines 0)
-             ("M" "MOVIES" entry (file+headline "~/Dropbox/org/Agenda.org" "Movies")
-              "* TODO %? :@Movies:\n%U" :empty-lines 0)
-             ("P" "Personal" entry (file+headline "~/Dropbox/org/Agenda.org" "Personale")
-              "* TODO %? :@Personal:\n%U" :empty-lines 0)
 
-             ("T" "Serie TV" entry (file+headline "~/Dropbox/org/Agenda.org" "Serie TV")
-              "* TODO %? :@TVSeries:\n%U" :empty-lines 0)
-             ("U" "Uni" entry (file+headline "~/Dropbox/org/Agenda.org" "Uni")
-              "* TODO %? :@Uni:\n%U" :empty-lines 0)
-             ("W" "Work" entry (file+headline "~/Dropbox/org/Agenda.org" "Work")
-              "* TODO %? :@Work:\n%U" :empty-lines 0)
-             ("S" "Scheduled TODO" entry (file+headline "~/Dropbox/org/Agenda.org" "SCHEDULED")
-              "* TODO %? %^G \nSCHEDULED: %^T\n  %U" :empty-lines 0))
+           ;; https://emacsdocs.org/docs/org/Capture-templates
+           org-capture-templates `(
+                                   ;; Tasks
+                                   ("c" "Clock in to a task" entry
+                                    (file+headline "tasks.org" "Clocked tasks")
+                                    ,(concat "* TODO %^{Title}\n"
+                                             ":PROPERTIES:\n"
+                                             ":EFFORT: %^{Effort estimate in minutes|5|10|15|30|45|60|90|120}\n"
+                                             ":END:\n\n"
+                                             "%A\n")
+                                    :prepend t
+                                    :clock-in t
+                                    :clock-keep t
+                                    :immediate-finish t
+                                    :empty-lines-after 1)
+
+                                   ("t" "Task with a due date" entry
+                                    (file+headline "tasks.org" "Tasks with a date")
+                                    ,(concat "* TODO %^{Title} %^g\n"
+                                             "SCHEDULED: %^t\n"
+                                             ":PROPERTIES:\n"
+                                             ":CAPTURED: %U\n"
+                                             ":END:\n\n"
+                                             "%a\n%i%?")
+                                    :empty-lines-after 1)
+
+                                   ("T" "Task without a deadline" entry
+                                    (file+headline "tasks.org" "Tasks without a deadline")
+                                    ,(concat "* TODO %^{Title} %^g\n"
+                                             ":PROPERTIES:\n"
+                                             ":CAPTURED: %U\n"
+                                             ":END:\n\n"
+                                             "%a\n%i%?")
+                                    :empty-lines-after 1)
+
+                                   ;; Entertainment
+                                   ("a" "Animes" entry
+                                    (file+headline "entertainment.org" "Anime")
+                                    ,(concat "* %^{Title}\n"
+                                             ":PROPERTIES:\n"
+                                             ":CAPTURED: %U\n"
+                                             ":END:\n\n"
+                                             "%i %l")
+                                    :empty-lines-after 1)
+
+                                   ("m" "Movies" entry
+                                    (file+headline "entertainment.org" "Movies")
+                                    ,(concat "* %^{Title}\n"
+                                             ":PROPERTIES:\n"
+                                             ":CAPTURED: %U\n"
+                                             ":END:\n\n"
+                                             "%i %l")
+                                    :empty-lines-after 1)
+
+                                   ("s" "Series" entry
+                                    (file+headline "entertainment.org" "Series")
+                                    ,(concat "* %^{Title}\n"
+                                             ":PROPERTIES:\n"
+                                             ":CAPTURED: %U\n"
+                                             ":END:\n\n"
+                                             "%i %l")
+                                    :empty-lines-after 1)
+
+                                   ;; Linux
+                                   ("e" "Emacs" entry
+                                    (file+headline "linux.org" "Emacs")
+                                    ,(concat "* %^{Title}\n"
+                                             ":PROPERTIES:\n"
+                                             ":CAPTURED: %U\n"
+                                             ":END:\n\n"
+                                             "%i %l")
+                                    :empty-lines-after 1)
+
+                                   ("n" "Nixos" entry
+                                    (file+headline "linux.org" "Nixos")
+                                    ,(concat "* %^{Title}\n"
+                                             ":PROPERTIES:\n"
+                                             ":CAPTURED: %U\n"
+                                             ":END:\n\n"
+                                             "%i %l")
+                                    :empty-lines-after 1))
 
            ;; TODOS
            org-use-fast-todo-selection 'expert ;; don't use popup window for todos
-           org-enforce-todo-dependencies t ;; don't set to DONE if children aren’t DONE
+           org-enforce-todo-dependencies t     ;; don't set to DONE if children aren’t DONE
            org-enforce-todo-checkbox-dependencies t
 
            ;; TODO customization
@@ -244,8 +304,8 @@
            org-modern-table-vertical 1
            org-modern-table-horizontal 0.2))
 
-(setup (:pkg (org-modern-indent :type git :host github :repo "jdtsmith/org-modern-indent"))
-  (:hook-into org-indent-mode))
+;; (setup (:pkg (org-modern-indent :type git :host github :repo "jdtsmith/org-modern-indent"))
+;;   (:hook-into org-indent-mode))
 
 (provide 'init-org)
 ;;; init-org.el ends here

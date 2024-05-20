@@ -5,7 +5,8 @@
   inputs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.browsers.chromium;
   inherit (config.valentino.modules) themes wayland;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
@@ -167,17 +168,15 @@ with lib; let
     #root > div{align-items: center; display: flex}}}
 
   '';
-in {
-  imports = [inputs.nur.hmModules.nur];
+in
+{
+  imports = [ inputs.nur.hmModules.nur ];
   options.valentino.modules.browsers.firefox.enable = mkEnableOption "firefox";
 
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
-      package =
-        if wayland.enable
-        then pkgs.firefox-wayland
-        else pkgs.firefox;
+      package = if wayland.enable then pkgs.firefox-wayland else pkgs.firefox;
 
       profiles.default = {
         inherit userChrome userContent;
@@ -195,14 +194,14 @@ in {
             "eBay".metaData.hidden = true;
             "Wikipedia".metaData.hidden = true;
             "Nix Packages" = {
-              urls = [{template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}];
+              urls = [ { template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; } ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@np"];
+              definedAliases = [ "@np" ];
             };
             "Nix Options" = {
-              urls = [{template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";}];
+              urls = [ { template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}"; } ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@no"];
+              definedAliases = [ "@no" ];
             };
           };
         };
@@ -408,7 +407,7 @@ in {
           "devtools.toolbox.host" = "left";
           "devtools.theme" = "dark";
           "devtools.onboarding.telemetry.logged" = false;
-          "devtools.inspector.three-pane-enabled" = false;
+          "devtools.inspector.three-pane-enabled" = true;
 
           #"devtools.chrome.enabled"= true;
           #"devtools.debugger.remote-enabled"= true;
@@ -649,10 +648,15 @@ in {
           "browser.aboutConfig.showWarning" = false;
         };
 
-        extensions = with config.nur.repos.rycee.firefox-addons;
-          [bitwarden ublock-origin user-agent-string-switcher]
+        extensions =
+          with config.nur.repos.rycee.firefox-addons;
+          [
+            bitwarden
+            ublock-origin
+            user-agent-string-switcher
+          ]
           # https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean (alternative to https://12ft.io/)
-          ++ (with config.nur.repos.colinsane.firefox-extensions; [bypass-paywalls-clean]);
+          ++ (with config.nur.repos.colinsane.firefox-extensions; [ bypass-paywalls-clean ]);
       };
     };
 
