@@ -19,6 +19,60 @@
 (setup (:pkg org :type built-in)
   (setq load-path
         (cl-remove-if (lambda (path) (string-match-p "lisp/org\\'" path)) load-path))
+  (defvar vb/org-custom-daily-agenda
+    ;; NOTE 2021-12-08: Specifying a match like the following does not
+    ;; work.
+    ;;
+    ;; tags-todo "+PRIORITY=\"A\""
+    ;;
+    ;; So we match everything and then skip entries with
+    ;; `org-agenda-skip-function'.
+    `((tags-todo "*"
+                 ((org-agenda-skip-function '(org-agenda-skip-if nil '(timestamp)))
+                  (org-agenda-skip-function
+                   `(org-agenda-skip-entry-if
+                     'notregexp ,(format "\\[#%s\\]" (char-to-string org-priority-highest))))
+                  (org-agenda-block-separator nil)
+                  (org-agenda-overriding-header "Important tasks without a date\n")))
+      (agenda "" ((org-agenda-span 1)
+                  (org-deadline-warning-days 0)
+                  (org-agenda-block-separator nil)
+                  (org-scheduled-past-days 0)
+                  ;; We don't need the `org-agenda-date-today'
+                  ;; highlight because that only has a practical
+                  ;; utility in multi-day views.
+                  (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                  (org-agenda-format-date "%A %-e %B %Y")
+                  (org-agenda-overriding-header "\nToday's agenda\n")))
+      (agenda "" ((org-agenda-start-on-weekday nil)
+                  (org-agenda-start-day "+1d")
+                  (org-agenda-span 3)
+                  (org-deadline-warning-days 0)
+                  (org-agenda-block-separator nil)
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                  (org-agenda-overriding-header "\nNext three days\n")))
+      (agenda "" ((org-agenda-time-grid nil)
+                  (org-agenda-start-on-weekday nil)
+                  ;; We don't want to replicate the previous section's
+                  ;; three days, so we start counting from the day after.
+                  (org-agenda-start-day "+4d")
+                  (org-agenda-span 14)
+                  (org-agenda-show-all-dates nil)
+                  (org-deadline-warning-days 0)
+                  (org-agenda-block-separator nil)
+                  (org-agenda-entry-types '(:deadline))
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                  (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n"))))
+    "Custom agenda for use in `org-agenda-custom-commands'.")
+
+  (defvar vb/org-template-basic
+    (concat "* %^{Title} %^g\n"
+            ":PROPERTIES:\n"
+            ":CAPTURED: %U\n"
+            ":END:\n"))
+
+
+
   ;; General
   (:option org-adapt-indentation nil
            org-fold-catch-invisible-edits 'smart
@@ -100,65 +154,58 @@
            org-agenda-current-time-string "← now ─────────────────────────────────────────────────" ;; "ᐊ---------- now"
            org-agenda-time-grid '((daily) () "" "")
            org-agenda-window-frame-fractions '(0.3 . 0.4) ; define min and max height for org-agenda buffers
-           org-agenda-hide-tags-regexp ".*" ;; Hide tags
+           ;; org-agenda-hide-tags-regexp ".*" ;; Hide tags
            org-agenda-prefix-format '((agenda . " %?-2i %t ")
-                                      (todo . " %i %-12:c")
-                                      (tags . " %i ")
+                                      (todo   . " %i %-12:c")
+                                      (tags   . " %i ")
                                       (search . " %i %-12:c"))
 
-           org-agenda-category-icon-alist `(("Anime" ,(list (all-the-icons-faicon "home" :height 0.8)) nil nil :ascent center))
+           ;; org-agenda-category-icon-alist `(("Anime" ,(list (all-the-icons-faicon "home" :height 0.8)) nil nil :ascent center))
 
-           org-tag-alist '(("@Anime"    . ?A)
-                           ("@Emacs"    . ?E)
-                           ("@Nixos"    . ?N)
-                           ("@Movies"   . ?M)
-                           ("@Personal" . ?P)
-                           ("@Work"     . ?W)
-                           ("@TVSeries" . ?T)
-                           ("@Uni"      . ?U))
+           org-tag-alist '(("linux"    . ?L)
+                           ("emacs"    . ?E)
+                           ("nixos"    . ?N)
+                           ("anime"    . ?A)
+                           ("movies"   . ?M)
+                           ("series"   . ?T)
+                           ("personal" . ?P)
+                           ("work"     . ?W)
+                           ("uni"      . ?U))
 
-           org-agenda-custom-commands '(("A" "Anime"
-                                         tags-todo "@Anime"
-                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-                                          (org-agenda-overriding-header "⚡ Anime")))
+           org-agenda-custom-commands `(("E" . "Entertainment")
+                                        ("Ea" "Anime"
+                                         tags "anime"
+                                         ((org-agenda-files '("entertainment.org"))))
+                                        ("Em" "Movies"
+                                         tags-todo "movies"
+                                         ((org-agenda-files '("entertainment.org"))))
 
-                                        ("E" "Emacs"
-                                         tags-todo "@Emacs"
-                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-                                          (org-agenda-overriding-header " Emacs")))
+                                        ("Es" "TV Series"
+                                         tags "series"
+                                         ((org-agenda-files '("entertainment.org"))))
 
-                                        ("N" "Nixos"
-                                         tags-todo "@Nixos"
-                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-                                          (org-agenda-overriding-header " Nixos")))
+                                        ("L" . "Linux")
+                                        ("Le" "Emacs"
+                                         tags "anime"
+                                         ((org-agenda-files '("linux.org"))))
 
-                                        ("M" "Movies"
-                                         tags-todo "@Movies"
-                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-                                          (org-agenda-overriding-header " Movies")))
+                                        ("Ln" "Nixos"
+                                         tags "nixos"
+                                         ((org-agenda-files '("linux.org"))))
 
-                                        ("P" "Personale"
-                                         tags-todo "@Personal"
-                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-                                          (org-agenda-overriding-header " Personale")))
-
-                                        ("W" "Work"
-                                         tags-todo "@Work"
-                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-                                          (org-agenda-overriding-header " Work")))
-
-                                        ("T" "TVSeries"
-                                         tags-todo "@TVSeries"
-                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-                                          (org-agenda-overriding-header "  Serie TV")))
-
-                                        ("U" "Uni"
-                                         tags-todo "@Uni"
-                                         ((org-agenda-files '("~/Dropbox/org/Agenda.org"))
-                                          (org-agenda-overriding-header "  Uni"))))
+                                        ("A" "Daily agenda and top priority tasks" ,vb/org-custom-daily-agenda))
 
            ;; https://emacsdocs.org/docs/org/Capture-templates
-           org-capture-templates `(
+           org-capture-templates `(("E" "Entertainment")
+                                   ("Ea" "Anime" entry (file+headline "entertainment.org" "Anime") ,vb/org-template-basic :empty-lines-after 1)
+                                   ("Em" "Movies" entry (file+headline "entertainment.org" "Movies") ,vb/org-template-basic :empty-lines-after 1)
+                                   ("Es" "TV Series" entry (file+headline "entertainment.org" "TV Series") ,vb/org-template-basic :empty-lines-after 1)
+
+                                   ("L" "Linux")
+                                   ("Le" "Emacs" entry (file+headline "linux.org" "Emacs") ,vb/org-template-basic :empty-lines-after 1)
+                                   ("Lg" "Generic" entry (file+headline "linux.org" "Miscellaneous") ,vb/org-template-basic :empty-lines-after 1)
+                                   ("Ln" "Nixos" entry (file+headline "linux.org" "Nixos") ,vb/org-template-basic :empty-lines-after 1)
+
                                    ;; Tasks
                                    ("c" "Clock in to a task" entry
                                     (file+headline "tasks.org" "Clocked tasks")
@@ -190,48 +237,6 @@
                                              ":CAPTURED: %U\n"
                                              ":END:\n\n"
                                              "%a\n%i%?")
-                                    :empty-lines-after 1)
-
-                                   ;; Entertainment
-                                   ("a" "Animes" entry
-                                    (file+headline "entertainment.org" "Anime")
-                                    ,(concat "* %^{Title}\n"
-                                             ":PROPERTIES:\n"
-                                             ":CAPTURED: %U\n"
-                                             ":END:\n")
-                                    :empty-lines-after 1)
-
-                                   ("m" "Movies" entry
-                                    (file+headline "entertainment.org" "Movies")
-                                    ,(concat "* %^{Title}\n"
-                                             ":PROPERTIES:\n"
-                                             ":CAPTURED: %U\n"
-                                             ":END:\n")
-                                    :empty-lines-after 1)
-
-                                   ("s" "Series" entry
-                                    (file+headline "entertainment.org" "Series")
-                                    ,(concat "* %^{Title}\n"
-                                             ":PROPERTIES:\n"
-                                             ":CAPTURED: %U\n"
-                                             ":END:\n")
-                                    :empty-lines-after 1)
-
-                                   ;; Linux
-                                   ("e" "Emacs" entry
-                                    (file+headline "linux.org" "Emacs")
-                                    ,(concat "* %^{Title}\n"
-                                             ":PROPERTIES:\n"
-                                             ":CAPTURED: %U\n"
-                                             ":END:\n")
-                                    :empty-lines-after 1)
-
-                                   ("n" "Nixos" entry
-                                    (file+headline "linux.org" "Nixos")
-                                    ,(concat "* %^{Title}\n"
-                                             ":PROPERTIES:\n"
-                                             ":CAPTURED: %U\n"
-                                             ":END:\n")
                                     :empty-lines-after 1))
 
            ;; TODOS
