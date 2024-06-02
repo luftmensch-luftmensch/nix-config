@@ -23,10 +23,12 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  patches = [./m-x.patch];
   postPatch = ''
     substituteInPlace M-x.lua \
-      --replace 'dofile("extended-menu")' "dofile(\"$out/share/mpv/scripts/extended-menu.lua\")"
+      --replace-fail "toggle_menu_binding = 't'" "toggle_menu_binding = 'Alt+x'" \
+      --replace-fail 'package.path =' "" \
+      --replace-fail 'mp.command_native({ "expand-path", "~~/script-modules/?.lua;" }) .. package.path' "" \
+      --replace-fail 'require "extended-menu"' "dofile(\"$out/share/mpv/scripts/extended-menu.lua\")"
   '';
 
   passthru.scriptName = "M-x.lua";
@@ -35,6 +37,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     description = "A menu that shows all commands you have available, key bindings and commends (if present) and from which you can call any of those commands";
     homepage = "https://github.com/Seme4eg/mpv-scripts/";
     license = licenses.mit;
-    maintainers = with lib.maintainers; [luftmensch-luftmensch];
+    maintainers = with lib.maintainers; [ luftmensch-luftmensch ];
   };
 })

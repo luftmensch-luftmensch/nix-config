@@ -12,12 +12,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     rev = "a67c8280a7711cfaa5871f55d53ddb017f6d7b4c";
     sha256 = "08800syb9x5d4k9pqylfsi313ggg1sf20cnf48fcgbn54l7sm4hx";
   };
-  patches = [./navigator.patch];
-
-  postPatch = ''
-    substituteInPlace navigator.lua \
-      --replace "mp.find_config_file('scripts')" "\"$out/share/mpv/scripts\""
-  '';
 
   dontBuild = true;
   installPhase = ''
@@ -26,12 +20,20 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     cp -v navigator.lua $out/share/mpv/scripts/
     runHook postInstall
   '';
+
+  postPatch = ''
+    substituteInPlace navigator.lua \
+      --replace-fail "'/media/HDD2/music/music/'," "" \
+      --replace-fail "'/media/HDD/users/anon/Downloads/'," "" \
+      --replace-fail "'/home/anon/'," ""
+  '';
+
   passthru.scriptName = "navigator.lua";
 
-  meta = with lib; {
-    description = " Navigate and open your local files in mpv";
+  meta = {
+    description = "Navigate and open your local files in mpv";
     homepage = "https://github.com/jonniek/mpv-filenavigator";
-    license = licenses.unlicense;
-    maintainers = with lib.maintainers; [luftmensch-luftmensch];
+    license = lib.licenses.unfree;
+    maintainers = with lib.maintainers; [ luftmensch-luftmensch ];
   };
 })

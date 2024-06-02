@@ -11,6 +11,6 @@
   sddm-theme-clairvoyance = pkgs.callPackage ./sddm-theme/default.nix { };
 
   # MPV custom scripts
-  mpv-navigator = pkgs.callPackage ./mpv-scripts/file-navigator { };
-  mpv-m-x = pkgs.callPackage ./mpv-scripts/M-x { };
+  mpv-navigator = pkgs.callPackage ./mpv-scripts/file-navigator.nix { };
+  mpv-m-x = pkgs.callPackage ./mpv-scripts/M-x.nix { };
 }
