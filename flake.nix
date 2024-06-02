@@ -1,20 +1,19 @@
 # > Where the snow paradise begins
-#
+
 # Author:  luftmensch-luftmensch
 # URL:     https://github.com/luftmensch-luftmensch/nix-config/
 # License: MIT
 # You probably shouldn't be using my configuration as a guideline
 # Sure, it works (mostly), but the code is horrible
 # I have no idea what the hell I'm doing... It's true!
-#
+
 # You can get started with flakes here: https://nixos.wiki/wiki/Flakes
 # Also, you may want to take a look on the flakes that I took inspiration:
 # - https://github.com/balsoft/nixos-config
 # - https://github.com/Kranzes/nix-config
 # - https://github.com/sebastiant/dotfiles
-#
-# Welcome to ground zero. Where the whole flake gets set up and all its modules
-# are loaded.
+
+# Welcome to ground zero. Where the whole flake gets set up and all its modules are loaded.
 {
   description = "A collection of crap, hacks and copy-paste to make my localhosts boot";
 

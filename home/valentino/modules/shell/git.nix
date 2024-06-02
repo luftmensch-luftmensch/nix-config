@@ -4,7 +4,8 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.shell.git;
   inherit (config.valentino.modules.editors) neovim;
   undo-git = pkgs.writeScriptBin "undo-git" (builtins.readFile ./scripts/undo-git.sh);
@@ -27,7 +28,8 @@ with lib; let
 
     echo "$AUTHOR_NAME is now the author of $COMMIT. You're officially an asshole.";
   '';
-in {
+in
+{
   options.valentino.modules.shell.git.enable = mkEnableOption "main user git configuration";
 
   config = mkIf cfg.enable {
@@ -59,10 +61,7 @@ in {
             # avoid git status showing all your files as modified because of the
             # automatic EOL conversion done when cloning a Unix-based EOL Git repo to a Windows one
             autocrfl = false;
-            editor =
-              if neovim.enable
-              then "nvim"
-              else "";
+            editor = if neovim.enable then "nvim" else "";
             # pager = "bat --theme=default --paging=always --tabs=4 --wrap=never --style=plain";
           };
 
@@ -118,6 +117,7 @@ in {
 
           # TODO: Try out
           redo = "reset --hard HEAD@{1}";
+          rv = ''!sh -c 'git commit --amend --no-edit --trailer "Reviewed-by: $*"' - '';
 
           branches = "branch -vva --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
 
@@ -187,14 +187,15 @@ in {
             pv = "pr view";
           };
 
-          editor =
-            if neovim.enable
-            then "nvim"
-            else "";
+          editor = if neovim.enable then "nvim" else "";
         };
       };
     };
 
-    home.packages = [undo-git git-blame-someone-else pkgs.oh-my-git];
+    home.packages = [
+      undo-git
+      git-blame-someone-else
+      pkgs.oh-my-git
+    ];
   };
 }

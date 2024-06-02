@@ -186,7 +186,7 @@
 
                                         ("L" . "Linux")
                                         ("Le" "Emacs"
-                                         tags "anime"
+                                         tags "emacs"
                                          ((org-agenda-files '("linux.org"))))
 
                                         ("Ln" "Nixos"

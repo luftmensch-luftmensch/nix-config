@@ -1,6 +1,6 @@
 inputs: {
   # Overlays for personal pkgs (callPackage)
-  additions = final: _: import ../packages {pkgs = final;};
+  additions = final: _: import ../packages { pkgs = final; };
 
   # Overlays for various pkgs (e.g. broken / too old)
   modifications = final: prev: {
@@ -38,5 +38,15 @@ inputs: {
         sha256 = "07g0wa97w6gw5b04zb27jysradsi9gpksqlw5vrl9g5snl3ys8si";
       };
     });
+  };
+
+  # TODO: Analize
+  # When applied, the unstable nixpkgs set (declared in the flake inputs) will
+  # be accessible through 'pkgs.unstable'
+  unstable-packages = final: _prev: {
+    unstable = import inputs.nixpkgs-unstable {
+      inherit (final) system;
+      config.allowUnfree = true;
+    };
   };
 }

@@ -59,17 +59,17 @@
              ("https://www.reddit.com/r/archlinux.rss" arch)
 
              ;; Programming languages related
-             ("https://nullprogram.com/feed/" coding nullprogram)
-             ("https://www.reddit.com/r/golang.rss" coding golang)
+             ("https://nullprogram.com/feed/"                    coding nullprogram)
+             ("https://www.reddit.com/r/golang.rss"              coding golang)
              ("https://bitfieldconsulting.com/golang?format=rss" coding golang)
-             ("https://www.reddit.com/r/C_Programming.rss" coding C)
-             ("https://www.reddit.com/r/ProgrammerHumor.rss" coding meme)
+             ("https://www.reddit.com/r/C_Programming.rss"       coding C)
+             ("https://www.reddit.com/r/ProgrammerHumor.rss"     coding meme)
+             ("https://vishnubharathi.codes/atom.xml"            coding vishnubharathi)
 
              ;; Emacs related
              ("https://www.reddit.com/r/emacs.rss"    emacs)
              ("https://www.reddit.com/r/orgmode.rss"  emacs orgmode)
              ("https://planet.emacslife.com/atom.xml" emacs emacslife)
-             ("https://dotfyle.com/this-week-in-neovim/rss.xml" neovim)
 
              ;; Latex related
              ("https://www.reddit.com/r/LaTeX.rss" latex)
@@ -81,6 +81,8 @@
              ("https://codewithandrea.com/rss.xml "     android flutter)
 
              ;; Miscellaneous
+             ("https://selfh.st/rss/" self-hosting)
+             ("https://dotfyle.com/this-week-in-neovim/rss.xml" neovim)
              ("https://www.rousette.org.uk/archives/index.xml" geekoides)
              ("https://www.bytelab.codes/rss/" bytelab))
 

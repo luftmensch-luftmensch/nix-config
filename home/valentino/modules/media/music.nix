@@ -4,20 +4,22 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.media.music;
-in {
+in
+{
   options.valentino.modules.media.music.enable = mkEnableOption "an option to play music";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       pavucontrol
       yt-dlp
+      youtube-tui
       spotdl
       spotify
     ];
 
-    # yt-dlp configuration
     home.file.".config/yt-dlp/config".text = ''
       # use .netrc for logins
       # -n
