@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.credentials.bitwarden;
-in {
+in
+{
   options.valentino.modules.credentials.bitwarden.enable = mkEnableOption "bitwarden";
 
   config = mkIf cfg.enable {
@@ -14,10 +16,11 @@ in {
       enable = true;
       settings = {
         email = "valentinobocchetti59@gmail.com";
-        pinentry = "gnome3";
+        pinentry =
+          if builtins.typeOf config.programs.rbw == "string" then "gnome3" else pkgs.pinentry-gnome3;
       };
     };
 
-    home.packages = [pkgs.bitwarden];
+    home.packages = [ pkgs.bitwarden ];
   };
 }

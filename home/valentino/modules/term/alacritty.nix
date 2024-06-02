@@ -1,13 +1,11 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; let
+{ config, lib, ... }:
+with lib;
+let
   cfg = config.valentino.modules.term.alacritty;
   inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
-in {
+in
+{
   options.valentino.modules.term.alacritty.enable = mkEnableOption "alacritty configuration";
 
   config = mkIf cfg.enable {
@@ -35,33 +33,34 @@ in {
           multiplier = 3;
         };
 
-        draw_bold_text_with_bright_colors = true;
-
         # Font configuration
-        font = let
-          inherit (themes.font.term) family;
-          inherit (themes.font.term) size;
-        in {
-          normal = {
-            inherit family;
-            style = "Regular";
+        font =
+          let
+            inherit (themes.font.term) family;
+            inherit (themes.font.term) size;
+          in
+          {
+            normal = {
+              inherit family;
+              style = "Regular";
+            };
+            bold = {
+              inherit family;
+              style = "Bold";
+            };
+            italic = {
+              inherit family;
+              style = "Italic";
+            };
+            inherit size;
+            offset = {
+              x = 0;
+              y = 0;
+            };
           };
-          bold = {
-            inherit family;
-            style = "Bold";
-          };
-          italic = {
-            inherit family;
-            style = "Italic";
-          };
-          inherit size;
-          offset = {
-            x = 0;
-            y = 0;
-          };
-        };
 
         colors = {
+          draw_bold_text_with_bright_colors = true;
           primary = {
             background = "#${palette.base00}";
             foreground = "#${palette.base05}";
@@ -99,17 +98,15 @@ in {
 
         mouse = {
           hide_when_typing = false;
-          hints.launcher.program = "xdg-open";
+          bindings = [
+            {
+              mouse = "Middle";
+              action = "PasteSelection";
+            }
+          ];
         };
 
-        mouse_bindings = [
-          {
-            mouse = "Middle";
-            action = "PasteSelection";
-          }
-        ];
-
-        key_bindings = [
+        keyboard.bindings = [
           {
             key = "Paste";
             action = "Paste";

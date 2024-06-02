@@ -38,6 +38,10 @@ inputs: {
         sha256 = "07g0wa97w6gw5b04zb27jysradsi9gpksqlw5vrl9g5snl3ys8si";
       };
     });
+
+    mpv-visualizer = prev.mpvScripts.visualizer.overrideAttrs (_oldAttrs: {
+      patches = [ ./patches/visualizer.patch ];
+    });
   };
 
   # TODO: Analize

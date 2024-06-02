@@ -1,19 +1,17 @@
-{
-  lib,
-  config,
-  ...
-}:
-with lib; let
+{ lib, config, ... }:
+with lib;
+let
   cfg = config.system.modules.graphical.wayland;
-in {
+in
+{
   options.system.modules.graphical.wayland.enable = mkEnableOption "Wayland basic configuration and packages";
 
   config = mkIf cfg.enable {
-    services.xserver.displayManager.defaultSession = "sway";
+    services.displayManager.defaultSession = "sway";
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
-      extraPackages = lib.mkDefault [];
+      extraPackages = lib.mkDefault [ ];
     };
   };
 }

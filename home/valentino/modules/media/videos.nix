@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.media.videos;
-in {
+in
+{
   options.valentino.modules.media.videos.enable = mkEnableOption "an option to watch videos";
 
   config = mkIf cfg.enable {
@@ -25,7 +27,6 @@ in {
         audio-file-auto = "fuzzy";
         audio-pitch-correction = "yes";
         volume-max = 115;
-        volume = 90;
         save-position-on-quit = "yes";
       };
 
@@ -70,11 +71,21 @@ in {
         "Alt+s" = "screenshot each-frame";
         DEL = "script-binding osc/visibility";
       };
-      scripts = with pkgs;
-        [mpv-modern-x mpv-m-x mpv-navigator mpv-visualizer]
-        ++ (with pkgs.mpvScripts; [mpris thumbfast sponsorblock]);
+      scripts =
+        with pkgs;
+        [
+          mpv-m-x
+          mpv-navigator
+          mpv-visualizer
+        ]
+        ++ (with pkgs.mpvScripts; [
+          mpris
+          modernx-zydezu
+          thumbfast
+          sponsorblock
+        ]);
     };
 
-    home.packages = [pkgs.obs-studio];
+    home.packages = [ pkgs.obs-studio ];
   };
 }

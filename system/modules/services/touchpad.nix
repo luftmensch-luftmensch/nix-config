@@ -1,15 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; let
+{ config, lib, ... }:
+with lib;
+let
   cfg = config.system.modules.services.touchpad;
-in {
+in
+{
   options.system.modules.services.touchpad.enable = mkEnableOption "Enable touchpad capabilities";
 
   config = mkIf cfg.enable {
-    services.xserver.libinput = {
+    services.libinput = {
       enable = true;
       touchpad.naturalScrolling = true;
     };
