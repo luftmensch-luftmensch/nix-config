@@ -33,10 +33,10 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   passthru.scriptName = "M-x.lua";
 
-  meta = with lib; {
+  meta = {
     description = "A menu that shows all commands you have available, key bindings and commends (if present) and from which you can call any of those commands";
     homepage = "https://github.com/Seme4eg/mpv-scripts/";
-    license = licenses.mit;
+    license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ luftmensch-luftmensch ];
   };
 })

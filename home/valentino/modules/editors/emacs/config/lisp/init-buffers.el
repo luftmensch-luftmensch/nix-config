@@ -115,7 +115,7 @@
                 (completing-read "File> " (directory-files *emacs-files* nil directory-files-no-dot-files-regexp))
                 *emacs-files*)))
 
-  (setq-default subword-mode))
+  (setq-default subword-mode t))
 
 
 (setup debug
