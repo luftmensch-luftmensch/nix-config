@@ -4,17 +4,20 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.core.cachix;
-in {
+in
+{
   options.system.modules.core.cachix.enable = mkEnableOption "cachix configuration";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.cachix];
+    environment.systemPackages = [ pkgs.cachix ];
 
     nix.settings = {
+      builders-use-substitutes = true;
       substituters = [
-        "https://cache.nixos.org/" #  Prebuilt binaries for Nixpkgs and NixOS. Used automatically by the Nix pm to speed up builds.
+        "https://cache.nixos.org/" # Prebuilt binaries for Nixpkgs and NixOS. Used automatically by the Nix pm to speed up builds.
         "https://nix-community.cachix.org" # Nix community binary cache
       ];
       trusted-public-keys = [

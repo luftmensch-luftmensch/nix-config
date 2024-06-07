@@ -1,9 +1,5 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
+{ pkgs, config, ... }:
+let
   homeDir = "${config.home.homeDirectory}";
   browser = "firefox.desktop";
   torrent = "qbittorrent.desktop";
@@ -11,11 +7,15 @@
   video = "mpv.desktop";
   text = "nvim.desktop";
   pdf = "org.pwmt.zathura.desktop";
-in {
+in
+{
   nix = {
-    package = lib.mkDefault pkgs.nix;
+    package = pkgs.nixVersions.latest;
     settings = {
-      experimental-features = ["nix-command" "flakes" "repl-flake"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       warn-dirty = false;
     };
   };
@@ -30,36 +30,36 @@ in {
     mimeApps = {
       enable = true;
       associations.added = {
-        "image/tiff" = ["${image}"];
-        "image/svg+xml" = ["${image}"];
-        "image/gif" = ["${video}"];
-        "video/x-matroska" = ["${video}"];
-        "video/mp4" = ["${video}"];
-        "audio/mpeg" = ["${video}"];
-        "application/json" = ["${text}"];
-        "application/yaml" = ["${text}"];
-        "application/pdf" = ["${pdf}"];
-        "x-scheme-handler/magnet" = ["${torrent}"];
-        "x-scheme-handler/http" = ["${browser}"];
-        "x-scheme-handler/https" = ["${browser}"];
-        "text/html" = ["${text}"];
+        "image/tiff" = [ "${image}" ];
+        "image/svg+xml" = [ "${image}" ];
+        "image/gif" = [ "${video}" ];
+        "video/x-matroska" = [ "${video}" ];
+        "video/mp4" = [ "${video}" ];
+        "audio/mpeg" = [ "${video}" ];
+        "application/json" = [ "${text}" ];
+        "application/yaml" = [ "${text}" ];
+        "application/pdf" = [ "${pdf}" ];
+        "x-scheme-handler/magnet" = [ "${torrent}" ];
+        "x-scheme-handler/http" = [ "${browser}" ];
+        "x-scheme-handler/https" = [ "${browser}" ];
+        "text/html" = [ "${text}" ];
       };
       defaultApplications = {
-        "image/png" = ["${image}"];
-        "image/jpeg" = ["${image}"];
-        "image/jpg" = ["${image}"];
-        "image/tiff" = ["${image}"];
-        "image/svg+xml" = ["${image}"];
-        "video/x-matroska" = ["${video}"];
-        "video/mp4" = ["${video}"];
-        "audio/mpeg" = ["${video}"];
-        "application/json" = ["${text}"];
-        "application/yaml" = ["${text}"];
-        "application/pdf" = ["${pdf}"];
-        "x-scheme-handler/magnet" = ["${torrent}"];
-        "x-scheme-handler/http" = ["${browser}"];
-        "x-scheme-handler/https" = ["${browser}"];
-        "text/html" = ["${text}"];
+        "image/png" = [ "${image}" ];
+        "image/jpeg" = [ "${image}" ];
+        "image/jpg" = [ "${image}" ];
+        "image/tiff" = [ "${image}" ];
+        "image/svg+xml" = [ "${image}" ];
+        "video/x-matroska" = [ "${video}" ];
+        "video/mp4" = [ "${video}" ];
+        "audio/mpeg" = [ "${video}" ];
+        "application/json" = [ "${text}" ];
+        "application/yaml" = [ "${text}" ];
+        "application/pdf" = [ "${pdf}" ];
+        "x-scheme-handler/magnet" = [ "${torrent}" ];
+        "x-scheme-handler/http" = [ "${browser}" ];
+        "x-scheme-handler/https" = [ "${browser}" ];
+        "text/html" = [ "${text}" ];
       };
     };
     userDirs = {
