@@ -1,10 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   valentino.modules = {
     apps.rofi.enable = true;
 
     wayland = {
       enable = true;
-      wm = ["sway"];
+      wm = [ "sway" ];
     };
 
     browsers = {
@@ -81,24 +82,24 @@
         regular = {
           family = "Sarasa Mono Slab SC";
           package = pkgs.sarasa-gothic;
-          size = 14;
+          size = 16;
         };
 
         monospace = {
           family = "FiraCode Nerd Font";
-          package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+          package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
           size = 14;
         };
 
         term = {
           family = "VictorMono Nerd Font";
-          package = pkgs.nerdfonts.override {fonts = ["VictorMono"];};
+          package = pkgs.nerdfonts.override { fonts = [ "VictorMono" ]; };
           size = 14;
         };
 
         bar = {
           family = "Iosevka Nerd Font";
-          package = pkgs.nerdfonts.override {fonts = ["Iosevka"];};
+          package = pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; };
           size = 14;
         };
       };

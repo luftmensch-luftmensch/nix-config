@@ -4,7 +4,8 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.wayland;
   theme = config.valentino.modules.themes;
   mod = "Mod4";
@@ -13,30 +14,51 @@ with lib; let
   external_output = "HDMI-A-1";
   imageDirectory = "${config.home.homeDirectory}/Dropbox/Immagini/wallpapers/Art/";
   inherit (config.colorScheme) palette;
-in {
+in
+{
   config = mkIf (cfg.enable && (elem "sway" cfg.wm)) {
     wayland.windowManager.sway = {
       enable = true;
       xwayland = true;
       systemd.enable = true;
 
-      config = let
-        settings = import ./settings.nix {
-          inherit mod mod1 default_output external_output theme palette pkgs;
-        };
-      in {
-        bars = [];
-        modifier = "${mod}";
-        floating = {
+      config =
+        let
+          settings = import ./settings.nix {
+            inherit
+              mod
+              mod1
+              default_output
+              external_output
+              theme
+              palette
+              pkgs
+              ;
+          };
+        in
+        {
+          bars = [ ];
           modifier = "${mod}";
-          border = 1;
+          floating = {
+            modifier = "${mod}";
+            border = 1;
+          };
+
+          focus.followMouse = true;
+
+          workspaceAutoBackAndForth = true;
+          inherit (settings)
+            input
+            output
+            keybindings
+            modes
+            workspaceOutputAssign
+            window
+            startup
+            gaps
+            fonts
+            ;
         };
-
-        focus.followMouse = true;
-
-        workspaceAutoBackAndForth = true;
-        inherit (settings) input output keybindings modes workspaceOutputAssign window startup gaps fonts;
-      };
 
       extraConfig = ''
         set {
@@ -51,7 +73,7 @@ in {
       '';
     };
 
-    home.packages = [pkgs.autotiling];
+    home.packages = [ pkgs.autotiling ];
 
     # xdg.portal = {
     #   enable = true;
@@ -75,7 +97,6 @@ in {
 
         waybar = {
           enable = true;
-          backlight.enable = true;
           battery.enable = true;
           inherit default_output external_output;
         };
