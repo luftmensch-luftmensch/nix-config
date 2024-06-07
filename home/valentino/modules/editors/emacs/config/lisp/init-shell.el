@@ -23,6 +23,44 @@
     [remap evil-insert-digraph] #'vterm--self-insert
     [remap evil-shift-left-line] #'vterm--self-insert)
 
+  ;; https://github.com/akermu/emacs-libvterm/issues/711
+  (defun vb/vterm--get-color (index &rest args)
+    "Retrieve the color by INDEX from `vterm-color-palette'.
+
+A special INDEX of -1 refers to the default colors.  ARGS can
+optionally include `:underline’ or `:inverse-video’ to indicate
+cells with these attributes.  If ARGS contains `:foreground',
+return the foreground color of the specified face instead of the
+background color.
+
+This function addresses an issue where the foreground color in
+vterm may match the background color, rendering text invisible."
+    (let ((foreground    (member :foreground args))
+          (underline     (member :underline args))
+          (inverse-video (member :inverse-video args)))
+      (let* ((fn (if foreground #'face-foreground #'face-background))
+             (base-face
+              (cond ((and (>= index 0)
+                          (< index 16))
+                     (elt vterm-color-palette index))
+                    ((and (= index -1) foreground
+                          underline)
+                     'vterm-color-underline)
+                    ((and (= index -1)
+                          (not foreground)
+                          inverse-video)
+                     'vterm-color-inverse-video)
+                    ((and (= index -2))
+                     'vterm-color-inverse-video))))
+        (if base-face
+            (funcall fn base-face nil t)
+          (if (eq fn 'face-background)
+              (face-foreground 'default)
+            (face-background 'default))))))
+
+  (advice-add 'vterm--get-color :override #'vb/vterm--get-color)
+
+
   (defun alacritty()
     "Open the terminal on the current directory."
     (interactive)
