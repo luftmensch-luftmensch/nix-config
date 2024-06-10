@@ -115,7 +115,6 @@ in
           last = "log -1 HEAD --stat";
           last-updated = "!git log --name-only --format='' --since '1 week ago' | perl -lne 'print unless $seen{$_}++'";
 
-          # TODO: Try out
           redo = "reset --hard HEAD@{1}";
           rv = ''!sh -c 'git commit --amend --no-edit --trailer "Reviewed-by: $*"' - '';
 
