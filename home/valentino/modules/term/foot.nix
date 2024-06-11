@@ -1,39 +1,38 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; let
+{ config, lib, ... }:
+with lib;
+let
   cfg = config.valentino.modules.term.foot;
   theme = config.valentino.modules.themes;
   inherit (config.colorScheme) palette;
-in {
+in
+{
   options.valentino.modules.term.foot.enable = mkEnableOption "foot configuration";
 
   config = mkIf cfg.enable {
     programs.foot = {
       enable = true;
       settings = {
-        main = let
-          inherit (theme.font.regular) family;
-          inherit (theme.font.regular) size;
-        in {
-          shell = "fish";
-          term = "foot";
-          app-id = "foot";
-          title = "foot";
-          locked-title = "no";
+        main =
+          let
+            inherit (theme.font.bar) family size;
+          in
+          {
+            shell = "fish";
+            term = "foot";
+            app-id = "foot";
+            title = "foot";
+            locked-title = "no";
 
-          dpi-aware = "no";
-          pad = "0x0";
-          notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
-          font = "${family}:${toString size}";
-          font-bold = "${family}:${toString size}";
-          font-italic = "${family}:${toString size}";
-          font-bold-italic = "${family}:${toString size}";
-        };
+            dpi-aware = "yes";
+            pad = "0x0";
+            notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
+            font = "${family}:${toString size}";
+            font-bold = "${family}:${toString size}";
+            font-italic = "${family}:${toString size}";
+            font-bold-italic = "${family}:${toString size}";
+          };
 
-        bell = {};
+        bell = { };
 
         scrollback.lines = 1000;
 
@@ -69,7 +68,7 @@ in {
           bright7 = "${palette.base05}";
         };
 
-        csd = {};
+        csd = { };
 
         key-bindings = {
           scrollback-up-page = "Page_Up";
@@ -98,11 +97,11 @@ in {
           show-urls-copy = "Control+Shift+o";
         };
 
-        search-bindings = {};
+        search-bindings = { };
 
         url-bindings.toggle-url-visible = "t";
 
-        mouse-bindings = {};
+        mouse-bindings = { };
       };
     };
   };

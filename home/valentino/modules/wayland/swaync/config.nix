@@ -1,8 +1,5 @@
+{ schema, pkgs, ... }:
 {
-  schema,
-  pkgs,
-  ...
-}: {
   text = ''
     {
       "$schema": "${schema}",
@@ -61,23 +58,23 @@
           "actions": [
             {
               "label": "󰛳",
-              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && nm-connection-editor"
+              "command": "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && nm-connection-editor'"
             },
             {
               "label": "",
-              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && emacsclient -c"
+              "command": "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && emacsclient -c'"
             },
             {
               "label": "",
-              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && firefox"
+              "command": "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && firefox'"
             },
             {
-              "label": "",
-              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && zathura"
+              "label": "",
+              "command": "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && zathura'"
             },
             {
               "label": "⏻",
-              "command": "${pkgs.swaynotificationcenter}/bin/swaync-client -cp && rofi-powermenu"
+              "command": "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && ${pkgs.rofi-powermenu}/bin/rofi-powermenu'"
             }
           ]
         },

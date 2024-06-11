@@ -1,25 +1,30 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   # Function to simplify making waybar outputs
   # https://github.com/Misterio77/nix-config/blob/main/home/misterio/features/desktop/common/wayland-wm/waybar.nix
-  jsonOutput = name: {
-    pre ? "",
-    text ? "",
-    tooltip ? "",
-    alt ? "",
-    class ? "",
-    percentage ? "",
-  }: "${pkgs.writeShellScriptBin "waybar-${name}" ''
-    set -euo pipefail
-    ${pre}
-    ${pkgs.jq}/bin/jq -cn \
-      --arg text "${text}" \
-      --arg tooltip "${tooltip}" \
-      --arg alt "${alt}" \
-      --arg class "${class}" \
-      --arg percentage "${percentage}" \
-      '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
-  ''}/bin/waybar-${name}";
-in {
+  jsonOutput =
+    name:
+    {
+      pre ? "",
+      text ? "",
+      tooltip ? "",
+      alt ? "",
+      class ? "",
+      percentage ? "",
+    }:
+    "${pkgs.writeShellScriptBin "waybar-${name}" ''
+      set -euo pipefail
+      ${pre}
+      ${pkgs.jq}/bin/jq -cn \
+        --arg text "${text}" \
+        --arg tooltip "${tooltip}" \
+        --arg alt "${alt}" \
+        --arg class "${class}" \
+        --arg percentage "${percentage}" \
+        '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
+    ''}/bin/waybar-${name}";
+in
+{
   # Shared modules
   "custom/menu" = {
     return-type = "json";
@@ -39,23 +44,25 @@ in {
     format = "<span style=\"italic\"> {}</span>";
   };
 
-  "sway/window" = let
-    _grim = "${pkgs.grim}/bin/grim -g";
-    _slurp = "${pkgs.slurp}/bin/slurp";
-    _swaymsg = "${pkgs.sway}/bin/swaymsg";
+  "sway/window" =
+    let
+      _grim = "${pkgs.grim}/bin/grim -g";
+      _slurp = "${pkgs.slurp}/bin/slurp";
+      _swaymsg = "${pkgs.sway}/bin/swaymsg";
 
-    # I fucking hate this mess but I cannot find a way to escape this
-    _screenshot_current_window = pkgs.writeShellScriptBin "_screenshot_current_window" ''
-      ${_grim} "$(${_swaymsg} -t get_tree | ${pkgs.jq}/bin/jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png')
-    '';
+      # I fucking hate this mess but I cannot find a way to escape this
+      _screenshot_current_window = pkgs.writeShellScriptBin "_screenshot_current_window" ''
+        ${_grim} "$(${_swaymsg} -t get_tree | ${pkgs.jq}/bin/jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png')
+      '';
 
-    _cmd_r = "(XCURSOR_SIZE=48 ${_slurp} -w 1 -c A5BAD1 -s C3DFFE94 | ${_grim} -g - ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png'))";
-  in {
-    max-length = 50;
-    on-click = "${_screenshot_current_window}/bin/_screenshot_current_window";
-    on-click-right = "sleep 0.1 ; pgrep ${_slurp} || ${_cmd_r}";
-    on-click-middle = "${_swaymsg} kill";
-  };
+      _cmd_r = "(XCURSOR_SIZE=48 ${_slurp} -w 1 -c A5BAD1 -s C3DFFE94 | ${_grim} -g - ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png'))";
+    in
+    {
+      max-length = 50;
+      on-click = "${_screenshot_current_window}/bin/_screenshot_current_window";
+      on-click-right = "sleep 0.1 ; pgrep ${_slurp} || ${_cmd_r}";
+      on-click-middle = "${_swaymsg} kill";
+    };
 
   clock = {
     timezone = "Europe/Rome";
@@ -94,7 +101,7 @@ in {
     format = "{icon}";
     format-icons = {
       activated = " "; # " ";
-      deactivated = " "; #  " ";
+      deactivated = " "; # " ";
     };
   };
 
@@ -112,9 +119,13 @@ in {
       phone = "";
       # portable= "";
       car = "";
-      default = [" " " " " "];
+      default = [
+        " "
+        " "
+        " "
+      ];
     };
-    on-click = "pavucontrol";
+    on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
   };
 
   network = {
@@ -155,7 +166,11 @@ in {
 
   backlight = {
     format = "{icon} <b>{percent}%</b>";
-    format-icons = ["󰃞" "󰃟" "󰃠"];
+    format-icons = [
+      "󰃞"
+      "󰃟"
+      "󰃠"
+    ];
     tooltip = false;
     # interval = 30;
     # align = 0;
@@ -188,7 +203,13 @@ in {
     format-plugged = "{capacity} %  ";
     format-alt = "{time} {icon}";
     format-full = "{capacity} % ";
-    format-icons = ["" "" "" "" ""];
+    format-icons = [
+      ""
+      ""
+      ""
+      ""
+      ""
+    ];
     tooltip-format = "{time} ({power} )";
     tooltip-format-charging = "{timeTo} ({power} )";
   };
