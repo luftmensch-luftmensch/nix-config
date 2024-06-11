@@ -27,9 +27,7 @@ in {
 
   config = mkIf cfg.enable {
     # Let it try to start a few more times
-    systemd.user.services.waybar = {
-      Unit.StartLimitBurst = 30;
-    };
+    systemd.user.services.waybar.Unit.StartLimitBurst = 30;
 
     programs.waybar = let
       style = import ./style.nix {

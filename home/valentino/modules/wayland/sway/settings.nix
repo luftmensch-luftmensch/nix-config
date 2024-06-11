@@ -6,7 +6,8 @@
   external_output,
   palette,
   pkgs,
-}: let
+}:
+let
   _wpctl = "${pkgs.wireplumber}/bin/wpctl";
   _notification-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
   _notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 1000";
@@ -15,10 +16,11 @@
   menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
 
   # Custom scripts
-  bss = pkgs.callPackage ./scripts/battery-status.nix {};
-  cms = pkgs.callPackage ./scripts/clipboard-manager.nix {inherit menu_opts;};
-  sus = pkgs.callPackage ./scripts/screenshot-utility.nix {inherit menu_opts;};
-in {
+  bss = pkgs.callPackage ./scripts/battery-status.nix { };
+  cms = pkgs.callPackage ./scripts/clipboard-manager.nix { inherit menu_opts; };
+  sus = pkgs.callPackage ./scripts/screenshot-utility.nix { inherit menu_opts; };
+in
+{
   gaps = {
     inner = 5;
     outer = 5;
@@ -27,7 +29,7 @@ in {
   };
 
   fonts = {
-    names = [theme.font.regular.family];
+    names = [ theme.font.regular.family ];
     # Sum required: floating point value but int option defined
     size = theme.font.regular.size + 0.0;
   };
@@ -204,9 +206,7 @@ in {
   # You can print the logs with: `journalctl --user --identifier sway (Adding --follow & --this-boot might be handy)
   # dbus-sway-environment
   startup = [
-    {
-      command = "corectrl";
-    }
+    { command = "corectrl"; }
 
     {
       command = "autotiling";
@@ -218,18 +218,10 @@ in {
       command = "rm -f $wob_sock && mkfifo $wob_sock && tail -f $wob_sock | wob";
     }
 
-    {
-      command = "wl-paste --watch cliphist store";
-    }
-
-    {
-      command = "swaync";
-    }
+    { command = "wl-paste --watch cliphist store"; }
 
     # Custom scripts
-    {
-      command = "${bss}/bin/bss";
-    }
+    { command = "${bss}/bin/bss"; }
   ];
 
   window = {
