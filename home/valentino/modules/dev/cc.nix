@@ -4,12 +4,12 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.dev.cc;
-in {
-  options.valentino.modules.dev.cc = {
-    enable = mkEnableOption "c language support and language server";
-  };
+in
+{
+  options.valentino.modules.dev.cc.enable = mkEnableOption "c language support and language server";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [

@@ -4,21 +4,23 @@
   pkgs,
   ...
 }:
-with lib;
-with builtins; let
+with lib builtins;
+let
   cfg = config.valentino.modules.dev.generics;
 
   apply-hm-env = pkgs.writeShellScript "apply-hm-env" ''
-    ${optionalString (config.home.sessionPath != []) ''
+    ${optionalString (config.home.sessionPath != [ ]) ''
       export PATH=${concatStringsSep ":" config.home.sessionPath}:$PATH
     ''}
-    ${concatStringsSep "\n" (lib.mapAttrsToList (k: v: ''
+    ${concatStringsSep "\n" (
+      lib.mapAttrsToList (k: v: ''
         export ${toString k}=${toString v}
-      '')
-      config.home.sessionVariables)}
+      '') config.home.sessionVariables
+    )}
     ${config.home.sessionVariablesExtra}
     exec "$@"
   '';
+
   # runs processes as systemd transient services
   run-as-service = pkgs.writeShellScriptBin "run-as-service" ''
     exec ${pkgs.systemd}/bin/systemd-run \
@@ -45,10 +47,14 @@ with builtins; let
     tty -s <&2 && exec 2>&1        # stderr to stdout (which might not be null)
     "$prog" "$@" &
   '';
-in {
+in
+{
   options.valentino.modules.dev.generics.enable = mkEnableOption "uncategorized packages for programming";
 
   config = mkIf cfg.enable {
-    home.packages = [run-as-service runbg];
+    home.packages = [
+      run-as-service
+      runbg
+    ];
   };
 }
