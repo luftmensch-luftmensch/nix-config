@@ -4,9 +4,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.shell.bash;
-in {
+in
+{
   options.valentino.modules.shell.bash.enable = mkEnableOption "bash setup";
 
   config = mkIf cfg.enable {
@@ -100,6 +102,9 @@ in {
       };
     };
 
-    home.packages = with pkgs; [beautysh shellcheck];
+    home.packages = with pkgs; [
+      beautysh
+      shellcheck
+    ];
   };
 }

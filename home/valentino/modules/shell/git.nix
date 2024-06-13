@@ -62,7 +62,6 @@ in
             # automatic EOL conversion done when cloning a Unix-based EOL Git repo to a Windows one
             autocrfl = false;
             editor = if neovim.enable then "nvim" else "";
-            # pager = "bat --theme=default --paging=always --tabs=4 --wrap=never --style=plain";
           };
 
           init.defaultBranch = "master";

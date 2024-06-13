@@ -5,11 +5,13 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.shell.nix-index;
   inherit (config.valentino.modules.shell) bash zsh;
-in {
-  imports = [inputs.nix-index-database.hmModules.nix-index];
+in
+{
+  imports = [ inputs.nix-index-database.hmModules.nix-index ];
   options.valentino.modules.shell.nix-index = {
     enable = mkEnableOption "Enable nix-index";
     service = mkEnableOption "Enable nix-index systemd service";
@@ -18,8 +20,7 @@ in {
   config = mkMerge [
     (mkIf cfg.enable {
       programs = {
-        # `command-not-found` relies on nix-channel.
-        # Enable and use `nix-index` instead.
+        # `command-not-found` relies on nix-channel. Enable and use `nix-index` instead.
         command-not-found.enable = false;
         nix-index-database.comma.enable = true;
 
@@ -69,7 +70,7 @@ in {
           OnBootSec = "10m";
           OnUnitActiveSec = "24h";
         };
-        Install.WantedBy = ["timers.target"];
+        Install.WantedBy = [ "timers.target" ];
       };
     })
   ];

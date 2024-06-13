@@ -4,10 +4,12 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.shell.extensions;
   inherit (config.valentino.modules.shell) bash zsh tmux;
-in {
+in
+{
   options.valentino.modules.shell.extensions.enable = mkEnableOption "shell useful commands (e.g. bat, eza)";
 
   config = mkIf cfg.enable {
@@ -17,7 +19,11 @@ in {
         rg = "${pkgs.ripgrep}/bin/rg -L";
         htop = "${pkgs.btop}/bin/btop";
       };
-      packages = with pkgs; [fd jq wget];
+      packages = with pkgs; [
+        fd
+        jq
+        wget
+      ];
 
       file.".config/wget/wgetrc".text = ''
         hsts-file=~/.cache/wget-hsts
@@ -54,7 +60,11 @@ in {
       bat = {
         enable = true;
         config.theme = "base16";
-        extraPackages = with pkgs.bat-extras; [batman batdiff batgrep];
+        extraPackages = with pkgs.bat-extras; [
+          batman
+          batdiff
+          batgrep
+        ];
       };
 
       # A better alternative to boring ls
@@ -62,7 +72,13 @@ in {
 
       fzf = {
         enable = true;
-        defaultOptions = ["--ansi" "--reverse" "--border" "--inline-info" "--color=16"];
+        defaultOptions = [
+          "--ansi"
+          "--reverse"
+          "--border"
+          "--inline-info"
+          "--color=16"
+        ];
 
         enableBashIntegration = bash.enable;
         enableZshIntegration = zsh.enable;

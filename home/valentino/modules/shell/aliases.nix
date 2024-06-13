@@ -1,9 +1,11 @@
-pkgs: let
+pkgs:
+let
   _curl = "${pkgs.curl}/bin/curl";
   _docker = "${pkgs.docker}/bin/docker";
   _gpg = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve";
   _nmcli = "${pkgs.networkmanager}/bin/nmcli device";
-in {
+in
+{
   mkdir = "mkdir -p ";
   free = "free -gt";
   exe = "chmod +x ";
@@ -40,7 +42,7 @@ in {
   ps = "ps auxf | less";
   psgrep = "ps aux | grep -v grep | grep -i -e VSZ -e";
   running = "systemctl --type=service";
-  wget = "wget -c --hsts-file=$HOME/.cache/wget-hsts";
+  wget = "wget -c";
 
   reboot-to-bios = "sudo systemctl reboot --firmware-setup";
 
