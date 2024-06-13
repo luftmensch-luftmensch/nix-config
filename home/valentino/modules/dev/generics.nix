@@ -4,7 +4,8 @@
   pkgs,
   ...
 }:
-with lib builtins;
+with lib;
+with builtins;
 let
   cfg = config.valentino.modules.dev.generics;
 

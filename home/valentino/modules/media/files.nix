@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.media.files;
-in {
+in
+{
   options.valentino.modules.media.files = {
     filezilla.enable = mkEnableOption "enable filezilla";
     libreoffice.enable = mkEnableOption "enable libreoffice";
@@ -16,14 +18,14 @@ in {
       interface = mkOption {
         type = types.str;
         default = "";
-        description = ''Interface to use'';
+        description = "Interface to use";
       };
     };
   };
 
   config = mkMerge [
     (mkIf cfg.qrcp.enable {
-      home.packages = [pkgs.qrcp];
+      home.packages = [ pkgs.qrcp ];
 
       home.file.".config/qrcp/config.json".text = ''
         {
@@ -40,16 +42,10 @@ in {
       '';
     })
 
-    (mkIf cfg.filezilla.enable {
-      home.packages = [pkgs.filezilla];
-    })
+    (mkIf cfg.filezilla.enable { home.packages = [ pkgs.filezilla ]; })
 
-    (mkIf cfg.libreoffice.enable {
-      home.packages = [pkgs.libreoffice];
-    })
+    (mkIf cfg.libreoffice.enable { home.packages = [ pkgs.libreoffice ]; })
 
-    (mkIf cfg.localsend.enable {
-      home.packages = [pkgs.localsend];
-    })
+    (mkIf cfg.localsend.enable { home.packages = [ pkgs.localsend ]; })
   ];
 }

@@ -4,10 +4,12 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.media.images;
   inherit (config.valentino.modules) wayland;
-in {
+in
+{
   options.valentino.modules.media.images = {
     imv.enable = mkEnableOption "an option to view images";
     feh.enable = mkEnableOption "an option to view images";
@@ -64,12 +66,13 @@ in {
             # Slideshow control
             t = "slideshow +1";
             "<Shift+T>" = "slideshow -1";
-            "<Shift+W>" = let
-              cmd =
-                if wayland.enable
-                then "swaymsg output \"*\" background ~/.cache/wallpaper fill"
-                else "feh --bg-scale ~/.cache/wallpaper";
-            in "exec cp -f \"\$imv_current_file\" ~/.cache/wallpaper && ${cmd}";
+            "<Shift+W>" =
+              let
+                path = "~/.cache/current_wallpaper";
+                cmd =
+                  if wayland.enable then "swaymsg output \"*\" background ${path} fill" else "feh --bg-scale ${path}";
+              in
+              "exec cp -f \"\$imv_current_file\" ${path} && ${cmd}";
           };
         };
       };
@@ -79,10 +82,22 @@ in {
       programs.feh = {
         enable = true;
         keybindings = {
-          zoom_out = ["j" "minus"];
-          zoom_in = ["k" "plus"];
-          next_img = ["l" "Right"];
-          prev_img = ["h" "Left"];
+          zoom_out = [
+            "j"
+            "minus"
+          ];
+          zoom_in = [
+            "k"
+            "plus"
+          ];
+          next_img = [
+            "l"
+            "Right"
+          ];
+          prev_img = [
+            "h"
+            "Left"
+          ];
         };
       };
     })

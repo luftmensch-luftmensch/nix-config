@@ -4,7 +4,8 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   inherit (config.valentino.modules) wayland xorg;
 
   # Creative XOR operator :D
@@ -15,7 +16,7 @@ with lib; let
     font-awesome
     fira-code
     monoid
-    (nerdfonts.override {fonts = ["Iosevka"];})
+    (nerdfonts.override { fonts = [ "Iosevka" ]; })
     iosevka-comfy.comfy
     source-code-pro
     sarasa-gothic
@@ -51,12 +52,29 @@ with lib; let
     speedtest-go
   ];
 
-  utilities = with pkgs;
-    [bind nmap traceroute]
-    ++ [procs ps_mem usbutils] # Usage: sudo ps_mem -p $(pgrep -d, -u $USER) (Why is Emacs using so much RAM?)
-    ++ [unrar unzip zip]
+  utilities =
+    with pkgs;
+    [
+      bind
+      nmap
+      traceroute
+    ]
+    ++ [
+      procs
+      ps_mem # Usage: sudo ps_mem -p $(pgrep -d, -u $USER) (Why is Emacs using so much RAM?)
+      usbutils
+    ]
+    ++ [
+      unrar
+      unzip
+      zip
+    ]
     # ++ [figlet] # Liked font: big/doom/calvin-s
-    ++ [lm_sensors lshw lsof];
+    ++ [
+      lm_sensors
+      lshw
+      lsof
+    ];
 
   desktop = with pkgs; [
     transmission-gtk
@@ -64,7 +82,8 @@ with lib; let
     gnome.gnome-disk-utility
     networkmanagerapplet
   ];
-in {
+in
+{
   config = {
     assertions = [
       {
@@ -73,20 +92,15 @@ in {
       }
     ];
 
-    home.packages =
-      desktop
-      ++ fonts
-      ++ monitoring
-      ++ utilities
-      ++ media;
+    home.packages = desktop ++ fonts ++ monitoring ++ utilities ++ media;
 
     fonts.fontconfig.enable = true;
 
     systemd.user.services.polkit = {
       Unit = {
         Description = "polkit-gnome";
-        Documentation = ["man:polkit(8)"];
-        PartOf = ["graphical-session.target"];
+        Documentation = [ "man:polkit(8)" ];
+        PartOf = [ "graphical-session.target" ];
       };
       Service = {
         Type = "simple";
@@ -94,7 +108,9 @@ in {
         RestartSec = 3;
         Restart = "always";
       };
-      Install = {WantedBy = ["graphical-session.target"];};
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
   };
 }
