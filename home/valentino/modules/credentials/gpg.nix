@@ -14,16 +14,10 @@ in
   config = mkIf cfg.enable {
     programs.gpg.enable = true;
 
-    services.gpg-agent =
-      {
-        enable = true;
-        enableSshSupport = true;
-      }
-      // lib.optionalAttrs (builtins.hasAttr "pinentryFlavor" config.services.gpg-agent) {
-        pinentryPackage = "gnome3";
-      }
-      // lib.optionalAttrs (builtins.hasAttr "pinentryPackage" config.services.gpg-agent) {
-        pinentryPackage = pkgs.pinentry-gnome3;
-      };
+    services.gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      pinentryPackage = pkgs.pinentry-gnome3;
+    };
   };
 }

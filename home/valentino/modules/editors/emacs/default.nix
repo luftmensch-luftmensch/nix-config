@@ -4,11 +4,13 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.editors.emacs;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/editors/emacs/config";
   inherit (config.valentino.modules) xorg;
-in {
+in
+{
   options.valentino.modules.editors.emacs = {
     enable = mkEnableOption "emacs and its configuration";
     daemon.enable = mkEnableOption "emacs daemon";
@@ -18,36 +20,38 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      home.packages = with pkgs; [hunspell hunspellDicts.it_IT hunspellDicts.en_US];
+      home.packages = with pkgs; [
+        hunspell
+        hunspellDicts.it_IT
+        hunspellDicts.en_US
+      ];
 
       programs.emacs = {
         enable = true;
-        package =
-          if xorg.enable
-          then pkgs.emacs29-gtk3
-          else pkgs.emacs29-pgtk;
+        package = if xorg.enable then pkgs.emacs29-gtk3 else pkgs.emacs29-pgtk;
 
-        extraPackages = epkgs:
+        extraPackages =
+          epkgs:
           with epkgs;
-            [
-              auctex
-              jinx
-              pdf-tools
-              treesit-grammars.with-all-grammars
-              vterm
-            ]
-            ++ (optionals cfg.telega.enable [
-              # melpaPackages.telega is outdated. Pull a newer version directly from the repo
-              (melpaPackages.telega.overrideAttrs (_oldAttrs: {
-                version = "0.8.256";
-                src = pkgs.fetchFromGitHub {
-                  owner = "zevlg";
-                  repo = "telega.el";
-                  rev = "99477b075f4032a49283d730e909a26f11606ee5";
-                  sha256 = "0nr9c42dlgaaysf4jhp7askl38d1cw8lvry1r9wlzf1jb9mjv5qn";
-                };
-              }))
-            ]);
+          [
+            auctex
+            jinx
+            pdf-tools
+            treesit-grammars.with-all-grammars
+            vterm
+          ]
+          ++ (optionals cfg.telega.enable [
+            # melpaPackages.telega is outdated. Pull a newer version directly from the repo
+            (melpaPackages.telega.overrideAttrs (_oldAttrs: {
+              version = "0.8.256";
+              src = pkgs.fetchFromGitHub {
+                owner = "zevlg";
+                repo = "telega.el";
+                rev = "99477b075f4032a49283d730e909a26f11606ee5";
+                sha256 = "0nr9c42dlgaaysf4jhp7askl38d1cw8lvry1r9wlzf1jb9mjv5qn";
+              };
+            }))
+          ]);
       };
 
       xdg.configFile = {
@@ -55,7 +59,6 @@ in {
         "emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/init.el";
         "emacs/early-init.el".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/early-init.el";
         "emacs/lisp".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/lisp";
-        "emacs/bookmarks".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/bookmarks";
         "emacs/.etc/straight/versions".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/straight/versions";
       };
     }
@@ -72,13 +75,11 @@ in {
       };
     })
 
-    (mkIf config.programs.notmuch.enable {
-      home.packages = [pkgs.notmuch.emacs];
-    })
+    (mkIf config.programs.notmuch.enable { home.packages = [ pkgs.notmuch.emacs ]; })
 
     (mkIf cfg.telega.enable {
       # Cross-platform library for building Telegram clients
-      home.packages = [pkgs.tdlib];
+      home.packages = [ pkgs.tdlib ];
     })
   ]);
 }

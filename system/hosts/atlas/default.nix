@@ -3,7 +3,8 @@
   config,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     ./options.nix
     ../common.nix
@@ -13,14 +14,13 @@
   # Kernel related
   boot = {
     kernelPackages = pkgs.linuxPackages;
-    kernelModules = ["kvm-intel"];
-    supportedFilesystems = ["btrfs"];
+    kernelModules = [ "kvm-intel" ];
+    supportedFilesystems = [ "btrfs" ];
   };
 
   # Networking specific
   networking = {
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
-    useDHCP = false; # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     interfaces.enp2s0.useDHCP = true;
   };
 
@@ -36,6 +36,6 @@
 
   services.xserver = {
     enable = true;
-    videoDrivers = ["intel"]; # "nvidia"
+    videoDrivers = [ "intel" ]; # "nvidia"
   };
 }

@@ -70,7 +70,10 @@ in
               let
                 path = "~/.cache/current_wallpaper";
                 cmd =
-                  if wayland.enable then "swaymsg output \"*\" background ${path} fill" else "feh --bg-scale ${path}";
+                  if wayland.enable then
+                    "swaymsg output \"*\" background ${path} fill"
+                  else
+                    "feh --no-fehbg --bg-scale ${path}";
               in
               "exec cp -f \"\$imv_current_file\" ${path} && ${cmd}";
           };

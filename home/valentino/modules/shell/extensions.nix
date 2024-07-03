@@ -88,7 +88,7 @@ in
       btop = {
         enable = true;
         settings = {
-          color_theme = "adwaita";
+          color_theme = "default";
           theme_background = false;
           vim_keys = true;
           shown_boxes = "cpu mem proc";

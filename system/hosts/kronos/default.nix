@@ -4,7 +4,8 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     ./options.nix
     ../common.nix
@@ -15,16 +16,23 @@
   boot = {
     # kernelPackages = pkgs.linuxPackages_zen;
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = ["kvm-amd" "amdgpu" "acpi_call"];
-    kernelParams = ["acpi_backlight=native" "idle=nomwait" "iommu=pt"];
-    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
-    supportedFilesystems = ["btrfs"];
+    kernelModules = [
+      "kvm-amd"
+      "amdgpu"
+      "acpi_call"
+    ];
+    kernelParams = [
+      "acpi_backlight=native"
+      "idle=nomwait"
+      "iommu=pt"
+    ];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    supportedFilesystems = [ "btrfs" ];
   };
 
   # Networking specific
   networking = {
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
-    useDHCP = false; # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     interfaces = {
       enp2s0f0.useDHCP = true;
       wlp3s0.useDHCP = true;
@@ -39,10 +47,14 @@
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
-      extraPackages = with pkgs; [amdvlk vaapiVdpau libvdpau-va-gl];
+      extraPackages = with pkgs; [
+        amdvlk
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
     };
     # In substitution of nixos-hardware
-    firmware = [pkgs.linux-firmware];
+    firmware = [ pkgs.linux-firmware ];
 
     trackpoint = {
       enable = lib.mkDefault true;
@@ -52,6 +64,6 @@
 
   services.xserver = {
     enable = true;
-    videoDrivers = ["amdgpu"];
+    videoDrivers = [ "amdgpu" ];
   };
 }

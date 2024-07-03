@@ -1,18 +1,27 @@
-_: {
+{ lib, ... }:
+{
   networking = {
-    firewall = let
-      localRanges = [
-        {
-          from = 9000;
-          to = 9091;
-        }
-      ];
-    in {
-      enable = true;
-      allowedTCPPortRanges = localRanges;
-      allowedUDPPortRanges = localRanges;
-      allowedUDPPorts = [51820];
-    };
+    # The global dhcp has been deprecated upstream, therefore explicitly set to false here.
+    # Use the new networkd service instead of the legacy "script-based" network setups.
+    # Host may contain individual dhcp interfaces or systemd-networkd configurations in host
+    # specific directories
+    useDHCP = false;
+    useNetworkd = lib.mkForce true;
+    firewall =
+      let
+        localRanges = [
+          {
+            from = 9000;
+            to = 9091;
+          }
+        ];
+      in
+      {
+        enable = true;
+        allowedTCPPortRanges = localRanges;
+        allowedUDPPortRanges = localRanges;
+        allowedUDPPorts = [ 51820 ];
+      };
 
     nameservers = [
       # DNS recursive service w/ Quad9 on ipv4 & ipv6
@@ -31,5 +40,10 @@ _: {
   };
 
   # DNS
-  services.resolved.enable = true;
+  services.resolved = {
+    enable = true;
+    dnssec = "allow-downgrade";
+    domains = [ "~." ];
+    dnsovertls = "opportunistic";
+  };
 }

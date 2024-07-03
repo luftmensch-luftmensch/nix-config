@@ -1,8 +1,5 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   ## System security tweaks
   security = {
     protectKernelImage = true; # Prevent replacing the running kernel w/o reboot
