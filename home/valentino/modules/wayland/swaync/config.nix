@@ -63,7 +63,7 @@
       buttons-grid.actions = [
         {
           "label" = "󰛳";
-          "command" = "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && nm-connection-editor'";
+          "commad" = "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && nm-connection-editor'";
         }
         {
           "label" = "";
@@ -79,12 +79,12 @@
         }
         {
           "label" = "⏻";
-          "command" = "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && ${pkgs.rofi-powermenu}/bin/rofi-powermenu'";
+          "command" = "bash -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && rofi-powermenu'";
         }
       ];
       "backlight" = {
         "label" = " ";
-        "device" = "amdgpu_bl0";
+        "device" = "amdgpu_bl1";
         "min" = 10;
       };
       volume.label = "";
