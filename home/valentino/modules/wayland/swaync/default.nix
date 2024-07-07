@@ -21,7 +21,14 @@ in
     home.packages = [ cfg.package ];
     services.swaync =
       let
-        config = import ./config.nix { inherit theme palette pkgs; };
+        config = import ./config.nix {
+          inherit
+            lib
+            theme
+            palette
+            pkgs
+            ;
+        };
       in
       {
         enable = true;

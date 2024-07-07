@@ -1,5 +1,5 @@
 {
-  # schema,
+  lib,
   theme,
   palette,
   pkgs,
@@ -55,54 +55,59 @@
       "dnd"
       "notifications"
     ];
-    "widget-config" = {
-      "label" = {
-        "max-lines" = 1;
-        "text" = "Control Center";
+    widget-config = {
+      label = {
+        max-lines = 1;
+        text = "Control Center";
       };
-      buttons-grid.actions = [
-        {
-          "label" = "󰛳";
-          "commad" = "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && nm-connection-editor'";
-        }
-        {
-          "label" = "";
-          "command" = "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && emacsclient -c'";
-        }
-        {
-          "label" = "";
-          "command" = "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && firefox'";
-        }
-        {
-          "label" = "";
-          "command" = "sh -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && zathura'";
-        }
-        {
-          "label" = "⏻";
-          "command" = "bash -c '${pkgs.swaynotificationcenter}/bin/swaync-client -cp && rofi-powermenu'";
-        }
-      ];
-      "backlight" = {
-        "label" = " ";
-        "device" = "amdgpu_bl1";
-        "min" = 10;
+      buttons-grid.actions =
+        let
+          swaync-client = "${pkgs.swaynotificationcenter}/bin/swaync-client -cp";
+          bash = "${lib.getExe pkgs.bash} -c";
+        in
+        [
+          {
+            label = "󰛳";
+            commad = "${bash} '${swaync-client} && ${pkgs.networkmanagerapplet}/bin/nm-connection-editor'";
+          }
+          {
+            label = "";
+            command = "${bash} '${swaync-client} && emacsclient -c'";
+          }
+          {
+            label = "";
+            command = "${bash} '${swaync-client} && ${lib.getExe pkgs.firefox}'";
+          }
+          {
+            label = "";
+            command = "${bash} '${swaync-client} && ${lib.getExe pkgs.zathura}'";
+          }
+          {
+            label = "⏻";
+            command = "${bash} '${swaync-client} && ${lib.getExe pkgs.rofi-powermenu}'";
+          }
+        ];
+      backlight = {
+        label = " ";
+        device = "amdgpu_bl1";
+        min = 10;
       };
       volume.label = "";
-      "inhibitors" = {
-        "text" = "Inhibitors";
-        "button-text" = "Clear All";
-        "clear-all-button" = true;
+      inhibitors = {
+        text = "Inhibitors";
+        button-text = "Clear All";
+        clear-all-button = true;
       };
-      "title" = {
-        "text" = "Notifications";
-        "clear-all-button" = true;
-        "button-text" = "Clear All";
+      title = {
+        text = "Notifications";
+        clear-all-button = true;
+        button-text = "Clear All";
       };
 
       dnd.text = "Do Not Disturb";
-      "mpris" = {
-        "image-size" = 96;
-        "image-radius" = 12;
+      mpris = {
+        image-size = 96;
+        image-radius = 12;
       };
     };
   };
