@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   inherit (config.system.modules.graphical) wayland xorg;
-in {
+in
+{
   # XDG Portals, useful for wayland screen sharing and flatpak).
   config = mkMerge [
     (mkIf (xorg.enable || wayland.enable) {
@@ -18,12 +20,12 @@ in {
 
     (mkIf wayland.enable {
       xdg.portal = {
-        extraPortals = [pkgs.xdg-desktop-portal-wlr];
+        extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
         wlr = {
           enable = true;
           settings.screencast = {
             chooser_type = "simple";
-            chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+            chooser_cmd = "${lib.getExe pkgs.slurp} -f %o -or";
           };
         };
       };

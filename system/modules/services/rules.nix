@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.services.udev-rules;
-in {
+in
+{
   options.system.modules.services.udev-rules.enable = mkEnableOption "Enable udev custom rules";
 
   config = mkIf cfg.enable {
@@ -14,8 +16,6 @@ in {
       extraRules = ''
         ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN{program}+="${pkgs.systemd}/bin/systemd-mount --no-block --automount=yes --collect $devnode /media"
       '';
-      # Usb wake up
-      # ACTION=="add", SUBSYSTEM=="usb", RUN+="${pkgs.bash}/bin/bash -c 'echo enabled > /sys/bus/usb/devices/*/power/wakeup'"
 
       # Autosuspend usb
       # ACTION=="add", SUBSYSTEM=="usb", ATTR{power/control}="auto"

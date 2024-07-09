@@ -15,9 +15,9 @@ in
   config = mkIf cfg.enable {
     home = {
       shellAliases = {
-        cat = "${pkgs.bat}/bin/bat";
-        rg = "${pkgs.ripgrep}/bin/rg -L";
-        htop = "${pkgs.btop}/bin/btop";
+        cat = "${lib.getExe pkgs.bat}";
+        rg = "${lib.getExe pkgs.ripgrep} -L";
+        htop = "${lib.getExe pkgs.btop}";
       };
       packages = with pkgs; [
         fd
