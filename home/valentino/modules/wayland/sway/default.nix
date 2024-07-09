@@ -26,6 +26,7 @@ in
         let
           settings = import ./settings.nix {
             inherit
+              lib
               mod
               mod1
               default_output

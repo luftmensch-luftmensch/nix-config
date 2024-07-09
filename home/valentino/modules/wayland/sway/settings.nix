@@ -1,4 +1,5 @@
 {
+  lib,
   mod,
   mod1,
   theme,
@@ -10,8 +11,8 @@
 let
   _wpctl = "${pkgs.wireplumber}/bin/wpctl";
   _notification-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
-  _notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 1000";
-  _brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl set";
+  _notify = "${lib.getExe pkgs.libnotify} -r 1 -u low -t 1000";
+  _brightnessctl = "${lib.getExe pkgs.brightnessctl} set";
 
   menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
 
@@ -122,25 +123,25 @@ in
     # Start mode
     "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
 
-    Print = "exec --no-startup-id ${pkgs.grim}/bin/grim -g  \"$(${pkgs.slurp}/bin/slurp)\" $(date +'%d-%m-%Y-%H:%M:%S').png";
+    Print = "exec --no-startup-id ${lib.getExe pkgs.grim} -g  \"$(${lib.getExe pkgs.slurp})\" $(date +'%d-%m-%Y-%H:%M:%S').png";
 
-    "${mod}+Return" = "exec --no-startup-id ${pkgs.foot}/bin/foot -a=default_term -e fish";
-    "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.foot}/bin/foot -a=floating_term -e fish";
+    "${mod}+Return" = "exec --no-startup-id ${lib.getExe pkgs.foot} -a=default_term -e fish";
+    "${mod}+Shift+Return" = "exec --no-startup-id ${lib.getExe pkgs.foot} -a=floating_term -e fish";
 
-    "${mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
+    "${mod}+b" = "exec --no-startup-id ${lib.getExe pkgs.firefox}";
 
     "${mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: ' | xargs swaymsg exec";
 
-    "${mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
+    "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.cinnamon.nemo}";
 
     "${mod}+m" = "exec --no-startup-id emacsclient -c";
-    "${mod}+o" = "exec --no-startup-id ${pkgs.obs-studio}/bin/obs";
-    "${mod}+p" = "exec --no-startup-id ${pkgs.pavucontrol}/bin/pavucontrol";
+    "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";
+    "${mod}+p" = "exec --no-startup-id ${lib.getExe pkgs.pavucontrol}";
 
-    "${mod}+Shift+b" = "exec --no-startup-id ${pkgs.chromium}/bin/chromium";
-    "${mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
+    "${mod}+Shift+b" = "exec --no-startup-id ${lib.getExe pkgs.chromium}";
+    "${mod}+Shift+c" = "exec --no-startup-id ${lib.getExe pkgs.vscodium}";
     "${mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
-    "${mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
+    "${mod}+Shift+s" = "exec --no-startup-id ${lib.getExe pkgs.spotify}";
 
     "${mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
     "${mod}+Shift+e" = "exec rofi -show emoji -modi emoji -theme $HOME/.config/rofi/themes/emoji";

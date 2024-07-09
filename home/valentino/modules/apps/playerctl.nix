@@ -4,10 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.apps.playerctl;
-  _notify = "${pkgs.libnotify}/bin/notify-send -u low -t 900 -i audio-x-generic";
-  _handler = "${pkgs.playerctl}/bin/playerctl";
+  _notify = "${lib.getExe pkgs.libnotify} -u low -t 900 -i audio-x-generic";
+  _handler = "${lib.getExe pkgs.playerctl}";
 
   playerctl-wrapper = pkgs.writeShellScriptBin "playerctl-wrapper" ''
     pause_or_resume() {
@@ -27,10 +28,14 @@ with lib; let
       esac
     done
   '';
-in {
+in
+{
   options.valentino.modules.apps.playerctl.enable = mkEnableOption "playerct";
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [playerctl playerctl-wrapper];
+    home.packages = with pkgs; [
+      playerctl
+      playerctl-wrapper
+    ];
   };
 }

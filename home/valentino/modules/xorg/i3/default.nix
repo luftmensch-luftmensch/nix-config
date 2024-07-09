@@ -4,34 +4,51 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.xorg;
   theme = config.valentino.modules.themes;
   mod = "Mod4";
   mod1 = "Mod1";
   inherit (config.colorScheme) palette;
-in {
+in
+{
   config = mkIf (cfg.enable && cfg.wm == "i3") {
     xsession = {
       enable = true;
       initExtra = "xset b off";
-      windowManager.i3 = let
-        settings = import ./settings.nix {
-          inherit mod mod1 theme palette pkgs;
-        };
-      in {
-        enable = true;
-        config = {
-          modifier = "${mod}";
-          floating.modifier = "${mod}";
-          bars = []; # use polybar instead
-          workspaceAutoBackAndForth = true;
+      windowManager.i3 =
+        let
+          settings = import ./settings.nix {
+            inherit
+              lib
+              mod
+              mod1
+              theme
+              palette
+              pkgs
+              ;
+          };
+        in
+        {
+          enable = true;
+          config = {
+            modifier = "${mod}";
+            floating.modifier = "${mod}";
+            bars = [ ]; # use polybar instead
+            workspaceAutoBackAndForth = true;
 
-          inherit (settings) assigns gaps keybindings modes startup;
-        };
+            inherit (settings)
+              assigns
+              gaps
+              keybindings
+              modes
+              startup
+              ;
+          };
 
-        inherit (settings) extraConfig;
-      };
+          inherit (settings) extraConfig;
+        };
     };
 
     home.packages = with pkgs; [

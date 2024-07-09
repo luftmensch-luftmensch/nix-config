@@ -1,21 +1,22 @@
 {
+  lib,
   mod,
   mod1,
   theme,
   palette,
   pkgs,
   ...
-}: let
+}:
+let
   _pactl = "${pkgs.pulseaudio}/bin/pactl";
   _pamixer = "${pkgs.pamixer}/bin/pamixer --get-volume";
-  _notify = "${pkgs.libnotify}/bin/notify-send -r 1 -u low -t 800";
-  _alacritty = "${pkgs.alacritty}/bin/alacritty";
-  sus = pkgs.callPackage ./scripts/screenshot-utility.nix {
-    inherit theme palette;
-  };
-in {
+  _notify = "${lib.getExe pkgs.libnotify} -r 1 -u low -t 800";
+  _alacritty = "${lib.getExe pkgs.alacritty}";
+  sus = pkgs.callPackage ./scripts/screenshot-utility.nix { inherit theme palette; };
+in
+{
   assigns = {
-    "2" = [{class = "^obs";}];
+    "2" = [ { class = "^obs"; } ];
   };
 
   gaps = {
@@ -110,21 +111,21 @@ in {
     "${mod}+Return" = "exec --no-startup-id ${_alacritty} -t Alacritty";
     "${mod}+Shift+Return" = "exec --no-startup-id ${_alacritty} -t floating_term";
 
-    "${mod}+b" = "exec --no-startup-id ${pkgs.firefox}/bin/firefox";
+    "${mod}+b" = "exec --no-startup-id ${lib.getExe pkgs.firefox}";
 
     "${mod}+d" = "exec --no-startup-id ${pkgs.bemenu}/bin/bemenu-run -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}' -p '▶ Run: '";
 
-    "${mod}+e" = "exec --no-startup-id ${pkgs.cinnamon.nemo}/bin/nemo";
+    "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.cinnamon.nemo}";
 
     "${mod}+m" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -c";
-    "${mod}+o" = "exec --no-startup-id ${pkgs.obs-studio}/bin/obs";
-    "${mod}+p" = "exec --no-startup-id ${pkgs.pavucontrol}/bin/pavucontrol";
+    "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";
+    "${mod}+p" = "exec --no-startup-id ${lib.getExe pkgs.pavucontrol}";
 
-    "${mod}+Shift+b" = "exec --no-startup-id ${pkgs.chromium}/bin/chromium";
-    "${mod}+Shift+c" = "exec --no-startup-id ${pkgs.vscodium}/bin/codium";
-    "${mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
+    "${mod}+Shift+b" = "exec --no-startup-id ${lib.getExe pkgs.chromium}";
+    "${mod}+Shift+c" = "exec --no-startup-id ${lib.getExe pkgs.vscodium}";
+    "${mod}+Shift+i" = "exec --no-startup-id ${lib.getExe pkgs.jetbrains.idea-community}";
     "${mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
-    "${mod}+Shift+s" = "exec --no-startup-id ${pkgs.spotify}/bin/spotify";
+    "${mod}+Shift+s" = "exec --no-startup-id ${lib.getExe pkgs.spotify}";
     "${mod}+Shift+e" = "exec rofi -show emoji -modi emoji -theme $HOME/.config/rofi/themes/emoji";
   };
 
@@ -154,11 +155,11 @@ in {
       always = true;
     }
 
-    {command = "parcellite";}
+    { command = "parcellite"; }
 
-    {command = "nm-applet";}
+    { command = "nm-applet"; }
 
-    {command = "rm -f $xob_sock && mkfifo $xob_sock && tail -f $xob_sock | xob -t 700";}
+    { command = "rm -f $xob_sock && mkfifo $xob_sock && tail -f $xob_sock | xob -t 700"; }
 
     {
       command = "systemctl --user restart polybar";
