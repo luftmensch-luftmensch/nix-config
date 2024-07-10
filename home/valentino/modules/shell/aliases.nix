@@ -1,8 +1,8 @@
-pkgs:
+{ lib, pkgs }:
 let
-  _curl = "${pkgs.curl}/bin/curl";
-  _docker = "${pkgs.docker}/bin/docker";
-  _gpg = "${pkgs.gnupg}/bin/gpg --keyserver-options auto-key-retrieve";
+  _curl = "${lib.getExe pkgs.curl}";
+  _docker = "${lib.getExe pkgs.docker}";
+  _gpg = "${lib.getExe pkgs.gnupg} --keyserver-options auto-key-retrieve";
   _nmcli = "${pkgs.networkmanager}/bin/nmcli device";
 in
 {
@@ -52,7 +52,7 @@ in
   home-diff-generation = "nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager";
   nix-show-inputs = "nix flake archive --json | jq '.path, ( .inputs | to_entries[] | {\"input\": .key, \"path\": .value.path})'";
 
-  ls = "${pkgs.eza}/bin/eza --icons --color=always --group-directories-first";
+  ls = "${lib.getExe pkgs.eza} --icons --color=always --group-directories-first";
   sl = "ls";
   la = "ls -a";
   ll = "ls -l";
@@ -64,7 +64,7 @@ in
   used-port = "echo 'User:      Command:   Port:'; echo '----------------------------' ; lsof -i 4 -P -n | grep -i 'listen' | awk '{print \$3, \$1, \$9}' | sed 's/ [a-z0-9\.\*]*:/ /' | sort -k 3 -n |xargs printf '%-10s %-10s %-10s\n' | uniq";
   open-port = "used-port";
 
-  yt = "${pkgs.yt-dlp}/bin/yt-dlp";
+  yt = "${lib.getExe pkgs.yt-dlp}";
   yt-aac = "yt --extract-audio --audio-format aac ";
   yt-best = "yt --extract-audio --audio-format best ";
   yt-flac = "yt --extract-audio --audio-format flac ";
@@ -102,7 +102,7 @@ in
   # Misc
   v = "vim";
 
-  getpass = "${pkgs.openssl}/bin/openssl rand -base64 20";
+  getpass = "${lib.getExe pkgs.openssl} rand -base64 20";
   # verify signature for isos
   gpg-check = "${_gpg} --verify";
   # receive the key of a developer

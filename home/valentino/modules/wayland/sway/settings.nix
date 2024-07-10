@@ -17,7 +17,7 @@ let
   menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
 
   # Custom scripts
-  bss = pkgs.callPackage ./scripts/battery-status.nix { };
+  bss = pkgs.callPackage ./scripts/battery-status.nix { inherit lib; };
   cms = pkgs.callPackage ./scripts/clipboard-manager.nix { inherit menu_opts; };
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix { inherit menu_opts; };
 in
@@ -115,7 +115,7 @@ in
     "${mod1}+Ctrl+Right" = "workspace next";
     "${mod1}+Ctrl+Left" = "workspace prev";
 
-    "${mod1}+Ctrl+h" = "exec --no-startup-id ${cms}/bin/cms";
+    "${mod1}+Ctrl+h" = "exec --no-startup-id ${lib.getExe cms}";
 
     "${mod}+Tab" = "workspace back_and_forth";
     "${mod}+Shift+Tab" = "workspace prev";
@@ -140,10 +140,10 @@ in
 
     "${mod}+Shift+b" = "exec --no-startup-id ${lib.getExe pkgs.chromium}";
     "${mod}+Shift+c" = "exec --no-startup-id ${lib.getExe pkgs.vscodium}";
-    "${mod}+Shift+i" = "exec --no-startup-id ${pkgs.jetbrains.idea-community}/bin/idea-community";
+    "${mod}+Shift+i" = "exec --no-startup-id ${lib.getExe pkgs.jetbrains.idea-community}";
     "${mod}+Shift+s" = "exec --no-startup-id ${lib.getExe pkgs.spotify}";
 
-    "${mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
+    "${mod}+Shift+p" = "exec --no-startup-id ${lib.getExe sus}";
     "${mod}+Shift+e" = "exec rofi -show emoji -modi emoji -theme $HOME/.config/rofi/themes/emoji";
   };
 
@@ -222,7 +222,7 @@ in
     { command = "wl-paste --watch cliphist store"; }
 
     # Custom scripts
-    { command = "${bss}/bin/bss"; }
+    { command = "${lib.getExe bss}"; }
   ];
 
   window = {

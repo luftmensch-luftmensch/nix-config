@@ -59,7 +59,7 @@ in
     in
     {
       max-length = 50;
-      on-click = "${_screenshot_current_window}/bin/_screenshot_current_window";
+      on-click = "${lib.getExe _screenshot_current_window}";
       on-click-right = "sleep 0.1 ; pgrep ${_slurp} || ${_cmd_r}";
       on-click-middle = "${_swaymsg} kill";
     };

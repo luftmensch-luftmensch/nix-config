@@ -88,7 +88,7 @@ in
       ];
 
       # To list all the defined function use: declare -f | grep -E '^[^ ]+ \(\) $'
-      shellAliases = import ./aliases.nix pkgs;
+      shellAliases = import ./aliases.nix { inherit lib pkgs; };
       sessionVariables = {
         # i = case-insensitive searches, unless uppercase characters in search string
         # F = exit immediately if output fits on one screen

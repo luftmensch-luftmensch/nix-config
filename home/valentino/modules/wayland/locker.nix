@@ -69,7 +69,7 @@ in
 
     services.swayidle =
       let
-        swaylock = "${pkgs.swaylock-effects}/bin/swaylock -fF";
+        swaylock = "${lib.getExe pkgs.swaylock-effects} -fF";
       in
       {
         enable = true;

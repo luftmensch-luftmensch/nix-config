@@ -4,13 +4,15 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.shell.fish;
   inherit (config.valentino.modules.xorg) polybar;
   inherit (config.valentino.modules.term) foot;
   inherit (config.valentino.modules) wayland;
   inherit (config.valentino.modules.shell) git;
-in {
+in
+{
   options.valentino.modules.shell.fish = {
     enable = mkEnableOption "Fish - The friendly interactive shell";
     cpuTuning = mkEnableOption "enable cpu frequency tuning";
@@ -39,7 +41,7 @@ in {
         sc = "systemctl";
       };
 
-      shellAliases = import ../aliases.nix pkgs;
+      shellAliases = import ../aliases.nix { inherit lib pkgs; };
       functions = mkMerge [
         (import ./functions.nix pkgs)
 
@@ -51,53 +53,59 @@ in {
         })
 
         (mkIf cfg.cpuTuning {
-          set-cpu.body = let
-            cpupower = "${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set";
-          in ''
-            switch "$argv[1]"
-             case "max"
-                 echo "Setting to max"
-                 sudo ${cpupower} -f 3.0Ghz > /dev/null 2>&1
-             case '*'
-                 sudo ${cpupower} -f 2.0Ghz > /dev/null 2>&1
-            end
-          '';
+          set-cpu.body =
+            let
+              cpupower = "${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set";
+            in
+            ''
+              switch "$argv[1]"
+               case "max"
+                   echo "Setting to max"
+                   sudo ${cpupower} -f 3.0Ghz > /dev/null 2>&1
+               case '*'
+                   sudo ${cpupower} -f 2.0Ghz > /dev/null 2>&1
+              end
+            '';
         })
 
         (mkIf wayland.enable {
-          color-picker = let
-            _grim = "${pkgs.grim}/bin/grim -g";
-            _slurp = "${pkgs.slurp}/bin/slurp -b 1B1F2800 -p";
-            _convert = "${pkgs.imagemagick}/bin/convert";
-          in {
-            body = ''
-              set color (${_grim} "$(${_slurp})" -t ppm - | ${_convert} - -format '%[pixel:p{0,0}]' txt:- | ${pkgs.coreutils}/bin/tail -n1 | ${pkgs.coreutils}/bin/cut -d' ' -f4)
-              set image /tmp/color_picker_image.png
+          color-picker =
+            let
+              _grim = "${pkgs.grim}/bin/grim -g";
+              _slurp = "${pkgs.slurp}/bin/slurp -b 1B1F2800 -p";
+              _convert = "${pkgs.imagemagick}/bin/convert";
+            in
+            {
+              body = ''
+                set color (${_grim} "$(${_slurp})" -t ppm - | ${_convert} - -format '%[pixel:p{0,0}]' txt:- | ${pkgs.coreutils}/bin/tail -n1 | ${pkgs.coreutils}/bin/cut -d' ' -f4)
+                set image /tmp/color_picker_image.png
 
-              if [ $color ];
-                echo "$color" | tr -d "\n" | ${pkgs.wl-clipboard}/bin/wl-copy
-                ${_convert} -size 48x48 xc:"$color" $image
-                ${pkgs.libnotify}/bin/notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$image" "$color, copied to clipboard."
-                [ -f "$image" ] && rm "$image"
-              end
-            '';
-          };
+                if [ $color ];
+                  echo "$color" | tr -d "\n" | ${pkgs.wl-clipboard}/bin/wl-copy
+                  ${_convert} -size 48x48 xc:"$color" $image
+                  ${pkgs.libnotify}/bin/notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$image" "$color, copied to clipboard."
+                  [ -f "$image" ] && rm "$image"
+                end
+              '';
+            };
         })
 
         (mkIf git.enable {
-          git-purge-history = let
-            _git = "${pkgs.git}/bin/git";
-          in {
-            body = ''
-              set current_branch (${_git} rev-parse --abbrev-ref HEAD)
-              ${_git} checkout --orphan temp
-              ${_git} add -A
-              ${_git} commit -am "¯\_(ツ)_/¯"
-              ${_git} branch -D $current_branch
-              ${_git} branch -m $current_branch
-              ${_git} push -f origin master
-            '';
-          };
+          git-purge-history =
+            let
+              _git = "${pkgs.git}/bin/git";
+            in
+            {
+              body = ''
+                set current_branch (${_git} rev-parse --abbrev-ref HEAD)
+                ${_git} checkout --orphan temp
+                ${_git} add -A
+                ${_git} commit -am "¯\_(ツ)_/¯"
+                ${_git} branch -D $current_branch
+                ${_git} branch -m $current_branch
+                ${_git} push -f origin master
+              '';
+            };
         })
       ];
     };
