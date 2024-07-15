@@ -19,6 +19,12 @@ let
         overlays = attrValues overlays;
       };
 
+      unstable-pkgs = import inputs.nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true; # Forgive me Stallman
+        overlays = attrValues overlays;
+      };
+
       baseHome = {
         inherit username;
         inherit stateVersion;
@@ -39,7 +45,7 @@ let
         ++ attrValues homeModules.${username};
 
       extraSpecialArgs = {
-        inherit inputs outputs;
+        inherit inputs outputs unstable-pkgs;
       };
     };
 in

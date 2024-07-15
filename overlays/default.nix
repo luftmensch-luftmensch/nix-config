@@ -4,7 +4,7 @@ inputs: {
 
   # Overlays for various pkgs (e.g. broken / too old)
   modifications = final: prev: {
-    stable = import inputs.nixpkgs-stable {
+    stable = import inputs.nixpkgs {
       inherit (final) system;
       config.allowUnfree = true; # Forgive me Stallman
     };
@@ -42,15 +42,5 @@ inputs: {
     mpv-visualizer = prev.mpvScripts.visualizer.overrideAttrs (_oldAttrs: {
       patches = [ ./patches/visualizer.patch ];
     });
-  };
-
-  # TODO: Analize
-  # When applied, the unstable nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.unstable'
-  unstable-packages = final: _prev: {
-    unstable = import inputs.nixpkgs-unstable {
-      inherit (final) system;
-      config.allowUnfree = true;
-    };
   };
 }
