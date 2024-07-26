@@ -43,12 +43,12 @@ in
           ++ (optionals cfg.telega.enable [
             # melpaPackages.telega is outdated. Pull a newer version directly from the repo
             (melpaPackages.telega.overrideAttrs (_oldAttrs: {
-              version = "0.8.256";
+              version = "0.8.290";
               src = pkgs.fetchFromGitHub {
                 owner = "zevlg";
                 repo = "telega.el";
-                rev = "99477b075f4032a49283d730e909a26f11606ee5";
-                sha256 = "0nr9c42dlgaaysf4jhp7askl38d1cw8lvry1r9wlzf1jb9mjv5qn";
+                rev = "657f3d479bb6740c7737a5360d3cf6f66d9cb012";
+                sha256 = "sha256-nDiGNFsgQ6WglL8/w7a9jT+WLNvnk2ugmLxX4qMIius=";
               };
             }))
           ]);

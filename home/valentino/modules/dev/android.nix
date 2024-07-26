@@ -4,14 +4,16 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.dev.android;
-in {
+in
+{
   options.valentino.modules.dev.android.enable = mkEnableOption "android devices support";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      jmtpfs
+      # jmtpfs
       gphoto2
       scrcpy
     ];

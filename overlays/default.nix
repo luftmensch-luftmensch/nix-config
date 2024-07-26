@@ -34,8 +34,8 @@ inputs: {
         # The tdlib authors do not set tags for minor versions, but
         # external programs depending on tdlib constrain the minor
         # version, hence we set a specific commit with a known version.
-        rev = "e4796b9bb67dee92d821f1c15e0f263a0941be13";
-        sha256 = "07g0wa97w6gw5b04zb27jysradsi9gpksqlw5vrl9g5snl3ys8si";
+        rev = "97ded01095246a3a693bc85bef4bca5d1af177dd";
+        sha256 = "sha256-KCcXltbCiN9b0OkGkXqLRq8sTgIToy8RhPP4ILR1gk0=";
       };
     });
 
