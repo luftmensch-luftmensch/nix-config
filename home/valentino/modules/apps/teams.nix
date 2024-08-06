@@ -22,7 +22,7 @@ in
           desktopName = "Teams";
           genericName = "Microsoft Teams";
           exec = ''
-            ${lib.getExe config.programs.chromium.package} --ozone-platform-hint=auto --force-dark-mode --enable-features=WebUIDarkMode --app="https://teams.live.com"
+            ${lib.getExe config.programs.chromium.package} --ozone-platform-hint=auto --force-dark-mode --enable-features=WebUIDarkMode --app="https://teams.microsoft.com"
           '';
           icon = "teams";
           categories = [
