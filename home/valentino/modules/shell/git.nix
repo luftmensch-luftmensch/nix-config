@@ -194,6 +194,7 @@ in
       undo-git
       git-blame-someone-else
       pkgs.oh-my-git
+      pkgs.meteor-go
     ];
   };
 }

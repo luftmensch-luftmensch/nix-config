@@ -13,4 +13,5 @@
   # MPV custom scripts
   mpv-navigator = pkgs.callPackage ./mpv-scripts/file-navigator.nix { };
   mpv-m-x = pkgs.callPackage ./mpv-scripts/M-x.nix { };
+  meteor-go = pkgs.callPackage ./meteor.nix { };
 }
