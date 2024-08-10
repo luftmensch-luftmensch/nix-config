@@ -109,4 +109,6 @@ in
   gpg-retrieve = "${_gpg} --receive-keys";
 
   adb-force-restart = "sudo adb kill-server; sudo adb start-server";
+
+  installation-date = "stat -c %w /";
 }
