@@ -39,19 +39,19 @@
         "type": "github"
       }
     },
-    "external-plugin:markdown-nvim": {
+    "external-plugin:markview-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1721099336,
-        "narHash": "sha256-mVSF+1HY8Fs59K6RHPxB8M5Y1sj1/MuDqKMiYu9uW1g=",
-        "owner": "MeanderingProgrammer",
-        "repo": "markdown.nvim",
-        "rev": "0bbc03c5a208274c89f15c625a0ee3700c9adda8",
+        "lastModified": 1723267222,
+        "narHash": "sha256-i86EKeJYM0dZzUyZ2JylS1+ExRyWw29dRPjcIkZ3qVA=",
+        "owner": "OXY2DEV",
+        "repo": "markview.nvim",
+        "rev": "7f4639a53b3e3aac3ad5deab99b21097264f07cc",
         "type": "github"
       },
       "original": {
-        "owner": "MeanderingProgrammer",
-        "repo": "markdown.nvim",
+        "owner": "OXY2DEV",
+        "repo": "markview.nvim",
         "type": "github"
       }
     },
@@ -257,18 +257,18 @@
     },
     "neovim-flake": {
       "inputs": {
-        "external-plugin:markdown-nvim": "external-plugin:markdown-nvim",
+        "external-plugin:markview-nvim": "external-plugin:markview-nvim",
         "external-plugin:nvim-silicon": "external-plugin:nvim-silicon",
         "external-plugin:vim-moonfly-colors": "external-plugin:vim-moonfly-colors",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1721721084,
-        "narHash": "sha256-L7fOZt4z4SBUPgYiVJIhrCiAW8k0UrZFtAIYKSbGoe8=",
+        "lastModified": 1723293795,
+        "narHash": "sha256-7scjegR2QwTnQFwDYLqQlDkiisqPUbFS7fli2zI46A0=",
         "owner": "luftmensch-luftmensch",
         "repo": "neovim-flake",
-        "rev": "a1f11ade0ad09051f8187cd4735d1e371965af1b",
+        "rev": "7e8d2c226ac2ad78dd0f99d2813ae217b66ea81c",
         "type": "github"
       },
       "original": {
@@ -325,11 +325,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1721531260,
-        "narHash": "sha256-O72uxk4gYFQDwNkoBioyrR3GK9EReZmexCStBaORMW8=",
+        "lastModified": 1722740924,
+        "narHash": "sha256-UQPgA5d8azLZuDHZMPmvDszhuKF1Ek89SrTRtqsQ4Ss=",
         "owner": "Mic92",
         "repo": "nix-index-database",
-        "rev": "b6db9fd8dc59bb2ccb403f76d16ba8bbc1d5263d",
+        "rev": "97ca0a0fca0391de835f57e44f369a283e37890f",
         "type": "github"
       },
       "original": {
@@ -387,11 +387,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1721562059,
-        "narHash": "sha256-Tybxt65eyOARf285hMHIJ2uul8SULjFZbT9ZaEeUnP8=",
+        "lastModified": 1723175592,
+        "narHash": "sha256-M0xJ3FbDUc4fRZ84dPGx5VvgFsOzds77KiBMW/mMTnI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "68c9ed8bbed9dfce253cc91560bf9043297ef2fe",
+        "rev": "5e0ca22929f3342b19569b21b2f3462f053e497b",
         "type": "github"
       },
       "original": {
@@ -403,11 +403,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1721686456,
-        "narHash": "sha256-nw/BnNzATDPfzpJVTnY8mcSKKsz6BJMEFRkJ332QSN0=",
+        "lastModified": 1722987190,
+        "narHash": "sha256-68hmex5efCiM2aZlAAEcQgmFI4ZwWt8a80vOeB/5w3A=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "575f3027caa1e291d24f1e9fb0e3a19c2f26d96b",
+        "rev": "21cc704b5e918c5fbf4f9fff22b4ac2681706d90",
         "type": "github"
       },
       "original": {
@@ -447,11 +447,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1721897203,
-        "narHash": "sha256-xBjX4vX1uk+4SDn8M8NWj8pdtoHC2Lwf3bAJ+Bn8ZGQ=",
+        "lastModified": 1723291300,
+        "narHash": "sha256-viTbaLSZVz+kjJdoNR6gY0BGVHSjodk3MH/VNk/sHp8=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "87639828df77ea8397119d06c83fa6091c208068",
+        "rev": "5087817dda64e63c1835a262e771a427adb75deb",
         "type": "github"
       },
       "original": {
@@ -481,11 +481,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1721688883,
-        "narHash": "sha256-9jsjsRKtJRqNSTXKj9zuDFRf2PGix30nMx9VKyPgD2U=",
+        "lastModified": 1722897572,
+        "narHash": "sha256-3m/iyyjCdRBF8xyehf59QlckIcmShyTesymSb+N4Ap4=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "aff2f88277dabe695de4773682842c34a0b7fd54",
+        "rev": "8ae477955dfd9cbf5fa4eb82a8db8ddbb94e79d9",
         "type": "github"
       },
       "original": {

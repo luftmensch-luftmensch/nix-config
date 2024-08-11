@@ -4,17 +4,24 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.media.documents;
   inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
-in {
+in
+{
   options.valentino.modules.media.documents = {
-    zathura.enable = mkEnableOption "pdf support (zathura)";
+    mdx.enable = mkEnableOption "manga support (mdx)";
     okular.enable = mkEnableOption "pdf support (okular)";
+    zathura.enable = mkEnableOption "pdf support (zathura)";
   };
 
   config = mkMerge [
+    (mkIf cfg.mdx.enable { home.packages = [ pkgs.mdx-go ]; })
+
+    (mkIf cfg.okular.enable { home.packages = [ pkgs.okular ]; })
+
     (mkIf cfg.zathura.enable {
       programs.zathura = {
         enable = true;
@@ -80,9 +87,10 @@ in {
         };
       };
 
-      home.packages = with pkgs; [pandoc poppler];
+      home.packages = with pkgs; [
+        pandoc
+        poppler
+      ];
     })
-
-    (mkIf cfg.okular.enable {home.packages = [pkgs.okular];})
   ];
 }

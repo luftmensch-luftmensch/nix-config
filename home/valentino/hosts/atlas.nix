@@ -28,7 +28,6 @@
       nix.enable = true;
       python.enable = true;
       tex.enable = true;
-      tools.enable = true;
     };
 
     editors = {
@@ -44,7 +43,10 @@
     };
 
     media = {
-      documents.zathura.enable = true;
+      documents = {
+        mdx.enable = true;
+        zathura.enable = true;
+      };
       editing.enable = true;
       files = {
         filezilla.enable = true;
