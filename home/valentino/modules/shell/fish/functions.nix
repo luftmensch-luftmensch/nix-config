@@ -1,7 +1,9 @@
-pkgs: let
+pkgs:
+let
   _gs = "${pkgs.ghostscript}/bin/gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite";
   _ffmpeg = "${pkgs.ffmpeg}/bin/ffmpeg";
-in {
+in
+{
   fish_prompt.body = ''
     set -l last_status $status
     set -l cyan (set_color -o cyan)
@@ -56,23 +58,25 @@ in {
     ${_gs} -q -dSAFER -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dEmbedAllFonts=true -dSubsetFonts=true -dColorImageDownsampleType=/Bicubic -dColorImageResolution=144 -dGrayImageDownsampleType=/Bicubic -dGrayImageResolution=144 -dMonoImageDownsampleType=/Bicubic -dMonoImageResolution=144 -sOutputFile=(path change-extension "" $argv[1])_compressed.pdf $argv[1]
   '';
 
-  build-pdf.body = let
-    _lualatex = "${pkgs.texliveTeTeX}/bin/lualatex -shell-escape --interaction=nonstopmode --file-line-error";
-  in ''
-    if [ -z "$argv" ];
-      echo "No arguments supplied"
-      return
-    else
-      echo "1° round"
-      ${_lualatex} "$argv[1]" > /dev/null 2>&1
-      echo "2° round"
-      ${_lualatex} "$argv[1]" > /dev/null 2>&1
-      echo "3° round"
-      ${_lualatex} "$argv[1]" > /dev/null 2>&1
-      echo "DONE!"
-      return
-    end
-  '';
+  build-pdf.body =
+    let
+      _lualatex = "${pkgs.texliveTeTeX}/bin/lualatex -shell-escape --interaction=nonstopmode --file-line-error";
+    in
+    ''
+      if [ -z "$argv" ];
+        echo "No arguments supplied"
+        return
+      else
+        echo "1° round"
+        ${_lualatex} "$argv[1]" > /dev/null 2>&1
+        echo "2° round"
+        ${_lualatex} "$argv[1]" > /dev/null 2>&1
+        echo "3° round"
+        ${_lualatex} "$argv[1]" > /dev/null 2>&1
+        echo "DONE!"
+        return
+      end
+    '';
 
   emptytrash.body = ''
     rm ~/.local/share/Trash/files ~/.local/share/Trash/info
@@ -182,7 +186,7 @@ in {
   # You can pass `--option eval-cache false` to turn off caching so that Nix will always show you the error message instead of error: cached failure of attribute 'nixosConfigurations.default.config.system.build.toplevel'
   update.body = ''
     set -l base_path $HOME/nix-config
-    sudo nixos-rebuild switch --flake "$base_path/.#$hostname" -v -L --use-remote-sudo
+    nixos-rebuild switch --flake "$base_path/.#$hostname" -v -L --use-remote-sudo
   '';
 
   home-switch.body = ''
