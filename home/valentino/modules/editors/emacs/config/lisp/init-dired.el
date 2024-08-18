@@ -58,19 +58,19 @@
            dired-deletion-confirmer 'y-or-n-p
            delete-by-moving-to-trash t)
 
-  (:bind-into dired-jump-map
-  	"j" dired-jump)
+  (:with-map dired-jump-map
+    (:bind "j" dired-jump))
 
-  (:bind-into dired-mode-map
-    "C-<return>" alacritty
-    "C-c C-e" wdired-change-to-wdired-mode
-    "C-c C-c" dired-hide-details-mode)
+  (:with-map dired-mode-map
+    (:bind
+     "C-<return>" alacritty
+     "C-c C-e" wdired-change-to-wdired-mode
+     "C-c C-c" dired-hide-details-mode
+     "M-<return>" vb/dired-open-file
+     "C-c o" vb/dired-open-file
+     "o" vb/dired-open-file
+     "O" vb/dired-open-marked-files))
 
-  (:bind-into dired-mode-map
-    "M-<return>" vb/dired-open-file
-    "C-c o" vb/dired-open-file
-    "o" vb/dired-open-file
-    "O" vb/dired-open-marked-files)
   (setup (:if-feature general)
     (vb/leader-key "d" '(dired :which-key "File Manager")))
   (setup (:if-feature evil)
@@ -79,10 +79,11 @@
       (kbd "gg") 'evil-goto-first-line
       (kbd "G") 'evil-goto-line)))
 
-;; (setup (:pkg all-the-icons-dired)
-;;   (:option all-the-icons-dired-monochrome nil)
-;;   (:with-after (all-the-icons dired)
-;;     (:hook-into dired-mode-hook)))
+(setup (:if-feature evil)
+  (:with-map dired-mode-map
+    (:bind
+     [remap evil-backward-char] #'dired-up-directory
+     [remap evil-forward-char] #'dired-find-file)))
 
 (setup (:pkg dirvish)
   (:require dirvish)
@@ -121,35 +122,34 @@
            ;;dirvish-path-separators (list " " "  " " ⋗ ")
            dirvish-mode-line-format '(:left (sort symlink) :right (omit yank index)))
 
-  (:bind-into dirvish-mode-map
-    "C-c f" #'dirvish-fd
-    "a" #'dirvish-quick-access
-    "." #'dired-create-empty-file
-    "f" #'dirvish-file-info-menu
-    "y" #'dirvish-yank-menu
-    "s" #'dirvish-quicksort ;; remapped `dired-sort-toggle-or-edit'
-    "v" #'dirvish-vc-menu ;; remapped `dired-view-file'
-    "q" #'dirvish-quit
-    "L" #'dirvish-history-go-forward
-    "H" #'dired-omit-mode
-    "m" #'dired-mark
-    "M" #'dirvish-mark-menu
-    "o" #'vb/dired-open-file
-    "TAB" #'dirvish-subtree-toggle
+  (:with-map dired-mode-map
+    (:bind
+     "C-c f" #'dirvish-fd
+     "a" #'dirvish-quick-access
+     "." #'dired-create-empty-file
+     "f" #'dirvish-file-info-menu
+     "y" #'dirvish-yank-menu
+     "s" #'dirvish-quicksort ;; remapped `dired-sort-toggle-or-edit'
+     "v" #'dirvish-vc-menu   ;; remapped `dired-view-file'
+     "q" #'dirvish-quit
+     "L" #'dirvish-history-go-forward
+     "H" #'dired-omit-mode
+     "m" #'dired-mark
+     "M" #'dirvish-mark-menu
+     "o" #'vb/dired-open-file
+     "TAB" #'dirvish-subtree-toggle
 
-    "M-f" #'dirvish-history-go-forward
-    "M-b" #'dirvish-history-go-backward
-    "M-l" #'dirvish-ls-switches-menu
-    "M-t" #'dirvish-layout-toggle
-    "M-s" #'dirvish-setup-menu
-    "M-e" #'dirvish-emerge-menu
-    "M-j" #'dirvish-fd-jump)
+     "M-f" #'dirvish-history-go-forward
+     "M-b" #'dirvish-history-go-backward
+     "M-l" #'dirvish-ls-switches-menu
+     "M-t" #'dirvish-layout-toggle
+     "M-s" #'dirvish-setup-menu
+     "M-e" #'dirvish-emerge-menu
+     "M-j" #'dirvish-fd-jump))
+
+
   (dirvish-override-dired-mode))
 
-(setup (:if-feature evil)
-  (:bind-into dirvish-mode-map
-    [remap evil-backward-char] #'dired-up-directory
-    [remap evil-forward-char] #'dired-find-file))
 
 (provide 'init-dired)
 ;;; init-dired.el ends here

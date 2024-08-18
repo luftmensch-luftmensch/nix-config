@@ -85,13 +85,14 @@
            vertico-resize "grow-only"
            vertico-cycle t)
 
-  (:bind-into vertico-map
-    "<escape>" #'keyboard-escape-quit
-    "C-j"  #'vertico-next
-    "C-k" #'vertico-previous
-    "M-TAB" #'minibuffer-force-complete-and-exit
-    "C-w" #'vb/minibuffer-backward-kill
-    "<tab>" #'vertico-insert) ;; minibuffer-complete
+  (:with-map vertico-map
+    (:bind
+     "<escape>" #'keyboard-escape-quit
+     "C-j"  #'vertico-next
+     "C-k" #'vertico-previous
+     "M-TAB" #'minibuffer-force-complete-and-exit
+     "C-w" #'vb/minibuffer-backward-kill
+     "<tab>" #'vertico-insert)) ;; minibuffer-complete
 
   ;; Prefix the current candidate with “» ”. (From https://github.com/minad/vertico/wiki#prefix-current-candidate-with-arrow)
   ;; This does add width to the left side of the minibuffer, which may interfere with your aesthetic-related configurations of other packages.
@@ -141,16 +142,22 @@
 ;; Marginalia
 (setup (:pkg marginalia)
   (:load-after vertico)
-  (:bind-into minibuffer-local-map
-    "M-A" marginalia-cycle)
-  (:option
-   marginalia-max-relative-age  0
-   marginalia-align  'right
-   marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  (:with-map minibuffer-local-map
+    (:bind "M-A" marginalia-cycle))
+
+  (:option marginalia-max-relative-age  0
+           marginalia-align 'right
+           marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
   (marginalia-mode 1))
 
 ;; Note: All-the-icons-completion depends on an already installed all-the-icons.
-(setup (:pkg all-the-icons-completion)
+;; TODO: Remove fork when https://github.com/iyefrat/all-the-icons-completion/pull/33 is merged
+;; TODO: Then, remove direct reference to GitHub when on MELPA
+
+(setup (:pkg (all-the-icons-completion :type git :host github :repo "iyefrat/all-the-icons-completion"
+                                       :fork (:host github
+                                                    :repo "maxecharel/all-the-icons-completion"
+                                                    :branch "contrib")))
   (:with-after (all-the-icons marginalia)
     (all-the-icons-completion-mode 1)
     (:with-mode marginalia-mode

@@ -6,32 +6,37 @@
 
 ;;; Code:
 
-(setup (:pkg pdf-tools)
-  (:option display-buffer-alist '(("^\\*outline"
-                                   display-buffer-in-side-window
-                                   (side . left)
-                                   (window-width . 0.20)
-                                   (inhibit-switch-frame . t)))
-           pdf-tools-installer-os "nixos")
+;; I currently don't use it. Leaving there for the future
+;; (setup (:pkg pdf-tools)
+;;   (:option display-buffer-alist '(("^\\*outline"
+;;                                    display-buffer-in-side-window
+;;                                    (side . left)
+;;                                    (window-width . 0.20)
+;;                                    (inhibit-switch-frame . t)))
+;;            pdf-tools-installer-os "nixos")
 
 
-  (:bind-into pdf-view-mode-map
-    "C-+" #'pdf-view-enlarge
-    "C--" #'pdf-view-shrink
-    "C-j" #'pdf-view-next-page
-    "C-k" #'pdf-view-previous-page
-    [remap evil-open-below] #'pdf-outline
-    [remap evil-window-top] #'pdf-view-fit-height-to-window
-    [remap evil-record-macro] #'quit-window
-    [remap evil-execute-last-recorded-macro] #'kill-this-buffer
-    [remap evil-forward-section-begin] #'pdf-view-next-page-command
-    [remap evil-backward-section-begin] #'pdf-view-previous-page-command)
+;;   (:with-map pdf-view-mode-map
+;;     (:bind
+;;      "C-+" #'pdf-view-enlarge
+;;      "C--" #'pdf-view-shrink
+;;      "C-j" #'pdf-view-next-page
+;;      "C-k" #'pdf-view-previous-page
+;;      [remap evil-open-below] #'pdf-outline
+;;      [remap evil-window-top] #'pdf-view-fit-height-to-window
+;;      [remap evil-record-macro] #'quit-window
+;;      [remap evil-execute-last-recorded-macro] #'kill-this-buffer
+;;      [remap evil-forward-section-begin] #'pdf-view-next-page-command
+;;      [remap evil-backward-section-begin] #'pdf-view-previous-page-command))
 
+;;   (:with-mode pdf-view-mode
+;;     (:file-match "\\.[pP][dD][fF]\\'"))
 
-  (:with-mode pdf-view-mode
-    (:file-match "\\.[pP][dD][fF]\\'"))
+;;   (pdf-tools-install :no-query))
 
-  (pdf-tools-install :no-query))
+;; (setup (:pkg saveplace-pdf-view)
+;;   (:load-after pdf-tools))
+
 (defun open-pdf ()
   "Open the corresponding pdf based on the current org file opened."
   (interactive)
@@ -39,8 +44,6 @@
       (message "Please select a valid file")
     (call-process-shell-command (concat "zathura " (file-name-base (buffer-file-name)) ".pdf > /dev/null 2>&1 & disown"))))
 
-(setup (:pkg saveplace-pdf-view)
-  (:load-after pdf-tools))
 
 (setup (:pkg elfeed)
   (:global "C-c e l" elfeed)
@@ -78,7 +81,7 @@
              ("https://www.reddit.com/r/androiddev.rss" android android-dev)
              ("https://www.reddit.com/r/fdroid.rss"     android fdroid)
              ("https://www.reddit.com/r/FlutterDev.rss" android flutter)
-             ("https://codewithandrea.com/rss.xml "     android flutter)
+             ("https://codewithandrea.com/rss.xml"      android flutter)
 
              ;; Miscellaneous
              ("https://selfh.st/rss/" self-hosting)
@@ -113,25 +116,27 @@ The function reads the tags from the `elfeed' db."
             (elfeed-search-update--force))
         (message "Filter %s is not present" filtered-tag))))
 
-  (:bind-into elfeed-search-mode-map
-    "C-+" 'vb/elfeed-filter-include-tag
-    "C--" 'vb/elfeed-filter-exclude-tag
-    ;; [remap negative-argument] 'vb/elfeed-filter-exclude-tag
-    [remap negative-argument] 'vb/elfeed-filter-exclude-tag
-    [remap evil-ret] 'elfeed-search-show-entry
-    [remap evil-goto-char] 'elfeed-search-browse-url
-    ;; filter
-    [remap evil-change-whole-line] #'elfeed-search-set-filter
-    [remap evil-substitute] #'elfeed-search-live-filter
-    [remap evil-change] #'elfeed-search-clear-filter
-    [remap evil-record-macro] #'elfeed-search-quit-window)
+  (:with-map elfeed-search-mode-map
+    (:bind
+     "C-+" 'vb/elfeed-filter-include-tag
+     "C--" 'vb/elfeed-filter-exclude-tag
+     ;; [remap negative-argument] 'vb/elfeed-filter-exclude-tag
+     [remap negative-argument] 'vb/elfeed-filter-exclude-tag
+     [remap evil-ret] 'elfeed-search-show-entry
+     [remap evil-goto-char] 'elfeed-search-browse-url
+     ;; filter
+     [remap evil-change-whole-line] #'elfeed-search-set-filter
+     [remap evil-substitute] #'elfeed-search-live-filter
+     [remap evil-change] #'elfeed-search-clear-filter
+     [remap evil-record-macro] #'elfeed-search-quit-window))
 
-  (:bind-into elfeed-show-mode-map
-    [remap elfeed-search-browse-url]  #'elfeed-show-visit
-    [remap evil-goto-char] 'elfeed-show-visit
-    [remap evil-record-macro] #'elfeed-kill-buffer
-    "C-j" 'elfeed-show-next
-    "C-k" 'elfeed-show-prev))
+  (:with-map elfeed-show-mode-map
+    (:bind
+     [remap elfeed-search-browse-url]  #'elfeed-show-visit
+     [remap evil-goto-char]            #'elfeed-show-visit
+     [remap evil-record-macro]         #'elfeed-kill-buffer
+     "C-j" 'elfeed-show-next
+     "C-k" 'elfeed-show-prev)))
 
 (setup (:if-feature evil)
   (evil-define-key 'normal elfeed-search-mode-map

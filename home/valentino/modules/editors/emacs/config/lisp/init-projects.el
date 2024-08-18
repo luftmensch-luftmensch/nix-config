@@ -29,21 +29,23 @@
            ;; to see them.
            magit-save-repository-buffers nil
            git-commit-summary-max-length 100)
-  (:bind-into magit-status-mode-map
-    "j" 'evil-next-line
-    "k" 'evil-previous-line
-    "Q" #'(lambda () (interactive) (vb/regex-kill-buffers "magit"))
-    [remap evil-execute-last-recorded-macro] #'(lambda () (interactive) (vb/regex-kill-buffers "magit"))
-    [remap evil-record-macro] #'(lambda () (interactive) (vb/regex-kill-buffers "magit"))
-    [remap evil-jump-forward] #'magit-section-toggle
-    [remap evil-delete-char] #'magit-discard
-    [remap evil-paste-before] #'magit-push
-    [remap evil-find-char-backward] #'magit-pull
-    [remap evil-find-char] #'magit-fetch
-    [remap evil-change-whole-line] #'magit-submodule
-    [remap evil-shell-command] #'magit-git-command
-    [remap evil-ret] #'magit-diff-visit-file
-    [remap evil-substitute] #'magit-stage))
+
+  (:with-map magit-status-mode-map
+    (:bind
+     "j" 'evil-next-line
+     "k" 'evil-previous-line
+     "Q" #'(lambda () (interactive) (vb/regex-kill-buffers "magit"))
+     [remap evil-execute-last-recorded-macro] #'(lambda () (interactive) (vb/regex-kill-buffers "magit"))
+     [remap evil-record-macro] #'(lambda () (interactive) (vb/regex-kill-buffers "magit"))
+     [remap evil-jump-forward] #'magit-section-toggle
+     [remap evil-delete-char] #'magit-discard
+     [remap evil-paste-before] #'magit-push
+     [remap evil-find-char-backward] #'magit-pull
+     [remap evil-find-char] #'magit-fetch
+     [remap evil-change-whole-line] #'magit-submodule
+     [remap evil-shell-command] #'magit-git-command
+     [remap evil-ret] #'magit-diff-visit-file
+     [remap evil-substitute] #'magit-stage)))
 
 (setup (:if-feature evil)
   (evil-define-key 'normal magit-mode-map
