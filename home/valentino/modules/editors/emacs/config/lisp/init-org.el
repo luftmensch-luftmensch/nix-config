@@ -260,27 +260,29 @@
   (:local-set completion-at-point-functions '(cape-dabbrev cape-file))
 
   ;; (:hook vb/org-mode-setup)
-  (:bind-into org-mode-map
-    [tab] 'org-cycle
-    [S-tab] 'org-shifttab
-    "M-j" 'org-next-visible-heading
-    "M-k" 'org-previous-visible-heading
-    "M-h" 'org-promote-subtree
-    "M-l" 'org-demote-subtree
+  (:with-map org-mode-map
+    (:bind
+     [tab] 'org-cycle
+     [S-tab] 'org-shifttab
+     "M-j" 'org-next-visible-heading
+     "M-k" 'org-previous-visible-heading
+     "M-h" 'org-promote-subtree
+     "M-l" 'org-demote-subtree
 
-    "C-j" 'org-move-subtree-down
-    "C-k" 'org-move-subtree-up))
+     "C-j" 'org-move-subtree-down
+     "C-k" 'org-move-subtree-up)))
 
 ;; TODO: Map 'org-agenda-view-mode-dispatch
 (setup (:if-feature evil)
-  (:bind-into org-agenda-mode-map
-    [remap evil-shift-right] 'org-agenda-later
-    [remap evil-shift-left] 'org-agenda-earlier
-    [remap evil-record-macro] 'org-agenda-quit
-    [remap evil-find-char-to] 'org-agenda-todo
-    [remap evil-find-char-to-backward] 'org-agenda-show-tags
-    [remap evil-replace] 'org-agenda-redo
-    [remap evil-ret] 'org-agenda-switch-to))
+  (:with-map org-agenda-mode-map
+    (:bind
+     [remap evil-shift-right] 'org-agenda-later
+     [remap evil-shift-left] 'org-agenda-earlier
+     [remap evil-record-macro] 'org-agenda-quit
+     [remap evil-find-char-to] 'org-agenda-todo
+     [remap evil-find-char-to-backward] 'org-agenda-show-tags
+     [remap evil-replace] 'org-agenda-redo
+     [remap evil-ret] 'org-agenda-switch-to)))
 
 (setup (:pkg org-appear)
   (:autoload org-appear-mode)

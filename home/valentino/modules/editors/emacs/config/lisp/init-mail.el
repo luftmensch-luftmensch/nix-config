@@ -245,29 +245,31 @@ With optional prefix ARG (\\[universal-argument]) call
 
   (:global "C-c m" notmuch
            "C-x m" notmuch-mua-new-mail)
-  (:bind-into notmuch-search-mode-map
-    ;; K
-    [remap evil-lookup] #'notmuch-tag-jump
-    ;; RET
-    [remap evil-ret] #'notmuch-search-show-thread
-    ;; /
-    [remap evil-search-forward] #'notmuch-search-filter)
+  (:with-map notmuch-search-mode-map
+    (:bind
+     ;; K
+     [remap evil-lookup] #'notmuch-tag-jump
+     ;; RET
+     [remap evil-ret] #'notmuch-search-show-thread
+     ;; /
+     [remap evil-search-forward] #'notmuch-search-filter))
 
-  (:bind-into notmuch-show-mode-map
-    [remap evil-change-whole-line] #'notmuch-show-save-attachments
-    ;; H
-    [remap evil-window-top] #'notmuch-show-toggle-visibility-headers
-    ;; *
-    [remap evil-search-word-forward] #'notmuch-show-tag-all
-    ;; RET
-    [remap evil-ret] #'notmuch-show-toggle-message
+  (:with-map notmuch-show-mode-map
+    (:bind
+     [remap evil-change-whole-line] #'notmuch-show-save-attachments
+     ;; H
+     [remap evil-window-top] #'notmuch-show-toggle-visibility-headers
+     ;; *
+     [remap evil-search-word-forward] #'notmuch-show-tag-all
+     ;; RET
+     [remap evil-ret] #'notmuch-show-toggle-message
 
-    "C-+" #'notmuch-show-add-tag
-    "C--" #'notmuch-show-remove-tag
-    "C-j" 'notmuch-show-next-message
-    "C-k" 'notmuch-show-previous-message
-    "M-j" 'notmuch-show-next-thread-show
-    "M-k" 'notmuch-show-previous-thread-show))
+     "C-+" #'notmuch-show-add-tag
+     "C--" #'notmuch-show-remove-tag
+     "C-j" 'notmuch-show-next-message
+     "C-k" 'notmuch-show-previous-message
+     "M-j" 'notmuch-show-next-thread-show
+     "M-k" 'notmuch-show-previous-thread-show)))
 
 (setup (:if-feature evil)
   (evil-define-key 'normal notmuch-common-keymap

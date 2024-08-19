@@ -76,8 +76,8 @@
   (:with-after (cape)
     (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster))
 
-  (:bind-into eglot-mode-map
-    [remap evil-lookup] #'eldoc-doc-buffer)
+  (:with-map eglot-mode-map
+    (:bind [remap evil-lookup] #'eldoc-doc-buffer))
   ;; Hooks
   (:with-mode (c-mode c++-mode go-mode nix-mode python-mode)
     (:hook eglot-ensure)))

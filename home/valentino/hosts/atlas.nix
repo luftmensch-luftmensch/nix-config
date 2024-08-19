@@ -43,10 +43,8 @@
     };
 
     media = {
-      documents = {
-        mdx.enable = true;
-        zathura.enable = true;
-      };
+      documents.zathura.enable = true;
+      reading.mdx.enable = true;
       editing.enable = true;
       files = {
         filezilla.enable = true;

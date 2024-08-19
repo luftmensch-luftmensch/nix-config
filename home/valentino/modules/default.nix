@@ -45,6 +45,7 @@
     "media/files"               = import ./media/files.nix;
     "media/images"              = import ./media/images.nix;
     "media/music"               = import ./media/music.nix;
+    "media/reading"             = import ./media/reading.nix;
     "media/videos"              = import ./media/videos.nix;
 
     "shell/bash"                = import ./shell/bash.nix;

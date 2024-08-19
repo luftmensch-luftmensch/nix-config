@@ -12,14 +12,11 @@ let
 in
 {
   options.valentino.modules.media.documents = {
-    mdx.enable = mkEnableOption "manga support (mdx)";
     okular.enable = mkEnableOption "pdf support (okular)";
     zathura.enable = mkEnableOption "pdf support (zathura)";
   };
 
   config = mkMerge [
-    (mkIf cfg.mdx.enable { home.packages = [ pkgs.mdx-go ]; })
-
     (mkIf cfg.okular.enable { home.packages = [ pkgs.okular ]; })
 
     (mkIf cfg.zathura.enable {

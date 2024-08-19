@@ -119,8 +119,8 @@
 
 
 (setup debug
-  (:bind-into debugger-mode-map
-    [remap evil-record-macro] 'top-level))
+  (:with-map debugger-mode-map
+    (:bind [remap evil-record-macro] 'top-level)))
 
 ;; Regex for buffers
 (defun vb/regex-kill-buffers (regexp)

@@ -163,6 +163,12 @@
     (:with-mode marginalia-mode
       (:hook all-the-icons-completion-marginalia-setup))))
 
+;; (setup (:pkg all-the-icons-completion)
+;;   (:with-after (all-the-icons marginalia)
+;;     (all-the-icons-completion-mode 1)
+;;     (:with-mode marginalia-mode
+;;       (:hook all-the-icons-completion-marginalia-setup))))
+
 ;; Orderless
 (setup (:pkg orderless)
   (defun vb/orderless-literal-dispatcher (pattern _index _total)

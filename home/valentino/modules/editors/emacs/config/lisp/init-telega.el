@@ -31,23 +31,25 @@
   (put (get 'telega-chat 'button-category-symbol)
        :inserter 'telega-ins--chat-full-2lines)
 
-  (:bind-into telega-root-mode-map
-    "<tab>" telega-chat-button-toggle-view
-    "TAB" telega-chat-button-toggle-view
-    [remap evil-record-macro] #'bury-buffer
-    [remap evil-execute-last-recorded-macro] #'telega-kill)
+  (:with-map telega-root-mode-map
+    (:bind
+     "<tab>" telega-chat-button-toggle-view
+     "TAB" telega-chat-button-toggle-view
+     [remap evil-record-macro] #'bury-buffer
+     [remap evil-execute-last-recorded-macro] #'telega-kill))
 
-  (:bind-into telega-chat-mode-map
-    [remap telega-msg-resend] 'telega-msg-forward-marked-or-at-point
-    ;; [remap evil-record-macro] #'bury-buffer
-    [remap evil-record-macro] #'kill-this-buffer
-    [remap evil-ret] #'telega-chatbuf-newline-or-input-send)
+  (:with-map telega-chat-mode-map
+    (:bind
+     [remap telega-msg-resend] 'telega-msg-forward-marked-or-at-point
+     [remap evil-record-macro] #'kill-this-buffer ;; #'bury-buffer
+     [remap evil-ret] #'telega-chatbuf-newline-or-input-send))
 
-  (:bind-into telega-image-mode-map
+  (:with-map telega-image-mode-map
+    (:bind
     [remap evil-record-macro] #'bury-buffer
     [remap evil-execute-last-recorded-macro] #'kill-this-buffer
     "C-+" #'image-increase-size
-    "C--" #'image-decrease-size)
+    "C--" #'image-decrease-size))
 
   (:when-loaded
     (:also-load telega-mnz)
@@ -78,7 +80,6 @@
 
 
 (setup (:if-feature evil)
-  (evil-define-key 'normal telega-root-mode-map
-    "J" telega-root-fastnav-map))
+  (evil-define-key 'normal telega-root-mode-map "J" telega-root-fastnav-map))
 (provide 'init-telega)
 ;;; init-telega.el ends here

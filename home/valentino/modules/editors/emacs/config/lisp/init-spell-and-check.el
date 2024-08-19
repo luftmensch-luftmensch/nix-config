@@ -34,8 +34,9 @@
          "C-c ! f" #'flymake-show-project-diagnostics
          "C-c ! n" #'flymake-goto-next-error
          "C-c ! p" #'flymake-goto-prev-error)
-  (:bind-into flymake-diagnostics-buffer-mode-map
-    [remap evil-record-macro] #'quit-window)
+  (:with-map flymake-diagnostics-buffer-mode-map
+    (:bind [remap evil-record-macro] #'quit-window))
+
   (:hook-into prog-mode text-mode))
 
 ;; From Purcell
