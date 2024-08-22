@@ -302,6 +302,7 @@
            org-modern-block-fringe nil    ;; Bad
            org-modern-variable-pitch nil
            org-modern-timestamp t
+           org-modern-star 'replace ;; Replacement strings for headline stars for each level
            org-modern-table t
            org-modern-table-vertical 1
            org-modern-table-horizontal 0.2))
