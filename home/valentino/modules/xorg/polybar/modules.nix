@@ -2,7 +2,8 @@
   temperature,
   palette,
   pkgs,
-}: {
+}:
+{
   "module/tray" = {
     type = "internal/tray";
     format-margin = "8px";
@@ -13,15 +14,17 @@
     tray-padding = 5;
     tray-scale = 1.0;
   };
-  "module/bctl" = let
-    cmd = pkgs.callPackage ./scripts/bluetooth.nix {};
-  in {
-    type = "custom/script";
-    exec = "${cmd}/bin/bluetooth-ctl";
-    tail = true;
-    format-foreground = "${palette.base0D}";
-    # label-maxlen = 55;
-  };
+  "module/bctl" =
+    let
+      cmd = pkgs.callPackage ./scripts/bluetooth.nix { };
+    in
+    {
+      type = "custom/script";
+      exec = "${cmd}/bin/bluetooth-ctl";
+      tail = true;
+      format-foreground = "${palette.base0D}";
+      # label-maxlen = 55;
+    };
 
   "module/date" = {
     type = "internal/date";
@@ -48,8 +51,22 @@
     label-muted = "  Muted";
 
     ramp = {
-      volume = ["" "" "" "" "" "" "" "" "" ""];
-      headphones = ["" ""];
+      volume = [
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+      ];
+      headphones = [
+        ""
+        ""
+      ];
     };
 
     ramp-volume-font = 2;
@@ -106,6 +123,9 @@
     label-focused-foreground = "#${palette.base0C}";
     label-urgent-foreground = "#${palette.base08}";
     label-separator = "  ";
+
+    label-mode-foreground = "#${palette.base08}";
+    label-mode-padding = 2;
     # label-separator-padding = 2;
   };
 
@@ -116,14 +136,16 @@
     label-maxlen = 35;
   };
 
-  "module/notifications" = let
-    notify = "${pkgs.dunst}/bin/dunstctl";
-  in {
-    type = "custom/script";
-    tail = true;
-    format-padding = 0;
-    click-left = "${notify} set-paused toggle";
-    click-right = "${notify} close-all";
-    exec = "if [[ \$(${notify} is-paused) = false ]]; then echo ' '; else echo ' '; fi";
-  };
+  "module/notifications" =
+    let
+      notify = "${pkgs.dunst}/bin/dunstctl";
+    in
+    {
+      type = "custom/script";
+      tail = true;
+      format-padding = 0;
+      click-left = "${notify} set-paused toggle";
+      click-right = "${notify} close-all";
+      exec = "if [[ \$(${notify} is-paused) = false ]]; then echo ' '; else echo ' '; fi";
+    };
 }
