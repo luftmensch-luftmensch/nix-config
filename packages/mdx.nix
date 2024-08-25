@@ -5,17 +5,17 @@
   ...
 }:
 let
-  version = "1.11.0";
+  pname = "mdx";
+  version = "1.11.1";
 in
 buildGoModule {
-  pname = "mdx";
-  inherit version;
+  inherit pname version;
 
   src = fetchFromGitHub {
     owner = "arimatakao";
     repo = "mdx";
     rev = "v${version}";
-    hash = "sha256-orlXXJAhvhnvRbnzMba7725pmkcDTIQnqCMwStn+5Qw=";
+    hash = "sha256-bXf6TIVCd7EknyFKeE12YOcqnZ4F3tDFNWBydO/DQAA=";
   };
 
   ldflags = [
@@ -27,7 +27,7 @@ buildGoModule {
   # test suite requires network
   doCheck = false;
 
-  vendorHash = "sha256-xHN+OrqodeK2vVZjGsH88OuHVcNtLbM+B4K5Ty45q0o=";
+  vendorHash = "sha256-+q8OQNU43E0Hdpinj+FSZdf+Nirdemc/Is4mZC8YAcs=";
 
   meta = {
     description = "Command-line interface program for downloading manga from the MangaDex website";
