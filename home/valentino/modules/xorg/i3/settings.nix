@@ -118,7 +118,7 @@ in
     "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.cinnamon.nemo}";
 
     "${mod}+m" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -c";
-    "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";
+    # "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";
     "${mod}+p" = "exec --no-startup-id ${lib.getExe pkgs.pavucontrol}";
 
     "${mod}+Shift+b" = "exec --no-startup-id ${lib.getExe pkgs.chromium}";
