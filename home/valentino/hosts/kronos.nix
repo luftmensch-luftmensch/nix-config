@@ -45,10 +45,10 @@
 
     media = {
       documents.zathura.enable = true;
+      reading.mdx.enable = true;
       editing.enable = true;
       files = {
         filezilla.enable = true;
-        # libreoffice.enable = true;
         localsend.enable = true;
         qrcp = {
           enable = true;
@@ -69,7 +69,6 @@
       bash.enable = true;
       extensions.enable = true;
       fish.enable = true;
-      # tmux.enable = true;
       direnv.enable = true;
       git.enable = true;
       nix-index.enable = true;
