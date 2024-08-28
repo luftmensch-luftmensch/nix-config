@@ -5,7 +5,7 @@
   ...
 }:
 let
-  version = "0.22.0";
+  version = "0.23.0";
 in
 buildGoModule {
   pname = "meteor";
@@ -15,7 +15,7 @@ buildGoModule {
     owner = "stefanlogue";
     repo = "meteor";
     rev = "v${version}";
-    hash = "sha256-aY/gOKvcKtOnL4FI2SM339LU4HoWYCq0W9mK2GyMqso=";
+    hash = "sha256-UA6bye9ti9AwnZkBIGjljDElkIEOhsiJ0NyYdKbF5m0=";
   };
 
   ldflags = [
