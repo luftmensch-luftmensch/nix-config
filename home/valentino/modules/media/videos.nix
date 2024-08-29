@@ -82,7 +82,6 @@ in
           mpris
           modernx-zydezu
           thumbfast
-          sponsorblock
         ]);
     };
 
