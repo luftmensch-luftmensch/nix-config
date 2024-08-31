@@ -96,6 +96,33 @@ managers such as DWM, BSPWM refer to this state as 'monocle'."
 
     (add-to-list 'consult-buffer-sources 'beframe--consult-source))
 
+
+  (defun vb/beframe-infer-frame-name (frame name)
+    "Infer a suitable name for FRAME with given NAME.
+See `beframe-rename-frame'."
+    (when-let (((frame-list))
+               (buffer (car (frame-parameter frame 'buffer-list)))
+               (file-name (when (bufferp buffer) (buffer-file-name buffer)))
+               (buf-name (buffer-name buffer))
+               (dir (with-current-buffer buffer (or (vc-root-dir) default-directory)))
+               (projectp (and (bound-and-true-p project--list)
+                              (listp project--list)
+                              (member (list dir) project--list))))
+      (cond
+       ((and name (stringp name))
+        name)
+       ((and projectp buf-name)
+        (format "%s" (file-name-nondirectory (directory-file-name dir))))
+       ((and (not (minibufferp)) file-name)
+        (format "%s %s" buf-name dir))
+       ((not (minibufferp))
+        buf-name)
+       (t
+        dir))))
+
+  ;; https://github.com/protesilaos/beframe/issues/3#issuecomment-2320773437
+  (advice-add 'beframe-infer-frame-name :override #'vb/beframe-infer-frame-name)
+
   (beframe-mode 1))
 
 (provide 'init-windows)
