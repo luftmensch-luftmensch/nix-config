@@ -4,6 +4,7 @@ let
   _docker = "${lib.getExe pkgs.docker}";
   _gpg = "${lib.getExe pkgs.gnupg} --keyserver-options auto-key-retrieve";
   _nmcli = "${pkgs.networkmanager}/bin/nmcli device";
+  _dig = lib.getExe' pkgs.dnsutils "dig";
 in
 {
   mkdir = "mkdir -p ";
@@ -18,7 +19,7 @@ in
   q = "exit";
 
   ipe = "${_curl} ipinfo.io/ip";
-  myip = "${_curl} ipv4.icanhazip.com";
+  myip = "${_dig} @resolver4.opendns.com myip.opendns.com +short";
 
   weather = "${_curl} -s wttr.in/naples?format=%l++%m++%C+%c+%t+%w++%p";
 
@@ -34,6 +35,7 @@ in
   webcam = "ffplay /dev/video0";
 
   jctl = "journalctl -p 3 -xb";
+  errors = "journalctl -p err..alert";
   clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
   clear-journaling = "sudo journalctl --rotate && sudo journalctl --vacuum-time=1s";
   journaling-disk-size = "journalctl --disk-usage";
@@ -111,4 +113,7 @@ in
   adb-force-restart = "sudo adb kill-server; sudo adb start-server";
 
   installation-date = "stat -c %w /";
+
+  # make sudo use aliases
+  sudo = "sudo ";
 }
