@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.hardware.bluetooth;
-in {
+in
+{
   options.system.modules.hardware.bluetooth.enable = mkEnableOption "Enable bluetooth capabilities";
 
   config = mkIf cfg.enable {

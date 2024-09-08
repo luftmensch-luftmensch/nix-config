@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.hardware.audio;
-in {
+in
+{
   options.system.modules.hardware.audio = {
     enable = mkEnableOption "Enable audio capabilities";
     pipewire.enable = mkEnableOption "Enable audio capabilities w/ pipewire";
@@ -13,7 +15,7 @@ in {
   };
 
   config = mkIf cfg.enable (mkMerge [
-    {sound.enable = true;}
+    { sound.enable = true; }
 
     (mkIf cfg.pipewire.enable {
       # To solve the error showed in journalctl (pipewire-pulse[1413]: execvp error 'pactl': No such file or directory)
@@ -30,6 +32,6 @@ in {
       };
     })
 
-    (mkIf cfg.pulseaudio.enable {hardware.pulseaudio.enable = true;})
+    (mkIf cfg.pulseaudio.enable { hardware.pulseaudio.enable = true; })
   ]);
 }

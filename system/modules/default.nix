@@ -27,6 +27,7 @@
 
   "hardware/audio"     = import ./hardware/audio.nix;
   "hardware/bluetooth" = import ./hardware/bluetooth.nix;
+  "hardware/video"     = import ./hardware/video.nix;
 
   "services/battery"   = import ./services/battery.nix;
   "services/fprintd"   = import ./services/fprintd.nix;
