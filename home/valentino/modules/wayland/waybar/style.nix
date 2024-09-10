@@ -2,7 +2,8 @@
   theme,
   palette,
   ...
-}: {
+}:
+{
   style = ''
     * {
       border: none;
@@ -198,5 +199,15 @@
       background-color: #${palette.base0D};
       color: #${palette.base00};
     }
+
+    #mode {
+      background-color: #${palette.base08};
+      border-bottom: 3px solid white;
+      border-radius: 0.2em;
+      margin: 0.2rem;
+      padding: 0 4px;
+    }
+
+
   '';
 }
