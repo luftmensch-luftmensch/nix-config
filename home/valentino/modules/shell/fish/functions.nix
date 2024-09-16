@@ -203,4 +203,13 @@ in
     printf "%s\n" "$(tput bold)🔼 TRANSMITTED $(tput sgr0): $transmitted"
     printf "%s\n" "$(tput bold)🔽 RECEIVED    $(tput sgr0): $received"
   '';
+
+  set-brightness.body = ''
+    if not set -q argv[1]
+      echo "Please specify a suitable value for the brightness"
+    else
+      echo "Setting display brightness to $argv[1]"
+      "${pkgs.ddcutil}/bin/ddcutil" setvcp 10 "$argv[1]" 12 "$argv[1]"
+    end
+  '';
 }

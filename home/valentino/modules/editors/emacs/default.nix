@@ -35,6 +35,7 @@ in
           with epkgs;
           [
             auctex
+            dslide
             jinx
             pdf-tools
             treesit-grammars.with-all-grammars
