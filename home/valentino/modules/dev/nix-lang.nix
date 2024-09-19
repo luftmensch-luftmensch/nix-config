@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.dev.nix;
-in {
+in
+{
   options.valentino.modules.dev.nix.enable = mkEnableOption "nix language extra tools and language server";
 
   config = mkIf cfg.enable {
@@ -14,7 +16,7 @@ in {
       statix
       deadnix
       alejandra
-      nil
+      nixd
       nix-output-monitor
       nvd
       nix-prefetch-git

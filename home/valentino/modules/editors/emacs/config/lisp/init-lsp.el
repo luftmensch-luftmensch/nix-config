@@ -62,8 +62,7 @@
                                           "--pch-storage=memory"
                                           "--header-insertion=never"
                                           "--header-insertion-decorators=0"))
-    (add-to-list 'eglot-server-programs `(nix-mode . ,(eglot-alternatives '(("nil")
-                                                                            ("rnix-lsp")))))
+    (add-to-list 'eglot-server-programs `(nix-mode . ("nixd")))
     (add-to-list 'eglot-server-programs '((go-mode) "gopls")))
 
   (:with-after (cape yasnippet)
