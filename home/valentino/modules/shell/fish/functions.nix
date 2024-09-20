@@ -206,7 +206,7 @@ in
 
   set-brightness.body =
     let
-      ddcutil = "${pkgs.ddcutil}/bin/ddcutil setvcp";
+      ddcutil = "${pkgs.ddcutil}/bin/ddcutil";
     in
     ''
       if not set -q argv[1]
@@ -215,13 +215,13 @@ in
         switch "$argv[1]"
           case "max"
             echo "Setting to max"
-            "${ddcutil}" 10 "80" 12 "80"
+            "${ddcutil}" setvcp 10 "80" 12 "80"
           case "min"
             echo "Setting to min"
-            "${ddcutil}" 10 "30" 12 "30"
+            "${ddcutil}" setvcp 10 "30" 12 "30"
           case '*'
             echo "Setting display brightness to $argv[1]"
-            "${ddcutil}" 10 "$argv[1]" 12 "$argv[1]"
+            "${ddcutil}" setvcp 10 "$argv[1]" 12 "$argv[1]"
         end
       end
     '';
