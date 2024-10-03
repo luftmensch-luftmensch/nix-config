@@ -114,6 +114,9 @@ in
 
   installation-date = "stat -c %w /";
 
+  mime = "xdg-mime query filetype";
+  font-family = "fc-list : family | ${lib.getExe pkgs.fzf}";
+
   # make sudo use aliases
   sudo = "sudo ";
 }
