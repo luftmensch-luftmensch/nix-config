@@ -5,16 +5,19 @@
   ...
 }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.valentino.modules.dev.tools;
-in {
+in
+{
   options.valentino.modules.dev.tools.enable = mkEnableOption "Developers tools";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      bruno
-      httpie-desktop
-      mongodb-compass
+      up-go
+      # bruno
+      # httpie-desktop
+      # mongodb-compass
     ];
   };
 }

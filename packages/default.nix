@@ -15,4 +15,5 @@
   mpv-m-x = pkgs.callPackage ./mpv-scripts/M-x.nix { };
   meteor-go = pkgs.callPackage ./meteor.nix { };
   mdx-go = pkgs.callPackage ./mdx.nix { };
+  up-go = pkgs.callPackage ./up.nix { };
 }
