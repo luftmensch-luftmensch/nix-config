@@ -14,10 +14,11 @@
     "browsers/chromium"         = import ./browsers/chromium.nix;
 
     "credentials/ssh"           = import ./credentials/ssh;
-    "credentials/sops"          = import ./credentials/sops.nix;
+    "credentials/1password"     = import ./credentials/1password.nix;
     "credentials/bitwarden"     = import ./credentials/bitwarden.nix;
     "credentials/gpg"           = import ./credentials/gpg.nix;
     "credentials/mail"          = import ./credentials/mail.nix;
+    "credentials/sops"          = import ./credentials/sops.nix;
 
     "dev/android"               = import ./dev/android.nix;
     "dev/cc"                    = import ./dev/cc.nix;

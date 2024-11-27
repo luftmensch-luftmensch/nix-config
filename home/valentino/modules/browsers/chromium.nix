@@ -3,10 +3,13 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.browsers.chromium;
   inherit (config.valentino.modules) wayland;
-in {
+  inherit (config.valentino.modules.credentials) bitwarden _1password;
+in
+{
   options.valentino.modules.browsers.chromium.enable = mkEnableOption "chromium";
 
   config = mkIf cfg.enable {
@@ -14,13 +17,23 @@ in {
       enable = true;
       # chrome://flags/#enable-webrtc-pipewire-capturer (Enable it to share entire screen)
       commandLineArgs =
-        ["--force-dark-mode" "--no-first-run" "--no-default-browser-check" "--no-service-autorun" "--enable-features=WebUIDarkMode"]
-        ++ optionals wayland.enable ["--ozone-platform=wayland" "--enable-usermedia-screen-capturing"];
+        [
+          "--force-dark-mode"
+          "--no-first-run"
+          "--no-default-browser-check"
+          "--no-service-autorun"
+          "--enable-features=WebUIDarkMode"
+        ]
+        ++ optionals wayland.enable [
+          "--ozone-platform=wayland"
+          "--enable-usermedia-screen-capturing"
+        ];
 
       extensions = [
-        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock
-        {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
-        {id = "iaiomicjabeggjcfkbimgmglanimpnae";} # tab manager
+        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock
+        (lib.optionals bitwarden.enable { id = "nngceckbapebfimnlniiiahkandclblb"; }) # bitwarden
+        { id = "iaiomicjabeggjcfkbimgmglanimpnae"; } # tab manager
+        (lib.optionals _1password.enable { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; }) # 1password
         # {id = "mcnbfjjgfmgcbljkoaaadoddokbmnlln";} # teleparty
       ];
     };

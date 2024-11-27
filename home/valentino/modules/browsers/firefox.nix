@@ -9,6 +9,7 @@ with lib;
 let
   cfg = config.valentino.modules.browsers.chromium;
   inherit (config.valentino.modules) themes wayland;
+  inherit (config.valentino.modules.credentials) bitwarden _1password;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
   userChrome = ''
     * {
@@ -319,7 +320,7 @@ in
           "browser.safebrowsing.downloads.remote.block_uncommon" = false;
 
           # Google safebrowsing can detect phishing and malware but it also sends
-          # informations to google together with an unique id called wrkey
+          # information to google together with an unique id called wrkey
           "browser.safebrowsing.downloads.remote.url" = "";
           "browser.safebrowsing.downloads.enabled" = false;
           "browser.sessionstore.privacy_level" = 2;
@@ -649,14 +650,18 @@ in
         };
 
         extensions =
-          with config.nur.repos.rycee.firefox-addons;
+          let
+            rycee = config.nur.repos.rycee.firefox-addons;
+            colinsane = config.nur.repos.colinsane.firefox-extensions;
+          in
           [
-            bitwarden
-            ublock-origin
-            user-agent-string-switcher
+            rycee.ublock-origin
+            rycee.user-agent-string-switcher
           ]
+          ++ lib.optionals bitwarden.enable [ rycee.bitwarden ]
+          ++ lib.optionals _1password.enable [ rycee.onepassword-password-manager ]
           # https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean (alternative to https://12ft.io/)
-          ++ (with config.nur.repos.colinsane.firefox-extensions; [ bypass-paywalls-clean ]);
+          ++ [ colinsane.bypass-paywalls-clean ];
       };
     };
 

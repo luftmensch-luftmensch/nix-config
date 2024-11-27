@@ -21,6 +21,7 @@
       gpg.enable = true;
       mail-defaults.enable = true;
       bitwarden.enable = true;
+      _1password.enable = true;
     };
 
     dev = {
