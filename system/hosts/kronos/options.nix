@@ -55,6 +55,7 @@ _: {
     };
 
     vpn = {
+      openconnect.enable = true;
       openvpn.enable = true;
       wireguard.enable = true;
     };

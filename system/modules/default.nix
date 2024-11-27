@@ -37,6 +37,7 @@
   "services/syncthing" = import ./services/syncthing.nix;
   "services/touchpad"  = import ./services/touchpad.nix;
 
+  "vpn/openconnect"    = import ./vpn/openconnect.nix;
   "vpn/openvpn"        = import ./vpn/openvpn.nix;
   "vpn/wireguard"      = import ./vpn/wireguard.nix;
 
