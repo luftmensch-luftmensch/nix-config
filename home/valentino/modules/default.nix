@@ -5,6 +5,7 @@
     "apps/rofi"                 = import ./apps/rofi;
     "apps/dunst"                = import ./apps/dunst.nix;
     "apps/playerctl"            = import ./apps/playerctl.nix;
+    "apps/remmina"              = import ./apps/remmina.nix;
     "apps/discord"              = import ./apps/discord.nix;
     "apps/teams"                = import ./apps/teams.nix;
     "apps/thunderbird"          = import ./apps/thunderbird.nix;
