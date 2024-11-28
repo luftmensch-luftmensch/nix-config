@@ -3,7 +3,7 @@
   valentino.modules = {
     apps = {
       rofi.enable = true;
-      remmina.enable = true;
+      vnc.enable = true;
     };
 
     wayland = {

@@ -380,7 +380,20 @@ in
   };
 
   output = {
-    default_output.res = "1920x1080  position 0,0";
-    external_output.res = "1920x1080  position 1920,0";
+    "*" = {
+      res = "1920x1080";
+      scale = "1";
+    };
+    # For some reason increasing the Y value moves the position below
+    # (that's why I've changed the position on the default output)
+
+    # side-by-side setup
+    # "${default_output}".position = "0,0";
+    # "${external_output}".position = "1920,0";
+
+    # vertical setup
+    "${default_output}".position = "0,1080";
+    "${external_output}".position = "0,0";
+
   };
 }

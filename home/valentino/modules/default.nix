@@ -5,10 +5,10 @@
     "apps/rofi"                 = import ./apps/rofi;
     "apps/dunst"                = import ./apps/dunst.nix;
     "apps/playerctl"            = import ./apps/playerctl.nix;
-    "apps/remmina"              = import ./apps/remmina.nix;
     "apps/discord"              = import ./apps/discord.nix;
     "apps/teams"                = import ./apps/teams.nix;
     "apps/thunderbird"          = import ./apps/thunderbird.nix;
+    "apps/vnc"                  = import ./apps/vnc.nix;
 
     "browsers/firefox"          = import ./browsers/firefox.nix;
     "browsers/chromium"         = import ./browsers/chromium.nix;

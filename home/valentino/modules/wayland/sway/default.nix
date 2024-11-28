@@ -63,7 +63,6 @@ in
 
       extraConfig = ''
         set {
-          $externalmonitor DP-5
           $opacity 0.9
           # Wob - Overlay volume/backlight/progress/anything bar for Wayland
           $wob_sock $XDG_RUNTIME_DIR/wob.sock
@@ -74,7 +73,10 @@ in
       '';
     };
 
-    home.packages = [ pkgs.autotiling ];
+    home.packages = with pkgs; [
+      autotiling
+      wdisplays
+    ];
 
     # xdg.portal = {
     #   enable = true;
