@@ -16,7 +16,9 @@ _: {
         username = "valentino";
         description = "Valentino Bocchetti";
         hashedPassword = "$6$4CvDCvwb2FE/EnAv$pP65k96pPwwOVu1aspgUbYSwq9HUgwzFCdvOvHq/rj6te1KdFNAWHbo65aql15awsUrKcianHFSTm5GzqA.MZ.";
-        extraAuthorizedKeys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILKiPJdb2rsLRwFGczP8x7KVTjqqY4lPkdbwE6+GcKxP valentino@homelab"];
+        extraAuthorizedKeys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILKiPJdb2rsLRwFGczP8x7KVTjqqY4lPkdbwE6+GcKxP valentino@homelab"
+        ];
       };
     };
 
@@ -56,7 +58,6 @@ _: {
 
     vpn = {
       openconnect.enable = true;
-      openvpn.enable = true;
       wireguard.enable = true;
     };
 
