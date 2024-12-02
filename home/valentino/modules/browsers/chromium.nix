@@ -29,13 +29,13 @@ in
           "--enable-usermedia-screen-capturing"
         ];
 
-      extensions = [
-        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock
-        (lib.optionals bitwarden.enable { id = "nngceckbapebfimnlniiiahkandclblb"; }) # bitwarden
-        { id = "iaiomicjabeggjcfkbimgmglanimpnae"; } # tab manager
-        (lib.optionals _1password.enable { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; }) # 1password
-        # {id = "mcnbfjjgfmgcbljkoaaadoddokbmnlln";} # teleparty
-      ];
+      extensions =
+        [
+          { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock
+          { id = "iaiomicjabeggjcfkbimgmglanimpnae"; } # tab manager
+        ]
+        ++ (lib.optionals bitwarden.enable) [ { id = "nngceckbapebfimnlniiiahkandclblb"; } ]
+        ++ (lib.optionals _1password.enable [ { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } ]);
     };
   };
 }
