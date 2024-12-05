@@ -57,6 +57,8 @@ _: {
       };
     };
 
+    vpn.openconnect.enable = true;
+
     shell.bash.enable = true;
   };
 }

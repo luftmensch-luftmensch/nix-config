@@ -1,7 +1,10 @@
 { pkgs, ... }:
 {
   valentino.modules = {
-    apps.rofi.enable = true;
+    apps = {
+      rofi.enable = true;
+      vnc.enable = true;
+    };
 
     xorg = {
       enable = true;
