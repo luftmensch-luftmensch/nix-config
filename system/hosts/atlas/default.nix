@@ -36,6 +36,7 @@
 
   services.xserver = {
     enable = true;
-    videoDrivers = [ "intel" ]; # "nvidia"
+    # videoDrivers = [ "intel" ]; # "nvidia"
+    videoDrivers = [ "modesetting" ];
   };
 }

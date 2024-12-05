@@ -36,10 +36,7 @@ _: {
     };
 
     hardware = {
-      audio = {
-        enable = true;
-        pipewire.enable = true;
-      };
+      audio.enable = true;
       bluetooth.enable = true;
     };
 

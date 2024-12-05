@@ -88,13 +88,13 @@ in
         };
 
         selection.save_to_clipboard = true;
-        live_config_reload = true;
+        general.live_config_reload = true;
         cursor.style = {
           shape = "Beam";
           blinking = "off";
         };
 
-        shell.program = "fish";
+        terminal.shell.program = "fish";
 
         mouse = {
           hide_when_typing = false;

@@ -4,16 +4,18 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.xorg.polybar;
   theme = config.valentino.modules.themes;
   inherit (config.colorScheme) palette;
-in {
+in
+{
   options.valentino.modules.xorg.polybar = {
     enable = mkEnableOption "polybar configuration";
     monitor = mkOption {
       type = types.nullOr types.str;
-      default = "HDMI1";
+      default = "HDMI-1";
     };
     temperature = mkOption {
       type = types.nullOr types.str;

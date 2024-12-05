@@ -37,10 +37,7 @@ _: {
     };
 
     hardware = {
-      audio = {
-        enable = true;
-        pulseaudio.enable = true;
-      };
+      audio.enable = true;
       video.i2c.enable = true;
       bluetooth.enable = true;
     };

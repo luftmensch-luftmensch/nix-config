@@ -115,7 +115,7 @@ in
 
     "${mod}+d" = "exec --no-startup-id ${pkgs.bemenu}/bin/bemenu-run -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}' -p '▶ Run: '";
 
-    "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.cinnamon.nemo}";
+    "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.nemo}";
 
     "${mod}+m" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -c";
     # "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";

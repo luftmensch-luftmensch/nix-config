@@ -4,14 +4,16 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.shell.bash;
-in {
+in
+{
   options.system.modules.shell.bash.enable = mkEnableOption "Bash system-wide completion and additions";
 
   config = mkIf cfg.enable {
     programs.bash = {
-      enableCompletion = true;
+      completion.enable = true;
       enableLsColors = true;
     };
 

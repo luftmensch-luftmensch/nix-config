@@ -77,9 +77,9 @@ let
     ];
 
   desktop = with pkgs; [
-    transmission-gtk
-    cinnamon.nemo-with-extensions
-    gnome.gnome-disk-utility
+    transmission_4-gtk
+    nemo-with-extensions
+    gnome-disk-utility
     networkmanagerapplet
   ];
 in

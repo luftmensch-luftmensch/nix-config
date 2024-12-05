@@ -132,7 +132,7 @@ in
 
     "${mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: ' | xargs swaymsg exec";
 
-    "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.cinnamon.nemo}";
+    "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.nemo}";
 
     "${mod}+m" = "exec --no-startup-id emacsclient -c";
     # "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";

@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   inherit (config.system.modules.graphical) xorg wayland;
-in {
+in
+{
   config = mkIf (xorg.enable || wayland.enable) {
     security = {
       pam.services.sddm.enableGnomeKeyring = true;
@@ -17,7 +19,7 @@ in {
     services = {
       dbus = {
         enable = true;
-        packages = [pkgs.dconf];
+        packages = [ pkgs.dconf ];
       };
 
       gnome.gnome-keyring.enable = true;
@@ -31,8 +33,12 @@ in {
     };
 
     # Who the hell uses xterm these days?
-    services.xserver.excludePackages = [pkgs.xterm];
+    services.xserver.excludePackages = [ pkgs.xterm ];
 
-    environment.systemPackages = with pkgs; [gnome.seahorse libsecret libinput];
+    environment.systemPackages = with pkgs; [
+      seahorse
+      libsecret
+      libinput
+    ];
   };
 }
