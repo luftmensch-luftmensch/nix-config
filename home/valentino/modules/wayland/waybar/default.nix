@@ -40,7 +40,7 @@ in
       {
         enable = true;
         systemd.enable = true;
-        package = pkgs.waybar.override { pulseSupport = true; };
+        package = pkgs.waybar;
         inherit (style) style;
         settings = [
           # Default monitor

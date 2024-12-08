@@ -9,10 +9,6 @@ inputs: {
       config.allowUnfree = true; # Forgive me Stallman
     };
 
-    # waybar = prev.waybar.overrideAttrs (oldAttrs: {
-    #   mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-    # });
-
     rofi-emoji-wayland = prev.rofi-emoji.overrideAttrs (_oldAttrs: {
       buildInputs = with final; [
         rofi-wayland-unwrapped

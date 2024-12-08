@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.valentino.modules.term.foot;
@@ -25,13 +30,13 @@ in
 
             dpi-aware = "yes";
             pad = "0x0";
-            notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
             font = "${family}:${toString size}";
             font-bold = "${family}:${toString size}";
             font-italic = "${family}:${toString size}";
             font-bold-italic = "${family}:${toString size}";
           };
 
+        desktop-notifications.command = "${lib.getExe pkgs.libnotify} -a \${app-id} -i \${app-id} \${title} \${body}";
         bell = { };
 
         scrollback.lines = 1000;
