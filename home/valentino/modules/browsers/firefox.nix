@@ -501,6 +501,7 @@ in
           [
             rycee.ublock-origin
             rycee.user-agent-string-switcher
+            # rycee.adaptive-tab-bar-colour # TODO: Try out
           ]
           ++ [ colinsane.bypass-paywalls-clean ] # https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean (alternative to https://12ft.io/)
           ++ lib.optionals bitwarden.enable [ rycee.bitwarden ]
