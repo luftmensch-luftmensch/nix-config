@@ -15,9 +15,9 @@
 }
 
 /* Extensions button */
-#unified-extensions-button {
-    display: none !important
-}
+/* #unified-extensions-button { */
+/*     display: none !important */
+/* } */
 
 /* Extension name inside URL bar */
 #identity-box.extensionPage #identity-icon-label {
