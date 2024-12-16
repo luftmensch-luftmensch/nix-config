@@ -16,8 +16,7 @@ in
       enable = true;
       settings = {
         email = "valentinobocchetti59@gmail.com";
-        pinentry =
-          if builtins.typeOf config.programs.rbw == "string" then "gnome3" else pkgs.pinentry-gnome3;
+        pinentry = pkgs.pinentry-gnome3;
       };
     };
 

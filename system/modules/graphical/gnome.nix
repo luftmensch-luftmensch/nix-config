@@ -4,9 +4,11 @@
   config,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.graphical.gnome;
-in {
+in
+{
   options.system.modules.graphical.gnome.enable = mkEnableOption "enable gnome";
 
   config = mkIf cfg.enable {
@@ -37,10 +39,14 @@ in {
       geary.enable = lib.mkForce false;
     };
 
-    environment.gnome.excludePackages =
-      (with pkgs.gnome; [gnome-backgrounds gnome-themes-extra])
-      ++ (with pkgs; [gnome-tour gnome-user-docs orca]);
+    environment.gnome.excludePackages = with pkgs; [
+      gnome-backgrounds
+      gnome-themes-extra
+      gnome-tour
+      gnome-user-docs
+      orca
+    ];
 
-    environment.systemPackages = with pkgs.gnome; [nautilus];
+    environment.systemPackages = [ pkgs.nautilus ];
   };
 }
