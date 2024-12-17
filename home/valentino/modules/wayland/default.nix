@@ -4,16 +4,24 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.wayland;
-in {
+in
+{
   options.valentino.modules.wayland = {
     enable = mkEnableOption "wayland configuration management for user";
     wm = mkOption {
       description = "An option to choose the window manager [wayland] configuration to enable";
-      default = [];
-      type = with types; listOf (enum ["sway" "hyprland" ""]);
-      example = ["sway"];
+      default = [ ];
+      type =
+        with types;
+        listOf (enum [
+          "sway"
+          "hyprland"
+          ""
+        ]);
+      example = [ "sway" ];
     };
   };
 
@@ -32,7 +40,6 @@ in {
       swayidle
       swaylock-effects
       wob
-      swaynotificationcenter
 
       wtype
       swaybg

@@ -18,7 +18,10 @@ in
   };
 
   config = mkIf wayland.enable {
-    home.packages = [ cfg.package ];
+    home.packages = [
+      cfg.package
+      pkgs.libnotify
+    ];
     services.swaync =
       let
         config = import ./config.nix {
@@ -32,7 +35,7 @@ in
       in
       {
         enable = true;
-        package = cfg.package;
+        inherit (cfg) package;
         inherit (config) settings style;
       };
   };

@@ -48,7 +48,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
 
     # TODO: Try out
-    # spicetify-nix.url = "github:the-argus/spicetify-nix";
+    # spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   # Function of an argument that uses a the inputs for reference
