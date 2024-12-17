@@ -93,6 +93,7 @@ in
         # 1. https://brainfucksec.github.io/firefox-hardening-guide
         settings = {
           "browser.uidensity" = 0;
+          "devtools.toolbox.zoomValue" = if wayland.enable then 1.3 else 1;
           "svg.context-properties.content.enabled" = true;
 
           "network.trr.mode" = 2;
