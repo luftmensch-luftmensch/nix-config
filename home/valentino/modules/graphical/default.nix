@@ -35,6 +35,7 @@ let
     material-design-icons
     ibm-plex
     san-francisco
+    sf-mono
     icomoon-feather
   ];
 
