@@ -48,7 +48,7 @@ in
         <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
         <fontconfig>
           <match target="pattern">
-            <edit name="dpi" mode="assign"><double>140</double></edit>
+            <edit name="dpi" mode="assign"><double>100</double></edit>
           </match>
         </fontconfig>
       '';

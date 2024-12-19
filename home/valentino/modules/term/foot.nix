@@ -30,10 +30,10 @@ in
 
             dpi-aware = "no";
             pad = "0x0";
-            font = "${family}:${toString size}";
-            font-bold = "${family}:${toString size}";
-            font-italic = "${family}:${toString size}";
-            font-bold-italic = "${family}:${toString size}";
+            font = "${family}:size=${toString size}";
+            font-bold = "${family}:size=${toString size}";
+            font-italic = "${family}:size=${toString size}";
+            font-bold-italic = "${family}:size=${toString size}";
           };
 
         desktop-notifications.command = "${lib.getExe pkgs.libnotify} -a \${app-id} -i \${app-id} \${title} \${body}";
