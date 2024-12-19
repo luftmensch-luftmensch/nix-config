@@ -28,7 +28,7 @@ in
             title = "foot";
             locked-title = "no";
 
-            dpi-aware = "yes";
+            dpi-aware = "no";
             pad = "0x0";
             font = "${family}:${toString size}";
             font-bold = "${family}:${toString size}";
