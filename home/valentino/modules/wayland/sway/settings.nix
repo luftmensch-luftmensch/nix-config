@@ -196,7 +196,7 @@ in
     }
 
     {
-      workspace = "0";
+      workspace = "10";
       output = external_output;
     }
   ];
