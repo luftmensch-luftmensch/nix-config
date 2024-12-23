@@ -85,6 +85,9 @@ in
         ]);
     };
 
-    home.packages = [ pkgs.obs-studio ];
+    home.packages = with pkgs; [
+      kooha
+      obs-studio
+    ];
   };
 }

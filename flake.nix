@@ -38,17 +38,16 @@
     ### Community-driven meta repository for Nix packages ###
     nur.url = "github:nix-community/NUR";
 
-    ###      Atomic secret provisioning for NixOS based on sops      ###
+    ### Atomic secret provisioning for NixOS based on sops ###
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ### Personal pre-baked neovim configuration ###
     neovim-flake.url = "github:luftmensch-luftmensch/neovim-flake";
 
     nix-colors.url = "github:misterio77/nix-colors";
-
-    # TODO: Try out
-    # spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   # Function of an argument that uses a the inputs for reference

@@ -207,17 +207,17 @@ in
   # You can print the logs with: `journalctl --user --identifier sway (Adding --follow & --this-boot might be handy)
   # dbus-sway-environment
   startup = [
-    { command = "corectrl"; }
+    # { command = "corectrl"; }
 
     {
       command = "autotiling";
       always = true;
     }
 
-    {
-      # Info about brightness & volume using wob
-      command = "rm -f $wob_sock && mkfifo $wob_sock && tail -f $wob_sock | wob";
-    }
+    # Info about brightness & volume using wob
+    { command = "rm -f $wob_sock && mkfifo $wob_sock && tail -f $wob_sock | wob"; }
+
+    { command = "nm-applet"; }
 
     { command = "wl-paste --watch cliphist store"; }
 

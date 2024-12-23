@@ -67,8 +67,8 @@
         in
         [
           {
-            label = "󰛳";
-            commad = "${bash} '${swaync-client} && ${pkgs.networkmanagerapplet}/bin/nm-connection-editor'";
+            label = "";
+            command = "${bash} '${swaync-client} && ${lib.getExe pkgs.kooha}'";
           }
           {
             label = "";
