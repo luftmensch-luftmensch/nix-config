@@ -18,6 +18,7 @@ in
       alejandra
       nixd
       nix-output-monitor
+      nixpkgs-review
       nvd
       nix-prefetch-git
       nix-search-cli
