@@ -8,6 +8,8 @@
   san-francisco = pkgs.callPackage ./fonts/san-francisco.nix { };
   sf-mono = pkgs.callPackage ./fonts/sf-mono.nix { };
 
+  haiku-icon-theme = pkgs.callPackage ./icons/haiku.nix { };
+
   # Custom sddm theme
   sddm-theme-clairvoyance = pkgs.callPackage ./sddm-theme/default.nix { };
 
