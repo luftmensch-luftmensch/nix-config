@@ -205,8 +205,8 @@ in
     for_window [class="mpv"] floating enable, sticky enable, resize set 480 480, move absolute position 1438 1
 
     # Pavucontrol
-    for_window [class="Pavucontrol"] floating enable position center; focus
-    for_window [class="Pavucontrol"] resize set 480 480
+    for_window [class="pavucontrol"] floating enable position center; focus
+    for_window [class="pavucontrol"] resize set 480 480
 
     # Teams
     for_window [title="Microsoft Teams Notification"] floating enable
