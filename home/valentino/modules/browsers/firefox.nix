@@ -263,8 +263,7 @@ in
           # Disable that websites can get notifications if you copy= paste, or cut something from a web page, and it lets them know which part of the page had been selected.
           "dom.battery.enabled" = false;
           "dom.event.clipboardevents.enabled" = true;
-          # TODO: Why the hell i disabled it?
-          # "dom.gamepad.enabled" = false;
+          "dom.gamepad.enabled" = true;
 
           "dom.security.https_only_mode" = true;
           #"dom.security.https_only_mode_ever_enabled" = true;
