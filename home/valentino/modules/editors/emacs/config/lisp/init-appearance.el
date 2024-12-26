@@ -26,6 +26,7 @@
 
            ;; Other graphical stuff
            visible-bell nil
+           ring-bell-function 'ignore
            x-gtk-use-system-tooltips t
            x-stretch-cursor nil
            use-dialog-box nil
