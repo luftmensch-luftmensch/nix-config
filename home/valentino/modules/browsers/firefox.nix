@@ -94,6 +94,7 @@ in
         settings = {
           "browser.uidensity" = 0;
           "devtools.toolbox.zoomValue" = if wayland.enable then 1.3 else 1;
+          "full-screen-api.warning.timeout" = 0;
           "svg.context-properties.content.enabled" = true;
 
           "network.trr.mode" = 2;
