@@ -13,6 +13,20 @@ let
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
   userChrome = builtins.readFile ./style/userChrome.css;
   userContent = builtins.readFile ./style/userContent.css;
+
+  extensions =
+    let
+      rycee = config.nur.repos.rycee.firefox-addons;
+      colinsane = config.nur.repos.colinsane.firefox-extensions;
+    in
+    [
+      rycee.ublock-origin
+      rycee.user-agent-string-switcher
+      # rycee.adaptive-tab-bar-colour # TODO: Try out
+    ]
+    ++ [ colinsane.bypass-paywalls-clean ] # https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean (alternative to https://12ft.io/)
+    ++ lib.optionals bitwarden.enable [ rycee.bitwarden ]
+    ++ lib.optionals _1password.enable [ rycee.onepassword-password-manager ];
 in
 {
   imports = [ inputs.nur.hmModules.nur ];
@@ -24,7 +38,7 @@ in
       package = if wayland.enable then pkgs.firefox-wayland else pkgs.firefox;
 
       profiles.default = {
-        inherit userChrome userContent;
+        inherit userChrome userContent extensions;
         name = "Default";
         search = {
           force = true;
@@ -32,7 +46,7 @@ in
           engines =
             let
               nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              youtube-icon = "${pkgs.colloid-icon-theme}/share/icons/Colloid-Light/apps/scalable/youtube.svg";
+              youtube-icon = "${pkgs.tela-icon-theme}/share/icons/Tela/scalable/apps/youtube.svg";
             in
             {
               "DuckDuckGo".metaData.alias = "@d";
@@ -508,20 +522,6 @@ in
           # Moved here to be able to know about error in the configuration
           "browser.aboutConfig.showWarning" = false;
         };
-
-        extensions =
-          let
-            rycee = config.nur.repos.rycee.firefox-addons;
-            colinsane = config.nur.repos.colinsane.firefox-extensions;
-          in
-          [
-            rycee.ublock-origin
-            rycee.user-agent-string-switcher
-            # rycee.adaptive-tab-bar-colour # TODO: Try out
-          ]
-          ++ [ colinsane.bypass-paywalls-clean ] # https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean (alternative to https://12ft.io/)
-          ++ lib.optionals bitwarden.enable [ rycee.bitwarden ]
-          ++ lib.optionals _1password.enable [ rycee.onepassword-password-manager ];
       };
     };
 

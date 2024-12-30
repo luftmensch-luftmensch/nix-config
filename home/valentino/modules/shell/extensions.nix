@@ -7,7 +7,7 @@
 with lib;
 let
   cfg = config.valentino.modules.shell.extensions;
-  inherit (config.valentino.modules.shell) bash zsh tmux;
+  inherit (config.valentino.modules.shell) bash zsh;
 in
 {
   options.valentino.modules.shell.extensions.enable = mkEnableOption "shell useful commands (e.g. bat, eza)";
@@ -82,7 +82,6 @@ in
 
         enableBashIntegration = bash.enable;
         enableZshIntegration = zsh.enable;
-        tmux.enableShellIntegration = tmux.enable;
       };
 
       btop = {
