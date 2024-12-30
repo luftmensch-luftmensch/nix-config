@@ -5,16 +5,24 @@
   inputs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.themes;
-  inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+  inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
   inherit (config.valentino.modules) xorg;
-in {
-  imports = [./onedark.nix ./modus.nix];
+in
+{
+  imports = [
+    ./onedark.nix
+    ./modus.nix
+  ];
 
   options.valentino.modules.themes = with types; {
     active = mkOption {
-      type = nullOr (enum ["onedark" "modus"]);
+      type = nullOr (enum [
+        "onedark"
+        "modus"
+      ]);
       default = null;
       description = ''
         Name of the theme to enable.
@@ -48,7 +56,7 @@ in {
 
         theme = {
           name = "${config.colorscheme.slug}";
-          package = gtkThemeFromScheme {scheme = config.colorscheme;};
+          package = gtkThemeFromScheme { scheme = config.colorscheme; };
         };
 
         font = {
@@ -56,14 +64,13 @@ in {
           inherit (cfg.font.regular) size;
         };
 
-        gtk3.extraConfig = let
-          is-dark =
-            if cfg.darkTheme
-            then 1
-            else 0;
-        in {
-          gtk-application-prefer-dark-theme = is-dark;
-        };
+        gtk3.extraConfig =
+          let
+            is-dark = if cfg.darkTheme then 1 else 0;
+          in
+          {
+            gtk-application-prefer-dark-theme = is-dark;
+          };
       };
 
       home.pointerCursor = {
@@ -74,12 +81,14 @@ in {
 
     # QT
     {
-      home.sessionVariables = {QT_QPA_PLATFORMTHEME = "qt5ct";};
-      home.packages = with pkgs.libsForQt5; [
-        qtstyleplugin-kvantum
-        breeze-qt5
-        qt5ct
-      ];
+      home = {
+        sessionVariables.QT_QPA_PLATFORMTHEME = "qt5ct";
+        packages = with pkgs.libsForQt5; [
+          qtstyleplugin-kvantum
+          breeze-qt5
+          qt5ct
+        ];
+      };
     }
 
     # Xorg

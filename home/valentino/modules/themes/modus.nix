@@ -19,15 +19,11 @@ in
         package = pkgs.haiku-icon-theme;
       };
 
-      cursorTheme =
-        let
-          cursor = if cfg.darkTheme then "Capitaine Cursors" else "Capitaine Cursors";
-        in
-        {
-          name = cursor;
-          inherit (cfg.cursor) size;
-          package = pkgs.capitaine-cursors-themed;
-        };
+      cursorTheme = {
+        name = "Capitaine Cursors";
+        inherit (cfg.cursor) size;
+        package = pkgs.capitaine-cursors-themed;
+      };
     };
 
     colorScheme =
