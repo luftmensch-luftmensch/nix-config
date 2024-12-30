@@ -153,7 +153,10 @@ in
     on-click = "${lib.getExe pkgs.foot} -e ${lib.getExe pkgs.btop}";
   };
 
-  tray.spacing = 10;
+  tray = {
+    icon-size = 25;
+    spacing = 10;
+  };
 
   "wlr/taskbar" = {
     format = "{icon}";
