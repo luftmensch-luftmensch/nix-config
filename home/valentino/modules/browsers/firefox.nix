@@ -29,26 +29,41 @@ in
         search = {
           force = true;
           default = "DuckDuckGo";
-          engines = {
-            "DuckDuckGo".metaData.alias = "@d";
-            "Google".metaData = {
-              alias = "@g";
-              hidden = true;
+          engines =
+            let
+              nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              youtube-icon = "${pkgs.colloid-icon-theme}/share/icons/Colloid-Light/apps/scalable/youtube.svg";
+            in
+            {
+              "DuckDuckGo".metaData.alias = "@d";
+              "Google".metaData = {
+                alias = "@g";
+                hidden = true;
+              };
+              "Bing".metaData.hidden = true;
+              "eBay".metaData.hidden = true;
+              "Wikipedia".metaData.hidden = true;
+              "Nix Packages" = {
+                urls = [ { template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; } ];
+                icon = nixos-icon;
+                definedAliases = [ "@np" ];
+              };
+              "Nix Options" = {
+                urls = [ { template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}"; } ];
+                icon = nixos-icon;
+                definedAliases = [ "@no" ];
+              };
+              "My NixOS" = {
+                urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
+                icon = nixos-icon;
+                definedAliases = [ "@nm" ];
+              };
+              "Youtube" = {
+                urls = [ { template = "https://www.youtube.com/results?search_query={searchTerms}"; } ];
+                icon = youtube-icon;
+                definedAliases = [ "@yt" ];
+              };
             };
-            "Bing".metaData.hidden = true;
-            "eBay".metaData.hidden = true;
-            "Wikipedia".metaData.hidden = true;
-            "Nix Packages" = {
-              urls = [ { template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; } ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@np" ];
-            };
-            "Nix Options" = {
-              urls = [ { template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}"; } ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@no" ];
-            };
-          };
         };
         #                       Disable automatic downloading of OpenH264 codec
         #  1. https://support.mozilla.org/en-US/kb/how-stop-firefox-making-automatic-connections#w_media-capabilities
