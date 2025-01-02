@@ -105,6 +105,7 @@ in
         };
       };
       apps.playerctl.enable = true;
+      services.battery.enable = true;
     };
   };
 }

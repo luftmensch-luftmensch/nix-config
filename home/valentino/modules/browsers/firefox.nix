@@ -37,6 +37,11 @@ in
       enable = true;
       package = if wayland.enable then pkgs.firefox-wayland else pkgs.firefox;
 
+      languagePacks = [
+        "it"
+        "en-US"
+      ];
+
       profiles.default = {
         inherit userChrome userContent extensions;
         name = "Default";

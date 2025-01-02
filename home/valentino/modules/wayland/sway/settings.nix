@@ -17,7 +17,6 @@ let
   menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
 
   # Custom scripts
-  bss = pkgs.callPackage ./scripts/battery-status.nix { inherit lib; };
   cms = pkgs.callPackage ./scripts/clipboard-manager.nix { inherit menu_opts; };
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix { inherit menu_opts; };
 in
@@ -221,9 +220,6 @@ in
     { command = "nm-applet"; }
 
     { command = "wl-paste --watch cliphist store"; }
-
-    # Custom scripts
-    { command = "${lib.getExe bss}"; }
   ];
 
   window = {
