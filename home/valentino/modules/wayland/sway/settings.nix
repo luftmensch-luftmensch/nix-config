@@ -50,7 +50,8 @@ in
     XF86MonBrightnessDown = "exec ${_brightnessctl} 5%- | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
 
     # Notification
-    XF86Messenger = "exec --no-startup-id ${_notification-center}";
+    XF86NotificationCenter = "exec --no-startup-id ${_notification-center}";
+
     "${mod}+x" = "exec --no-startup-id ${_notification-center}";
     "${mod}+Shift+n" = "exec --no-startup-id ${_notification-center}";
 
