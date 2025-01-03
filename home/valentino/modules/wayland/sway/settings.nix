@@ -201,7 +201,7 @@ in
     }
   ];
 
-  ### Sway logging & jorunalctl###
+  ### Sway logging & journalctl ###
   # If you'd like sway's output to be handled by journald (like a systemd service), systemd-cat can be used for this:
   # exec systemd-cat --identifier=sway sway
   # You can print the logs with: `journalctl --user --identifier sway (Adding --follow & --this-boot might be handy)

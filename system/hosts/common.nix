@@ -1,7 +1,6 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   fs-diff = pkgs.writeShellScriptBin "fs-diff" ''
-    #!/usr/bin/env bash
-    # fs-diff.sh
     set -euo pipefail
     sudo mkdir -p /mnt
 
@@ -27,7 +26,8 @@
 
     sudo umount -R /mnt
   '';
-in {
+in
+{
   boot = {
     loader = {
       systemd-boot = {
@@ -43,7 +43,19 @@ in {
     };
 
     initrd = {
-      availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "ums_realtek" "usbhid" "usb_storage" "sd_mod" "xxhash" "nvme" "sd_mod" "rtsx_pci_sdmmc"];
+      availableKernelModules = [
+        "xhci_pci"
+        "ehci_pci"
+        "ahci"
+        "ums_realtek"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+        "xxhash"
+        "nvme"
+        "sd_mod"
+        "rtsx_pci_sdmmc"
+      ];
 
       # Note `lib.mkBefore` is used instead of `lib.mkAfter` here.
       postDeviceCommands = pkgs.lib.mkBefore ''
@@ -68,52 +80,59 @@ in {
   };
 
   # An handy way to retrieve the corresponding label from UUID is using `blkid`
-  fileSystems = let
-    fs_options = ["autodefrag" "space_cache=v2" "noatime" "compress=zstd:3"];
-  in {
-    "/" = {
-      device = "/dev/disk/by-label/vault";
-      fsType = "btrfs";
-      options = ["subvol=@"] ++ fs_options;
+  fileSystems =
+    let
+      fs_options = [
+        "autodefrag"
+        "space_cache=v2"
+        "noatime"
+        "compress=zstd:3"
+      ];
+    in
+    {
+      "/" = {
+        device = "/dev/disk/by-label/vault";
+        fsType = "btrfs";
+        options = [ "subvol=@" ] ++ fs_options;
+      };
+
+      "/home" = {
+        device = "/dev/disk/by-label/vault";
+        fsType = "btrfs";
+        options = [ "subvol=@home" ] ++ fs_options;
+      };
+
+      "/nix" = {
+        device = "/dev/disk/by-label/vault";
+        fsType = "btrfs";
+        options = [ "subvol=@nix" ] ++ fs_options;
+      };
+
+      "/persist" = {
+        device = "/dev/disk/by-label/vault";
+        fsType = "btrfs";
+        options = [ "subvol=@persist" ] ++ fs_options;
+        neededForBoot = true;
+      };
+
+      "/var/log" = {
+        device = "/dev/disk/by-label/vault";
+        fsType = "btrfs";
+        options = [ "subvol=@var_log" ] ++ fs_options;
+      };
+
+      "/boot" = {
+        device = "/dev/disk/by-label/boot";
+        fsType = "vfat";
+      };
     };
 
-    "/home" = {
-      device = "/dev/disk/by-label/vault";
-      fsType = "btrfs";
-      options = ["subvol=@home"] ++ fs_options;
-    };
-
-    "/nix" = {
-      device = "/dev/disk/by-label/vault";
-      fsType = "btrfs";
-      options = ["subvol=@nix"] ++ fs_options;
-    };
-
-    "/persist" = {
-      device = "/dev/disk/by-label/vault";
-      fsType = "btrfs";
-      options = ["subvol=@persist"] ++ fs_options;
-      neededForBoot = true;
-    };
-
-    "/var/log" = {
-      device = "/dev/disk/by-label/vault";
-      fsType = "btrfs";
-      options = ["subvol=@var_log"] ++ fs_options;
-    };
-
-    "/boot" = {
-      device = "/dev/disk/by-label/boot";
-      fsType = "vfat";
-    };
-  };
-
-  swapDevices = [{device = "/dev/disk/by-label/SWAP";}];
+  swapDevices = [ { device = "/dev/disk/by-label/SWAP"; } ];
 
   services.btrfs.autoScrub = {
     enable = true;
     interval = "monthly";
   };
 
-  environment.systemPackages = [fs-diff];
+  environment.systemPackages = [ fs-diff ];
 }

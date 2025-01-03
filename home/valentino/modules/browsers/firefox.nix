@@ -530,6 +530,11 @@ in
       };
     };
 
-    home.file.".config/startpage.html".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
+    home = {
+      file.".config/startpage.html".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
+      packages = with pkgs; [
+        (writeShellScriptBin "firefox-private" ''exec ${lib.getExe firefox} --private-window'')
+      ];
+    };
   };
 }

@@ -8,6 +8,7 @@
   "core/network"       = import ./core/network.nix;
   "core/quiet-boot"    = import ./core/quiet-boot.nix;
   "core/settings"      = import ./core/settings.nix;
+  "core/slim"          = import ./core/slim.nix;
   "core/user"          = import ./core/user.nix;
 
   "credentials/gpg"    = import ./credentials/gpg.nix;

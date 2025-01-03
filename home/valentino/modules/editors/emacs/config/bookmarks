@@ -2,11 +2,7 @@
 ;;;; This format is meant to be slightly human-readable;
 ;;;; nevertheless, you probably don't want to edit it.
 ;;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("AGENDA"
- (filename . "~/Dropbox/org/Agenda.org")
- (rear-context-string)
- (position . 1))
-
+(
 ("BOOKMARKS"
  (filename . "~/nix-config/home/valentino/modules/editors/emacs/config/bookmarks")
  (rear-context-string)

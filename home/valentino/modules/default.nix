@@ -51,6 +51,7 @@
     "media/videos"              = import ./media/videos.nix;
 
     "services/battery"          = import ./services/battery.nix;
+
     "shell/bash"                = import ./shell/bash.nix;
     "shell/zsh"                 = import ./shell/zsh.nix;
     "shell/direnv"              = import ./shell/direnv.nix;

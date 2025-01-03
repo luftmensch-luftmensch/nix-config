@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.valentino.modules.shell.extensions;
+  upfile = pkgs.writeScriptBin "upfile" (builtins.readFile ./scripts/upfile.sh);
   inherit (config.valentino.modules.shell) bash zsh;
 in
 {
@@ -23,6 +24,7 @@ in
         fd
         jq
         wget
+        upfile
       ];
 
       file.".config/wget/wgetrc".text = ''

@@ -20,6 +20,7 @@ _: {
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILKiPJdb2rsLRwFGczP8x7KVTjqqY4lPkdbwE6+GcKxP valentino@homelab"
         ];
       };
+      slim.enable = true;
     };
 
     credentials.ssh.enable = true;
