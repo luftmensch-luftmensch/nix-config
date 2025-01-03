@@ -107,6 +107,15 @@ With optional prefix ARG (\\[universal-argument]) call
       (notmuch-refresh-all-buffers)
     (notmuch-refresh-this-buffer)))
 
+(defun vb/lieer-sendmail ()
+  "Set the required variables to send a mail through `lieer'.
+To improve."
+  (let (from (message-fetch-field "from"))
+    (when (string= from "mario.liguori.056@gmail.com")
+      (setq-local sendmail-program "gmi"
+                  message-sendmail-extra-arguments '("send" "--quiet" "-t" "-C" "~/.config/mails/gmail")))))
+
+
 ;; Current client for mails
 (setup notmuch
   (:autoload notmuch notmuch-mua-new-mail)
@@ -156,16 +165,17 @@ With optional prefix ARG (\\[universal-argument]) call
                :sort-order newest-first
                :key ,(kbd "p u"))
              ;; University
-             ( :name "📥 inbox (university)"
-               ;; :query "tag:inbox and tag:university"
-               ;; TODO: Investigate -> For some reason the mail in unina are not marked as inbox
-               :query "tag:university"
-               :sort-order newest-first
-               :key ,(kbd "u i"))
-             ( :name "📔 unread (university)"
-               :query "tag:unread and tag:inbox and tag:university"
-               :sort-order newest-first
-               :key ,(kbd "u u"))))
+             ;; ( :name "📥 inbox (university)"
+             ;;   ;; :query "tag:inbox and tag:university"
+             ;;   ;; TODO: Investigate -> For some reason the mail in unina are not marked as inbox
+             ;;   :query "tag:university"
+             ;;   :sort-order newest-first
+             ;;   :key ,(kbd "u i"))
+             ;; ( :name "📔 unread (university)"
+             ;;   :query "tag:unread and tag:inbox and tag:university"
+             ;;   :sort-order newest-first
+             ;;   :key ,(kbd "u u"))
+             ))
 
   ;; Tags
   (:option notmuch-archive-tags vb/notmuch-mark-archive-tags
@@ -234,7 +244,8 @@ With optional prefix ARG (\\[universal-argument]) call
   ;; Identities
   (:option notmuch-identies '("valentinobocchetti59@gmail.com" "vale.bocchetti@studenti.unina.it")
            notmuch-fcc-dirs '(("valentinobocchetti59@gmail.com" . "gmail/sent +personal +sent")
-                              ("vale.bocchetti@studenti.unina.it" . "unina/sent +university +sent")))
+                              ;; ("vale.bocchetti@studenti.unina.it" . "unina/sent +university +sent")
+                              ))
 
   ;; Other cosmetic formatting
   (add-to-list 'notmuch-tag-formats '("encrypted" (concat tag "🔒")))
@@ -284,7 +295,12 @@ With optional prefix ARG (\\[universal-argument]) call
   (:option send-mail-function 'sendmail-send-it
            mail-specify-envelope-from t
            message-sendmail-envelope-from 'header
-           mail-envelope-from 'header))
+           mail-envelope-from 'header)
+  (:with-hook message-send-hook (:hook vb/lieer-sendmail)))
+
+(setup message
+  (:option message-cite-style 'message-cite-style-gmail
+           message-citation-line-function 'message-insert-formatted-citation-line))
 
 (provide 'init-mail)
 ;;; init-mail.el ends here
