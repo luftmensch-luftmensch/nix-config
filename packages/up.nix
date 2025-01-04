@@ -38,7 +38,7 @@ buildGoModule {
   meta = {
     description = "Troubleshoot problems with your Internet connection";
     changelog = "https://github.com/jesusprubio/up/releases/";
-    homepage = "https://github.com/stefanlogue/meteor";
+    homepage = "https://github.com/jesusprubio/up";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ luftmensch-luftmensch ];
     mainProgram = "up-go";
