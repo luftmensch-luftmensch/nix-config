@@ -6,7 +6,7 @@
 }:
 let
   pname = "mdx";
-  version = "1.11.1";
+  version = "1.12.3";
 in
 buildGoModule {
   inherit pname version;
@@ -15,7 +15,7 @@ buildGoModule {
     owner = "arimatakao";
     repo = "mdx";
     rev = "v${version}";
-    hash = "sha256-bXf6TIVCd7EknyFKeE12YOcqnZ4F3tDFNWBydO/DQAA=";
+    hash = "sha256-kOzL83bAIgCwUASkEZW9HXAkpTkRooTZMcN4koaHkV4=";
   };
 
   ldflags = [
