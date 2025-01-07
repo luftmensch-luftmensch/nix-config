@@ -42,7 +42,8 @@ let
           { home = baseHome; }
           "${configs}/hosts/${hostname}.nix"
         ]
-        ++ attrValues homeModules.${username};
+        ++ attrValues homeModules.${username}
+        ++ [ inputs.nur.modules.homeManager.default ];
 
       extraSpecialArgs = {
         inherit inputs outputs unstable-pkgs;

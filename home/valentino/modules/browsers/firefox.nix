@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 with lib;
@@ -16,8 +15,8 @@ let
 
   extensions =
     let
-      rycee = config.nur.repos.rycee.firefox-addons;
-      colinsane = config.nur.repos.colinsane.firefox-extensions;
+      rycee = pkgs.nur.repos.rycee.firefox-addons;
+      colinsane = pkgs.nur.repos.colinsane.firefox-extensions;
     in
     [
       rycee.ublock-origin
@@ -29,7 +28,6 @@ let
     ++ lib.optionals _1password.enable [ rycee.onepassword-password-manager ];
 in
 {
-  imports = [ inputs.nur.hmModules.nur ];
   options.valentino.modules.browsers.firefox.enable = mkEnableOption "firefox";
 
   config = mkIf cfg.enable {
@@ -348,7 +346,8 @@ in
           "font.name.serif-x-western" = "${themes.font.regular.family}";
 
           # GEO Preference
-          "geo.provider.network.url" = "https:#location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
+          "geo.provider.network.url" =
+            "https:#location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
           "geo.provider.use_gpsd" = false;
 
           # GFX - Webrender
@@ -531,7 +530,8 @@ in
     };
 
     home = {
-      file.".config/startpage.html".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
+      file.".config/startpage.html".source =
+        config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
       packages = with pkgs; [
         (writeShellScriptBin "firefox-private" ''exec ${lib.getExe firefox} --private-window'')
       ];
