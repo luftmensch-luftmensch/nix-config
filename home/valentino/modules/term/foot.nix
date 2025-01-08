@@ -19,7 +19,7 @@ in
       settings = {
         main =
           let
-            inherit (theme.font.bar) family size;
+            inherit (theme.font.term) family size;
           in
           {
             shell = "fish";
