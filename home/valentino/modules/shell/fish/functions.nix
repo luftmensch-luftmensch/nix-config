@@ -225,4 +225,17 @@ in
         end
       end
     '';
+
+  bt-battery.body =
+    let
+
+      bctl = "${pkgs.bluez}/bin/bluetoothctl devices Connected";
+      dbus = "${pkgs.dbus}/bin/dbus-send --print-reply=literal --system --dest=org.bluez";
+    in
+    ''
+      ${bctl} | cut -f2,3 -d ' ' | while read device;
+        echo "$device" | read -d ' ' -l uuid name
+        echo "$name $(${dbus} /org/bluez/hci0/dev_"$(string replace -a : _ $uuid)" org.freedesktop.DBus.Properties.Get string:"org.bluez.Battery1" string:"Percentage" | awk '{print $3}')%"
+      end
+    '';
 }
