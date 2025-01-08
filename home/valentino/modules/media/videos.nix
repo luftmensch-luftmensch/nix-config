@@ -53,7 +53,6 @@ in
         # Quitting
         q = "quit";
         Q = "quit-watch-later";
-        "ctrl+w" = "quit";
 
         ESC = "set fullscreen no";
 
@@ -63,6 +62,7 @@ in
 
         f = "cycle fullscreen";
         SPACE = "cycle pause";
+        "Ctrl+w" = "ignore";
 
         # Screenshot
         s = "screenshot";
