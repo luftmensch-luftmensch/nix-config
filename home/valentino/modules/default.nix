@@ -64,6 +64,7 @@
 
     "term/alacritty"            = import ./term/alacritty.nix;
     "term/foot"                 = import ./term/foot.nix;
+    "term/kitty"                = import ./term/kitty.nix;
 
     "wayland"                   = import ./wayland;
     "wayland/sway"              = import ./wayland/sway;

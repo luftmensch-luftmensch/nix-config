@@ -66,6 +66,7 @@
 
     term = {
       alacritty.enable = true;
+      kitty.enable = true;
       foot.enable = true;
     };
 
