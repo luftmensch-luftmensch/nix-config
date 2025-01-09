@@ -25,6 +25,23 @@ in
         scrollback_lines = 10000;
         show_hyperlink_targets = "yes";
         enable_audio_bell = false;
+        background_opacity = 1.0;
+        background_blur = 1;
+        cursor_shape = "beam";
+        cursor_blink_interval = 0;
+        clear_all_shortcuts = true;
+        detect_urls = true;
+        url_prefixes = "http https file ftp gemini irc gopher mailto news git";
+      };
+
+      keybindings = {
+        "ctrl+shift+c" = "copy_to_clipboard";
+        "ctrl+v" = "paste_from_clipboard";
+        "ctrl+shift+v" = "paste_from_clipboard";
+        "ctrl+shift+t" = "new_window";
+        "ctrl+shift+n" = "new_window";
+        "ctrl+shift+e" = "kitten hints --type url --hints-text-color red";
+        "ctrl+shift+g" = "show_last_command_output";
       };
       shellIntegration = {
         enableBashIntegration = bash.enable;
