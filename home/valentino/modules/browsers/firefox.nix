@@ -129,9 +129,10 @@ in
           "full-screen-api.warning.timeout" = 0;
           "svg.context-properties.content.enabled" = true;
 
-          "network.trr.mode" = 2;
-          "network.trr.uri" = "https://dns.quad9.net/dns-query";
-          "beacon.enabled" = false;
+          # Breaks some sites
+          # "network.trr.mode" = 2;
+          # "network.trr.uri" = "https://dns.quad9.net/dns-query";
+          # "beacon.enabled" = false;
 
           # BREAK PAD
           # Disable sending Firefox crash reports to Mozilla servers
@@ -387,6 +388,7 @@ in
           # NETWORK
           # Not rendering IDNs as their Punycode equivalent leaves you open to phishing attacks that can be very difficult to notice.
           "network.IDN_show_punycode" = true;
+          "network.dns.disableIPv6" = true;
           # Disable Firefox prefetching pages it thinks you will visit next:
           # Prefetching causes cookies from the prefetched site to be loaded and other potentially unwanted behavior. Details here and here.
           #"network.dns.disablePrefetch" = true;

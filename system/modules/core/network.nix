@@ -28,7 +28,7 @@
       enable = true;
       dns = "systemd-resolved";
       wifi.powersave = true;
-      insertNameservers = [
+      appendNameservers = [
         # DNS recursive service w/ Quad9 on ipv4 & ipv6
         "9.9.9.9"
         "149.112.112.112"
