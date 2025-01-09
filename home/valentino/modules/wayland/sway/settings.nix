@@ -374,6 +374,11 @@ in
       drag = "enabled";
       scroll_method = "two_finger";
     };
+
+    "ETPS/2 Elantech TrackPoint" = {
+      accel_profile = "flat";
+      pointer_accel = "-1";
+    };
   };
 
   output = {

@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  unstable-pkgs,
   ...
 }:
 with lib;
@@ -13,9 +12,9 @@ in
   options.valentino.modules.apps.vnc.enable = mkEnableOption "enable vnc capabilities";
 
   config = mkIf cfg.enable {
-    home.packages = [
-      pkgs.remmina
-      unstable-pkgs.anydesk
+    home.packages = with pkgs; [
+      remmina
+      anydesk
     ];
   };
 }
