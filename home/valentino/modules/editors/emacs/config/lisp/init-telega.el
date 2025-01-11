@@ -24,6 +24,7 @@
            telega-chat-button-width 30
            switch-to-buffer-preserve-window-point t
            telega-chat--display-buffer-action '((display-buffer-reuse-window display-buffer-use-some-window))
+           telega-contact-birthdays-mode nil ;; I don't really care of birthday top popup in telega
            telega-root-fill-column (+ 50 telega-chat-button-width)
            telega-chat-fill-column (+ 50 telega-chat-button-width)
            telega-chat-input-markups '("markdown2" "org"))
