@@ -120,8 +120,9 @@ in
     "${mod}+Tab" = "workspace back_and_forth";
     "${mod}+Shift+Tab" = "workspace prev";
 
-    # Start mode
+    # Modes
     "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
+    "${mod}+s" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
 
     Print = "exec --no-startup-id ${lib.getExe pkgs.grim} -g  \"$(${lib.getExe pkgs.slurp})\" $(date +'%d-%m-%Y-%H:%M:%S').png";
 
@@ -353,6 +354,14 @@ in
       Return = "mode default";
       Escape = "mode default";
       "${mod}+r" = "mode default";
+    };
+
+    scratchpad = {
+      s = "scratchpad show";
+      m = "move scratchpad";
+      Return = "mode default";
+      Escape = "mode default";
+      "${mod}+s" = "mode default";
     };
   };
 
