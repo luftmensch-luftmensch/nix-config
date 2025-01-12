@@ -35,14 +35,15 @@ in
         url_prefixes = "http https file ftp gemini irc gopher mailto news git";
         remember_window_size = false;
         allow_remote_control = true;
+        confirm_os_window_close = 0;
       };
 
       keybindings = {
         "ctrl+shift+c" = "copy_to_clipboard";
         "ctrl+v" = "paste_from_clipboard";
         "ctrl+shift+v" = "paste_from_clipboard";
-        "ctrl+shift+t" = "new_window";
-        "ctrl+shift+n" = "new_window";
+        "ctrl+shift+t" = "launch --cwd=current --type=os-window";
+        "ctrl+shift+n" = "launch --cwd=current --type=os-window";
         "ctrl+shift+e" = "kitten hints --type url --hints-text-color red";
         "ctrl+shift+g" = "show_last_command_output";
       };
