@@ -38,18 +38,23 @@ in
         confirm_os_window_close = 0;
         close_on_child_death = true;
         scrollback_pager = "${config.home.sessionVariables.PAGER}";
+        paste_actions = "quote-urls-at-prompt,confirm";
+        notify_on_cmd_finish = "always 2 command notify-send \"job %c finished with status: %s\"";
       };
 
       keybindings = {
+        "ctrl+plus" = "change_font_size all +2.0";
+        "ctrl+minus" = "change_font_size all -2.0";
         "ctrl+shift+c" = "copy_to_clipboard";
         "ctrl+v" = "paste_from_clipboard";
         "ctrl+shift+v" = "paste_from_clipboard";
-        "ctrl+shift+t" = "launch --cwd=current --type=os-window";
-        "ctrl+shift+n" = "launch --cwd=current --type=os-window";
-        "ctrl+shift+e" = "kitten hints --type url --hints-text-color red";
+        "ctrl+shift+t" = "new_os_window_with_cwd";
+        "ctrl+shift+n" = "new_os_window_with_cwd";
+        "ctrl+o" = "kitten hints --type url --hints-text-color red";
         "ctrl+shift+g" = "show_last_command_output";
       };
       shellIntegration = {
+        mode = "enabled";
         enableBashIntegration = bash.enable;
         enableFishIntegration = fish.enable;
         enableZshIntegration = zsh.enable;
