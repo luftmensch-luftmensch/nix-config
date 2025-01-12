@@ -108,7 +108,7 @@ in
 
     # Modes
     "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
-    "${mod}+g" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
+    "${mod}+s" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
 
     Print = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
     "${mod}+Return" = "exec --no-startup-id ${_alacritty} -t Alacritty";
@@ -156,7 +156,7 @@ in
       m = "move scratchpad";
       Return = "mode default";
       Escape = "mode default";
-      "${mod}+g" = "mode default";
+      "${mod}+s" = "mode default";
     };
   };
 
