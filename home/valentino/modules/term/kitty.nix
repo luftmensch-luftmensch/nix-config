@@ -36,6 +36,7 @@ in
         remember_window_size = false;
         allow_remote_control = true;
         confirm_os_window_close = 0;
+        close_on_child_death = true;
       };
 
       keybindings = {
