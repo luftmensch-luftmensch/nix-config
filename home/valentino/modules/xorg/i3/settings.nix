@@ -13,6 +13,8 @@ let
   _notify = "${lib.getExe pkgs.libnotify} -r 1 -u low -t 800";
   _alacritty = "${lib.getExe pkgs.alacritty}";
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix { inherit theme palette; };
+  menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
+
 in
 {
   assigns = {
@@ -104,8 +106,9 @@ in
     "${mod}+Tab" = "workspace back_and_forth";
     "${mod}+Shift+Tab" = "workspace prev";
 
-    # Start mode
+    # Modes
     "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
+    "${mod}+g" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
 
     Print = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
     "${mod}+Return" = "exec --no-startup-id ${_alacritty} -t Alacritty";
@@ -113,7 +116,7 @@ in
 
     "${mod}+b" = "exec --no-startup-id ${lib.getExe pkgs.firefox}";
 
-    "${mod}+d" = "exec --no-startup-id ${pkgs.bemenu}/bin/bemenu-run -i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}' -p '▶ Run: '";
+    "${mod}+d" = "exec --no-startup-id ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: '";
 
     "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.nemo}";
 
@@ -146,6 +149,14 @@ in
       Return = "mode default";
       Escape = "mode default";
       "${mod}+r" = "mode default";
+    };
+
+    scratchpad = {
+      s = "scratchpad show";
+      m = "move scratchpad";
+      Return = "mode default";
+      Escape = "mode default";
+      "${mod}+g" = "mode default";
     };
   };
 
