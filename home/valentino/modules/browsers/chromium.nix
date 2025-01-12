@@ -10,7 +10,10 @@ let
   inherit (config.valentino.modules.credentials) bitwarden _1password;
 in
 {
-  options.valentino.modules.browsers.chromium.enable = mkEnableOption "chromium";
+  options.valentino.modules.browsers.chromium = {
+    enable = mkEnableOption "chromium";
+    ungoogled = mkEnableOption "UnGoogled features";
+  };
 
   config = mkIf cfg.enable {
     programs.chromium = {
@@ -27,6 +30,26 @@ in
         ++ optionals wayland.enable [
           "--ozone-platform=wayland"
           "--enable-usermedia-screen-capturing"
+
+          # TODO: try out chrome wayland flags
+          # "--ignore-gpu-blocklist"
+          # "--enable-gpu-rasterization"
+          # "--enable-zero-copy"
+          # "--disable-features=UseChromeOSDirectVideoDecoder"
+          # "--enable-media-router"
+          # "--enable-smooth-scrolling"
+        ]
+        ++ optionals cfg.ungoogled [
+          # TODO: Try out ungoogled chrome flag features
+          "--disable-search-engine-collection"
+          "--extension-mime-request-handling=always-prompt-for-install"
+          "--fingerprinting-canvas-image-data-noise"
+          "--fingerprinting-canvas-measuretext-noise"
+          "--fingerprinting-client-rects-noise"
+          "--popups-to-tabs"
+          "--force-punycode-hostnames"
+          "--show-avatar-button=incognito-and-guest"
+          "--no-pings"
         ];
 
       extensions =
