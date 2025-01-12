@@ -68,7 +68,10 @@
       videos.enable = true;
     };
 
-    term.alacritty.enable = true;
+    term = {
+      alacritty.enable = true;
+      kitty.enable = true;
+    };
 
     shell = {
       bash.enable = true;

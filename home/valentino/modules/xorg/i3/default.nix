@@ -21,6 +21,7 @@ in
         let
           settings = import ./settings.nix {
             inherit
+              config
               lib
               mod
               mod1

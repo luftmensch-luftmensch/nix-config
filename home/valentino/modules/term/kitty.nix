@@ -31,7 +31,10 @@ in
         cursor_blink_interval = 0;
         clear_all_shortcuts = true;
         detect_urls = true;
+        url_style = "double";
         url_prefixes = "http https file ftp gemini irc gopher mailto news git";
+        remember_window_size = false;
+        allow_remote_control = true;
       };
 
       keybindings = {
