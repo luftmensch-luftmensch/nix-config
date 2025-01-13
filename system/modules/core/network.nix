@@ -7,7 +7,6 @@
     # specific directories
     useDHCP = false;
     useNetworkd = lib.mkForce true;
-    enableIPv6 = false;
     firewall =
       let
         localRanges = [
