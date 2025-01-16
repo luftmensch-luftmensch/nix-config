@@ -30,6 +30,11 @@ let
         inherit stateVersion;
         homeDirectory = "/home/${username}";
       };
+
+      utils = import ./utils.nix {
+        inherit (nixpkgs) lib;
+        inherit pkgs;
+      };
     in
     home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -46,7 +51,12 @@ let
         ++ [ inputs.nur.modules.homeManager.default ];
 
       extraSpecialArgs = {
-        inherit inputs outputs unstable-pkgs;
+        inherit
+          inputs
+          outputs
+          unstable-pkgs
+          utils
+          ;
       };
     };
 in
