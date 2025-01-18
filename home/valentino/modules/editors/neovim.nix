@@ -5,12 +5,14 @@
   inputs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.editors.neovim;
-in {
+in
+{
   options.valentino.modules.editors.neovim.enable = mkEnableOption "neovim";
 
   config = mkIf cfg.enable {
-    home.packages = with inputs.neovim-flake.packages.${pkgs.system}; [nvim];
+    home.packages = with inputs.neovim-flake.packages.${pkgs.system}; [ default ];
   };
 }

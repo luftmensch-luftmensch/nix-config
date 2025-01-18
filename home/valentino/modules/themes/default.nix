@@ -15,6 +15,7 @@ in
   imports = [
     ./onedark.nix
     ./modus.nix
+    ./paradise.nix
   ];
 
   options.valentino.modules.themes = with types; {
@@ -22,6 +23,7 @@ in
       type = nullOr (enum [
         "onedark"
         "modus"
+        "paradise"
       ]);
       default = null;
       description = ''

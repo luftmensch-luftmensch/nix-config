@@ -15,6 +15,7 @@ in
     home.packages = with pkgs; [
       remmina
       anydesk
+      # TODO: try out rustdesk
     ];
   };
 }
