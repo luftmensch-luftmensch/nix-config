@@ -63,6 +63,7 @@ in
         f = "cycle fullscreen";
         SPACE = "cycle pause";
         "Ctrl+w" = "ignore";
+        "Ctrl+c" = "ignore";
 
         # Screenshot
         s = "screenshot";

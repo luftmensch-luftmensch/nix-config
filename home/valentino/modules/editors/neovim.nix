@@ -13,6 +13,6 @@ in
   options.valentino.modules.editors.neovim.enable = mkEnableOption "neovim";
 
   config = mkIf cfg.enable {
-    home.packages = with inputs.neovim-flake.packages.${pkgs.system}; [ default ];
+    home.packages = with inputs.neovim-flake.packages.${pkgs.system}; [ nvim ];
   };
 }
