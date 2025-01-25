@@ -50,7 +50,6 @@ in
         "ctrl+plus" = "change_font_size all +2.0";
         "ctrl+minus" = "change_font_size all -2.0";
         "ctrl+shift+c" = "copy_to_clipboard";
-        "ctrl+v" = "paste_from_clipboard";
         "ctrl+shift+v" = "paste_from_clipboard";
         "ctrl+shift+t" = "new_os_window_with_cwd";
         "ctrl+shift+n" = "new_os_window_with_cwd";
