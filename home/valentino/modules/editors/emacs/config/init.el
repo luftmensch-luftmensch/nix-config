@@ -8,7 +8,7 @@
 ;;                    ____,
 ;;                   /.---|
 ;;                   `    |     ___
-;;                       (=\.  /-. \
+;;                       (=\.  /-.  \
 ;;                        |\/\_|"|  |
 ;;                        |_\ |;-|  ;
 ;;                        | / \| |_/ \
@@ -24,7 +24,7 @@
 ;;
 ;;
 ;; Well, hello there! How are you doing wanderer? Looking for some
-;; lisp goodness?  You might find it here, you might not.  If you do
+;; Lisp goodness?  You might find it here, you might not.  If you do
 ;; find what you are looking for here, feel free take them with you,
 ;; give them a new life, a new filesystem, a new home.  All I ask of
 ;; you is to treat them with love and care.  They have always been
@@ -48,7 +48,7 @@
 ;; Good luck!
 
 ;; -------------------------------------------------------------------------------- ;;
-;;   This file was auto-tangled from an orgmode file. (C)  luftmensch-luftmensch    ;;
+;;   This file was auto-tangled from an orgmode file.  (C)  luftmensch-luftmensch   ;;
 ;; -------------------------------------------------------------------------------- ;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

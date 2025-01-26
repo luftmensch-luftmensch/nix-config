@@ -17,8 +17,8 @@
 
 
 (setup (:pkg (org :type built-in))
-  (setq load-path
-        (cl-remove-if (lambda (path) (string-match-p "lisp/org\\'" path)) load-path))
+  ;; (setq load-path
+  ;;       (cl-remove-if (lambda (path) (string-match-p "lisp/org\\'" path)) load-path))
   (defvar vb/org-custom-daily-agenda
     ;; NOTE 2021-12-08: Specifying a match like the following does not
     ;; work.
