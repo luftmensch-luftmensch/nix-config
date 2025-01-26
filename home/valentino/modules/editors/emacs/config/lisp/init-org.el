@@ -16,7 +16,7 @@
   (visual-line-mode 1))
 
 
-(setup (:pkg org :type built-in)
+(setup (:pkg (org :type built-in))
   (setq load-path
         (cl-remove-if (lambda (path) (string-match-p "lisp/org\\'" path)) load-path))
   (defvar vb/org-custom-daily-agenda
