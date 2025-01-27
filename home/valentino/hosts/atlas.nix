@@ -81,7 +81,10 @@
         cpuTuning = true;
       };
       direnv.enable = true;
-      git.enable = true;
+      git = {
+        enable = true;
+        gh.enable = true;
+      };
       nix-index.enable = true;
     };
 
