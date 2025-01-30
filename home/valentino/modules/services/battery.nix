@@ -20,7 +20,7 @@ let
     text =
       let
         _acpi = "${lib.getExe pkgs.acpi} -b";
-        _notify = "${lib.getExe pkgs.libnotify} -t 1000 -u critical";
+        _notify = "${lib.getExe pkgs.libnotify} -t 1000 -r 1 -u critical";
         _logger = "${lib.getExe pkgs.logger} -t battery-status -p warning";
       in
       ''

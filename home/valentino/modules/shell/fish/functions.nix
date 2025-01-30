@@ -194,6 +194,11 @@ in
     home-manager switch --flake "$base_path/.#$USER@$hostname"
   '';
 
+  home-news.body = ''
+    set -l base_path $HOME/nix-config
+    home-manager news --flake "$base_path/.#$USER@$hostname"
+  '';
+
   # [net]work [u]sage: check network usage stats
   netu.body = ''
     set -l net_device (ip route | awk '/via/ {print $5}')
