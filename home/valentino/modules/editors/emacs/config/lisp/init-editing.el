@@ -66,7 +66,7 @@
 
   ;; Vertical scroll
   (setq scroll-step 1
-        scroll-margin 10
+        ;; scroll-margin 10
         ;; Reduce cursor lag by a tiny bit by not auto-adjusting `window-vscroll'
         ;; for tall lines.
         auto-window-vscroll nil)
@@ -91,6 +91,10 @@
   (setq scroll-conservatively 101
         scroll-preserve-screen-position t
         scroll-preserve-screen-position t))
+
+(setup (:pkg (ultra-scroll :host github :repo "jdtsmith/ultra-scroll"))
+  (:option scroll-margin 0)
+  (:when-loaded (ultra-scroll-mode 1)))
 
 (setup mouse
   ;; Movement related
@@ -126,8 +130,8 @@
            select-enable-clipboard t
            select-enable-primary nil))
 
-(setup (:pkg goto-last-change)
-  (:global "C-z" goto-last-change))
+;; (setup (:pkg goto-last-change)
+;;   (:global "C-z" goto-last-change))
 
 (setup (:require autorevert)
   (:hide-mode auto-revert)

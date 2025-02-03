@@ -43,21 +43,5 @@
   (:option treesit-auto-install 'prompt)
   (global-treesit-auto-mode))
 
-(setup tree-sitter
-  (:only-if (or (version< emacs-version "29") (not (treesit-available-p))))
-
-  (:pkg tree-sitter-langs)
-
-  (:pkg tree-sitter)
-
-  (:load-after tree-sitter-langs)
-
-  (:autoload tree-sitter-mode tree-sitter-hl-mode)
-
-  (:with-hook tree-sitter-after-on-hook
-    (:hook tree-sitter-hl-mode))
-
-  (global-tree-sitter-mode 1))
-
 (provide 'init-code-style)
 ;;; init-code-style.el ends here
