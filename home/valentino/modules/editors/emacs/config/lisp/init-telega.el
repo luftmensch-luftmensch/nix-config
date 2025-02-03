@@ -42,13 +42,13 @@
   (:with-map telega-chat-mode-map
     (:bind
      [remap telega-msg-resend] 'telega-msg-forward-dwim
-     [remap evil-record-macro] #'kill-this-buffer ;; #'bury-buffer
+     [remap evil-record-macro] #'kill-current-buffer
      [remap evil-ret] #'telega-chatbuf-newline-or-input-send))
 
   (:with-map telega-image-mode-map
     (:bind
     [remap evil-record-macro] #'bury-buffer
-    [remap evil-execute-last-recorded-macro] #'kill-this-buffer
+    [remap evil-execute-last-recorded-macro] #'kill-current-buffer
     "C-+" #'image-increase-size
     "C--" #'image-decrease-size))
 

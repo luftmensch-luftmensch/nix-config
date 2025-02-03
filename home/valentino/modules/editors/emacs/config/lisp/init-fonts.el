@@ -32,26 +32,15 @@
   ;; (:option fontaine-latest-state-file (locate-user-emacs-file "var/fontaine-state.eld"))
 
   (:option fontaine-presets
-           `(
-             ;; Sarasa
-             (sarasa
+           `((sarasa
               :default-family "Sarasa Mono Slab SC"
               :default-height ,vb/font-height
-              :variable-pitch-family "Sarasa Mono Slab SC")
-             ;; Victor Mono
-             ;; (victor
-             ;;  :default-family "VictorMono Nerd Font"
-             ;;  :default-height ,vb/font-height
-	     ;;  :variable-pitch-family "VictorMono Nerd Font")
-             ))
+              :variable-pitch-family "Sarasa Mono Slab SC")))
 
   (fontaine-set-preset (or (fontaine-restore-latest-preset) 'sarasa))
 
   (:with-hook kill-emacs-hook
-    (:hook fontaine-store-latest-preset))
-
-  (:with-hook (modus-themes-after-load-theme-hook ef-themes-post-load-hook)
-    (:hook fontaine-apply-current-preset)))
+    (:hook fontaine-store-latest-preset)))
 
 (provide 'init-fonts)
 ;;; init-fonts.el ends here

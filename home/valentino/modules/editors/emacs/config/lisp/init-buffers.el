@@ -22,7 +22,7 @@
 ;; Additional keymaps using <SPC> prefix
 (setup (:if-feature general)
   (vb/leader-key
-    "z"  '(kill-this-buffer :which-key "Close current buffer")
+    "z"  '(kill-current-buffer :which-key "Close current buffer") ;; More reliable than the old kill-this-buffer (that now wants parameters)
     "k"  '(kill-matching-buffers :which-key "Kill buffers (Regex)")
     "RET" '(bookmark-jump :which-key "Bookmarks")))
 

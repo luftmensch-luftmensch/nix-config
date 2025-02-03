@@ -7,8 +7,8 @@
 ;;; Code:
 
 (setup flymake
-  ;; Dumb `flymake' made me crash for this
-  (add-to-list 'elisp-flymake-byte-compile-load-path load-path)
+  ;; Dumb `flymake' made me crash for this -> Broken on emacs 30
+  ;; (add-to-list 'elisp-flymake-byte-compile-load-path load-path)
 
   (:option flymake-fringe-indicator-position 'left-fringe
            flymake-suppress-zero-counters t
@@ -57,13 +57,6 @@
     (:pkg jinx))
   (:with-mode text-mode
     (:hook #'jinx-mode)))
-
-;; (setup flyspell
-;;   (:with-mode text-mode
-;;     (:hook flyspell-mode))
-;; 
-;;   (:with-mode prog-mode
-;;     (:hook flyspell-prog-mode)))
 
 (provide 'init-spell-and-check)
 ;;; init-spell-and-check.el ends here

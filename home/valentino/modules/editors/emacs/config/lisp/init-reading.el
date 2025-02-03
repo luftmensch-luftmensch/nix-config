@@ -25,7 +25,7 @@
 ;;      [remap evil-open-below] #'pdf-outline
 ;;      [remap evil-window-top] #'pdf-view-fit-height-to-window
 ;;      [remap evil-record-macro] #'quit-window
-;;      [remap evil-execute-last-recorded-macro] #'kill-this-buffer
+;;      [remap evil-execute-last-recorded-macro] #'kill-current-buffer
 ;;      [remap evil-forward-section-begin] #'pdf-view-next-page-command
 ;;      [remap evil-backward-section-begin] #'pdf-view-previous-page-command))
 
