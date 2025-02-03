@@ -28,7 +28,7 @@ in
 
       programs.emacs = {
         enable = true;
-        package = if xorg.enable then pkgs.emacs29-gtk3 else pkgs.emacs29-pgtk;
+        package = if xorg.enable then pkgs.emacs30-gtk3 else pkgs.emacs30-pgtk;
 
         extraPackages =
           epkgs:
@@ -44,12 +44,12 @@ in
           ++ (optionals cfg.telega.enable [
             # melpaPackages.telega is outdated. Pull a newer version directly from the repo
             (melpaPackages.telega.overrideAttrs (_oldAttrs: {
-              version = "0.8.392";
+              version = "0.8.420";
               src = pkgs.fetchFromGitHub {
                 owner = "zevlg";
                 repo = "telega.el";
-                rev = "f4f957253093a449c806397fd6157e19d84a7c02";
-                hash = "sha256-qvbH6pITrgQn8xjtuW5m5D7sJd5Zmj0RZfzRR0dA2+w=";
+                rev = "cd73d4ca12769d44a791dcd95cd79202d6bf377b";
+                hash = "sha256-lyn2+oobswBbRaN42VOe46YIZXyMhr8AhZdl/d4A6hg=";
               };
             }))
           ]);
