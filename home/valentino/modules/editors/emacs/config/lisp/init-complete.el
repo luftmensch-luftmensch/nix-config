@@ -60,9 +60,10 @@
             (zap-up-to-char (- arg) ?/)
           (delete-minibuffer-contents))
       (backward-kill-word arg)))
+
   ;; Automatic directory creation on find-file
-  (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
-    "Create parent directory if not exists while visiting file."
+  (define-advice find-file (:before (filename &optional wildcards) make-directory-maybe)
+    "Create parent directory if it does not exist while visiting a file."
     (unless (file-exists-p filename)
       (let ((dir (file-name-directory filename)))
         (unless (file-exists-p dir)

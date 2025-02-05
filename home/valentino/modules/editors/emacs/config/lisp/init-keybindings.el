@@ -33,14 +33,6 @@
     "el" '(elfeed :which-key "Elfeed - view")
     "eu" '(elfeed-update :which-key "Elfeed - update")
 
-    ;; EMMS
-    ;; "a"  '(:ignore t :which-key "Music")
-    ;; "a a" '(emms-play-directory :which-key "Play playlist")
-    ;; "a s" '(emms-play-directory :which-key "Play/Pause")
-    ;; "a x" '(emms-stop :which-key "Stop")
-    ;; "a n" '(emms-next :which-key "Next track")
-    ;; "a p" '(emms-previous :which-key "Previous track")
-
     "s" '(vterm :which-key "Open terminal")
 
     ;; Agenda
