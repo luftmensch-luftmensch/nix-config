@@ -3,7 +3,11 @@
   valentino.modules = {
     apps = {
       rofi.enable = true;
-      vnc.enable = true;
+      vnc = {
+        anydesk.enable = true;
+        remmina.enable = true;
+        horizon.enable = true;
+      };
     };
 
     xorg = {

@@ -9,13 +9,17 @@ let
   cfg = config.valentino.modules.apps.vnc;
 in
 {
-  options.valentino.modules.apps.vnc.enable = mkEnableOption "enable vnc capabilities";
-
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      remmina
-      anydesk
-      # TODO: try out rustdesk
-    ];
+  options.valentino.modules.apps.vnc = {
+    remmina.enable = mkEnableOption "enable remmina";
+    horizon.enable = mkEnableOption "enable vmware horizon client";
+    anydesk.enable = mkEnableOption "enable anydesk";
+    rustdesk.enable = mkEnableOption "enable rustdesk";
   };
+
+  config = mkMerge [
+    (mkIf cfg.remmina.enable { home.packages = [ pkgs.remmina ]; })
+    (mkIf cfg.anydesk.enable { home.packages = [ pkgs.anydesk ]; })
+    (mkIf cfg.rustdesk.enable { home.packages = [ pkgs.rustdesk ]; })
+    (mkIf cfg.horizon.enable { home.packages = [ pkgs.vmware-horizon-client ]; })
+  ];
 }
