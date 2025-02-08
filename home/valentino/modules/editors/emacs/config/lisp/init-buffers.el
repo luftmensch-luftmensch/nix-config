@@ -122,6 +122,10 @@
   (:with-map debugger-mode-map
     (:bind [remap evil-record-macro] 'top-level)))
 
+(setup help
+  (:with-map help-mode-map
+    (:bind [remap evil-record-macro] 'quit-window)))
+
 ;; Regex for buffers
 (defun vb/regex-kill-buffers (regexp)
   "Kill buffers matching REGEXP without asking for confirmation."
