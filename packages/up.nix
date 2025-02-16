@@ -5,7 +5,7 @@
   ...
 }:
 let
-  version = "1.1.0";
+  version = "1.2.1";
 in
 buildGoModule {
   pname = "up";
@@ -15,7 +15,7 @@ buildGoModule {
     owner = "jesusprubio";
     repo = "up";
     rev = "v${version}";
-    hash = "sha256-sr57l/yDCsc+PUCjtSrOKdtAxqObDJpO6zF6eWVKezc=";
+    hash = "sha256-H5JACzdbIAlc38oTX8uv8YnLZhgsJlFcQeB2RoJkfpg=";
   };
 
   ldflags = [
@@ -26,14 +26,7 @@ buildGoModule {
 
   vendorHash = "sha256-/Gsqc8rEptMBItqeb/N/gE4V3iUGZa8k1GqUR1+togY=";
 
-  checkFlags =
-    let
-      # Skip tests that require network access
-      skippedTests = [
-        "TestDNSProbe"
-      ];
-    in
-    [ "-skip=^${builtins.concatStringsSep "$|^" skippedTests}$" ];
+  checkFlags = [ "-skip=^TestDNSProbe$" ];
 
   meta = {
     description = "Troubleshoot problems with your Internet connection";
