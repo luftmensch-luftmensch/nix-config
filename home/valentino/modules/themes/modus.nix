@@ -20,9 +20,9 @@ in
       };
 
       cursorTheme = {
-        name = "Capitaine Cursors";
+        name = if cfg.darkTheme then "phinger-cursors-dark" else "phinger-cursors-light"; # "Capitaine Cursors";
         inherit (cfg.cursor) size;
-        package = pkgs.capitaine-cursors-themed;
+        package = pkgs.phinger-cursors; # pkgs.capitaine-cursors-themed;
       };
     };
 
