@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.xorg.picom;
-in {
+in
+{
   options.valentino.modules.xorg.picom.enable = mkEnableOption "picom configuration";
 
   config = mkIf cfg.enable {
@@ -45,11 +47,15 @@ in {
         frame-opacity = 0.7;
         inactive-opacity-override = false;
 
-        opacityRules = [
-          "90:class_g = 'floating_term'"
-          "90:class_g = 'kitty'"
-          "90:class_g = 'Alacritty'"
-        ];
+        opacityRules =
+          [
+            "90:class_g = 'floating_term'"
+            "90:class_g = 'Alacritty'"
+          ]
+          ++ lib.optionals config.valentino.modules.term.kitty.enable [
+            "90:class_g = 'Kitty'"
+            "90:class_g = 'kitty'"
+          ];
 
         # GLX backend: Avoid using stencil buffer, useful if you don't have a
         # stencil buffer. Might cause incorrect opacity when rendering

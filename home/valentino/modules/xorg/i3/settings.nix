@@ -12,7 +12,11 @@ let
   _pactl = "${pkgs.pulseaudio}/bin/pactl";
   _pamixer = "${pkgs.pamixer}/bin/pamixer --get-volume";
   _notify = "${lib.getExe pkgs.libnotify} -r 1 -u low -t 800";
-  _terminal = if config.valentino.modules.term.kitty.enable then "${lib.getExe pkgs.kitty}" else "${lib.getExe pkgs.alacritty}";
+  _terminal =
+    if config.valentino.modules.term.kitty.enable then
+      "${lib.getExe pkgs.kitty}"
+    else
+      "${lib.getExe pkgs.alacritty}";
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix { inherit theme palette; };
   menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
 
@@ -112,7 +116,7 @@ in
     "${mod}+s" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
 
     Print = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
-    "${mod}+Return" = "exec --no-startup-id ${_terminal} -T Alacritty";
+    "${mod}+Return" = "exec --no-startup-id ${_terminal} -T Kitty";
     "${mod}+Shift+Return" = "exec --no-startup-id ${_terminal} -T floating_term";
 
     "${mod}+b" = "exec --no-startup-id ${lib.getExe pkgs.firefox}";
@@ -187,7 +191,7 @@ in
     floating_minimum_size 75 x 50
     floating_maximum_size 1000 x 1000
 
-    # Alacritty
+    # floating terminal
     for_window [title="floating_term"] floating enable, move position center, resize set 700 400
 
     # Feh
