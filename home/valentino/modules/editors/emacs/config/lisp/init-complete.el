@@ -152,9 +152,7 @@
   (marginalia-mode 1))
 
 ;; Note: All-the-icons-completion depends on an already installed all-the-icons.
-;; TODO: Remove fork when https://github.com/iyefrat/all-the-icons-completion/pull/33 is merged
-;; TODO: Then, remove direct reference to GitHub when on MELPA
-
+;; TODO: Remove fork when https://github.com/iyefrat/all-the-icons-completion/pull/33 is merged. Then, remove direct reference to GitHub when on MELPA
 (setup (:pkg (all-the-icons-completion :type git :host github :repo "iyefrat/all-the-icons-completion"
                                        :fork (:host github
                                                     :repo "maxecharel/all-the-icons-completion"

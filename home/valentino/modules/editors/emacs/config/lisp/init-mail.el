@@ -156,26 +156,14 @@ To improve."
   ;; Saved searches
   (:option notmuch-saved-searches
            ;; Personal
-           `(( :name "📥 inbox (personal)"
-               :query "tag:inbox and tag:personal"
-               :sort-order newest-first
-               :key ,(kbd "p i"))
-             ( :name "📔 unread (personal)"
-               :query "tag:unread and tag:inbox and tag:personal"
-               :sort-order newest-first
-               :key ,(kbd "p u"))
-             ;; University
-             ;; ( :name "📥 inbox (university)"
-             ;;   ;; :query "tag:inbox and tag:university"
-             ;;   ;; TODO: Investigate -> For some reason the mail in unina are not marked as inbox
-             ;;   :query "tag:university"
-             ;;   :sort-order newest-first
-             ;;   :key ,(kbd "u i"))
-             ;; ( :name "📔 unread (university)"
-             ;;   :query "tag:unread and tag:inbox and tag:university"
-             ;;   :sort-order newest-first
-             ;;   :key ,(kbd "u u"))
-             ))
+           `((:name "📥 inbox (personal)"
+                    :query "tag:inbox and tag:personal"
+                    :sort-order newest-first
+                    :key ,(kbd "p i"))
+             (:name "📔 unread (personal)"
+                    :query "tag:unread and tag:inbox and tag:personal"
+                    :sort-order newest-first
+                    :key ,(kbd "p u"))))
 
   ;; Tags
   (:option notmuch-archive-tags vb/notmuch-mark-archive-tags
