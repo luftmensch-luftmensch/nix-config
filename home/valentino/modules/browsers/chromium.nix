@@ -134,6 +134,8 @@ in
         [
           { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock
           { id = "iaiomicjabeggjcfkbimgmglanimpnae"; } # tab manager
+          { id = "inojafojbhdpnehkhhfjalgjjobnhomj"; } # tempmail
+          { id = "fonalplhodhnenmokepaijoemaednpjm"; } # directo
         ]
         ++ (lib.optionals bitwarden.enable) [ { id = "nngceckbapebfimnlniiiahkandclblb"; } ]
         ++ (lib.optionals _1password.enable) [ { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } ];
