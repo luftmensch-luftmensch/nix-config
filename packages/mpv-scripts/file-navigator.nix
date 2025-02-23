@@ -9,8 +9,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "jonniek";
     repo = finalAttrs.pname;
-    rev = "a67c8280a7711cfaa5871f55d53ddb017f6d7b4c";
-    sha256 = "08800syb9x5d4k9pqylfsi313ggg1sf20cnf48fcgbn54l7sm4hx";
+    rev = "51242195da9b3231ab7fde367a63dc58fb6858f3";
+    hash = "sha256-JjYDBdoPcNH+SVbOIFICJSM1sH6t6IEA2yHnHMbHpV8=";
   };
 
   dontBuild = true;
@@ -21,19 +21,19 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  postPatch = ''
-    substituteInPlace navigator.lua \
-      --replace-fail "'/media/HDD2/music/music/'," "" \
-      --replace-fail "'/media/HDD/users/anon/Downloads/'," "" \
-      --replace-fail "'/home/anon/'," ""
-  '';
+  # postPatch = ''
+  #   substituteInPlace navigator.lua \
+  #     --replace-fail "'/media/HDD2/music/music/'," "" \
+  #     --replace-fail "'/media/HDD/users/anon/Downloads/'," "" \
+  #     --replace-fail "'/home/anon/'," ""
+  # '';
 
   passthru.scriptName = "navigator.lua";
 
   meta = {
     description = "Navigate and open your local files in mpv";
     homepage = "https://github.com/jonniek/mpv-filenavigator";
-    license = lib.licenses.unfree;
+    license = lib.licenses.unlicense;
     maintainers = with lib.maintainers; [ luftmensch-luftmensch ];
   };
 })
