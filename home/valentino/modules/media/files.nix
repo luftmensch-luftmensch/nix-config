@@ -7,12 +7,18 @@
 with lib;
 let
   cfg = config.valentino.modules.media.files;
+  terminal =
+    with lib;
+    with pkgs;
+    if config.valentino.modules.term.kitty.enable then "${getExe kitty}" else "${getExe alacritty}";
 in
 {
   options.valentino.modules.media.files = {
     filezilla.enable = mkEnableOption "enable filezilla";
     libreoffice.enable = mkEnableOption "enable libreoffice";
     localsend.enable = mkEnableOption "localsend - An open source cross-platform alternative to AirDrop";
+    nemo.enable = mkEnableOption "nemo file browser";
+
     qrcp = {
       enable = mkEnableOption "enable qrcp";
       interface = mkOption {
@@ -47,5 +53,10 @@ in
     (mkIf cfg.libreoffice.enable { home.packages = [ pkgs.libreoffice ]; })
 
     (mkIf cfg.localsend.enable { home.packages = [ pkgs.localsend ]; })
+
+    (mkIf cfg.nemo.enable {
+      home.packages = [ pkgs.nemo-with-extensions ];
+      dconf.settings."org/cinnamon/desktop/applications/terminal".exec = "${terminal}";
+    })
   ];
 }

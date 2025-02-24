@@ -58,6 +58,7 @@
       files = {
         filezilla.enable = true;
         localsend.enable = true;
+        nemo.enable = true;
         qrcp = {
           enable = true;
           interface = "wlp3s0";

@@ -79,7 +79,6 @@ let
 
   desktop = with pkgs; [
     transmission_4-gtk
-    nemo-with-extensions
     gnome-disk-utility
     networkmanagerapplet
   ];

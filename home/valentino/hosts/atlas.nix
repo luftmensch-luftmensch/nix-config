@@ -59,6 +59,7 @@
         filezilla.enable = true;
         libreoffice.enable = true;
         localsend.enable = true;
+        nemo.enable = true;
         qrcp = {
           enable = true;
           interface = "enp2s0";
