@@ -64,6 +64,8 @@ in
         SPACE = "cycle pause";
         "Ctrl+w" = "ignore";
         "Ctrl+c" = "ignore";
+        WHEEL_LEFT = "ignore";
+        WHEEL_RIGHT = "ignore";
 
         # Screenshot
         s = "screenshot";
