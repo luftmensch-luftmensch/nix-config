@@ -41,8 +41,6 @@ in
         # Volume
         j = "add volume -2";
         k = "add volume 2";
-        WHEEL_UP = "add volume 2";
-        WHEEL_DOWN = "add volume -2";
 
         # Speed
         "[" = "multiply speed 1/1.1";

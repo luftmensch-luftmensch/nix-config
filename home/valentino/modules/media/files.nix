@@ -10,7 +10,7 @@ let
   terminal =
     with lib;
     with pkgs;
-    if config.valentino.modules.term.kitty.enable then "${getExe kitty}" else "${getExe alacritty}";
+    if config.valentino.modules.xorg.enable then "${getExe kitty}" else "${getExe foot}";
 in
 {
   options.valentino.modules.media.files = {
