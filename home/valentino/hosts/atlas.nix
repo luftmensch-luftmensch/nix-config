@@ -10,10 +10,7 @@
       };
     };
 
-    xorg = {
-      enable = true;
-      wm = "i3";
-    };
+    xorg.enable = true;
 
     browsers = {
       firefox.enable = true;

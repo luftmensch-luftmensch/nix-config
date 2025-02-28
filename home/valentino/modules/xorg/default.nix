@@ -4,19 +4,12 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.xorg;
-in {
-  options.valentino.modules.xorg = {
-    enable = mkEnableOption "xorg configuration management for user";
-
-    wm = mkOption {
-      description = "An option to choose the window manager [xorg] configuration to enable";
-      default = null;
-      type = types.nullOr (types.enum ["i3"]);
-      example = "i3";
-    };
-  };
+in
+{
+  options.valentino.modules.xorg.enable = mkEnableOption "xorg configuration management for user";
 
   config = mkIf cfg.enable {
     xsession.enable = true;

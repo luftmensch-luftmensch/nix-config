@@ -13,7 +13,7 @@ let
   inherit (config.colorScheme) palette;
 in
 {
-  config = mkIf (cfg.enable && cfg.wm == "i3") {
+  config = mkIf cfg.enable {
     xsession = {
       enable = true;
       initExtra = "xset b off";
