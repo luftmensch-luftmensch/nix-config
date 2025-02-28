@@ -207,7 +207,5 @@
       margin: 0.2rem;
       padding: 0 4px;
     }
-
-
   '';
 }

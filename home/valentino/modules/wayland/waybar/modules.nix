@@ -23,6 +23,7 @@ let
         --arg percentage "${percentage}" \
         '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
     ''}/bin/waybar-${name}";
+
 in
 {
   # Shared modules
@@ -30,32 +31,31 @@ in
     return-type = "json";
     exec = jsonOutput "menu" {
       text = "";
-      tooltip = ''$(cat /etc/os-release | grep PRETTY_NAME | cut -d '"' -f2)'';
+      tooltip = ''$(grep PRETTY_NAME /etc/os-release | cut -d '"' -f2)'';
     };
     on-click = "rofi-powermenu";
   };
+
   "sway/workspaces" = {
     disable-scroll = true;
     all-outputs = false;
     format = "{name}";
   };
 
-  "sway/mode" = {
-    format = "<span style=\"italic\"> {}</span>";
-  };
+  "sway/mode".format = "<span style=\"italic\"> {}</span>";
 
   "sway/window" =
     let
       _grim = "${lib.getExe pkgs.grim} -g";
       _slurp = "${lib.getExe pkgs.slurp}";
       _swaymsg = "${pkgs.sway}/bin/swaymsg";
+      _date = "${pkgs.coreutils}/bin/date +'screenshot_%Y-%m-%d_%H%M%S.png'";
 
       # I fucking hate this mess but I cannot find a way to escape this
       _screenshot_current_window = pkgs.writeShellScriptBin "_screenshot_current_window" ''
-        ${_grim} "$(${_swaymsg} -t get_tree | ${lib.getExe pkgs.jq} -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png')
+        ${_grim} "$(${_swaymsg} -t get_tree | ${lib.getExe pkgs.jq} -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" ~/$(${_date})
       '';
-
-      _cmd_r = "(XCURSOR_SIZE=48 ${_slurp} -w 1 -c A5BAD1 -s C3DFFE94 | ${_grim} - ~/$(date +'Screenshot_%Y-%m-%d_%H%M%S.png'))";
+      _cmd_r = "(XCURSOR_SIZE=48 ${_slurp} -w 1 -c A5BAD1 -s C3DFFE94 | ${_grim} - ~/$(${_date}))";
     in
     {
       max-length = 50;
