@@ -7,7 +7,7 @@
 with lib;
 let
   cfg = config.valentino.modules.wayland.locker;
-  inherit (config.wayland.windowManager) sway hyprland;
+  inherit (config.wayland.windowManager) sway;
   inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
 in
@@ -67,14 +67,14 @@ in
         };
     };
 
-    services.swayidle =
-      let
-        swaylock = "${lib.getExe pkgs.swaylock-effects} -fF";
-      in
-      {
-        enable = true;
+    services.swayidle = {
+      enable = true;
 
-        events = [
+      events =
+        let
+          swaylock = "${lib.getExe pkgs.swaylock-effects} -fF";
+        in
+        [
           {
             event = "before-sleep";
             command = "${swaylock}";
@@ -85,37 +85,19 @@ in
           }
         ];
 
-        timeouts =
-          let
-            hyprctl = "${pkgs.hyprland}/bin/hyprctl";
-            swaymsg = "${pkgs.sway}/bin/swaymsg";
-          in
-          [
-            {
-              timeout = 300;
-              command = "${swaylock}";
-            }
-          ]
-          ++ (optionals sway.enable [
-            {
-              timeout = 360;
-              command = "${swaymsg} output * dpms off";
-              resumeCommand = "${swaymsg} output * dpms on";
-            }
-          ])
-          ++ (optionals hyprland.enable [
-            {
-              timeout = 360;
-              command = "${hyprctl} dispatch dpms off";
-              resumeCommand = "${hyprctl} dispatch dpms on";
-            }
-          ]);
-      };
-
-    systemd.user.services.swayidle.Install = {
-      WantedBy =
-        (optionals sway.enable [ "sway-session.target" ])
-        ++ (optionals hyprland.enable [ "hyprland-session.target" ]);
+      timeouts =
+        let
+          swaymsg = "${pkgs.sway}/bin/swaymsg";
+        in
+        [
+          {
+            timeout = 360;
+            command = "${swaymsg} output * dpms off";
+            resumeCommand = "${swaymsg} output * dpms on";
+          }
+        ];
     };
+
+    systemd.user.services.swayidle.Install.WantedBy = (optionals sway.enable [ "sway-session.target" ]);
   };
 }

@@ -16,7 +16,7 @@ let
   inherit (config.colorScheme) palette;
 in
 {
-  config = mkIf (cfg.enable && (elem "sway" cfg.wm)) {
+  config = mkIf cfg.enable {
     wayland.windowManager.sway = {
       enable = true;
       xwayland = true;

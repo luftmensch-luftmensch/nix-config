@@ -9,21 +9,7 @@ let
   cfg = config.valentino.modules.wayland;
 in
 {
-  options.valentino.modules.wayland = {
-    enable = mkEnableOption "wayland configuration management for user";
-    wm = mkOption {
-      description = "An option to choose the window manager [wayland] configuration to enable";
-      default = [ ];
-      type =
-        with types;
-        listOf (enum [
-          "sway"
-          "hyprland"
-          ""
-        ]);
-      example = [ "sway" ];
-    };
-  };
+  options.valentino.modules.wayland.enable = mkEnableOption "wayland configuration";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [

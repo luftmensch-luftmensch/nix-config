@@ -70,7 +70,6 @@
     "wayland/sway"              = import ./wayland/sway;
     "wayland/swaync"            = import ./wayland/swaync;
     "wayland/waybar"            = import ./wayland/waybar;
-    "wayland/hyprland"          = import ./wayland/hyprland.nix;
     "wayland/locker"            = import ./wayland/locker.nix;
     "wayland/random-background" = import ./wayland/random-background.nix;
 

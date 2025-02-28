@@ -10,10 +10,7 @@
       };
     };
 
-    wayland = {
-      enable = true;
-      wm = [ "sway" ];
-    };
+    wayland.enable = true;
 
     browsers = {
       firefox.enable = true;
@@ -46,9 +43,7 @@
         telega.enable = true;
         orgSetupFiles.enable = true;
       };
-      intellij.enable = true;
       neovim.enable = true;
-      vscode.enable = true;
     };
 
     media = {
@@ -69,11 +64,7 @@
       videos.enable = true;
     };
 
-    term = {
-      alacritty.enable = true;
-      kitty.enable = true;
-      foot.enable = true;
-    };
+    term.foot.enable = true;
 
     shell = {
       bash.enable = true;
