@@ -3,7 +3,7 @@
 # Configurations folder
 theme="$HOME/.config/rofi/themes/powermenu"
 
-uptime_command=$(uptime -p | sed -e 's/up //g')
+uptime_command=$(awk '{d=int($1/86400); h=int(($1%86400)/3600); m=int(($1%3600)/60); printf("%s%s%d minutes\n", d?d" days, ":"", h?h" hours, ":"", m)}' /proc/uptime)
 rofi_command="rofi -theme $theme"
 
 # Options
