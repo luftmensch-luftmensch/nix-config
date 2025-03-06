@@ -24,10 +24,10 @@
            telega-chat-button-width 30
            switch-to-buffer-preserve-window-point t
            telega-chat--display-buffer-action '((display-buffer-reuse-window display-buffer-use-some-window))
-           telega-contact-birthdays-mode nil ;; I don't really care of birthday top popup in telega
            telega-root-fill-column (+ 50 telega-chat-button-width)
            telega-chat-fill-column (+ 50 telega-chat-button-width)
            telega-chat-input-markups '("markdown2" "org"))
+
 
   (put (get 'telega-chat 'button-category-symbol)
        :inserter 'telega-ins--chat-full-2lines)
@@ -47,10 +47,10 @@
 
   (:with-map telega-image-mode-map
     (:bind
-    [remap evil-record-macro] #'bury-buffer
-    [remap evil-execute-last-recorded-macro] #'kill-current-buffer
-    "C-+" #'image-increase-size
-    "C--" #'image-decrease-size))
+     [remap evil-record-macro] #'bury-buffer
+     [remap evil-execute-last-recorded-macro] #'kill-current-buffer
+     "C-+" #'image-increase-size
+     "C--" #'image-decrease-size))
 
   (:when-loaded
     (:also-load telega-mnz)
@@ -69,7 +69,9 @@
     (:hook visual-fill-column-mode))
 
   (:with-hook telega-load-hook
-    (:hook telega-notifications-mode)))
+    (:hook telega-notifications-mode))
+  ;; I don't really care of birthday top popup in telega
+  (:when-loaded (telega-contact-birthdays-mode -1)))
 
 (setup (:if-feature general)
   (vb/leader-key

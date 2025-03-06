@@ -28,6 +28,20 @@
               (let ((process-connection-type nil))
                 (start-process "" nil "emacsclient" fPath))) myFileList)))
 
+  ;; Mark all files except those specified by user interaction. Those file needs to be passed as string
+  (defun vb/dired-mark-all-except (exclude-list)
+    "Mark all files in Dired except those in EXCLUDE-LIST."
+    (interactive
+     (list (split-string
+            (read-string "Enter filenames to exclude (separated by spaces): ") " " t)))
+    (dired-mark-files-regexp ".*")  ;; Mark everything
+    (dolist (file exclude-list)
+      (save-excursion
+        (goto-char (point-min))
+        (when (search-forward file nil t)
+          (dired-unmark 1)))))  ;; Unmark only excluded files
+
+
   ;; Kill the current Dired buffer, then visit the file or directory
   (put 'dired-find-alternate-file 'disabled nil)
 
