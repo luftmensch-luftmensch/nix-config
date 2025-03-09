@@ -17,6 +17,7 @@
 
   "dev/adb"            = import ./dev/adb.nix;
   "dev/docker"         = import ./dev/docker.nix;
+  "dev/keyboard"       = import ./dev/keyboard.nix;
   "dev/manpages"       = import ./dev/manpages.nix;
   "dev/virtualisation" = import ./dev/virtualisation.nix;
 
