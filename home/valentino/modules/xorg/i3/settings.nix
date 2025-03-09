@@ -37,6 +37,9 @@ in
     F1 = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ -10% && echo $(${_pamixer}) > $xob_sock";
     F2 = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ +10% && echo $(${_pamixer}) > $xob_sock";
 
+    XF86AudioLowerVolume = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ -10% && echo $(${_pamixer}) > $xob_sock";
+    XF86AudioRaiseVolume = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ +10% && echo $(${_pamixer}) > $xob_sock";
+
     F3 = "exec --no-startup-id ${_pactl} set-sink-mute @DEFAULT_SINK@ toggle && ${_notify} -i audio-input-microphone \"$(${_pactl} get-sink-mute @DEFAULT_SINK@ | grep -q 'no' && echo 'Unmuted' || echo 'Muted')\"";
     F4 = "exec --no-startup-id ${_pactl} set-source-mute @DEFAULT_SOURCE@ toggle && ${_notify} -i audio-input-microphone \"$(${_pactl} get-source-mute @DEFAULT_SOURCE@ | grep -q 'no' && echo 'Mic unmuted' || echo 'Mic muted')\"";
 
