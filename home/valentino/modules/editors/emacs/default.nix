@@ -28,7 +28,7 @@ in
 
       programs.emacs = {
         enable = true;
-        package = if xorg.enable then pkgs.emacs29-gtk3 else pkgs.emacs29-pgtk;
+        package = if xorg.enable then pkgs.emacs-gtk else pkgs.emacs-pgtk;
 
         extraPackages =
           epkgs:
