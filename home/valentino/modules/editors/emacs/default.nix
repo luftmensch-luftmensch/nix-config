@@ -24,6 +24,7 @@ in
         hunspell
         hunspellDicts.it_IT
         hunspellDicts.en_US
+        vips # required by dirvish
       ];
 
       programs.emacs = {
