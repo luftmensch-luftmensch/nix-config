@@ -3,6 +3,7 @@
   valentino.modules = {
     apps = {
       rofi.enable = true;
+      teams.enable = true;
       vnc = {
         anydesk.enable = true;
         remmina.enable = true;

@@ -31,7 +31,7 @@ let
         homeDirectory = "/home/${username}";
       };
 
-      utils = import ./utils.nix {
+      infra = import ./infra.nix {
         inherit (nixpkgs) lib;
         inherit pkgs;
       };
@@ -55,7 +55,7 @@ let
           inputs
           outputs
           unstable-pkgs
-          utils
+          infra
           ;
       };
     };
