@@ -67,14 +67,15 @@ in
         };
     };
 
-    services.swayidle = {
-      enable = true;
+    services.swayidle =
+      let
+        swaylock = "${lib.getExe pkgs.swaylock-effects} -fF";
+        swaymsg = "${pkgs.sway}/bin/swaymsg";
+      in
+      {
+        enable = true;
 
-      events =
-        let
-          swaylock = "${lib.getExe pkgs.swaylock-effects} -fF";
-        in
-        [
+        events = [
           {
             event = "before-sleep";
             command = "${swaylock}";
@@ -85,18 +86,25 @@ in
           }
         ];
 
-      timeouts =
-        let
-          swaymsg = "${pkgs.sway}/bin/swaymsg";
-        in
-        [
+        timeouts = [
+          {
+            timeout = 300;
+            command = "${swaylock}";
+          }
+
           {
             timeout = 360;
             command = "${swaymsg} output * dpms off";
             resumeCommand = "${swaymsg} output * dpms on";
           }
+
+          # {
+          #   timeout = 360;
+          #   command = "${swaymsg} 'output * dpms off'";
+          #   resumeCommand = "${swaymsg} 'output * dpms on'";
+          # }
         ];
-    };
+      };
 
     systemd.user.services.swayidle.Install.WantedBy = (optionals sway.enable [ "sway-session.target" ]);
   };
