@@ -34,6 +34,7 @@ in
     enable = mkEnableOption "main user git configuration";
     gh.enable = mkEnableOption "enable gh";
     lazygit.enable = mkEnableOption "enable lazygit";
+    gitbutler.enable = mkEnableOption "enable gitbutler";
   };
 
   config = mkMerge [
@@ -207,9 +208,9 @@ in
         };
       };
     })
-  ];
 
-  # config = mkIf cfg.enable {
-  #
-  # };
+    (mkIf cfg.gitbutler.enable {
+      home.packages = [ pkgs.gitbutler ];
+    })
+  ];
 }
