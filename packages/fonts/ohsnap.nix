@@ -16,8 +16,9 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     runHook preInstall
-    mkdir -p $out/share/fonts/truetype
-    install -Dm644 *.otf $out/share/fonts/truetype
+    mkfontdir "$out/share/fonts"
+    install -m 644 -D *.pcf -t "$out/share/fonts"
+    install -m 644 -D *.psfu -t "$out/share/kbd/consolefonts"
     runHook postInstall
   '';
 

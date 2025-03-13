@@ -5,13 +5,13 @@
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "M-x";
-  version = "0-unstable-2024-08-31";
+  version = "0-unstable-2025-03-10";
 
   src = fetchFromGitHub {
     owner = "Seme4eg";
     repo = "mpv-scripts";
-    rev = "229cb615e701fafa8d7c3077286053243b252525";
-    hash = "sha256-xekWIjqVkan1XS7dIqt5iZzI+CgByb9OjYE+GULYgMs=";
+    rev = "beee45c82e6cd7a77aeb2bbd51e364d5a2899614";
+    hash = "sha256-VAWYP00FNrsdjpGdh5J8AnnZIVv9DqwEP4J4QuNFjmg=";
   };
 
   scriptPath = ".";
