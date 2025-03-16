@@ -79,6 +79,7 @@
     "t t" '(telega :which-key "Open Telega")
     "t c" '(telega-chat-with :which-key "Chat with")
     "t s" '(telega-view-search :which-key "Search for...")
+    "t f" '(telega-chabuf-input-formatting-set :which-key "Format region")
     "t q" '(telega-kill :wich-key "Close Telega")))
 
 
