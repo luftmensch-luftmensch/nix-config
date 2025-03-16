@@ -35,7 +35,7 @@
            backup-by-copying t
            version-control t
            delete-old-versions t
-           kept-new-versions 5
+           kept-new-versions 2
            kept-old-versions 0
            create-lockfiles nil
            auto-save-include-big-deletions t))
@@ -43,12 +43,10 @@
 ;;; Lines related
 
 (setup display-line-numbers
-  ;; Defaults
-  (setq-default display-line-numbers-widen t)
-  (setq-default display-line-numbers-width 3)
-
   ;; Preferences
-  (:option display-line-numbers-type 'relative
+  (:option display-line-numbers-widen t
+           display-line-numbers-width 3
+           display-line-numbers-type 'relative
            display-line-numbers-width-start nil
            display-line-numbers-grow-only t)
 
@@ -129,9 +127,6 @@
            kill-whole-line t
            select-enable-clipboard t
            select-enable-primary nil))
-
-;; (setup (:pkg goto-last-change)
-;;   (:global "C-z" goto-last-change))
 
 (setup (:require autorevert)
   (:hide-mode auto-revert)
