@@ -11,17 +11,27 @@ in
   options.valentino.modules.credentials.ssh.enable = mkEnableOption "ssh user configuration";
 
   config = mkIf cfg.enable {
-    sops.secrets."personal/config" = {
-      sopsFile = ./personal/config;
-      mode = "0400";
-      format = "binary";
-      path = "${config.home.homeDirectory}/.ssh/personal/config";
+    sops.secrets = {
+      "personal/config" = {
+        sopsFile = ./personal/config;
+        mode = "0400";
+        format = "binary";
+        path = "${config.home.homeDirectory}/.ssh/personal/config";
+      };
+
+      "work/config" = {
+        sopsFile = ./work/config;
+        mode = "0400";
+        format = "binary";
+        path = "${config.home.homeDirectory}/.ssh/work/config";
+      };
     };
 
     programs.ssh = {
       enable = true;
       includes = [
         "personal/config"
+        "work/config"
       ];
     };
   };
