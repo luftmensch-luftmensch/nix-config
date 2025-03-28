@@ -3,10 +3,12 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.apps.thunderbird;
   inherit (config.colorScheme) palette;
-in {
+in
+{
   options.valentino.modules.apps.thunderbird.enable = mkEnableOption "thunderbird configuration";
 
   config = mkIf cfg.enable {
@@ -19,7 +21,7 @@ in {
           isDefault = true;
           settings = {
             "mail.spellcheck.inline" = false;
-            "javascript.enabled" = false;
+            "javascript.enabled" = true;
 
             # General
             "general.useragent.override" = "";
