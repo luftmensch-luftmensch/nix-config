@@ -53,7 +53,7 @@ in
         })
 
         (mkIf cfg.cpuTuning {
-          set-cpu.body =
+          setc.body =
             let
               cpupower = "${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set";
             in

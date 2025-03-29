@@ -209,7 +209,7 @@ in
     printf "%s\n" "$(tput bold)🔽 RECEIVED    $(tput sgr0): $received"
   '';
 
-  set-brightness.body =
+  setb.body =
     let
       ddcutil = "${pkgs.ddcutil}/bin/ddcutil";
     in
