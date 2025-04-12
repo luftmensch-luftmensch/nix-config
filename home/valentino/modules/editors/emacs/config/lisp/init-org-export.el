@@ -31,17 +31,45 @@
   ;; (add-to-list 'org-latex-listings-langs '(groovy "groovy"))
 
   ;; LaTeX base classes
-  (:when-loaded (add-to-list 'org-latex-classes
-                             '("org-plain-latex"
-                               "\\documentclass{article}
-                 [NO-DEFAULT-PACKAGES]
-                 [PACKAGES]
-                 [EXTRA]"
-                               ("\\section{%s}" . "\\section*{%s}")
-                               ("\\subsection{%s}" . "\\subsection*{%s}")
-                               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
+  ;; (:when-loaded (add-to-list 'org-latex-classes
+  ;;                            '("org-plain-latex"
+  ;;                              "\\documentclass{article}
+  ;;                [NO-DEFAULT-PACKAGES]
+  ;;                [PACKAGES]
+  ;;                [EXTRA]"
+  ;;                              ("\\section{%s}" . "\\section*{%s}")
+  ;;                              ("\\subsection{%s}" . "\\subsection*{%s}")
+  ;;                              ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  ;;                              ("\\paragraph{%s}" . "\\paragraph*{%s}")
+  ;;                              ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+  ;; Additional latex classes
+  (with-eval-after-load 'ox-latex
+    ;; Aggiungi org-plain-latex
+    (add-to-list 'org-latex-classes
+		 '("org-plain-latex"
+		   "\\documentclass{article}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+		   ("\\section{%s}" . "\\section*{%s}")
+		   ("\\subsection{%s}" . "\\subsection*{%s}")
+		   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+		   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+		   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+    ;; Aggiungi extreport
+    (add-to-list 'org-latex-classes
+		 '("extreport"
+                   "\\documentclass{extreport}"
+                   ("\\chapter{%s}" . "\\chapter*{%s}")
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
+
+  )
 
 ;; Reveal.js
 (setup (:pkg (ox-reveal :type git :host github :repo "yjwen/org-reveal"))
