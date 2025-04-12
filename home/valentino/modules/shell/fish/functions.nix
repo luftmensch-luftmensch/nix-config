@@ -225,8 +225,12 @@ in
             echo "Setting to min"
             "${ddcutil}" setvcp 10 "30" 12 "30"
           case '*'
-            echo "Setting display brightness to $argv[1]"
-            "${ddcutil}" setvcp 10 "$argv[1]" 12 "$argv[1]"
+            if string match -qr '^-?[0-9]+(\.?[0-9]*)?$' "$argv[1]"
+              echo "Setting display brightness to $argv[1]"
+              "${ddcutil}" setvcp 10 "$argv[1]" 12 "$argv[1]"
+            else
+              echo "The given value $argv[1] is not a valid one"
+            end
         end
       end
     '';
