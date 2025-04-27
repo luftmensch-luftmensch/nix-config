@@ -21,13 +21,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  # postPatch = ''
-  #   substituteInPlace navigator.lua \
-  #     --replace-fail "'/media/HDD2/music/music/'," "" \
-  #     --replace-fail "'/media/HDD/users/anon/Downloads/'," "" \
-  #     --replace-fail "'/home/anon/'," ""
-  # '';
-
   passthru.scriptName = "navigator.lua";
 
   meta = {
