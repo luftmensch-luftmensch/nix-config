@@ -131,7 +131,7 @@
 
 #+LATEX_HEADER: \makeatletter
 #+LATEX_HEADER: \newfontfamily\IcoMoon{IcoMoon}[
-#+LATEX_HEADER: Path = /home/valentino/Dropbox/fonts/icons/,
+#+LATEX_HEADER: Path = /home/valentino/dots/files/fonts/icons/,
 #+LATEX_HEADER: Extension = .ttf,
 #+LATEX_HEADER: UprightFont = *,
 #+LATEX_HEADER: ]
@@ -196,7 +196,7 @@
 #+LATEX_HEADER:
 #+LATEX_HEADER:
 #+LATEX_HEADER: \newfontfamily\IcoFont{IcoFont}[
-#+LATEX_HEADER: Path = /home/valentino/Dropbox/fonts/icons/,
+#+LATEX_HEADER: Path = /home/valentino/dots/files/fonts/icons/,
 #+LATEX_HEADER: Extension = .ttf,
 #+LATEX_HEADER: UprightFont = *,
 #+LATEX_HEADER: ]
@@ -222,7 +222,7 @@
 
 #+LATEX_HEADER: \makeatletter
 #+LATEX_HEADER: 	\newfontfamily\Lato{Lato}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .ttf,
 #+LATEX_HEADER: 		UprightFont = *-Regular,
 #+LATEX_HEADER: 		BoldFont = *-Bold,
@@ -231,7 +231,7 @@
 #+LATEX_HEADER: 	]
 
 #+LATEX_HEADER: 	\newfontfamily\Scientifica{scientifica}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .ttf,
 #+LATEX_HEADER: 		UprightFont = *,
 #+LATEX_HEADER: 		BoldFont = *Bold,
@@ -239,7 +239,7 @@
 #+LATEX_HEADER: 	]
 
 #+LATEX_HEADER: 	\newfontfamily\FiraCode{FiraCode}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .ttf,
 #+LATEX_HEADER: 		UprightFont = *-Regular,
 #+LATEX_HEADER: 		BoldFont = *-Bold,
@@ -247,7 +247,7 @@
 #+LATEX_HEADER: 	]
 
 #+LATEX_HEADER: 	\newfontfamily\Karla{Karla}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .ttf,
 #+LATEX_HEADER: 		UprightFont = *-Regular,
 #+LATEX_HEADER: 		BoldFont = *-Bold,
@@ -256,13 +256,13 @@
 #+LATEX_HEADER: 	]
 
 #+LATEX_HEADER: 	\newfontfamily\Agency{Agency}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .ttf,
 #+LATEX_HEADER: 		UprightFont = *,
 #+LATEX_HEADER: 	]
 
 #+LATEX_HEADER: 	\newfontfamily\Alte{Alte DIN 1451 Mittelschrift}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .ttf,
 #+LATEX_HEADER: 		UprightFont = *,
 #+LATEX_HEADER: 		BoldFont=*,
@@ -274,7 +274,7 @@
 #+LATEX_HEADER: 	]
 
 #+LATEX_HEADER: 	\newfontfamily\AlteG{Alte DIN 1451 Mittelschrift G}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .ttf,
 #+LATEX_HEADER: 		UprightFont = *,
 #+LATEX_HEADER: 		BoldFont=*,
@@ -286,7 +286,7 @@
 #+LATEX_HEADER: 	]
 
 #+LATEX_HEADER: 	\newfontfamily\Gobold{Gobold}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .otf,
 #+LATEX_HEADER: 		UprightFont = *-Regular,
 #+LATEX_HEADER: 		BoldFont=*-Bold,
@@ -295,7 +295,7 @@
 #+LATEX_HEADER: 	]
 
 #+LATEX_HEADER: 	\newfontfamily\GoboldHollow{GoboldHollow}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .otf,
 #+LATEX_HEADER: 		UprightFont = *-Regular,
 #+LATEX_HEADER: 		BoldFont=*-Bold,
@@ -304,7 +304,7 @@
 #+LATEX_HEADER: 	]
 
 #+LATEX_HEADER: 	\newfontfamily\Mononoki{mononoki}[
-#+LATEX_HEADER: 		Path = /home/valentino/Dropbox/fonts/,
+#+LATEX_HEADER: 		Path = /home/valentino/dots/files/fonts/,
 #+LATEX_HEADER: 		Extension = .ttf,
 #+LATEX_HEADER: 		UprightFont = *-Regular,
 #+LATEX_HEADER: 		BoldFont=*-Bold,
