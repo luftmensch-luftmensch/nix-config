@@ -4,61 +4,63 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.editors.vscode;
   inherit (config.valentino.modules) themes wayland;
-  zoomLevel =
-    if wayland.enable
-    then 1.5
-    else 0;
-in {
+  zoomLevel = if wayland.enable then 1.5 else 0;
+in
+{
   options.valentino.modules.editors.vscode.enable = mkEnableOption "vscode";
 
   config = mkIf cfg.enable {
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
-      extensions = with pkgs.vscode-extensions;
-        [
-          # Direnv support
-          mkhl.direnv
+      profiles.default = {
+        extensions =
+          with pkgs.vscode-extensions;
+          [
+            # Direnv support
+            mkhl.direnv
 
-          # Neovim + whichkey overlay
-          asvetliakov.vscode-neovim
-          vspacecode.whichkey
+            # Neovim + whichkey overlay
+            asvetliakov.vscode-neovim
+            vspacecode.whichkey
 
-          # Todo tree view
-          gruntfuggly.todo-tree
+            # Todo tree view
+            gruntfuggly.todo-tree
 
-          # Language support
-          dart-code.dart-code
-          dart-code.flutter
-          bbenoist.nix
+            # Language support
+            dart-code.dart-code
+            dart-code.flutter
+            bbenoist.nix
 
-          # Theming
-          vscode-icons-team.vscode-icons
-          viktorqvarfordt.vscode-pitch-black-theme
-          bierner.docs-view
-        ]
-        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "better-comments";
-            publisher = "aaron-bond";
-            version = "3.0.2";
-            sha256 = "sha256-hQmA8PWjf2Nd60v5EAuqqD8LIEu7slrNs8luc3ePgZc=";
-          }
+            # Theming
+            vscode-icons-team.vscode-icons
+            viktorqvarfordt.vscode-pitch-black-theme
+            bierner.docs-view
+          ]
+          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = "better-comments";
+              publisher = "aaron-bond";
+              version = "3.0.2";
+              sha256 = "sha256-hQmA8PWjf2Nd60v5EAuqqD8LIEu7slrNs8luc3ePgZc=";
+            }
 
-          {
-            name = "toggle-excluded-files";
-            publisher = "amodio";
-            version = "2.0.0";
-            sha256 = "sha256-eoab2rZSrIYAHFVIwojcnqZ59NbldJty8FqdkxzNlDc=";
-          }
-        ];
+            {
+              name = "toggle-excluded-files";
+              publisher = "amodio";
+              version = "2.0.0";
+              sha256 = "sha256-eoab2rZSrIYAHFVIwojcnqZ59NbldJty8FqdkxzNlDc=";
+            }
+          ];
 
-      keybindings = import ./keybindings.nix;
-      userSettings = import ./settings.nix {
-        inherit themes zoomLevel;
+        keybindings = import ./keybindings.nix;
+        userSettings = import ./settings.nix {
+          inherit themes zoomLevel;
+        };
       };
     };
 

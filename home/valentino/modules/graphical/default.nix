@@ -16,7 +16,7 @@ let
     font-awesome
     fira-code
     monoid
-    (nerdfonts.override { fonts = [ "Iosevka" ]; })
+    nerd-fonts.iosevka # If all nerd-fonts are needed -> builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts)
     iosevka-comfy.comfy
     source-code-pro
     sarasa-gothic

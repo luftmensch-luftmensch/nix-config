@@ -4,48 +4,35 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.apps.rofi;
   inherit (config.valentino.modules) wayland;
   inherit (config.valentino.modules.credentials) bitwarden;
 
-  rofiPkg =
-    if wayland.enable
-    then pkgs.rofi-wayland
-    else pkgs.rofi;
+  rofiPkg = if wayland.enable then pkgs.rofi-wayland else pkgs.rofi;
 
-  rofi-emoji =
-    if wayland.enable
-    then pkgs.rofi-emoji-wayland
-    else pkgs.rofi-emoji;
+  rofi-emoji = if wayland.enable then pkgs.rofi-emoji-wayland else pkgs.rofi-emoji;
 
-  rofi-powermenu =
-    if wayland.enable
-    then pkgs.rofi-powermenu-wayland
-    else pkgs.rofi-powermenu;
+  rofi-powermenu = if wayland.enable then pkgs.rofi-powermenu-wayland else pkgs.rofi-powermenu;
 
-  rofi-rbw =
-    if wayland.enable
-    then pkgs.rofi-rbw-wayland
-    else pkgs.rofi-rbw-x11;
+  rofi-rbw = if wayland.enable then pkgs.rofi-rbw-wayland else pkgs.rofi-rbw-x11;
 
-  rofiFonts = pkgs.nerdfonts.override {
-    fonts = ["Iosevka"];
-  };
-in {
+  rofiFonts = pkgs.nerd-fonts.iosevka;
+in
+{
   options.valentino.modules.apps.rofi.enable = mkEnableOption "rofi configuration";
 
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
       package = rofiPkg;
-      plugins = [rofi-emoji];
+      plugins = [ rofi-emoji ];
     };
 
-    home.packages = with pkgs;
-      [rofi-powermenu]
-      ++ optionals bitwarden.enable [rofi-rbw]
-      ++ [rofiFonts];
+    home.packages =
+      with pkgs;
+      [ rofi-powermenu ] ++ optionals bitwarden.enable [ rofi-rbw ] ++ [ rofiFonts ];
     xdg.configFile = {
       "rofi/colors/color.rasi".text = ''
         @import "${config.colorscheme.slug}.rasi"

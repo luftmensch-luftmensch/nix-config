@@ -4,7 +4,7 @@
   fetchFromGitHub,
   gtk3,
   adwaita-icon-theme,
-  breeze-icons,
+  # kdePackages,
   hicolor-icon-theme,
 }:
 let
@@ -27,11 +27,12 @@ stdenvNoCC.mkDerivation {
 
   propagatedBuildInputs = [
     adwaita-icon-theme
-    breeze-icons
+    # kdePackages.breeze-icons
     hicolor-icon-theme
   ];
 
   dontDropIconThemeCache = true;
+  # dontWrapQtApps = true;
 
   installPhase = ''
     runHook preInstall

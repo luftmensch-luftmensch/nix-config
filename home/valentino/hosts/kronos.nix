@@ -93,19 +93,19 @@
 
         monospace = {
           family = "FiraCode Nerd Font";
-          package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
+          package = pkgs.nerd-fonts.fira-code;
           size = 14;
         };
 
         term = {
           family = "VictorMono Nerd Font";
-          package = pkgs.nerdfonts.override { fonts = [ "VictorMono" ]; };
+          package = pkgs.nerd-fonts.victor-mono;
           size = 14;
         };
 
         bar = {
           family = "Iosevka Nerd Font";
-          package = pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; };
+          package = pkgs.nerd-fonts.iosevka;
           size = 14;
         };
       };

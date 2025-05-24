@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.services.printing;
-in {
+in
+{
   options.system.modules.services.printing = {
     cups.enable = mkEnableOption "Enable printing capabilities";
     sane.enable = mkEnableOption "Enable scanning capabilities";
@@ -17,15 +19,12 @@ in {
       services.printing = {
         enable = true;
         # TODO: Try out cups-brother-hl1210w -> Unfortunately adding this one triggers a complete rebuild of glibc
-        drivers = [pkgs.brlaser];
+        drivers = [ pkgs.brlaser ];
       };
     })
 
     (mkIf cfg.sane.enable {
-      hardware.sane = {
-        enable = true;
-        extraBackends = [pkgs.epkowa];
-      };
+      hardware.sane.enable = true;
     })
   ];
 }

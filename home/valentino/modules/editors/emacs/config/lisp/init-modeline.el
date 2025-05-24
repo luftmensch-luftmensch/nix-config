@@ -18,6 +18,9 @@
 
 ;;;; Faces
 
+(defface vb/modeline-icon '((t (:family "Iosevka Nerd Font Propo")))
+  "Face for Unicode Icons using Nerd Font.")
+
 (defface vb/modeline-indicator-red
   '((default :inherit bold)
     (((class color) (min-colors 88) (background light))
@@ -201,14 +204,14 @@ Specific to the current window's mode line.")
 (defun vb/modeline-evil-state-tag ()
   "Return mode line tag depending on the Evil state."
   (pcase evil-state
-    ('normal (propertize "   " 'face 'vb/modeline-indicator-blue))
-    ('insert (propertize "   " 'face 'vb/modeline-indicator-yellow))
-    ('visual (propertize "   " 'face 'vb/modeline-indicator-magenta))
-    ('motion (propertize "   " 'face 'vb/modeline-indicator-yellow))
-    ('emacs (propertize "  " 'face 'vb/modeline-indicator-magenta))
-    ('operator (propertize "   " 'face 'vb/modeline-indicator-red))
-    ('replace (propertize "   " 'face 'vb/modeline-indicator-red))
-    ('vb/basic (propertize "   " 'face 'vb/modeline-indicator-green))))
+    ('normal (propertize "   " 'face '(:inherit (vb/modeline-icon vb/modeline-indicator-blue))))
+    ('insert (propertize "   " 'face '(:inherit (vb/modeline-icon vb/modeline-indicator-yellow))))
+    ('visual (propertize "   " 'face '(:inherit (vb/modeline-icon vb/modeline-indicator-magenta))))
+    ('motion (propertize "   " 'face '(:inherit (vb/modeline-icon vb/modeline-indicator-yellow))))
+    ('emacs  (propertize "   " 'face '(:inherit (vb/modeline-icon vb/modeline-indicator-magenta))))
+    ('operator (propertize "   " 'face '(:inherit (vb/modeline-icon vb/modeline-indicator-red))))
+    ('replace (propertize "   " 'face '(:inherit (vb/modeline-icon vb/modeline-indicator-red))))
+    ('vb/basic (propertize "   " 'face '(:inherit (vb/modeline-icon vb/modeline-indicator-red))))))
 
 (defvar-local vb/modeline-evil
     '(:eval

@@ -13,7 +13,7 @@ let
   userChrome = builtins.readFile ./style/userChrome.css;
   userContent = builtins.readFile ./style/userContent.css;
 
-  extensions =
+  extensions.packages =
     let
       rycee = pkgs.nur.repos.rycee.firefox-addons;
     in
@@ -43,20 +43,20 @@ in
         name = "Default";
         search = {
           force = true;
-          default = "DuckDuckGo";
+          default = "ddg";
           engines =
             let
               nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               youtube-icon = "${pkgs.tela-icon-theme}/share/icons/Tela/scalable/apps/youtube.svg";
             in
             {
-              "DuckDuckGo".metaData.alias = "@d";
-              "Google".metaData = {
+              ddg.metaData.alias = "@d";
+              google.metaData = {
                 alias = "@g";
                 hidden = true;
               };
-              "Bing".metaData.hidden = true;
-              "eBay".metaData.hidden = true;
+              bing.metaData.hidden = true;
+              ebay.metaData.hidden = true;
               "Wikipedia".metaData.hidden = true;
               "Nix Packages" = {
                 urls = [ { template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; } ];
