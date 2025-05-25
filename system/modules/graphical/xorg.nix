@@ -4,7 +4,8 @@ let
   cfg = config.system.modules.graphical.xorg;
 in
 {
-  options.system.modules.graphical.xorg.enable = mkEnableOption "xorg basic configuration and packages";
+  options.system.modules.graphical.xorg.enable =
+    mkEnableOption "xorg basic configuration and packages";
 
   config = mkIf cfg.enable {
     services.xserver = {
@@ -14,5 +15,7 @@ in
     };
 
     services.displayManager.defaultSession = "none+i3";
+    # https://github.com/NixOS/nixpkgs/issues/401891
+    security.pam.services.i3lock.enable = true;
   };
 }
