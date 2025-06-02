@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  cfg = config.valentino.modules.browsers.chromium;
+  cfg = config.valentino.modules.browsers.firefox;
   inherit (config.valentino.modules) themes wayland;
   inherit (config.valentino.modules.credentials) bitwarden _1password;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";

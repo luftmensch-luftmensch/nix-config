@@ -55,8 +55,17 @@ in
     (mkIf cfg.localsend.enable { home.packages = [ pkgs.localsend ]; })
 
     (mkIf cfg.nemo.enable {
-      home.packages = [ pkgs.nemo-with-extensions ];
-      dconf.settings."org/cinnamon/desktop/applications/terminal".exec = "${terminal}";
+      home = {
+        packages = [ pkgs.nemo-with-extensions ];
+        file.".gnome2/accels/nemo".text = ''
+          (gtk_accel_path "<Actions>/DirViewActions/OpenInTerminal" "<Primary><Shift>t")
+        '';
+      };
+
+      dconf.settings = {
+        "org/cinnamon/desktop/applications/terminal".exec = "${terminal}";
+        "org/cinnamon/desktop/interface".can-change-accels = true;
+      };
     })
   ];
 }

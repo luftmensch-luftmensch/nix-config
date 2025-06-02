@@ -20,6 +20,7 @@ let
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix { inherit theme palette; };
   menu_opts = "-i --fn '${theme.font.regular.family} ${(toString theme.font.regular.size)}' --nb '#${palette.base00}'  --tb '#${palette.base01}' --hb '#${palette.base02}' --tf '#${palette.base0D}' --hf '#${palette.base0D}'";
 
+  features = import ../../features.nix { inherit lib config; };
 in
 {
   assigns = {
@@ -33,112 +34,119 @@ in
     smartBorders = "on";
   };
 
-  keybindings = {
-    F1 = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ -10% && echo $(${_pamixer}) > $xob_sock";
-    F2 = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ +10% && echo $(${_pamixer}) > $xob_sock";
+  keybindings =
+    {
+      F1 = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ -10% && echo $(${_pamixer}) > $xob_sock";
+      F2 = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ +10% && echo $(${_pamixer}) > $xob_sock";
 
-    XF86AudioLowerVolume = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ -10% && echo $(${_pamixer}) > $xob_sock";
-    XF86AudioRaiseVolume = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ +10% && echo $(${_pamixer}) > $xob_sock";
+      XF86AudioLowerVolume = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ -10% && echo $(${_pamixer}) > $xob_sock";
+      XF86AudioRaiseVolume = "exec --no-startup-id ${_pactl} set-sink-volume @DEFAULT_SINK@ +10% && echo $(${_pamixer}) > $xob_sock";
 
-    F3 = "exec --no-startup-id ${_pactl} set-sink-mute @DEFAULT_SINK@ toggle && ${_notify} -i audio-input-microphone \"$(${_pactl} get-sink-mute @DEFAULT_SINK@ | grep -q 'no' && echo 'Unmuted' || echo 'Muted')\"";
-    F4 = "exec --no-startup-id ${_pactl} set-source-mute @DEFAULT_SOURCE@ toggle && ${_notify} -i audio-input-microphone \"$(${_pactl} get-source-mute @DEFAULT_SOURCE@ | grep -q 'no' && echo 'Mic unmuted' || echo 'Mic muted')\"";
+      F3 = "exec --no-startup-id ${_pactl} set-sink-mute @DEFAULT_SINK@ toggle && ${_notify} -i audio-input-microphone \"$(${_pactl} get-sink-mute @DEFAULT_SINK@ | grep -q 'no' && echo 'Unmuted' || echo 'Muted')\"";
+      F4 = "exec --no-startup-id ${_pactl} set-source-mute @DEFAULT_SOURCE@ toggle && ${_notify} -i audio-input-microphone \"$(${_pactl} get-source-mute @DEFAULT_SOURCE@ | grep -q 'no' && echo 'Mic unmuted' || echo 'Mic muted')\"";
 
-    F7 = "exec playerctl-wrapper -p"; # Prev
-    F8 = "exec playerctl-wrapper -x"; # Play/Pause
-    F9 = "exec playerctl-wrapper -n"; # Next
+      F7 = "exec playerctl-wrapper -p"; # Prev
+      F8 = "exec playerctl-wrapper -x"; # Play/Pause
+      F9 = "exec playerctl-wrapper -n"; # Next
 
-    "${mod}+q" = "kill";
-    "--release ${mod}+Escape" = "exec xkill";
-    "${mod}+Shift+r" = "restart";
+      "${mod}+q" = "kill";
+      "--release ${mod}+Escape" = "exec xkill";
+      "${mod}+Shift+r" = "restart";
 
-    # Focus
-    "${mod}+Left" = "focus left";
-    "${mod}+Down" = "focus down";
-    "${mod}+Up" = "focus up";
-    "${mod}+Right" = "focus right";
-    "${mod}+h" = "focus left";
-    "${mod}+j" = "focus down";
-    "${mod}+k" = "focus up";
-    "${mod}+l" = "focus right";
+      # Focus
+      "${mod}+Left" = "focus left";
+      "${mod}+Down" = "focus down";
+      "${mod}+Up" = "focus up";
+      "${mod}+Right" = "focus right";
+      "${mod}+h" = "focus left";
+      "${mod}+j" = "focus down";
+      "${mod}+k" = "focus up";
+      "${mod}+l" = "focus right";
 
-    # Move
-    "${mod}+Shift+Left" = "move left";
-    "${mod}+Shift+Down" = "move down";
-    "${mod}+Shift+Up" = "move up";
-    "${mod}+Shift+Right" = "move right";
-    "${mod}+Shift+h" = "move left";
-    "${mod}+Shift+j" = "move down";
-    "${mod}+Shift+k" = "move up";
-    "${mod}+Shift+l" = "move right";
+      # Move
+      "${mod}+Shift+Left" = "move left";
+      "${mod}+Shift+Down" = "move down";
+      "${mod}+Shift+Up" = "move up";
+      "${mod}+Shift+Right" = "move right";
+      "${mod}+Shift+h" = "move left";
+      "${mod}+Shift+j" = "move down";
+      "${mod}+Shift+k" = "move up";
+      "${mod}+Shift+l" = "move right";
 
-    # Splitting
-    "${mod}+z" = "split v; exec ${_notify} -i computer 'Tile horizontally'";
-    "${mod}+v" = "split h; exec ${_notify} -i computer 'Tile vertically'";
+      # Splitting
+      "${mod}+z" = "split v; exec ${_notify} -i computer 'Tile horizontally'";
+      "${mod}+v" = "split h; exec ${_notify} -i computer 'Tile vertically'";
 
-    "${mod}+f" = "fullscreen toggle";
+      "${mod}+f" = "fullscreen toggle";
 
-    # toggle tiling / floating
-    "${mod}+Shift+space" = "floating toggle";
-    # change focus between tiling / floating windows
-    "${mod}+space" = "focus mode_toggle";
+      # toggle tiling / floating
+      "${mod}+Shift+space" = "floating toggle";
+      # change focus between tiling / floating windows
+      "${mod}+space" = "focus mode_toggle";
 
-    "${mod}+x" = "exec rofi-powermenu";
+      "${mod}+x" = "exec rofi-powermenu";
 
-    # switch to workspace
-    "${mod}+1" = "workspace number 1";
-    "${mod}+2" = "workspace number 2";
-    "${mod}+3" = "workspace number 3";
-    "${mod}+4" = "workspace number 4";
-    "${mod}+5" = "workspace number 5";
-    "${mod}+6" = "workspace number 6";
-    "${mod}+7" = "workspace number 7";
-    "${mod}+8" = "workspace number 8";
-    "${mod}+9" = "workspace number 9";
-    "${mod}+0" = "workspace number 10";
+      # switch to workspace
+      "${mod}+1" = "workspace number 1";
+      "${mod}+2" = "workspace number 2";
+      "${mod}+3" = "workspace number 3";
+      "${mod}+4" = "workspace number 4";
+      "${mod}+5" = "workspace number 5";
+      "${mod}+6" = "workspace number 6";
+      "${mod}+7" = "workspace number 7";
+      "${mod}+8" = "workspace number 8";
+      "${mod}+9" = "workspace number 9";
+      "${mod}+0" = "workspace number 10";
 
-    # move focused container to workspace
-    "${mod}+Shift+1" = "move container to workspace number 1";
-    "${mod}+Shift+2" = "move container to workspace number 2";
-    "${mod}+Shift+3" = "move container to workspace number 3";
-    "${mod}+Shift+4" = "move container to workspace number 4";
-    "${mod}+Shift+5" = "move container to workspace number 5";
-    "${mod}+Shift+6" = "move container to workspace number 6";
-    "${mod}+Shift+7" = "move container to workspace number 7";
-    "${mod}+Shift+8" = "move container to workspace number 8";
-    "${mod}+Shift+9" = "move container to workspace number 9";
-    "${mod}+Shift+0" = "move container to workspace number 10";
+      # move focused container to workspace
+      "${mod}+Shift+1" = "move container to workspace number 1";
+      "${mod}+Shift+2" = "move container to workspace number 2";
+      "${mod}+Shift+3" = "move container to workspace number 3";
+      "${mod}+Shift+4" = "move container to workspace number 4";
+      "${mod}+Shift+5" = "move container to workspace number 5";
+      "${mod}+Shift+6" = "move container to workspace number 6";
+      "${mod}+Shift+7" = "move container to workspace number 7";
+      "${mod}+Shift+8" = "move container to workspace number 8";
+      "${mod}+Shift+9" = "move container to workspace number 9";
+      "${mod}+Shift+0" = "move container to workspace number 10";
 
-    "${mod1}+Ctrl+Right" = "workspace next";
-    "${mod1}+Ctrl+Left" = "workspace prev";
+      "${mod1}+Ctrl+Right" = "workspace next";
+      "${mod1}+Ctrl+Left" = "workspace prev";
 
-    "${mod}+Tab" = "workspace back_and_forth";
-    "${mod}+Shift+Tab" = "workspace prev";
+      "${mod}+Tab" = "workspace back_and_forth";
+      "${mod}+Shift+Tab" = "workspace prev";
 
-    # Modes
-    "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
-    "${mod}+s" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
+      # Modes
+      "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
+      "${mod}+s" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
 
-    Print = "exec --no-startup-id ${pkgs.xfce.xfce4-screenshooter}/bin/xfce4-screenshooter -r";
-    "${mod}+Return" = "exec --no-startup-id ${_terminal} -T Kitty";
-    "${mod}+Shift+Return" = "exec --no-startup-id ${_terminal} -T floating_term";
+      Print = "exec --no-startup-id ${lib.getExe pkgs.xfce.xfce4-screenshooter} -r";
+      "${mod}+Return" = "exec --no-startup-id ${_terminal} -T Kitty";
+      "${mod}+Shift+Return" = "exec --no-startup-id ${_terminal} -T floating_term";
 
-    "${mod}+b" = "exec --no-startup-id ${lib.getExe pkgs.firefox}";
+      "${mod}+d" = "exec --no-startup-id ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: '";
+      "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.nemo}";
 
-    "${mod}+d" = "exec --no-startup-id ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: '";
+      "${mod}+m" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -c";
+      # "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";
+      "${mod}+p" = "exec --no-startup-id ${lib.getExe pkgs.pavucontrol}";
 
-    "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.nemo}";
-
-    "${mod}+m" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -c";
-    # "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";
-    "${mod}+p" = "exec --no-startup-id ${lib.getExe pkgs.pavucontrol}";
-
-    "${mod}+Shift+b" = "exec --no-startup-id ${lib.getExe pkgs.chromium}";
-    "${mod}+Shift+c" = "exec --no-startup-id ${lib.getExe pkgs.vscodium}";
-    "${mod}+Shift+i" = "exec --no-startup-id ${lib.getExe pkgs.jetbrains.idea-community}";
-    "${mod}+Shift+p" = "exec --no-startup-id ${sus}/bin/sus";
-    "${mod}+Shift+s" = "exec --no-startup-id ${lib.getExe pkgs.spotify}";
-    "${mod}+Shift+e" = "exec rofi -show emoji -modi emoji -theme $HOME/.config/rofi/themes/emoji";
-  };
+      "${mod}+Shift+p" = "exec --no-startup-id ${lib.getExe sus}";
+      "${mod}+Shift+s" = "exec --no-startup-id ${lib.getExe pkgs.spotify}";
+      "${mod}+Shift+e" = "exec rofi -show emoji -modi emoji -theme $HOME/.config/rofi/themes/emoji";
+    }
+    // features.withCode {
+      "${mod}+Shift+c" = "exec --no-startup-id ${lib.getExe config.programs.vscode.package}";
+    }
+    // features.withFirefox {
+      "${mod}+b" = "exec --no-startup-id ${lib.getExe config.programs.firefox.package}";
+    }
+    // features.withChromium {
+      "${mod}+Shift+b" = "exec --no-startup-id ${lib.getExe config.programs.chromium.package}";
+    }
+    // features.withIntellij {
+      "${mod}+Shift+i" = "exec --no-startup-id ${lib.getExe pkgs.jetbrains.idea-community}";
+    };
 
   modes = {
     resize = {
