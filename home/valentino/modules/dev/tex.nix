@@ -12,7 +12,7 @@ in
   options.valentino.modules.dev.tex.enable = mkEnableOption "Tex support";
 
   config = mkIf cfg.enable {
-    # NOTE: To find out where a specifc sty is located: ll $(dirname $(kpsewhich listings.sty))
+    # NOTE: To find out where a specific sty is located: ll $(dirname $(kpsewhich listings.sty))
     home.packages = with pkgs; [
       texliveFull
       tectonic

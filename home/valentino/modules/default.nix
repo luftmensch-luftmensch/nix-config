@@ -38,9 +38,6 @@
     "editors/neovim"            = import ./editors/neovim.nix;
     "editors/vscode"            = import ./editors/vscode;
 
-    "gaming/emulators"          = import ./gaming/emulators.nix;
-    "gaming/steam"              = import ./gaming/steam.nix;
-
     "graphical"                 = import ./graphical;
 
     "media/documents"           = import ./media/documents.nix;

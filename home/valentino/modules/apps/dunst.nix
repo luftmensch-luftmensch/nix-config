@@ -4,16 +4,18 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.apps.dunst;
-  inherit (config.valentino.modules) wayland themes;
+  inherit (config.valentino.modules) themes;
   inherit (config.colorScheme) palette;
-in {
+in
+{
   options.valentino.modules.apps.dunst.enable = mkEnableOption "dunst configuration";
 
   config = mkIf cfg.enable {
     # A library that sends desktop notifications to a notification daemon (Gonna hel dunst!)
-    home.packages = [pkgs.libnotify];
+    home.packages = [ pkgs.libnotify ];
 
     services.dunst = {
       enable = true;
@@ -28,12 +30,7 @@ in {
           width = "(300, 450)";
           height = "300";
           origin = "top-right";
-          offset = let
-            vMargin =
-              if wayland.enable
-              then "10"
-              else "40";
-          in "10x${vMargin}";
+          offset = "10x40";
 
           notification_limit = 3;
 
@@ -62,13 +59,11 @@ in {
           sort = "no";
           idle_threshold = 0;
 
-          # Text
-          font = let
-            fontName = themes.font.monospace.family;
-            fontSize = themes.font.monospace.size;
-          in "${fontName} ${toString fontSize}, Material Design Icons ${
-            toString fontSize
-          }";
+          font =
+            let
+              inherit (themes.font.monospace) family size;
+            in
+            "${family} ${toString size}, Material Design Icons ${toString size}";
 
           line_height = 3;
           markup = "yes";
@@ -105,7 +100,7 @@ in {
           class = "Dunst";
 
           dmenu = "${pkgs.bemenu}/bin/bemenu-run -p dunst:";
-          browser = "${pkgs.firefox}bin/firefox -new-tab";
+          browser = "${lib.getExe pkgs.firefox} -new-tab";
           always_run_script = true;
           ignore_dbusclose = false;
 

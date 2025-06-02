@@ -4,14 +4,16 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.editors.intellij;
-in {
+in
+{
   options.valentino.modules.editors.intellij.enable = mkEnableOption "Intellij";
 
   config = mkIf cfg.enable {
     home = {
-      packages = [pkgs.jetbrains.idea-community];
+      packages = [ pkgs.jetbrains.idea-community ];
 
       # https://github.com/JetBrains/ideavim
       file.".config/ideavim/ideavimrc".text = ''

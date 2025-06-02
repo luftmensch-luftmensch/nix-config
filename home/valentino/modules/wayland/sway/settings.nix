@@ -1,5 +1,6 @@
 {
   lib,
+  config,
   mod,
   mod1,
   theme,
@@ -19,6 +20,7 @@ let
   # Custom scripts
   cms = pkgs.callPackage ./scripts/clipboard-manager.nix { inherit menu_opts; };
   sus = pkgs.callPackage ./scripts/screenshot-utility.nix { inherit menu_opts; };
+  features = import ../../features.nix { inherit lib config; };
 in
 {
   gaps = {
@@ -34,119 +36,127 @@ in
     size = theme.font.regular.size + 0.0;
   };
 
-  keybindings = {
-    # Recently wireplumber (v 0.4.11) added a few utilities for their wpctl tool. You can do:
-    # set-volume and set-mute works with that helper, alternatively you can run wpctl status to get the ID.
-    # Volume
-    XF86AudioRaiseVolume = "exec --no-startup-id ${_wpctl} set-volume @DEFAULT_SINK@ 10%+ && ${_wpctl} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
-    XF86AudioLowerVolume = "exec --no-startup-id ${_wpctl} set-volume @DEFAULT_SINK@ 10%- && ${_wpctl} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
-    XF86AudioMute = "exec --no-startup-id ${_wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+  keybindings =
+    {
+      # Recently wireplumber (v 0.4.11) added a few utilities for their wpctl tool. You can do:
+      # set-volume and set-mute works with that helper, alternatively you can run wpctl status to get the ID.
+      # Volume
+      XF86AudioRaiseVolume = "exec --no-startup-id ${_wpctl} set-volume @DEFAULT_SINK@ 10%+ && ${_wpctl} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
+      XF86AudioLowerVolume = "exec --no-startup-id ${_wpctl} set-volume @DEFAULT_SINK@ 10%- && ${_wpctl} get-volume @DEFAULT_SINK@ | awk '{print $2*100}' > $wob_sock";
+      XF86AudioMute = "exec --no-startup-id ${_wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
-    XF86AudioMicMute = "exec --no-startup-id ${_wpctl} set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ${_notify} -i audio-input-microphone \"$(${_wpctl} get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo 'Mic Muted' || echo 'Mic Unmuted')\"";
+      XF86AudioMicMute = "exec --no-startup-id ${_wpctl} set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ${_notify} -i audio-input-microphone \"$(${_wpctl} get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo 'Mic Muted' || echo 'Mic Unmuted')\"";
 
-    # BRIGHTNESS
-    XF86MonBrightnessUp = "exec ${_brightnessctl} 5%+ | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
-    XF86MonBrightnessDown = "exec ${_brightnessctl} 5%- | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
+      # BRIGHTNESS
+      XF86MonBrightnessUp = "exec ${_brightnessctl} 5%+ | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
+      XF86MonBrightnessDown = "exec ${_brightnessctl} 5%- | grep -oP '(?<=[(])[^%)]*' > $wob_sock";
 
-    # Notification
-    XF86NotificationCenter = "exec --no-startup-id ${_notification-center}";
+      # Notification
+      XF86NotificationCenter = "exec --no-startup-id ${_notification-center}";
 
-    "${mod}+x" = "exec --no-startup-id ${_notification-center}";
-    "${mod}+Shift+n" = "exec --no-startup-id ${_notification-center}";
+      "${mod}+x" = "exec --no-startup-id ${_notification-center}";
+      "${mod}+Shift+n" = "exec --no-startup-id ${_notification-center}";
 
-    "${mod}+q" = "kill";
-    "${mod}+Shift+r" = "reload";
+      "${mod}+q" = "kill";
+      "${mod}+Shift+r" = "reload";
 
-    # Focus
-    "${mod}+Left" = "focus left";
-    "${mod}+Down" = "focus down";
-    "${mod}+Up" = "focus up";
-    "${mod}+Right" = "focus right";
-    "${mod}+h" = "focus left";
-    "${mod}+j" = "focus down";
-    "${mod}+k" = "focus up";
-    "${mod}+l" = "focus right";
+      # Focus
+      "${mod}+Left" = "focus left";
+      "${mod}+Down" = "focus down";
+      "${mod}+Up" = "focus up";
+      "${mod}+Right" = "focus right";
+      "${mod}+h" = "focus left";
+      "${mod}+j" = "focus down";
+      "${mod}+k" = "focus up";
+      "${mod}+l" = "focus right";
 
-    # Move
-    "${mod}+Shift+Left" = "move left";
-    "${mod}+Shift+Down" = "move down";
-    "${mod}+Shift+Up" = "move up";
-    "${mod}+Shift+Right" = "move right";
-    "${mod}+Shift+h" = "move left";
-    "${mod}+Shift+j" = "move down";
-    "${mod}+Shift+k" = "move up";
-    "${mod}+Shift+l" = "move right";
+      # Move
+      "${mod}+Shift+Left" = "move left";
+      "${mod}+Shift+Down" = "move down";
+      "${mod}+Shift+Up" = "move up";
+      "${mod}+Shift+Right" = "move right";
+      "${mod}+Shift+h" = "move left";
+      "${mod}+Shift+j" = "move down";
+      "${mod}+Shift+k" = "move up";
+      "${mod}+Shift+l" = "move right";
 
-    # Splitting
-    "${mod}+z" = "split v; exec ${_notify} -i computer 'Tile horizontally'";
-    "${mod}+v" = "split h; exec ${_notify} -i computer 'Tile vertically'";
+      # Splitting
+      "${mod}+z" = "split v; exec ${_notify} -i computer 'Tile horizontally'";
+      "${mod}+v" = "split h; exec ${_notify} -i computer 'Tile vertically'";
 
-    "${mod}+f" = "fullscreen toggle";
+      "${mod}+f" = "fullscreen toggle";
 
-    # toggle tiling / floating
-    "${mod}+Shift+space" = "floating toggle";
-    # change focus between tiling / floating windows
-    "${mod}+space" = "focus mode_toggle";
+      # toggle tiling / floating
+      "${mod}+Shift+space" = "floating toggle";
+      # change focus between tiling / floating windows
+      "${mod}+space" = "focus mode_toggle";
 
-    # switch to workspace
-    "${mod}+1" = "workspace number 1";
-    "${mod}+2" = "workspace number 2";
-    "${mod}+3" = "workspace number 3";
-    "${mod}+4" = "workspace number 4";
-    "${mod}+5" = "workspace number 5";
-    "${mod}+6" = "workspace number 6";
-    "${mod}+7" = "workspace number 7";
-    "${mod}+8" = "workspace number 8";
-    "${mod}+9" = "workspace number 9";
-    "${mod}+0" = "workspace number 10";
+      # switch to workspace
+      "${mod}+1" = "workspace number 1";
+      "${mod}+2" = "workspace number 2";
+      "${mod}+3" = "workspace number 3";
+      "${mod}+4" = "workspace number 4";
+      "${mod}+5" = "workspace number 5";
+      "${mod}+6" = "workspace number 6";
+      "${mod}+7" = "workspace number 7";
+      "${mod}+8" = "workspace number 8";
+      "${mod}+9" = "workspace number 9";
+      "${mod}+0" = "workspace number 10";
 
-    # move focused container to workspace
-    "${mod}+Shift+1" = "move container to workspace number 1";
-    "${mod}+Shift+2" = "move container to workspace number 2";
-    "${mod}+Shift+3" = "move container to workspace number 3";
-    "${mod}+Shift+4" = "move container to workspace number 4";
-    "${mod}+Shift+5" = "move container to workspace number 5";
-    "${mod}+Shift+6" = "move container to workspace number 6";
-    "${mod}+Shift+7" = "move container to workspace number 7";
-    "${mod}+Shift+8" = "move container to workspace number 8";
-    "${mod}+Shift+9" = "move container to workspace number 9";
-    "${mod}+Shift+0" = "move container to workspace number 10";
+      # move focused container to workspace
+      "${mod}+Shift+1" = "move container to workspace number 1";
+      "${mod}+Shift+2" = "move container to workspace number 2";
+      "${mod}+Shift+3" = "move container to workspace number 3";
+      "${mod}+Shift+4" = "move container to workspace number 4";
+      "${mod}+Shift+5" = "move container to workspace number 5";
+      "${mod}+Shift+6" = "move container to workspace number 6";
+      "${mod}+Shift+7" = "move container to workspace number 7";
+      "${mod}+Shift+8" = "move container to workspace number 8";
+      "${mod}+Shift+9" = "move container to workspace number 9";
+      "${mod}+Shift+0" = "move container to workspace number 10";
 
-    "${mod1}+Ctrl+Right" = "workspace next";
-    "${mod1}+Ctrl+Left" = "workspace prev";
+      "${mod1}+Ctrl+Right" = "workspace next";
+      "${mod1}+Ctrl+Left" = "workspace prev";
 
-    "${mod1}+Ctrl+h" = "exec --no-startup-id ${lib.getExe cms}";
+      "${mod1}+Ctrl+h" = "exec --no-startup-id ${lib.getExe cms}";
 
-    "${mod}+Tab" = "workspace back_and_forth";
-    "${mod}+Shift+Tab" = "workspace prev";
+      "${mod}+Tab" = "workspace back_and_forth";
+      "${mod}+Shift+Tab" = "workspace prev";
 
-    # Modes
-    "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
-    "${mod}+s" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
+      # Modes
+      "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
+      "${mod}+s" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
 
-    Print = "exec --no-startup-id ${lib.getExe pkgs.grim} -g  \"$(${lib.getExe pkgs.slurp})\" $(date +'%d-%m-%Y-%H:%M:%S').png";
+      Print = "exec --no-startup-id ${lib.getExe pkgs.grim} -g  \"$(${lib.getExe pkgs.slurp})\" $(date +'%d-%m-%Y-%H:%M:%S').png";
 
-    "${mod}+Return" = "exec --no-startup-id ${lib.getExe pkgs.foot} -a=default_term -e fish";
-    "${mod}+Shift+Return" = "exec --no-startup-id ${lib.getExe pkgs.foot} -a=floating_term -e fish";
+      "${mod}+Return" = "exec --no-startup-id ${lib.getExe pkgs.foot} -a=default_term -e fish";
+      "${mod}+Shift+Return" = "exec --no-startup-id ${lib.getExe pkgs.foot} -a=floating_term -e fish";
 
-    "${mod}+b" = "exec --no-startup-id ${lib.getExe pkgs.firefox}";
+      "${mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: ' | xargs swaymsg exec";
 
-    "${mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: ' | xargs swaymsg exec";
+      "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.nemo}";
 
-    "${mod}+e" = "exec --no-startup-id ${lib.getExe pkgs.nemo}";
+      "${mod}+m" = "exec --no-startup-id emacsclient -c";
+      # "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";
+      "${mod}+p" = "exec --no-startup-id ${lib.getExe pkgs.pavucontrol}";
 
-    "${mod}+m" = "exec --no-startup-id emacsclient -c";
-    # "${mod}+o" = "exec --no-startup-id ${lib.getExe pkgs.obs-studio}";
-    "${mod}+p" = "exec --no-startup-id ${lib.getExe pkgs.pavucontrol}";
+      "${mod}+Shift+s" = "exec --no-startup-id ${lib.getExe pkgs.spotify}";
 
-    "${mod}+Shift+b" = "exec --no-startup-id ${lib.getExe pkgs.chromium}";
-    "${mod}+Shift+c" = "exec --no-startup-id ${lib.getExe pkgs.vscodium}";
-    "${mod}+Shift+i" = "exec --no-startup-id ${lib.getExe pkgs.jetbrains.idea-community}";
-    "${mod}+Shift+s" = "exec --no-startup-id ${lib.getExe pkgs.spotify}";
-
-    "${mod}+Shift+p" = "exec --no-startup-id ${lib.getExe sus}";
-    "${mod}+Shift+e" = "exec rofi -show emoji -modi emoji -theme $HOME/.config/rofi/themes/emoji";
-  };
+      "${mod}+Shift+p" = "exec --no-startup-id ${lib.getExe sus}";
+      "${mod}+Shift+e" = "exec rofi -show emoji -modi emoji -theme $HOME/.config/rofi/themes/emoji";
+    }
+    // features.withCode {
+      "${mod}+Shift+c" = "exec --no-startup-id ${lib.getExe config.programs.vscode.package}";
+    }
+    // features.withFirefox {
+      "${mod}+b" = "exec --no-startup-id ${lib.getExe config.programs.firefox.package}";
+    }
+    // features.withChromium {
+      "${mod}+Shift+b" = "exec --no-startup-id ${lib.getExe config.programs.chromium.package}";
+    }
+    // features.withIntellij {
+      "${mod}+Shift+i" = "exec --no-startup-id ${lib.getExe pkgs.jetbrains.idea-community}";
+    };
 
   workspaceOutputAssign = [
     # Laptop
@@ -405,6 +415,5 @@ in
     # vertical setup
     "${default_output}".position = "0,1080";
     "${external_output}".position = "0,0";
-
   };
 }

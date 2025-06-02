@@ -4,12 +4,14 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.editors.android-studio;
-in {
+in
+{
   options.valentino.modules.editors.android-studio.enable = mkEnableOption "Android IDE";
 
   config = mkIf cfg.enable {
-    home.packages = [pkgs.android-studio];
+    home.packages = [ pkgs.android-studio ];
   };
 }
