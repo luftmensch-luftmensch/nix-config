@@ -58,7 +58,6 @@ in
   sl = "ls";
   la = "ls -a";
   ll = "ls -l";
-  "ll." = "ls --header --git --classify --long --binary --group --time-style=long-iso --links --all --all --sort=name";
   "l." = "ls -a --group-directories-first | egrep '^\.'";
   lll = "ls --header --git --classify --long --binary --group --time-style=long-iso --links --all --sort=name";
   tree = "ls -aT";

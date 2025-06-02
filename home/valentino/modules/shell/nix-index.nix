@@ -8,7 +8,7 @@
 with lib;
 let
   cfg = config.valentino.modules.shell.nix-index;
-  inherit (config.valentino.modules.shell) bash zsh;
+  inherit (config.valentino.modules.shell) bash fish;
 in
 {
   imports = [ inputs.nix-index-database.hmModules.nix-index ];
@@ -20,14 +20,13 @@ in
   config = mkMerge [
     (mkIf cfg.enable {
       programs = {
-        # `command-not-found` relies on nix-channel. Enable and use `nix-index` instead.
-        command-not-found.enable = false;
+        command-not-found.enable = false; # `command-not-found` relies on nix-channel. Enable and use `nix-index` instead.
         nix-index-database.comma.enable = true;
 
         nix-index = {
           enable = true;
           enableBashIntegration = bash.enable;
-          enableZshIntegration = zsh.enable;
+          enableFishIntegration = fish.enable;
         };
       };
     })
@@ -36,7 +35,7 @@ in
       assertions = [
         {
           assertion = cfg.enable;
-          message = "In order to use the systemd service the nix-index options must be setted to true";
+          message = "In order to use the systemd service the nix-index options must be set to true";
         }
       ];
       systemd.user.services.nix-index-database-sync = {

@@ -49,7 +49,7 @@
     };
 
     media = {
-      documents.zathura.enable = true;
+      documents.enable = true;
       reading.mdx.enable = true;
       editing.enable = true;
       files = {

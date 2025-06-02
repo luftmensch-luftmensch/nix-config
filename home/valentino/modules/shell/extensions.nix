@@ -8,10 +8,11 @@ with lib;
 let
   cfg = config.valentino.modules.shell.extensions;
   upfile = pkgs.writeScriptBin "upfile" (builtins.readFile ./scripts/upfile.sh);
-  inherit (config.valentino.modules.shell) bash zsh;
+  inherit (config.valentino.modules.shell) bash fish;
 in
 {
-  options.valentino.modules.shell.extensions.enable = mkEnableOption "shell useful commands (e.g. bat, eza)";
+  options.valentino.modules.shell.extensions.enable =
+    mkEnableOption "shell useful commands (e.g. bat, eza)";
 
   config = mkIf cfg.enable {
     home = {
@@ -83,7 +84,7 @@ in
         ];
 
         enableBashIntegration = bash.enable;
-        enableZshIntegration = zsh.enable;
+        enableFishIntegration = fish.enable;
       };
 
       btop = {

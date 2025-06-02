@@ -191,9 +191,7 @@ in
       ];
     })
 
-    (mkIf cfg.lazygit.enable {
-      programs.lazygit.enable = true;
-    })
+    (mkIf cfg.lazygit.enable { programs.lazygit.enable = true; })
 
     (mkIf cfg.gh.enable {
       programs.gh = {
@@ -209,8 +207,6 @@ in
       };
     })
 
-    (mkIf cfg.gitbutler.enable {
-      home.packages = [ pkgs.gitbutler ];
-    })
+    (mkIf cfg.gitbutler.enable { home.packages = [ pkgs.gitbutler ]; })
   ];
 }

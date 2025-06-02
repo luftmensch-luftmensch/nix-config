@@ -4,14 +4,17 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.xorg.xob;
   inherit (config.colorScheme) palette;
-in {
-  options.valentino.modules.xorg.xob.enable = mkEnableOption "A lightweight overlay volume (or anything) bar for the X Window System";
+in
+{
+  options.valentino.modules.xorg.xob.enable =
+    mkEnableOption "A lightweight overlay volume (or anything) bar for the X Window System";
 
   config = mkIf cfg.enable {
-    home.packages = [pkgs.xob];
+    home.packages = [ pkgs.xob ];
 
     home.file.".config/xob/styles.cfg".text = ''
       default = {

@@ -3,7 +3,7 @@ with lib;
 let
   cfg = config.valentino.modules.term.kitty;
   inherit (config.valentino.modules) themes;
-  inherit (config.valentino.modules.shell) bash fish zsh;
+  inherit (config.valentino.modules.shell) bash fish;
 in
 {
   options.valentino.modules.term.kitty.enable = mkEnableOption "kitty configuration";
@@ -11,14 +11,6 @@ in
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      # font =
-      #   let
-      #     inherit (themes.font.term) family size;
-      #   in
-      #   {
-      #     inherit size;
-      #     name = family;
-      #   };
       themeFile = if themes.darkTheme then "Modus_Vivendi" else "Modus_Operandi";
       settings = {
         shell = if fish.enable then "fish" else "bash";
@@ -40,7 +32,7 @@ in
         scrollback_pager = "${config.home.sessionVariables.PAGER}";
         paste_actions = "quote-urls-at-prompt,confirm";
         notify_on_cmd_finish = "always 2 command notify-send \"job %c finished with status: %s\"";
-        font_family = "family=\"${themes.font.term.family}\""; # "family=\"Sarasa Fixed Slab SC\"";
+        font_family = "family=\"${themes.font.term.family}\"";
         bold_font = "auto";
         italic_font = "auto";
         bold_italic_font = "auto";
@@ -60,9 +52,7 @@ in
         mode = "enabled";
         enableBashIntegration = bash.enable;
         enableFishIntegration = fish.enable;
-        enableZshIntegration = zsh.enable;
       };
     };
-
   };
 }

@@ -4,10 +4,18 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.wayland.random-background;
-  flags = lib.concatStringsSep " " ["-r" "-q" "output" "*" "bg"];
-in {
+  flags = lib.concatStringsSep " " [
+    "-r"
+    "-q"
+    "output"
+    "*"
+    "bg"
+  ];
+in
+{
   options.valentino.modules.wayland.random-background = {
     enable = mkEnableOption "wayland screen random background";
 
@@ -22,7 +30,13 @@ in {
     };
 
     display = mkOption {
-      type = types.enum ["center" "fill" "max" "scale" "tile"];
+      type = types.enum [
+        "center"
+        "fill"
+        "max"
+        "scale"
+        "tile"
+      ];
       default = "fill";
       description = "Display background images according to this option.";
     };
@@ -44,24 +58,24 @@ in {
       systemd.user.services.random-background = {
         Unit = {
           Description = "Set random desktop background using swaymsg";
-          After = ["graphical-session-pre.target"];
-          PartOf = ["graphical-session.target"];
+          After = [ "graphical-session-pre.target" ];
+          PartOf = [ "graphical-session.target" ];
         };
 
         Service = {
           Type = "oneshot";
-          ExecStart = "${pkgs.sway}/bin/swaymsg ${flags} '\"$(${pkgs.findutils}/bin/find ${cfg.imageDirectory} -type f | shuf -n1)\"' ${cfg.display}";
+          ExecStart = "${pkgs.sway}/bin/swaymsg ${flags} '\"$(${lib.getExe pkgs.findutils} ${cfg.imageDirectory} -type f | shuf -n1)\"' ${cfg.display}";
           IOSchedulingClass = "idle";
         };
 
-        Install.WantedBy = ["graphical-session.target"];
+        Install.WantedBy = [ "graphical-session.target" ];
       };
     }
     (mkIf (cfg.interval != null) {
       systemd.user.timers.random-background = {
         Unit.Description = "Set random desktop background using swaymsg";
         Timer.OnUnitActiveSec = cfg.interval;
-        Install.WantedBy = ["timers.target"];
+        Install.WantedBy = [ "timers.target" ];
       };
     })
   ]);

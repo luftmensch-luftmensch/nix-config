@@ -28,6 +28,6 @@ pkgs.writeShellScriptBin "sus" ''
       Fullscreen) ${_grim} -o "$(${_swaymsg} -t get_outputs | ${_jq} -r '.[] | select(.focused) | .name')" "$filename" ;;
       section) ${_grim} -g "$(${_slurp})" "$filename" ;;
       window) ${_grim} -g "$(${_swaymsg} -t get_tree | ${_jq} -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')"  "$filename" ;;
-      "Screenshot+clipboard") ${_grim} -g "$(${_slurp} -d)" - | ${_wlcp} -t image/png #(screenshot+clipboard) ;;
+      "Screenshot+clipboard") ${_grim} -g "$(${_slurp} -d)" - | ${_wlcp} -t image/png ;;
   esac
 ''

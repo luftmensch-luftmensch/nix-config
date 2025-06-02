@@ -2,7 +2,8 @@
   monitor,
   theme,
   palette,
-}: {
+}:
+{
   "global/wm" = {
     margin-bottom = 0;
     margin-top = 0;
@@ -18,42 +19,47 @@
     compositing-border = "over";
   };
 
-  "bar/configuration" = {
-    font-0 = "${theme.font.bar.family}:weight=medium:size=${toString theme.font.bar.size};3";
-    font-1 = "${theme.font.bar.family}:weight=medium:size=${toString theme.font.bar.size};3";
-    font-2 = "${theme.font.bar.family}:weight=medium:size=${toString theme.font.bar.size};3";
-    font-3 = "${theme.font.bar.family}:weight=medium:size=${toString theme.font.bar.size};3";
-    background = "${palette.base00}";
-    foreground = "${palette.base06}";
+  "bar/configuration" =
+    let
+      family = theme.font.bar.family;
+      size = theme.font.bar.size;
+    in
+    {
+      font-0 = "${family}:weight=medium:size=${toString size};3";
+      font-1 = "${family}:weight=medium:size=${toString size};3";
+      font-2 = "${family}:weight=medium:size=${toString size};3";
+      font-3 = "${family}:weight=medium:size=${toString size};3";
+      background = "${palette.base00}";
+      foreground = "${palette.base06}";
 
-    monitor-strict = false;
+      monitor-strict = false;
 
-    override-redirect = false;
-    fixed-center = true;
-    width = "100%";
-    bottom = true;
-    height = 30;
+      override-redirect = false;
+      fixed-center = true;
+      width = "100%";
+      bottom = true;
+      height = 30;
 
-    offset-x = 0;
-    offset-y = 0;
+      offset-x = 0;
+      offset-y = 0;
 
-    radius-top = "0.0";
-    radius-bottom = "0.0";
+      radius-top = "0.0";
+      radius-bottom = "0.0";
 
-    line-size = 1;
+      line-size = 1;
 
-    border-size = 0;
-    padding = 1;
-    module-margin-left = 1;
-    module-margin-right = 1;
-    separator = "";
-    spacing = 0;
-    dim-value = "1.0";
-    wm-name = "i3";
-    locale = "";
-    enable-ipc = true;
-    dpi = 100;
-  };
+      border-size = 0;
+      padding = 1;
+      module-margin-left = 1;
+      module-margin-right = 1;
+      separator = "";
+      spacing = 0;
+      dim-value = "1.0";
+      wm-name = "i3";
+      locale = "";
+      enable-ipc = true;
+      dpi = 100;
+    };
 
   "bar/main" = {
     "inherit" = "bar/configuration";

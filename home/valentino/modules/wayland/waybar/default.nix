@@ -34,7 +34,6 @@ in
     programs.waybar =
       let
         style = import ./style.nix { inherit theme palette; };
-
         custom_modules = import ./modules.nix { inherit lib pkgs; };
       in
       {

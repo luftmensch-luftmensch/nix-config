@@ -51,14 +51,11 @@
     "services/battery"          = import ./services/battery.nix;
 
     "shell/bash"                = import ./shell/bash.nix;
-    "shell/zsh"                 = import ./shell/zsh.nix;
     "shell/direnv"              = import ./shell/direnv.nix;
     "shell/extensions"          = import ./shell/extensions.nix;
     "shell/fish"                = import ./shell/fish;
     "shell/git"                 = import ./shell/git.nix;
     "shell/nix-index"           = import ./shell/nix-index.nix;
-    "shell/starship"            = import ./shell/starship.nix;
-    "shell/zellij"              = import ./shell/zellij.nix;
 
     "term/alacritty"            = import ./term/alacritty.nix;
     "term/foot"                 = import ./term/foot.nix;
