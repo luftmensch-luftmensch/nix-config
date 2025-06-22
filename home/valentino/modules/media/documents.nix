@@ -57,6 +57,7 @@ in
         selection-clipboard = "clipboard";
         statusbar-home-tilde = true;
         guioptions = "sv";
+        database = "sqlite";
       };
 
       mappings = {
