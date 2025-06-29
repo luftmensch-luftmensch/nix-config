@@ -5,6 +5,7 @@
       rofi.enable = true;
       outlook.enable = true;
       teams.enable = true;
+      keyboards.zmk-studio.enable = true;
       vnc = {
         anydesk.enable = true;
         remmina.enable = true;
