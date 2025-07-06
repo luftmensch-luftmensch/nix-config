@@ -31,8 +31,8 @@ in
       };
 
       bindings = {
-        h = "seek -10";
-        l = "seek 10";
+        h = "seek -5";
+        l = "seek 5";
         RIGHT = "seek 5";
         LEFT = "seek -5";
         "Shift+PGUP" = "seek 600";
