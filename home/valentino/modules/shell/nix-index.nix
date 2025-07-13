@@ -11,7 +11,7 @@ let
   inherit (config.valentino.modules.shell) bash fish;
 in
 {
-  imports = [ inputs.nix-index-database.hmModules.nix-index ];
+  imports = [ inputs.nix-index-database.homeModules.nix-index ];
   options.valentino.modules.shell.nix-index = {
     enable = mkEnableOption "Enable nix-index";
     service = mkEnableOption "Enable nix-index systemd service";
