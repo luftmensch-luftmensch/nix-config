@@ -4,18 +4,20 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.vpn.wireguard;
-in {
+in
+{
   options.system.modules.vpn.wireguard.enable = mkEnableOption "Enable wireguard capabilities";
 
   config = mkIf cfg.enable {
     networking.wg-quick.interfaces = {
       # "wg0" is the network interface name. You can name the interface arbitrarily. -> run with `systemctl start wg-quick-<interface-name>.service`
       wg0 = {
-        address = ["10.8.0.3/24"];
+        address = [ "10.8.0.3/24" ];
         listenPort = 51820;
-        dns = ["1.1.1.1"];
+        dns = [ "1.1.1.1" ];
 
         # Path to the private key file.
         #
@@ -30,13 +32,16 @@ in {
           # HOME
           {
             # Public key of the server (not a file path).
-            publicKey = "od98flJk4uIwawgfHQagMePqnnsgvhV4w7sq9h3ZGWU=";
+            publicKey = "2CsrfaY8Pvbke0mykrnDbsCDgWEyn990cxZ6yuGSUQw=";
 
             # Pre shared key used by wg-easy
-            presharedKey = "Bq+DpD2XnPlXd815ysg9PBak9lWTGN6WuSSV5qx3Yt0=";
+            presharedKey = "mEf95ahJrsiYBqwP2g9bItvtnLnUbcqo7AHBiIO7mFw=";
 
             # Forward all the traffic via VPN.
-            allowedIPs = ["0.0.0.0/0" "::/0"];
+            allowedIPs = [
+              "0.0.0.0/0"
+              "::/0"
+            ];
             # Or forward only particular subnets
             #allowedIPs = [ "10.100.0.1" "91.108.12.0/22" ];
 
@@ -52,6 +57,6 @@ in {
       };
     };
 
-    environment.systemPackages = [pkgs.wireguard-tools];
+    environment.systemPackages = [ pkgs.wireguard-tools ];
   };
 }
