@@ -27,6 +27,7 @@ in
           settings = import ./settings.nix {
             inherit
               lib
+              config
               mod
               mod1
               default_output
