@@ -18,5 +18,4 @@
   mpv-m-x = pkgs.callPackage ./mpv-scripts/M-x.nix { };
   mdx-go = pkgs.callPackage ./mdx.nix { };
   up-go = pkgs.callPackage ./up.nix { };
-  zmk-studio = pkgs.callPackage ./zmk-studio { };
 }
