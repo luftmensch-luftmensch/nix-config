@@ -19,6 +19,7 @@ _: {
         extraAuthorizedKeys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILKiPJdb2rsLRwFGczP8x7KVTjqqY4lPkdbwE6+GcKxP valentino@homelab"
         ];
+        extraGroups = [ "dialout" ]; # support for serial device
       };
       slim.enable = true;
     };

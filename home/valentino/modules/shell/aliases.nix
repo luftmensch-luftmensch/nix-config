@@ -3,7 +3,7 @@ let
   _curl = "${lib.getExe pkgs.curl}";
   _docker = "${lib.getExe pkgs.docker}";
   _gpg = "${lib.getExe pkgs.gnupg} --keyserver-options auto-key-retrieve";
-  _nmcli = "${pkgs.networkmanager}/bin/nmcli device";
+  _nmcli = "nmcli device";
   _dig = lib.getExe' pkgs.dnsutils "dig";
 in
 {
