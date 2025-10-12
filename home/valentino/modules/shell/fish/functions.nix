@@ -201,7 +201,7 @@ in
 
   # [net]work [u]sage: check network usage stats
   netu.body = ''
-    set -l net_device (ip route | awk '/via/ {print $5}')
+    set -l net_device (ip route | awk '/via/ {print $5}' | head -n1)
     set -l transmitted (ifconfig "$net_device" | awk '/TX packets/ {print $6$7}')
     set -l received (ifconfig "$net_device" | awk '/RX packets/ {print $6$7}')
 
@@ -247,4 +247,23 @@ in
         echo "$name $(${dbus} /org/bluez/hci0/dev_"$(string replace -a : _ $uuid)" org.freedesktop.DBus.Properties.Get string:"org.bluez.Battery1" string:"Percentage" | awk '{print $3}')%"
       end
     '';
+
+  # Run a program detached
+  runfree.body = ''
+    if [ -z "$argv" ];
+      echo -e "Arguments needed not supplied\nUsage:\n\trunfree {command}"
+      return
+    else
+      $argv > /dev/null 2>&1 & disown
+    end
+  '';
+
+  # Copy file with progress bar
+  cppy.body = ''
+    if type -q rsync
+        rsync -ah --info=progress2 $argv
+    else
+        echo -e "rsync is not installed."
+    end
+  '';
 }

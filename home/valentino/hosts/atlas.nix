@@ -5,11 +5,7 @@
       rofi.enable = true;
       outlook.enable = true;
       teams.enable = true;
-      vnc = {
-        anydesk.enable = true;
-        remmina.enable = true;
-        horizon.enable = true;
-      };
+      vnc.remmina.enable = true;
     };
 
     xorg.enable = true;
@@ -31,7 +27,6 @@
       android.enable = true;
       cc.enable = true;
       java.enable = true;
-      js.enable = true;
       nix.enable = true;
       python.enable = true;
       tex.enable = true;

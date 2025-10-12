@@ -1,7 +1,12 @@
 { inputs, ... }:
 with builtins;
 let
-  inherit (inputs) self nixpkgs home-manager;
+  inherit (inputs)
+    self
+    nixpkgs
+    nixpkgs-unstable
+    home-manager
+    ;
   inherit (self) outputs overlays homeModules;
 
   genConfiguration =
@@ -19,9 +24,9 @@ let
         overlays = attrValues overlays;
       };
 
-      unstable-pkgs = import inputs.nixpkgs-unstable {
+      unstable-pkgs = import nixpkgs-unstable {
         inherit system;
-        config.allowUnfree = true; # Forgive me Stallman
+        config.allowUnfree = true;
         overlays = attrValues overlays;
       };
 

@@ -8,7 +8,7 @@ with lib;
 let
   cfg = config.valentino.modules.browsers.firefox;
   inherit (config.valentino.modules) themes wayland;
-  inherit (config.valentino.modules.credentials) bitwarden _1password;
+  inherit (config.valentino.modules.credentials) bitwarden;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
   userChrome = builtins.readFile ./style/userChrome.css;
   userContent = builtins.readFile ./style/userContent.css;
@@ -22,8 +22,7 @@ let
       rycee.user-agent-string-switcher
       # rycee.adaptive-tab-bar-colour # TODO: Try out
     ]
-    ++ lib.optionals bitwarden.enable [ rycee.bitwarden ]
-    ++ lib.optionals _1password.enable [ rycee.onepassword-password-manager ];
+    ++ lib.optionals bitwarden.enable [ rycee.bitwarden ];
 in
 {
   options.valentino.modules.browsers.firefox.enable = mkEnableOption "firefox";

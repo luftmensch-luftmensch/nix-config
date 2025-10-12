@@ -39,6 +39,11 @@ in
 
       shellAbbrs = {
         sc = "systemctl";
+        m = {
+          position = "anywhere";
+          setCursor = true;
+          expansion = ''math "%"'';
+        };
       };
 
       shellAliases = import ../aliases.nix { inherit lib pkgs; };

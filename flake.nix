@@ -20,7 +20,7 @@
   # Attribute set of all the dependencies used in the flake - Dependency Management Part
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05"; # Released in 23.05.2025
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager?ref=release-25.05";
