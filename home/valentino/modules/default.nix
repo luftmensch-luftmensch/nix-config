@@ -19,6 +19,7 @@
     "credentials/bitwarden"     = import ./credentials/bitwarden.nix;
     "credentials/gpg"           = import ./credentials/gpg.nix;
     "credentials/mail"          = import ./credentials/mail.nix;
+    "credentials/proton"        = import ./credentials/proton.nix;
     "credentials/sops"          = import ./credentials/sops.nix;
 
     "dev/android"               = import ./dev/android.nix;
