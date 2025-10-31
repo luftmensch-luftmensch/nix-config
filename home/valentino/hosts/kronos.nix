@@ -25,7 +25,10 @@
       mail-defaults.enable = true;
       bitwarden.enable = true;
       _1password.enable = true;
-      proton.authenticator.enable = true;
+      proton = {
+        authenticator.enable = true;
+        pass.enable = true;
+      };
     };
 
     dev = {
