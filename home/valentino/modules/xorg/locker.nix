@@ -16,7 +16,7 @@ in
       enable = true;
       xautolock = {
         enable = true;
-        extraOptions = [ "-time 10" ];
+        extraOptions = [ "-time 20" ];
       };
       lockCmd =
         let

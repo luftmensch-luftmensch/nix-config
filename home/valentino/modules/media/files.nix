@@ -18,6 +18,7 @@ in
     libreoffice.enable = mkEnableOption "enable libreoffice";
     localsend.enable = mkEnableOption "localsend - An open source cross-platform alternative to AirDrop";
     nemo.enable = mkEnableOption "nemo file browser";
+    gallery-dl.enable = mkEnableOption "gallery-dl - Command-line program to download image galleries and collections from several image hosting sites";
 
     qrcp = {
       enable = mkEnableOption "enable qrcp";
@@ -67,5 +68,7 @@ in
         "org/cinnamon/desktop/interface".can-change-accels = true;
       };
     })
+
+    (mkIf cfg.gallery-dl.enable { home.packages = [ pkgs.gallery-dl ]; })
   ];
 }

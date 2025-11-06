@@ -53,6 +53,7 @@
       editing.enable = true;
       files = {
         filezilla.enable = true;
+        gallery-dl.enable = true;
         libreoffice.enable = true;
         localsend.enable = true;
         nemo.enable = true;
