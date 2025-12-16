@@ -3,11 +3,17 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.services.syncthing;
   user = config.system.modules.core.user.username;
-  availableThemes = ["default" "black" "dark"];
-in {
+  availableThemes = [
+    "default"
+    "black"
+    "dark"
+  ];
+in
+{
   options.system.modules.services.syncthing = {
     enable = mkEnableOption "Enable syncthing capabilities";
     id = mkOption {
@@ -30,41 +36,46 @@ in {
 
   config = mkIf cfg.enable {
     services = {
-      syncthing = let
-        dir = "/home/${user}/.config/syncthing";
-      in {
-        enable = true;
-        inherit user;
-        configDir = dir;
-        dataDir = dir;
-        openDefaultPorts = true; # TCP 22000 for transfer, UDP 21027 for discovery
-        overrideFolders = true; # Purge folders not declaratively configured!
-        overrideDevices = true;
-        # relay.enable = true;
+      syncthing =
+        let
+          dir = "/home/${user}/.config/syncthing";
+        in
+        {
+          enable = true;
+          inherit user;
+          configDir = dir;
+          dataDir = dir;
+          openDefaultPorts = true; # TCP 22000 for transfer, UDP 21027 for discovery
+          overrideFolders = true; # Purge folders not declaratively configured!
+          overrideDevices = true;
+          # relay.enable = true;
 
-        settings = {
-          gui.theme = cfg.theme;
-          devices = {
-            P30-PRO.id = "POGJUQZ-LA6JNGT-T7VN6AL-ZYVOEGE-HHNDWPN-6SXXULO-IQKO7KQ-6HNPBQP";
-            nixos-device = {
-              inherit (cfg) id;
+          settings = {
+            gui.theme = cfg.theme;
+            devices = {
+              S25-ULTRA.id = "UWIFOFJ-7SBA4E4-EVDNZYJ-DM6WRHS-BKQCLL6-RKMK3LH-2ZNSERJ-W53QMAI";
+              nixos-device = {
+                inherit (cfg) id;
+              };
             };
-          };
-          folders = {
-            "Dropbox" = {
-              path = "/home/${user}/Dropbox";
-              id = "tcfun-ya2ir";
-              devices = ["P30-PRO" "nixos-device"];
-            };
+            folders = {
+              "Dropbox" = {
+                path = "/home/${user}/Dropbox";
+                id = "tcfun-ya2ir";
+                devices = [
+                  "S25-ULTRA"
+                  "nixos-device"
+                ];
+              };
 
-            "Video" = {
-              path = "/home/${user}/Video";
-              id = "tzf49-nwpwz";
-              devices = ["nixos-device"];
+              "Video" = {
+                path = "/home/${user}/Video";
+                id = "tzf49-nwpwz";
+                devices = [ "nixos-device" ];
+              };
             };
           };
         };
-      };
     };
   };
 }

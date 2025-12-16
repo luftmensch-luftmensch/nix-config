@@ -1,4 +1,26 @@
-inputs: {
+inputs:
+let
+  addPatches =
+    pkg: patches:
+    pkg.overrideAttrs (oldAttrs: {
+      patches = (oldAttrs.patches or [ ]) ++ patches;
+    });
+in
+{
+  # For every flake input, aliases 'pkgs.inputs.${flake}' to
+  # 'inputs.${flake}.packages.${pkgs.system}' or
+  # 'inputs.${flake}.legacyPackages.${pkgs.system}' or
+  flake-inputs = final: _: {
+    inputs = builtins.mapAttrs (
+      _: flake:
+      let
+        legacyPackages = (flake.legacyPackages or { }).${final.stdenv.hostPlatform.system} or { };
+        packages = (flake.packages or { }).${final.stdenv.hostPlatform.system} or { };
+      in
+      if legacyPackages != { } then legacyPackages else packages
+    ) inputs;
+  };
+
   # Overlays for personal pkgs (callPackage)
   additions = final: _: import ../packages { pkgs = final; };
 
@@ -35,8 +57,10 @@ inputs: {
       };
     });
 
-    mpv-visualizer = prev.mpvScripts.visualizer.overrideAttrs (_oldAttrs: {
-      patches = [ ./patches/visualizer.patch ];
-    });
+    # mpv-visualizer = prev.mpvScripts.visualizer.overrideAttrs (_oldAttrs: {
+    #   patches = [ ./patches/visualizer.patch ];
+    # });
+
+    mpv-visualizer = addPatches prev.mpvScripts.visualizer [ ./patches/visualizer.patch ];
   };
 }
