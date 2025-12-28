@@ -8,14 +8,14 @@
     # Example usage:
     # 1. Define our extensions
     # extensions = {
-    #   "bitwarden" = buildFirefoxXpiAddon {
-    #     pname = "bitwarden";
-    #     version = "2024.6.2";
-    #     addonId = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
+    #   "<name>" = buildFirefoxXpiAddon {
+    #     pname = "<name>";
+    #     version = "<version>";
+    #     addonId = "<ID>";
 
     #     src = pkgs.fetchurl {
-    #       url = "https://addons.mozilla.org/firefox/downloads/file/4305759/bitwarden_password_manager-2024.6.2.xpi";
-    #       hash = "sha256-wGTi1mAcuSHs0VTg07/VTXGvQ9oZR6pRZmh37wr9FDY=";
+    #       url = "";
+    #       hash = "";
     #     };
 
     #     meta = {

@@ -16,7 +16,6 @@
 
     "credentials/ssh"           = import ./credentials/ssh;
     "credentials/1password"     = import ./credentials/1password.nix;
-    "credentials/bitwarden"     = import ./credentials/bitwarden.nix;
     "credentials/gpg"           = import ./credentials/gpg.nix;
     "credentials/mail"          = import ./credentials/mail.nix;
     "credentials/proton"        = import ./credentials/proton.nix;
