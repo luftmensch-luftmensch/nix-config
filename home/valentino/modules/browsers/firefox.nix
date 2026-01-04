@@ -8,7 +8,6 @@ with lib;
 let
   cfg = config.valentino.modules.browsers.firefox;
   inherit (config.valentino.modules) themes wayland;
-  inherit (config.valentino.modules.credentials) _1password;
   inherit (config.valentino.modules.credentials.proton) pass;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
   userChrome = builtins.readFile ./style/userChrome.css;
@@ -22,8 +21,7 @@ let
       rycee.ublock-origin
       rycee.user-agent-string-switcher
     ]
-    ++ lib.optionals pass.enable [ rycee.proton-pass ]
-    ++ lib.optionals _1password.enable [ rycee.onepassword-password-manager ];
+    ++ lib.optionals pass.enable [ rycee.proton-pass ];
 in
 {
   options.valentino.modules.browsers.firefox.enable = mkEnableOption "firefox";

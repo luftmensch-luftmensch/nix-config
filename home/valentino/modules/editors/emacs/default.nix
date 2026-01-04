@@ -79,7 +79,7 @@ in
       };
     })
 
-    (mkIf config.programs.notmuch.enable { home.packages = [ pkgs.notmuch.emacs ]; })
+    # (mkIf config.programs.notmuch.enable { home.packages = [ pkgs.notmuch.emacs ]; })
 
     (mkIf cfg.telega.enable {
       # Cross-platform library for building Telegram clients

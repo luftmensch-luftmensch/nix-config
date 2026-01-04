@@ -140,7 +140,7 @@
 
 (require 'init-extra-modes)
 
-(require 'init-mail)
+;; (require 'init-mail)
 
 ;; (require 'init-tex)
 
