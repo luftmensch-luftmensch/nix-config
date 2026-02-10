@@ -85,9 +85,6 @@
   (:with-hook (eglot-managed-mode-hook)
     (:hook vb/lsp-optimization-mode)))
 
-;; TODO: https://github.com/svaante/dape
-;; (setup (:pkg dape))
-
 (setup (:if-feature general)
   ;; Additional keymaps using <SPC> prefix
   (vb/leader-key

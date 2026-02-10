@@ -40,11 +40,6 @@
     "b a" '(org-agenda :which-key "Agenda view")
     "b n" '(org-capture :which-key "Capture note")
 
-    ;; Magit
-    "g"  '(:ignore t :which-key "Git")
-    "gg" #'((lambda () (interactive) (magit "~/nix-config")) :which-key "Nixos Config")
-    "g." '(magit :which-key "Launch Magit in current directory")
-
     ;; Mail with NotMuch
     "o" '(:ignore t :which-key "Mail")
     "om" '(notmuch :which-key "Mail dashboard")

@@ -29,6 +29,20 @@ in
 
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = false;
+      matchBlocks."*" = {
+        forwardAgent = false;
+        addKeysToAgent = "no";
+        compression = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+
+        controlMaster = "auto";
+        controlPath = "~/.ssh/sockets/%r@%h-%p";
+        controlPersist = "60m";
+      };
       includes = [
         "personal/config"
         "work/config"

@@ -3,15 +3,17 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.services.logind;
-in {
+in
+{
   options.system.modules.services.logind.enable = mkEnableOption "Enable logind capabilities";
 
   config = mkIf cfg.enable {
-    services.logind = {
-      lidSwitch = "suspend";
-      lidSwitchDocked = "suspend";
+    services.logind.settings.Login = {
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchDocked = "suspend";
     };
   };
 }

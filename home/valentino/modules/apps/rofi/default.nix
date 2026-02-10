@@ -7,11 +7,6 @@
 with lib;
 let
   cfg = config.valentino.modules.apps.rofi;
-  inherit (config.valentino.modules) wayland;
-
-  rofiPkg = if wayland.enable then pkgs.rofi-wayland else pkgs.rofi;
-  rofi-emoji = if wayland.enable then pkgs.rofi-emoji-wayland else pkgs.rofi-emoji;
-  rofi-powermenu = if wayland.enable then pkgs.rofi-powermenu-wayland else pkgs.rofi-powermenu;
   rofiFonts = pkgs.nerd-fonts.iosevka;
 in
 {
@@ -20,12 +15,12 @@ in
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      package = rofiPkg;
-      plugins = [ rofi-emoji ];
+      package = pkgs.rofi;
+      plugins = [ pkgs.rofi-emoji ];
     };
 
     home.packages = [
-      rofi-powermenu
+      pkgs.rofi-powermenu
       rofiFonts
     ];
 

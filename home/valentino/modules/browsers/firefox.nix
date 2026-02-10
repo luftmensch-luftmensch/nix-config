@@ -10,8 +10,9 @@ let
   inherit (config.valentino.modules) themes wayland;
   inherit (config.valentino.modules.credentials.proton) pass;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
-  userChrome = builtins.readFile ./style/userChrome.css;
-  userContent = builtins.readFile ./style/userContent.css;
+
+  userChrome = builtins.readFile "${pkgs.firefox-parfait}/share/firefox-parfait/userChrome.css";
+  userContent = builtins.readFile "${pkgs.firefox-parfait}/share/firefox-parfait/userContent.css";
 
   extensions.packages =
     let
@@ -526,13 +527,48 @@ in
 
           # Moved here to be able to know about error in the configuration
           "browser.aboutConfig.showWarning" = false;
+
+          # Sidebar custom configuration
+          "sidebar.position_start" = true;
+          "sidebar.revamp" = true;
+          "sidebar.revamp.round-content-area" = false;
+          "sidebar.verticalTabs" = true;
+          "sidebar.visibility" = "hide-sidebar";
+
+          # Parfait general configuration - https://github.com/reizumii/parfait
+          "parfait.animations.enabled" = true;
+          "parfait.blur.enabled" = false;
+          "parfait.window.borderless" = true;
+          "parfait.bg.accent-color" = false;
+          "parfait.bg.contrast" = 2;
+          "parfait.bg.gradient" = false;
+          "parfait.bg.opacity" = 4;
+          "parfait.bg.transparent" = false;
+          "parfait.tabs.groups.color" = false;
+          "parfait.sidebar.width.preset" = 1;
+          "parfait.theme.lwt.alt" = false;
+          "parfait.theme.roundness.preset" = 2;
+          "parfait.toolbar.sidebar-gutter" = true;
+          "parfait.toolbar.unified-sidebar" = true;
+          "parfait.toolbar.force-hl-layout" = false;
+          "parfait.traffic-lights.enabled" = false;
+          "parfait.traffic-lights.mono" = false;
+          "parfait.urlbar.url.center" = false;
+          "parfait.urlbar.results.compact" = false;
+          "parfait.urlbar.search-mode.glow" = false;
+          "parfait.new-tab.logo" = 1;
+          "parfait.new-tab.bg.pattern" = false;
         };
       };
     };
 
     home = {
-      file.".config/startpage.html".source =
-        config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
+      file = {
+        ".config/startpage.html".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
+        ".mozilla/firefox/default/chrome/parfait".source =
+          config.lib.file.mkOutOfStoreSymlink "${pkgs.firefox-parfait}/share/firefox-parfait/parfait";
+      };
+
       packages = with pkgs; [
         (writeShellScriptBin "firefox-private" ''exec ${lib.getExe config.programs.firefox.package} --private-window'')
       ];

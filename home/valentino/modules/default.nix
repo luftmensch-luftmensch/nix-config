@@ -70,6 +70,7 @@
 
     "xorg"                      = import ./xorg;
     "xorg/i3"                   = import ./xorg/i3;
+    "xorg/clipboard"            = import ./xorg/clipboard.nix;
     "xorg/locker"               = import ./xorg/locker.nix;
     "xorg/picom"                = import ./xorg/picom.nix;
     "xorg/polybar"              = import ./xorg/polybar;

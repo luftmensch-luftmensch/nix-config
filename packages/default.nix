@@ -3,11 +3,10 @@
 }:
 {
   rofi-powermenu = pkgs.callPackage ./rofi-powermenu { };
-  rofi-powermenu-wayland = pkgs.callPackage ./rofi-powermenu { backend = "wayland"; };
-
   san-francisco = pkgs.callPackage ./fonts/san-francisco.nix { };
   sf-mono = pkgs.callPackage ./fonts/sf-mono.nix { };
 
+  firefox-parfait = pkgs.callPackage ./firefox/firefox-parfait.nix { };
   haiku-icon-theme = pkgs.callPackage ./icons/haiku.nix { };
 
   # Custom sddm theme

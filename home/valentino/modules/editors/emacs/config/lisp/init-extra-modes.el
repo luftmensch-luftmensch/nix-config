@@ -9,7 +9,7 @@
 (setup (:pkg cmake-mode)
   (:file-match (rx (or "CmakeLists.txt" ".cmake") eos)))
 
-(setup (:pkg nix-mode)
+(setup (:pkg nix-mode :type git :host github :repo "NixOS/nix-mode")
   (:file-match (rx ".nix" eos)))
 
 (setup (:pkg go-mode)

@@ -139,13 +139,7 @@
   (:hook-into prog-mode)
 
   (:with-mode dired-mode
-    (:hook diff-hl-dired-mode))
-
-  (:with-after magit
-    (:with-hook magit-pre-refresh-hook
-      (:hook diff-hl-magit-pre-refresh))
-    (:with-hook magit-post-refresh-hook
-      (:hook diff-hl-magit-post-refresh))))
+    (:hook diff-hl-dired-mode)))
 
 (setup long-lines
   (set-display-table-slot standard-display-table 'truncation (make-glyph-code ?…))

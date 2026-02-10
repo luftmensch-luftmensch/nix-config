@@ -29,7 +29,7 @@ let
     corefonts
 
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     noto-fonts-cjk-sans
 
     material-design-icons

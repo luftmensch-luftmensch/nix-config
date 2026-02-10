@@ -28,7 +28,6 @@ _: {
 
     dev = {
       adb.enable = true;
-      docker.enable = true;
       keyboard.enable = true;
       manpages.enable = true;
     };

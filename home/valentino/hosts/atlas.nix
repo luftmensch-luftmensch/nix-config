@@ -36,6 +36,7 @@
     };
 
     editors = {
+      android-studio.enable = true;
       emacs = {
         enable = true;
         daemon.enable = true;

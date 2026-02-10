@@ -84,11 +84,11 @@ in
     # QT
     {
       home = {
-        sessionVariables.QT_QPA_PLATFORMTHEME = "qt5ct";
-        packages = with pkgs.libsForQt5; [
+        sessionVariables.QT_QPA_PLATFORMTHEME = "qt6ct";
+        packages = with pkgs.kdePackages; [
           qtstyleplugin-kvantum
-          breeze-qt5
-          qt5ct
+          breeze
+          qt6ct
         ];
       };
     }

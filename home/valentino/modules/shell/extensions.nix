@@ -81,8 +81,7 @@ in
           "--border"
           "--inline-info"
           "--color=16"
-          # TODO: Update when fzf version is bumped to 0.66 (https://github.com/junegunn/fzf/issues/4560#issuecomment-3423338387)
-          # "--color=current-bg:0,border:0"
+          "--color=current-bg:0,border:0"
         ];
 
         enableBashIntegration = bash.enable;
