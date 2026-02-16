@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.core.impermanence;
-in {
+in
+{
   options.system.modules.core.impermanence.enable = mkEnableOption "Erase your darling...";
 
   config = mkIf cfg.enable {
@@ -19,6 +21,7 @@ in {
         "/var/lib/libvirt"
         "/var/lib/fprint"
         "/var/lib/docker"
+        "/var/lib/AccountsService/icons"
         "/root/.ssh"
         "/root/.gnupg"
       ];

@@ -10,7 +10,7 @@
   haiku-icon-theme = pkgs.callPackage ./icons/haiku.nix { };
 
   # Custom sddm theme
-  sddm-theme-clairvoyance = pkgs.callPackage ./sddm-theme/default.nix { };
+  sddm-theme-silent = pkgs.callPackage ./sddm { theme = "rei"; };
 
   # MPV custom scripts
   mpv-navigator = pkgs.callPackage ./mpv-scripts/file-navigator.nix { };

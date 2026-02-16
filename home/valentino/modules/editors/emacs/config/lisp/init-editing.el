@@ -18,6 +18,7 @@
   (setq locale-coding-system 'utf-8-unix)
   (setq selection-coding-system 'utf-8)
   (setq x-select-request-type nil)
+  (setq-default x-select-enable-clipboard-manager nil)
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (prefer-coding-system 'utf-8-unix)
   (set-clipboard-coding-system 'utf-8)
