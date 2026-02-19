@@ -9,6 +9,7 @@ let
   inherit (config.system.modules.dev) adb docker virtualisation;
   inherit (config.system.modules.services.printing) cups sane;
   inherit (config.system.modules.services) touchpad;
+  inherit (config.system.modules.hardware.video) i2c;
   inherit (config.networking) networkmanager;
 in
 {
@@ -80,6 +81,7 @@ in
         ]
         ++ optionals sane.enable [ "scanner" ]
         ++ optionals touchpad.enable [ "input" ]
+        ++ optionals i2c.enable [ "i2c" ]
         ++ cfg.extraGroups;
 
         openssh.authorizedKeys.keys = [

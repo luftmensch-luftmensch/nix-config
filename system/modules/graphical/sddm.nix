@@ -43,7 +43,7 @@ in
           in
           ''
             if [ -f "${source}" ]; then
-              if [ ! -f "${dest}" ] || ! cmp -s "${source}" "${dest}"; then
+              if [ ! -f "${dest}" ] || ! "${pkgs.diffutils}/bin/cmp" -s "${source}" "${dest}"; then
                   rm -f "${dest}"
                   cp -L "${source}" "${dest}"
               fi
