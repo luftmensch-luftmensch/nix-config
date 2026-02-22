@@ -30,7 +30,7 @@ in
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
-      package = if wayland.enable then pkgs.firefox-wayland else pkgs.firefox;
+      package = pkgs.firefox;
 
       languagePacks = [
         "it"

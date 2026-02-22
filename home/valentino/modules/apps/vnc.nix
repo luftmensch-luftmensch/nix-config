@@ -11,7 +11,7 @@ in
 {
   options.valentino.modules.apps.vnc = {
     remmina.enable = mkEnableOption "enable remmina";
-    horizon.enable = mkEnableOption "enable vmware horizon client";
+    horizon.enable = mkEnableOption "enable omnissa horizon client";
     anydesk.enable = mkEnableOption "enable anydesk";
     rustdesk.enable = mkEnableOption "enable rustdesk";
   };
@@ -20,6 +20,6 @@ in
     (mkIf cfg.remmina.enable { home.packages = [ pkgs.remmina ]; })
     (mkIf cfg.anydesk.enable { home.packages = [ pkgs.anydesk ]; })
     (mkIf cfg.rustdesk.enable { home.packages = [ pkgs.rustdesk ]; })
-    (mkIf cfg.horizon.enable { home.packages = [ pkgs.vmware-horizon-client ]; })
+    (mkIf cfg.horizon.enable { home.packages = [ pkgs.omnissa-horizon-client ]; })
   ];
 }
