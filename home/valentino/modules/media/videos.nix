@@ -71,6 +71,7 @@ in
         "Ctrl+s" = "screenshot window";
         "Alt+s" = "screenshot each-frame";
         DEL = "script-binding osc/visibility";
+        "Shift+m" = "cycle-values audio-channels \"auto-safe\" \"mono\"";
       };
       scripts =
         with pkgs;
