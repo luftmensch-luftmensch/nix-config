@@ -146,5 +146,8 @@
   (set-display-table-slot standard-display-table 'truncation (make-glyph-code ?…))
   (set-display-table-slot standard-display-table 'wrap (make-glyph-code ?↩)))
 
+;; Needed for a bunch of packages (dired, telega)
+(setup (:pkg (cond-let :type git :host github :repo "tarsius/cond-let")))
+
 (provide 'init-editing)
 ;;; init-editing.el ends here

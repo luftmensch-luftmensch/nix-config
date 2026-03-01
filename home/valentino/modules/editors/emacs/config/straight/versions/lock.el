@@ -66,7 +66,6 @@
  ("straight.el" . "44a866f28f3ded6bcd8bc79ddc73b8b5044de835")
  ("svg-lib" . "341b6d13f313ae8fb1a3f6d0a3fb27c02f3925d8")
  ("tomelr" . "ff34a7d9a68d0f25718a8a4e0fd9c6a73e506cdb")
- ("transient" . "f4aac8443c63ac47795fba12db193ff4da0279f0")
  ("treesit-auto" . "016bd286a1ba4628f833a626f8b9d497882ecdf3")
  ("verb" . "3841f1db7c6b7969f349f51dd43eb97477dc3943")
  ("vertico" . "e69ef62ffa4bc42dd42437881c251ecdcae0e0c5")
