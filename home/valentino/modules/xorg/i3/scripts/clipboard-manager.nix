@@ -33,7 +33,7 @@ pkgs.writeShellScriptBin "cms" ''
       if [[ "$(${_clip} list | wc -l)" -eq 0 ]]; then
         ${_notify} -u normal "No items stored yet!" -a CLIPBOARD_MANAGER -r ''${notification_id} -p -i ~/Dropbox/icons/checked.png
       else
-        selected="$(${_clip} list | ${_menu} -p '▶ Delete item from Clipboard: '-W 0.5 | cut -d: -f1)"
+        selected="$(${_clip} list | ${_menu} -p '▶ Delete item from Clipboard: ' -W 0.5 | cut -d: -f1)"
         [[ -n "$selected" ]] && ${_clip} remove "$selected"
       fi
   }
