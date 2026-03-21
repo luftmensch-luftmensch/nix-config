@@ -85,7 +85,7 @@ in
         ++ cfg.extraGroups;
 
         openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII5bHKpkOWDHNEaG5eovp8pQzsNpJIm8+ziHwF5idLKf valentino@P30-Pro"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII4WzaQqD5h0L/Pzwkc+HG4UMcn0ngjGm+jTI9Zn8GRz valentino@S25-ULTRA"
         ]
         ++ cfg.extraAuthorizedKeys;
       };
