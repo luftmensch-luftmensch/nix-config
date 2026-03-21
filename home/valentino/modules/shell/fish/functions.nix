@@ -186,7 +186,7 @@ in
   # You can pass `--option eval-cache false` to turn off caching so that Nix will always show you the error message instead of error: cached failure of attribute 'nixosConfigurations.default.config.system.build.toplevel'
   update.body = ''
     set -l base_path $HOME/nix-config
-    nixos-rebuild switch --flake "$base_path/.#$hostname" -v -L --use-remote-sudo
+    nixos-rebuild switch --flake "$base_path/.#$hostname" -v -L --sudo
   '';
 
   home-switch.body = ''
