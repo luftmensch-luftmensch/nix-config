@@ -3,6 +3,7 @@
   stdenv,
   makeWrapper,
   procps,
+  gawk,
   rofi,
 }:
 with lib;
@@ -27,6 +28,7 @@ stdenv.mkDerivation {
         makeBinPath [
           procps
           rofi
+          gawk
         ]
       }"
   '';
