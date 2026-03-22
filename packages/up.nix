@@ -5,7 +5,7 @@
   ...
 }:
 let
-  version = "1.2.1";
+  version = "1.3.0";
 in
 buildGoModule {
   pname = "up";
@@ -15,7 +15,7 @@ buildGoModule {
     owner = "jesusprubio";
     repo = "up";
     rev = "v${version}";
-    hash = "sha256-H5JACzdbIAlc38oTX8uv8YnLZhgsJlFcQeB2RoJkfpg=";
+    hash = "sha256-fXg+fU7wCirJ1pGpahCjeYVUQukmTlnorS2F5eCcXCI=";
   };
 
   ldflags = [
