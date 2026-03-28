@@ -147,6 +147,8 @@ in
           "browser.ai.control.smartTabGroups" = "blocked";
           "browser.ai.control.translations" = "blocked";
 
+          "browser.ml.chat.enabled" = false;
+
           # BROWSER - CACHE
 
           # Disable the Offline Cache.
@@ -577,7 +579,7 @@ in
       };
 
       packages = with pkgs; [
-        (writeShellScriptBin "firefox-private" ''exec ${lib.getExe config.programs.firefox.package} --private-window'')
+        (writeShellScriptBin "firefox-private" "exec ${lib.getExe config.programs.firefox.package} --private-window")
       ];
     };
   };
