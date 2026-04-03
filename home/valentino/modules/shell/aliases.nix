@@ -1,7 +1,6 @@
 { lib, pkgs }:
 let
   _curl = "${lib.getExe pkgs.curl}";
-  _docker = "${lib.getExe pkgs.docker}";
   _gpg = "${lib.getExe pkgs.gnupg} --keyserver-options auto-key-retrieve";
   _nmcli = "nmcli device";
   _dig = lib.getExe' pkgs.dnsutils "dig";
@@ -94,11 +93,6 @@ in
   # ------ Systemd-analyze ------- #
   sapu = "systemd-analyze --user plot > systemd-analyze-user.svg";
   sap = "systemd-analyze plot > systemd-analyze-user.svg";
-
-  # Docker related
-  dcu = "${_docker} compose up -d";
-  dcd = "${_docker} compose down";
-  dps = "${_docker} ps";
 
   # Misc
   v = "vim";
