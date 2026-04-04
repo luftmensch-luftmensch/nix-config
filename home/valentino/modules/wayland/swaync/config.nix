@@ -145,7 +145,7 @@
 
     .notification-row {
       outline: none;
-      margin: 20px;
+      margin: 8px 20px;
       padding: 0;
     }
 
