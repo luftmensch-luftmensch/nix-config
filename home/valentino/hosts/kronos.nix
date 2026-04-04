@@ -68,7 +68,7 @@
       videos.enable = true;
     };
 
-    term.foot.enable = true;
+    term.kitty.enable = true;
 
     shell = {
       bash.enable = true;
@@ -102,7 +102,7 @@
         term = {
           family = "VictorMono Nerd Font";
           package = pkgs.nerd-fonts.victor-mono;
-          size = 14;
+          size = 16;
         };
 
         bar = {

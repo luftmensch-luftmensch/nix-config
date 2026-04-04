@@ -32,9 +32,9 @@ let
         status="$(${_acpi} | awk 'NR==1 {print $3}' | sed 's/,//g')"
 
         if [ "$capacity" -le 20 ] && [ "$capacity" -ge 11 ] && [ "$status" == "Discharging" ]; then
-            send_notification battery_low "$capacity %: See you, space cowboy..." 
+            send_notification battery-low "$capacity %: See you, space cowboy..."
         elif [ "$capacity" -le 10 ] && [ "$status" == "Discharging" ]; then
-            send_notification battery_caution "Running on low battery!"
+            send_notification battery-caution "Running on low battery!"
         elif [ "$capacity" -eq 100 ] && [ "$status" == "Full" ]; then
              send_notification battery "Fully recharged! Please remove the power supply"
         fi
