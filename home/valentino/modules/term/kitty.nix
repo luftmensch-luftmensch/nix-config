@@ -33,6 +33,7 @@ in
         paste_actions = "quote-urls-at-prompt,confirm";
         notify_on_cmd_finish = "always 2 command notify-send \"job %c finished with status: %s\"";
         font_family = "family=\"${themes.font.term.family}\"";
+        font_size = themes.font.term.size;
         bold_font = "auto";
         italic_font = "auto";
         bold_italic_font = "auto";

@@ -102,7 +102,7 @@
         term = {
           family = "VictorMono Nerd Font";
           package = pkgs.nerd-fonts.victor-mono;
-          size = 16;
+          size = 14;
         };
 
         bar = {

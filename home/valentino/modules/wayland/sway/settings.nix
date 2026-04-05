@@ -135,7 +135,7 @@ in
     Print = "exec --no-startup-id ${lib.getExe pkgs.grim} -g  \"$(${lib.getExe pkgs.slurp})\" $(date +'%d-%m-%Y-%H:%M:%S').png";
 
     "${mod}+Return" = "exec --no-startup-id ${_terminal} -T Kitty";
-    "${mod}+Shift+Return" = "exec --no-startup-id ${_terminal} -T floating_term";
+    "${mod}+Shift+Return" = "exec --no-startup-id ${_terminal} --class floating_term";
 
     "${mod}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run ${menu_opts} -p '▶ Run: ' | xargs swaymsg exec";
 
