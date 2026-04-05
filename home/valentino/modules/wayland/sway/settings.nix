@@ -315,7 +315,7 @@ in
 
       {
         command = "opacity $opacity";
-        criteria.app_id = "foot";
+        criteria.app_id = "Kitty";
       }
 
       {

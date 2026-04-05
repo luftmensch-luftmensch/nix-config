@@ -8,7 +8,6 @@ with lib;
 let
   cfg = config.valentino.modules.shell.fish;
   inherit (config.valentino.modules.xorg) polybar;
-  inherit (config.valentino.modules.term) foot;
   inherit (config.valentino.modules) wayland;
   inherit (config.valentino.modules.shell) git;
 in
@@ -21,21 +20,7 @@ in
   config = mkIf cfg.enable {
     programs.fish = {
       enable = true;
-      shellInit = mkMerge [
-        (import ./init.nix).shellInit
-
-        (mkIf foot.enable ''
-          # Taken from https://codeberg.org/dnkl/foot/wiki#user-content-spawning-new-terminal-instances-in-the-current-working-directory
-          function update_cwd_osc --on-variable PWD --description 'Notify terminals when $PWD changes'
-            if status --is-command-substitution || set -q INSIDE_EMACS
-                return
-            end
-            printf \e\]7\;file://%s%s\e\\ $hostname (string escape --style=url $PWD)
-          end
-
-          update_cwd_osc # Run once since we might have inherited PWD from a parent shell
-        '')
-      ];
+      shellInit = (import ./init.nix).shellInit;
 
       shellAbbrs = {
         sc = "systemctl";

@@ -7,10 +7,6 @@
 with lib;
 let
   cfg = config.valentino.modules.media.files;
-  terminal =
-    with lib;
-    with pkgs;
-    if config.valentino.modules.xorg.enable then "${getExe kitty}" else "${getExe foot}";
 in
 {
   options.valentino.modules.media.files = {
@@ -64,7 +60,7 @@ in
       };
 
       dconf.settings = {
-        "org/cinnamon/desktop/applications/terminal".exec = "${terminal}";
+        "org/cinnamon/desktop/applications/terminal".exec = "${lib.getExe pkgs.kitty}";
         "org/cinnamon/desktop/interface".can-change-accels = true;
       };
     })

@@ -145,12 +145,12 @@ in
 
   cpu = {
     format = "  {avg_frequency}Gz";
-    on-click = "${lib.getExe pkgs.foot} -e ${lib.getExe pkgs.btop}";
+    on-click = "${lib.getExe pkgs.kitty} -e ${lib.getExe pkgs.btop}";
   };
 
   memory = {
     format = "  {used:0.1f} G";
-    on-click = "${lib.getExe pkgs.foot} -e ${lib.getExe pkgs.btop}";
+    on-click = "${lib.getExe pkgs.kitty} -e ${lib.getExe pkgs.btop}";
   };
 
   tray = {
