@@ -46,7 +46,7 @@ in
             "<Up>" = "zoom 1";
             "<Shift+plus>" = "zoom 1";
             "<Down>" = "zoom -1";
-            i = "exec ${lib.getExe pkgs.libnotify} -t 800 -u low -i image-x-generic \$imv_current_file";
+            i = "exec ${lib.getExe pkgs.libnotify} -t 800 -u low -i image-x-generic \"$imv_current_file\"";
 
             # Other commands
             x = "close";
