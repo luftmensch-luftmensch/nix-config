@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  unstable-pkgs,
   ...
 }:
 with lib;
@@ -45,13 +46,14 @@ in
           ++ (optionals cfg.telega.enable [
             # melpaPackages.telega is outdated. Pull a newer version directly from the repo
             (melpaPackages.telega.overrideAttrs (_oldAttrs: {
-              version = "0.8.550";
+              version = "0.8.630";
               src = pkgs.fetchFromGitHub {
                 owner = "zevlg";
                 repo = "telega.el";
-                rev = "4e7850c48c08405c8fb8a4132fe7e52e49692c6e";
-                hash = "sha256-FNhBLu14WDbD3NE9xXPBesJyiTGOqfzwG8jEj3kgs0w=";
+                rev = "93b16e46c26fc81e1fb02b6c4c7ef7bbdd3dd5a2";
+                hash = "sha256-YzDn2CuZa/NkP8cHtmR6TCgBlzu8ETLNjPJcM1kKR5c=";
               };
+              buildInputs = [ unstable-pkgs.tdlib ];
             }))
           ]);
       };
@@ -77,13 +79,6 @@ in
         client.enable = true;
         startWithUserSession = "graphical";
       };
-    })
-
-    # (mkIf config.programs.notmuch.enable { home.packages = [ pkgs.notmuch.emacs ]; })
-
-    (mkIf cfg.telega.enable {
-      # Cross-platform library for building Telegram clients
-      home.packages = [ pkgs.tdlib ];
     })
   ]);
 }
