@@ -13,18 +13,12 @@ let
 in
 {
   imports = [
-    ./onedark.nix
     ./modus.nix
-    ./paradise.nix
   ];
 
   options.valentino.modules.themes = with types; {
     active = mkOption {
-      type = nullOr (enum [
-        "onedark"
-        "modus"
-        "paradise"
-      ]);
+      type = nullOr (enum [ "modus" ]);
       default = null;
       description = ''
         Name of the theme to enable.

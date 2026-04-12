@@ -4,17 +4,17 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.valentino.modules.dev.js;
-in {
+in
+{
   options.valentino.modules.dev.js.enable = mkEnableOption "javascript language tools";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       nodejs
-      node2nix
-      yarn
-      nodePackages.typescript-language-server
+      typescript-language-server
     ];
 
     # Needed to quickly install borked modules (e.g. amplify, *coff*) in home

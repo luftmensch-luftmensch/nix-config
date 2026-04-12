@@ -14,7 +14,12 @@ in
   config = mkIf cfg.enable {
     # NOTE: To find out where a specific sty is located: ll $(dirname $(kpsewhich listings.sty))
     home.packages = with pkgs; [
-      texliveFull
+      (texliveFull.withPackages (
+        ps: with ps; [
+          fontawesome6
+          source-sans
+        ]
+      ))
       tectonic
     ];
   };
