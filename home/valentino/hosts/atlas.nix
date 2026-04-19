@@ -32,7 +32,6 @@
       nix.enable = true;
       python.enable = true;
       tex.enable = true;
-      tools.enable = true;
     };
 
     editors = {

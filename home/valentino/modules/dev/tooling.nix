@@ -13,9 +13,8 @@ in
   options.valentino.modules.dev.tools.enable = mkEnableOption "Developers tools";
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      up-go
-      # bruno
+    home.packages = [
+      # pkgs.bruno
       # httpie-desktop
       # mongodb-compass
     ];
