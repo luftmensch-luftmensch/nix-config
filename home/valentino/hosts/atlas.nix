@@ -46,7 +46,10 @@
 
     media = {
       documents.enable = true;
-      reading.mdx.enable = true;
+      reading = {
+        mdx.enable = true;
+        newsboat.enable = true;
+      };
       editing.enable = true;
       files = {
         filezilla.enable = true;

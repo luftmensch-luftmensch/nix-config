@@ -28,11 +28,6 @@
     :prefix "C-x")
 
   (vb/leader-key
-    ;; Elfeed
-    "e"  '(:ignore t :which-key "Elfeed")
-    "el" '(elfeed :which-key "Elfeed - view")
-    "eu" '(elfeed-update :which-key "Elfeed - update")
-
     "s" '(vterm :which-key "Open terminal")
 
     ;; Agenda

@@ -142,17 +142,9 @@
 
 ;; (require 'init-mail)
 
-;; (require 'init-tex)
-
-(require 'init-reading)
-
 (require 'init-shell)
 
 (require 'init-telega)
-
-;; (require 'init-media)
-
-(setup (:pkg daemons))
 
 (require 'init-games)
 
