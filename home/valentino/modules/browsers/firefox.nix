@@ -21,6 +21,7 @@ let
     [
       rycee.ublock-origin
       rycee.user-agent-string-switcher
+      rycee.video-downloadhelper
     ]
     ++ lib.optionals pass.enable [ rycee.proton-pass ];
 in
