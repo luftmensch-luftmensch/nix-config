@@ -29,9 +29,6 @@
            telega-chat-input-markups '("markdown2" "org"))
 
 
-  (put (get 'telega-chat 'button-category-symbol)
-       :inserter 'telega-ins--chat-full-2lines)
-
   (:with-map telega-root-mode-map
     (:bind
      "<tab>" telega-chat-button-toggle-view
@@ -57,15 +54,8 @@
     (:global "C-c t" telega-prefix-map))
 
   (:with-mode telega-chat-mode
-    ;; From Andrew Tropin <3
-    (:local-set completion-at-point-functions (mapcar
-                                               #'cape-company-to-capf
-                                               (append (list 'telega-company-emoji
-                                                             'telega-company-username
-                                                             'telega-company-hashtag)
-                                                       (when (telega-chat-bot-p telega-chatbuf--chat)
-                                                         '(telega-company-botcmd)))))
     (:hook telega-mnz-mode)
+    (:hook telega-completions-setup-capf)
     (:hook visual-fill-column-mode))
 
   (:with-hook telega-load-hook

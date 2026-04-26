@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.core.boot;
-in {
+in
+{
   options.system.modules.core.boot.quietboot.enable = mkEnableOption "quietboot";
 
   config = mkIf cfg.quietboot.enable {
@@ -29,11 +31,6 @@ in {
         enable = true;
         theme = "bgrt";
       };
-    };
-
-    console = {
-      useXkbConfig = true;
-      earlySetup = false;
     };
   };
 }

@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   # Timezone
   time.timeZone = "Europe/Rome";
@@ -6,5 +7,11 @@
   i18n.defaultLocale = "it_IT.UTF-8";
 
   # Console settings
-  console.font = "Lat2-Terminus16";
+  console = {
+    earlySetup = true;
+    font = "Lat2-Terminus16";
+    keyMap = "it";
+    packages = [ pkgs.terminus_font ];
+  };
+
 }
