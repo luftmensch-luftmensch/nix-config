@@ -149,16 +149,6 @@ in
                 title = "r/androiddev";
                 extraTags = [ "android-dev" ];
               }
-              {
-                url = "https://www.reddit.com/r/FlutterDev.rss";
-                title = "r/FlutterDev";
-                extraTags = [ "flutter" ];
-              }
-              {
-                url = "https://codewithandrea.com/rss.xml";
-                title = "Code With Andrea";
-                extraTags = [ "flutter" ];
-              }
             ])
             [
               {
