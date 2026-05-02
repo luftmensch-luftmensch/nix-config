@@ -78,11 +78,6 @@ in
       end
     '';
 
-  emptytrash.body = ''
-    rm ~/.local/share/Trash/files ~/.local/share/Trash/info
-    mkdir ~/.local/share/Trash/info ~/.local/share/Trash/files
-  '';
-
   mkcd.body = ''
     mkdir "$argv[1]" && cd "$argv[1]"
   '';

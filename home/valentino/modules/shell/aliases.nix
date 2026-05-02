@@ -112,4 +112,6 @@ in
 
   # make sudo use aliases
   sudo = "sudo ";
+
+  emptytrash = "${lib.getExe pkgs.findutils} ~/.local/share/Trash/files ~/.local/share/Trash/info -mindepth 1 -delete";
 }

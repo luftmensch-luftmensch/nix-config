@@ -24,11 +24,6 @@ in
 
         PS2="\[\033[32m\]  > \[\e[0m\]"
 
-        emptytrash(){
-          rm ~/.local/share/Trash/files ~/.local/share/Trash/info
-          mkdir ~/.local/share/Trash/files ~/.local/share/Trash/info
-        }
-
         ex () {
           if [ -f "$1" ] ; then
           case $1 in
