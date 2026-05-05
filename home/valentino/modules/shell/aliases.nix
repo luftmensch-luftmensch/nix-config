@@ -26,11 +26,6 @@ in
   parrot = "${_curl} parrot.live";
   rr = "${_curl} -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash";
 
-  # LICENSE
-  gpl = "${_curl} https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
-  agpl = "${_curl} https://www.gnu.org/licenses/agpl-3.0.txt -o LICENSE";
-  mit = "${_curl} https://mit-license.org/license.txt -o LICENSE";
-
   webcam = "ffplay /dev/video0";
 
   jctl = "journalctl -p 3 -xb";
