@@ -25,7 +25,7 @@ in
           enable = true;
           settings.screencast = {
             chooser_type = "simple";
-            chooser_cmd = "${lib.getExe pkgs.slurp} -f %o -or";
+            chooser_cmd = "''${lib.getExe pkgs.slurp} -f 'Monitor: %o' -or";
           };
         };
       };
