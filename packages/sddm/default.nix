@@ -33,7 +33,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
       cp -r $src/* ${basePath}
 
       substituteInPlace ${basePath}/metadata.desktop \
-        --replace-warn configs/default.conf configs/${theme}.conf
+        --replace-fail configs/default.conf configs/${theme}.conf
 
       chmod +w ${basePath}/configs/${theme}.conf
 
