@@ -117,23 +117,28 @@ in
             "AdaptiveButtonInTopToolbarTranslate"
             # Disable detailed language settings
             "DetailedLanguageSettings"
-            # Disable fetching optimization guides
-            "OptimizationHintsFetching"
             # Partition third-party storage
             "DisableThirdPartyStoragePartitioningDeprecationTrial2"
 
             # Disable media engagement
             "PreloadMediaEngagementData"
             "MediaEngagementBypassAutoplayPolicies"
+
+            # Disable fetching optimization guides
+            "OptimizationHintsFetching"
+            # Disable Gemini Nano on-device AI model (prevents 4GB silent download)
+            "OptimizationGuideOnDeviceModel"
+            "PromptAPIForGeminiNano"
           ]
         )
       ];
 
       extensions = [
-        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock
+        { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; } # ublock origin lite
         { id = "iaiomicjabeggjcfkbimgmglanimpnae"; } # tab manager
         { id = "inojafojbhdpnehkhhfjalgjjobnhomj"; } # tempmail
         { id = "fonalplhodhnenmokepaijoemaednpjm"; } # directo
+        { id = "lmjnegcaeklhafolokijcfjliaokphfk"; } # video downloader helper
       ]
       ++ (lib.optionals _1password.enable) [ { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } ];
     };
