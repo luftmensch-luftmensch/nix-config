@@ -361,8 +361,7 @@ in
           # GFX - Webrender
           #"gfx.webrender.all" = true;
           # https://www.reddit.com/r/swaywm/comments/1iuqclq/firefox_is_now_way_more_efficient_under_sway_it/
-          "gfx.webrender.compositor.force-enabled" =
-            if (wayland.enable && config.programs.firefox.package.version >= "135.0") then true else false;
+          "gfx.webrender.compositor.force-enabled" = if wayland.enable then true else false;
 
           # LAYOUT
           "layout.display-list.retain" = true;
