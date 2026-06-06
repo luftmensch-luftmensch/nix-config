@@ -60,6 +60,18 @@ in
           "$@" || exit $?
         }
       '';
+      # Redish custom background color for ssh connection
+      profileExtra = ''
+        if [[ -n "$SSH_CONNECTION" ]]; then
+          printf '\e]11;#1c0d0d\a'
+        fi
+      '';
+      # Reset background color when ssh session closed
+      logoutExtra = ''
+        if [[ -n "$SSH_CONNECTION" ]]; then
+          printf '\e]11;#000000\a'
+        fi
+      '';
       historyControl = [
         "ignorespace"
         "ignoredups"

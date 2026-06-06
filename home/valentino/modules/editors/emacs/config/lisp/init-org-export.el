@@ -72,9 +72,9 @@
   )
 
 ;; Reveal.js
-(setup (:pkg (ox-reveal :type git :host github :repo "yjwen/org-reveal"))
+(setup (:pkg org-re-reveal)
   (:load-after ox)
-  (:option org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
+  (setopt org-re-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
 
 ;; Hugo
 (setup (:pkg ox-hugo)
