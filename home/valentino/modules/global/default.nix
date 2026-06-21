@@ -51,7 +51,7 @@ in
     userDirs = {
       enable = true;
       createDirectories = true;
-
+      setSessionVariables = true;
       # These are useless to me
       documents = null;
       publicShare = null;

@@ -10,7 +10,7 @@ let
   theme = config.valentino.modules.themes;
   mod = "Mod4";
   mod1 = "Mod1";
-  inherit (config.colorScheme) palette;
+  palette = config.stylix.base16Scheme;
 in
 {
   config = mkIf cfg.enable {

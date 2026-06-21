@@ -62,7 +62,6 @@ in
 
       bat = {
         enable = true;
-        config.theme = "base16";
         extraPackages = with pkgs.bat-extras; [
           batman
           batdiff
@@ -91,7 +90,6 @@ in
       btop = {
         enable = true;
         settings = {
-          color_theme = "default";
           theme_background = false;
           vim_keys = true;
           shown_boxes = "cpu mem proc";

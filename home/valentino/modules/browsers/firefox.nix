@@ -7,7 +7,7 @@
 with lib;
 let
   cfg = config.valentino.modules.browsers.firefox;
-  inherit (config.valentino.modules) themes wayland;
+  inherit (config.valentino.modules) wayland;
   inherit (config.valentino.modules.credentials.proton) pass;
   configDir = "${config.home.homeDirectory}/nix-config/home/valentino/modules/browsers";
 
@@ -29,9 +29,12 @@ in
   options.valentino.modules.browsers.firefox.enable = mkEnableOption "firefox";
 
   config = mkIf cfg.enable {
+    stylix.targets.firefox.profileNames = [ "default" ];
+
     programs.firefox = {
       enable = true;
       package = pkgs.firefox;
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
 
       languagePacks = [
         "it"
@@ -348,11 +351,6 @@ in
           # TAB BEHAVIOR
           "findbar.highlightAll" = true;
 
-          # FONTS
-          "font.name.monospace.x-western" = "${themes.font.regular.family}";
-          "font.name.sans-serif.x-western" = "${themes.font.regular.family}";
-          "font.name.serif-x-western" = "${themes.font.regular.family}";
-
           # GEO Preference
           "geo.provider.network.url" =
             "https:#location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
@@ -475,9 +473,6 @@ in
           # default with Strict Enhanced Tracking Protection.
           #"privacy.query_stripping" = true;
 
-          # READER
-          "reader.color_scheme" = "dark"; # or sepia
-
           # SECURITY
 
           # Show in-content login form warning UI for insecure login fields
@@ -574,7 +569,7 @@ in
     home = {
       file = {
         ".config/startpage.html".source = config.lib.file.mkOutOfStoreSymlink "${configDir}/startpage.html";
-        ".mozilla/firefox/default/chrome/parfait".source =
+        ".config/mozilla/firefox/default/chrome/parfait".source =
           config.lib.file.mkOutOfStoreSymlink "${pkgs.firefox-parfait}/share/firefox-parfait/parfait";
       };
 

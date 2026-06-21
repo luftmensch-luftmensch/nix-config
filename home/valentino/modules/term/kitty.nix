@@ -17,7 +17,6 @@ in
         scrollback_lines = 10000;
         show_hyperlink_targets = "yes";
         enable_audio_bell = false;
-        background_opacity = 0.9;
         background_blur = 1;
         cursor_shape = "beam";
         cursor_blink_interval = 0;

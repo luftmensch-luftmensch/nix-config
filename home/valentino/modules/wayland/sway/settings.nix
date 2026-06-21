@@ -39,7 +39,7 @@ in
   fonts = {
     names = [ theme.font.regular.family ];
     # Sum required: floating point value but int option defined
-    size = theme.font.regular.size + 0.0;
+    size = lib.mkDefault (theme.font.regular.size + 0.0);
   };
 
   keybindings = {

@@ -121,7 +121,7 @@ in
     "${mod}+r" = "mode resize; exec ${_notify} -i video-display \"Resize\"";
     "${mod}+s" = "mode scratchpad; exec ${_notify} -i video-display \"Scratchpad\"";
 
-    Print = "exec --no-startup-id ${lib.getExe pkgs.xfce.xfce4-screenshooter} -r";
+    Print = "exec --no-startup-id ${lib.getExe pkgs.xfce4-screenshooter} -r";
     "${mod}+Return" = "exec --no-startup-id ${_terminal} -T Kitty";
     "${mod}+Shift+Return" = "exec --no-startup-id ${_terminal} -T floating_term";
 

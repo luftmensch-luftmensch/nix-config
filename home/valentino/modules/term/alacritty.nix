@@ -3,12 +3,17 @@ with lib;
 let
   cfg = config.valentino.modules.term.alacritty;
   inherit (config.valentino.modules) themes;
-  inherit (config.colorScheme) palette;
 in
 {
   options.valentino.modules.term.alacritty.enable = mkEnableOption "alacritty configuration";
 
   config = mkIf cfg.enable {
+    stylix.targets.alacritty = {
+      enable = true;
+      fonts.enable = false;
+      # opacity.enable = false;
+    };
+
     programs.alacritty = {
       enable = true;
 
@@ -24,7 +29,6 @@ in
             y = 0;
           };
           decorations = "none";
-          opacity = 0.95;
         };
 
         # Scrolling history and multiplier
@@ -58,34 +62,6 @@ in
               y = 0;
             };
           };
-
-        colors = {
-          draw_bold_text_with_bright_colors = true;
-          primary = {
-            background = "#${palette.base00}";
-            foreground = "#${palette.base05}";
-          };
-          normal = {
-            black = "#${palette.base00}";
-            red = "#${palette.base08}";
-            green = "#${palette.base0B}";
-            yellow = "#${palette.base09}";
-            blue = "#${palette.base0D}";
-            magenta = "#${palette.base0E}";
-            cyan = "#${palette.base0C}";
-            white = "#${palette.base05}";
-          };
-          bright = {
-            black = "#${palette.base03}";
-            red = "#${palette.base06}";
-            green = "#${palette.base0B}";
-            yellow = "#${palette.base09}";
-            blue = "#${palette.base0D}";
-            magenta = "#${palette.base0E}";
-            cyan = "#${palette.base0C}";
-            white = "#${palette.base05}";
-          };
-        };
 
         selection.save_to_clipboard = true;
         general.live_config_reload = true;

@@ -8,7 +8,6 @@ with lib;
 let
   cfg = config.valentino.modules.apps.dunst;
   inherit (config.valentino.modules) themes;
-  inherit (config.colorScheme) palette;
 in
 {
   options.valentino.modules.apps.dunst.enable = mkEnableOption "dunst configuration";
@@ -16,6 +15,11 @@ in
   config = mkIf cfg.enable {
     # A library that sends desktop notifications to a notification daemon (Gonna hel dunst!)
     home.packages = [ pkgs.libnotify ];
+
+    stylix.targets.dunst = {
+      enable = true;
+      fonts.enable = false;
+    };
 
     services.dunst = {
       enable = true;
@@ -53,8 +57,6 @@ in
 
           corner_radius = 5;
           frame_width = 2;
-          frame_color = "#${palette.base0D}";
-          separator_color = "frame";
 
           sort = "no";
           idle_threshold = 0;
@@ -114,23 +116,9 @@ in
           mouse_right_click = "close_current";
         };
 
-        urgency_low = {
-          background = "#${palette.base00}";
-          foreground = "#${palette.base05}";
-          timeout = 5;
-        };
-
-        urgency_normal = {
-          background = "#${palette.base00}";
-          foreground = "#${palette.base05}";
-          timeout = 5;
-        };
-
-        urgency_critical = {
-          background = "#${palette.base0F}";
-          foreground = "#${palette.base05}";
-          timeout = 0;
-        };
+        urgency_low.timeout = 5;
+        urgency_normal.timeout = 5;
+        urgency_critical.timeout = 5;
 
         experimental.per_monitor_dpi = false;
       };

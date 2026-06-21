@@ -13,8 +13,8 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      nodejs
-      typescript-language-server
+      # nodejs
+      # typescript-language-server
     ];
 
     # Needed to quickly install borked modules (e.g. amplify, *coff*) in home

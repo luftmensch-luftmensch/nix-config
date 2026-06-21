@@ -26,7 +26,7 @@ in
 
     xdg.configFile = {
       "rofi/colors/color.rasi".text = ''
-        @import "${config.colorscheme.slug}.rasi"
+        @import "${config.stylix.base16Scheme.slug}.rasi"
       '';
 
       "rofi/colors" = {

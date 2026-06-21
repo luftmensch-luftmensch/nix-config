@@ -8,7 +8,7 @@ with lib;
 let
   cfg = config.valentino.modules.wayland.waybar;
   theme = config.valentino.modules.themes;
-  inherit (config.colorScheme) palette;
+  palette = config.stylix.base16Scheme;
 in
 {
   options.valentino.modules.wayland.waybar = {
@@ -55,19 +55,18 @@ in
             ];
 
             modules-center = [ "clock" ];
-            modules-right =
-              [
-                "idle_inhibitor"
-                "pulseaudio"
-                "network"
-              ]
-              ++ (optionals cfg.battery.enable [ "battery" ])
-              ++ (optionals cfg.backlight.enable [ "backlight" ])
-              ++ [
-                "cpu"
-                "memory"
-                "tray"
-              ];
+            modules-right = [
+              "idle_inhibitor"
+              "pulseaudio"
+              "network"
+            ]
+            ++ (optionals cfg.battery.enable [ "battery" ])
+            ++ (optionals cfg.backlight.enable [ "backlight" ])
+            ++ [
+              "cpu"
+              "memory"
+              "tray"
+            ];
             # Shared modules
             inherit (custom_modules)
               "sway/workspaces"

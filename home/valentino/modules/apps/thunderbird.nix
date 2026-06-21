@@ -6,7 +6,7 @@
 with lib;
 let
   cfg = config.valentino.modules.apps.thunderbird;
-  inherit (config.colorScheme) palette;
+  palette = config.stylix.base16Scheme;
 in
 {
   options.valentino.modules.apps.thunderbird.enable = mkEnableOption "thunderbird configuration";

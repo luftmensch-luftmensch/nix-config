@@ -12,7 +12,6 @@ in
   options.system.modules.dev.adb.enable = mkEnableOption "Enable adb";
 
   config = mkIf cfg.enable {
-    programs.adb.enable = true;
     environment.systemPackages = [ pkgs.android-tools ];
   };
 }

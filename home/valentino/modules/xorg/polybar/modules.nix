@@ -30,7 +30,7 @@
     type = "internal/date";
     interval = "1.0";
     time = "%H:%M";
-    format = "%{A1:${pkgs.xfce.orage}/bin/orage:}<label>%{A}";
+    format = "%{A1:${pkgs.lib.getExe pkgs.orage}:}<label>%{A}";
     format-prefix = " ";
     format-prefix-font = 2;
     format-prefix-foreground = "#${palette.base08}";

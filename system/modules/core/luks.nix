@@ -3,13 +3,15 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.system.modules.core.boot;
-in {
+in
+{
   # Sometimes it is necessary to boot a system without needing an keyboard and monitor.
   # You will create a secret key, add it to a key slot and put it onto an USB stick.
   # (even better using the by-label format identifier)
-  # Then save the key into the usb stick choosen
+  # Then save the key into the usb stick chosen
   # Then edit the initrd options and rebuild the system.
   # Below the commands used to do it
 
@@ -34,7 +36,6 @@ in {
       allowDiscards = true;
       keyFileSize = 4096;
       keyFile = "${cfg.luks.keyFile}";
-      fallbackToPassword = true;
     };
   };
 }

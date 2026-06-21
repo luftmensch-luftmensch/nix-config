@@ -7,7 +7,7 @@
 with lib;
 let
   cfg = config.valentino.modules.xorg.xob;
-  inherit (config.colorScheme) palette;
+  palette = config.stylix.base16Scheme;
 in
 {
   options.valentino.modules.xorg.xob.enable =

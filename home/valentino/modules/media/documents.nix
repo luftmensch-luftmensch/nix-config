@@ -8,44 +8,16 @@ with lib;
 let
   cfg = config.valentino.modules.media.documents;
   inherit (config.valentino.modules) themes;
-  inherit (config.colorScheme) palette;
 in
 {
   options.valentino.modules.media.documents.enable = mkEnableOption "zathura pdf viewer";
 
   config = mkIf cfg.enable {
+    stylix.targets.zathura.enable = true;
     programs.zathura = {
       enable = true;
       options = {
         font = "${themes.font.term.family} " + (toString themes.font.term.size);
-
-        default-bg = "#${palette.base00}";
-        default-fg = "#${palette.base01}";
-
-        statusbar-fg = "#${palette.base04}";
-        statusbar-bg = "#${palette.base02}";
-
-        inputbar-bg = "#${palette.base00}";
-        inputbar-fg = "#${palette.base07}";
-
-        notification-bg = "#${palette.base00}";
-        notification-fg = "#${palette.base07}";
-
-        notification-error-bg = "#${palette.base00}";
-        notification-error-fg = "#${palette.base06}";
-
-        notification-warning-bg = "#${palette.base00}";
-        notification-warning-fg = "#${palette.base06}";
-
-        highlight-color = "#${palette.base0A}";
-        highlight-active-color = "#${palette.base0D}";
-
-        completion-bg = "#${palette.base01}";
-        completion-fg = "#${palette.base0D}";
-
-        recolor-lightcolor = "#${palette.base00}";
-        recolor-darkcolor = "#${palette.base06}";
-
         recolor = true;
         recolor-keephue = false;
         incremental-search = true;

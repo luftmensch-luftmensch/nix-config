@@ -21,11 +21,11 @@ in
 
       xautolock
       xclip
-      xorg.xev
-      xorg.xkill
-      xorg.xrdb
+      xev
+      xkill
+      xrdb
       xss-lock
-      xfce.xfce4-screenshooter
+      xfce4-screenshooter
     ];
 
     valentino.modules.xorg = {

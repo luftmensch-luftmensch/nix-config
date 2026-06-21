@@ -13,10 +13,12 @@ let
   default_output = "eDP-1";
   external_output = "HDMI-A-1";
   imageDirectory = "${config.home.homeDirectory}/Dropbox/Immagini/wallpapers/Art/";
-  inherit (config.colorScheme) palette;
+  palette = config.stylix.base16Scheme;
 in
 {
   config = mkIf cfg.enable {
+    stylix.targets.sway.enable = true;
+
     wayland.windowManager.sway = {
       enable = true;
       xwayland = true;

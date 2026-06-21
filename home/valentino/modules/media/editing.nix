@@ -24,7 +24,7 @@ in
     home.packages = with pkgs; [
       darktable
       (if xorg.enable then gimpWrapped else gimp-with-plugins)
-      inkscape-with-extensions
+      # inkscape-with-extensions
     ];
   };
 }

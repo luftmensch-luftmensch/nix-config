@@ -8,7 +8,7 @@ with lib;
 let
   cfg = config.valentino.modules.wayland.swaync;
   inherit (config.valentino.modules) wayland;
-  inherit (config.colorScheme) palette;
+  palette = config.stylix.base16Scheme;
   theme = config.valentino.modules.themes;
 in
 {

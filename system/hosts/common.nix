@@ -56,26 +56,33 @@ in
         "sd_mod"
         "rtsx_pci_sdmmc"
       ];
+      systemd.services.rollback = {
+        description = "Rollback root filesystem to a pristine state on boot";
+        wantedBy = [ "initrd.target" ];
+        after = [ "systemd-cryptsetup@nix\\x2denc.service" ];
+        requires = [ "systemd-cryptsetup@nix\\x2denc.service" ];
+        before = [ "sysroot.mount" ];
+        unitConfig.DefaultDependencies = "no";
+        serviceConfig.Type = "oneshot";
+        script = ''
+          mkdir -p /mnt
+          mount -t btrfs -o subvol=/ /dev/mapper/nix-enc /mnt
 
-      # Note `lib.mkBefore` is used instead of `lib.mkAfter` here.
-      postDeviceCommands = pkgs.lib.mkBefore ''
-        mkdir -p /mnt
-        mount -o subvol=/ /dev/mapper/nix-enc /mnt
+          btrfs subvolume list -o /mnt/@ |
+          cut -f9 -d' ' |
+          while read subvolume; do
+            echo "DELETING /$subvolume SUBVOLUME..."
+            btrfs subvolume delete "/mnt/$subvolume"
+          done &&
+          echo "DELETING @ SUBVOLUME..." &&
+          btrfs subvolume delete /mnt/@
 
-        btrfs subvolume list -o /mnt/@ |
-        cut -f9 -d' ' |
-        while read subvolume; do
-          echo "DELETING /$subvolume SUBVOLUME..."
-          btrfs subvolume delete "/mnt/$subvolume"
-        done &&
-        echo "DELETING @ SUBVOLUME..." &&
-        btrfs subvolume delete /mnt/@
+          echo "RESTORING BLANK /root SUBVOLUME..."
+          btrfs subvolume snapshot /mnt/root-blank /mnt/@
 
-        echo "RESTORING BLANK /root SUBVOLUME..."
-        btrfs subvolume snapshot /mnt/root-blank /mnt/@
-
-        umount /mnt
-      '';
+          umount /mnt
+        '';
+      };
     };
   };
 

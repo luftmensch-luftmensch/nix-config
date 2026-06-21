@@ -8,7 +8,7 @@ with lib;
 let
   cfg = config.valentino.modules.xorg.polybar;
   theme = config.valentino.modules.themes;
-  inherit (config.colorScheme) palette;
+  palette = config.stylix.base16Scheme;
 in
 {
   options.valentino.modules.xorg.polybar = {
