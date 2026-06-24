@@ -42,6 +42,8 @@
     };
   };
 
+  systemd.network.wait-online.anyInterface = true;
+
   # DNS
   services.resolved = {
     enable = true;

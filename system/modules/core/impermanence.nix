@@ -15,22 +15,22 @@ in
       hideMounts = true;
       directories = [
         "/etc/NetworkManager/system-connections"
+        "/var/lib/nixos"
+        "/var/lib/NetworkManager"
         "/var/lib/bluetooth"
-        # "/var/lib/cni"
-        # "/var/lib/containers"
         "/var/lib/libvirt"
         "/var/lib/fprint"
         "/var/lib/docker"
         "/var/lib/AccountsService/icons"
         "/root/.ssh"
         "/root/.gnupg"
+
+        # "/var/lib/cni"
+        # "/var/lib/containers"
       ];
       files = [
         "/etc/adjtime"
         "/etc/machine-id"
-        "/var/lib/NetworkManager/secret_key"
-        "/var/lib/NetworkManager/seen-bssids"
-        "/var/lib/NetworkManager/timestamps"
         # No more needed as I don't use both Wayland and X11 sessions on the same device
         # "/var/lib/sddm/state.conf" # Name of the session for the last logged-in user
       ];
