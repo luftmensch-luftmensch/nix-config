@@ -20,7 +20,7 @@ in
   config = mkIf cfg.enable {
     programs.fish = {
       enable = true;
-      shellInit = (import ./init.nix).shellInit;
+      inherit ((import ./init.nix)) shellInit;
 
       shellAbbrs = {
         sc = "systemctl";

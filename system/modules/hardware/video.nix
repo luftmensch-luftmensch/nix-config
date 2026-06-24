@@ -12,7 +12,7 @@ in
     i2c.enable = mkEnableOption "Enable i2c capabilities";
   };
 
-  config = (mkMerge [
+  config = mkMerge [
     (mkIf cfg.i2c.enable { hardware.i2c.enable = true; })
-  ]);
+  ];
 }

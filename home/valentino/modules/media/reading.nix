@@ -71,7 +71,7 @@ in
             mkUrls =
               tag: urls:
               map (entry: {
-                url = entry.url;
+                inherit (entry) url;
                 title =
                   entry.title or (
                     (lib.toUpper (builtins.substring 0 1 tag))

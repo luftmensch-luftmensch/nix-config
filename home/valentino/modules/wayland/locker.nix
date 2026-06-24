@@ -69,6 +69,6 @@ in
         ];
       };
 
-    systemd.user.services.swayidle.Install.WantedBy = (optionals sway.enable [ "sway-session.target" ]);
+    systemd.user.services.swayidle.Install.WantedBy = optionals sway.enable [ "sway-session.target" ];
   };
 }
