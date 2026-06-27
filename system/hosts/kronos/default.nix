@@ -50,8 +50,6 @@
         libvdpau-va-gl
       ];
     };
-    # In substitution of nixos-hardware
-    firmware = [ pkgs.linux-firmware ];
 
     trackpoint = {
       enable = lib.mkDefault true;

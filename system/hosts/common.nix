@@ -142,4 +142,7 @@ in
   };
 
   environment.systemPackages = [ fs-diff ];
+
+  # Closed-source blobs for the hardware gods who demand tribute
+  hardware.firmware = [ pkgs.linux-firmware ];
 }
