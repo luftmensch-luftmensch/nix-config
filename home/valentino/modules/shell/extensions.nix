@@ -22,6 +22,7 @@ in
         htop = "${lib.getExe pkgs.btop}";
       };
       packages = with pkgs; [
+        anisaturn # custom animesaturn scraper
         fd
         jq
         wget
