@@ -21,6 +21,23 @@ in
         # TODO: Try out cups-brother-hl1210w -> Unfortunately adding this one triggers a complete rebuild of glibc
         drivers = [ pkgs.brlaser ];
       };
+
+      hardware.printers = {
+
+        ensureDefaultPrinter = "printer";
+        ensurePrinters = [
+          {
+            name = "printer";
+            location = "printer";
+            deviceUri = "ipp://192.168.1.74";
+            model = "drv:///brlaser.drv/br1210.ppd";
+            ppdOptions = {
+              PageSize = "A4";
+            };
+          }
+        ];
+      };
+
     })
 
     (mkIf cfg.sane.enable {
