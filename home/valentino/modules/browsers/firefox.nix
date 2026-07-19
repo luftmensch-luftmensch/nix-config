@@ -14,22 +14,28 @@ let
   userChrome = builtins.readFile "${pkgs.firefox-parfait}/share/firefox-parfait/userChrome.css";
   userContent = builtins.readFile "${pkgs.firefox-parfait}/share/firefox-parfait/userContent.css";
 
-  extensions.packages =
-    let
-      rycee = pkgs.nur.repos.rycee.firefox-addons;
-    in
-    [
-      rycee.ublock-origin
-      rycee.user-agent-string-switcher
-      rycee.video-downloadhelper
-    ]
-    ++ lib.optionals pass.enable [ rycee.proton-pass ];
+  extensions = {
+    settings."FirefoxColor@mozilla.com".force = true;
+    packages =
+      let
+        rycee = pkgs.nur.repos.rycee.firefox-addons;
+      in
+      [
+        rycee.ublock-origin
+        rycee.user-agent-string-switcher
+        rycee.video-downloadhelper
+      ]
+      ++ lib.optionals pass.enable [ rycee.proton-pass ];
+  };
 in
 {
   options.valentino.modules.browsers.firefox.enable = mkEnableOption "firefox";
 
   config = mkIf cfg.enable {
-    stylix.targets.firefox.profileNames = [ "default" ];
+    stylix.targets.firefox = {
+      profileNames = [ "default" ];
+      colorTheme.enable = true;
+    };
 
     programs.firefox = {
       enable = true;
@@ -126,7 +132,8 @@ in
         # 1. https://brainfucksec.github.io/firefox-hardening-guide
         settings = {
           "browser.uidensity" = 0;
-          "devtools.toolbox.zoomValue" = if wayland.enable then 1.3 else 1;
+          # "devtools.toolbox.zoomValue" = if wayland.enable then 1.3 else 1;
+          "devtools.toolbox.zoomValue" = 1;
           "full-screen-api.warning.timeout" = 0;
           "svg.context-properties.content.enabled" = true;
 
