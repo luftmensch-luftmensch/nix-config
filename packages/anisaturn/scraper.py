@@ -4,6 +4,7 @@ from asyncio import (Event, Semaphore, TaskGroup, TimeoutError, run, sleep,
                      wait_for)
 from dataclasses import dataclass
 from sys import exit
+from urllib.parse import urlparse
 
 from argcomplete import autocomplete
 from playwright.async_api import (Browser, BrowserContext, Page,
@@ -42,6 +43,10 @@ class ScraperConfig:
     @property
     def paths(self) -> list[str]:
         return [f"ep-{i}" for i in range(1, self.episodes + 1)]
+
+    @property
+    def origin(self) -> str:
+        return f"{(p := urlparse(self.url)).scheme}://{p.netloc}/"
 
     @staticmethod
     def add_arguments(parser: ArgumentParser) -> None:
@@ -201,7 +206,7 @@ async def _attempt_single(
         context: BrowserContext = await browser.new_context(user_agent=cfg.user_agent)
         page: Page = await context.new_page()
         await page.add_init_script(cfg.stealth_script)
-        await page.set_extra_http_headers({"Referer": "https://www.animesaturn.net/"})
+        await page.set_extra_http_headers({"Referer": cfg.origin})
         page.on("request", lambda r: _track_url(r.url))
         page.on("response", lambda r: _track_url(r.url))
         # Diagnostics: surface JS console messages and uncaught page errors so we
@@ -209,7 +214,7 @@ async def _attempt_single(
         # no mp4/m3u8 request ever showed up.
         page.on(
             "console",
-            lambda msg: logger.debug("%s - console[%s]: %s", path, msg.type, msg.text),
+            lambda msg: logger.debug(f"{path} - console[{msg.type}]: {msg.text}"),
         )
         page.on(
             "pageerror",
@@ -238,11 +243,11 @@ async def _attempt_single(
                 await locator.click(timeout=cfg.click_timeout)
                 await page.wait_for_load_state("networkidle", timeout=15000)
                 logger.debug(
-                    "%s - Button found, player page reached: %s", path, page.url
+                    f"{path} - Button found, player page reached: {page.url}"
                 )
             else:
                 logger.debug(
-                    "%s - No button found, trying directly on the current page", path
+                    f"{path} - No button found, trying directly on the current page"
                 )
 
             await page.wait_for_timeout(2000)
@@ -310,8 +315,7 @@ async def main() -> None:
 
     if not scraper_config.url:
         logger.error(
-            "No --url provided. This is required: pass the anime page url, "
-            "e.g. --url https://www.animesaturn.net/anime/some-anime-slug"
+            "No --url provided. This is required: pass the anime page url"
         )
         exit(1)
 

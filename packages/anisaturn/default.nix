@@ -27,7 +27,7 @@ stdenv.mkDerivation {
 
     makeWrapper ${pythonEnv}/bin/python3 $out/bin/anisaturn \
       --add-flags "$out/share/anisaturn/scraper.py" \
-      --set PLAYWRIGHT_BROWSERS_PATH ${playwright-driver.browsers} \
+      --set PLAYWRIGHT_BROWSERS_PATH ${playwright-driver.browsers}
 
     runHook postInstall
   '';
