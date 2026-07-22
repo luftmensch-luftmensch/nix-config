@@ -72,11 +72,11 @@ in
         "Alt+s" = "screenshot each-frame";
         DEL = "script-binding osc/visibility";
         "Shift+m" = "cycle-values audio-channels \"auto-safe\" \"mono\"";
+        "Alt+x" = "script-binding select/select-binding";
       };
       scripts =
         with pkgs;
         [
-          mpv-m-x
           mpv-navigator
           mpv-visualizer
         ]

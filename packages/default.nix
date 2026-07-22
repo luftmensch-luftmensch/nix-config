@@ -14,7 +14,6 @@
 
   # MPV custom scripts
   mpv-navigator = pkgs.callPackage ./mpv-scripts/file-navigator.nix { };
-  mpv-m-x = pkgs.callPackage ./mpv-scripts/M-x.nix { };
   mdx-go = pkgs.callPackage ./mdx.nix { };
 
   # Custom scraper for animesaturn
