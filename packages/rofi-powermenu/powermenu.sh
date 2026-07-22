@@ -14,14 +14,10 @@ suspend=" "
 logout="󰍃"
 
 logout() {
-    if [[ "$DESKTOP_SESSION" =~ "qtile" ]]; then
-        qtile cmd-obj -o cmd -f shutdown
-    elif [[ "$DESKTOP_SESSION" =~ "i3" ]]; then
+    if [[ "$DESKTOP_SESSION" =~ "i3" ]]; then
         i3-msg exit
     elif [[ "$XDG_CURRENT_DESKTOP" =~ "sway" ]]; then
         swaymsg exit && systemctl stop --user sway-session.target
-    elif [[ "$XDG_CURRENT_DESKTOP" =~ "Hyprland" ]]; then
-        hyprctl dispatch -- exit && systemctl stop --user hyprland-session.target
     fi
 }
 
