@@ -40,7 +40,7 @@ in
       allowDiscards = true;
       keyFileSize = 4096;
       keyFile = "${cfg.keyFile}";
-      keyFileTimeout = cfg.keyFileTimeout;
+      inherit (cfg) keyFileTimeout;
     };
   };
 }
