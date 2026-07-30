@@ -22,7 +22,8 @@ in
 
         screenshot-format = "png";
         screenshot-png-compression = 8;
-        screenshot-template = "~/%F (%P) %n";
+        screenshot-directory = "~";
+        screenshot-template = "%F (%P) %n";
 
         audio-file-auto = "fuzzy";
         audio-pitch-correction = "yes";
