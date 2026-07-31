@@ -74,6 +74,7 @@ in
         DEL = "script-binding osc/visibility";
         "Shift+m" = "cycle-values audio-channels \"auto-safe\" \"mono\"";
         "Alt+x" = "script-binding select/select-binding";
+        p = "show-text \"\${playlist}\\n\${time-pos} / \${duration}\" 4000";
       };
       scripts =
         with pkgs;
