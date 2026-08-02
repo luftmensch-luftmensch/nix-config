@@ -58,6 +58,7 @@ in
       templates = null;
       pictures = null;
       music = null;
+      projects = null;
 
       # Curse you nemo the platypus
       desktop = "$HOME";
