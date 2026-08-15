@@ -22,7 +22,7 @@ in
 
         screenshot-format = "png";
         screenshot-png-compression = 8;
-        screenshot-directory = "~";
+        screenshot-directory = "${config.home.homeDirectory}/";
         screenshot-template = "%F (%P) %n";
 
         audio-file-auto = "fuzzy";
