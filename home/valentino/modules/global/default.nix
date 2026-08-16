@@ -2,7 +2,7 @@
 let
   homeDir = "${config.home.homeDirectory}";
   browser = "firefox.desktop";
-  torrent = "qbittorrent.desktop";
+  torrent = "transmission-gtk.desktop";
   image = "imv.desktop";
   video = "mpv.desktop";
   text = "nvim.desktop";
