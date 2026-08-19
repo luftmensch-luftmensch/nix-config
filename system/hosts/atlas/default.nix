@@ -37,5 +37,13 @@
   services.xserver = {
     enable = true;
     videoDrivers = [ "modesetting" ]; # intel nvidia
+    # 120Hz supported, might as well use it
+    monitorSection = ''
+      Option "PreferredMode" "1920x1080_120"
+    '';
+
+    screenSection = ''
+      Option "metamodes" "1920x1080_120 +0+0"
+    '';
   };
 }
