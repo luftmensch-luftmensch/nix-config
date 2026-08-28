@@ -24,6 +24,7 @@
       "acpi_backlight=native"
       "idle=nomwait"
       "iommu=pt"
+      "psmouse.elantech_smbus=0" # Apparently, I would like my touchpad buttons to work
     ];
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     supportedFilesystems = [ "btrfs" ];

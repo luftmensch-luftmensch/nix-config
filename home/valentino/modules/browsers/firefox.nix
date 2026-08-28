@@ -551,7 +551,7 @@ in
           "parfait.blur.enabled" = false;
           "parfait.window.borderless" = true;
           "parfait.bg.accent-color" = false;
-          "parfait.bg.contrast" = 2;
+          "parfait.bg.contrast" = 4;
           "parfait.bg.gradient" = false;
           "parfait.bg.opacity" = 4;
           "parfait.bg.transparent" = false;
