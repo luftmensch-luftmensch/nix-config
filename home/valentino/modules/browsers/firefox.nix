@@ -132,8 +132,7 @@ in
         # 1. https://brainfucksec.github.io/firefox-hardening-guide
         settings = {
           "browser.uidensity" = 0;
-          # "devtools.toolbox.zoomValue" = if wayland.enable then 1.3 else 1;
-          "devtools.toolbox.zoomValue" = 1;
+          "devtools.toolbox.zoomValue" = if wayland.enable then 1.3 else 1;
           "full-screen-api.warning.timeout" = 0;
           "svg.context-properties.content.enabled" = true;
 
@@ -534,7 +533,7 @@ in
           # UI
           # Avoid open directly a link with right click
           "ui.context_menus.after_mouseup" = true;
-          # "extensions.activeThemeID"= "firefox-compact-dark@mozilla.org"; // default default-theme@mozilla.org
+          # "extensions.activeThemeID"= "firefox-compact-dark@mozilla.org"; # default default-theme@mozilla.org
 
           # Moved here to be able to know about error in the configuration
           "browser.aboutConfig.showWarning" = false;
