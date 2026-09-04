@@ -231,7 +231,7 @@ in
     }
 
     # Info about brightness & volume using wob
-    { command = "rm -f $wob_sock && mkfifo $wob_sock && tail -f $wob_sock | wob"; }
+    # { command = "rm -f $wob_sock && mkfifo $wob_sock && tail -f $wob_sock | wob"; }
 
     { command = "nm-applet"; }
 

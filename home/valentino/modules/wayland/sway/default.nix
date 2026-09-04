@@ -64,16 +64,21 @@ in
             ;
         };
 
-      extraConfig = ''
-        set {
-          $opacity 0.9
-          # Wob - Overlay volume/backlight/progress/anything bar for Wayland
-          $wob_sock $XDG_RUNTIME_DIR/wob.sock
-        }
-        bindgesture swipe:3:right workspace back_and_forth
-        bindgesture swipe:3:left workspace back_and_forth
-        bindgesture swipe:3:up fullscreen
-      '';
+      extraConfig =
+        let
+          _wob_sock =
+            lib.replaceStrings [ "%t" ] [ "$XDG_RUNTIME_DIR" ]
+              config.systemd.user.sockets.wob.Socket.ListenFIFO;
+        in
+        ''
+          set {
+            $opacity 0.9
+            $wob_sock ${_wob_sock}
+          }
+          bindgesture swipe:3:right workspace back_and_forth
+          bindgesture swipe:3:left workspace back_and_forth
+          bindgesture swipe:3:up fullscreen
+        '';
     };
 
     home.packages = with pkgs; [
@@ -96,6 +101,7 @@ in
           battery.enable = true;
           inherit default_output external_output;
         };
+        wob.enable = true;
       };
       apps.playerctl.enable = true;
       services.battery.enable = true;

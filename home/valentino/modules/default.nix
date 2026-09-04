@@ -66,6 +66,7 @@
     "wayland/waybar"            = import ./wayland/waybar;
     "wayland/locker"            = import ./wayland/locker.nix;
     "wayland/random-background" = import ./wayland/random-background.nix;
+    "wayland/wob"               = import ./wayland/wob.nix;
 
     "xorg"                      = import ./xorg;
     "xorg/i3"                   = import ./xorg/i3;

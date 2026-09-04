@@ -25,7 +25,6 @@ in
 
       swayidle
       swaylock-effects
-      wob
 
       wtype
       swaybg
