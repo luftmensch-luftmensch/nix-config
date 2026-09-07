@@ -28,7 +28,7 @@ class ScraperConfig:
     """Scraper configuration, with sensible default values."""
 
     url: str | None = None
-    episodes: int = 12
+    episodes: str = "12"
     max_concurrency: int = 3
     retries: int = 1
     max_wait_seconds: float = 12
@@ -42,7 +42,13 @@ class ScraperConfig:
 
     @property
     def paths(self) -> list[str]:
-        return [f"ep-{i}" for i in range(1, self.episodes + 1)]
+        match self.episodes.strip().split("-"):
+            case [n]:
+                return [f"ep-{i}" for i in range(1, int(n) + 1)]
+            case [a, b]:
+                return [f"ep-{i}" for i in range(int(a), int(b) + 1)]
+            case _:
+                raise ValueError(f"Ivalid format: {self.episodes}")
 
     @property
     def origin(self) -> str:
@@ -59,9 +65,9 @@ class ScraperConfig:
         )
         group.add_argument(
             "--episodes",
-            type=int,
+            type=str,
             default=defaults.episodes,
-            help="Number of episodes to attempt, generates ep-1..ep-N (default: %(default)s)",
+            help="Number of episodes to attempt with range sintax support, (default: %(default)s)",
         )
         group.add_argument(
             "--max-concurrency",
@@ -142,8 +148,7 @@ class LoggingConfig:
             action="store_true",
             default=defaults.debug,
             help=(
-                "Enable debug mode: verbose logging plus debug artifacts "
-                "such as screenshots on missing mp4/m3u8 urls (default: %(default)s)"
+                "Enable debug mode: verbose logging plus debug artifacts (default: %(default)s)"
             ),
         )
 

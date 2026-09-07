@@ -184,8 +184,6 @@ in
       always = true;
     }
 
-    { command = "clipcatd"; }
-
     { command = "nm-applet"; }
 
     { command = "rm -f $xob_sock && mkfifo $xob_sock && tail -f $xob_sock | xob -t 700"; }

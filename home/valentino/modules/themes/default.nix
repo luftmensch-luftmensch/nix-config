@@ -70,12 +70,30 @@ in
             terminal = cfg.font.term.size;
           };
         };
-        targets.gtk = {
-          enable = true;
-          fonts.enable = true;
-        };
-        targets.gnome.fonts.enable = false;
         opacity.terminal = 0.9;
+
+        # Conditionally disable unnecessary targets
+        targets =
+          lib.genAttrs
+            [
+              "blender"
+              "gdu"
+              "gedit"
+              "hyprland"
+              "hyprlock"
+              "hyprpanel"
+              "vencord"
+            ]
+            (_: {
+              enable = lib.mkForce false;
+            })
+          // {
+            gtk = {
+              enable = true;
+              fonts.enable = true;
+            };
+            gnome.fonts.enable = false;
+          };
       };
 
       gtk = {
