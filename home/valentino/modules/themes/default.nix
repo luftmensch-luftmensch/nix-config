@@ -77,6 +77,7 @@ in
           lib.genAttrs
             [
               "blender"
+              "forge"
               "gdu"
               "gedit"
               "hyprland"
