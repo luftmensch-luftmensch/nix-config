@@ -51,21 +51,15 @@ in
         };
         timeouts = [
           {
-            timeout = 300;
+            timeout = 500;
             command = "${swaylock}";
           }
 
           {
-            timeout = 360;
+            timeout = 560;
             command = "${swaymsg} output * dpms off";
             resumeCommand = "${swaymsg} output * dpms on";
           }
-
-          # {
-          #   timeout = 360;
-          #   command = "${swaymsg} 'output * dpms off'";
-          #   resumeCommand = "${swaymsg} 'output * dpms on'";
-          # }
         ];
       };
 
