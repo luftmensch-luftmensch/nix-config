@@ -8,17 +8,27 @@ with lib;
 let
   cfg = config.valentino.modules.apps.dunst;
   inherit (config.valentino.modules) themes;
+  iconPackage = pkgs.adwaita-icon-theme;
 in
 {
   options.valentino.modules.apps.dunst.enable = mkEnableOption "dunst configuration";
 
   config = mkIf cfg.enable {
-    # A library that sends desktop notifications to a notification daemon (Gonna hel dunst!)
-    home.packages = [ pkgs.libnotify ];
+    home.packages = [
+      # A library that sends desktop notifications to a notification daemon (Gonna hel dunst!)
+      pkgs.libnotify
+      iconPackage
+    ];
 
     stylix.targets.dunst = {
       enable = true;
       fonts.enable = false;
+      icons.override = {
+        enable = true;
+        package = iconPackage;
+        light = "Adwaita";
+        dark = "Adwaita";
+      };
     };
 
     services.dunst = {
