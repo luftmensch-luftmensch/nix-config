@@ -547,25 +547,28 @@ in
 
           # Parfait general configuration - https://github.com/reizumii/parfait
           "parfait.animations.enabled" = true;
-          "parfait.blur.enabled" = false;
-          "parfait.window.borderless" = true;
-          "parfait.bg.accent-color" = false;
-          "parfait.bg.contrast" = 4;
-          "parfait.bg.gradient" = false;
-          "parfait.bg.opacity" = 4;
-          "parfait.bg.transparent" = false;
-          "parfait.tabs.groups.color" = false;
-          "parfait.sidebar.width.preset" = 1;
-          "parfait.theme.lwt.alt" = false;
+          "parfait.theme.blur.enabled" = false;
+          "parfait.theme.borderless" = true;
           "parfait.theme.roundness.preset" = 2;
+
+          "parfait.background.accent-color" = false;
+          "parfait.background.accent-color.contrast" = 4;
+          "parfait.background.accent-color.opacity" = 4;
+          "parfait.background.accent-color.gradient" = false;
+          "parfait.background.transparent" = false;
+
+          "parfait.layout.unified-sidebar" = true;
+          "parfait.layout.unified-sidebar.width.preset" = 1;
+
           "parfait.toolbar.sidebar-gutter" = true;
-          "parfait.toolbar.unified-sidebar" = true;
-          "parfait.toolbar.force-hl-layout" = false;
+
           "parfait.traffic-lights.enabled" = false;
           "parfait.traffic-lights.mono" = false;
-          "parfait.urlbar.url.center" = false;
-          "parfait.urlbar.results.compact" = false;
-          "parfait.urlbar.search-mode.glow" = false;
+
+          "parfait.urlbar.center-url" = false;
+
+          "parfait.tabs.groups.fx-colors-on-folders" = false;
+
           "parfait.new-tab.logo" = 1;
           "parfait.new-tab.bg.pattern" = false;
         };
