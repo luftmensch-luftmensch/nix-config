@@ -7,31 +7,31 @@
 ;;; Code:
 
 (setup (:pkg cmake-mode)
-  (:file-match (rx (or "CmakeLists.txt" ".cmake") eos)))
+  (:match-file "CMakeLists.txt" "*.cmake"))
 
 (setup (:pkg nix-ts-mode)
-  (:file-match (rx ".nix" eos)))
+  (:match-file "*.nix"))
 
 (setup (:pkg go-mode)
-  (:file-match (rx ".go" eos)))
+  (:match-file "*.go"))
 
 (setup (:pkg markdown-mode)
-  (:file-match (rx (or ".md" ".markdown" ".mdown") eos)))
+  (:match-file "*.md" "*.markdown" "*.mdown"))
 
 (setup (:pkg yaml-mode)
-  (:file-match (rx (or ".yml" ".yaml") eos)))
+  (:match-file "*.yml" "*.yaml"))
 
 (setup (:pkg json-mode)
-  (:file-match (rx ".json" eos)))
+  (:match-file "*.json"))
 
 (setup (:pkg dockerfile-mode)
-  (:file-match (rx ".dockerfile" eos)))
+  (:match-file "Dockerfile" "Dockerfile.*" "*.dockerfile"))
 
 ;; Organize and send HTTP requests from Emacs with verb
-(setup (:pkg verb))
+;; (setup (:pkg verb))
 
 ;; Organize and send HTTP requests from Emacs with plz-see (wrapper around plz)
-(setup (:pkg plz-see))
+;; (setup (:pkg plz-see))
 
 (provide 'init-extra-modes)
 ;;; init-extra-modes.el ends here
