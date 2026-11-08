@@ -57,7 +57,10 @@ _: {
 
     vpn = {
       openconnect.enable = true;
-      wireguard.enable = true;
+      wireguard = {
+        external.enable = true;
+        internal.enable = true;
+      };
     };
 
     shell.bash.enable = true;
