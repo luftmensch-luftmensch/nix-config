@@ -12,16 +12,16 @@
 
 # Public keys
 keys:
-  - &atlas age1gef7ypvn8lzjppymnnj0lxyq60jsmcnagqayfevjpu9qx64ll9rqv6hzf9
+  - &valentino age1gef7ypvn8lzjppymnnj0lxyq60jsmcnagqayfevjpu9qx64ll9rqv6hzf9
+  - &atlas age187vuznaqg788ecfl9r97pt9k224drt4x48jkxr2thcgg5zv765rqtclx8r
   - &kronos age1lta8402ylegpswhwuwe6n87a9fhqfmlt49u762pc6l25pqk5j4hqhnugmz
-# Creation rules referencing the upon public keys
 creation_rules:
-  - path_regex: home/valentino/modules/credentials/ssh/*
+  - path_regex: home/valentino/modules/credentials/ssh/.*
     key_groups:
-      - age: [*atlas, *kronos]
+      - age: [*valentino, *atlas, *kronos]
   - path_regex: secrets/wireguard\.ya?ml$
     key_groups:
-      - age: [*atlas, *kronos]
+      - age: [*valentino, *atlas, *kronos]
   - path_regex: secrets/openconnect\.ya?ml$
     key_groups:
-      - age: [*atlas, *kronos]
+      - age: [*valentino, *atlas, *kronos]
