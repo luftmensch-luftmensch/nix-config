@@ -560,8 +560,6 @@ in
           "parfait.layout.unified-sidebar" = true;
           "parfait.layout.unified-sidebar.width.preset" = 1;
 
-          "parfait.toolbar.sidebar-gutter" = true;
-
           "parfait.traffic-lights.enabled" = false;
           "parfait.traffic-lights.mono" = false;
 
@@ -569,8 +567,8 @@ in
 
           "parfait.tabs.groups.fx-colors-on-folders" = false;
 
-          "parfait.new-tab.logo" = 1;
-          "parfait.new-tab.bg.pattern" = false;
+          "parfait.new-tab.logo" = "firefox";
+          "parfait.new-tab.background.pattern" = false;
         };
       };
     };

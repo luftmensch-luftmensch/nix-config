@@ -31,7 +31,6 @@
       java.enable = true;
       nix.enable = true;
       python.enable = true;
-      tex.enable = true;
     };
 
     editors = {

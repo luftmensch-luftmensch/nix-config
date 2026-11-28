@@ -6,7 +6,7 @@
 }:
 let
   pname = "firefox-parfait";
-  version = "1.0";
+  version = "1.3";
 in
 stdenvNoCC.mkDerivation {
   inherit pname version;
@@ -15,7 +15,7 @@ stdenvNoCC.mkDerivation {
     owner = "reizumii";
     repo = "parfait";
     rev = "v${version}";
-    hash = "sha256-nUlkkZ60WLEottauGLX8QZAaT4tZlE/dzfIAm/CaB4k=";
+    hash = "sha256-hd5u6ogZAzk5K1QZs/+wIzbBF6Ovpii/PW0+f/FhPIs=";
   };
 
   dontConfigure = true;

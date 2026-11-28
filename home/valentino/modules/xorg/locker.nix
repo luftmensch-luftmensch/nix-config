@@ -14,10 +14,8 @@ in
   config = mkIf cfg.enable {
     services.screen-locker = {
       enable = true;
-      xautolock = {
-        enable = true;
-        extraOptions = [ "-time 20" ];
-      };
+      xautolock.enable = true;
+      inactiveInterval = 20;
       lockCmd =
         let
           ff-locker = pkgs.writeShellApplication {
